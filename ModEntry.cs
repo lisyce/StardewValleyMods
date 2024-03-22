@@ -8,7 +8,8 @@ using static BZP_Allergies.AllergenManager;
 namespace BZP_Allergies
 {
     /// <summary>The mod entry point.</summary>
-    internal sealed class ModEntry : Mod {
+    internal sealed class ModEntry : Mod
+    {
 
         private Harmony Harmony;
         private ModConfig Config;
@@ -68,7 +69,12 @@ namespace BZP_Allergies
             configMenu.Register(
                 mod: this.ModManifest,
                 reset: () => this.Config = new ModConfig(),
-                save: () => this.Helper.WriteConfig(this.Config),
+                save: () => {
+                    this.Monitor.Log("Saving", LogLevel.Debug);
+                    this.Helper.WriteConfig(this.Config);
+                    this.Config = this.Helper.ReadConfig<ModConfig>();
+                    this.Helper.GameContent.InvalidateCache("Data/Objects");
+                },
                 titleScreenOnly: false
             );
 

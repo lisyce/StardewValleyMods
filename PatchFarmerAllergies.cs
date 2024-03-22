@@ -32,7 +32,7 @@ namespace BZP_Allergies
                     __instance.applyBuff("bzp_allergies_1");
                     
                     // randomly apply nausea
-                    if (Rand.NextDouble() < 0.75)
+                    if (Rand.NextDouble() < 0.50)
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }

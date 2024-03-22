@@ -1,5 +1,4 @@
 ﻿using BZP_Allergies.Config;
-using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley.GameData.Objects;
 using static BZP_Allergies.AllergenManager;
