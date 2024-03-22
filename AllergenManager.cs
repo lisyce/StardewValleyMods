@@ -85,10 +85,39 @@ namespace BZP_Allergies
             }
             return result;
         }
+        public static bool FarmerIsAllergic(Allergens allergen, ModConfig config)
+        {
+            switch (allergen)
+            {
+                case Allergens.EGG:
+                    return config.Farmer.EggAllergy;
+                case Allergens.WHEAT:
+                    return config.Farmer.WheatAllergy;
+                case Allergens.FISH:
+                    return config.Farmer.FishAllergy;
+                case Allergens.SHELLFISH:
+                    return config.Farmer.ShellfishAllergy;
+                case Allergens.TREE_NUTS:
+                    return config.Farmer.TreenutAllergy;
+                case Allergens.DAIRY:
+                    return config.Farmer.DairyAllergy;
+                default:
+                    return false;
+            }
+        }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object, ModConfig config)
         {
-            
+            // check each of the allergens
+            foreach (Allergens a in Enum.GetValues<Allergens>())
+            {
+                if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a, config))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

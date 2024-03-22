@@ -47,7 +47,7 @@ namespace BZP_Allergies
             {
                 foreach (Allergens a in Enum.GetValues<Allergens>())
                 {
-                    PatchAllergenObjects.AddAllergen(e, a);
+                    PatchAllergenObjects.AddAllergen(e, a, Config);
                 }
             }
         }
