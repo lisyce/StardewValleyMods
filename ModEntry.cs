@@ -36,9 +36,10 @@ namespace BZP_Allergies {
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                PatchAllergenObjects.AddAllergenContextTag(e, Allergens.EGG);
-                Monitor.Log("Wheat", LogLevel.Debug);
-                PatchAllergenObjects.AddAllergenContextTag(e, Allergens.WHEAT);
+                foreach (Allergens a in Enum.GetValues<Allergens>())
+                {
+                    PatchAllergenObjects.AddAllergen(e, a);
+                }
             }
         }
     }
