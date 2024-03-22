@@ -10,7 +10,7 @@ namespace BZP_Allergies
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod {
 
-        internal Harmony harmony;
+        private Harmony Harmony;
         private ModConfig Config;
 
         /*********
@@ -27,10 +27,10 @@ namespace BZP_Allergies
             this.Config = this.Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(this.Monitor);
+            PatchFarmerAllergies.Initialize(this.Monitor, this.Config);
 
-            this.harmony = new(this.ModManifest.UniqueID);
-            harmony.PatchAll();            
+            this.Harmony = new(this.ModManifest.UniqueID);
+            Harmony.PatchAll();            
         }
 
 

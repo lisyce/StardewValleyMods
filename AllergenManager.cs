@@ -1,4 +1,4 @@
-﻿using Netcode;
+﻿using BZP_Allergies.Config;
 
 namespace BZP_Allergies
 {
@@ -84,6 +84,11 @@ namespace BZP_Allergies
                 throw new Exception("No objects have been assigned the allergen " + allergen.ToString());
             }
             return result;
+        }
+
+        public static bool FarmerIsAllergic (StardewValley.Object @object, ModConfig config)
+        {
+            
         }
     }
 }

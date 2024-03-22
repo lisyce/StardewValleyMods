@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using StardewValley;
 using StardewModdingAPI;
+using BZP_Allergies.Config;
 
 namespace BZP_Allergies
 {
@@ -8,13 +9,15 @@ namespace BZP_Allergies
     internal class PatchFarmerAllergies
     {
         private static IMonitor Monitor;
-        private static Random rnd;
+        private static Random Rand;
+        private static ModConfig Config;
 
         // call this method from your Entry class
-        public static void Initialize(IMonitor monitor)
+        public static void Initialize(IMonitor monitor, ModConfig config)
         {
             Monitor = monitor;
-            rnd = new Random();
+            Rand = new Random();
+            Config = config;
         }
 
         [HarmonyPrefix]
@@ -23,14 +26,13 @@ namespace BZP_Allergies
             try
             {
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
-                if (itemToEat != null)
+                if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config))
                 {
-                    
                     // add the allergic reaction buff
                     __instance.applyBuff("bzp_allergies_1");
                     
                     // randomly apply nausea
-                    if (rnd.NextDouble() < 0.75)
+                    if (Rand.NextDouble() < 0.75)
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }
