@@ -3,6 +3,7 @@ using GenericModConfigMenu;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewValley;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies

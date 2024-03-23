@@ -21,13 +21,13 @@ namespace BZP_Allergies
                     ISet<string> idsToEdit = GetObjectsWithAllergen(allergen);
                     foreach (string id in idsToEdit)
                     {
-                        // add context tags and edibility data
+                        // add context tags
                         ObjectData objectData = editor.Data[id];
-                        objectData.ContextTags.Add(GetAllergenContextTag(allergen));
-                        if (allergic)
+                        if (objectData.ContextTags == null)
                         {
-                            objectData.Edibility = -20;  // same as normal red mushroom
+                            objectData.ContextTags = new List<string>();
                         }
+                        objectData.ContextTags.Add(GetAllergenContextTag(allergen));
 
                         // update descriptions
                         if (!objectData.Description.Contains("Allergens: "))

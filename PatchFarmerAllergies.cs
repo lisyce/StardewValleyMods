@@ -28,6 +28,9 @@ namespace BZP_Allergies
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
                 if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config))
                 {
+                    // change edibility
+                    itemToEat.Edibility = -20;
+
                     // add the allergic reaction buff
                     __instance.applyBuff("bzp_allergies_1");
                     
