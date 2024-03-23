@@ -2,6 +2,7 @@
 using StardewModdingAPI.Events;
 using StardewValley.GameData.Objects;
 using static BZP_Allergies.AllergenManager;
+using StardewValley.GameData.Machines;
 
 namespace BZP_Allergies
 {
@@ -18,7 +19,7 @@ namespace BZP_Allergies
                 {
                     var editor = asset.AsDictionary<string, ObjectData>();
 
-                    ISet<string> idsToEdit = GetObjectsWithAllergen(allergen);
+                    ISet<string> idsToEdit = GetObjectsWithAllergen(allergen, editor);
                     foreach (string id in idsToEdit)
                     {
                         // add context tags
@@ -43,5 +44,6 @@ namespace BZP_Allergies
                 });
             }
         }
+
     }
 }

@@ -3,7 +3,6 @@ using GenericModConfigMenu;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewValley;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -14,25 +13,32 @@ namespace BZP_Allergies
 
         private Harmony Harmony;
         private ModConfig Config;
+        private IModHelper ModHelper;
 
         /*********
         ** Public methods
         *********/
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
-        public override void Entry(IModHelper helper) {
+        public override void Entry(IModHelper modHelper) {
+            this.ModHelper = modHelper;
+
+            // allergen manager
+            AllergenManager.Initialize(Monitor, Config);
+
             // events
-            helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-            helper.Events.Content.AssetRequested += this.OnAssetRequested;
+            modHelper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            modHelper.Events.Content.AssetRequested += this.OnAssetRequested;
 
             // config
             this.Config = this.Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(this.Monitor, this.Config);
+            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper);
 
             this.Harmony = new(this.ModManifest.UniqueID);
-            Harmony.PatchAll();            
+            Harmony.PatchAll();    
+            
         }
 
 
