@@ -3,6 +3,7 @@ using StardewModdingAPI.Events;
 using StardewValley.GameData.Objects;
 using static BZP_Allergies.AllergenManager;
 using StardewValley.GameData.Machines;
+using StardewModdingAPI.Utilities;
 
 namespace BZP_Allergies
 {
@@ -11,7 +12,8 @@ namespace BZP_Allergies
 
         public static void AddAllergen (AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
+            string path = PathUtilities.NormalizeAssetName("Data/Objects");
+            if (e.NameWithoutLocale.IsEquivalentTo(path))
             {
                 bool allergic = FarmerIsAllergic(allergen, config);
 

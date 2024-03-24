@@ -5,6 +5,8 @@ using BZP_Allergies.Config;
 using StardewValley.Buffs;
 using StardewValley.GameData.Buffs;
 using Microsoft.Xna.Framework.Graphics;
+using StardewModdingAPI.Utilities;
+using System.IO;
 
 namespace BZP_Allergies
 {
@@ -48,8 +50,9 @@ namespace BZP_Allergies
                     };
 
                     BuffEffects effects = new(buffAttributesData);
+                    string iconPath = PathUtilities.NormalizeAssetName("TileSheets/BuffsIcons");
                     Buff reactionBuff = new(AllergenManager.ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
-                        120000, ModHelper.GameContent.Load<Texture2D>("TileSheets/BuffsIcons"), 25, effects,
+                        120000, ModHelper.GameContent.Load<Texture2D>(iconPath), 25, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     __instance.applyBuff(reactionBuff);
                     

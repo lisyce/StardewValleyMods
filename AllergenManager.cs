@@ -5,6 +5,7 @@ using StardewValley;
 using System.Text.RegularExpressions;
 using StardewValley.ItemTypeDefinitions;
 using System.Runtime.CompilerServices;
+using StardewModdingAPI.Utilities;
 
 namespace BZP_Allergies
 {
@@ -182,7 +183,8 @@ namespace BZP_Allergies
 
                     string madeFromId = m.Value;
                     // load Data/Objects for context tags
-                    IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>("Data/Objects");
+                    string path = PathUtilities.NormalizeAssetName("Data/Objects");
+                    IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>(path);
 
                     // !isShellfish = isFish since these can only be made from one of the two
                     bool isShellfish = objData[madeFromId].ContextTags.Contains("fish_crab_pot");
