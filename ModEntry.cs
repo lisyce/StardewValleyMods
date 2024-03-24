@@ -1,8 +1,10 @@
 ﻿using BZP_Allergies.Config;
 using GenericModConfigMenu;
 using HarmonyLib;
+using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewModdingAPI.Utilities;
 using StardewValley;
 using static BZP_Allergies.AllergenManager;
 
@@ -15,6 +17,7 @@ namespace BZP_Allergies
         private Harmony Harmony;
         private ModConfig Config;
         private IModHelper ModHelper;
+        private Texture2D AllergyMedicine;
 
         /*********
         ** Public methods
@@ -30,6 +33,7 @@ namespace BZP_Allergies
             // events
             modHelper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
             modHelper.Events.Content.AssetRequested += this.OnAssetRequested;
+            modHelper.Events.Content.AssetReady += this.OnAssetReady;
 
             // config
             this.Config = this.Helper.ReadConfig<ModConfig>();
@@ -40,7 +44,6 @@ namespace BZP_Allergies
 
             this.Harmony = new(this.ModManifest.UniqueID);
             Harmony.PatchAll();    
-            
         }
 
 
@@ -57,8 +60,23 @@ namespace BZP_Allergies
             {
                 foreach (Allergens a in Enum.GetValues<Allergens>())
                 {
-                    PatchAllergenObjects.AddAllergen(e, a, Config);
+                    PatchObjects.AddAllergen(e, a, Config);
                 }
+            }
+            else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/AllergyMedicine"))
+            {
+                e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath("assets/AllergyMedicine.png"), AssetLoadPriority.Medium);
+            }
+        }
+
+        /// <inheritdoc cref="IContentEvents.AssetReady"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnAssetReady(object sender, AssetReadyEventArgs e)
+        {
+            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/AllergyMedicine"))
+            {
+                this.AllergyMedicine = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/AllergyMedicine");
             }
         }
 

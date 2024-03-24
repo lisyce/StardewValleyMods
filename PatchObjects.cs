@@ -6,7 +6,7 @@ using StardewModdingAPI.Utilities;
 
 namespace BZP_Allergies
 {
-    internal sealed class PatchAllergenObjects
+    internal sealed class PatchObjects
     {
 
         public static void AddAllergen (AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
@@ -18,6 +18,7 @@ namespace BZP_Allergies
 
                 e.Edit(asset =>
                 {
+                    // update items containing allergens
                     var editor = asset.AsDictionary<string, ObjectData>();
 
                     ISet<string> idsToEdit = GetObjectsWithAllergen(allergen, editor);
@@ -42,6 +43,36 @@ namespace BZP_Allergies
                         }
                         objectData.Description += GetAllergenReadableString(allergen);
                     }
+
+                    // add new object assets
+                    ObjectData allergyMedicine = new()
+                    {
+                        Name = "Allergy Medicine",
+                        DisplayName = "Allergy Medicine",
+                        Description = "Drink for relief from an allergic reaction. Can be consumed even when nauseous.",
+                        Type = "Crafting",
+                        Category = 0,
+                        Price = 500,
+                        Texture = PathUtilities.NormalizeAssetName("Mods/BarleyZP.BzpAllergies/AllergyMedicine"),
+                        SpriteIndex = 0,
+                        Edibility = 20,
+                        IsDrink = true,
+                        Buffs = null,
+                        GeodeDropsDefaultItems = false,
+                        GeodeDrops = null,
+                        ArtifactSpotChances = null,
+                        ExcludeFromFishingCollection = false,
+                        ExcludeFromShippingCollection = false,
+                        ExcludeFromRandomSale = false,
+                        ContextTags = new List<string>()
+                        {
+                            "medicine_item",
+                            "color_dark_purple"
+                        },
+                        CustomFields = null
+                    };
+
+                    editor.Data["BzpAllergies_AllergyMedicine"] = allergyMedicine;
                 });
             }
         }
