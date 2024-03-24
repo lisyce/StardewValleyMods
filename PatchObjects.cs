@@ -67,7 +67,8 @@ namespace BZP_Allergies
                         ContextTags = new List<string>()
                         {
                             "medicine_item",
-                            "color_dark_purple"
+                            "color_dark_purple",
+                            "ginger_item"  // so can be eaten when nauseous
                         },
                         CustomFields = null
                     };

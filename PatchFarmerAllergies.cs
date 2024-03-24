@@ -62,6 +62,11 @@ namespace BZP_Allergies
                         __instance.applyBuff(Buff.nauseous);
                     }
                 }
+                else if (itemToEat != null && itemToEat.QualifiedItemId.Equals("(O)BzpAllergies_AllergyMedicine"))
+                {
+                    // nausea is automatically removed. remove the reaction as well
+                    __instance.buffs.Remove(AllergenManager.ALLERIC_REACTION_DEBUFF);
+                }
             }
             catch (Exception ex)
             {
