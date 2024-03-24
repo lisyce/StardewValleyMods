@@ -52,7 +52,7 @@ namespace BZP_Allergies
                     BuffEffects effects = new(buffAttributesData);
                     string iconPath = PathUtilities.NormalizeAssetName("TileSheets/BuffsIcons");
                     Buff reactionBuff = new(AllergenManager.ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
-                        120000, GameContent.Load<Texture2D>(iconPath), 25, effects,
+                        120000, GameContent.Load<Texture2D>(iconPath), 6, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     __instance.applyBuff(reactionBuff);
                     
