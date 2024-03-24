@@ -77,7 +77,6 @@ namespace BZP_Allergies
                 mod: this.ModManifest,
                 reset: () => this.Config = new ModConfig(),
                 save: () => {
-                    this.Monitor.Log("Saving", LogLevel.Debug);
                     this.Helper.WriteConfig(this.Config);
                     this.Config = this.Helper.ReadConfig<ModConfig>();
                     this.Helper.GameContent.InvalidateCache("Data/Objects");

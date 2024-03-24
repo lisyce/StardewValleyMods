@@ -2,7 +2,9 @@
 using StardewValley;
 using StardewModdingAPI;
 using BZP_Allergies.Config;
-using System.Numerics;
+using StardewValley.Buffs;
+using StardewValley.GameData.Buffs;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BZP_Allergies
 {
@@ -38,7 +40,18 @@ namespace BZP_Allergies
                     itemToEat.Edibility = -20;
 
                     // add the allergic reaction buff
-                    __instance.applyBuff(AllergenManager.ALLERIC_REACTION_DEBUFF);
+                    BuffAttributesData buffAttributesData = new()
+                    {
+                        Speed = -1,
+                        Defense = -1,
+                        Attack = -1
+                    };
+
+                    BuffEffects effects = new(buffAttributesData);
+                    Buff reactionBuff = new(AllergenManager.ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
+                        120000, ModHelper.GameContent.Load<Texture2D>("TileSheets/BuffsIcons"), 25, effects,
+                        true, "Allergic Reaction", "Probably shouldn't have eaten that...");
+                    __instance.applyBuff(reactionBuff);
                     
                     // randomly apply nausea
                     if (Rand.NextDouble() < 0.50)

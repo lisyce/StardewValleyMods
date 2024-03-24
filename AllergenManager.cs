@@ -158,7 +158,6 @@ namespace BZP_Allergies
 
         public static bool FarmerIsAllergic (StardewValley.Object @object, ModConfig config, IGameContentHelper helper)
         {
-            Monitor.Log(@object.QualifiedItemId, LogLevel.Debug);
             // special case: roe, aged roe, or smoked fish
             // need to differentiate fish vs shellfish ingredient
             List<string> fishShellfishDifferentiation = new() { "(O)447", "(O)812", "(O)SmokedFish" };
