@@ -1,5 +1,5 @@
-﻿using BZP_Allergies.Config;
-using GenericModConfigMenu;
+﻿using BZP_Allergies.Apis;
+using BZP_Allergies.Config;
 using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
@@ -56,16 +56,23 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
+            string objects = PathUtilities.NormalizeAssetName("Data/Objects");
+            string allergyMedicineAsset = PathUtilities.NormalizeAssetName("Mods/BarleyZP.BzpAllergies/AllergyMedicine");
+            string shops = PathUtilities.NormalizeAssetName("Data/Shops");
+            if (e.NameWithoutLocale.IsEquivalentTo(objects))
             {
                 foreach (Allergens a in Enum.GetValues<Allergens>())
                 {
                     PatchObjects.AddAllergen(e, a, Config);
                 }
             }
-            else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/AllergyMedicine"))
+            else if (e.NameWithoutLocale.IsEquivalentTo(allergyMedicineAsset))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath("assets/AllergyMedicine.png"), AssetLoadPriority.Medium);
+            }
+            else if (e.NameWithoutLocale.IsEquivalentTo(shops))
+            {
+                PatchHarveyShop.Patch(e);
             }
         }
 

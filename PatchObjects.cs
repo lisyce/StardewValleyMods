@@ -26,10 +26,7 @@ namespace BZP_Allergies
                     {
                         // add context tags
                         ObjectData objectData = editor.Data[id];
-                        if (objectData.ContextTags == null)
-                        {
-                            objectData.ContextTags = new List<string>();
-                        }
+                        objectData.ContextTags ??= new List<string>();
                         objectData.ContextTags.Add(GetAllergenContextTag(allergen));
 
                         // update descriptions
