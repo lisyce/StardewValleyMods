@@ -2,7 +2,6 @@
 using StardewModdingAPI.Events;
 using StardewValley.GameData.Objects;
 using static BZP_Allergies.AllergenManager;
-using StardewValley.GameData.Machines;
 using StardewModdingAPI.Utilities;
 
 namespace BZP_Allergies

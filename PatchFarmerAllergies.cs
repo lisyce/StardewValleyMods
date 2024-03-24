@@ -6,7 +6,6 @@ using StardewValley.Buffs;
 using StardewValley.GameData.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Utilities;
-using System.IO;
 
 namespace BZP_Allergies
 {
@@ -16,16 +15,16 @@ namespace BZP_Allergies
         private static IMonitor Monitor;
         private static Random Rand;
         private static ModConfig Config;
-        private static IModHelper ModHelper;
+        private static IGameContentHelper GameContent;
 
 
         // call this method from your Entry class
-        public static void Initialize(IMonitor monitor, ModConfig config, IModHelper modHelper)
+        public static void Initialize(IMonitor monitor, ModConfig config, IGameContentHelper helper)
         {
             Monitor = monitor;
             Rand = new Random();
             Config = config;
-            ModHelper = modHelper;
+            GameContent = helper;
         }
 
         [HarmonyPrefix]
@@ -33,10 +32,11 @@ namespace BZP_Allergies
         {
             try
             {
+                
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
                 __state = itemToEat == null ? int.MinValue : itemToEat.Edibility;
 
-                if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config, ModHelper.GameContent))
+                if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config, GameContent))
                 {
                     // change edibility
                     itemToEat.Edibility = -20;
@@ -44,7 +44,7 @@ namespace BZP_Allergies
                     // add the allergic reaction buff
                     BuffAttributesData buffAttributesData = new()
                     {
-                        Speed = -1,
+                        Speed = -2,
                         Defense = -1,
                         Attack = -1
                     };
@@ -52,7 +52,7 @@ namespace BZP_Allergies
                     BuffEffects effects = new(buffAttributesData);
                     string iconPath = PathUtilities.NormalizeAssetName("TileSheets/BuffsIcons");
                     Buff reactionBuff = new(AllergenManager.ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
-                        120000, ModHelper.GameContent.Load<Texture2D>(iconPath), 25, effects,
+                        120000, GameContent.Load<Texture2D>(iconPath), 25, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     __instance.applyBuff(reactionBuff);
                     
@@ -77,7 +77,7 @@ namespace BZP_Allergies
             try
             {
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
-                if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config, ModHelper.GameContent) && __state != int.MinValue)
+                if (itemToEat != null && AllergenManager.FarmerIsAllergic(itemToEat, Config, GameContent) && __state != int.MinValue)
                 {
                     // change edibility
                     itemToEat.Edibility = __state;

@@ -3,6 +3,7 @@ using GenericModConfigMenu;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
+using StardewValley;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -34,7 +35,8 @@ namespace BZP_Allergies
             this.Config = this.Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper);
+            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper.GameContent);
+            PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent);
 
             this.Harmony = new(this.ModManifest.UniqueID);
             Harmony.PatchAll();    
