@@ -1,19 +1,13 @@
 ﻿using StardewValley.GameData.Objects;
 using StardewModdingAPI;
 using BZP_Allergies.Config;
-using StardewValley;
 using System.Text.RegularExpressions;
-using StardewValley.ItemTypeDefinitions;
-using System.Runtime.CompilerServices;
 using StardewModdingAPI.Utilities;
 
 namespace BZP_Allergies
 {
-    internal class AllergenManager
+    internal class AllergenManager : Initializable
     {
-        private static IMonitor Monitor;
-        private static ModConfig Config;
-
         public enum Allergens {
             EGG,
             WHEAT,
@@ -72,13 +66,6 @@ namespace BZP_Allergies
             { Allergens.TREE_NUTS, "Tree Nuts" },
             { Allergens.DAIRY, "Dairy" }
         };
-
-        // call this method from your Entry class
-        public static void Initialize(IMonitor monitor, ModConfig config)
-        {
-            Monitor = monitor;
-            Config = config;
-        }
 
         public static string GetAllergenContextTag(Allergens allergen)
         {
@@ -183,7 +170,7 @@ namespace BZP_Allergies
 
                     string madeFromId = m.Value;
                     // load Data/Objects for context tags
-                    string path = PathUtilities.NormalizeAssetName("Data/Objects");
+                    string path = PathUtilities.NormalizeAssetName(@"Data/Objects");
                     IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>(path);
 
                     // !isShellfish = isFish since these can only be made from one of the two

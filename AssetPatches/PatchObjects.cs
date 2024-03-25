@@ -4,14 +4,14 @@ using StardewValley.GameData.Objects;
 using static BZP_Allergies.AllergenManager;
 using StardewModdingAPI.Utilities;
 
-namespace BZP_Allergies
+namespace BZP_Allergies.AssetPatches
 {
     internal sealed class PatchObjects
     {
 
-        public static void AddAllergen (AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
+        public static void AddAllergen(AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
         {
-            string path = PathUtilities.NormalizeAssetName("Data/Objects");
+            string path = PathUtilities.NormalizeAssetName(@"Data/Objects");
             if (e.NameWithoutLocale.IsEquivalentTo(path))
             {
                 bool allergic = FarmerIsAllergic(allergen, config);
@@ -50,7 +50,7 @@ namespace BZP_Allergies
                         Type = "Crafting",
                         Category = 0,
                         Price = 500,
-                        Texture = PathUtilities.NormalizeAssetName("Mods/BarleyZP.BzpAllergies/AllergyMedicine"),
+                        Texture = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine"),
                         SpriteIndex = 0,
                         Edibility = 20,
                         IsDrink = true,

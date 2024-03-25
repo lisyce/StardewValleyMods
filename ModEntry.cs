@@ -1,5 +1,7 @@
 ﻿using BZP_Allergies.Apis;
+using BZP_Allergies.AssetPatches;
 using BZP_Allergies.Config;
+using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
@@ -28,19 +30,19 @@ namespace BZP_Allergies
             this.ModHelper = modHelper;
 
             // allergen manager
-            AllergenManager.Initialize(Monitor, Config);
+            AllergenManager.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
 
             // events
-            modHelper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-            modHelper.Events.Content.AssetRequested += this.OnAssetRequested;
-            modHelper.Events.Content.AssetReady += this.OnAssetReady;
+            modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
+            modHelper.Events.Content.AssetRequested += OnAssetRequested;
+            modHelper.Events.Content.AssetReady += OnAssetReady;
 
             // config
             this.Config = this.Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper.GameContent);
-            PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent);
+            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper.GameContent, ModHelper.ModContent);
+            PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
 
             this.Harmony = new(this.ModManifest.UniqueID);
             Harmony.PatchAll();    
@@ -56,9 +58,9 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
         {
-            string objects = PathUtilities.NormalizeAssetName("Data/Objects");
-            string allergyMedicineAsset = PathUtilities.NormalizeAssetName("Mods/BarleyZP.BzpAllergies/AllergyMedicine");
-            string shops = PathUtilities.NormalizeAssetName("Data/Shops");
+            string objects = PathUtilities.NormalizeAssetName(@"Data/Objects");
+            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine");
+            string shops = PathUtilities.NormalizeAssetName(@"Data/Shops");
             if (e.NameWithoutLocale.IsEquivalentTo(objects))
             {
                 foreach (Allergens a in Enum.GetValues<Allergens>())
@@ -81,9 +83,10 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetReady(object sender, AssetReadyEventArgs e)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/AllergyMedicine"))
+            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine");
+            if (e.NameWithoutLocale.IsEquivalentTo(allergyMedicineAsset))
             {
-                this.AllergyMedicine = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/AllergyMedicine");
+                this.AllergyMedicine = Game1.content.Load<Texture2D>(allergyMedicineAsset);
             }
         }
 
@@ -106,7 +109,6 @@ namespace BZP_Allergies
                 save: () => {
                     this.Helper.WriteConfig(this.Config);
                     this.Config = this.Helper.ReadConfig<ModConfig>();
-                    this.Helper.GameContent.InvalidateCache("Data/Objects");
                 },
                 titleScreenOnly: false
             );

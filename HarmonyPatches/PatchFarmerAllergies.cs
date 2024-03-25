@@ -1,38 +1,22 @@
 ﻿using HarmonyLib;
 using StardewValley;
 using StardewModdingAPI;
-using BZP_Allergies.Config;
 using StardewValley.Buffs;
 using StardewValley.GameData.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Utilities;
 
-namespace BZP_Allergies
+namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(Farmer), nameof(Farmer.doneEating))]
-    internal class PatchFarmerAllergies
+    internal class PatchFarmerAllergies : Initializable
     {
-        private static IMonitor Monitor;
-        private static Random Rand;
-        private static ModConfig Config;
-        private static IGameContentHelper GameContent;
-
-
-        // call this method from your Entry class
-        public static void Initialize(IMonitor monitor, ModConfig config, IGameContentHelper helper)
-        {
-            Monitor = monitor;
-            Rand = new Random();
-            Config = config;
-            GameContent = helper;
-        }
-
         [HarmonyPrefix]
         static bool DoneEating_Prefix(ref Farmer __instance, out int __state)
         {
             try
             {
-                
+
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
                 __state = itemToEat == null ? int.MinValue : itemToEat.Edibility;
 
@@ -46,18 +30,20 @@ namespace BZP_Allergies
                     {
                         Speed = -2,
                         Defense = -1,
-                        Attack = -1
+                        Attack = -1,
                     };
 
                     BuffEffects effects = new(buffAttributesData);
-                    string iconPath = PathUtilities.NormalizeAssetName("TileSheets/BuffsIcons");
+                    string iconPath = PathUtilities.NormalizeAssetName(@"TileSheets/BuffsIcons");
                     Buff reactionBuff = new(AllergenManager.ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
                         120000, GameContent.Load<Texture2D>(iconPath), 6, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
+                    reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
+
                     __instance.applyBuff(reactionBuff);
-                    
+
                     // randomly apply nausea
-                    if (Rand.NextDouble() < 0.50)
+                    if (new Random().NextDouble() < 0.50)
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }

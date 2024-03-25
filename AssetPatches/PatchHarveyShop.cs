@@ -1,20 +1,15 @@
-﻿using BZP_Allergies.Config;
-using HarmonyLib;
-using StardewModdingAPI;
-using StardewModdingAPI.Events;
+﻿using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
-using StardewValley;
 using StardewValley.GameData;
 using StardewValley.GameData.Shops;
-using static BZP_Allergies.AllergenManager;
 
-namespace BZP_Allergies
+namespace BZP_Allergies.AssetPatches
 {
     internal class PatchHarveyShop
     {
         public static void Patch(AssetRequestedEventArgs e)
         {
-            string path = PathUtilities.NormalizeAssetName("Data/Shops");
+            string path = PathUtilities.NormalizeAssetName(@"Data/Shops");
             if (e.NameWithoutLocale.IsEquivalentTo(path))
             {
                 e.Edit(asset =>
