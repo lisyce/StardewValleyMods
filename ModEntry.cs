@@ -19,7 +19,7 @@ namespace BZP_Allergies
         private Harmony Harmony;
         private ModConfig Config;
         private IModHelper ModHelper;
-        private Texture2D AllergyMedicine;
+        private Texture2D ObjectSprites;
 
         /*********
         ** Public methods
@@ -27,7 +27,7 @@ namespace BZP_Allergies
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper modHelper) {
-            this.ModHelper = modHelper;
+            ModHelper = modHelper;
 
             // allergen manager
             AllergenManager.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
@@ -38,13 +38,13 @@ namespace BZP_Allergies
             modHelper.Events.Content.AssetReady += OnAssetReady;
 
             // config
-            this.Config = this.Helper.ReadConfig<ModConfig>();
+            Config = Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(this.Monitor, this.Config, ModHelper.GameContent, ModHelper.ModContent);
+            PatchFarmerAllergies.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
             PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
 
-            this.Harmony = new(this.ModManifest.UniqueID);
+            Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();    
         }
 
@@ -59,7 +59,7 @@ namespace BZP_Allergies
         private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
         {
             string objects = PathUtilities.NormalizeAssetName(@"Data/Objects");
-            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine");
+            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites");
             string shops = PathUtilities.NormalizeAssetName(@"Data/Shops");
             if (e.NameWithoutLocale.IsEquivalentTo(objects))
             {
@@ -70,7 +70,7 @@ namespace BZP_Allergies
             }
             else if (e.NameWithoutLocale.IsEquivalentTo(allergyMedicineAsset))
             {
-                e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath("assets/AllergyMedicine.png"), AssetLoadPriority.Medium);
+                e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/ObjectSprites.png"), AssetLoadPriority.Medium);
             }
             else if (e.NameWithoutLocale.IsEquivalentTo(shops))
             {
@@ -83,10 +83,10 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetReady(object sender, AssetReadyEventArgs e)
         {
-            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine");
-            if (e.NameWithoutLocale.IsEquivalentTo(allergyMedicineAsset))
+            string objectSpritesAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites");
+            if (e.NameWithoutLocale.IsEquivalentTo(objectSpritesAsset))
             {
-                this.AllergyMedicine = Game1.content.Load<Texture2D>(allergyMedicineAsset);
+                this.ObjectSprites = Game1.content.Load<Texture2D>(objectSpritesAsset);
             }
         }
 
@@ -95,7 +95,7 @@ namespace BZP_Allergies
         /// <param name="e">The event arguments.</param>
         private void OnGameLaunched(object sender, GameLaunchedEventArgs e) {
             // get Generic Mod Config Menu's API (if it's installed)
-            var configMenu = this.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+            var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (configMenu is null)
             {
                 Monitor.Log("No mod config menu API found.", LogLevel.Debug);
@@ -104,66 +104,16 @@ namespace BZP_Allergies
 
             // register mod
             configMenu.Register(
-                mod: this.ModManifest,
-                reset: () => this.Config = new ModConfig(),
+                mod: ModManifest,
+                reset: () => Config = new ModConfig(),
                 save: () => {
-                    this.Helper.WriteConfig(this.Config);
-                    this.Config = this.Helper.ReadConfig<ModConfig>();
+                    Helper.WriteConfig(Config);
+                    Config = Helper.ReadConfig<ModConfig>();
                 },
                 titleScreenOnly: false
             );
 
-            // add some config options
-            configMenu.AddSectionTitle(
-                mod: this.ModManifest,
-                text: () => "Famer Allergies"
-            );
-            configMenu.AddParagraph(
-                mod: this.ModManifest,
-                text: () => "Eating a food containing an allergen results in a loss of energy and debuffs."
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Eggs",
-                tooltip: () => "Your farmer will be allergic to any foods containing eggs.",
-                getValue: () => this.Config.Farmer.EggAllergy,
-                setValue: value => this.Config.Farmer.EggAllergy = value
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Wheat",
-                tooltip: () => "Your farmer will be allergic to any foods containing wheat.",
-                getValue: () => this.Config.Farmer.WheatAllergy,
-                setValue: value => this.Config.Farmer.WheatAllergy = value
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Fish",
-                tooltip: () => "Your farmer will be allergic to any foods containing fish.",
-                getValue: () => this.Config.Farmer.FishAllergy,
-                setValue: value => this.Config.Farmer.FishAllergy = value
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Shellfish",
-                tooltip: () => "Your farmer will be allergic to any foods containing shellfish.",
-                getValue: () => this.Config.Farmer.ShellfishAllergy,
-                setValue: value => this.Config.Farmer.ShellfishAllergy = value
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Tree Nuts",
-                tooltip: () => "Your farmer will be allergic to any foods containing tree nuts.",
-                getValue: () => this.Config.Farmer.TreenutAllergy,
-                setValue: value => this.Config.Farmer.TreenutAllergy = value
-            );
-            configMenu.AddBoolOption(
-                mod: this.ModManifest,
-                name: () => "Dairy",
-                tooltip: () => "Your farmer will be allergic to any foods containing dairy.",
-                getValue: () => this.Config.Farmer.DairyAllergy,
-                setValue: value => this.Config.Farmer.DairyAllergy = value
-            );
+            ConfigMenuInit.SetupMenuUI(configMenu, ModManifest, Config);
         }
     }
 }

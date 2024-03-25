@@ -50,7 +50,7 @@ namespace BZP_Allergies.AssetPatches
                         Type = "Crafting",
                         Category = 0,
                         Price = 500,
-                        Texture = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/AllergyMedicine"),
+                        Texture = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites"),
                         SpriteIndex = 0,
                         Edibility = 20,
                         IsDrink = true,
@@ -70,7 +70,35 @@ namespace BZP_Allergies.AssetPatches
                         CustomFields = null
                     };
 
+                    ObjectData lactasePills = new()
+                    {
+                        Name = "Lactase Pills",
+                        DisplayName = "Lactase Pills",
+                        Description = "Eat before consuming dairy if you're allergic for temporary protection.",
+                        Type = "Crafting",
+                        Category = 0,
+                        Price = 500,
+                        Texture = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites"),
+                        SpriteIndex = 1,
+                        Edibility = 20,
+                        IsDrink = false,
+                        Buffs = null,
+                        GeodeDropsDefaultItems = false,
+                        GeodeDrops = null,
+                        ArtifactSpotChances = null,
+                        ExcludeFromFishingCollection = false,
+                        ExcludeFromShippingCollection = false,
+                        ExcludeFromRandomSale = false,
+                        ContextTags = new List<string>()
+                        {
+                            "medicine_item",
+                            "color_blue"
+                        },
+                        CustomFields = null
+                    };
+
                     editor.Data["BzpAllergies_AllergyMedicine"] = allergyMedicine;
+                    editor.Data["BzpAllergies_LactasePills"] = lactasePills;
                 });
             }
         }
