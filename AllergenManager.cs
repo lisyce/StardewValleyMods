@@ -18,6 +18,7 @@ namespace BZP_Allergies
         }
 
         public const string ALLERIC_REACTION_DEBUFF = "bzp_allergies_1";
+        public const string LACTASE_PILLS_BUFF = "bzp_allergies_2";
 
         private static readonly Dictionary<Allergens, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
         {

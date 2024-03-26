@@ -42,7 +42,7 @@ namespace BZP_Allergies
             Config = Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerAllergies.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
+            PatchFarmerDoneEating.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
             PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
 
             Harmony = new(ModManifest.UniqueID);
