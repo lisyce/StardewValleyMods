@@ -19,14 +19,15 @@ namespace BZP_Allergies
         private Harmony Harmony;
         private ModConfig Config;
         private IModHelper ModHelper;
-        private Texture2D ObjectSprites;
+        private Texture2D Sprites;
 
         /*********
         ** Public methods
         *********/
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
-        public override void Entry(IModHelper modHelper) {
+        public override void Entry(IModHelper modHelper)
+        {
             ModHelper = modHelper;
 
             // allergen manager
@@ -59,7 +60,7 @@ namespace BZP_Allergies
         private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
         {
             string objects = PathUtilities.NormalizeAssetName(@"Data/Objects");
-            string allergyMedicineAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites");
+            string sprites = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/Sprites");
             string shops = PathUtilities.NormalizeAssetName(@"Data/Shops");
             if (e.NameWithoutLocale.IsEquivalentTo(objects))
             {
@@ -68,9 +69,9 @@ namespace BZP_Allergies
                     PatchObjects.AddAllergen(e, a, Config);
                 }
             }
-            else if (e.NameWithoutLocale.IsEquivalentTo(allergyMedicineAsset))
+            else if (e.NameWithoutLocale.IsEquivalentTo(sprites))
             {
-                e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/ObjectSprites.png"), AssetLoadPriority.Medium);
+                e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
             }
             else if (e.NameWithoutLocale.IsEquivalentTo(shops))
             {
@@ -83,10 +84,10 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetReady(object sender, AssetReadyEventArgs e)
         {
-            string objectSpritesAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/ObjectSprites");
-            if (e.NameWithoutLocale.IsEquivalentTo(objectSpritesAsset))
+            string spriteAsset = PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/Sprites");
+            if (e.NameWithoutLocale.IsEquivalentTo(spriteAsset))
             {
-                this.ObjectSprites = Game1.content.Load<Texture2D>(objectSpritesAsset);
+                this.Sprites = Game1.content.Load<Texture2D>(spriteAsset);
             }
         }
 
