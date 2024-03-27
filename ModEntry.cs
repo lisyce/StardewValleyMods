@@ -3,11 +3,15 @@ using BZP_Allergies.AssetPatches;
 using BZP_Allergies.Config;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
+using StardewValley.ItemTypeDefinitions;
+using StardewValley.Menus;
+using System.Buffers;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -72,6 +76,11 @@ namespace BZP_Allergies
             else if (e.NameWithoutLocale.IsEquivalentTo(sprites))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
+                //e.Edit(
+                    //apply: data => ApplyReactionDebuffIconEdits(data, PatchFarmerDoneEating.item),
+                    //priority: AssetEditPriority.Default,
+                    //onBehalfOf: ModManifest.UniqueID
+                //);
             }
             else if (e.NameWithoutLocale.IsEquivalentTo(shops))
             {

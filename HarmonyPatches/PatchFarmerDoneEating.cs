@@ -7,25 +7,31 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Utilities;
 
 using static BZP_Allergies.AllergenManager;
+using StardewValley.ItemTypeDefinitions;
+using Microsoft.Xna.Framework;
+using System.Buffers;
 
 namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(Farmer), nameof(Farmer.doneEating))]
     internal class PatchFarmerDoneEating : Initializable
     {
+        public static StardewValley.Object? item = null;
+
         [HarmonyPrefix]
         static bool DoneEating_Prefix(ref Farmer __instance, out int __state)
         {
             try
             {
-
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
                 __state = itemToEat == null ? int.MinValue : itemToEat.Edibility;
                 if (itemToEat == null)
                 {
                     return true;
                 }
-                string iconPath = PathUtilities.NormalizeAssetName(@"TileSheets/BuffsIcons");
+                // MUST SET item FIRST
+                item = itemToEat;
+                Texture2D sprites = Game1.content.Load<Texture2D>(PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/Sprites"));
 
                 if (FarmerIsAllergic(itemToEat, Config, GameContent))
                 {
@@ -50,8 +56,12 @@ namespace BZP_Allergies.HarmonyPatches
                     };
 
                     BuffEffects effects = new(buffAttributesData);
+
+                    SetBuffIcon(itemToEat, sprites, out Texture2D buffIcon);
+
+                    // get texture of the item we ate for use in the buff icon
                     Buff reactionBuff = new(ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
-                        120000, GameContent.Load<Texture2D>(iconPath), 6, effects,
+                        120000, buffIcon, 0, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
 
@@ -72,9 +82,9 @@ namespace BZP_Allergies.HarmonyPatches
                 {
                     // get that dairy immunity
                     Buff immuneBuff = new(LACTASE_PILLS_BUFF, "food", itemToEat.DisplayName,
-                        120000, GameContent.Load<Texture2D>(iconPath), 10, null,
+                        120000, sprites, 3, null,
                         false, "Dairy Immunity", "Quick, eat the cheese!");
-                    
+
                     __instance.applyBuff(immuneBuff);
                 }
             }
@@ -101,6 +111,50 @@ namespace BZP_Allergies.HarmonyPatches
             catch (Exception ex)
             {
                 Monitor.Log($"Failed in {nameof(DoneEating_Postfix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+
+        private static void SetBuffIcon(StardewValley.Object itemToEat, Texture2D modSprites, out Texture2D result)
+        {
+            ParsedItemData dataOrErrorItem = ItemRegistry.GetDataOrErrorItem(itemToEat.QualifiedItemId);
+            Texture2D itemToEatTexture = dataOrErrorItem.GetTexture();
+            result = new(Game1.graphics.GraphicsDevice, 16, 16);
+
+            Rectangle itemToEatSourceArea = dataOrErrorItem.GetSourceRect();
+
+            Rectangle borderSourceArea = Game1.getSourceRectForStandardTileSheet(modSprites, 2, 16, 16);
+
+            // patch the pixels
+            // TODO: attribution
+            //https://github.com/Pathoschild/SMAPI/blob/e8a86a0b98061d322c2af89af845ed9f5fd15468/src/SMAPI/Framework/Content/AssetDataForImage.cs#L78
+  
+            // this.PatchImageImpl(sourceData, source.Width, source.Height, sourceArea.Value, targetArea.Value, patchMode);
+
+            // apply the itemToEat overlay
+            TransparentOverlay(result, itemToEatTexture, itemToEatSourceArea);
+
+
+            // apply the border overlay
+            TransparentOverlay(result, modSprites, borderSourceArea);
+        }
+
+        private static void TransparentOverlay(Texture2D under, Texture2D over, Rectangle overSourceRect)
+        {
+            // TODO make this actually transparent lol
+            // https://github.com/Pathoschild/SMAPI/blob/e8a86a0b98061d322c2af89af845ed9f5fd15468/src/SMAPI/Framework/Content/AssetDataForImage.cs#L53
+            int pixelCount = overSourceRect.Width * overSourceRect.Height;
+            int firstPixel = 0;
+            int lastPixel = pixelCount - 1;
+
+            Color[] sourceData = ArrayPool<Color>.Shared.Rent(pixelCount);  // no idea what this does
+            try
+            {
+                over.GetData(0, overSourceRect, sourceData, 0, pixelCount);
+                under.SetData(0, null, sourceData, firstPixel, pixelCount);
+            }
+            finally
+            {
+                ArrayPool<Color>.Shared.Return(sourceData);
             }
         }
     }
