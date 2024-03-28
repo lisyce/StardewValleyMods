@@ -11,8 +11,7 @@ namespace BZP_Allergies.AssetPatches
 
         public static void AddAllergen(AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
         {
-            string path = PathUtilities.NormalizeAssetName(@"Data/Objects");
-            if (e.NameWithoutLocale.IsEquivalentTo(path))
+            if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
                 bool allergic = FarmerIsAllergic(allergen, config);
 
@@ -97,8 +96,8 @@ namespace BZP_Allergies.AssetPatches
                         CustomFields = null
                     };
 
-                    editor.Data["BzpAllergies_AllergyMedicine"] = allergyMedicine;
-                    editor.Data["BzpAllergies_LactasePills"] = lactasePills;
+                    editor.Data[AllergenManager.ALLERGY_RELIEF_ID] = allergyMedicine;
+                    editor.Data[AllergenManager.LACTASE_PILLS_ID] = lactasePills;
                 });
             }
         }

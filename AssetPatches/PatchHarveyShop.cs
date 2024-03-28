@@ -9,8 +9,7 @@ namespace BZP_Allergies.AssetPatches
     {
         public static void Patch(AssetRequestedEventArgs e)
         {
-            string path = PathUtilities.NormalizeAssetName(@"Data/Shops");
-            if (e.NameWithoutLocale.IsEquivalentTo(path))
+            if (e.NameWithoutLocale.IsEquivalentTo("Data/Shops"))
             {
                 e.Edit(asset =>
                 {
@@ -33,8 +32,8 @@ namespace BZP_Allergies.AssetPatches
                         AvailableStockModifiers = null,
                         AvailableStockModifierMode = QuantityModifier.QuantityModifierMode.Stack,
                         Condition = null,
-                        Id = "(O)BzpAllergies_AllergyMedicine",
-                        ItemId = "(O)BzpAllergies_AllergyMedicine",
+                        Id = "(O)" + AllergenManager.ALLERGY_RELIEF_ID,
+                        ItemId = "(O)" + AllergenManager.ALLERGY_RELIEF_ID,
                         RandomItemId = null,
                         MaxItems = null,
                         MinStack = -1,
@@ -70,8 +69,8 @@ namespace BZP_Allergies.AssetPatches
                         AvailableStockModifiers = null,
                         AvailableStockModifierMode = QuantityModifier.QuantityModifierMode.Stack,
                         Condition = null,
-                        Id = "(O)BzpAllergies_LactasePills",
-                        ItemId = "(O)BzpAllergies_LactasePills",
+                        Id = "(O)" + AllergenManager.LACTASE_PILLS_ID,
+                        ItemId = "(O)" + AllergenManager.LACTASE_PILLS_ID,
                         RandomItemId = null,
                         MaxItems = null,
                         MinStack = -1,

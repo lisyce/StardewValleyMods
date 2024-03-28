@@ -17,8 +17,12 @@ namespace BZP_Allergies
             DAIRY
         }
 
-        public const string ALLERIC_REACTION_DEBUFF = "bzp_allergies_1";
-        public const string LACTASE_PILLS_BUFF = "bzp_allergies_2";
+        public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_buff_1", ModEntry.MOD_ID);
+        public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
+        public static readonly string REACTION_EVENT = string.Format("{0}_had_allergic_reaction", ModEntry.MOD_ID);
+
+        public static readonly string ALLERGY_RELIEF_ID = string.Format("{0}_AllergyMedicine", ModEntry.MOD_ID);
+        public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
 
         private static readonly Dictionary<Allergens, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
         {
@@ -50,12 +54,12 @@ namespace BZP_Allergies
 
         private static readonly Dictionary<Allergens, string> ENUM_TO_CONTEXT_TAG = new()
         {
-            { Allergens.EGG, "bzp_allergies_egg" },
-            { Allergens.WHEAT, "bzp_allergies_wheat" },
-            { Allergens.FISH, "bzp_allergies_fish" },
-            { Allergens.SHELLFISH, "bzp_allergies_shellfish" },
-            { Allergens.TREE_NUTS, "bzp_allergies_treenuts" },
-            { Allergens.DAIRY, "bzp_allergies_dairy" }
+            { Allergens.EGG, string.Format("{0}_egg", ModEntry.MOD_ID) },
+            { Allergens.WHEAT, string.Format("{0}_wheat", ModEntry.MOD_ID) },
+            { Allergens.FISH, string.Format("{0}_fish", ModEntry.MOD_ID) },
+            { Allergens.SHELLFISH, string.Format("{0}_shellfish", ModEntry.MOD_ID) },
+            { Allergens.TREE_NUTS, string.Format("{0}_treenuts", ModEntry.MOD_ID) },
+            { Allergens.DAIRY, string.Format("{0}_dairy", ModEntry.MOD_ID) }
         };
 
         private static readonly Dictionary<Allergens, string> ENUM_TO_STRING = new()
@@ -171,8 +175,7 @@ namespace BZP_Allergies
 
                     string madeFromId = m.Value;
                     // load Data/Objects for context tags
-                    string path = PathUtilities.NormalizeAssetName(@"Data/Objects");
-                    IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>(path);
+                    IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>("Data/Objects");
 
                     // !isShellfish = isFish since these can only be made from one of the two
                     bool isShellfish = objData[madeFromId].ContextTags.Contains("fish_crab_pot");

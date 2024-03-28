@@ -25,15 +25,15 @@ namespace BZP_Allergies.HarmonyPatches
             {
                 StardewValley.Object? itemToEat = __instance.itemToEat as StardewValley.Object;
                 __state = itemToEat == null ? int.MinValue : itemToEat.Edibility;
-                if (itemToEat == null)
+                if (itemToEat == null || !__instance.IsLocalPlayer)
                 {
                     return true;
                 }
                 // MUST SET item FIRST
                 item = itemToEat;
-                Texture2D sprites = Game1.content.Load<Texture2D>(PathUtilities.NormalizeAssetName(@"Mods/BarleyZP.BzpAllergies/Sprites"));
+                Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
 
-                if (FarmerIsAllergic(itemToEat, Config, GameContent))
+                if (FarmerIsAllergic(itemToEat, Config, GameContent) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
                     // is it dairy and do we have the buff?
                     if (itemToEat.HasContextTag(GetAllergenContextTag(Allergens.DAIRY)) && __instance.hasBuff(LACTASE_PILLS_BUFF))
@@ -70,13 +70,22 @@ namespace BZP_Allergies.HarmonyPatches
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }
+
+                    // add to seen events and send mail
+                    // TODO: REMOVE DEBUG
+                    __instance.eventsSeen.Remove(REACTION_EVENT);
+                    if (__instance.eventsSeen.Add(REACTION_EVENT) || !__instance.mailReceived.Contains(REACTION_EVENT))
+                    {
+                        Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
+                    }
                 }
-                else if (itemToEat.QualifiedItemId.Equals("(O)BzpAllergies_AllergyMedicine"))
+                else if (itemToEat.QualifiedItemId.Equals("(O)" + ALLERGY_RELIEF_ID))
                 {
                     // nausea is automatically removed. remove the reaction as well
                     __instance.buffs.Remove(ALLERIC_REACTION_DEBUFF);
+                    
                 }
-                else if (itemToEat.QualifiedItemId.Equals("(O)BzpAllergies_LactasePills"))
+                else if (itemToEat.QualifiedItemId.Equals("(O)" + LACTASE_PILLS_ID))
                 {
                     // get that dairy immunity
                     Buff immuneBuff = new(LACTASE_PILLS_BUFF, "food", itemToEat.DisplayName,

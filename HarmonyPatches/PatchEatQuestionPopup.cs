@@ -15,8 +15,7 @@ namespace BZP_Allergies.HarmonyPatches
             try
             {
                 // is this the "Eat {0}?" or "Drink {0}?" popup?
-                string assetPath = PathUtilities.NormalizeAssetName(@"Strings/StringsFromCSFiles");
-                IDictionary<string, string> stringsData = GameContent.Load<Dictionary<string, string>>(assetPath);
+                IDictionary<string, string> stringsData = GameContent.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
                 string activeObjectName = Game1.player.ActiveObject.DisplayName;
                 string eatQuestion = string.Format(stringsData["Game1.cs.3160"], activeObjectName);
                 string drinkQuestion = string.Format(stringsData["Game1.cs.3159"], activeObjectName);
