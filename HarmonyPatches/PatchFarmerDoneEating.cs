@@ -57,11 +57,9 @@ namespace BZP_Allergies.HarmonyPatches
 
                     BuffEffects effects = new(buffAttributesData);
 
-                    SetBuffIcon(itemToEat, sprites, out Texture2D buffIcon);
-
                     // get texture of the item we ate for use in the buff icon
                     Buff reactionBuff = new(ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
-                        120000, buffIcon, 0, effects,
+                        120000, sprites, 2, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
 
@@ -111,50 +109,6 @@ namespace BZP_Allergies.HarmonyPatches
             catch (Exception ex)
             {
                 Monitor.Log($"Failed in {nameof(DoneEating_Postfix)}:\n{ex}", LogLevel.Error);
-            }
-        }
-
-        private static void SetBuffIcon(StardewValley.Object itemToEat, Texture2D modSprites, out Texture2D result)
-        {
-            ParsedItemData dataOrErrorItem = ItemRegistry.GetDataOrErrorItem(itemToEat.QualifiedItemId);
-            Texture2D itemToEatTexture = dataOrErrorItem.GetTexture();
-            result = new(Game1.graphics.GraphicsDevice, 16, 16);
-
-            Rectangle itemToEatSourceArea = dataOrErrorItem.GetSourceRect();
-
-            Rectangle borderSourceArea = Game1.getSourceRectForStandardTileSheet(modSprites, 2, 16, 16);
-
-            // patch the pixels
-            // TODO: attribution
-            //https://github.com/Pathoschild/SMAPI/blob/e8a86a0b98061d322c2af89af845ed9f5fd15468/src/SMAPI/Framework/Content/AssetDataForImage.cs#L78
-  
-            // this.PatchImageImpl(sourceData, source.Width, source.Height, sourceArea.Value, targetArea.Value, patchMode);
-
-            // apply the itemToEat overlay
-            TransparentOverlay(result, itemToEatTexture, itemToEatSourceArea);
-
-
-            // apply the border overlay
-            TransparentOverlay(result, modSprites, borderSourceArea);
-        }
-
-        private static void TransparentOverlay(Texture2D under, Texture2D over, Rectangle overSourceRect)
-        {
-            // TODO make this actually transparent lol
-            // https://github.com/Pathoschild/SMAPI/blob/e8a86a0b98061d322c2af89af845ed9f5fd15468/src/SMAPI/Framework/Content/AssetDataForImage.cs#L53
-            int pixelCount = overSourceRect.Width * overSourceRect.Height;
-            int firstPixel = 0;
-            int lastPixel = pixelCount - 1;
-
-            Color[] sourceData = ArrayPool<Color>.Shared.Rent(pixelCount);  // no idea what this does
-            try
-            {
-                over.GetData(0, overSourceRect, sourceData, 0, pixelCount);
-                under.SetData(0, null, sourceData, firstPixel, pixelCount);
-            }
-            finally
-            {
-                ArrayPool<Color>.Shared.Return(sourceData);
             }
         }
     }

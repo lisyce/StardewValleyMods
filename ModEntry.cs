@@ -76,11 +76,6 @@ namespace BZP_Allergies
             else if (e.NameWithoutLocale.IsEquivalentTo(sprites))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
-                //e.Edit(
-                    //apply: data => ApplyReactionDebuffIconEdits(data, PatchFarmerDoneEating.item),
-                    //priority: AssetEditPriority.Default,
-                    //onBehalfOf: ModManifest.UniqueID
-                //);
             }
             else if (e.NameWithoutLocale.IsEquivalentTo(shops))
             {
