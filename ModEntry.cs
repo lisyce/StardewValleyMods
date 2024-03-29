@@ -3,15 +3,11 @@ using BZP_Allergies.AssetPatches;
 using BZP_Allergies.Config;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
-using StardewValley.ItemTypeDefinitions;
-using StardewValley.Menus;
-using System.Buffers;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -24,6 +20,8 @@ namespace BZP_Allergies
         private ModConfig Config;
         private IModHelper ModHelper;
         private Texture2D Sprites;
+
+        public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
         public static readonly string MOD_ID = "BarleyZP.BzpAllergies";
 
@@ -43,6 +41,7 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.Content.AssetReady += OnAssetReady;
+            modHelper.Events.GameLoop.DayStarted += OnDayStarted;
 
             // config
             Config = Helper.ReadConfig<ModConfig>();
@@ -113,6 +112,14 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest, Config);
+        }
+
+        /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void OnDayStarted(object sender, DayStartedEventArgs e)
+        {
+            NpcsThatReactedToday.Clear();
         }
     }
 }
