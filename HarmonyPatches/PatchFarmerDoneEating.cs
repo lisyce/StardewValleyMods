@@ -4,12 +4,8 @@ using StardewModdingAPI;
 using StardewValley.Buffs;
 using StardewValley.GameData.Buffs;
 using Microsoft.Xna.Framework.Graphics;
-using StardewModdingAPI.Utilities;
 
 using static BZP_Allergies.AllergenManager;
-using StardewValley.ItemTypeDefinitions;
-using Microsoft.Xna.Framework;
-using System.Buffers;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -33,7 +29,7 @@ namespace BZP_Allergies.HarmonyPatches
                 item = itemToEat;
                 Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
 
-                if (FarmerIsAllergic(itemToEat, Config, GameContent) && !__instance.hasBuff(Buff.squidInkRavioli))
+                if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
                     // is it dairy and do we have the buff?
                     if (itemToEat.HasContextTag(GetAllergenContextTag(Allergens.DAIRY)) && __instance.hasBuff(LACTASE_PILLS_BUFF))
@@ -57,24 +53,21 @@ namespace BZP_Allergies.HarmonyPatches
 
                     BuffEffects effects = new(buffAttributesData);
 
-                    // get texture of the item we ate for use in the buff icon
                     Buff reactionBuff = new(ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
                         120000, sprites, 2, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
 
                     __instance.applyBuff(reactionBuff);
-
+                    
                     // randomly apply nausea
                     if (new Random().NextDouble() < 0.50)
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }
 
-                    // add to seen events and send mail
-                    // TODO: REMOVE DEBUG
-                    __instance.eventsSeen.Remove(REACTION_EVENT);
-                    if (__instance.eventsSeen.Add(REACTION_EVENT) || !__instance.mailReceived.Contains(REACTION_EVENT))
+                    // send mail
+                    if (!__instance.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
                     {
                         Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
                     }

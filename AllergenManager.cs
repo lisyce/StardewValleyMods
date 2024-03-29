@@ -24,6 +24,8 @@ namespace BZP_Allergies
         public static readonly string ALLERGY_RELIEF_ID = string.Format("{0}_AllergyMedicine", ModEntry.MOD_ID);
         public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
 
+        public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
+
         private static readonly Dictionary<Allergens, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
         {
             { Allergens.EGG, new HashSet<string>{
@@ -41,7 +43,7 @@ namespace BZP_Allergies
             }},
             { Allergens.SHELLFISH, new HashSet<string>{
                 "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "447", "812",
-                "SmokedFish"
+                "SmokedFish", "715", "372", "717", "718", "719", "720", "723", "716", "721", "722"
             }},
             { Allergens.TREE_NUTS, new HashSet<string>{
                 "239", "607", "408"
@@ -94,10 +96,10 @@ namespace BZP_Allergies
 
         public static ISet<string> GetObjectsWithAllergen(Allergens allergen, IAssetDataForDictionary<string, ObjectData> data)
         {
-            // labeled cooked items
+            // labeled items
             ISet<string> result = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
 
-            // raw ingredient items
+            // category items
             if (allergen == Allergens.EGG)
             {
                 ISet<string> rawEggItems = GetItemsWithContextTags(new List<string> { "egg_item", "mayo_item", "large_egg_item" }, data);
@@ -128,28 +130,28 @@ namespace BZP_Allergies
 
             
         }
-        public static bool FarmerIsAllergic(Allergens allergen, ModConfig config)
+        public static bool FarmerIsAllergic(Allergens allergen)
         {
             switch (allergen)
             {
                 case Allergens.EGG:
-                    return config.Farmer.EggAllergy;
+                    return Config.Farmer.EggAllergy;
                 case Allergens.WHEAT:
-                    return config.Farmer.WheatAllergy;
+                    return Config.Farmer.WheatAllergy;
                 case Allergens.FISH:
-                    return config.Farmer.FishAllergy;
+                    return Config.Farmer.FishAllergy;
                 case Allergens.SHELLFISH:
-                    return config.Farmer.ShellfishAllergy;
+                    return Config.Farmer.ShellfishAllergy;
                 case Allergens.TREE_NUTS:
-                    return config.Farmer.TreenutAllergy;
+                    return Config.Farmer.TreenutAllergy;
                 case Allergens.DAIRY:
-                    return config.Farmer.DairyAllergy;
+                    return Config.Farmer.DairyAllergy;
                 default:
                     return false;
             }
         }
 
-        public static bool FarmerIsAllergic (StardewValley.Object @object, ModConfig config, IGameContentHelper helper)
+        public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
             // special case: roe, aged roe, or smoked fish
             // need to differentiate fish vs shellfish ingredient
@@ -175,18 +177,18 @@ namespace BZP_Allergies
 
                     string madeFromId = m.Value;
                     // load Data/Objects for context tags
-                    IDictionary<string, ObjectData> objData = helper.Load<Dictionary<string, ObjectData>>("Data/Objects");
+                    IDictionary<string, ObjectData> objData = GameContent.Load<Dictionary<string, ObjectData>>("Data/Objects");
 
                     // !isShellfish = isFish since these can only be made from one of the two
-                    bool isShellfish = objData[madeFromId].ContextTags.Contains("fish_crab_pot");
+                    bool isShellfish = objData[madeFromId].ContextTags.Contains(GetAllergenContextTag(Allergens.SHELLFISH));
 
-                    if (isShellfish && FarmerIsAllergic(Allergens.SHELLFISH, config))
+                    if (isShellfish && FarmerIsAllergic(Allergens.SHELLFISH))
                     {
                         return true;
                     }
                     else
                     {
-                        return !isShellfish && FarmerIsAllergic(Allergens.FISH, config);
+                        return !isShellfish && FarmerIsAllergic(Allergens.FISH);
                     }
                 }
                 catch (Exception ex)
@@ -201,7 +203,7 @@ namespace BZP_Allergies
             // check each of the allergens
             foreach (Allergens a in Enum.GetValues<Allergens>())
             {
-                if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a, config))
+                if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
                 {
                     return true;
                 }

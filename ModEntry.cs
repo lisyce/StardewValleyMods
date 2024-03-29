@@ -69,7 +69,7 @@ namespace BZP_Allergies
             {
                 foreach (Allergens a in Enum.GetValues<Allergens>())
                 {
-                    PatchObjects.AddAllergen(e, a, Config);
+                    PatchObjects.AddAllergen(e, a);
                 }
             }
             else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))

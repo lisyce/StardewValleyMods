@@ -22,7 +22,7 @@ namespace BZP_Allergies.HarmonyPatches
 
                 if (question.Equals(eatQuestion) || question.Equals(drinkQuestion))
                 {
-                    if (FarmerIsAllergic(Game1.player.ActiveObject, Config, GameContent))
+                    if (FarmerIsAllergic(Game1.player.ActiveObject))
                     {
                         question += " You are allergic to it!";
                     }

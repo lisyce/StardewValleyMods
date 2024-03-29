@@ -9,11 +9,11 @@ namespace BZP_Allergies.AssetPatches
     internal sealed class PatchObjects
     {
 
-        public static void AddAllergen(AssetRequestedEventArgs e, Allergens allergen, ModConfig config)
+        public static void AddAllergen(AssetRequestedEventArgs e, Allergens allergen)
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                bool allergic = FarmerIsAllergic(allergen, config);
+                bool allergic = FarmerIsAllergic(allergen);
 
                 e.Edit(asset =>
                 {
