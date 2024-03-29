@@ -25,7 +25,7 @@ namespace BZP_Allergies
         private IModHelper ModHelper;
         private Texture2D Sprites;
 
-        public static readonly string MOD_ID = "21238";
+        public static readonly string MOD_ID = "BarleyZP.BzpAllergies";
 
         /*********
         ** Public methods
@@ -75,14 +75,6 @@ namespace BZP_Allergies
             else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
-            }
-            else if (e.NameWithoutLocale.IsEquivalentTo("Data/Shops"))
-            {
-                PatchHarveyShop.Patch(e);
-            }
-            else if (e.NameWithoutLocale.IsEquivalentTo("Data/Mail"))
-            {
-                PatchLetters.PatchMail(e);
             }
         }
 

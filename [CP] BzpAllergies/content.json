@@ -1,0 +1,87 @@
+{
+  "Format": "2.0.0",
+  "Changes": [
+    {
+      "LogName": "Add medicine to Harvey's clinic",
+      "Action": "EditData",
+      "Target": "Data/Shops",
+      "TargetField": [ "Hospital", "Items" ],
+      "Entries": {
+        "BarleyZP.BzpAllergies_AllergyMedicine": {
+          "Id": "BarleyZP.BzpAllergies_AllergyMedicine",
+          "ItemId": "(O)BarleyZP.BzpAllergies_AllergyMedicine",
+          "Price": 1000
+        },
+        "BarleyZP.BzpAllergies_LactasePills": {
+          "Id": "BarleyZP.BzpAllergies_LactasePills",
+          "ItemId": "(O)BarleyZP.BzpAllergies_LactasePills",
+          "Price": 1500
+        }
+      }
+    },
+    {
+      "LogName": "Add custom objects",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "Entries": {
+        "BarleyZP.BzpAllergies_AllergyMedicine": {
+          "Name": "Allergy Medicine",
+          "DisplayName": "Allergy Medicine",
+          "Description": "Drink for relief from an allergic reaction. Can be consumed even when nauseous.",
+          "Type": "Crafting",
+          "Category": 0,
+          "Price": 500,
+          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 0,
+          "Edibility": 20,
+          "IsDrink": true,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "medicine_item",
+            "color_dark_purple",
+            "ginger_item"
+          ],
+          "CustomFields": null
+        },
+        "BarleyZP.BzpAllergies_LactasePills": {
+          "Name": "Lactase Pills",
+          "DisplayName": "Lactase Pills",
+          "Description": "Eat before consuming dairy if you're allergic for temporary protection.",
+          "Type": "Crafting",
+          "Category": 0,
+          "Price": 500,
+          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 1,
+          "Edibility": 20,
+          "IsDrink": false,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "medicine_item",
+            "color_blue"
+          ],
+          "CustomFields": null
+        }
+      }
+    },
+    {
+      "LogName": "Add custom mail",
+      "Action": "EditData",
+      "Target": "Data/Mail",
+      "Entries": {
+        "BarleyZP.BzpAllergies_harvey_ad": "@,^I heard that you experienced an allergic reaction the other day.^You should come by the clinic sometime and get some medicine so it doesn't happen again!^I've enclosed some Allergy Medicine to get you by until you can stop in.^^-Dr. Harvey%item object BarleyZP.BzpAllergies_AllergyMedicine 1%%[#]Harvey's Allergy Medicine"
+      }
+    }
+  ]
+}

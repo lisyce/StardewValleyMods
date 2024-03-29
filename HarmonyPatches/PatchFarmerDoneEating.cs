@@ -67,10 +67,11 @@ namespace BZP_Allergies.HarmonyPatches
                     }
 
                     // send mail
-                    if (!__instance.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
-                    {
+                    // TODO: uncomment this debug if
+                    //if (!__instance.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
+                    //{
                         Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
-                    }
+                    //}
                 }
                 else if (itemToEat.QualifiedItemId.Equals("(O)" + ALLERGY_RELIEF_ID))
                 {

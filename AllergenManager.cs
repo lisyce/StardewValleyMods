@@ -17,7 +17,7 @@ namespace BZP_Allergies
             DAIRY
         }
 
-        public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_buff_1", ModEntry.MOD_ID);
+        public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_allergic_reaction", ModEntry.MOD_ID);
         public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
         public static readonly string REACTION_EVENT = string.Format("{0}_had_allergic_reaction", ModEntry.MOD_ID);
 
