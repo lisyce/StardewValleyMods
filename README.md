@@ -43,7 +43,9 @@ You may leave a comment on the linked Nexus mod page or create an issue on this 
 
 ## Planned Features
 
-- Configurable allergies for NPCs that influence gift tastes, dialogue, etc.
-- Public API and potential content pack framework to allow other mods to integrate more easily
 - Support for custom allergens
+- Public API and potential content pack framework to allow other mods to integrate more easily
+- Randomized allergens for an extra challenge
+- Configurable allergies for NPCs that influence gift tastes, dialogue, etc.
+- Compatibility with Stardew Valley Expanded and Ridgeside Village
 - Translation support
