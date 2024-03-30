@@ -11,7 +11,7 @@ namespace BZP_Allergies.Config
             // add some config options
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "Famer Allergies"
+                text: () => "Farmer Allergies"
             );
             configMenu.AddParagraph(
                 mod: modManifest,

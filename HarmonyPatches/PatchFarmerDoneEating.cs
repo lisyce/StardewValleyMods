@@ -12,7 +12,6 @@ namespace BZP_Allergies.HarmonyPatches
     [HarmonyPatch(typeof(Farmer), nameof(Farmer.doneEating))]
     internal class PatchFarmerDoneEating : Initializable
     {
-        public static StardewValley.Object? item = null;
 
         [HarmonyPrefix]
         static bool DoneEating_Prefix(ref Farmer __instance, out int __state)
@@ -25,8 +24,7 @@ namespace BZP_Allergies.HarmonyPatches
                 {
                     return true;
                 }
-                // MUST SET item FIRST
-                item = itemToEat;
+
                 Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
 
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
