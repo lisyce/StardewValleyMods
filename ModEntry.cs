@@ -19,7 +19,6 @@ namespace BZP_Allergies
         private Harmony Harmony;
         private ModConfig Config;
         private IModHelper ModHelper;
-        private Texture2D Sprites;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -40,7 +39,6 @@ namespace BZP_Allergies
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
-            modHelper.Events.Content.AssetReady += OnAssetReady;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
 
             // config
@@ -65,7 +63,7 @@ namespace BZP_Allergies
         /// <inheritdoc cref="IContentEvents.AssetRequested"/>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event data.</param>
-        private void OnAssetRequested(object sender, AssetRequestedEventArgs e)
+        private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
@@ -80,21 +78,10 @@ namespace BZP_Allergies
             }
         }
 
-        /// <inheritdoc cref="IContentEvents.AssetReady"/>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event data.</param>
-        private void OnAssetReady(object sender, AssetReadyEventArgs e)
-        {
-            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
-            {
-                this.Sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
-            }
-        }
-
         /// <inheritdoc cref="IGameLoopEvents.GameLaunched"/>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event arguments.</param>
-        private void OnGameLaunched(object sender, GameLaunchedEventArgs e) {
+        private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
             // get Generic Mod Config Menu's API (if it's installed)
             var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (configMenu is null)
@@ -120,7 +107,7 @@ namespace BZP_Allergies
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event arguments.</param>
-        private void OnDayStarted(object sender, DayStartedEventArgs e)
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             NpcsThatReactedToday.Clear();
         }

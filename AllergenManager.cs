@@ -215,12 +215,17 @@ namespace BZP_Allergies
                 {
                     result.Add(item.Key);
                 }
+            }
 
-                // remove shellfish
-                ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(Allergens.SHELLFISH, new HashSet<string>());
-                foreach (string shellfishId in shellfish)
+            // remove shellfish
+            ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(Allergens.SHELLFISH, new HashSet<string>());
+            
+            foreach (var item in data.Data)
+            {
+                List<string> tags = item.Value.ContextTags ?? new();
+                if (shellfish.Contains(item.Key) || tags.Contains(GetAllergenContextTag(Allergens.SHELLFISH)))
                 {
-                    result.Remove(shellfishId);
+                    result.Remove(item.Key);
                 }
             }
 
