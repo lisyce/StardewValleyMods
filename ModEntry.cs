@@ -51,7 +51,10 @@ namespace BZP_Allergies
             PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
 
             Harmony = new(ModManifest.UniqueID);
-            Harmony.PatchAll();    
+            Harmony.PatchAll();
+
+            // console commands
+            modHelper.ConsoleCommands.Add("list_allergens", "Get a list of all possible allergens.", this.ListAllergens);
         }
 
 
@@ -120,6 +123,10 @@ namespace BZP_Allergies
         private void OnDayStarted(object sender, DayStartedEventArgs e)
         {
             NpcsThatReactedToday.Clear();
+        }
+
+        private void ListAllergens(string command, string[] args) {
+            Monitor.Log("egg, wheat, fish, shellfish, treenuts, dairy", LogLevel.Info);
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using StardewValley.GameData.Objects;
 using StardewModdingAPI;
-using BZP_Allergies.Config;
 using System.Text.RegularExpressions;
-using StardewModdingAPI.Utilities;
-using StardewValley;
-using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
 {
