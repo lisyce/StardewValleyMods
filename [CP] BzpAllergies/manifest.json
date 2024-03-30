@@ -1,11 +1,11 @@
 {
-  "Name": "BarleyZP Allergies (CP)",
+  "Name": "BarleyZP Allergies [CP Component]",
   "Author": "BarleyZP",
   "Version": "1.0.0",
-  "Description": "BarleyZP's Allergy Mod",
+  "Description": "BarleyZP's Allergy Mod Content Patcher Component",
   "UniqueID": "BarleyZP.BzpAllergies.CP",
   "MinimumApiVersion": "3.8.0",
-  "UpdateKeys": [],
+  "UpdateKeys": [ "Nexus:21238'" ],
   "ContentPackFor": {
     "UniqueID": "Pathoschild.ContentPatcher"
   }

@@ -25,17 +25,6 @@ namespace BZP_Allergies.AssetPatches
                         ObjectData objectData = editor.Data[id];
                         objectData.ContextTags ??= new List<string>();
                         objectData.ContextTags.Add(GetAllergenContextTag(allergen));
-
-                        // update descriptions
-                        if (!objectData.Description.Contains("Allergens: "))
-                        {
-                            objectData.Description += "\nAllergens: ";
-                        }
-                        else
-                        {
-                            objectData.Description += ", ";
-                        }
-                        objectData.Description += GetAllergenReadableString(allergen);
                     }
                 });
             }

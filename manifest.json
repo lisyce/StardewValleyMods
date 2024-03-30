@@ -1,10 +1,10 @@
 {
-  "Name": "BarleyZP Allergies",
+  "Name": "BarleyZP Allergies [SMAPI Component]",
   "Author": "BarleyZP",
   "Version": "1.0.0",
-  "Description": "BarleyZP's Allergy Mod",
+  "Description": "BarleyZP's Allergy Mod SMAPI Component",
   "UniqueID": "BarleyZP.BzpAllergies",
   "EntryDll": "BzpAllergies.dll",
   "MinimumApiVersion": "3.8.0",
-  "UpdateKeys": []
+  "UpdateKeys": [ "Nexus:21238" ]
 }

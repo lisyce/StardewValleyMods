@@ -3,6 +3,8 @@ using StardewModdingAPI;
 using BZP_Allergies.Config;
 using System.Text.RegularExpressions;
 using StardewModdingAPI.Utilities;
+using StardewValley;
+using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
 {
@@ -107,13 +109,7 @@ namespace BZP_Allergies
             }
             else if (allergen == Allergens.FISH)
             {
-                ISet<string> fishItems = GetItemsWithContextTags(
-                    new List<string> { "fish_ocean", "fish_legendary", "fish_lake", "fish_river", "fish_freshwater", "fish_pond",
-                                       "fish_secret_pond", "fish_swamp", "fish_bug_lair", "fish_semi_rare", "fish_night_market",
-                                       "fish_legendary_family", "id_(o)smokedfish", "id_o_smokedfish" },
-                    data,
-                    new List<string> { "fish_crab_pot" }
-                );
+                ISet<string> fishItems = GetFishItems(data);
                 result.UnionWith(fishItems);
             }
             else if (allergen == Allergens.DAIRY)
@@ -212,11 +208,32 @@ namespace BZP_Allergies
             return false;
         }
 
-        public static ISet<string> GetItemsWithContextTags (List<string> tags, IAssetDataForDictionary<string, ObjectData> data, List<string>? rejectTags = null)
+        private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
         {
             ISet<string> result = new HashSet<string>();
 
-            rejectTags ??= new List<string>();
+            foreach (var item in data.Data)
+            {
+                ObjectData v = item.Value;
+                if (v.Category == StardewValley.Object.FishCategory)
+                {
+                    result.Add(item.Key);
+                }
+
+                // remove shellfish
+                ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(Allergens.SHELLFISH, new HashSet<string>());
+                foreach (string shellfishId in shellfish)
+                {
+                    result.Remove(shellfishId);
+                }
+            }
+
+            return result;
+        }
+
+        private static ISet<string> GetItemsWithContextTags (List<string> tags, IAssetDataForDictionary<string, ObjectData> data)
+        {
+            ISet<string> result = new HashSet<string>();
 
             foreach (var item in data.Data)
             {
@@ -226,14 +243,6 @@ namespace BZP_Allergies
                     if (v.ContextTags != null && v.ContextTags.Contains(tag))
                     {
                         result.Add(item.Key);
-                    }
-                }
-
-                foreach (string rejectTag in rejectTags)
-                {
-                    if (v.ContextTags != null && v.ContextTags.Contains(rejectTag))
-                    {
-                        result.Remove(item.Key);
                     }
                 }
             }
