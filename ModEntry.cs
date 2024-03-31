@@ -68,7 +68,7 @@ namespace BZP_Allergies
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                foreach (string a in ALLERGENS_TO_DISPLAY_NAME.Keys)
+                foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
                 {
                     PatchObjects.AddAllergen(e, a);
                 }
@@ -117,7 +117,15 @@ namespace BZP_Allergies
         }
 
         private void ListAllergens(string command, string[] args) {
-            Monitor.Log("egg, wheat, fish, shellfish, treenuts, dairy", LogLevel.Info);
+
+            string result = "\n{Allergen Id}: {Allergen Display Name}";
+
+            foreach (var item in AllergenManager.ALLERGEN_TO_DISPLAY_NAME)
+            {
+                result += "\n\t" + item.Key + ": " + item.Value;
+            }
+
+            Monitor.Log(result, LogLevel.Info);
         }
     }
 }

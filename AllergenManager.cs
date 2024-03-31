@@ -16,7 +16,7 @@ namespace BZP_Allergies
 
         public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
 
-        private static readonly Dictionary<string, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
+        public static readonly Dictionary<string, ISet<string>> ALLERGEN_OBJECTS = new()
         {
             { "egg", new HashSet<string>{
                 "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
@@ -44,7 +44,7 @@ namespace BZP_Allergies
             }}
         };
 
-        public static readonly Dictionary<string, string> ALLERGENS_TO_DISPLAY_NAME = new()
+        public static readonly Dictionary<string, string> ALLERGEN_TO_DISPLAY_NAME = new()
         {
             { "egg", "Eggs" },
             { "wheat", "Wheat" },
@@ -54,6 +54,12 @@ namespace BZP_Allergies
             { "dairy", "Dairy" }
         };
 
+        public static readonly Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS = new()
+        {
+            { "egg", new HashSet<string>{ "egg_item", "mayo_item", "large_egg_item" } },
+            { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } }
+        };
+
         public static string GetAllergenContextTag(string allergen)
         {
             return ModEntry.MOD_ID + "_" + allergen.ToLower();
@@ -61,10 +67,10 @@ namespace BZP_Allergies
 
         public static string GetAllergenDisplayName(string allergen)
         {
-            string result = ALLERGENS_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
+            string result = ALLERGEN_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
             if (result.Equals(""))
             {
-                throw new Exception("No readable string was defined for the allergen " + allergen.ToString());
+                throw new Exception("No allergen found named " + allergen.ToString());
             }
             return result;
         }
@@ -72,32 +78,19 @@ namespace BZP_Allergies
         public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
         {
             // labeled items
-            ISet<string> result = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
+            ISet<string> result = ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
 
-            // category items
-            if (allergen == "egg")
-            {
-                ISet<string> rawEggItems = GetItemsWithContextTags(new List<string> { "egg_item", "mayo_item", "large_egg_item" }, data);
-                result.UnionWith(rawEggItems);
-            }
-            else if (allergen == "fish")
+            // fish special case
+            if (allergen == "fish")
             {
                 ISet<string> fishItems = GetFishItems(data);
                 result.UnionWith(fishItems);
             }
-            else if (allergen == "dairy")
-            {
-                ISet<string> dairyItems = GetItemsWithContextTags(new List<string> { "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" }, data);
-                result.UnionWith(dairyItems);
-            }
 
-            if (result.Count == 0)
-            {
-                throw new Exception("No objects have been assigned the allergen " + allergen.ToString());
-            }
+            ISet<string> items = GetItemsWithContextTags(ALLERGEN_CONTEXT_TAGS.GetValueOrDefault(allergen, new HashSet<string>()), data);
+            result.UnionWith(items);
+
             return result;
-
-            
         }
         public static bool FarmerIsAllergic(string allergen)
         {
@@ -168,7 +161,7 @@ namespace BZP_Allergies
             }
 
             // check each of the allergens
-            foreach (string a in ALLERGENS_TO_DISPLAY_NAME.Keys)
+            foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
             {
                 if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
                 {
@@ -193,7 +186,7 @@ namespace BZP_Allergies
             }
 
             // remove shellfish
-            ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault("shellfish", new HashSet<string>());
+            ISet<string> shellfish = ALLERGEN_OBJECTS.GetValueOrDefault("shellfish", new HashSet<string>());
             
             foreach (var item in data.Data)
             {
@@ -207,7 +200,7 @@ namespace BZP_Allergies
             return result;
         }
 
-        private static ISet<string> GetItemsWithContextTags (List<string> tags, IAssetDataForDictionary<string, ObjectData> data)
+        private static ISet<string> GetItemsWithContextTags (ISet<string> tags, IAssetDataForDictionary<string, ObjectData> data)
         {
             ISet<string> result = new HashSet<string>();
 

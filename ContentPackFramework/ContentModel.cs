@@ -13,13 +13,16 @@ namespace BZP_Allergies.ContentPackFramework
     {
         // display name
         public string? Name { get; set; }
+
+        // internal name
+        public string? Id { get; set; }
     }
 
     internal class AllergenAssignments
     {
-        public string? AllergenName { get; set; }
+        public string? AllergenId { get; set; }
 
-        // any object with this Id has the allergen
+        // any object with this unqualified Id has the allergen
         public List<string> ObjectIds { get; set; } = new();
 
         // any object with this context tag has the allergen
