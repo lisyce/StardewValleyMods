@@ -30,7 +30,7 @@ namespace BZP_Allergies.HarmonyPatches
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
                     // is it dairy and do we have the buff?
-                    if (itemToEat.HasContextTag(GetAllergenContextTag(Allergens.DAIRY)) && __instance.hasBuff(LACTASE_PILLS_BUFF))
+                    if (itemToEat.HasContextTag(GetAllergenContextTag("dairy")) && __instance.hasBuff(LACTASE_PILLS_BUFF))
                     {
                         HUDMessage lactaseProtectionMessage = new("Good thing you took your lactase!");
                         lactaseProtectionMessage.messageSubject = itemToEat;

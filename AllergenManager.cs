@@ -6,14 +6,6 @@ namespace BZP_Allergies
 {
     internal class AllergenManager : Initializable
     {
-        public enum Allergens {
-            EGG,
-            WHEAT,
-            FISH,
-            SHELLFISH,
-            TREE_NUTS,
-            DAIRY
-        }
 
         public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_allergic_reaction", ModEntry.MOD_ID);
         public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
@@ -24,67 +16,52 @@ namespace BZP_Allergies
 
         public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
 
-        private static readonly Dictionary<Allergens, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
+        private static readonly Dictionary<string, ISet<string>> ENUM_TO_ALLERGEN_OBJECTS = new()
         {
-            { Allergens.EGG, new HashSet<string>{
+            { "egg", new HashSet<string>{
                 "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
                 "732"
             }},
-            { Allergens.WHEAT, new HashSet<string>{
+            { "wheat", new HashSet<string>{
                 "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
                 "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
                 "262"
             }},
-            { Allergens.FISH, new HashSet<string>{
+            { "fish", new HashSet<string>{
                 "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
                 "265", "447", "445", "812", "SmokedFish"
             }},
-            { Allergens.SHELLFISH, new HashSet<string>{
+            { "shellfish", new HashSet<string>{
                 "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "447", "812",
                 "SmokedFish", "715", "372", "717", "718", "719", "720", "723", "716", "721", "722"
             }},
-            { Allergens.TREE_NUTS, new HashSet<string>{
+            { "treenuts", new HashSet<string>{
                 "239", "607", "408"
             }},
-            { Allergens.DAIRY, new HashSet<string>{
+            { "dairy", new HashSet<string>{
                 "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
                 "608", "727", "730", "904", "424", "426"
             }}
         };
 
-        private static readonly Dictionary<Allergens, string> ENUM_TO_CONTEXT_TAG = new()
+        public static readonly Dictionary<string, string> ALLERGENS_TO_DISPLAY_NAME = new()
         {
-            { Allergens.EGG, string.Format("{0}_egg", ModEntry.MOD_ID) },
-            { Allergens.WHEAT, string.Format("{0}_wheat", ModEntry.MOD_ID) },
-            { Allergens.FISH, string.Format("{0}_fish", ModEntry.MOD_ID) },
-            { Allergens.SHELLFISH, string.Format("{0}_shellfish", ModEntry.MOD_ID) },
-            { Allergens.TREE_NUTS, string.Format("{0}_treenuts", ModEntry.MOD_ID) },
-            { Allergens.DAIRY, string.Format("{0}_dairy", ModEntry.MOD_ID) }
+            { "egg", "Eggs" },
+            { "wheat", "Wheat" },
+            { "fish", "Fish" },
+            { "shellfish", "Shellfish" },
+            { "treenuts", "Tree Nuts" },
+            { "dairy", "Dairy" }
         };
 
-        private static readonly Dictionary<Allergens, string> ENUM_TO_STRING = new()
+        public static string GetAllergenContextTag(string allergen)
         {
-            { Allergens.EGG, "Eggs" },
-            { Allergens.WHEAT, "Wheat" },
-            { Allergens.FISH, "Fish" },
-            { Allergens.SHELLFISH, "Shellfish" },
-            { Allergens.TREE_NUTS, "Tree Nuts" },
-            { Allergens.DAIRY, "Dairy" }
-        };
-
-        public static string GetAllergenContextTag(Allergens allergen)
-        {
-            string result = ENUM_TO_CONTEXT_TAG.GetValueOrDefault(allergen, "");
-            if (result.Equals(""))
-            {
-                throw new Exception("No context tags were defined for the allergen " + allergen.ToString());
-            }
-            return result;
+            return ModEntry.MOD_ID + "_" + allergen.ToLower();
         }
 
-        public static string GetAllergenReadableString(Allergens allergen)
+        public static string GetAllergenDisplayName(string allergen)
         {
-            string result = ENUM_TO_STRING.GetValueOrDefault(allergen, "");
+            string result = ALLERGENS_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
             if (result.Equals(""))
             {
                 throw new Exception("No readable string was defined for the allergen " + allergen.ToString());
@@ -92,23 +69,23 @@ namespace BZP_Allergies
             return result;
         }
 
-        public static ISet<string> GetObjectsWithAllergen(Allergens allergen, IAssetDataForDictionary<string, ObjectData> data)
+        public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
         {
             // labeled items
             ISet<string> result = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
 
             // category items
-            if (allergen == Allergens.EGG)
+            if (allergen == "egg")
             {
                 ISet<string> rawEggItems = GetItemsWithContextTags(new List<string> { "egg_item", "mayo_item", "large_egg_item" }, data);
                 result.UnionWith(rawEggItems);
             }
-            else if (allergen == Allergens.FISH)
+            else if (allergen == "fish")
             {
                 ISet<string> fishItems = GetFishItems(data);
                 result.UnionWith(fishItems);
             }
-            else if (allergen == Allergens.DAIRY)
+            else if (allergen == "dairy")
             {
                 ISet<string> dairyItems = GetItemsWithContextTags(new List<string> { "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" }, data);
                 result.UnionWith(dairyItems);
@@ -122,31 +99,29 @@ namespace BZP_Allergies
 
             
         }
-        public static bool FarmerIsAllergic(Allergens allergen)
+        public static bool FarmerIsAllergic(string allergen)
         {
-            switch (allergen)
+            return allergen switch
             {
-                case Allergens.EGG:
-                    return Config.Farmer.EggAllergy;
-                case Allergens.WHEAT:
-                    return Config.Farmer.WheatAllergy;
-                case Allergens.FISH:
-                    return Config.Farmer.FishAllergy;
-                case Allergens.SHELLFISH:
-                    return Config.Farmer.ShellfishAllergy;
-                case Allergens.TREE_NUTS:
-                    return Config.Farmer.TreenutAllergy;
-                case Allergens.DAIRY:
-                    return Config.Farmer.DairyAllergy;
-                default:
-                    return false;
-            }
+                "egg" => Config.Farmer.EggAllergy,
+                "wheat" => Config.Farmer.WheatAllergy,
+                "fish" => Config.Farmer.FishAllergy,
+                "shellfish" => Config.Farmer.ShellfishAllergy,
+                "treenuts" => Config.Farmer.TreenutAllergy,
+                "dairy" => Config.Farmer.DairyAllergy,
+                _ => false,
+            };
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
             // special case: roe, aged roe, or smoked fish
             // need to differentiate fish vs shellfish ingredient
+            // TODO: 
+            // 1. check if there are multiple allergen context tags
+            // 2. if so, check if we have preserve_sheet_index context tag
+            // 3. if so, use the preserve index to figure out what it's made of
+            // 4. if no preserves tag, just see if we're allergic to any of the multiple tags
             List<string> fishShellfishDifferentiation = new() { "(O)447", "(O)812", "(O)SmokedFish" };
             if (fishShellfishDifferentiation.Contains(@object.QualifiedItemId))
             {
@@ -172,15 +147,15 @@ namespace BZP_Allergies
                     IDictionary<string, ObjectData> objData = GameContent.Load<Dictionary<string, ObjectData>>("Data/Objects");
 
                     // !isShellfish = isFish since these can only be made from one of the two
-                    bool isShellfish = objData[madeFromId].ContextTags.Contains(GetAllergenContextTag(Allergens.SHELLFISH));
+                    bool isShellfish = objData[madeFromId].ContextTags.Contains(GetAllergenContextTag("shellfish"));
 
-                    if (isShellfish && FarmerIsAllergic(Allergens.SHELLFISH))
+                    if (isShellfish && FarmerIsAllergic("shellfish"))
                     {
                         return true;
                     }
                     else
                     {
-                        return !isShellfish && FarmerIsAllergic(Allergens.FISH);
+                        return !isShellfish && FarmerIsAllergic("fish");
                     }
                 }
                 catch (Exception ex)
@@ -193,7 +168,7 @@ namespace BZP_Allergies
             }
 
             // check each of the allergens
-            foreach (Allergens a in Enum.GetValues<Allergens>())
+            foreach (string a in ALLERGENS_TO_DISPLAY_NAME.Keys)
             {
                 if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
                 {
@@ -218,12 +193,12 @@ namespace BZP_Allergies
             }
 
             // remove shellfish
-            ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault(Allergens.SHELLFISH, new HashSet<string>());
+            ISet<string> shellfish = ENUM_TO_ALLERGEN_OBJECTS.GetValueOrDefault("shellfish", new HashSet<string>());
             
             foreach (var item in data.Data)
             {
                 List<string> tags = item.Value.ContextTags ?? new();
-                if (shellfish.Contains(item.Key) || tags.Contains(GetAllergenContextTag(Allergens.SHELLFISH)))
+                if (shellfish.Contains(item.Key) || tags.Contains(GetAllergenContextTag("shellfish")))
                 {
                     result.Remove(item.Key);
                 }

@@ -1,6 +1,7 @@
 ﻿using BZP_Allergies.Apis;
 using BZP_Allergies.AssetPatches;
 using BZP_Allergies.Config;
+using BZP_Allergies.ContentPackFramework;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
@@ -67,7 +68,7 @@ namespace BZP_Allergies
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                foreach (Allergens a in Enum.GetValues<Allergens>())
+                foreach (string a in ALLERGENS_TO_DISPLAY_NAME.Keys)
                 {
                     PatchObjects.AddAllergen(e, a);
                 }
@@ -102,6 +103,9 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest, Config);
+
+            // content packs
+            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), configMenu);
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>
