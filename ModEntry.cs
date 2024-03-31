@@ -20,6 +20,7 @@ namespace BZP_Allergies
         private Harmony Harmony;
         private ModConfig Config;
         private IModHelper ModHelper;
+        public static Texture2D Sprites;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -76,6 +77,17 @@ namespace BZP_Allergies
             else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
+            }
+        }
+
+        /// <inheritdoc cref="IContentEvents.AssetReady"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnAssetReady(object? sender, AssetReadyEventArgs e)
+        {
+            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
+            {
+                Sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
             }
         }
 

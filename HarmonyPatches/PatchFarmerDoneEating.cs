@@ -25,7 +25,7 @@ namespace BZP_Allergies.HarmonyPatches
                     return true;
                 }
 
-                Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
+                Texture2D sprites = ModEntry.Sprites;
 
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {

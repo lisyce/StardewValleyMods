@@ -29,11 +29,11 @@ namespace BZP_Allergies
             }},
             { "fish", new HashSet<string>{
                 "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
-                "265", "447", "445", "812", "SmokedFish"
+                "265", "445"
             }},
             { "shellfish", new HashSet<string>{
-                "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "447", "812",
-                "SmokedFish", "715", "372", "717", "718", "719", "720", "723", "716", "721", "722"
+                "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
+                "717", "718", "719", "720", "723", "716", "721", "722"
             }},
             { "treenuts", new HashSet<string>{
                 "239", "607", "408"
@@ -99,55 +99,16 @@ namespace BZP_Allergies
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
-            // special case: roe, aged roe, or smoked fish
-            // need to differentiate fish vs shellfish ingredient
-            // TODO: 
-            // 1. check if there are multiple allergen context tags
-            // 2. if so, check if we have preserve_sheet_index context tag
-            // 3. if so, use the preserve index to figure out what it's made of
-            // 4. if no preserves tag, just see if we're allergic to any of the multiple tags
-            List<string> fishShellfishDifferentiation = new() { "(O)447", "(O)812", "(O)SmokedFish" };
-            if (fishShellfishDifferentiation.Contains(@object.QualifiedItemId))
+            // special case: preserves sheet item (smoked fish, roe, jam, etc.)
+            string? preserve_sheet_tag = TryGetPreserveSheetTag(@object);
+            if (preserve_sheet_tag != null)
             {
-                try
+                // get the id of the object it was made from
+                Match m = Regex.Match(preserve_sheet_tag, @"\d+");
+                if (m.Success)
                 {
-                    // get context tags
-                    ISet<string> tags = @object.GetContextTags();
-
-                    // find the "preserve_sheet_index_{id}" tag
-                    Regex rx = new(@"^preserve_sheet_index_\d+$");
-                    List<string> filtered_tags = tags.Where(t => rx.IsMatch(t)).ToList();
-                    string preserve_sheet_tag = filtered_tags[0];
-
-                    // get the id of the object it was made from
-                    Match m = Regex.Match(preserve_sheet_tag, @"\d+");
-                    if (!m.Success)
-                    {
-                        throw new Exception("No regex match for item id in preserve_sheet_index context tag");
-                    }
-
                     string madeFromId = m.Value;
-                    // load Data/Objects for context tags
-                    IDictionary<string, ObjectData> objData = GameContent.Load<Dictionary<string, ObjectData>>("Data/Objects");
-
-                    // !isShellfish = isFish since these can only be made from one of the two
-                    bool isShellfish = objData[madeFromId].ContextTags.Contains(GetAllergenContextTag("shellfish"));
-
-                    if (isShellfish && FarmerIsAllergic("shellfish"))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return !isShellfish && FarmerIsAllergic("fish");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Monitor.Log($"Failed in {nameof(FarmerIsAllergic)}:\n{ex}", LogLevel.Error);
-                    Monitor.Log("Unable to determine whether eaten Object was fish or shellfish");
-                    // we failed to determine, so let's just fall through and
-                    // return whether the farmer is allergic to fish or shellfish
+                    return FarmerIsAllergic(new StardewValley.Object(madeFromId, 1));
                 }
             }
 
@@ -161,6 +122,21 @@ namespace BZP_Allergies
             }
 
             return false;
+        }
+
+        private static string? TryGetPreserveSheetTag(StardewValley.Object @object)
+        {
+            // get context tags
+            ISet<string> tags = @object.GetContextTags();
+
+            // find the "preserve_sheet_index_{id}" tag
+            Regex rx = new(@"^preserve_sheet_index_\d+$");
+            List<string> filteredTags = tags.Where(t => rx.IsMatch(t)).ToList();
+            if (filteredTags.Count == 0)
+            {
+                return null;
+            }
+            return filteredTags[0];
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
