@@ -2,16 +2,16 @@
 {
     internal class GenericAllergenConfig
     {
-        public Dictionary<string, bool> allergies;
+        public Dictionary<string, bool> Allergies;
 
         public GenericAllergenConfig()
         {
-            allergies = new();
+            Allergies = new();
 
             // get content pack configurations
             foreach (string id in AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Keys)
             {
-                allergies.Add(id, false);
+                Allergies.Add(id, false);
             }
         }
     }

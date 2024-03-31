@@ -60,6 +60,8 @@ namespace BZP_Allergies
             { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } }
         };
 
+        public static readonly Dictionary<string, string> ALLERGEN_CONTENT_PACK = new();
+
         public static string GetAllergenContextTag(string allergen)
         {
             return ModEntry.MOD_ID + "_" + allergen.ToLower();
@@ -94,7 +96,7 @@ namespace BZP_Allergies
         }
         public static bool FarmerIsAllergic(string allergen)
         {
-            return Config.Farmer.allergies.GetValueOrDefault(allergen, false);
+            return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)

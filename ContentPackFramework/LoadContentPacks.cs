@@ -67,9 +67,11 @@ namespace BZP_Allergies.ContentPackFramework
                     AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(allergen.Id, allergen.Name);
                 }
 
-                if (!config.Farmer.allergies.ContainsKey(allergen.Id))
+                AllergenManager.ALLERGEN_CONTENT_PACK.Add(allergen.Id, pack.Manifest.Name);
+
+                if (!config.Farmer.Allergies.ContainsKey(allergen.Id))
                 {
-                    config.Farmer.allergies.Add(allergen.Id, false);
+                    config.Farmer.Allergies.Add(allergen.Id, false);
                 }
             }
         
