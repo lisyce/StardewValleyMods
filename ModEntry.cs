@@ -17,7 +17,7 @@ namespace BZP_Allergies
     {
 
         private Harmony Harmony;
-        private ModConfig Config;
+        public static ModConfig Config;
         private IModHelper ModHelper;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
@@ -34,7 +34,7 @@ namespace BZP_Allergies
             ModHelper = modHelper;
 
             // allergen manager
-            AllergenManager.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
+            AllergenManager.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
@@ -45,8 +45,8 @@ namespace BZP_Allergies
             Config = Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerDoneEating.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
-            PatchEatQuestionPopup.Initialize(Monitor, Config, ModHelper.GameContent, ModHelper.ModContent);
+            PatchFarmerDoneEating.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
+            PatchEatQuestionPopup.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();
@@ -101,7 +101,7 @@ namespace BZP_Allergies
                 titleScreenOnly: false
             );
 
-            ConfigMenuInit.SetupMenuUI(configMenu, ModManifest, Config);
+            ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>

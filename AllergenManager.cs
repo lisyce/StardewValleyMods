@@ -127,17 +127,17 @@ namespace BZP_Allergies
             switch (allergen)
             {
                 case Allergens.EGG:
-                    return Config.Farmer.EggAllergy;
+                    return ModEntry.Config.Farmer.EggAllergy;
                 case Allergens.WHEAT:
-                    return Config.Farmer.WheatAllergy;
+                    return ModEntry.Config.Farmer.WheatAllergy;
                 case Allergens.FISH:
-                    return Config.Farmer.FishAllergy;
+                    return ModEntry.Config.Farmer.FishAllergy;
                 case Allergens.SHELLFISH:
-                    return Config.Farmer.ShellfishAllergy;
+                    return ModEntry.Config.Farmer.ShellfishAllergy;
                 case Allergens.TREE_NUTS:
-                    return Config.Farmer.TreenutAllergy;
+                    return ModEntry.Config.Farmer.TreenutAllergy;
                 case Allergens.DAIRY:
-                    return Config.Farmer.DairyAllergy;
+                    return ModEntry.Config.Farmer.DairyAllergy;
                 default:
                     return false;
             }
