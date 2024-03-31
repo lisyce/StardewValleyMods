@@ -1,24 +1,24 @@
 ﻿using BZP_Allergies.Apis;
+using BZP_Allergies.Config;
 using StardewModdingAPI;
-using System.Text.RegularExpressions;
 
 namespace BZP_Allergies.ContentPackFramework
 {
     internal class LoadContentPacks : Initializable
     {
-        public static void LoadPacks(IEnumerable<IContentPack> packs, IGenericModConfigMenuApi configMenu)
+        public static void LoadPacks(IEnumerable<IContentPack> packs, ModConfig config)
         {
             foreach (IContentPack contentPack in packs)
             {
                 Monitor.Log($"Reading content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Info);
-                if (!ProcessPack(contentPack))
+                if (!ProcessPack(contentPack, config))
                 {
                     Monitor.Log($"Unable to read content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Error);
                 }
             }
         }
 
-        private static bool ProcessPack(IContentPack pack)
+        private static bool ProcessPack(IContentPack pack, ModConfig config)
         {
             ContentModel? content = pack.ReadJsonFile<ContentModel>("content.json");
             if (content == null)
@@ -62,9 +62,17 @@ namespace BZP_Allergies.ContentPackFramework
                     AllergenManager.ALLERGEN_CONTEXT_TAGS.Add(allergen.Id, new HashSet<string>());
                 }
 
-                AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(allergen.Id, allergen.Name);
-            }
+                if (!AllergenManager.ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergen.Id))
+                {
+                    AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(allergen.Id, allergen.Name);
+                }
 
+                if (!config.Farmer.allergies.ContainsKey(allergen.Id))
+                {
+                    config.Farmer.allergies.Add(allergen.Id, false);
+                }
+            }
+        
             // allergen assignments
             for (int i = 0; i < content.AllergenAssignments.Count; i++)
             {

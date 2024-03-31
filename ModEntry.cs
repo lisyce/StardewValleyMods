@@ -91,7 +91,10 @@ namespace BZP_Allergies
                 return;
             }
 
-            // register mod
+            // content packs
+            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
+
+            // config
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => Config = new ModConfig(),
@@ -103,9 +106,6 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest, Config);
-
-            // content packs
-            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), configMenu);
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>

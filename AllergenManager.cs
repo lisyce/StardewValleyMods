@@ -94,16 +94,7 @@ namespace BZP_Allergies
         }
         public static bool FarmerIsAllergic(string allergen)
         {
-            return allergen switch
-            {
-                "egg" => Config.Farmer.EggAllergy,
-                "wheat" => Config.Farmer.WheatAllergy,
-                "fish" => Config.Farmer.FishAllergy,
-                "shellfish" => Config.Farmer.ShellfishAllergy,
-                "treenuts" => Config.Farmer.TreenutAllergy,
-                "dairy" => Config.Farmer.DairyAllergy,
-                _ => false,
-            };
+            return Config.Farmer.allergies.GetValueOrDefault(allergen, false);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
