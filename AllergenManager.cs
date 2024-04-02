@@ -1,6 +1,7 @@
 ﻿using StardewValley.GameData.Objects;
 using StardewModdingAPI;
 using System.Text.RegularExpressions;
+using StardewValley;
 
 namespace BZP_Allergies
 {
@@ -64,7 +65,7 @@ namespace BZP_Allergies
 
         public static string GetAllergenContextTag(string allergen)
         {
-            return ModEntry.MOD_ID + "_" + allergen.ToLower();
+            return ModEntry.MOD_ID + "_allergen_" + allergen.ToLower();
         }
 
         public static string GetAllergenDisplayName(string allergen)
@@ -102,16 +103,10 @@ namespace BZP_Allergies
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
             // special case: preserves sheet item (smoked fish, roe, jam, etc.)
-            string? preserve_sheet_tag = TryGetPreserveSheetTag(@object);
-            if (preserve_sheet_tag != null)
+            StardewValley.Object? madeFromObject = TryGetMadeFromObject(@object);
+            if (madeFromObject != null)
             {
-                // get the id of the object it was made from
-                Match m = Regex.Match(preserve_sheet_tag, @"\d+");
-                if (m.Success)
-                {
-                    string madeFromId = m.Value;
-                    return FarmerIsAllergic(new StardewValley.Object(madeFromId, 1));
-                }
+                return FarmerIsAllergic(madeFromObject);
             }
 
             // check each of the allergens
@@ -126,7 +121,7 @@ namespace BZP_Allergies
             return false;
         }
 
-        private static string? TryGetPreserveSheetTag(StardewValley.Object @object)
+        public static StardewValley.Object? TryGetMadeFromObject(StardewValley.Object @object)
         {
             // get context tags
             ISet<string> tags = @object.GetContextTags();
@@ -138,7 +133,18 @@ namespace BZP_Allergies
             {
                 return null;
             }
-            return filteredTags[0];
+            string preserve_sheet_tag = filteredTags[0];
+            if (preserve_sheet_tag != null)
+            {
+                // get the id of the object it was made from
+                Match m = Regex.Match(preserve_sheet_tag, @"\d+");
+                if (m.Success)
+                {
+                    string madeFromId = m.Value;
+                    return ItemRegistry.Create(madeFromId) as StardewValley.Object;
+                }
+            }
+            return null;
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)

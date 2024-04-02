@@ -9,6 +9,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
+using System;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -53,7 +54,8 @@ namespace BZP_Allergies
             Harmony.PatchAll();
 
             // console commands
-            modHelper.ConsoleCommands.Add("list_allergens", "Get a list of all possible allergens.", this.ListAllergens);
+            modHelper.ConsoleCommands.Add("list_allergens", "Get a list of all possible allergens.", ListAllergens);
+            modHelper.ConsoleCommands.Add("get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
         }
 
 
@@ -128,6 +130,39 @@ namespace BZP_Allergies
             }
 
             Monitor.Log(result, LogLevel.Info);
+        }
+
+        private void GetAllergensOfHeldItem(string command, string[] args)
+        {
+            List<string> result = new();
+            Item currItem = Game1.player.CurrentItem;
+
+            //if (!currItem.QualifiedItemId.StartsWith("(O)")) return;
+
+            if (currItem is StardewValley.Object currObj)
+            {
+                foreach (var tag in currObj.GetContextTags())
+                {
+                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    {
+                        result.Add(tag.Split("_").Last());
+                    }
+                }
+
+                StardewValley.Object? madeFrom = TryGetMadeFromObject(currObj);
+                if (madeFrom != null)
+                {
+                    foreach (var tag in madeFrom.GetContextTags())
+                    {
+                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                        {
+                            result.Add(tag.Split("_").Last());
+                        }
+                    }
+                }
+            }
+
+            Monitor.Log(string.Join(", ", result), LogLevel.Info);
         }
     }
 }
