@@ -7,7 +7,6 @@ namespace BZP_Allergies
 {
     internal class AllergenManager : Initializable
     {
-
         public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_allergic_reaction", ModEntry.MOD_ID);
         public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
         public static readonly string REACTION_EVENT = string.Format("{0}_had_allergic_reaction", ModEntry.MOD_ID);
@@ -17,51 +16,62 @@ namespace BZP_Allergies
 
         public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
 
-        public static readonly Dictionary<string, ISet<string>> ALLERGEN_OBJECTS = new()
-        {
-            { "egg", new HashSet<string>{
-                "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
-                "732"
-            }},
-            { "wheat", new HashSet<string>{
-                "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
-                "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
-                "262"
-            }},
-            { "fish", new HashSet<string>{
-                "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
-                "265", "445"
-            }},
-            { "shellfish", new HashSet<string>{
-                "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
-                "717", "718", "719", "720", "723", "716", "721", "722"
-            }},
-            { "treenuts", new HashSet<string>{
-                "239", "607", "408"
-            }},
-            { "dairy", new HashSet<string>{
-                "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
-                "608", "727", "730", "904", "424", "426"
-            }}
-        };
+        public static Dictionary<string, ISet<string>> ALLERGEN_OBJECTS;
 
-        public static readonly Dictionary<string, string> ALLERGEN_TO_DISPLAY_NAME = new()
-        {
-            { "egg", "Eggs" },
-            { "wheat", "Wheat" },
-            { "fish", "Fish" },
-            { "shellfish", "Shellfish" },
-            { "treenuts", "Tree Nuts" },
-            { "dairy", "Dairy" }
-        };
+        public static Dictionary<string, string> ALLERGEN_TO_DISPLAY_NAME;
 
-        public static readonly Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS = new()
-        {
-            { "egg", new HashSet<string>{ "egg_item", "mayo_item", "large_egg_item" } },
-            { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } }
-        };
+        public static Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS;
 
-        public static readonly Dictionary<string, string> ALLERGEN_CONTENT_PACK = new();
+        public static Dictionary<string, string> ALLERGEN_CONTENT_PACK;
+
+        public static void InitDefaultDicts()
+        {
+            ALLERGEN_OBJECTS = new()
+            {
+                { "egg", new HashSet<string>{
+                    "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
+                    "732"
+                }},
+                { "wheat", new HashSet<string>{
+                    "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
+                    "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
+                    "262"
+                }},
+                { "fish", new HashSet<string>{
+                    "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
+                    "265", "445"
+                }},
+                { "shellfish", new HashSet<string>{
+                    "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
+                    "717", "718", "719", "720", "723", "716", "721", "722"
+                }},
+                { "treenuts", new HashSet<string>{
+                    "239", "607", "408"
+                }},
+                { "dairy", new HashSet<string>{
+                    "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
+                    "608", "727", "730", "904", "424", "426"
+                }}
+            };
+
+            ALLERGEN_TO_DISPLAY_NAME = new()
+            {
+                { "egg", "Eggs" },
+                { "wheat", "Wheat" },
+                { "fish", "Fish" },
+                { "shellfish", "Shellfish" },
+                { "treenuts", "Tree Nuts" },
+                { "dairy", "Dairy" }
+            };
+
+            ALLERGEN_CONTEXT_TAGS = new()
+            {
+                { "egg", new HashSet<string>{ "egg_item", "mayo_item", "large_egg_item" } },
+                { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } }
+            };
+
+            ALLERGEN_CONTENT_PACK = new();
+        }
 
         public static string GetAllergenContextTag(string allergen)
         {

@@ -37,6 +37,7 @@ namespace BZP_Allergies
 
             // allergen manager
             AllergenManager.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
+            AllergenManager.InitDefaultDicts();
 
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
@@ -54,8 +55,9 @@ namespace BZP_Allergies
             Harmony.PatchAll();
 
             // console commands
-            modHelper.ConsoleCommands.Add("list_allergens", "Get a list of all possible allergens.", ListAllergens);
-            modHelper.ConsoleCommands.Add("get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
+            modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);
+            modHelper.ConsoleCommands.Add("bzpa_get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
+            modHelper.ConsoleCommands.Add("bzpa_reload", "Reload all content packs.", ReloadPacks);
         }
 
 
@@ -163,6 +165,14 @@ namespace BZP_Allergies
             }
 
             Monitor.Log(string.Join(", ", result), LogLevel.Info);
+        }
+
+        private void ReloadPacks(string command, string[] args)
+        {
+            AllergenManager.InitDefaultDicts();
+            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
+            Helper.GameContent.InvalidateCache("Data/Objects");
+            Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
         }
     }
 }
