@@ -27,9 +27,31 @@ This mod changes core gameplay logic and thus employs some use of Harmony. Curre
 
 All of these prefixes allow the original logic to run afterwards, so they should be fairly compatible with other mods that patch these methods.
 
-## Integrating Your Mod
+## Creating Custom Allergens and Integrating Modded Items
 
 See [the content pack docs](docs/content_packs.md).
+
+## Adding NPC Reaction Dialogue
+
+Many of the base game NPCs have special dialogue if you speak to them while having an allergic reaction. If you'd like to have your custom NPCs react, you'll need to add a dialogue option with the key `"BarleyZP.BzpAllergies_farmer_allergic_reaction"`. You may also included dialogue in the `"Characters/Dialogue/MarriageDialogue{Name}"` assets, and the mod will try to use the married dialogue instead if you are married or roommates with that character. Here is an example using Content Patcher (that the base mod uses!) for Alex's non-marriage reaction dialogue.
+
+```json
+{
+  "Format": "2.0.0",
+  "Changes": [
+    {
+      "LogName": "Alex Dialogue",
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Alex",
+      "Entries": {
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Yikes! You don't look so good...$7"
+      }
+    }
+  ]
+}
+```
+
+Adding this dialogue is not currently supported through the BarleyZP's Allergies content pack framework. You will need to edit the asset in C# or use another framework like Content Patcher.
 
 # Bug Reports and Feature Requests
 
