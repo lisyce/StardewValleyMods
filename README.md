@@ -2,7 +2,7 @@
 
 **BarleyZP's Allergy Mod** is a [Stardew Valley](https://www.stardewvalley.net/) mod which allows players to configure food allergies for an extra challenge. It is compatible with version 1.6+.
 
-![Stardew Valley player is prompted to choose whether or not to eat cheese, which they are allergic to.](docs/CheeseAllergenPopup.png)
+![Stardew Valley player is prompted to choose whether or not to eat cheese, which they are allergic to.](docs/screenshots/CheeseAllergenPopup.png)
 
 # Installation
 
@@ -29,13 +29,7 @@ All of these prefixes allow the original logic to run afterwards, so they should
 
 ## Integrating Your Mod
 
-### Registering Objects Under an Allergen
-
-Context tags are the primary method of determining whether an item has an allergen. Assign your object one or more context tags of the form `BarleyZP.BzpAllergies_{allergen}` to give it an allergen. Currently, there are six supported allergen tags: `egg`, `wheat`, `fish`, `shellfish`, `treenuts`, and `dairy`. There are a few other ways objects can be registered under an allergen:
-
-- Any object with the tags `egg_item`, `mayo_item`, or `large_egg_item` contains the egg allergen
-- Any object with `milk_item`, `large_milk_item`, `cow_milk_item`, or `goat_milk_item` contains the dairy allergen
-- Any object with the fish category (`-4`) that was NOT registered with a shellfish allergen context tag contains the fish allergen
+See [the content pack docs](docs/content_packs.md).
 
 # Bug Reports and Feature Requests
 
