@@ -139,29 +139,9 @@ namespace BZP_Allergies
             List<string> result = new();
             Item currItem = Game1.player.CurrentItem;
 
-            //if (!currItem.QualifiedItemId.StartsWith("(O)")) return;
-
             if (currItem is StardewValley.Object currObj)
             {
-                foreach (var tag in currObj.GetContextTags())
-                {
-                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
-                    {
-                        result.Add(tag.Split("_").Last());
-                    }
-                }
-
-                StardewValley.Object? madeFrom = TryGetMadeFromObject(currObj);
-                if (madeFrom != null)
-                {
-                    foreach (var tag in madeFrom.GetContextTags())
-                    {
-                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
-                        {
-                            result.Add(tag.Split("_").Last());
-                        }
-                    }
-                }
+                result = GetAllergensInObject(currObj);
             }
 
             Monitor.Log(string.Join(", ", result), LogLevel.Info);

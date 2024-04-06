@@ -112,23 +112,47 @@ namespace BZP_Allergies
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
-            // special case: preserves sheet item (smoked fish, roe, jam, etc.)
-            StardewValley.Object? madeFromObject = TryGetMadeFromObject(@object);
-            if (madeFromObject != null)
-            {
-                return FarmerIsAllergic(madeFromObject);
-            }
+            List<string> containsAllergens = GetAllergensInObject(@object);
 
-            // check each of the allergens
-            foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
+            foreach (string a in containsAllergens)
             {
                 if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
                 {
                     return true;
                 }
             }
-
             return false;
+        }
+
+        public static List<string> GetAllergensInObject(StardewValley.Object @object)
+        {
+            List<string> result = new();
+
+            // special case: preserves sheet item (smoked fish, roe, jam, etc.)
+            StardewValley.Object? madeFrom = TryGetMadeFromObject(@object);
+            if (madeFrom != null)
+            {
+                foreach (var tag in madeFrom.GetContextTags())
+                {
+                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    {
+                        result.Add(tag.Split("_").Last());
+                    }
+                }
+            }
+            // other case: not a preserves item
+            else
+            {
+                foreach (var tag in @object.GetContextTags())
+                {
+                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    {
+                        result.Add(tag.Split("_").Last());
+                    }
+                }
+            }
+
+            return result;
         }
 
         public static StardewValley.Object? TryGetMadeFromObject(StardewValley.Object @object)
