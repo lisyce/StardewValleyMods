@@ -78,6 +78,11 @@ namespace BZP_Allergies
             return ModEntry.MOD_ID + "_allergen_" + allergen.ToLower();
         }
 
+        public static string GetMadeWithContextTag(string allergen)
+        {
+            return ModEntry.MOD_ID + "_made_with_id_" + allergen.ToLower();
+        }
+
         public static string GetAllergenDisplayName(string allergen)
         {
             string result = ALLERGEN_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
@@ -105,6 +110,7 @@ namespace BZP_Allergies
 
             return result;
         }
+
         public static bool FarmerIsAllergic(string allergen)
         {
             return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
@@ -116,7 +122,7 @@ namespace BZP_Allergies
 
             foreach (string a in containsAllergens)
             {
-                if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
+                if (FarmerIsAllergic(a))
                 {
                     return true;
                 }
@@ -124,9 +130,13 @@ namespace BZP_Allergies
             return false;
         }
 
-        public static List<string> GetAllergensInObject(StardewValley.Object @object)
+        public static List<string> GetAllergensInObject(StardewValley.Object? @object)
         {
             List<string> result = new();
+            if (@object == null)
+            {
+                return result;
+            }
 
             // special case: preserves sheet item (smoked fish, roe, jam, etc.)
             StardewValley.Object? madeFrom = TryGetMadeFromObject(@object);
@@ -140,7 +150,7 @@ namespace BZP_Allergies
                     }
                 }
             }
-            // other case: not a preserves item
+            // else: boring normal item
             else
             {
                 foreach (var tag in @object.GetContextTags())
