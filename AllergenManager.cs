@@ -138,15 +138,19 @@ namespace BZP_Allergies
                 return result;
             }
 
-            // special case: preserves sheet item (smoked fish, roe, jam, etc.)
-            StardewValley.Object? madeFrom = TryGetMadeFromObject(@object);
-            if (madeFrom != null)
+            // special case: preserves item or cooked with allergens
+            List<StardewValley.Object> madeFrom = TryGetMadeFromObjects(@object);
+
+            if (madeFrom.Count > 0)
             {
-                foreach (var tag in madeFrom.GetContextTags())
+                foreach (StardewValley.Object madeFromObj in madeFrom)
                 {
-                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    foreach (var tag in madeFromObj.GetContextTags())
                     {
-                        result.Add(tag.Split("_").Last());
+                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                        {
+                            result.Add(tag.Split("_").Last());
+                        }
                     }
                 }
             }
@@ -165,30 +169,34 @@ namespace BZP_Allergies
             return result;
         }
 
-        public static StardewValley.Object? TryGetMadeFromObject(StardewValley.Object @object)
+        public static List<StardewValley.Object> TryGetMadeFromObjects(StardewValley.Object @object)
         {
+            List<StardewValley.Object> result = new();
             // get context tags
             ISet<string> tags = @object.GetContextTags();
 
-            // find the "preserve_sheet_index_{id}" tag
-            Regex rx = new(@"^preserve_sheet_index_\d+$");
+            // find the "preserve_sheet_index_{id}" tag or the made with tag
+            Regex rx = new(@"^(preserve_sheet_index|BarleyZP.BzpAllergies_made_with_id)_\d+$");
             List<string> filteredTags = tags.Where(t => rx.IsMatch(t)).ToList();
             if (filteredTags.Count == 0)
             {
-                return null;
+                return result;
             }
-            string preserve_sheet_tag = filteredTags[0];
-            if (preserve_sheet_tag != null)
+
+            foreach (string tag in filteredTags)
             {
                 // get the id of the object it was made from
-                Match m = Regex.Match(preserve_sheet_tag, @"\d+");
+                Match m = Regex.Match(tag, @"\d+");
                 if (m.Success)
                 {
                     string madeFromId = m.Value;
-                    return ItemRegistry.Create(madeFromId) as StardewValley.Object;
+                    if (ItemRegistry.Create(madeFromId) is StardewValley.Object casted)
+                    {
+                        result.Add(casted);
+                    }
                 }
             }
-            return null;
+            return result;
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
