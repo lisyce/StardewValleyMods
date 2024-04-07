@@ -106,7 +106,7 @@ namespace BZP_Allergies.HarmonyPatches
                 foreach (InventoryData item in usedItems)
                 {
                     if (item == null || item.Item == null) continue;
-                    Monitor.Log(item.Item.DisplayName, LogLevel.Debug);
+
                     // what allergens does it have?
                     List<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
                     foreach (string allergen in allergens)

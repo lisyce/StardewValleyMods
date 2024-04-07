@@ -14,7 +14,7 @@ namespace BZP_Allergies.HarmonyPatches
     {
 
         [HarmonyPrefix]
-        static bool DoneEating_Prefix(ref Farmer __instance, out int __state)
+        static void DoneEating_Prefix(ref Farmer __instance, out int __state)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace BZP_Allergies.HarmonyPatches
                 __state = itemToEat == null ? int.MinValue : itemToEat.Edibility;
                 if (itemToEat == null || !__instance.IsLocalPlayer)
                 {
-                    return true;
+                    return;
                 }
 
                 Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
@@ -35,7 +35,7 @@ namespace BZP_Allergies.HarmonyPatches
                         HUDMessage lactaseProtectionMessage = new("Good thing you took your lactase!");
                         lactaseProtectionMessage.messageSubject = itemToEat;
                         Game1.addHUDMessage(lactaseProtectionMessage);
-                        return true;
+                        return;
                     }
 
                     // change edibility
@@ -91,7 +91,6 @@ namespace BZP_Allergies.HarmonyPatches
                 Monitor.Log($"Failed in {nameof(DoneEating_Prefix)}:\n{ex}", LogLevel.Error);
                 __state = int.MinValue;  // error value
             }
-            return true; // run original logic
         }
 
         [HarmonyPostfix]
