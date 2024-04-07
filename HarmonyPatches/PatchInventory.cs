@@ -11,19 +11,17 @@ using System.Threading.Tasks;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    [HarmonyPatch(typeof(IClickableMenu), "drawToolTip")]
+    [HarmonyPatch(typeof(StardewValley.Object), "getDescription")]
     internal class PatchTooltip : Initializable
     {
-        public static StardewValley.Object? craftedObj = null;
-
-        [HarmonyPrefix]
-        static void DrawToolTip_Prefix(ref string hoverText, ref Item hoveredItem)
+        [HarmonyPostfix]
+        static void GetDescription_Postfix(StardewValley.Object __instance, ref string __result)
         {
             // note: this method gets called A LOT. This prefix needs to be efficient
             // 25 chars max a line
             try
             {
-                List<string> allergens = AllergenManager.GetAllergensInObject(hoveredItem as StardewValley.Object);
+                List<string> allergens = AllergenManager.GetAllergensInObject(__instance);
                 if (allergens.Count == 0) return;
 
                 StringBuilder allergenText = new("\nAllergens: ");
@@ -49,11 +47,11 @@ namespace BZP_Allergies.HarmonyPatches
                         currLineLen += 2;
                     }
                 }
-                hoverText += allergenText.ToString();
+                __result += allergenText.ToString();
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(DrawToolTip_Prefix)}:\n{ex}", LogLevel.Error);
+                Monitor.Log($"Failed in {nameof(GetDescription_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
