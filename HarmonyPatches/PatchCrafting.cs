@@ -113,11 +113,12 @@ namespace BZP_Allergies.HarmonyPatches
                     foreach (string allergen in allergens)
                     {
                         val += allergen + ",";
-                        //PatchCreateItem.craftedObj.GetContextTags().Add(GetMadeWithContextTag(item.Item.ItemId));
                     }
                 }
-
-                PatchCreateItem.craftedObj.modData["BarleyZP.BzpAllergies_CookedWith"] = val.Trim(',');
+                if (val.Length > 0)
+                {
+                    PatchCreateItem.craftedObj.modData["BarleyZP.BzpAllergies_CookedWith"] = val.Trim(',');
+                }
             }
             catch (Exception ex)
             {
@@ -126,9 +127,14 @@ namespace BZP_Allergies.HarmonyPatches
         }
 
         // includes farmer inventory (Game1.player.Items)
-        private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory> inventories)
+        private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory>? inventories)
         {
             Dictionary<string, InventoryData> results = new();
+            if (inventories == null)
+            {
+                return results;
+            }
+
             foreach (IInventory container in inventories)
             {
                 foreach (Item i in container)
