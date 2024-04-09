@@ -2,7 +2,7 @@
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
-using System.ComponentModel;
+using System.Text;
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies.HarmonyPatches
@@ -103,17 +103,21 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 // what allergens did we cook this with?
+                string val = "";
                 foreach (InventoryData item in usedItems)
                 {
                     if (item == null || item.Item == null) continue;
 
                     // what allergens does it have?
-                    List<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
+                    ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
                     foreach (string allergen in allergens)
                     {
-                        PatchCreateItem.craftedObj.GetContextTags().Add(GetMadeWithContextTag(item.Item.ItemId));
+                        val += allergen + ",";
+                        //PatchCreateItem.craftedObj.GetContextTags().Add(GetMadeWithContextTag(item.Item.ItemId));
                     }
                 }
+
+                PatchCreateItem.craftedObj.modData["BarleyZP.BzpAllergies_CookedWith"] = val.Trim(',');
             }
             catch (Exception ex)
             {

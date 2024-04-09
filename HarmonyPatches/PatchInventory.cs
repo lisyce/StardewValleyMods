@@ -21,16 +21,15 @@ namespace BZP_Allergies.HarmonyPatches
             // 25 chars max a line
             try
             {
-                List<string> allergens = AllergenManager.GetAllergensInObject(__instance);
+                ISet<string> allergens = AllergenManager.GetAllergensInObject(__instance);
                 if (allergens.Count == 0) return;
 
                 StringBuilder allergenText = new("\nAllergens: ");
                 int currLineLen = allergenText.Length;
 
-                for (int i=0; i < allergens.Count; i++)
+                int i = 0;
+                foreach (string a in allergens)
                 {
-                    string a = allergens[i];
-
                     int len = a.Length;
                     if (currLineLen + len > 25)
                     {
@@ -46,6 +45,7 @@ namespace BZP_Allergies.HarmonyPatches
                         allergenText.Append(", ");
                         currLineLen += 2;
                     }
+                    i++;
                 }
                 __result += allergenText.ToString();
             }
@@ -67,8 +67,8 @@ namespace BZP_Allergies.HarmonyPatches
                 // don't do any work if we know they can't stack already
                 if (!__result) return;
 
-                List<string> instanceAllergens = AllergenManager.GetAllergensInObject(__instance as StardewValley.Object);
-                List<string> otherAllergens = AllergenManager.GetAllergensInObject(other as StardewValley.Object);
+                ISet<string> instanceAllergens = AllergenManager.GetAllergensInObject(__instance as StardewValley.Object);
+                ISet<string> otherAllergens = AllergenManager.GetAllergensInObject(other as StardewValley.Object);
 
                 if (instanceAllergens.Count != otherAllergens.Count)
                 {

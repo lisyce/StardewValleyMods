@@ -118,7 +118,7 @@ namespace BZP_Allergies
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
-            List<string> containsAllergens = GetAllergensInObject(@object);
+            ISet<string> containsAllergens = GetAllergensInObject(@object);
 
             foreach (string a in containsAllergens)
             {
@@ -130,15 +130,15 @@ namespace BZP_Allergies
             return false;
         }
 
-        public static List<string> GetAllergensInObject(StardewValley.Object? @object)
+        public static ISet<string> GetAllergensInObject(StardewValley.Object? @object)
         {
-            List<string> result = new();
+            ISet<string> result = new HashSet<string>();
             if (@object == null)
             {
                 return result;
             }
 
-            // special case: preserves item or cooked with allergens
+            // special case: preserves item
             List<StardewValley.Object> madeFrom = TryGetMadeFromObjects(@object);
 
             if (madeFrom.Count > 0)
@@ -152,6 +152,15 @@ namespace BZP_Allergies
                             result.Add(tag.Split("_").Last());
                         }
                     }
+                }
+            }
+            // special case: cooked item
+            else if (@object.modData.TryGetValue("BarleyZP.BzpAllergies_CookedWith", out string cookedWith))
+            {
+                // try looking in the modData field for what the thing was crafted with
+                foreach (string allergen in cookedWith.Split(","))
+                {
+                    result.Add(allergen);
                 }
             }
             // else: boring normal item
@@ -175,10 +184,11 @@ namespace BZP_Allergies
             // get context tags
             ISet<string> tags = @object.GetContextTags();
 
-            // find the "preserve_sheet_index_{id}" tag or the made with tag
-            Regex rx = new(@"^(preserve_sheet_index|BarleyZP.BzpAllergies_made_with_id)_\d+$");
+            // find the "preserve_sheet_index_{id}" tag
+            Regex rx = new(@"^preserve_sheet_index_\d+$");
             List<string> filteredTags = tags.Where(t => rx.IsMatch(t)).ToList();
-            if (filteredTags.Count == 0)
+
+            if (filteredTags.Count == 0)  // no preserves index
             {
                 return result;
             }

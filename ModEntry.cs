@@ -134,7 +134,7 @@ namespace BZP_Allergies
 
         private void GetAllergensOfHeldItem(string command, string[] args)
         {
-            List<string> result = new();
+            ISet<string> result = new HashSet<string>();
             Item currItem = Game1.player.CurrentItem;
 
             if (currItem is StardewValley.Object currObj)
