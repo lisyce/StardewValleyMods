@@ -34,9 +34,9 @@ namespace BZP_Allergies
         public override void Entry(IModHelper modHelper)
         {
             ModHelper = modHelper;
+            Initializable.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // allergen manager
-            AllergenManager.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
             AllergenManager.InitDefaultDicts();
 
             // events
@@ -48,10 +48,6 @@ namespace BZP_Allergies
             Config = Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerDoneEating.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
-            PatchEatQuestionPopup.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
-            PatchCreateItem.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
-            PatchConsumeIngredients.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();

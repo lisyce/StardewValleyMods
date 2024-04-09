@@ -55,4 +55,42 @@ namespace BZP_Allergies.HarmonyPatches
             }
         }
     }
+
+    [HarmonyPatch(typeof(Item), "canStackWith")]
+    internal class PatchCanStack : Initializable
+    {
+        [HarmonyPostfix]
+        static void CanStackWith_Postfix(ISalable other, StardewValley.Item __instance, ref bool __result)
+        {
+            try
+            {
+                // don't do any work if we know they can't stack already
+                if (!__result) return;
+
+                List<string> instanceAllergens = AllergenManager.GetAllergensInObject(__instance as StardewValley.Object);
+                List<string> otherAllergens = AllergenManager.GetAllergensInObject(other as StardewValley.Object);
+
+                if (instanceAllergens.Count != otherAllergens.Count)
+                {
+                    // different allergen count, so different allergens. can't stack
+                    __result = false;
+                    return;
+                }
+
+                // do they contain the same allergens?
+                foreach (string a in instanceAllergens)
+                {
+                    if (!otherAllergens.Contains(a))
+                    {
+                        __result = false;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+    }
 }

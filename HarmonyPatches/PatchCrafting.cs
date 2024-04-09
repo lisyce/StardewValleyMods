@@ -30,7 +30,7 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
-                if (__result is StardewValley.Object obj && obj.Edibility > -300)  // must be edible
+                if (__result is StardewValley.Object obj && obj.Edibility > -300 && !obj.QualifiedItemId.Equals("(O)921"))  // must be edible and not the ravioli
                 {
                     craftedObj = obj;
                 } else
