@@ -130,6 +130,18 @@ namespace BZP_Allergies.HarmonyPatches
         private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory>? inventories)
         {
             Dictionary<string, InventoryData> results = new();
+            foreach (Item i in Game1.player.Items)
+            {
+                if (i == null) continue;
+                if (!results.ContainsKey(i.QualifiedItemId))
+                {
+                    results[i.QualifiedItemId] = new();
+                }
+                InventoryData data = results[i.QualifiedItemId];
+                data.Stack += i.Stack;
+                data.Item = i;
+            }
+
             if (inventories == null)
             {
                 return results;
@@ -148,18 +160,6 @@ namespace BZP_Allergies.HarmonyPatches
                     data.Stack += i.Stack;
                     data.Item = i;
                 }
-            }
-
-            foreach (Item i in Game1.player.Items)
-            {
-                if (i == null) continue;
-                if (!results.ContainsKey(i.QualifiedItemId))
-                {
-                    results[i.QualifiedItemId] = new();
-                }
-                InventoryData data = results[i.QualifiedItemId];
-                data.Stack += i.Stack;
-                data.Item = i;
             }
 
             return results;
