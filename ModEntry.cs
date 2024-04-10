@@ -34,9 +34,9 @@ namespace BZP_Allergies
         public override void Entry(IModHelper modHelper)
         {
             ModHelper = modHelper;
+            Initializable.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // allergen manager
-            AllergenManager.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
             AllergenManager.InitDefaultDicts();
 
             // events
@@ -48,8 +48,6 @@ namespace BZP_Allergies
             Config = Helper.ReadConfig<ModConfig>();
 
             // harmony patches
-            PatchFarmerDoneEating.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
-            PatchEatQuestionPopup.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();
@@ -112,6 +110,10 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
+            foreach (IContentPack pack in Helper.ContentPacks.GetOwned())
+            {
+                ConfigMenuInit.SetupContentPackConfig(configMenu, ModManifest, pack);
+            }
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>
@@ -136,32 +138,12 @@ namespace BZP_Allergies
 
         private void GetAllergensOfHeldItem(string command, string[] args)
         {
-            List<string> result = new();
+            ISet<string> result = new HashSet<string>();
             Item currItem = Game1.player.CurrentItem;
-
-            //if (!currItem.QualifiedItemId.StartsWith("(O)")) return;
 
             if (currItem is StardewValley.Object currObj)
             {
-                foreach (var tag in currObj.GetContextTags())
-                {
-                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
-                    {
-                        result.Add(tag.Split("_").Last());
-                    }
-                }
-
-                StardewValley.Object? madeFrom = TryGetMadeFromObject(currObj);
-                if (madeFrom != null)
-                {
-                    foreach (var tag in madeFrom.GetContextTags())
-                    {
-                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
-                        {
-                            result.Add(tag.Split("_").Last());
-                        }
-                    }
-                }
+                result = GetAllergensInObject(currObj);
             }
 
             Monitor.Log(string.Join(", ", result), LogLevel.Info);

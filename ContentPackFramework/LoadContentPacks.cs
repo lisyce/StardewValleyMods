@@ -36,6 +36,11 @@ namespace BZP_Allergies.ContentPackFramework
             }
 
             // custom allergens
+            if (!AllergenManager.ALLERGEN_CONTENT_PACK.ContainsKey(pack.Manifest.UniqueID))
+            {
+                AllergenManager.ALLERGEN_CONTENT_PACK.Add(pack.Manifest.UniqueID, new HashSet<string>());
+            }
+
             foreach (var pair in content.CustomAllergens)
             {
                 CustomAllergen allergen = pair.Value;
@@ -61,7 +66,7 @@ namespace BZP_Allergies.ContentPackFramework
                     AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(pair.Key, allergen.Name);
                 }
 
-                AllergenManager.ALLERGEN_CONTENT_PACK.Add(pair.Key, pack.Manifest.Name);
+                AllergenManager.ALLERGEN_CONTENT_PACK[pack.Manifest.UniqueID].Add(pair.Key);
 
                 if (!config.Farmer.Allergies.ContainsKey(pair.Key))
                 {

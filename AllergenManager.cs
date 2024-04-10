@@ -22,7 +22,7 @@ namespace BZP_Allergies
 
         public static Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS;
 
-        public static Dictionary<string, string> ALLERGEN_CONTENT_PACK;
+        public static Dictionary<string, ISet<string>> ALLERGEN_CONTENT_PACK;
 
         public static void InitDefaultDicts()
         {
@@ -73,23 +73,36 @@ namespace BZP_Allergies
             ALLERGEN_CONTENT_PACK = new();
         }
 
+        public static void ThrowIfAllergenDoesntExist(string allergen)
+        {
+            if (!ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergen))
+            {
+                throw new Exception("No allergen found named " + allergen.ToString());
+            }
+        }
+
         public static string GetAllergenContextTag(string allergen)
         {
+            ThrowIfAllergenDoesntExist(allergen);
             return ModEntry.MOD_ID + "_allergen_" + allergen.ToLower();
+        }
+
+        public static string GetMadeWithContextTag(string allergen)
+        {
+            ThrowIfAllergenDoesntExist(allergen);
+            return ModEntry.MOD_ID + "_made_with_id_" + allergen.ToLower();
         }
 
         public static string GetAllergenDisplayName(string allergen)
         {
-            string result = ALLERGEN_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
-            if (result.Equals(""))
-            {
-                throw new Exception("No allergen found named " + allergen.ToString());
-            }
-            return result;
+            ThrowIfAllergenDoesntExist(allergen);
+            return ALLERGEN_TO_DISPLAY_NAME[allergen];
         }
 
         public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
         {
+            ThrowIfAllergenDoesntExist(allergen);
+
             // labeled items
             ISet<string> result = ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
 
@@ -105,56 +118,105 @@ namespace BZP_Allergies
 
             return result;
         }
+
         public static bool FarmerIsAllergic(string allergen)
         {
+            ThrowIfAllergenDoesntExist(allergen);
             return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
         {
-            // special case: preserves sheet item (smoked fish, roe, jam, etc.)
-            StardewValley.Object? madeFromObject = TryGetMadeFromObject(@object);
-            if (madeFromObject != null)
-            {
-                return FarmerIsAllergic(madeFromObject);
-            }
+            ISet<string> containsAllergens = GetAllergensInObject(@object);
 
-            // check each of the allergens
-            foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
+            foreach (string a in containsAllergens)
             {
-                if (@object.HasContextTag(GetAllergenContextTag(a)) && FarmerIsAllergic(a))
+                if (FarmerIsAllergic(a))
                 {
                     return true;
                 }
             }
-
             return false;
         }
 
-        public static StardewValley.Object? TryGetMadeFromObject(StardewValley.Object @object)
+        public static ISet<string> GetAllergensInObject(StardewValley.Object? @object)
         {
+            ISet<string> result = new HashSet<string>();
+            if (@object == null)
+            {
+                return result;
+            }
+
+            // special case: preserves item
+            List<StardewValley.Object> madeFrom = TryGetMadeFromObjects(@object);
+
+            if (madeFrom.Count > 0)
+            {
+                foreach (StardewValley.Object madeFromObj in madeFrom)
+                {
+                    foreach (var tag in madeFromObj.GetContextTags())
+                    {
+                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                        {
+                            result.Add(tag.Split("_").Last());
+                        }
+                    }
+                }
+            }
+            // special case: cooked item
+            else if (@object.modData.TryGetValue("BarleyZP.BzpAllergies_CookedWith", out string cookedWith))
+            {
+                // try looking in the modData field for what the thing was crafted with
+                foreach (string allergen in cookedWith.Split(","))
+                {
+                    result.Add(allergen);
+                }
+            }
+            // else: boring normal item
+            else
+            {
+                foreach (var tag in @object.GetContextTags())
+                {
+                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    {
+                        result.Add(tag.Split("_").Last());
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public static List<StardewValley.Object> TryGetMadeFromObjects(StardewValley.Object @object)
+        {
+            List<StardewValley.Object> result = new();
+
             // get context tags
             ISet<string> tags = @object.GetContextTags();
 
             // find the "preserve_sheet_index_{id}" tag
             Regex rx = new(@"^preserve_sheet_index_\d+$");
             List<string> filteredTags = tags.Where(t => rx.IsMatch(t)).ToList();
-            if (filteredTags.Count == 0)
+
+            if (filteredTags.Count == 0)  // no preserves index
             {
-                return null;
+                return result;
             }
-            string preserve_sheet_tag = filteredTags[0];
-            if (preserve_sheet_tag != null)
+
+            foreach (string tag in filteredTags)
             {
                 // get the id of the object it was made from
-                Match m = Regex.Match(preserve_sheet_tag, @"\d+");
+                Match m = Regex.Match(tag, @"\d+");
                 if (m.Success)
                 {
                     string madeFromId = m.Value;
-                    return ItemRegistry.Create(madeFromId) as StardewValley.Object;
+                    if (ItemRegistry.Create(madeFromId) is StardewValley.Object casted)
+                    {
+                        result.Add(casted);
+                    }
                 }
             }
-            return null;
+            return result;
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
