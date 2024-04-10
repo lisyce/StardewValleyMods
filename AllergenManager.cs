@@ -73,28 +73,36 @@ namespace BZP_Allergies
             ALLERGEN_CONTENT_PACK = new();
         }
 
+        public static void ThrowIfAllergenDoesntExist(string allergen)
+        {
+            if (!ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergen))
+            {
+                throw new Exception("No allergen found named " + allergen.ToString());
+            }
+        }
+
         public static string GetAllergenContextTag(string allergen)
         {
+            ThrowIfAllergenDoesntExist(allergen);
             return ModEntry.MOD_ID + "_allergen_" + allergen.ToLower();
         }
 
         public static string GetMadeWithContextTag(string allergen)
         {
+            ThrowIfAllergenDoesntExist(allergen);
             return ModEntry.MOD_ID + "_made_with_id_" + allergen.ToLower();
         }
 
         public static string GetAllergenDisplayName(string allergen)
         {
-            string result = ALLERGEN_TO_DISPLAY_NAME.GetValueOrDefault(allergen, "");
-            if (result.Equals(""))
-            {
-                throw new Exception("No allergen found named " + allergen.ToString());
-            }
-            return result;
+            ThrowIfAllergenDoesntExist(allergen);
+            return ALLERGEN_TO_DISPLAY_NAME[allergen];
         }
 
         public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
         {
+            ThrowIfAllergenDoesntExist(allergen);
+
             // labeled items
             ISet<string> result = ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
 
@@ -113,6 +121,7 @@ namespace BZP_Allergies
 
         public static bool FarmerIsAllergic(string allergen)
         {
+            ThrowIfAllergenDoesntExist(allergen);
             return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
         }
 
@@ -181,6 +190,7 @@ namespace BZP_Allergies
         public static List<StardewValley.Object> TryGetMadeFromObjects(StardewValley.Object @object)
         {
             List<StardewValley.Object> result = new();
+
             // get context tags
             ISet<string> tags = @object.GetContextTags();
 
