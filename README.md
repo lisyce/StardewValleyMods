@@ -19,11 +19,15 @@ Ensure that both the "\[CP\] BzpAllergies" and the "BzpAllergies" mods are direc
 
 ## Harmony Patches
 
-This mod changes core gameplay logic and thus employs some use of Harmony. Currently, the following methods are patched with prefix or postfix methods:
+This mod changes core gameplay logic and thus employs some use of Harmony. Currently, the following methods are patched with prefix or postfix methods (no transpilers are used):
 
 - `GameLocation.createQuestionDialogue`
 - `Farmer.doneEating`
 - `NPC.checkAction`
+- `CraftingRecipe.createItem`
+- `CraftingRecipe.consumeIngredients`
+- `Object.getDescription`
+- `Item.canStackWith`
 
 All of these prefixes allow the original logic to run afterwards, so they should be fairly compatible with other mods that patch these methods.
 

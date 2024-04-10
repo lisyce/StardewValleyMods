@@ -65,13 +65,13 @@ The `"Format"` field describes the version of this content pack framework that w
 
 Here, you may define custom allergens outside of the six provided by the base mod. It is NOT recommended to edit the base six allergens, which have Ids `"egg"`, `"wheat"`, `"fish"`, `"shellfish"`, `"treenuts"`, and `"dairy"`.
 
-Custom allergens are defined by a unique Id key, which is customarily in all lowercase and must be unique among ALL allergens in the game, including from other content packs. They also have a `"Name"`, which is their name displayed to the player.
+Custom allergens are defined by a unique Id key, which is customarily in all lowercase and must be unique among ALL allergens in the game, including from other content packs. This unique Id may not contain commas. Custom allergens also have a `"Name"`, which is their name displayed to the player.
 
 ### AllergenAssignments
 
 This is where you may give in-game objects an allergen. The keys again denote the unique Ids of the allergen you want to assign objects to.
 
-Use `"ObjectIds"` (A list of string unqualified object Ids) to give objects with those Ids the allergen. This allows you to assign your custom allergens to in-game objects or to give your modded items one of the base six allergens. Derived goods (jelly, wine, etc.) are handled by the mod code, so the above `content.json` file would ensure that grape wine or other processed goods also contain the allergen, even though only the grape Id was listed.
+Use `"ObjectIds"` (A list of string unqualified object Ids) to give objects with those Ids the allergen. This allows you to assign your custom allergens to in-game objects or to give your modded items one of the base six allergens. Derived goods (jelly, wine, etc.) are handled by the mod code, so the above `content.json` file would ensure that grape wine or other processed goods also contain the allergen, even though only the grape Id was listed. Additionally, any foods that are cooked/crafted with the grape item would also be assigned the "grape" allergy. However, you should still assign the cooked/crafted foods to any allergens they may have as a backup, just in case the mod code needs something to fall back on.
 
 Use `"ContextTags"` (A list of string context tags) to give any objects with those context tags the allergen. For example this `content.json` describes a custom mayo allergy (not eggs, mayo specifically!):
 
@@ -85,6 +85,10 @@ Use `"ContextTags"` (A list of string context tags) to give any objects with tho
   },
   "AllergenAssignments": {
     "mayo": {
+      "ObjectIds": [
+        "648",
+        "213"
+      ],
       "ContextTags": [
         "mayo_item"
       ]
@@ -93,7 +97,7 @@ Use `"ContextTags"` (A list of string context tags) to give any objects with tho
 }
 ```
 
-This can save typing if there are lots of items that share a context tag that you would like to all have the same allergen.
+This can save typing if there are lots of items that share a context tag that you would like to all have the same allergen. Notice how both Coleslaw (`"648"`) and the Fish Taco (`"213"`) are also marked as having the mayo allergen because they are cooked with mayo.
 
 #### Automatically-added allergens
 
