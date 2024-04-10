@@ -110,6 +110,10 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
+            foreach (IContentPack pack in Helper.ContentPacks.GetOwned())
+            {
+                ConfigMenuInit.SetupContentPackConfig(configMenu, ModManifest, pack);
+            }
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>

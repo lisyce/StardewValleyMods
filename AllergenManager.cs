@@ -22,7 +22,7 @@ namespace BZP_Allergies
 
         public static Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS;
 
-        public static Dictionary<string, string> ALLERGEN_CONTENT_PACK;
+        public static Dictionary<string, ISet<string>> ALLERGEN_CONTENT_PACK;
 
         public static void InitDefaultDicts()
         {
