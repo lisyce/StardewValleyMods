@@ -23,7 +23,6 @@ namespace BZP_Allergies.Config
                 text: () => "Eating a food containing an allergen results in a loss of energy and debuffs. Both raw ingredients and derived items may cause reactions."
             );
 
-            GenericAllergenConfig farmerConfig = ModEntry.Config.Farmer;
 
             List<string> mainAllergies = new()
             {
@@ -38,8 +37,8 @@ namespace BZP_Allergies.Config
                     mod: modManifest,
                     name: () => displayName,
                     tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => farmerConfig.Allergies[id],
-                    setValue: value => farmerConfig.Allergies[id] = value
+                    getValue: () => ModEntry.Config.Farmer.Allergies[id],
+                    setValue: value => ModEntry.Config.Farmer.Allergies[id] = value
                 );
             }
         }
@@ -76,8 +75,8 @@ namespace BZP_Allergies.Config
                     mod: modManifest,
                     name: () => displayName,
                     tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => farmerConfig.Allergies[allergen],
-                    setValue: value => farmerConfig.Allergies[allergen] = value
+                    getValue: () => ModEntry.Config.Farmer.Allergies[allergen],
+                    setValue: value => ModEntry.Config.Farmer.Allergies[allergen] = value
                 );
             }
         }
