@@ -1,0 +1,80 @@
+{
+  "Format": "1.0.0",
+  "CustomAllergens": {
+    "BarleyZP.cornucopia_peanut": {
+      "Name": "Peanuts"
+    },
+    "BarleyZP.cornucopia_almond": {
+      "Name": "Almonds"
+    },
+    "BarleyZP.cornucopia_cashew": {
+      "Name": "Cashews"
+    },
+    "BarleyZP.cornucopia_pecan": {
+      "Name": "Pecans"
+    },
+    "BarleyZP.cornucopia_pistachio": {
+      "Name": "Pistachios"
+    },
+    "BarleyZP.cornucopia_walnut": {
+      "Name": "Walnuts"
+    },
+    "BarleyZP.cornucopia_soy": {
+      "Name": "Soy"
+    }
+  },
+  "AllergenAssignments": {
+    "wheat": {
+      "ObjectIds": [
+        "Cornucopia_Durum",
+        "Cornucopia_SemolinaFlour",
+        "Cornucopia_DarkAle"
+      ]
+    },
+    "treenut": {
+      "ObjectIds": [
+        "Cornucopia_Almond",
+        "Cornucopia_Cashew",
+        "Cornucopia_Pecan",
+        "Cornucopia_Pistachio",
+        "Cornucopia_Walnut"
+      ]
+    },
+    "BarleyZP.cornucopia_peanut": {
+      "ObjectIds": [
+        "Cornucopia_Peanut"
+      ]
+    },
+    "BarleyZP.cornucopia_almond": {
+      "ObjectIds": [
+        "Cornucopia_Almond"
+      ]
+    },
+    "BarleyZP.cornucopia_cashew": {
+      "ObjectIds": [
+        "Cornucopia_Cashew"
+      ]
+    },
+    "BarleyZP.cornucopia_pecan": {
+      "ObjectIds": [
+        "Cornucopia_Pecan"
+      ]
+    },
+    "BarleyZP.cornucopia_pistachio": {
+      "ObjectIds": [
+        "Cornucopia_Pistachio"
+      ]
+    },
+    "BarleyZP.cornucopia_walnut": {
+      "ObjectIds": [
+        "Cornucopia_Walnut"
+      ]
+    },
+    "BarleyZP.cornucopia_soy": {
+      "ObjectIds": [
+        "Cornucopia_Soybeans",
+        "Cornucopia_Tofu"
+      ]
+    }
+  }
+}
