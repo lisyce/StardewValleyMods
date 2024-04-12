@@ -1,18 +1,22 @@
 {
-    "Name": "[BZPA] Conrucopia Allergies",
-    "Author": "BarleyZP",
-    "Version": "1.0.0",
-    "Description": "Brings BarleyZP's Allergies to Cornucopia",
-    "UniqueID": "BarleyZP.BzpAllergiesCornucopia.BZPA",
-    "MinimumApiVersion": "3.8.0",
-    "UpdateKeys": [],
-    "ContentPackFor": {
-      "UniqueID": "BarleyZP.BzpAllergies"
+  "Name": "[BZPA] Cornucopia Allergies",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Brings BarleyZP's Allergies to Cornucopia",
+  "UniqueID": "BarleyZP.BzpAllergiesCornucopia.BZPA",
+  "MinimumApiVersion": "3.8.0",
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "BarleyZP.BzpAllergies"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "BarleyZP.BzpAllergies",
+      "IsRequired": true
     },
-    "Dependencies": [
-      {
-        "UniqueID": "BarleyZP.BzpAllergies",
-        "IsRequired": true
-      }
-    ]
-  }
+    {
+      "UniqueID": "Cornucopia.MoreCrops",
+      "IsRequired": true
+    }
+  ]
+}

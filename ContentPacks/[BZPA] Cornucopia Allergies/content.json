@@ -1,25 +1,25 @@
 {
   "Format": "1.0.0",
   "CustomAllergens": {
-    "BarleyZP.cornucopia_peanut": {
+    "BarleyZP.CornucopiaPeanut": {
       "Name": "Peanuts"
     },
-    "BarleyZP.cornucopia_almond": {
+    "BarleyZP.CornucopiaAlmond": {
       "Name": "Almonds"
     },
-    "BarleyZP.cornucopia_cashew": {
+    "BarleyZP.CornucopiaCashew": {
       "Name": "Cashews"
     },
-    "BarleyZP.cornucopia_pecan": {
+    "BarleyZP.CornucopiaPecan": {
       "Name": "Pecans"
     },
-    "BarleyZP.cornucopia_pistachio": {
+    "BarleyZP.CornucopiaPistachio": {
       "Name": "Pistachios"
     },
-    "BarleyZP.cornucopia_walnut": {
+    "BarleyZP.CornucopiaWalnut": {
       "Name": "Walnuts"
     },
-    "BarleyZP.cornucopia_soy": {
+    "BarleyZP.CornucopiaSoy": {
       "Name": "Soy"
     }
   },
@@ -31,7 +31,7 @@
         "Cornucopia_DarkAle"
       ]
     },
-    "treenut": {
+    "treenuts": {
       "ObjectIds": [
         "Cornucopia_Almond",
         "Cornucopia_Cashew",
@@ -40,37 +40,37 @@
         "Cornucopia_Walnut"
       ]
     },
-    "BarleyZP.cornucopia_peanut": {
+    "BarleyZP.CornucopiaPeanut": {
       "ObjectIds": [
         "Cornucopia_Peanut"
       ]
     },
-    "BarleyZP.cornucopia_almond": {
+    "BarleyZP.CornucopiaAlmond": {
       "ObjectIds": [
         "Cornucopia_Almond"
       ]
     },
-    "BarleyZP.cornucopia_cashew": {
+    "BarleyZP.CornucopiaCashew": {
       "ObjectIds": [
         "Cornucopia_Cashew"
       ]
     },
-    "BarleyZP.cornucopia_pecan": {
+    "BarleyZP.CornucopiaPecan": {
       "ObjectIds": [
         "Cornucopia_Pecan"
       ]
     },
-    "BarleyZP.cornucopia_pistachio": {
+    "BarleyZP.CornucopiaPistachio": {
       "ObjectIds": [
         "Cornucopia_Pistachio"
       ]
     },
-    "BarleyZP.cornucopia_walnut": {
+    "BarleyZP.CornucopiaWalnut": {
       "ObjectIds": [
         "Cornucopia_Walnut"
       ]
     },
-    "BarleyZP.cornucopia_soy": {
+    "BarleyZP.CornucopiaSoy": {
       "ObjectIds": [
         "Cornucopia_Soybeans",
         "Cornucopia_Tofu"

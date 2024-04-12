@@ -26,7 +26,9 @@ namespace BZP_Allergies.AssetPatches
                         objectData.ContextTags ??= new List<string>();
                         objectData.ContextTags.Add(GetAllergenContextTag(allergen));
                     }
-                });
+                },
+                AssetEditPriority.Late
+                );
             }
         }
 

@@ -65,7 +65,7 @@ The `"Format"` field describes the version of this content pack framework that w
 
 Here, you may define custom allergens outside of the six provided by the base mod. It is NOT recommended to edit the base six allergens, which have Ids `"egg"`, `"wheat"`, `"fish"`, `"shellfish"`, `"treenuts"`, and `"dairy"`.
 
-Custom allergens are defined by a unique Id key, which is customarily in all lowercase and must be unique among ALL allergens in the game, including from other content packs. This unique Id may not contain commas. Custom allergens also have a `"Name"`, which is their name displayed to the player.
+Custom allergens are defined by a unique Id key, which is customarily in all lowercase and must be unique among ALL allergens in the game, including from other content packs. This unique Id may not contain commas or underscores. Custom allergens also have a `"Name"`, which is their name displayed to the player.
 
 ### AllergenAssignments
 

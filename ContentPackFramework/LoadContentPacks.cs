@@ -1,5 +1,4 @@
-﻿using BZP_Allergies.Apis;
-using BZP_Allergies.Config;
+﻿using BZP_Allergies.Config;
 using StardewModdingAPI;
 
 namespace BZP_Allergies.ContentPackFramework
@@ -16,6 +15,12 @@ namespace BZP_Allergies.ContentPackFramework
                     Monitor.Log($"Unable to read content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Error);
                 }
             }
+        }
+
+        private static string SanitizeAllergenId(string id)
+        {
+            // remove "," "_" and lowercase
+            return id.Replace(",", "").Replace("_", "").ToLower();
         }
 
         private static bool ProcessPack(IContentPack pack, ModConfig config)
@@ -44,33 +49,34 @@ namespace BZP_Allergies.ContentPackFramework
             foreach (var pair in content.CustomAllergens)
             {
                 CustomAllergen allergen = pair.Value;
+                string allergenId = SanitizeAllergenId(pair.Key);
 
                 if (allergen.Name == null)
                 {
-                    Monitor.Log("No Name was specified for allergen with Id " + pair.Key, LogLevel.Error);
+                    Monitor.Log("No Name was specified for allergen with Id " + allergenId, LogLevel.Error);
                     return false;
                 }
 
-                if (!AllergenManager.ALLERGEN_OBJECTS.ContainsKey(pair.Key))
+                if (!AllergenManager.ALLERGEN_OBJECTS.ContainsKey(allergenId))
                 {
-                    AllergenManager.ALLERGEN_OBJECTS.Add(pair.Key, new HashSet<string>());
+                    AllergenManager.ALLERGEN_OBJECTS.Add(allergenId, new HashSet<string>());
                 }
 
-                if (!AllergenManager.ALLERGEN_CONTEXT_TAGS.ContainsKey(pair.Key))
+                if (!AllergenManager.ALLERGEN_CONTEXT_TAGS.ContainsKey(allergenId))
                 {
-                    AllergenManager.ALLERGEN_CONTEXT_TAGS.Add(pair.Key, new HashSet<string>());
+                    AllergenManager.ALLERGEN_CONTEXT_TAGS.Add(allergenId, new HashSet<string>());
                 }
 
-                if (!AllergenManager.ALLERGEN_TO_DISPLAY_NAME.ContainsKey(pair.Key))
+                if (!AllergenManager.ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergenId))
                 {
-                    AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(pair.Key, allergen.Name);
+                    AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(allergenId, allergen.Name);
                 }
 
-                AllergenManager.ALLERGEN_CONTENT_PACK[pack.Manifest.UniqueID].Add(pair.Key);
+                AllergenManager.ALLERGEN_CONTENT_PACK[pack.Manifest.UniqueID].Add(allergenId);
 
-                if (!config.Farmer.Allergies.ContainsKey(pair.Key))
+                if (!config.Farmer.Allergies.ContainsKey(allergenId))
                 {
-                    config.Farmer.Allergies.Add(pair.Key, false);
+                    config.Farmer.Allergies.Add(allergenId, false);
                 }
             }
 
@@ -78,23 +84,24 @@ namespace BZP_Allergies.ContentPackFramework
             foreach (var pair in content.AllergenAssignments)
             {
                 AllergenAssignments allergenAssign = pair.Value;
+                string allergenId = SanitizeAllergenId(pair.Key);
 
-                if (pair.Key == null)
+                if (allergenId == null)
                 {
-                    Monitor.Log("No AllergenId was specified for allergen assignment with Id " + pair.Key, LogLevel.Error);
+                    Monitor.Log("No AllergenId was specified for allergen assignment with Id " + allergenId, LogLevel.Error);
                     return false;
                 }
 
                 // object Ids
                 foreach (string id in allergenAssign.ObjectIds)
                 {
-                    AllergenManager.ALLERGEN_OBJECTS[pair.Key].Add(id);
+                    AllergenManager.ALLERGEN_OBJECTS[allergenId].Add(id);
                 }
 
                 // context tags
                 foreach (string tag in allergenAssign.ContextTags)
                 {
-                    AllergenManager.ALLERGEN_CONTEXT_TAGS[pair.Key].Add(tag);
+                    AllergenManager.ALLERGEN_CONTEXT_TAGS[allergenId].Add(tag);
                 }
             }
 
