@@ -26,7 +26,7 @@ namespace BZP_Allergies.Config
 
             List<string> mainAllergies = new()
             {
-                "egg", "wheat", "fish", "shellfish", "treenuts", "dairy"
+                "egg", "wheat", "fish", "shellfish", "treenuts", "dairy", "mushroom"
             };
             mainAllergies.Sort();
 
@@ -37,7 +37,7 @@ namespace BZP_Allergies.Config
                     mod: modManifest,
                     name: () => displayName,
                     tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => ModEntry.Config.Farmer.Allergies[id],
+                    getValue: () => ModEntry.Config.Farmer.Allergies.GetValueOrDefault(id, false),
                     setValue: value => ModEntry.Config.Farmer.Allergies[id] = value
                 );
             }
@@ -75,7 +75,7 @@ namespace BZP_Allergies.Config
                     mod: modManifest,
                     name: () => displayName,
                     tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => ModEntry.Config.Farmer.Allergies[allergen],
+                    getValue: () => ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false),
                     setValue: value => ModEntry.Config.Farmer.Allergies[allergen] = value
                 );
             }

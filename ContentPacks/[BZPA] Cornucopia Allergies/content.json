@@ -40,6 +40,11 @@
         "Cornucopia_Walnut"
       ]
     },
+    "mushroom": {
+      "ContextTags": [
+        "mushroom_item"
+      ]
+    },
     "BarleyZP.CornucopiaPeanut": {
       "ObjectIds": [
         "Cornucopia_Peanut"

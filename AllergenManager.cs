@@ -35,7 +35,7 @@ namespace BZP_Allergies
                 { "wheat", new HashSet<string>{
                     "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
                     "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
-                    "262"
+                    "262", "346"
                 }},
                 { "fish", new HashSet<string>{
                     "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
@@ -51,6 +51,10 @@ namespace BZP_Allergies
                 { "dairy", new HashSet<string>{
                     "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
                     "608", "727", "730", "904", "424", "426"
+                }},
+                { "mushroom", new HashSet<string>
+                {
+                    "404", "205", "606", "218", "420", "422", "281", "257", "773", "851"
                 }}
             };
 
@@ -61,7 +65,8 @@ namespace BZP_Allergies
                 { "fish", "Fish" },
                 { "shellfish", "Shellfish" },
                 { "treenuts", "Tree Nuts" },
-                { "dairy", "Dairy" }
+                { "dairy", "Dairy" },
+                { "mushroom", "Mushrooms" }
             };
 
             ALLERGEN_CONTEXT_TAGS = new()

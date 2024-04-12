@@ -62,11 +62,6 @@ namespace BZP_Allergies.ContentPackFramework
                     AllergenManager.ALLERGEN_OBJECTS.Add(allergenId, new HashSet<string>());
                 }
 
-                if (!AllergenManager.ALLERGEN_CONTEXT_TAGS.ContainsKey(allergenId))
-                {
-                    AllergenManager.ALLERGEN_CONTEXT_TAGS.Add(allergenId, new HashSet<string>());
-                }
-
                 if (!AllergenManager.ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergenId))
                 {
                     AllergenManager.ALLERGEN_TO_DISPLAY_NAME.Add(allergenId, allergen.Name);
@@ -99,6 +94,11 @@ namespace BZP_Allergies.ContentPackFramework
                 }
 
                 // context tags
+                if (allergenAssign.ContextTags.Count > 0 && !AllergenManager.ALLERGEN_CONTEXT_TAGS.ContainsKey(allergenId))
+                {
+                    AllergenManager.ALLERGEN_CONTEXT_TAGS.Add(allergenId, new HashSet<string>());
+                }
+
                 foreach (string tag in allergenAssign.ContextTags)
                 {
                     AllergenManager.ALLERGEN_CONTEXT_TAGS[allergenId].Add(tag);
