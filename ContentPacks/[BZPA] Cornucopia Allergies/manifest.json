@@ -5,7 +5,7 @@
   "Description": "Brings BarleyZP's Allergies to Cornucopia",
   "UniqueID": "BarleyZP.BzpAllergiesCornucopia.BZPA",
   "MinimumApiVersion": "3.8.0",
-  "UpdateKeys": [],
+  "UpdateKeys": [ "Nexus:22329" ],
   "ContentPackFor": {
     "UniqueID": "BarleyZP.BzpAllergies"
   },
