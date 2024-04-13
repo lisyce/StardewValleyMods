@@ -103,6 +103,14 @@ namespace BZP_Allergies
                     Config = new ModConfig();
                 },
                 save: () => {
+                    if (Config.RandomizeAllergies)
+                    {
+                        Config.Farmer = new();  // zero-out farmer allergies
+                    }
+                    else
+                    {
+                        Config.RandomAllergenCount = -1;
+                    }
                     Helper.WriteConfig(Config);
                     Config = Helper.ReadConfig<ModConfig>();
                 },
