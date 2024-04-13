@@ -20,6 +20,8 @@ namespace BZP_Allergies
 
         private Harmony Harmony;
         public static ModConfig Config;
+        public static bool AllergenRandomDirty = false;
+        public static int LastSavedAllergenRandomCount;
         private IModHelper ModHelper;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
@@ -101,11 +103,19 @@ namespace BZP_Allergies
                 mod: ModManifest,
                 reset: () => {
                     Config = new ModConfig();
+                    AllergenRandomDirty = false;
+                    LastSavedAllergenRandomCount = Config.RandomAllergenCount;
                 },
                 save: () => {
                     if (Config.RandomizeAllergies)
                     {
                         Config.Farmer = new();  // zero-out farmer allergies
+                        if (AllergenRandomDirty || LastSavedAllergenRandomCount != Config.RandomAllergenCount)
+                        {
+                            Monitor.Log("Generating a new set of random allergies...", LogLevel.Info);
+                            List<string> randomAllergies = AllergenManager.RollRandomKAllergies(Config.RandomAllergenCount);
+                            Monitor.Log(string.Join(", ", randomAllergies), LogLevel.Debug);
+                        }
                     }
                     else
                     {
@@ -113,6 +123,9 @@ namespace BZP_Allergies
                     }
                     Helper.WriteConfig(Config);
                     Config = Helper.ReadConfig<ModConfig>();
+
+                    AllergenRandomDirty = false;
+                    LastSavedAllergenRandomCount = Config.RandomAllergenCount;
                 },
                 titleScreenOnly: false
             );

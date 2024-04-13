@@ -31,7 +31,14 @@ namespace BZP_Allergies.Config
                 name: () => "Randomize my allergies",
                 tooltip: () => "Play with random allergies rather than choosing your own.",
                 getValue: () => ModEntry.Config.RandomizeAllergies,
-                setValue: value => ModEntry.Config.RandomizeAllergies = value
+                setValue: value => {
+                    if (ModEntry.Config.RandomizeAllergies != value)
+                    {
+                        // switched
+                        ModEntry.AllergenRandomDirty = !ModEntry.AllergenRandomDirty;
+                    }
+                    ModEntry.Config.RandomizeAllergies = value;
+                }
             );
 
             // randomization options

@@ -224,6 +224,38 @@ namespace BZP_Allergies
             return result;
         }
 
+        public static List<string> RollRandomKAllergies(int k)
+        {
+            Random random = new();
+
+            if (k == -1)
+            {
+                // generate k from binomial distribution with p = 0.5
+                k = 1;
+                
+                int trials = ALLERGEN_TO_DISPLAY_NAME.Count - 1;
+                for (int i = 0; i < trials; i++)
+                {
+                    if (random.NextDouble() < 0.5)
+                    {
+                        k++;
+                    }
+                }
+            }
+
+            // select k random allergens
+            List<string> result = new();
+            List<string> possibleAllergies = ALLERGEN_TO_DISPLAY_NAME.Keys.ToList();
+            for (int i = 0; i < k; i++)
+            {
+                int idx = random.Next(possibleAllergies.Count);
+                result.Add(possibleAllergies[idx]);
+                possibleAllergies.RemoveAt(idx);
+            }
+
+            return result;
+        }
+
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
         {
             ISet<string> result = new HashSet<string>();
