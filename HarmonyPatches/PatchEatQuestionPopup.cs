@@ -14,13 +14,14 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
+                if (!ModEntry.Config.HintBeforeEating || Game1.player.ActiveObject == null)
+                {
+                    return;
+                }
+
                 // is this the "Eat {0}?" or "Drink {0}?" popup?
                 IDictionary<string, string> stringsData = GameContent.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
                 
-                if (Game1.player.ActiveObject == null)
-                {
-                    return;
-                }                
                 string activeObjectName = Game1.player.ActiveObject.DisplayName;
                 string eatQuestion = string.Format(stringsData["Game1.cs.3160"], activeObjectName);
                 string drinkQuestion = string.Format(stringsData["Game1.cs.3159"], activeObjectName);

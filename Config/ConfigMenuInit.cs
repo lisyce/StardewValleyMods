@@ -8,10 +8,34 @@ namespace BZP_Allergies.Config
         public static void SetupMenuUI(IGenericModConfigMenuApi configMenu, IManifest modManifest)
         {
             // add a link to config
-            configMenu.AddPageLink(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
+            configMenu.AddPageLink(modManifest, "BzpAllergies_Farmer", () => "Farmer Allergies");          
 
             // switch to page
-            configMenu.AddPage(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
+            configMenu.AddPage(modManifest, "BzpAllergies_Farmer", () => "Farmer Allergies");
+
+            // general settings
+            configMenu.AddSectionTitle(
+                mod: modManifest,
+                text: () => "General Settings"
+            );
+            configMenu.AddBoolOption(
+                mod: modManifest,
+                name: () => "Hints before eating",
+                tooltip: () => "Select to get a hint in the popup before you eat something to warn you of your allergies.",
+                getValue: () => ModEntry.Config.HintBeforeEating,
+                setValue: value => ModEntry.Config.HintBeforeEating = value
+            );
+
+            // randomization options
+            configMenu.AddSectionTitle(
+                mod: modManifest,
+                text: () => "Randomize Allergies"
+            );
+
+            configMenu.AddParagraph(
+                mod: modManifest,
+                text: () => "Randomize your allergies for an extra challenge! If you choose this option, the game will randomly roll some allergies for you and you'll have to discover them as you play!"
+            );
 
             // add some config options
             configMenu.AddSectionTitle(
@@ -46,7 +70,7 @@ namespace BZP_Allergies.Config
         public static void SetupContentPackConfig(IGenericModConfigMenuApi configMenu, IManifest modManifest, IContentPack pack)
         {
             // switch to farmer allergies page
-            configMenu.AddPage(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
+            configMenu.AddPage(modManifest, "BzpAllergies_Farmer", () => "Farmer Allergies");
 
             // add a link to config
             configMenu.AddPageLink(modManifest, pack.Manifest.UniqueID, () => pack.Manifest.Name);
@@ -55,7 +79,7 @@ namespace BZP_Allergies.Config
             configMenu.AddPage(modManifest, pack.Manifest.UniqueID, () => "Farmer Allergies");
 
             // add a link back
-            configMenu.AddPageLink(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Back");
+            configMenu.AddPageLink(modManifest, "BzpAllergies_Farmer", () => "Back");
 
             // title
             configMenu.AddSectionTitle(
