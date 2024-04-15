@@ -29,8 +29,9 @@ namespace BZP_Allergies.HarmonyPatches
 
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
+                    ISet<string> itemToEatAllergens = GetAllergensInObject(itemToEat);
                     // is it dairy and do we have the buff?
-                    if (itemToEat.HasContextTag(GetAllergenContextTag("dairy")) && __instance.hasBuff(LACTASE_PILLS_BUFF))
+                    if (itemToEatAllergens.Contains("dairy") && __instance.hasBuff(LACTASE_PILLS_BUFF))
                     {
                         HUDMessage lactaseProtectionMessage = new("Good thing you took your lactase!");
                         lactaseProtectionMessage.messageSubject = itemToEat;
@@ -69,6 +70,17 @@ namespace BZP_Allergies.HarmonyPatches
                     {
                         Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
                     }
+
+                    // discover allergies
+                    foreach (string allergen in itemToEatAllergens)
+                    {
+                        Monitor.Log(allergen, LogLevel.Debug);
+                        if (DiscoverPlayerAllergy(allergen))
+                        {
+                            Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                            Game1.playSound("newArtifact");
+                        }
+                    }
                 }
                 else if (itemToEat.QualifiedItemId.Equals("(O)" + ALLERGY_RELIEF_ID))
                 {
@@ -103,7 +115,7 @@ namespace BZP_Allergies.HarmonyPatches
                 {
                     // change edibility back to original value
                     itemToEat.Edibility = __state;
-                }
+                }                
             }
             catch (Exception ex)
             {

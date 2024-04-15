@@ -15,6 +15,9 @@ namespace BZP_Allergies
         public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
 
         public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
+        public static readonly string FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_DiscoveredPlayerAllergens";
+        public static readonly string FARMER_HAS_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_PlayerAllergens";
+
 
         public static Dictionary<string, ISet<string>> ALLERGEN_OBJECTS;
 
@@ -127,6 +130,18 @@ namespace BZP_Allergies
         public static bool FarmerIsAllergic(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
+            if (ModEntry.Config.RandomizeAllergies)
+            {
+                if (Game1.player.modData.TryGetValue(FARMER_HAS_ALLERGIES_MODDATA_KEY, out string has))
+                {
+                    Monitor.Log(has, LogLevel.Debug);
+                    Monitor.Log(has.Split(',').Contains(allergen).ToString(), LogLevel.Debug);
+                    return has.Split(',').Contains(allergen);
+                }
+                return false;
+            }
+            
+            // not random; use the config
             return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
         }
 
@@ -254,6 +269,29 @@ namespace BZP_Allergies
             }
 
             return result;
+        }
+
+        public static bool PlayerHasDiscoveredAllergy(string allergyId)
+        {
+            if (Game1.player.modData.TryGetValue(FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, out string discovered)) {
+                if (discovered.Split(',').Contains(allergyId)) return true;
+            }
+
+            return false;
+        }
+
+        public static bool DiscoverPlayerAllergy(string allergyId)
+        {
+            if (PlayerHasDiscoveredAllergy(allergyId)) return false;
+            if (Game1.player.modData.TryGetValue(FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, out string discovered))
+            {
+                Game1.player.modData[FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = discovered + "," + allergyId;
+            }
+            else
+            {
+                Game1.player.modData[FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = allergyId;
+            }
+            return true;
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)

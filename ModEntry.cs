@@ -23,6 +23,8 @@ namespace BZP_Allergies
         public static bool AllergenRandomDirty = false;
         public static int LastSavedAllergenRandomCount;
         private IModHelper ModHelper;
+        private static string? discoveredModDataChanged = null;
+        private static string? hasModDataChanged = null;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -45,6 +47,7 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
+            modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
 
             // config
             Config = Helper.ReadConfig<ModConfigModel>();
@@ -107,9 +110,6 @@ namespace BZP_Allergies
                     LastSavedAllergenRandomCount = Config.RandomAllergenCount;
                 },
                 save: () => {
-                    StardewValley.Mods.ModDataDictionary modData = Game1.player.modData;
-                    string modDataKey = "BarleyZP.BzpAllergies_DiscoveredPlayerAllergens";
-
                     if (Config.RandomizeAllergies)
                     {
                         Config.Farmer = new();  // zero-out farmer allergies
@@ -119,7 +119,8 @@ namespace BZP_Allergies
                             List<string> randomAllergies = AllergenManager.RollRandomKAllergies(Config.RandomAllergenCount);
                             Monitor.Log(string.Join(", ", randomAllergies), LogLevel.Debug);  // TODO: remove this line
 
-                            modData[modDataKey] = "";  // we re-rolled our allergies, so we don't know what any of them are!
+                            discoveredModDataChanged = "";  // we re-rolled our allergies, so we don't know what any of them are!
+                            hasModDataChanged = string.Join(",", randomAllergies);
                         }
                     }
                     else
@@ -128,21 +129,23 @@ namespace BZP_Allergies
 
                         // no randomization; they all start discovered
                         List<string> allergensDiscovered = new();
+                        List<string> allergensHad = new();
                         foreach (var pair in Config.Farmer.Allergies)
                         {
                             if (pair.Value && ALLERGEN_TO_DISPLAY_NAME.ContainsKey(pair.Key))  // make sure the content pack still exists
                             {
                                 allergensDiscovered.Add(pair.Key);
+                                allergensHad.Add(pair.Key);
                             }
                         }
-                        modData[modDataKey] = string.Join(',', allergensDiscovered);
+                        discoveredModDataChanged = string.Join(',', allergensDiscovered);
+                        hasModDataChanged = string.Join(',', allergensHad);
                     }
                     Helper.WriteConfig(Config);
                     Config = Helper.ReadConfig<ModConfigModel>();
 
                     AllergenRandomDirty = false;
                     LastSavedAllergenRandomCount = Config.RandomAllergenCount;
-                    Monitor.Log(modData[modDataKey], LogLevel.Debug);
                 },
                 titleScreenOnly: false
             );
@@ -160,6 +163,33 @@ namespace BZP_Allergies
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             NpcsThatReactedToday.Clear();
+        }
+
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        {
+            StardewValley.Mods.ModDataDictionary modData = Game1.player.modData;
+            string discoveredKey = FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY;
+            string hasKey = FARMER_HAS_ALLERGIES_MODDATA_KEY;
+
+            if (!modData.ContainsKey(discoveredKey))
+            {
+                modData[discoveredKey] = "";
+            }
+
+            if (!modData.ContainsKey(hasKey))
+            {
+                modData[hasKey] = "";
+            }
+
+            if (discoveredModDataChanged != null)
+            {
+                modData[discoveredKey] = discoveredModDataChanged;
+            }
+
+            if (hasModDataChanged != null)
+            {
+                modData[hasKey] = hasModDataChanged;
+            }
         }
 
         private void ListAllergens(string command, string[] args) {

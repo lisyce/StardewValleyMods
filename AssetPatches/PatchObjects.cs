@@ -11,8 +11,6 @@ namespace BZP_Allergies.AssetPatches
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                bool allergic = FarmerIsAllergic(allergen);
-
                 e.Edit(asset =>
                 {
                     // update items containing allergens
