@@ -5,7 +5,7 @@ namespace BZP_Allergies.ContentPackFramework
 {
     internal class LoadContentPacks : Initializable
     {
-        public static void LoadPacks(IEnumerable<IContentPack> packs, ModConfig config)
+        public static void LoadPacks(IEnumerable<IContentPack> packs, ModConfigModel config)
         {
             foreach (IContentPack contentPack in packs)
             {
@@ -23,7 +23,7 @@ namespace BZP_Allergies.ContentPackFramework
             return id.Replace(",", "").Replace("_", "").ToLower();
         }
 
-        private static bool ProcessPack(IContentPack pack, ModConfig config)
+        private static bool ProcessPack(IContentPack pack, ModConfigModel config)
         {
             ContentModel? content = pack.ReadJsonFile<ContentModel>("content.json");
             if (content == null)

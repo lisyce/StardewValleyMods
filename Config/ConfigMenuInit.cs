@@ -128,7 +128,6 @@ namespace BZP_Allergies.Config
             );
 
             // register options
-            GenericAllergenConfig farmerConfig = ModEntry.Config.Farmer;
             List<string> sortedAllergens = AllergenManager.ALLERGEN_CONTENT_PACK[pack.Manifest.UniqueID].ToList();
             sortedAllergens.Sort();
 

@@ -1,6 +1,6 @@
 ﻿namespace BZP_Allergies.Config
 {
-    internal sealed class ModConfig
+    internal sealed class ModConfigModel
     {
         public GenericAllergenConfig Farmer { get; set; } = new();
         public bool RandomizeAllergies { get; set; } = false;

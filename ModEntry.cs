@@ -19,7 +19,7 @@ namespace BZP_Allergies
     {
 
         private Harmony Harmony;
-        public static ModConfig Config;
+        public static ModConfigModel Config;
         public static bool AllergenRandomDirty = false;
         public static int LastSavedAllergenRandomCount;
         private IModHelper ModHelper;
@@ -47,7 +47,7 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
 
             // config
-            Config = Helper.ReadConfig<ModConfig>();
+            Config = Helper.ReadConfig<ModConfigModel>();
 
             // harmony patches
 
@@ -102,11 +102,14 @@ namespace BZP_Allergies
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => {
-                    Config = new ModConfig();
+                    Config = new ModConfigModel();
                     AllergenRandomDirty = false;
                     LastSavedAllergenRandomCount = Config.RandomAllergenCount;
                 },
                 save: () => {
+                    StardewValley.Mods.ModDataDictionary modData = Game1.player.modData;
+                    string modDataKey = "BarleyZP.BzpAllergies_DiscoveredPlayerAllergens";
+
                     if (Config.RandomizeAllergies)
                     {
                         Config.Farmer = new();  // zero-out farmer allergies
@@ -114,18 +117,32 @@ namespace BZP_Allergies
                         {
                             Monitor.Log("Generating a new set of random allergies...", LogLevel.Info);
                             List<string> randomAllergies = AllergenManager.RollRandomKAllergies(Config.RandomAllergenCount);
-                            Monitor.Log(string.Join(", ", randomAllergies), LogLevel.Debug);
+                            Monitor.Log(string.Join(", ", randomAllergies), LogLevel.Debug);  // TODO: remove this line
+
+                            modData[modDataKey] = "";  // we re-rolled our allergies, so we don't know what any of them are!
                         }
                     }
                     else
                     {
                         Config.RandomAllergenCount = -1;
+
+                        // no randomization; they all start discovered
+                        List<string> allergensDiscovered = new();
+                        foreach (var pair in Config.Farmer.Allergies)
+                        {
+                            if (pair.Value && ALLERGEN_TO_DISPLAY_NAME.ContainsKey(pair.Key))  // make sure the content pack still exists
+                            {
+                                allergensDiscovered.Add(pair.Key);
+                            }
+                        }
+                        modData[modDataKey] = string.Join(',', allergensDiscovered);
                     }
                     Helper.WriteConfig(Config);
-                    Config = Helper.ReadConfig<ModConfig>();
+                    Config = Helper.ReadConfig<ModConfigModel>();
 
                     AllergenRandomDirty = false;
                     LastSavedAllergenRandomCount = Config.RandomAllergenCount;
+                    Monitor.Log(modData[modDataKey], LogLevel.Debug);
                 },
                 titleScreenOnly: false
             );
