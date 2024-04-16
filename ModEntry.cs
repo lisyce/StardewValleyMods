@@ -20,11 +20,7 @@ namespace BZP_Allergies
 
         private Harmony Harmony;
         public static ModConfigModel Config;
-        public static bool AllergenRandomDirty = false;
-        public static int LastSavedAllergenRandomCount;
         private IModHelper ModHelper;
-        private static string? discoveredModDataChanged = null;
-        private static string? hasModDataChanged = null;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -41,7 +37,7 @@ namespace BZP_Allergies
             Initializable.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // allergen manager
-            AllergenManager.InitDefaultDicts();
+            AllergenManager.InitDefault();
 
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
@@ -53,7 +49,6 @@ namespace BZP_Allergies
             Config = Helper.ReadConfig<ModConfigModel>();
 
             // harmony patches
-
             Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();
 
@@ -75,7 +70,7 @@ namespace BZP_Allergies
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
+                foreach (string a in ALLERGEN_DATA.Keys)
                 {
                     PatchObjects.AddAllergen(e, a);
                 }
@@ -106,55 +101,15 @@ namespace BZP_Allergies
                 mod: ModManifest,
                 reset: () => {
                     Config = new ModConfigModel();
-                    AllergenRandomDirty = false;
-                    LastSavedAllergenRandomCount = Config.RandomAllergenCount;
                 },
-                save: () => {
-                    if (Config.RandomizeAllergies)
-                    {
-                        Config.Farmer = new();  // zero-out farmer allergies
-                        if (AllergenRandomDirty || LastSavedAllergenRandomCount != Config.RandomAllergenCount)
-                        {
-                            Monitor.Log("Generating a new set of random allergies...", LogLevel.Info);
-                            List<string> randomAllergies = AllergenManager.RollRandomKAllergies(Config.RandomAllergenCount);
-                            Monitor.Log(string.Join(", ", randomAllergies), LogLevel.Debug);  // TODO: remove this line
-
-                            discoveredModDataChanged = "";  // we re-rolled our allergies, so we don't know what any of them are!
-                            hasModDataChanged = string.Join(",", randomAllergies);
-                        }
-                    }
-                    else
-                    {
-                        Config.RandomAllergenCount = -1;
-
-                        // no randomization; they all start discovered
-                        List<string> allergensDiscovered = new();
-                        List<string> allergensHad = new();
-                        foreach (var pair in Config.Farmer.Allergies)
-                        {
-                            if (pair.Value && ALLERGEN_TO_DISPLAY_NAME.ContainsKey(pair.Key))  // make sure the content pack still exists
-                            {
-                                allergensDiscovered.Add(pair.Key);
-                                allergensHad.Add(pair.Key);
-                            }
-                        }
-                        discoveredModDataChanged = string.Join(',', allergensDiscovered);
-                        hasModDataChanged = string.Join(',', allergensHad);
-                    }
+                save: () =>
+                {
                     Helper.WriteConfig(Config);
                     Config = Helper.ReadConfig<ModConfigModel>();
-
-                    AllergenRandomDirty = false;
-                    LastSavedAllergenRandomCount = Config.RandomAllergenCount;
-                },
-                titleScreenOnly: false
+                }
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
-            foreach (IContentPack pack in Helper.ContentPacks.GetOwned())
-            {
-                ConfigMenuInit.SetupContentPackConfig(configMenu, ModManifest, pack);
-            }
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>
@@ -165,40 +120,25 @@ namespace BZP_Allergies
             NpcsThatReactedToday.Clear();
         }
 
+
+        // TODO: get rid of this thing when you're done testing
         private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
         {
             StardewValley.Mods.ModDataDictionary modData = Game1.player.modData;
             string discoveredKey = FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY;
             string hasKey = FARMER_HAS_ALLERGIES_MODDATA_KEY;
 
-            if (!modData.ContainsKey(discoveredKey))
-            {
-                modData[discoveredKey] = "";
-            }
-
-            if (!modData.ContainsKey(hasKey))
-            {
-                modData[hasKey] = "";
-            }
-
-            if (discoveredModDataChanged != null)
-            {
-                modData[discoveredKey] = discoveredModDataChanged;
-            }
-
-            if (hasModDataChanged != null)
-            {
-                modData[hasKey] = hasModDataChanged;
-            }
+            modData[discoveredKey] = "";
+            modData[hasKey] = "dairy,shellfish";
         }
 
         private void ListAllergens(string command, string[] args) {
 
             string result = "\n{Allergen Id}: {Allergen Display Name}";
 
-            foreach (var item in AllergenManager.ALLERGEN_TO_DISPLAY_NAME)
+            foreach (var item in AllergenManager.ALLERGEN_DATA)
             {
-                result += "\n\t" + item.Key + ": " + item.Value;
+                result += "\n\t" + item.Key + ": " + item.Value.DisplayName;
             }
 
             Monitor.Log(result, LogLevel.Info);
@@ -219,7 +159,7 @@ namespace BZP_Allergies
 
         private void ReloadPacks(string command, string[] args)
         {
-            AllergenManager.InitDefaultDicts();
+            AllergenManager.InitDefault();
             LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
             Helper.GameContent.InvalidateCache("Data/Objects");
             Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
