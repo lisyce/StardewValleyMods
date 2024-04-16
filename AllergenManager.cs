@@ -72,7 +72,12 @@ namespace BZP_Allergies
             ALLERGEN_CONTEXT_TAGS = new()
             {
                 { "egg", new HashSet<string>{ "egg_item", "mayo_item", "large_egg_item" } },
-                { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } }
+                { "wheat", new HashSet<string>() },
+                { "fish", new HashSet<string>() },
+                { "shellfish", new HashSet<string>() },
+                { "treenuts", new HashSet<string>() },
+                { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } },
+                { "mushroom", new HashSet<string>() }
             };
 
             ALLERGEN_CONTENT_PACK = new();
