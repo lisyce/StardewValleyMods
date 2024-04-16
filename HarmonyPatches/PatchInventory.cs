@@ -7,7 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using StardewValley.Menus;
+using Microsoft.Xna.Framework;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -90,6 +91,58 @@ namespace BZP_Allergies.HarmonyPatches
             catch (Exception ex)
             {
                 Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(SkillsPage), "draw")]
+    internal class PatchSkillsPageDraw : Initializable
+    {
+        public static ClickableTextureComponent? AllergyTab = null;  // TODO move this to the actual menu draw class later as a static constant
+
+        [HarmonyPrefix]
+        static void Draw_Prefix(SkillsPage __instance, SpriteBatch b)
+        {
+            try
+            {
+                ClickableTextureComponent allergyTab = new(
+                    "BarleyZP.BzpAllergies",
+                    new Rectangle(__instance.xPositionOnScreen - 48, __instance.yPositionOnScreen + 64 * 2, 64, 64),
+                    "",
+                    "Allergies",
+                    Game1.mouseCursors,
+                    new Rectangle(640, 80, 16, 16),
+                    4f
+                 );
+
+                allergyTab.draw(b);
+                AllergyTab = allergyTab;
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed in {nameof(Draw_Prefix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(SkillsPage), "performHoverAction")]
+    internal class PatchSkillsPageHover : Initializable
+    {
+        [HarmonyPostfix]
+        static void PerformHoverAction_Postfix(SkillsPage __instance, int x, int y)
+        {
+            try
+            {
+                if (PatchSkillsPageDraw.AllergyTab == null) return;
+
+                if (PatchSkillsPageDraw.AllergyTab.containsPoint(x, y))
+                {
+                    Traverse.Create(__instance).Field("hoverText").SetValue(PatchSkillsPageDraw.AllergyTab.hoverText);
+                }
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed in {nameof(PerformHoverAction_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
