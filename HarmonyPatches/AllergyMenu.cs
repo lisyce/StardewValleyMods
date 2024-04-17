@@ -8,7 +8,7 @@ namespace BZP_Allergies.HarmonyPatches
 {
     internal class AllergyMenu : SkillsPage
     {
-        private ClickableTextureComponent AllergyTab;
+        private readonly ClickableTextureComponent AllergyTab;
         private bool OnAllergyTab = false;
 
         public AllergyMenu(int x, int y, int width, int height)
@@ -28,11 +28,18 @@ namespace BZP_Allergies.HarmonyPatches
 
         public override void receiveLeftClick(int x, int y, bool playSound = true)
         {
-            if (AllergyTab.containsPoint(x, y) && !OnAllergyTab)
+            if (AllergyTab.containsPoint(x, y))
             {
                 Game1.playSound("smallSelect");
-                AllergyTab.bounds.X += CollectionsPage.widthToMoveActiveTab;
-                OnAllergyTab = true;
+                if (!OnAllergyTab)
+                {
+                    AllergyTab.bounds.X += CollectionsPage.widthToMoveActiveTab;
+                }
+                else
+                {
+                    AllergyTab.bounds.X -= CollectionsPage.widthToMoveActiveTab;
+                }
+                OnAllergyTab = !OnAllergyTab;
             } 
             else
             {
@@ -46,12 +53,23 @@ namespace BZP_Allergies.HarmonyPatches
             {
                 Traverse.Create(this).Field("hoverText").SetValue(AllergyTab.hoverText);
             }
+            else
+            {
+                base.performHoverAction(x, y);
+            }
         }
 
         public override void draw(SpriteBatch b)
         {
             AllergyTab.draw(b);
-            base.draw(b);
+            if (OnAllergyTab)
+            {
+
+            }
+            else
+            {
+                base.draw(b);
+            }
         }
     }
 }

@@ -105,7 +105,6 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
-                Monitor.Log("here", LogLevel.Debug);
                 __instance.pages[1] = new AllergyMenu(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
             }
             catch (Exception ex)
