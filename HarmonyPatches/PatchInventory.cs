@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Microsoft.Xna.Framework.Graphics;
+using BZP_Allergies.HarmonyPatches.UI;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -105,7 +105,7 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
-                __instance.pages[1] = new AllergyMenu(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
+                __instance.pages[1] = new PatchedSkillsPage(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
             }
             catch (Exception ex)
             {

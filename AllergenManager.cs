@@ -131,7 +131,7 @@ namespace BZP_Allergies
         {
             if (ModDataSetContains(modData, key, item)) return false;  // don't add duplicates
 
-            if (modData.TryGetValue(key, out string val) && val.Length > 0)
+            if (ModDataGet(modData, key, out string val) && val.Length > 0)
             {
                 modData[key] = val + "," + item.Replace(",", "");
             }
@@ -144,11 +144,22 @@ namespace BZP_Allergies
 
         public static ISet<string> ModDataSetGet(StardewValley.Mods.ModDataDictionary modData, string key)
         { 
-            if (modData.TryGetValue(key, out string val))
+            if (ModDataGet(modData, key, out string val))
             {
                 return val.Split(',').ToHashSet();
             }
             return new HashSet<string>();
+        }
+
+        public static bool ModDataGet(StardewValley.Mods.ModDataDictionary modData, string key, out string val)
+        {
+            if (modData.TryGetValue(key, out string datastr))
+            {
+                val = datastr;
+                return true;
+            }
+            val = "";
+            return false;
         }
 
         public static bool FarmerIsAllergic(string allergen)
