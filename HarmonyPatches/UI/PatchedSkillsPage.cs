@@ -28,8 +28,10 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 );
 
             Options = new(x, y, width, height);
-            
+
             // do we start random or not?
+            PopulateOptions(false);
+
             if (AllergenManager.ModDataGet(Game1.player.modData, "BarleyZP.BzpAllergies_Random", out string val))
             {
                 PopulateOptions(val == "true");
@@ -45,6 +47,27 @@ namespace BZP_Allergies.HarmonyPatches.UI
         {
             Options.options.Clear();  // get rid of the default settings
             Options.options.Add(new OptionsElement("My Allergies"));
+
+            string smallText = random ? "You currently have randomized allergies." : "You have selected allergens.";
+            Options.options.Add(new CustomSmallFontElement(smallText));
+
+            
+            if (random)
+            {
+                Options.options.Add(new CustomButtonPair("Reroll Allergies", "Switch to Selection", () => { }, AllergySelectionToggle));
+            }
+            else
+            {
+                Options.options.Add(new OptionsButton("Switch to Random", AllergySelectionToggle));
+            }
+        }
+
+        // precondition: Game1.player.modData has key "BarleyZP.BzpAllergies_Random"
+        private void AllergySelectionToggle()
+        {
+            bool currentlyRandom = Game1.player.modData["BarleyZP.BzpAllergies_Random"] == "true";
+            Game1.player.modData["BarleyZP.BzpAllergies_Random"] = currentlyRandom ? "false" : "true";
+            PopulateOptions(!currentlyRandom);
         }
 
         public override void receiveLeftClick(int x, int y, bool playSound = true)

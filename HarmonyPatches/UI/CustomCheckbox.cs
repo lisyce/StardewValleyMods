@@ -12,7 +12,6 @@ namespace BZP_Allergies.HarmonyPatches.UI
         public CustomCheckbox(string label, bool checkInit, Action<bool> onChange, int x = -1, int y = -1) : base(label, -2, x, y)
         {
             OnChange = onChange;
-
             this.isChecked = checkInit;
         }
 
