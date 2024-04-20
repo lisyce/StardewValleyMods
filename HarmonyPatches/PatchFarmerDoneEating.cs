@@ -74,7 +74,6 @@ namespace BZP_Allergies.HarmonyPatches
                     // discover allergies
                     foreach (string allergen in itemToEatAllergens)
                     {
-                        Monitor.Log(allergen, LogLevel.Debug);
                         if (DiscoverPlayerAllergy(allergen))
                         {
                             Game1.showGlobalMessage("You've learned more about your dietary restrictions.");

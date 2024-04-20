@@ -5,11 +5,11 @@ using StardewModdingAPI;
 
 namespace BZP_Allergies.HarmonyPatches.UI
 {
-    internal class CustomButtonPair : OptionsElement
+    internal class CustomOptionsButtonPair : OptionsElement
     {
         private OptionsButton btn1;
         private OptionsButton btn2;
-        public CustomButtonPair(string label1, string label2, Action action1, Action action2) : base("")
+        public CustomOptionsButtonPair(string label1, string label2, Action action1, Action action2) : base("")
         {
             btn1 = new(label1, action1);
             btn2 = new(label2, action2);

@@ -2,6 +2,7 @@
 using StardewModdingAPI;
 using System.Text.RegularExpressions;
 using StardewValley;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BZP_Allergies
 {
@@ -15,8 +16,8 @@ namespace BZP_Allergies
         public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
 
         public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
-        public static readonly string FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_DiscoveredPlayerAllergens";
-        public static readonly string FARMER_HAS_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_PlayerAllergens";
+        public static readonly string FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_DiscoveredAllergies";
+        public static readonly string FARMER_HAS_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_PlayerAllergies";
 
         public static readonly Dictionary<string, AllergenModel> ALLERGEN_DATA = new();
 
@@ -121,39 +122,40 @@ namespace BZP_Allergies
             return result;
         }
 
-        public static bool ModDataSetContains(StardewValley.Mods.ModDataDictionary modData, string key, string item)
+        public static bool ModDataSetContains(IHaveModData obj, string key, string item)
         {
-            return ModDataSetGet(modData, key).Contains(item);
+            return ModDataSetGet(obj, key).Contains(item);
         }
 
         // items cannot contain commas
-        public static bool ModDataSetAdd(StardewValley.Mods.ModDataDictionary modData, string key, string item)
+        public static bool ModDataSetAdd(IHaveModData obj, string key, string item)
         {
-            if (ModDataSetContains(modData, key, item)) return false;  // don't add duplicates
+            if (ModDataSetContains(obj, key, item)) return false;  // don't add duplicates
+            item = item.Replace(",", "");  // sanitize
 
-            if (ModDataGet(modData, key, out string val) && val.Length > 0)
+            if (ModDataGet(obj, key, out string val) && val.Length > 0)
             {
-                modData[key] = val + "," + item.Replace(",", "");
+                obj.modData[key] = val + "," + item;
             }
             else
             {
-                modData[key] = val;
+                obj.modData[key] = item;
             }
             return true;
         }
 
-        public static ISet<string> ModDataSetGet(StardewValley.Mods.ModDataDictionary modData, string key)
+        public static ISet<string> ModDataSetGet(IHaveModData obj, string key)
         { 
-            if (ModDataGet(modData, key, out string val))
+            if (ModDataGet(obj, key, out string val) && val.Length > 0)
             {
                 return val.Split(',').ToHashSet();
             }
             return new HashSet<string>();
         }
 
-        public static bool ModDataGet(StardewValley.Mods.ModDataDictionary modData, string key, out string val)
+        public static bool ModDataGet(IHaveModData obj, string key, out string val)
         {
-            if (modData.TryGetValue(key, out string datastr))
+            if (obj.modData.TryGetValue(key, out string datastr))
             {
                 val = datastr;
                 return true;
@@ -165,7 +167,7 @@ namespace BZP_Allergies
         public static bool FarmerIsAllergic(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
-            return ModDataSetContains(Game1.player.modData, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergen);
+            return ModDataSetContains(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergen);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
@@ -211,7 +213,7 @@ namespace BZP_Allergies
             {
                 
                 // try looking in the modData field for what the thing was crafted with
-                foreach (string allergen in ModDataSetGet(@object.modData, "BarleyZP.BzpAllergies_CookedWith"))
+                foreach (string allergen in ModDataSetGet(@object, "BarleyZP.BzpAllergies_CookedWith"))
                 {
                     result.Add(allergen);
                 }
@@ -297,12 +299,12 @@ namespace BZP_Allergies
 
         public static bool PlayerHasDiscoveredAllergy(string allergyId)
         {
-            return ModDataSetContains(Game1.player.modData, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+            return ModDataSetContains(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
         }
 
         public static bool DiscoverPlayerAllergy(string allergyId)
         {
-            return ModDataSetAdd(Game1.player.modData, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+            return ModDataSetAdd(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)

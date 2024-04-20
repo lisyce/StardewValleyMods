@@ -32,7 +32,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
             // do we start random or not?
             PopulateOptions(false);
 
-            if (AllergenManager.ModDataGet(Game1.player.modData, "BarleyZP.BzpAllergies_Random", out string val))
+            if (AllergenManager.ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val))
             {
                 PopulateOptions(val == "true");
             }
@@ -47,27 +47,65 @@ namespace BZP_Allergies.HarmonyPatches.UI
         {
             Options.options.Clear();  // get rid of the default settings
             Options.options.Add(new OptionsElement("My Allergies"));
+            string smallText = random ? "You have randomized allergies." : "You have selected allergens.";
+            Options.options.Add(new CustomOptionsSmallFontElement(smallText));
+            Options.options.Add(new CustomOptionsHorizontalLine());
 
-            string smallText = random ? "You currently have randomized allergies." : "You have selected allergens.";
-            Options.options.Add(new CustomSmallFontElement(smallText));
 
-            
             if (random)
             {
-                Options.options.Add(new CustomButtonPair("Reroll Allergies", "Switch to Selection", () => { }, AllergySelectionToggle));
+                
+                // get discovered allergies
+                ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY);
+                
+                if (discovered.Count == 0)
+                {
+                    // render 0 count message
+                    Options.options.Add(new CustomOptionsSmallFontElement("You haven't discovered any allergies yet."));
+                }
+                else
+                {
+                    // show all discovered messages
+                    foreach (string allergy in discovered)
+                    {
+                        string displayName = AllergenManager.GetAllergenDisplayName(allergy);
+                        Options.options.Add(new CustomOptionsSmallFontElement("- " + displayName));
+                    }
+                }
+
+                // if hint, show many discovered/total
+                if (ModEntry.Config.AllergenCountHint)
+                {
+                    ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY);
+                    string hintCountText = "You've discovered " + discovered.Count + "/" + has.Count + " of your allergies.";
+                    Options.options.Add(new CustomOptionsSmallFontElement(hintCountText));
+                }
+
+                Options.options.Add(new CustomOptionsHorizontalLine());
+                Options.options.Add(new CustomOptionsButtonPair("Reroll Allergies", "Switch to Selection", RerollAllergies, AllergySelectionToggle));
             }
             else
             {
+                Options.options.Add(new CustomOptionsHorizontalLine());
                 Options.options.Add(new OptionsButton("Switch to Random", AllergySelectionToggle));
             }
         }
 
-        // precondition: Game1.player.modData has key "BarleyZP.BzpAllergies_Random"
         private void AllergySelectionToggle()
         {
-            bool currentlyRandom = Game1.player.modData["BarleyZP.BzpAllergies_Random"] == "true";
+            bool currentlyRandom = false;
+            if (AllergenManager.ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val))
+            {
+                currentlyRandom = val == "true";
+            }
             Game1.player.modData["BarleyZP.BzpAllergies_Random"] = currentlyRandom ? "false" : "true";
+            Options.currentItemIndex = 0;
             PopulateOptions(!currentlyRandom);
+        }
+
+        private void RerollAllergies()
+        {
+
         }
 
         public override void receiveLeftClick(int x, int y, bool playSound = true)
