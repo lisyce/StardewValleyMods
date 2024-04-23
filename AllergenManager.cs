@@ -144,6 +144,18 @@ namespace BZP_Allergies
             return true;
         }
 
+        public static bool ModDataSetRemove(IHaveModData obj, string key, string item)
+        {
+            item = item.Replace(",", "");  // sanitize
+
+            ISet<string> currVal = ModDataSetGet(obj, key);
+            bool retVal = currVal.Remove(item);
+
+            obj.modData[key] = string.Join(',', currVal);
+
+            return retVal;
+        }
+
         public static ISet<string> ModDataSetGet(IHaveModData obj, string key)
         { 
             if (ModDataGet(obj, key, out string val) && val.Length > 0)
@@ -309,7 +321,14 @@ namespace BZP_Allergies
 
         public static void TogglePlayerHasAllergy(string allergyId, bool has)
         {
-            Monitor.Log(has.ToString(), LogLevel.Debug);
+            if (!has)
+            {
+                ModDataSetRemove(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergyId);
+            }
+            else
+            {
+                ModDataSetAdd(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergyId);
+            }
         }
 
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)

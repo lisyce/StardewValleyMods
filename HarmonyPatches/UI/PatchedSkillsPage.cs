@@ -94,7 +94,10 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 foreach (string id in allergenIds)
                 {
                     AllergenModel data = AllergenManager.ALLERGEN_DATA[id];
-                    CustomOptionsCheckbox checkbox = new(data.DisplayName, has.Contains(id), (val) => AllergenManager.TogglePlayerHasAllergy(id, val));
+                    CustomOptionsCheckbox checkbox = new(data.DisplayName, has.Contains(id), (val) => {
+                        AllergenManager.TogglePlayerHasAllergy(id, val);
+                        PopulateOptions(false);
+                        });
                     Options.options.Add(checkbox);
                 }
 
@@ -112,6 +115,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 currentlyRandom = val == "true";
             }
             Game1.player.modData["BarleyZP.BzpAllergies_Random"] = currentlyRandom ? "false" : "true";
+            Game1.player.modData[AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = "";
             Options.currentItemIndex = 0;
             PopulateOptions(!currentlyRandom);
         }
