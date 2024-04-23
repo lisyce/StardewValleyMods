@@ -74,10 +74,11 @@ namespace BZP_Allergies.HarmonyPatches
                     // discover allergies
                     foreach (string allergen in itemToEatAllergens)
                     {
-                        if (DiscoverPlayerAllergy(allergen))
+                        if (FarmerIsAllergic(allergen) && DiscoverPlayerAllergy(allergen))
                         {
                             Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
                             Game1.playSound("newArtifact");
+                            break;
                         }
                     }
                 }

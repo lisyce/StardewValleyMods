@@ -154,6 +154,12 @@ namespace BZP_Allergies.HarmonyPatches.UI
             AllergyTab.draw(b);
             if (OnAllergyTab)
             {
+                ClickableTextureComponent upArrowRef = Traverse.Create(Options).Field("upArrow").GetValue<ClickableTextureComponent>();
+                ClickableTextureComponent downArrowRef = Traverse.Create(Options).Field("downArrow").GetValue<ClickableTextureComponent>();
+
+                upArrowRef.visible = Options.options.Count > 7;
+                downArrowRef.visible = Options.options.Count > 7;
+
                 Options.draw(b);
             }
             else
