@@ -307,6 +307,11 @@ namespace BZP_Allergies
             return ModDataSetAdd(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
         }
 
+        public static void TogglePlayerHasAllergy(string allergyId, bool has)
+        {
+            Monitor.Log(has.ToString(), LogLevel.Debug);
+        }
+
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
         {
             ISet<string> result = new HashSet<string>();
