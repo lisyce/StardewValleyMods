@@ -316,7 +316,12 @@ namespace BZP_Allergies
 
         public static bool DiscoverPlayerAllergy(string allergyId)
         {
-            return ModDataSetAdd(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+            if (ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val) && val == "true")
+            {
+                return ModDataSetAdd(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+            }
+
+            return false;
         }
 
         public static void TogglePlayerHasAllergy(string allergyId, bool has)

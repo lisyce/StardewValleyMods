@@ -14,6 +14,8 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
+                bool randomAllergies = ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val) && val == "true";
+
                 if (!ModEntry.Config.HintBeforeEating || Game1.player.ActiveObject == null)
                 {
                     return;
@@ -28,7 +30,18 @@ namespace BZP_Allergies.HarmonyPatches
 
                 if (question.Equals(eatQuestion) || question.Equals(drinkQuestion))
                 {
-                    if (FarmerIsAllergic(Game1.player.ActiveObject))
+                    bool hasDiscoveredAtLeastOneAllergy = false;
+                    ISet<string> allergens = GetAllergensInObject(Game1.player.ActiveObject);
+                    foreach (string a in allergens)
+                    {
+                        if (PlayerHasDiscoveredAllergy(a))
+                        {
+                            hasDiscoveredAtLeastOneAllergy = true;
+                            break;
+                        }
+                    }
+
+                    if (FarmerIsAllergic(Game1.player.ActiveObject) && (!randomAllergies || (randomAllergies && hasDiscoveredAtLeastOneAllergy)))
                     {
                         question += " You are allergic to it!";
                     }
