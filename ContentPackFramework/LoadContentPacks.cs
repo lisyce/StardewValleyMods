@@ -58,7 +58,7 @@ namespace BZP_Allergies.ContentPackFramework
                     break;
                 }
 
-                AllergenManager.ALLERGEN_DATA.Add(allergenId, new(allergen.Name, pack.Manifest.UniqueID));
+                AllergenManager.ALLERGEN_DATA.Add(allergenId, new(allergen.Name, pack.Manifest.UniqueID, pack.Manifest.Name));
             }
 
             // allergen assignments

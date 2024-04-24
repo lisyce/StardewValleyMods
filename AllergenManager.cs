@@ -384,14 +384,16 @@ namespace BZP_Allergies
         public ISet<string> ObjectIds { get; }
         public ISet<string> ContextTags {  get; }
         public string DisplayName { get; }
-        public string? AddedByContentPack { get; }  // null if not added by any pack, otherwise unique Id of the pack
+        public string? AddedByContentPackId { get; }  // null if not added by any pack, otherwise unique Id of the pack
+        public string? AddedByContentPackName { get; }
 
-        public AllergenModel (string displayName, string? addedByContentPack = null)
+        public AllergenModel (string displayName, string? addedByContentPackId = null, string? addedByContentPackName = null)
         {
             ObjectIds = new HashSet<string>();
             ContextTags = new HashSet<string>();
             DisplayName = displayName;
-            AddedByContentPack = addedByContentPack;
+            AddedByContentPackId = addedByContentPackId;
+            AddedByContentPackName = addedByContentPackName;
         }
 
         public void AddObjectIds (IEnumerable<string> ids)

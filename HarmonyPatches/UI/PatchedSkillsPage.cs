@@ -13,17 +13,22 @@ namespace BZP_Allergies.HarmonyPatches.UI
         private readonly ClickableTextureComponent AllergyTab;
         private bool OnAllergyTab = false;
         private OptionsPage Options;
+        private Traverse HoverTextTraverse;
+        private Traverse UpArrowTraverse;
+        private Traverse DownArrowTraverse;
 
         public PatchedSkillsPage(int x, int y, int width, int height)
             : base(x, y, width, height)
         {
+            Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
+            
             AllergyTab = new(
                 "BarleyZP.BzpAllergies",
                 new Rectangle(xPositionOnScreen - 48, yPositionOnScreen + 64 * 2, 64, 64),
                 "",
                 "Allergies",
-                Game1.mouseCursors,
-                new Rectangle(640, 80, 16, 16),
+                sprites,
+                new Rectangle(64, 0, 16, 16),
                 4f
                 );
 
@@ -41,21 +46,25 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 PopulateOptions(false);
                 Game1.player.modData["BarleyZP.BzpAllergies_Random"] = "false";
             }
+
+            HoverTextTraverse = Traverse.Create(this).Field("hoverText");
+            UpArrowTraverse = Traverse.Create(Options).Field("upArrow");
+            DownArrowTraverse = Traverse.Create(Options).Field("downArrow");
         }
 
         private void PopulateOptions(bool random)
         {
-            Options.options.Clear();  // get rid of the default settings
-            Options.options.Add(new OptionsElement("My Allergies"));
-            string smallText = random ? "You have randomized allergies." : "You have selected allergens.";
-            Options.options.Add(new CustomOptionsSmallFontElement(smallText));
-            Options.options.Add(new CustomOptionsHorizontalLine());
+            Options.options.Clear();
 
+            Options.options.Add(new OptionsElement("My Allergies"));
+            
             ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY);
 
             if (random)
             {
-                
+                Options.options.Add(new CustomOptionsSmallFontElement("You have random allergies."));
+                Options.options.Add(new CustomOptionsHorizontalLine());
+
                 // get discovered allergies
                 ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY);
                 
@@ -86,6 +95,9 @@ namespace BZP_Allergies.HarmonyPatches.UI
             }
             else
             {
+                Options.options.Add(new CustomOptionsSmallFontElement("You have selected your allergies."));
+                Options.options.Add(new CustomOptionsHorizontalLine());
+
                 // get all the possible allergies
                 List<string> allergenIds = AllergenManager.ALLERGEN_DATA.Keys.ToList();
                 allergenIds.Sort(AllergySortKey);
@@ -94,10 +106,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 foreach (string id in allergenIds)
                 {
                     AllergenModel data = AllergenManager.ALLERGEN_DATA[id];
-                    CustomOptionsCheckbox checkbox = new(data.DisplayName, has.Contains(id), (val) => {
-                        AllergenManager.TogglePlayerHasAllergy(id, val);
-                        PopulateOptions(false);
-                        });
+                    CustomOptionsCheckbox checkbox = new(data.DisplayName, has.Contains(id),
+                        (val) => AllergenManager.TogglePlayerHasAllergy(id, val), data.AddedByContentPackName ?? "");
                     Options.options.Add(checkbox);
                 }
 
@@ -105,6 +115,10 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 Options.options.Add(new CustomOptionsHorizontalLine());
                 Options.options.Add(new OptionsButton("Switch to Random", AllergySelectionToggle));
             }
+
+            // reset scroll
+            Options.currentItemIndex = 0;
+            Traverse.Create(Options).Method("setScrollBarToCurrentIndex").GetValue();
         }
 
         private void AllergySelectionToggle()
@@ -116,7 +130,14 @@ namespace BZP_Allergies.HarmonyPatches.UI
             }
             Game1.player.modData["BarleyZP.BzpAllergies_Random"] = currentlyRandom ? "false" : "true";
             Game1.player.modData[AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = "";
-            Options.currentItemIndex = 0;
+            Game1.player.modData[AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY] = "";
+
+            // if we switch from selection to random, roll allergies
+            if (!currentlyRandom)
+            {
+                RerollAllergies();
+            }
+
             PopulateOptions(!currentlyRandom);
         }
 
@@ -128,8 +149,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
             if ((HasAllergens.Contains(a1) && HasAllergens.Contains(a2)) || (!HasAllergens.Contains(a1) && !HasAllergens.Contains(a2)))
             {
                 // now sort by content pack
-                string? a1Pack = AllergenManager.ALLERGEN_DATA[a1].AddedByContentPack;
-                string? a2Pack = AllergenManager.ALLERGEN_DATA[a2].AddedByContentPack;
+                string? a1Pack = AllergenManager.ALLERGEN_DATA[a1].AddedByContentPackId;
+                string? a2Pack = AllergenManager.ALLERGEN_DATA[a2].AddedByContentPackId;
                 if (a1Pack == a2Pack)
                 {
                     // sort by name
@@ -154,7 +175,10 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         private void RerollAllergies()
         {
-
+            List<string> newAllergies = AllergenManager.RollRandomKAllergies(ModEntry.Config.NumberRandomAllergies);
+            Game1.player.modData[AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = "";
+            Game1.player.modData[AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY] = string.Join(',', newAllergies);
+            PopulateOptions(true);
         }
 
         public override void receiveLeftClick(int x, int y, bool playSound = true)
@@ -165,12 +189,22 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 if (!OnAllergyTab)
                 {
                     AllergyTab.bounds.X += CollectionsPage.widthToMoveActiveTab;
+                    Options.currentItemIndex = 0;
                 }
                 else
                 {
                     AllergyTab.bounds.X -= CollectionsPage.widthToMoveActiveTab;
                 }
                 OnAllergyTab = !OnAllergyTab;
+
+                // re-populate the options to resort the checkboxes
+                bool currentlyRandom = false;
+                if (AllergenManager.ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val))
+                {
+                    currentlyRandom = val == "true";
+                }
+
+                PopulateOptions(currentlyRandom);
             }
             else if (OnAllergyTab)
             {
@@ -184,13 +218,31 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         public override void performHoverAction(int x, int y)
         {
+            HoverTextTraverse.SetValue("");
             if (AllergyTab.containsPoint(x, y))
             {
-                Traverse.Create(this).Field("hoverText").SetValue(AllergyTab.hoverText);
+                HoverTextTraverse.SetValue(AllergyTab.hoverText);
             }
             else if (OnAllergyTab)
             {
                 Options.performHoverAction(x, y);
+
+                // do any of the options have tooltip?
+                for (int i = 0; i < Options.optionSlots.Count; i++)
+                {
+                    ClickableComponent slot = Options.optionSlots[i];
+                    OptionsElement el = Options.options[Options.currentItemIndex + i];
+
+                    // are we in the left third of the slot (where the text probably is)?
+                    Rectangle shrunkBounds = new(slot.bounds.X, slot.bounds.Y, slot.bounds.Width / 3, slot.bounds.Height);
+                    bool inLeftThirdOfSlot = shrunkBounds.Contains(x, y);
+    
+                    if (inLeftThirdOfSlot && el is CustomOptionsCheckbox customEl && customEl.HoverText.Length > 0)
+                    {
+                        HoverTextTraverse.SetValue("From " + customEl.HoverText);
+                        break;
+                    }
+                }
             }
             else
             {
@@ -203,13 +255,17 @@ namespace BZP_Allergies.HarmonyPatches.UI
             AllergyTab.draw(b);
             if (OnAllergyTab)
             {
-                ClickableTextureComponent upArrowRef = Traverse.Create(Options).Field("upArrow").GetValue<ClickableTextureComponent>();
-                ClickableTextureComponent downArrowRef = Traverse.Create(Options).Field("downArrow").GetValue<ClickableTextureComponent>();
+                ClickableTextureComponent upArrowRef = UpArrowTraverse.GetValue<ClickableTextureComponent>();
+                ClickableTextureComponent downArrowRef = DownArrowTraverse.GetValue<ClickableTextureComponent>();
 
                 upArrowRef.visible = Options.options.Count > 7;
                 downArrowRef.visible = Options.options.Count > 7;
 
                 Options.draw(b);
+                if (HoverTextTraverse.GetValue<string>().Length > 0)
+                {
+                    IClickableMenu.drawHoverText(b, HoverTextTraverse.GetValue<string>(), Game1.smallFont, 0, 0, -1, null);
+                }
             }
             else
             {

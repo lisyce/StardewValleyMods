@@ -128,8 +128,7 @@ namespace BZP_Allergies
             string discoveredKey = FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY;
             string hasKey = FARMER_HAS_ALLERGIES_MODDATA_KEY;
 
-            modData[discoveredKey] = "";
-            modData[hasKey] = "dairy,shellfish";
+            modData.Clear();
         }
 
         private void ListAllergens(string command, string[] args) {
