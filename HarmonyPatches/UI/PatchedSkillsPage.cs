@@ -230,6 +230,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 // do any of the options have tooltip?
                 for (int i = 0; i < Options.optionSlots.Count; i++)
                 {
+                    if (Options.currentItemIndex + i >= Options.options.Count) continue;
+
                     ClickableComponent slot = Options.optionSlots[i];
                     OptionsElement el = Options.options[Options.currentItemIndex + i];
 
