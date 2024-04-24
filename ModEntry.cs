@@ -43,7 +43,6 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
-            modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
 
             // config
             Config = Helper.ReadConfig<ModConfigModel>();
@@ -118,17 +117,6 @@ namespace BZP_Allergies
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             NpcsThatReactedToday.Clear();
-        }
-
-
-        // TODO: get rid of this thing when you're done testing
-        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
-        {
-            StardewValley.Mods.ModDataDictionary modData = Game1.player.modData;
-            string discoveredKey = FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY;
-            string hasKey = FARMER_HAS_ALLERGIES_MODDATA_KEY;
-
-            modData.Clear();
         }
 
         private void ListAllergens(string command, string[] args) {

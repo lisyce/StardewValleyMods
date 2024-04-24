@@ -58,7 +58,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
             Options.options.Add(new OptionsElement("My Allergies"));
             
-            ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY);
+            ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
 
             if (random)
             {
@@ -66,7 +66,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 Options.options.Add(new CustomOptionsHorizontalLine());
 
                 // get discovered allergies
-                ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY);
+                ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player,Constants.ModDataDiscovered);
                 
                 if (discovered.Count == 0)
                 {
@@ -129,8 +129,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 currentlyRandom = val == "true";
             }
             Game1.player.modData["BarleyZP.BzpAllergies_Random"] = currentlyRandom ? "false" : "true";
-            Game1.player.modData[AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = "";
-            Game1.player.modData[AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY] = "";
+            Game1.player.modData[Constants.ModDataDiscovered] = "";
+            Game1.player.modData[Constants.ModDataHas] = "";
 
             // if we switch from selection to random, roll allergies
             if (!currentlyRandom)
@@ -145,7 +145,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
         private int AllergySortKey(string a1, string a2)
         {
             // first sort by whether they're checked
-            ISet<string> HasAllergens = AllergenManager.ModDataSetGet(Game1.player, AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY);
+            ISet<string> HasAllergens = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
             if ((HasAllergens.Contains(a1) && HasAllergens.Contains(a2)) || (!HasAllergens.Contains(a1) && !HasAllergens.Contains(a2)))
             {
                 // now sort by content pack
@@ -176,8 +176,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
         private void RerollAllergies()
         {
             List<string> newAllergies = AllergenManager.RollRandomKAllergies(ModEntry.Config.NumberRandomAllergies);
-            Game1.player.modData[AllergenManager.FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY] = "";
-            Game1.player.modData[AllergenManager.FARMER_HAS_ALLERGIES_MODDATA_KEY] = string.Join(',', newAllergies);
+            Game1.player.modData[Constants.ModDataDiscovered] = "";
+            Game1.player.modData[Constants.ModDataHas] = string.Join(',', newAllergies);
             PopulateOptions(true);
         }
 

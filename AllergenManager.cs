@@ -6,19 +6,25 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BZP_Allergies
 {
+    internal class Constants
+    {
+        public static readonly string ModDataRandom = "BarleyZP.BzpAllergies_Random";
+        public static readonly string ModDataDiscovered = "BarleyZP.BzpAllergies_DiscoveredAllergies";
+        public static readonly string ModDataHas = "BarleyZP.BzpAllergies_PlayerAllergies";
+
+        public static readonly string ReactionDebuff = "BarleyZP.BzpAllergies_allergic_debuff";
+        public static readonly string LactaseBuff = "BarleyZP.BzpAllergies_lactase_buff";
+
+        public static readonly string ReactionEventId = "BarleyZP.BzpAllergies_had_allergic_reaction";
+
+        public static readonly string AllergyReliefId = "BarleyZP.BzpAllergies_AllergyMedicine";
+        public static readonly string LactasePillsId = "BarleyZP.BzpAllergies_LactasePills";
+
+        public static readonly string NpcReactionDialogueKey = "BarleyZP.BzpAllergies_farmer_allergic_reaction";
+    }
+
     internal class AllergenManager : Initializable
     {
-        public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_allergic_reaction", ModEntry.MOD_ID);
-        public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
-        public static readonly string REACTION_EVENT = string.Format("{0}_had_allergic_reaction", ModEntry.MOD_ID);
-
-        public static readonly string ALLERGY_RELIEF_ID = string.Format("{0}_AllergyMedicine", ModEntry.MOD_ID);
-        public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
-
-        public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
-        public static readonly string FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_DiscoveredAllergies";
-        public static readonly string FARMER_HAS_ALLERGIES_MODDATA_KEY = "BarleyZP.BzpAllergies_PlayerAllergies";
-
         public static readonly Dictionary<string, AllergenModel> ALLERGEN_DATA = new();
 
         public static void InitDefault()
@@ -179,7 +185,7 @@ namespace BZP_Allergies
         public static bool FarmerIsAllergic(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
-            return ModDataSetContains(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergen);
+            return ModDataSetContains(Game1.player, Constants.ModDataHas, allergen);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
@@ -311,14 +317,14 @@ namespace BZP_Allergies
 
         public static bool PlayerHasDiscoveredAllergy(string allergyId)
         {
-            return ModDataSetContains(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+            return ModDataSetContains(Game1.player, Constants.ModDataDiscovered, allergyId);
         }
 
         public static bool DiscoverPlayerAllergy(string allergyId)
         {
-            if (ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val) && val == "true")
+            if (ModDataGet(Game1.player, Constants.ModDataRandom, out string val) && val == "true")
             {
-                return ModDataSetAdd(Game1.player, FARMER_DISCOVERED_ALLERGIES_MODDATA_KEY, allergyId);
+                return ModDataSetAdd(Game1.player, Constants.ModDataDiscovered, allergyId);
             }
 
             return false;
@@ -328,11 +334,11 @@ namespace BZP_Allergies
         {
             if (!has)
             {
-                ModDataSetRemove(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergyId);
+                ModDataSetRemove(Game1.player, Constants.ModDataHas, allergyId);
             }
             else
             {
-                ModDataSetAdd(Game1.player, FARMER_HAS_ALLERGIES_MODDATA_KEY, allergyId);
+                ModDataSetAdd(Game1.player, Constants.ModDataHas, allergyId);
             }
         }
 

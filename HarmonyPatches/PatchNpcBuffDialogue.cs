@@ -18,7 +18,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 // is the farmer having a reaction?
-                if (who.hasBuff(AllergenManager.ALLERIC_REACTION_DEBUFF))
+                if (who.hasBuff(Constants.ReactionDebuff))
                 {
                     Dialogue? reactionDialogue = GetNpcAllergicReactionDialogue(__instance, who);
                     if (reactionDialogue != null && !ModEntry.NpcsThatReactedToday.Contains(__instance.Name))
@@ -40,14 +40,14 @@ namespace BZP_Allergies.HarmonyPatches
         {
             if (who.isMarriedOrRoommates() && who.spouse == npc.Name)
             {
-                Dialogue? marriageDialogue = npc.tryToGetMarriageSpecificDialogue(AllergenManager.REACTION_DIALOGUE_KEY);
+                Dialogue? marriageDialogue = npc.tryToGetMarriageSpecificDialogue(Constants.NpcReactionDialogueKey);
                 if (marriageDialogue != null)
                 {
                     return marriageDialogue;
                 }
             }
             
-            return npc.TryGetDialogue(AllergenManager.REACTION_DIALOGUE_KEY);
+            return npc.TryGetDialogue(Constants.NpcReactionDialogueKey);
         }
     }
 }
