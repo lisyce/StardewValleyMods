@@ -43,6 +43,7 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
+            modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
 
             // config
             Config = Helper.ReadConfig<ModConfigModel>();
@@ -109,6 +110,31 @@ namespace BZP_Allergies
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
+        }
+
+        /// <inheritdoc cref="IGameLoopEvents.SaveLoaded"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        {
+            // make sure all the allergens the player "has" and "discovered" still exist
+            ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
+            ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+            foreach (string id in has)
+            {
+                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                {
+                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataHas, id);
+                }
+            }
+
+            foreach (string id in discovered)
+            {
+                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                {
+                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataDiscovered, id);
+                }
+            }
         }
 
         /// <inheritdoc cref="IGameLoopEvents.DayStarted"/>

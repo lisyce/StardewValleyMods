@@ -241,6 +241,10 @@ namespace BZP_Allergies
                     {
                         result.Add(allergenId);
                     }
+                    else
+                    {
+                        ModDataSetRemove(@object, Constants.ModDataCookedWith, allergenId);  // clean up for future
+                    }
                 }
             }
             // else: boring normal item
