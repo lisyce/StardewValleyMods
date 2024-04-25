@@ -11,6 +11,7 @@ namespace BZP_Allergies
         public static readonly string ModDataRandom = "BarleyZP.BzpAllergies_Random";
         public static readonly string ModDataDiscovered = "BarleyZP.BzpAllergies_DiscoveredAllergies";
         public static readonly string ModDataHas = "BarleyZP.BzpAllergies_PlayerAllergies";
+        public static readonly string ModDataCookedWith = "BarleyZP.BzpAllergies_CookedWith";
 
         public static readonly string ReactionDebuff = "BarleyZP.BzpAllergies_allergic_debuff";
         public static readonly string LactaseBuff = "BarleyZP.BzpAllergies_lactase_buff";
@@ -221,19 +222,25 @@ namespace BZP_Allergies
                     {
                         if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
                         {
-                            result.Add(tag.Split("_").Last());
+                            string allergenId = tag.Split("_").Last();
+                            if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                            {
+                                result.Add(allergenId);
+                            }
                         }
                     }
                 }
             }
             // special case: cooked item
-            else if (@object.modData.ContainsKey("BarleyZP.BzpAllergies_CookedWith"))
+            else if (@object.modData.ContainsKey(Constants.ModDataCookedWith))
             {
-                
                 // try looking in the modData field for what the thing was crafted with
-                foreach (string allergen in ModDataSetGet(@object, "BarleyZP.BzpAllergies_CookedWith"))
+                foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataCookedWith))
                 {
-                    result.Add(allergen);
+                    if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                    {
+                        result.Add(allergenId);
+                    }
                 }
             }
             // else: boring normal item
@@ -243,7 +250,11 @@ namespace BZP_Allergies
                 {
                     if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
                     {
-                        result.Add(tag.Split("_").Last());
+                        string allergenId = tag.Split("_").Last();
+                        if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                        {
+                            result.Add(allergenId);
+                        }
                     }
                 }
             }
