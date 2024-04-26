@@ -56,6 +56,7 @@ namespace BZP_Allergies
             modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);
             modHelper.ConsoleCommands.Add("bzpa_get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
             modHelper.ConsoleCommands.Add("bzpa_reload", "Reload all content packs.", ReloadPacks);
+            modHelper.ConsoleCommands.Add("bzpa_player_allergies", "Get the player's allergies.", GetPlayerAllergies);
         }
 
 
@@ -151,7 +152,7 @@ namespace BZP_Allergies
 
             foreach (var item in AllergenManager.ALLERGEN_DATA)
             {
-                result += "\n\t" + item.Key + ": " + item.Value.DisplayName;
+                result += "\n  " + item.Key + ": " + item.Value.DisplayName;
             }
 
             Monitor.Log(result, LogLevel.Info);
@@ -176,6 +177,20 @@ namespace BZP_Allergies
             LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
             Helper.GameContent.InvalidateCache("Data/Objects");
             Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
+        }
+
+        private void GetPlayerAllergies(string command, string[] args)
+        {
+            ISet<string> has = ModDataSetGet(Game1.player, Constants.ModDataHas);
+            ISet<string> discovered = ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+
+            string result = "\n{Allergen Id}: {Discovered}";
+            foreach (string a in has)
+            {
+                result += "\n  " + a + ": " + discovered.Contains(a);
+            }
+            
+            Monitor.Log(result, LogLevel.Info);
         }
     }
 }
