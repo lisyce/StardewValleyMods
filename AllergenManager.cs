@@ -2,92 +2,92 @@
 using StardewModdingAPI;
 using System.Text.RegularExpressions;
 using StardewValley;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BZP_Allergies
 {
+    internal class Constants
+    {
+        public static readonly string ModDataRandom = "BarleyZP.BzpAllergies_Random";
+        public static readonly string ModDataDiscovered = "BarleyZP.BzpAllergies_DiscoveredAllergies";
+        public static readonly string ModDataHas = "BarleyZP.BzpAllergies_PlayerAllergies";
+        public static readonly string ModDataCookedWith = "BarleyZP.BzpAllergies_CookedWith";
+
+        public static readonly string ReactionDebuff = "BarleyZP.BzpAllergies_allergic_debuff";
+        public static readonly string LactaseBuff = "BarleyZP.BzpAllergies_lactase_buff";
+
+        public static readonly string ReactionEventId = "BarleyZP.BzpAllergies_had_allergic_reaction";
+
+        public static readonly string AllergyReliefId = "BarleyZP.BzpAllergies_AllergyMedicine";
+        public static readonly string LactasePillsId = "BarleyZP.BzpAllergies_LactasePills";
+
+        public static readonly string NpcReactionDialogueKey = "BarleyZP.BzpAllergies_farmer_allergic_reaction";
+    }
+
     internal class AllergenManager : Initializable
     {
-        public static readonly string ALLERIC_REACTION_DEBUFF = string.Format("{0}_allergic_reaction", ModEntry.MOD_ID);
-        public static readonly string LACTASE_PILLS_BUFF = string.Format("{0}_buff_2", ModEntry.MOD_ID);
-        public static readonly string REACTION_EVENT = string.Format("{0}_had_allergic_reaction", ModEntry.MOD_ID);
+        public static readonly Dictionary<string, AllergenModel> ALLERGEN_DATA = new();
 
-        public static readonly string ALLERGY_RELIEF_ID = string.Format("{0}_AllergyMedicine", ModEntry.MOD_ID);
-        public static readonly string LACTASE_PILLS_ID = string.Format("{0}_LactasePills", ModEntry.MOD_ID);
-
-        public static readonly string REACTION_DIALOGUE_KEY = string.Format("{0}_farmer_allergic_reaction", ModEntry.MOD_ID);
-
-        public static Dictionary<string, ISet<string>> ALLERGEN_OBJECTS;
-
-        public static Dictionary<string, string> ALLERGEN_TO_DISPLAY_NAME;
-
-        public static Dictionary<string, ISet<string>> ALLERGEN_CONTEXT_TAGS;
-
-        public static Dictionary<string, ISet<string>> ALLERGEN_CONTENT_PACK;
-
-        public static void InitDefaultDicts()
+        public static void InitDefault()
         {
-            ALLERGEN_OBJECTS = new()
-            {
-                { "egg", new HashSet<string>{
+            ALLERGEN_DATA.Clear();
+
+            AllergenModel egg = new("Eggs");
+            egg.AddObjectIds(new HashSet<string>{
                     "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
                     "732"
-                }},
-                { "wheat", new HashSet<string>{
+                });
+            egg.AddTags(new HashSet<string> { "egg_item", "mayo_item", "large_egg_item" });
+            ALLERGEN_DATA["egg"] = egg;
+
+            AllergenModel wheat = new("Wheat");
+            wheat.AddObjectIds(new HashSet<string>{
                     "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
                     "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
                     "262", "346"
-                }},
-                { "fish", new HashSet<string>{
+                });
+            ALLERGEN_DATA["wheat"] = wheat;
+
+            AllergenModel fish = new("Fish");
+            fish.AddObjectIds(new HashSet<string>{
                     "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
                     "265", "445"
-                }},
-                { "shellfish", new HashSet<string>{
+                });
+            ALLERGEN_DATA["fish"] = fish;
+
+            AllergenModel shellfish = new("Shellfish");
+            shellfish.AddObjectIds(new HashSet<string>{
                     "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
                     "717", "718", "719", "720", "723", "716", "721", "722"
-                }},
-                { "treenuts", new HashSet<string>{
+                });
+            ALLERGEN_DATA["shellfish"] = shellfish;
+
+            AllergenModel treenuts = new("Tree Nuts");
+            treenuts.AddObjectIds(new HashSet<string>{
                     "239", "607", "408"
-                }},
-                { "dairy", new HashSet<string>{
+                });
+            ALLERGEN_DATA["treenuts"] = treenuts;
+
+            AllergenModel dairy = new("Dairy");
+            dairy.AddObjectIds(new HashSet<string>{
                     "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
                     "608", "727", "730", "904", "424", "426"
-                }},
-                { "mushroom", new HashSet<string>
-                {
+                });
+            dairy.AddTags(new HashSet<string> { "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" });
+            ALLERGEN_DATA["dairy"] = dairy;
+
+            AllergenModel mushroom = new("Mushrooms");
+            mushroom.AddObjectIds(new HashSet<string>{
                     "404", "205", "606", "218", "420", "422", "281", "257", "773", "851"
-                }}
-            };
-
-            ALLERGEN_TO_DISPLAY_NAME = new()
-            {
-                { "egg", "Eggs" },
-                { "wheat", "Wheat" },
-                { "fish", "Fish" },
-                { "shellfish", "Shellfish" },
-                { "treenuts", "Tree Nuts" },
-                { "dairy", "Dairy" },
-                { "mushroom", "Mushrooms" }
-            };
-
-            ALLERGEN_CONTEXT_TAGS = new()
-            {
-                { "egg", new HashSet<string>{ "egg_item", "mayo_item", "large_egg_item" } },
-                { "wheat", new HashSet<string>() },
-                { "fish", new HashSet<string>() },
-                { "shellfish", new HashSet<string>() },
-                { "treenuts", new HashSet<string>() },
-                { "dairy", new HashSet<string>{ "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" } },
-                { "mushroom", new HashSet<string>() }
-            };
-
-            ALLERGEN_CONTENT_PACK = new();
+                });
+            ALLERGEN_DATA["mushroom"] = mushroom;
         }
 
         public static void ThrowIfAllergenDoesntExist(string allergen)
         {
-            if (!ALLERGEN_TO_DISPLAY_NAME.ContainsKey(allergen))
+            if (!ALLERGEN_DATA.ContainsKey(allergen))
             {
-                throw new Exception("No allergen found named " + allergen.ToString());
+                throw new Exception("No allergen found with Id " + allergen.ToString());
             }
         }
 
@@ -106,7 +106,7 @@ namespace BZP_Allergies
         public static string GetAllergenDisplayName(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
-            return ALLERGEN_TO_DISPLAY_NAME[allergen];
+            return ALLERGEN_DATA[allergen].DisplayName;
         }
 
         public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
@@ -114,7 +114,7 @@ namespace BZP_Allergies
             ThrowIfAllergenDoesntExist(allergen);
 
             // labeled items
-            ISet<string> result = ALLERGEN_OBJECTS.GetValueOrDefault(allergen, new HashSet<string>());
+            ISet<string> result = ALLERGEN_DATA[allergen].ObjectIds;
 
             // fish special case
             if (allergen == "fish")
@@ -123,16 +123,70 @@ namespace BZP_Allergies
                 result.UnionWith(fishItems);
             }
 
-            ISet<string> items = GetItemsWithContextTags(ALLERGEN_CONTEXT_TAGS.GetValueOrDefault(allergen, new HashSet<string>()), data);
+            ISet<string> items = GetItemsWithContextTags(ALLERGEN_DATA[allergen].ContextTags, data);
             result.UnionWith(items);
 
             return result;
         }
 
+        public static bool ModDataSetContains(IHaveModData obj, string key, string item)
+        {
+            return ModDataSetGet(obj, key).Contains(item);
+        }
+
+        // items cannot contain commas
+        public static bool ModDataSetAdd(IHaveModData obj, string key, string item)
+        {
+            if (ModDataSetContains(obj, key, item)) return false;  // don't add duplicates
+            item = item.Replace(",", "");  // sanitize
+
+            if (ModDataGet(obj, key, out string val) && val.Length > 0)
+            {
+                obj.modData[key] = val + "," + item;
+            }
+            else
+            {
+                obj.modData[key] = item;
+            }
+            return true;
+        }
+
+        public static bool ModDataSetRemove(IHaveModData obj, string key, string item)
+        {
+            item = item.Replace(",", "");  // sanitize
+
+            ISet<string> currVal = ModDataSetGet(obj, key);
+            bool retVal = currVal.Remove(item);
+
+            obj.modData[key] = string.Join(',', currVal);
+
+            return retVal;
+        }
+
+        public static ISet<string> ModDataSetGet(IHaveModData obj, string key)
+        { 
+            if (ModDataGet(obj, key, out string val) && val.Length > 0)
+            {
+                return val.Split(',').ToHashSet();
+            }
+            return new HashSet<string>();
+        }
+
+        public static bool ModDataGet(IHaveModData obj, string key, out string val)
+        {
+            if (obj.modData.TryGetValue(key, out string datastr))
+            {
+                val = datastr;
+                return true;
+            }
+            val = "";
+            return false;
+        }
+
         public static bool FarmerIsAllergic(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
-            return ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false);
+            return ModDataSetContains(Game1.player, Constants.ModDataHas, allergen);
         }
 
         public static bool FarmerIsAllergic (StardewValley.Object @object)
@@ -168,18 +222,29 @@ namespace BZP_Allergies
                     {
                         if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
                         {
-                            result.Add(tag.Split("_").Last());
+                            string allergenId = tag.Split("_").Last();
+                            if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                            {
+                                result.Add(allergenId);
+                            }
                         }
                     }
                 }
             }
             // special case: cooked item
-            else if (@object.modData.TryGetValue("BarleyZP.BzpAllergies_CookedWith", out string cookedWith))
+            else if (@object.modData.ContainsKey(Constants.ModDataCookedWith))
             {
                 // try looking in the modData field for what the thing was crafted with
-                foreach (string allergen in cookedWith.Split(","))
+                foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataCookedWith))
                 {
-                    result.Add(allergen);
+                    if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                    {
+                        result.Add(allergenId);
+                    }
+                    else
+                    {
+                        ModDataSetRemove(@object, Constants.ModDataCookedWith, allergenId);  // clean up for future
+                    }
                 }
             }
             // else: boring normal item
@@ -189,7 +254,11 @@ namespace BZP_Allergies
                 {
                     if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
                     {
-                        result.Add(tag.Split("_").Last());
+                        string allergenId = tag.Split("_").Last();
+                        if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                        {
+                            result.Add(allergenId);
+                        }
                     }
                 }
             }
@@ -229,6 +298,65 @@ namespace BZP_Allergies
             return result;
         }
 
+        public static List<string> RollRandomKAllergies(int k)
+        {
+            Random random = new();
+
+            if (k == -1)
+            {
+                // generate k from binomial distribution with p = 0.5
+                k = 1;
+                
+                int trials = ALLERGEN_DATA.Count - 1;
+                for (int i = 0; i < trials; i++)
+                {
+                    if (random.NextDouble() < 0.5)
+                    {
+                        k++;
+                    }
+                }
+            }
+
+            // select k random allergens
+            List<string> result = new();
+            List<string> possibleAllergies = ALLERGEN_DATA.Keys.ToList();
+            for (int i = 0; i < k; i++)
+            {
+                int idx = random.Next(possibleAllergies.Count);
+                result.Add(possibleAllergies[idx]);
+                possibleAllergies.RemoveAt(idx);
+            }
+
+            return result;
+        }
+
+        public static bool PlayerHasDiscoveredAllergy(string allergyId)
+        {
+            return ModDataSetContains(Game1.player, Constants.ModDataDiscovered, allergyId);
+        }
+
+        public static bool DiscoverPlayerAllergy(string allergyId)
+        {
+            if (ModDataGet(Game1.player, Constants.ModDataRandom, out string val) && val == "true")
+            {
+                return ModDataSetAdd(Game1.player, Constants.ModDataDiscovered, allergyId);
+            }
+
+            return false;
+        }
+
+        public static void TogglePlayerHasAllergy(string allergyId, bool has)
+        {
+            if (!has)
+            {
+                ModDataSetRemove(Game1.player, Constants.ModDataHas, allergyId);
+            }
+            else
+            {
+                ModDataSetAdd(Game1.player, Constants.ModDataHas, allergyId);
+            }
+        }
+
         private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
         {
             ISet<string> result = new HashSet<string>();
@@ -243,7 +371,7 @@ namespace BZP_Allergies
             }
 
             // remove shellfish
-            ISet<string> shellfish = ALLERGEN_OBJECTS.GetValueOrDefault("shellfish", new HashSet<string>());
+            ISet<string> shellfish = ALLERGEN_DATA["shellfish"].ObjectIds;
             
             foreach (var item in data.Data)
             {
@@ -274,6 +402,40 @@ namespace BZP_Allergies
             }
 
             return result;
+        }
+    }
+
+    internal class AllergenModel
+    {
+        public ISet<string> ObjectIds { get; }
+        public ISet<string> ContextTags {  get; }
+        public string DisplayName { get; }
+        public string? AddedByContentPackId { get; }  // null if not added by any pack, otherwise unique Id of the pack
+        public string? AddedByContentPackName { get; }
+
+        public AllergenModel (string displayName, string? addedByContentPackId = null, string? addedByContentPackName = null)
+        {
+            ObjectIds = new HashSet<string>();
+            ContextTags = new HashSet<string>();
+            DisplayName = displayName;
+            AddedByContentPackId = addedByContentPackId;
+            AddedByContentPackName = addedByContentPackName;
+        }
+
+        public void AddObjectIds (IEnumerable<string> ids)
+        {
+            foreach (string id in ids)
+            {
+                ObjectIds.Add(id);
+            }
+        }
+
+        public void AddTags(IEnumerable<string> tags)
+        {
+            foreach (string tag in tags)
+            {
+                ContextTags.Add(tag);
+            }
         }
     }
 }

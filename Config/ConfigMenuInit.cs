@@ -7,78 +7,41 @@ namespace BZP_Allergies.Config
     {
         public static void SetupMenuUI(IGenericModConfigMenuApi configMenu, IManifest modManifest)
         {
-            // add a link to config
-            configMenu.AddPageLink(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
-
-            // switch to page
-            configMenu.AddPage(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
-
-            // add some config options
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "Farmer Allergies"
+                text: () => "General Settings"
             );
-            configMenu.AddParagraph(
+
+            configMenu.AddBoolOption(
                 mod: modManifest,
-                text: () => "Eating a food containing an allergen results in a loss of energy and debuffs. Both raw ingredients and derived items may cause reactions."
+                name: () => "Hints before eating",
+                tooltip: () => "Select to get a hint in the popup before you eat something to warn you of your allergies.",
+                getValue: () => ModEntry.Config.HintBeforeEating,
+                setValue: value => ModEntry.Config.HintBeforeEating = value
             );
 
-
-            List<string> mainAllergies = new()
-            {
-                "egg", "wheat", "fish", "shellfish", "treenuts", "dairy", "mushroom"
-            };
-            mainAllergies.Sort();
-
-            foreach (string id in mainAllergies)
-            {
-                string displayName = AllergenManager.GetAllergenDisplayName(id);
-                configMenu.AddBoolOption(
-                    mod: modManifest,
-                    name: () => displayName,
-                    tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => ModEntry.Config.Farmer.Allergies.GetValueOrDefault(id, false),
-                    setValue: value => ModEntry.Config.Farmer.Allergies[id] = value
-                );
-            }
-        }
-
-        public static void SetupContentPackConfig(IGenericModConfigMenuApi configMenu, IManifest modManifest, IContentPack pack)
-        {
-            // switch to farmer allergies page
-            configMenu.AddPage(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Farmer Allergies");
-
-            // add a link to config
-            configMenu.AddPageLink(modManifest, pack.Manifest.UniqueID, () => pack.Manifest.Name);
-
-            // switch to page
-            configMenu.AddPage(modManifest, pack.Manifest.UniqueID, () => "Farmer Allergies");
-
-            // add a link back
-            configMenu.AddPageLink(modManifest, "BarleyZP.BzpAllergies_Farmer", () => "Back");
-
-            // title
-            configMenu.AddSectionTitle(
+            configMenu.AddBoolOption(
                 mod: modManifest,
-                text: () => pack.Manifest.Name
+                name: () => "Random Allergy Count Hint",
+                tooltip: () => "Select to get a hint in allergy menu to see how many more allergies you haven't discovered.",
+                getValue: () => ModEntry.Config.AllergenCountHint,
+                setValue: value => ModEntry.Config.AllergenCountHint = value
             );
 
-            // register options
-            GenericAllergenConfig farmerConfig = ModEntry.Config.Farmer;
-            List<string> sortedAllergens = AllergenManager.ALLERGEN_CONTENT_PACK[pack.Manifest.UniqueID].ToList();
-            sortedAllergens.Sort();
+            configMenu.AddNumberOption(
+                mod: modManifest,
+                name: () => "Number of Random Allergies",
+                tooltip: () => "If you roll random allergies in-game, this determines how many you'll get.",
+                getValue: () => ModEntry.Config.NumberRandomAllergies,
+                setValue: value =>
+                {
+                    if (value < -1) value = -1;
+                    if (value > AllergenManager.ALLERGEN_DATA.Count) value = AllergenManager.ALLERGEN_DATA.Count;
+                    ModEntry.Config.NumberRandomAllergies = value;
+                }
+            );
 
-            foreach (var allergen in sortedAllergens)
-            {
-                string displayName = AllergenManager.GetAllergenDisplayName(allergen);
-                configMenu.AddBoolOption(
-                    mod: modManifest,
-                    name: () => displayName,
-                    tooltip: () => "Your farmer will be allergic to any foods containing " + displayName.ToLower() + ".",
-                    getValue: () => ModEntry.Config.Farmer.Allergies.GetValueOrDefault(allergen, false),
-                    setValue: value => ModEntry.Config.Farmer.Allergies[allergen] = value
-                );
-            }
+            configMenu.AddParagraph(modManifest, () => "Set to -1 for a random number of random allergies!");
         }
     }
 }

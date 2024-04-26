@@ -29,12 +29,14 @@ namespace BZP_Allergies.HarmonyPatches
 
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
+                    ISet<string> itemToEatAllergens = GetAllergensInObject(itemToEat);
                     // is it dairy and do we have the buff?
-                    if (itemToEat.HasContextTag(GetAllergenContextTag("dairy")) && __instance.hasBuff(LACTASE_PILLS_BUFF))
+                    if (itemToEatAllergens.Contains("dairy") && __instance.hasBuff(Constants.LactaseBuff))
                     {
                         HUDMessage lactaseProtectionMessage = new("Good thing you took your lactase!");
                         lactaseProtectionMessage.messageSubject = itemToEat;
                         Game1.addHUDMessage(lactaseProtectionMessage);
+                        Game1.playSound("jingle1");
                         return;
                     }
 
@@ -51,7 +53,7 @@ namespace BZP_Allergies.HarmonyPatches
 
                     BuffEffects effects = new(buffAttributesData);
 
-                    Buff reactionBuff = new(ALLERIC_REACTION_DEBUFF, "food", itemToEat.DisplayName,
+                    Buff reactionBuff = new(Constants.ReactionDebuff, "food", itemToEat.DisplayName,
                         120000, sprites, 2, effects,
                         true, "Allergic Reaction", "Probably shouldn't have eaten that...");
                     reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
@@ -69,17 +71,28 @@ namespace BZP_Allergies.HarmonyPatches
                     {
                         Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
                     }
+
+                    // discover allergies
+                    foreach (string allergen in itemToEatAllergens)
+                    {
+                        if (FarmerIsAllergic(allergen) && DiscoverPlayerAllergy(allergen))
+                        {
+                            Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                            Game1.playSound("newArtifact");
+                            break;
+                        }
+                    }
                 }
-                else if (itemToEat.QualifiedItemId.Equals("(O)" + ALLERGY_RELIEF_ID))
+                else if (itemToEat.QualifiedItemId.Equals("(O)" + Constants.AllergyReliefId))
                 {
                     // nausea is automatically removed. remove the reaction as well
-                    __instance.buffs.Remove(ALLERIC_REACTION_DEBUFF);
+                    __instance.buffs.Remove(Constants.ReactionDebuff);
                     
                 }
-                else if (itemToEat.QualifiedItemId.Equals("(O)" + LACTASE_PILLS_ID))
+                else if (itemToEat.QualifiedItemId.Equals("(O)" + Constants.LactasePillsId))
                 {
                     // get that dairy immunity
-                    Buff immuneBuff = new(LACTASE_PILLS_BUFF, "food", itemToEat.DisplayName,
+                    Buff immuneBuff = new(Constants.LactaseBuff, "food", itemToEat.DisplayName,
                         120000, sprites, 3, null,
                         false, "Dairy Immunity", "Quick, eat the cheese!");
 
@@ -103,7 +116,7 @@ namespace BZP_Allergies.HarmonyPatches
                 {
                     // change edibility back to original value
                     itemToEat.Edibility = __state;
-                }
+                }                
             }
             catch (Exception ex)
             {

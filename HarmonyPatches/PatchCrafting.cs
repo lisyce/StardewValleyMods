@@ -117,7 +117,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
                 if (val.Length > 0)
                 {
-                    PatchCreateItem.craftedObj.modData["BarleyZP.BzpAllergies_CookedWith"] = val.Trim(',');
+                    PatchCreateItem.craftedObj.modData[Constants.ModDataCookedWith] = val.Trim(',');
                 }
             }
             catch (Exception ex)

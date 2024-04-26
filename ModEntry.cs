@@ -19,7 +19,7 @@ namespace BZP_Allergies
     {
 
         private Harmony Harmony;
-        public static ModConfig Config;
+        public static ModConfigModel Config;
         private IModHelper ModHelper;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
@@ -37,18 +37,18 @@ namespace BZP_Allergies
             Initializable.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // allergen manager
-            AllergenManager.InitDefaultDicts();
+            AllergenManager.InitDefault();
 
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
+            modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
 
             // config
-            Config = Helper.ReadConfig<ModConfig>();
+            Config = Helper.ReadConfig<ModConfigModel>();
 
             // harmony patches
-
             Harmony = new(ModManifest.UniqueID);
             Harmony.PatchAll();
 
@@ -56,6 +56,7 @@ namespace BZP_Allergies
             modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);
             modHelper.ConsoleCommands.Add("bzpa_get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
             modHelper.ConsoleCommands.Add("bzpa_reload", "Reload all content packs.", ReloadPacks);
+            modHelper.ConsoleCommands.Add("bzpa_player_allergies", "Get the player's allergies.", GetPlayerAllergies);
         }
 
 
@@ -70,7 +71,7 @@ namespace BZP_Allergies
         {
             if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
             {
-                foreach (string a in ALLERGEN_TO_DISPLAY_NAME.Keys)
+                foreach (string a in ALLERGEN_DATA.Keys)
                 {
                     PatchObjects.AddAllergen(e, a);
                 }
@@ -100,19 +101,40 @@ namespace BZP_Allergies
             configMenu.Register(
                 mod: ModManifest,
                 reset: () => {
-                    Config = new ModConfig();
+                    Config = new ModConfigModel();
                 },
-                save: () => {
+                save: () =>
+                {
                     Helper.WriteConfig(Config);
-                    Config = Helper.ReadConfig<ModConfig>();
-                },
-                titleScreenOnly: false
+                    Config = Helper.ReadConfig<ModConfigModel>();
+                }
             );
 
             ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
-            foreach (IContentPack pack in Helper.ContentPacks.GetOwned())
+        }
+
+        /// <inheritdoc cref="IGameLoopEvents.SaveLoaded"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        {
+            // make sure all the allergens the player "has" and "discovered" still exist
+            ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
+            ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+            foreach (string id in has)
             {
-                ConfigMenuInit.SetupContentPackConfig(configMenu, ModManifest, pack);
+                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                {
+                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataHas, id);
+                }
+            }
+
+            foreach (string id in discovered)
+            {
+                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                {
+                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataDiscovered, id);
+                }
             }
         }
 
@@ -128,9 +150,9 @@ namespace BZP_Allergies
 
             string result = "\n{Allergen Id}: {Allergen Display Name}";
 
-            foreach (var item in AllergenManager.ALLERGEN_TO_DISPLAY_NAME)
+            foreach (var item in AllergenManager.ALLERGEN_DATA)
             {
-                result += "\n\t" + item.Key + ": " + item.Value;
+                result += "\n  " + item.Key + ": " + item.Value.DisplayName;
             }
 
             Monitor.Log(result, LogLevel.Info);
@@ -151,10 +173,24 @@ namespace BZP_Allergies
 
         private void ReloadPacks(string command, string[] args)
         {
-            AllergenManager.InitDefaultDicts();
+            AllergenManager.InitDefault();
             LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
             Helper.GameContent.InvalidateCache("Data/Objects");
             Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
+        }
+
+        private void GetPlayerAllergies(string command, string[] args)
+        {
+            ISet<string> has = ModDataSetGet(Game1.player, Constants.ModDataHas);
+            ISet<string> discovered = ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+
+            string result = "\n{Allergen Id}: {Discovered}";
+            foreach (string a in has)
+            {
+                result += "\n  " + a + ": " + discovered.Contains(a);
+            }
+            
+            Monitor.Log(result, LogLevel.Info);
         }
     }
 }

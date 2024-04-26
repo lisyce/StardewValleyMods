@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using Microsoft.Xna.Framework.Graphics;
+using BZP_Allergies.HarmonyPatches.UI;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -7,7 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using StardewValley.Menus;
+using Microsoft.Xna.Framework;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -90,6 +91,25 @@ namespace BZP_Allergies.HarmonyPatches
             catch (Exception ex)
             {
                 Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(GameMenu))]
+    [HarmonyPatch(MethodType.Constructor)]
+    [HarmonyPatch(new Type[] { typeof(bool) })]
+    internal class PatchGameMenuConstructor : Initializable
+    {
+        [HarmonyPostfix]
+        static void Constructor_Postfix(GameMenu __instance)
+        {
+            try
+            {
+                __instance.pages[1] = new PatchedSkillsPage(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
+            }
+            catch (Exception ex)
+            {
+                Monitor.Log($"Failed in {nameof(Constructor_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
