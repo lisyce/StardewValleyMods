@@ -1,7 +1,7 @@
 {
   "Name": "BarleyZP Allergies [CP]",
   "Author": "BarleyZP",
-  "Version": "1.2.1",
+  "Version": "1.3.0",
   "Description": "BarleyZP's Allergy Mod Content Patcher Component",
   "UniqueID": "BarleyZP.BzpAllergies.CP",
   "MinimumApiVersion": "3.8.0",
@@ -15,26 +15,8 @@
       "IsRequired": true
     },
     {
-      "Name": "BarleyZP Allergies [CP]",
-      "Author": "BarleyZP",
-      "Version": "1.2.1",
-      "Description": "BarleyZP's Allergy Mod Content Patcher Component",
-      "UniqueID": "BarleyZP.BzpAllergies.CP",
-      "MinimumApiVersion": "3.8.0",
-      "UpdateKeys": [ "Nexus:21238'" ],
-      "ContentPackFor": {
-        "UniqueID": "Pathoschild.ContentPatcher"
-      },
-      "Dependencies": [
-        {
-          "UniqueID": "Pathoschild.ContentPatcher",
-          "IsRequired": true
-        },
-        {
-          "UniqueID": "spacechase0.SpaceCore",
-          "IsRequired": true
-        }
-      ]
+      "UniqueID": "spacechase0.SpaceCore",
+      "IsRequired": true
     }
   ]
 }

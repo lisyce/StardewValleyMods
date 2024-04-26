@@ -20,6 +20,24 @@
       }
     },
     {
+      "LogName": "Recipes",
+      "Action": "EditData",
+      "Target": "Data/CookingRecipes",
+      "Entries": {
+        "BarleyZP.BzpAllergies_PlantMilk": "423 1/BarleyZP.BzpAllergies_PlantMilk/default/"
+      }
+    },
+    {
+      "LogName": "Category Overrides",
+      "Action": "EditData",
+      "Target": "spacechase0.SpaceCore/ObjectExtensionData",
+      "Entries": {
+        "BarleyZP.BzpAllergies_PlantMilk": {
+          "CategoryTextOverride": ""
+        }
+      }
+    },
+    {
       "LogName": "Add custom objects",
       "Action": "EditData",
       "Target": "Data/Objects",
@@ -72,33 +90,31 @@
             "color_blue"
           ],
           "CustomFields": null
+        },
+        "BarleyZP.BzpAllergies_PlantMilk": {
+          "Name": "Plant Milk",
+          "DisplayName": "Plant Milk",
+          "Description": "A dairy-free alternative for cooking.",
+          "Type": "Cooking",
+          "Category": -6,
+          "Price": 150,
+          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 1,
+          "Edibility": 20,
+          "IsDrink": true,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "color_white"
+          ],
+          "CustomFields": null
         }
-      },
-      "BarleyZP.BzpAllergies_PlantMilk": {
-        "Name": "Plant Milk",
-        "DisplayName": "Plant Milk",
-        "Description": "A dairy-free alternative for cooking.",
-        "Type": "Crafting",
-        "Category": -6,
-        "Price": 150,
-        "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
-        "SpriteIndex": 1,
-        "Edibility": 20,
-        "IsDrink": false,
-        "Buffs": null,
-        "GeodeDropsDefaultItems": false,
-        "GeodeDrops": null,
-        "ArtifactSpotChances": null,
-        "ExcludeFromFishingCollection": false,
-        "ExcludeFromShippingCollection": false,
-        "ExcludeFromRandomSale": false,
-        "ContextTags": [
-          "medicine_item",
-          "color_blue"
-        ],
-        "CustomFields": null
       }
-    }
     },
     {
       "LogName": "Add custom mail",
