@@ -24,7 +24,7 @@ namespace BZP_Allergies
         public static readonly string NpcReactionDialogueKey = "BarleyZP.BzpAllergies_farmer_allergic_reaction";
     }
 
-    internal class AllergenManager : Initializable
+    internal class AllergenManager
     {
         public static readonly Dictionary<string, AllergenModel> ALLERGEN_DATA = new();
 

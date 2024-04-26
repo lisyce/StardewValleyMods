@@ -18,9 +18,11 @@ namespace BZP_Allergies
     internal sealed class ModEntry : Mod
     {
 
+        public static ModEntry Instance { get; private set; }
+
         private Harmony Harmony;
-        public static ModConfigModel Config;
-        private IModHelper ModHelper;
+        public ModConfigModel Config;
+        public IModHelper ModHelper;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -33,8 +35,9 @@ namespace BZP_Allergies
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper modHelper)
         {
+            Instance = this;
+
             ModHelper = modHelper;
-            Initializable.Initialize(Monitor, ModHelper.GameContent, ModHelper.ModContent);
 
             // allergen manager
             AllergenManager.InitDefault();

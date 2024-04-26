@@ -21,7 +21,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
             this.bounds = new(bounds.X, bounds.Y, newWidth, bounds.Height);
         }
 
-        public override void draw(SpriteBatch b, int slotX, int slotY, IClickableMenu context = null)
+        public override void draw(SpriteBatch b, int slotX, int slotY, IClickableMenu? context = null)
         {
             btn1.draw(b, slotX, slotY, context);
             btn2.draw(b, slotX, slotY, context);

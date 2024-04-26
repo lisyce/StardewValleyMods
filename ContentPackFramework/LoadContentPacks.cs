@@ -3,16 +3,16 @@ using StardewModdingAPI;
 
 namespace BZP_Allergies.ContentPackFramework
 {
-    internal class LoadContentPacks : Initializable
+    internal class LoadContentPacks
     {
         public static void LoadPacks(IEnumerable<IContentPack> packs, ModConfigModel config)
         {
             foreach (IContentPack contentPack in packs)
             {
-                Monitor.Log($"Reading content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Info);
+                ModEntry.Instance.Monitor.Log($"Reading content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Info);
                 if (!ProcessPack(contentPack, config))
                 {
-                    Monitor.Log($"Unable to read content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Error);
+                    ModEntry.Instance.Monitor.Log($"Unable to read content pack: {contentPack.Manifest.Name} {contentPack.Manifest.Version}", LogLevel.Error);
                 }
             }
         }
@@ -29,14 +29,14 @@ namespace BZP_Allergies.ContentPackFramework
             if (content == null)
             {
                 // show 'required file missing' error
-                Monitor.Log("Pack is missing a content.json, or it is empty.", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log("Pack is missing a content.json, or it is empty.", LogLevel.Error);
                 return false;
             }
 
             // check format
             if (content.Format == null || !content.Format.Equals("1.0.0"))
             {
-                Monitor.Log("Valid content format was not specified. Valid formats are: \"1.0.0\"", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log("Valid content format was not specified. Valid formats are: \"1.0.0\"", LogLevel.Error);
                 return false;
             }
 
@@ -48,13 +48,13 @@ namespace BZP_Allergies.ContentPackFramework
 
                 if (allergen.Name == null)
                 {
-                    Monitor.Log("No Name was specified for allergen with Id " + allergenId, LogLevel.Error);
+                    ModEntry.Instance.Monitor.Log("No Name was specified for allergen with Id " + allergenId, LogLevel.Error);
                     return false;
                 }
 
                 if (AllergenManager.ALLERGEN_DATA.ContainsKey(allergenId))
                 {
-                    Monitor.Log("Allergen with Id " + allergenId + " already exists. Skipping...", LogLevel.Warn);
+                    ModEntry.Instance.Monitor.Log("Allergen with Id " + allergenId + " already exists. Skipping...", LogLevel.Warn);
                     break;
                 }
 
@@ -69,7 +69,7 @@ namespace BZP_Allergies.ContentPackFramework
 
                 if (allergenId == null)
                 {
-                    Monitor.Log("No AllergenId was specified for allergen assignment with Id " + allergenId, LogLevel.Error);
+                    ModEntry.Instance.Monitor.Log("No AllergenId was specified for allergen assignment with Id " + allergenId, LogLevel.Error);
                     return false;
                 }
 

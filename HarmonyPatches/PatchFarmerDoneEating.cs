@@ -10,7 +10,7 @@ using static BZP_Allergies.AllergenManager;
 namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(Farmer), nameof(Farmer.doneEating))]
-    internal class PatchFarmerDoneEating : Initializable
+    internal class PatchFarmerDoneEating
     {
 
         [HarmonyPrefix]
@@ -101,7 +101,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(DoneEating_Prefix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(DoneEating_Prefix)}:\n{ex}", LogLevel.Error);
                 __state = int.MinValue;  // error value
             }
         }
@@ -120,7 +120,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(DoneEating_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(DoneEating_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }

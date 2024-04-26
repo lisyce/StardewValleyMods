@@ -21,7 +21,7 @@ namespace BZP_Allergies.HarmonyPatches
 
 
     [HarmonyPatch(typeof(CraftingRecipe), "createItem")]
-    internal class PatchCreateItem : Initializable
+    internal class PatchCreateItem
     {
         public static StardewValley.Object? craftedObj = null;
 
@@ -40,13 +40,13 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(CreateItem_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CreateItem_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
 
     [HarmonyPatch(typeof(CraftingRecipe), "consumeIngredients")]
-    internal class PatchConsumeIngredients : Initializable
+    internal class PatchConsumeIngredients
     {
 
         [HarmonyPrefix]
@@ -66,7 +66,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(ConsumeIngredients_Prefix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(ConsumeIngredients_Prefix)}:\n{ex}", LogLevel.Error);
                 __state = null;
             }
         }
@@ -122,7 +122,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(ConsumeIngredients_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(ConsumeIngredients_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
 
