@@ -73,7 +73,32 @@
           ],
           "CustomFields": null
         }
+      },
+      "BarleyZP.BzpAllergies_PlantMilk": {
+        "Name": "Plant Milk",
+        "DisplayName": "Plant Milk",
+        "Description": "A dairy-free alternative for cooking.",
+        "Type": "Crafting",
+        "Category": -6,
+        "Price": 150,
+        "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+        "SpriteIndex": 1,
+        "Edibility": 20,
+        "IsDrink": false,
+        "Buffs": null,
+        "GeodeDropsDefaultItems": false,
+        "GeodeDrops": null,
+        "ArtifactSpotChances": null,
+        "ExcludeFromFishingCollection": false,
+        "ExcludeFromShippingCollection": false,
+        "ExcludeFromRandomSale": false,
+        "ContextTags": [
+          "medicine_item",
+          "color_blue"
+        ],
+        "CustomFields": null
       }
+    }
     },
     {
       "LogName": "Add custom mail",
