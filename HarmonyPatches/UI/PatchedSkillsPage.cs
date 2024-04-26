@@ -84,7 +84,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 }
 
                 // if hint, show many discovered/total
-                if (ModEntry.Config.AllergenCountHint)
+                if (ModEntry.Instance.Config.AllergenCountHint)
                 {
                     string hintCountText = "You've discovered " + discovered.Count + "/" + has.Count + " of your allergies.";
                     Options.options.Add(new CustomOptionsSmallFontElement(hintCountText));
@@ -175,7 +175,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         private void RerollAllergies()
         {
-            List<string> newAllergies = AllergenManager.RollRandomKAllergies(ModEntry.Config.NumberRandomAllergies);
+            List<string> newAllergies = AllergenManager.RollRandomKAllergies(ModEntry.Instance.Config.NumberRandomAllergies);
             Game1.player.modData[Constants.ModDataDiscovered] = "";
             Game1.player.modData[Constants.ModDataHas] = string.Join(',', newAllergies);
             PopulateOptions(true);

@@ -7,7 +7,7 @@ using static BZP_Allergies.AllergenManager;
 namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) })]
-    internal class PatchEatQuestionPopup : Initializable
+    internal class PatchEatQuestionPopup
     {
         [HarmonyPrefix]
         static void CreateQuestionDialogue_Prefix(ref string question)
@@ -16,13 +16,13 @@ namespace BZP_Allergies.HarmonyPatches
             {
                 bool randomAllergies = ModDataGet(Game1.player, "BarleyZP.BzpAllergies_Random", out string val) && val == "true";
 
-                if (!ModEntry.Config.HintBeforeEating || Game1.player.ActiveObject == null)
+                if (!ModEntry.Instance.Config.HintBeforeEating || Game1.player.ActiveObject == null)
                 {
                     return;
                 }
 
                 // is this the "Eat {0}?" or "Drink {0}?" popup?
-                IDictionary<string, string> stringsData = GameContent.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
+                IDictionary<string, string> stringsData = ModEntry.Instance.ModHelper.GameContent.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
                 
                 string activeObjectName = Game1.player.ActiveObject.DisplayName;
                 string eatQuestion = string.Format(stringsData["Game1.cs.3160"], activeObjectName);
@@ -49,7 +49,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(CreateQuestionDialogue_Prefix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CreateQuestionDialogue_Prefix)}:\n{ex}", LogLevel.Error);
             }
         }
     }

@@ -16,28 +16,28 @@ namespace BZP_Allergies.Config
                 mod: modManifest,
                 name: () => "Hints before eating",
                 tooltip: () => "Select to get a hint in the popup before you eat something to warn you of your allergies.",
-                getValue: () => ModEntry.Config.HintBeforeEating,
-                setValue: value => ModEntry.Config.HintBeforeEating = value
+                getValue: () => ModEntry.Instance.Config.HintBeforeEating,
+                setValue: value => ModEntry.Instance.Config.HintBeforeEating = value
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
                 name: () => "Random Allergy Count Hint",
                 tooltip: () => "Select to get a hint in allergy menu to see how many more allergies you haven't discovered.",
-                getValue: () => ModEntry.Config.AllergenCountHint,
-                setValue: value => ModEntry.Config.AllergenCountHint = value
+                getValue: () => ModEntry.Instance.Config.AllergenCountHint,
+                setValue: value => ModEntry.Instance.Config.AllergenCountHint = value
             );
 
             configMenu.AddNumberOption(
                 mod: modManifest,
                 name: () => "Number of Random Allergies",
                 tooltip: () => "If you roll random allergies in-game, this determines how many you'll get.",
-                getValue: () => ModEntry.Config.NumberRandomAllergies,
+                getValue: () => ModEntry.Instance.Config.NumberRandomAllergies,
                 setValue: value =>
                 {
                     if (value < -1) value = -1;
                     if (value > AllergenManager.ALLERGEN_DATA.Count) value = AllergenManager.ALLERGEN_DATA.Count;
-                    ModEntry.Config.NumberRandomAllergies = value;
+                    ModEntry.Instance.Config.NumberRandomAllergies = value;
                 }
             );
 

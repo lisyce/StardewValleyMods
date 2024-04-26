@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(StardewValley.Object), "getDescription")]
-    internal class PatchTooltip : Initializable
+    internal class PatchTooltip
     {
         [HarmonyPostfix]
         static void GetDescription_Postfix(StardewValley.Object __instance, ref string __result)
@@ -52,13 +52,13 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(GetDescription_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(GetDescription_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
 
     [HarmonyPatch(typeof(Item), "canStackWith")]
-    internal class PatchCanStack : Initializable
+    internal class PatchCanStack
     {
         [HarmonyPostfix]
         static void CanStackWith_Postfix(ISalable other, StardewValley.Item __instance, ref bool __result)
@@ -90,7 +90,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
@@ -98,7 +98,7 @@ namespace BZP_Allergies.HarmonyPatches
     [HarmonyPatch(typeof(GameMenu))]
     [HarmonyPatch(MethodType.Constructor)]
     [HarmonyPatch(new Type[] { typeof(bool) })]
-    internal class PatchGameMenuConstructor : Initializable
+    internal class PatchGameMenuConstructor
     {
         [HarmonyPostfix]
         static void Constructor_Postfix(GameMenu __instance)
@@ -109,7 +109,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(Constructor_Postfix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(Constructor_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }

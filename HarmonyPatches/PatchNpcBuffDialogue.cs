@@ -5,7 +5,7 @@ using StardewValley;
 namespace BZP_Allergies.HarmonyPatches
 {
     [HarmonyPatch(typeof(NPC), nameof(NPC.checkAction))]
-    internal class PatchNpcBuffDialogue : Initializable
+    internal class PatchNpcBuffDialogue
     {
         [HarmonyPrefix]
         static void CheckAction_Prefix(ref NPC __instance, ref Farmer who)
@@ -31,7 +31,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             catch (Exception ex)
             {
-                Monitor.Log($"Failed in {nameof(CheckAction_Prefix)}:\n{ex}", LogLevel.Error);
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CheckAction_Prefix)}:\n{ex}", LogLevel.Error);
             }
 
         }
