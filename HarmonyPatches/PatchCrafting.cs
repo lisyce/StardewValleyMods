@@ -115,10 +115,7 @@ namespace BZP_Allergies.HarmonyPatches
                         val += allergen + ",";
                     }
                 }
-                if (val.Length > 0)
-                {
-                    PatchCreateItem.craftedObj.modData[Constants.ModDataCookedWith] = val.Trim(',');
-                }
+                PatchCreateItem.craftedObj.modData[Constants.ModDataCookedWith] = val.Trim(',');
             }
             catch (Exception ex)
             {
