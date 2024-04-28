@@ -6,6 +6,7 @@ namespace BZP_Allergies.AssetPatches
 {
     internal sealed class PatchObjects
     {
+        private static List<string> PlantMilkItems = new() { "423", "408", "88" };
 
         public static void AddAllergen(AssetRequestedEventArgs e, string allergen)
         {
@@ -30,5 +31,23 @@ namespace BZP_Allergies.AssetPatches
             }
         }
 
+        public static void AddAlternativeIngredientTags(AssetRequestedEventArgs e)
+        {
+            if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
+            {
+                e.Edit(asset =>
+                {
+                    var editor = asset.AsDictionary<string, ObjectData>();
+
+                    foreach (string id in PlantMilkItems)
+                    {
+                        editor.Data[id].ContextTags ??= new List<string>();
+                        editor.Data[id].ContextTags.Add("BarleyZP.BzpAllergies_PlantMilkIngredient");
+                    }                    
+                },
+                AssetEditPriority.Late
+                );
+            }
+        }
     }
 }

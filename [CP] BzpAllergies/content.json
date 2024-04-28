@@ -24,7 +24,7 @@
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
       "Entries": {
-        "BarleyZP.BzpAllergies_PlantMilk": "423 1/BarleyZP.BzpAllergies_PlantMilk/default/"
+        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/"
       }
     },
     {
@@ -34,6 +34,27 @@
       "Entries": {
         "BarleyZP.BzpAllergies_PlantMilk": {
           "CategoryTextOverride": ""
+        }
+      }
+    },
+    {
+      "LogName": "Plant milk ingredient context tag recipe",
+      "Action": "EditData",
+      "Target": "spacechase0.SpaceCore/CookingRecipeOverrides",
+      "Entries": {
+        "BarleyZP.BzpAllergies_PlantMilk": {
+          "ProductQualifiedId": "(O)BarleyZP.BzpAllergies_PlantMilk",
+          "ProductAmount": 1,
+          "Ingredients": [
+            {
+              "Type": "ContextTag",
+              "Value": "BarleyZP.BzpAllergies_PlantMilkIngredient",
+              "Amount": 1,
+              "OverrideText": "Plant Milk Item (Any)",
+              "OverrideTexturePath": "Mods/BarleyZP.BzpAllergies/Sprites",
+              "OverrideTextureRect": "new(96,0,16,16)"
+            }
+          ]
         }
       }
     },

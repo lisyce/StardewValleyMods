@@ -4,6 +4,7 @@ using BZP_Allergies.Config;
 using BZP_Allergies.ContentPackFramework;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
@@ -78,6 +79,7 @@ namespace BZP_Allergies
                 {
                     PatchObjects.AddAllergen(e, a);
                 }
+                PatchObjects.AddAlternativeIngredientTags(e);
             }
             else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
             {
