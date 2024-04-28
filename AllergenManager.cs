@@ -1,8 +1,7 @@
-﻿using StardewValley.GameData.Objects;
-using StardewModdingAPI;
-using System.Text.RegularExpressions;
+﻿using StardewModdingAPI;
 using StardewValley;
-using Microsoft.Xna.Framework.Graphics;
+using StardewValley.GameData.Objects;
+using System.Text.RegularExpressions;
 
 namespace BZP_Allergies
 {
@@ -91,42 +90,10 @@ namespace BZP_Allergies
             }
         }
 
-        public static string GetAllergenContextTag(string allergen)
-        {
-            ThrowIfAllergenDoesntExist(allergen);
-            return ModEntry.MOD_ID + "_allergen_" + allergen.ToLower();
-        }
-
-        public static string GetMadeWithContextTag(string allergen)
-        {
-            ThrowIfAllergenDoesntExist(allergen);
-            return ModEntry.MOD_ID + "_made_with_id_" + allergen.ToLower();
-        }
-
         public static string GetAllergenDisplayName(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
             return ALLERGEN_DATA[allergen].DisplayName;
-        }
-
-        public static ISet<string> GetObjectsWithAllergen(string allergen, IAssetDataForDictionary<string, ObjectData> data)
-        {
-            ThrowIfAllergenDoesntExist(allergen);
-
-            // labeled items
-            ISet<string> result = ALLERGEN_DATA[allergen].ObjectIds;
-
-            // fish special case
-            if (allergen == "fish")
-            {
-                ISet<string> fishItems = GetFishItems(data);
-                result.UnionWith(fishItems);
-            }
-
-            ISet<string> items = GetItemsWithContextTags(ALLERGEN_DATA[allergen].ContextTags, data);
-            result.UnionWith(items);
-
-            return result;
         }
 
         public static bool ModDataSetContains(IHaveModData obj, string key, string item)
@@ -214,21 +181,11 @@ namespace BZP_Allergies
             // special case: preserves item
             List<StardewValley.Object> madeFrom = TryGetMadeFromObjects(@object);
 
-            if (madeFrom.Count > 0)
+            if (madeFrom.Any())
             {
                 foreach (StardewValley.Object madeFromObj in madeFrom)
                 {
-                    foreach (var tag in madeFromObj.GetContextTags())
-                    {
-                        if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
-                        {
-                            string allergenId = tag.Split("_").Last();
-                            if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
-                            {
-                                result.Add(allergenId);
-                            }
-                        }
-                    }
+                    result.UnionWith(GetAllergensInObject(madeFromObj));
                 }
             }
             // special case: cooked item
@@ -250,16 +207,27 @@ namespace BZP_Allergies
             // else: boring normal item
             else
             {
-                foreach (var tag in @object.GetContextTags())
+                foreach (var allergenData in ALLERGEN_DATA)
                 {
-                    if (tag.StartsWith(ModEntry.MOD_ID + "_allergen_"))
+                    // do we have this allergen?
+                    if (allergenData.Value.ObjectIds.Contains(@object.ItemId))
                     {
-                        string allergenId = tag.Split("_").Last();
-                        if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
-                        {
-                            result.Add(allergenId);
-                        }
+                        result.Add(allergenData.Key);
                     }
+
+                    // are any of this objects context tags in the context tags for the allergen?
+                    if (allergenData.Value.ContextTags.Intersect(@object.GetContextTags()).Any())
+                    {
+                        result.Add(allergenData.Key);
+                    }
+                }
+
+                // is it fish category (-4) and NOT a shellfish?
+                if (@object.Category == StardewValley.Object.FishCategory &&
+                    !ALLERGEN_DATA["shellfish"].ObjectIds.Contains(@object.ItemId) &&
+                    !ALLERGEN_DATA["shellfish"].ContextTags.Intersect(@object.GetContextTags()).Any())
+                {
+                    result.Add("fish");
                 }
             }
 
@@ -355,53 +323,6 @@ namespace BZP_Allergies
             {
                 ModDataSetAdd(Game1.player, Constants.ModDataHas, allergyId);
             }
-        }
-
-        private static ISet<string> GetFishItems (IAssetDataForDictionary<string, ObjectData> data)
-        {
-            ISet<string> result = new HashSet<string>();
-
-            foreach (var item in data.Data)
-            {
-                ObjectData v = item.Value;
-                if (v.Category == StardewValley.Object.FishCategory)
-                {
-                    result.Add(item.Key);
-                }
-            }
-
-            // remove shellfish
-            ISet<string> shellfish = ALLERGEN_DATA["shellfish"].ObjectIds;
-            
-            foreach (var item in data.Data)
-            {
-                List<string> tags = item.Value.ContextTags ?? new();
-                if (shellfish.Contains(item.Key) || tags.Contains(GetAllergenContextTag("shellfish")))
-                {
-                    result.Remove(item.Key);
-                }
-            }
-
-            return result;
-        }
-
-        private static ISet<string> GetItemsWithContextTags (ISet<string> tags, IAssetDataForDictionary<string, ObjectData> data)
-        {
-            ISet<string> result = new HashSet<string>();
-
-            foreach (var item in data.Data)
-            {
-                ObjectData v = item.Value;
-                foreach (string tag in tags)
-                {
-                    if (v.ContextTags != null && v.ContextTags.Contains(tag))
-                    {
-                        result.Add(item.Key);
-                    }
-                }
-            }
-
-            return result;
         }
     }
 
