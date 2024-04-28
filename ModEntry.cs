@@ -1,8 +1,6 @@
 ﻿using BZP_Allergies.Apis;
-using BZP_Allergies.AssetPatches;
 using BZP_Allergies.Config;
 using BZP_Allergies.ContentPackFramework;
-using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -73,15 +71,7 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Data/Objects"))
-            {
-                foreach (string a in ALLERGEN_DATA.Keys)
-                {
-                    PatchObjects.AddAllergen(e, a);
-                }
-                PatchObjects.AddAlternativeIngredientTags(e);
-            }
-            else if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
+            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
             }
@@ -180,7 +170,6 @@ namespace BZP_Allergies
         {
             AllergenManager.InitDefault();
             LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
-            Helper.GameContent.InvalidateCache("Data/Objects");
             Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
         }
 
