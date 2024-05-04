@@ -56,13 +56,15 @@ namespace BZP_Allergies
             Harmony = new(ModManifest.UniqueID);
             Harmony.Patch(
                 original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem)),
-                postfix: new HarmonyMethod(typeof(PatchCreateItem), nameof(PatchCreateItem.CreateItem_Postfix))
+                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
             );
             Harmony.Patch(
                 original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.consumeIngredients)),
-                prefix: new HarmonyMethod(typeof(PatchConsumeIngredients), nameof(PatchConsumeIngredients.ConsumeIngredients_Prefix)),
-                postfix: new HarmonyMethod(typeof(PatchConsumeIngredients), nameof(PatchConsumeIngredients.ConsumeIngredients_Postfix))
+                prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Prefix)) { before = new string[] { "spacechase0.SpaceCore" } },
+                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Postfix))
             );
+
+
             Harmony.Patch(
                 original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) }),
                 prefix: new HarmonyMethod(typeof(PatchEatQuestionPopup), nameof(PatchEatQuestionPopup.CreateQuestionDialogue_Prefix))

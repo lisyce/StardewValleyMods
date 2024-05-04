@@ -18,7 +18,7 @@ namespace BZP_Allergies.HarmonyPatches
     }
 
 
-    internal class PatchCreateItem
+    internal class CraftingPatches
     {
         public static StardewValley.Object? craftedObj = null;
 
@@ -39,16 +39,13 @@ namespace BZP_Allergies.HarmonyPatches
                 ModEntry.Instance.Monitor.Log($"Failed in {nameof(CreateItem_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
-    }
 
-    internal class PatchConsumeIngredients
-    {
         public static void ConsumeIngredients_Prefix(out Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
         {
             ModEntry.Instance.Monitor.Log("consume", LogLevel.Debug);
             try
             {
-                if (PatchCreateItem.craftedObj == null)
+                if (craftedObj == null)
                 {
                     __state = null;
                     return;
@@ -68,7 +65,7 @@ namespace BZP_Allergies.HarmonyPatches
         {
             try
             {
-                if (PatchCreateItem.craftedObj == null)
+                if (craftedObj == null)
                 {
                     return;
                 }
@@ -95,7 +92,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 // what allergens did we cook this with?
-                PatchCreateItem.craftedObj.modData[Constants.ModDataMadeWith] = "";
+                craftedObj.modData[Constants.ModDataMadeWith] = "";
                 foreach (InventoryData item in usedItems)
                 {
                     if (item == null || item.Item == null) continue;
@@ -104,7 +101,7 @@ namespace BZP_Allergies.HarmonyPatches
                     ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
                     foreach (string allergen in allergens)
                     {
-                        AllergenManager.ModDataSetAdd(PatchCreateItem.craftedObj, Constants.ModDataMadeWith, allergen);
+                        AllergenManager.ModDataSetAdd(craftedObj, Constants.ModDataMadeWith, allergen);
                     }
                 }
             }

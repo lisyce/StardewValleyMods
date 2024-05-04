@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using BZP_Allergies.HarmonyPatches.UI;
+﻿using BZP_Allergies.HarmonyPatches.UI;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
