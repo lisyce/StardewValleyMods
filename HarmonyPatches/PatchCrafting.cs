@@ -103,7 +103,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 // what allergens did we cook this with?
-                PatchCreateItem.craftedObj.modData[Constants.ModDataCookedWith] = "";
+                PatchCreateItem.craftedObj.modData[Constants.ModDataMadeWith] = "";
                 foreach (InventoryData item in usedItems)
                 {
                     if (item == null || item.Item == null) continue;
@@ -112,7 +112,7 @@ namespace BZP_Allergies.HarmonyPatches
                     ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
                     foreach (string allergen in allergens)
                     {
-                        AllergenManager.ModDataSetAdd(PatchCreateItem.craftedObj, Constants.ModDataCookedWith, allergen);
+                        AllergenManager.ModDataSetAdd(PatchCreateItem.craftedObj, Constants.ModDataMadeWith, allergen);
                     }
                 }
             }

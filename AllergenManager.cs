@@ -10,7 +10,7 @@ namespace BZP_Allergies
         public static readonly string ModDataRandom = "BarleyZP.BzpAllergies_Random";
         public static readonly string ModDataDiscovered = "BarleyZP.BzpAllergies_DiscoveredAllergies";
         public static readonly string ModDataHas = "BarleyZP.BzpAllergies_PlayerAllergies";
-        public static readonly string ModDataCookedWith = "BarleyZP.BzpAllergies_CookedWith";
+        public static readonly string ModDataMadeWith = "BarleyZP.BzpAllergies_MadeWith";
 
         public static readonly string ReactionDebuff = "BarleyZP.BzpAllergies_allergic_debuff";
         public static readonly string LactaseBuff = "BarleyZP.BzpAllergies_lactase_buff";
@@ -190,11 +190,11 @@ namespace BZP_Allergies
                     result.UnionWith(GetAllergensInObject(madeFromObj));
                 }
             }
-            // special case: cooked item
-            else if (@object.modData.ContainsKey(Constants.ModDataCookedWith))
+            // special case: cooked/milled/crafted (etc) item
+            else if (@object.modData.ContainsKey(Constants.ModDataMadeWith))
             {
                 // try looking in the modData field for what the thing was crafted with
-                foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataCookedWith))
+                foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataMadeWith))
                 {
                     if (ALLERGEN_DATA_ASSET.ContainsKey(allergenId))  // allergy still exists
                     {
@@ -202,7 +202,7 @@ namespace BZP_Allergies
                     }
                     else
                     {
-                        ModDataSetRemove(@object, Constants.ModDataCookedWith, allergenId);  // clean up for future
+                        ModDataSetRemove(@object, Constants.ModDataMadeWith, allergenId);  // clean up for future
                     }
                 }
             }
