@@ -27,6 +27,8 @@ namespace BZP_Allergies
     {
         public static readonly Dictionary<string, AllergenModel> ALLERGEN_DATA = new();
 
+        public static Dictionary<string, AllergenModel> ALLERGEN_DATA_ASSET => Game1.content.Load<Dictionary<string, AllergenModel>>("BarleyZP.BzpAllergies/AllergyData");
+
         public static void InitDefault()
         {
             ALLERGEN_DATA.Clear();
@@ -84,7 +86,7 @@ namespace BZP_Allergies
 
         public static void ThrowIfAllergenDoesntExist(string allergen)
         {
-            if (!ALLERGEN_DATA.ContainsKey(allergen))
+            if (!ALLERGEN_DATA_ASSET.ContainsKey(allergen))
             {
                 throw new Exception("No allergen found with Id " + allergen.ToString());
             }
@@ -93,7 +95,7 @@ namespace BZP_Allergies
         public static string GetAllergenDisplayName(string allergen)
         {
             ThrowIfAllergenDoesntExist(allergen);
-            return ALLERGEN_DATA[allergen].DisplayName;
+            return ALLERGEN_DATA_ASSET[allergen].DisplayName;
         }
 
         public static bool ModDataSetContains(IHaveModData obj, string key, string item)
@@ -194,7 +196,7 @@ namespace BZP_Allergies
                 // try looking in the modData field for what the thing was crafted with
                 foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataCookedWith))
                 {
-                    if (ALLERGEN_DATA.ContainsKey(allergenId))  // allergy still exists
+                    if (ALLERGEN_DATA_ASSET.ContainsKey(allergenId))  // allergy still exists
                     {
                         result.Add(allergenId);
                     }
@@ -207,7 +209,7 @@ namespace BZP_Allergies
             // else: boring normal item
             else
             {
-                foreach (var allergenData in ALLERGEN_DATA)
+                foreach (var allergenData in ALLERGEN_DATA_ASSET)
                 {
                     // do we have this allergen?
                     if (allergenData.Value.ObjectIds.Contains(@object.ItemId))
@@ -224,8 +226,8 @@ namespace BZP_Allergies
 
                 // is it fish category (-4) and NOT a shellfish?
                 if (@object.Category == StardewValley.Object.FishCategory &&
-                    !ALLERGEN_DATA["shellfish"].ObjectIds.Contains(@object.ItemId) &&
-                    !ALLERGEN_DATA["shellfish"].ContextTags.Intersect(@object.GetContextTags()).Any())
+                    !ALLERGEN_DATA_ASSET["shellfish"].ObjectIds.Contains(@object.ItemId) &&
+                    !ALLERGEN_DATA_ASSET["shellfish"].ContextTags.Intersect(@object.GetContextTags()).Any())
                 {
                     result.Add("fish");
                 }
@@ -275,7 +277,7 @@ namespace BZP_Allergies
                 // generate k from binomial distribution with p = 0.5
                 k = 1;
                 
-                int trials = ALLERGEN_DATA.Count - 1;
+                int trials = ALLERGEN_DATA_ASSET.Count - 1;
                 for (int i = 0; i < trials; i++)
                 {
                     if (random.NextDouble() < 0.5)
@@ -287,7 +289,7 @@ namespace BZP_Allergies
 
             // select k random allergens
             List<string> result = new();
-            List<string> possibleAllergies = ALLERGEN_DATA.Keys.ToList();
+            List<string> possibleAllergies = ALLERGEN_DATA_ASSET.Keys.ToList();
             for (int i = 0; i < k; i++)
             {
                 int idx = random.Next(possibleAllergies.Count);
@@ -331,16 +333,15 @@ namespace BZP_Allergies
         public ISet<string> ObjectIds { get; }
         public ISet<string> ContextTags {  get; }
         public string DisplayName { get; }
-        public string? AddedByContentPackId { get; }  // null if not added by any pack, otherwise unique Id of the pack
-        public string? AddedByContentPackName { get; }
 
-        public AllergenModel (string displayName, string? addedByContentPackId = null, string? addedByContentPackName = null)
+        public string? AddedByContentPackId { get; }
+
+        public AllergenModel (string displayName, string? addedByContentPackId = null)
         {
             ObjectIds = new HashSet<string>();
             ContextTags = new HashSet<string>();
             DisplayName = displayName;
             AddedByContentPackId = addedByContentPackId;
-            AddedByContentPackName = addedByContentPackName;
         }
 
         public void AddObjectIds (IEnumerable<string> ids)

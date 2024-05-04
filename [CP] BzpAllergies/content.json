@@ -24,7 +24,7 @@
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
       "Entries": {
-        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/"
+        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/Plant Milk"
       }
     },
     {
@@ -50,9 +50,14 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_PlantMilkIngredient",
               "Amount": 1,
-              "OverrideText": "Plant Milk Item (Any)",
-              "OverrideTexturePath": "Mods/BarleyZP.BzpAllergies/Sprites",
-              "OverrideTextureRect": "new(96,0,16,16)"
+              "OverrideText": "Milk Substitute",
+              "OverrideTexturePath": "BarleyZP.BzpAllergies/Sprites",
+              "OverrideTextureRect": {
+                "X": 96,
+                "Y": 0,
+                "Width": 16,
+                "Height": 16
+              }
             }
           ]
         }
@@ -70,7 +75,7 @@
           "Type": "Crafting",
           "Category": 0,
           "Price": 500,
-          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
           "SpriteIndex": 0,
           "Edibility": 20,
           "IsDrink": true,
@@ -95,7 +100,7 @@
           "Type": "Crafting",
           "Category": 0,
           "Price": 500,
-          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
           "SpriteIndex": 1,
           "Edibility": 20,
           "IsDrink": false,
@@ -119,7 +124,7 @@
           "Type": "Cooking",
           "Category": -6,
           "Price": 150,
-          "Texture": "Mods/BarleyZP.BzpAllergies/Sprites",
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
           "SpriteIndex": 5,
           "Edibility": 20,
           "IsDrink": true,

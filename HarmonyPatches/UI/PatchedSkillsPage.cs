@@ -20,7 +20,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
         public PatchedSkillsPage(int x, int y, int width, int height)
             : base(x, y, width, height)
         {
-            Texture2D sprites = Game1.content.Load<Texture2D>("Mods/BarleyZP.BzpAllergies/Sprites");
+            Texture2D sprites = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
             
             AllergyTab = new(
                 "BarleyZP.BzpAllergies",
@@ -99,15 +99,23 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 Options.options.Add(new CustomOptionsHorizontalLine());
 
                 // get all the possible allergies
-                List<string> allergenIds = AllergenManager.ALLERGEN_DATA.Keys.ToList();
+                List<string> allergenIds = AllergenManager.ALLERGEN_DATA_ASSET.Keys.ToList();
                 allergenIds.Sort(AllergySortKey);
 
                 // render the checkboxes
                 foreach (string id in allergenIds)
                 {
-                    AllergenModel data = AllergenManager.ALLERGEN_DATA[id];
+                    AllergenModel data = AllergenManager.ALLERGEN_DATA_ASSET[id];
+                    string addedBy = "";
+                    if (data.AddedByContentPackId != null)
+                    {
+                        IModInfo modInfo = ModEntry.Instance.Helper.ModRegistry.Get(data.AddedByContentPackId);
+                        addedBy = modInfo.Manifest.Name;
+                    }
+                    
+
                     CustomOptionsCheckbox checkbox = new(data.DisplayName, has.Contains(id),
-                        (val) => AllergenManager.TogglePlayerHasAllergy(id, val), data.AddedByContentPackName ?? "");
+                        (val) => AllergenManager.TogglePlayerHasAllergy(id, val), addedBy);
                     Options.options.Add(checkbox);
                 }
 
@@ -149,8 +157,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
             if ((HasAllergens.Contains(a1) && HasAllergens.Contains(a2)) || (!HasAllergens.Contains(a1) && !HasAllergens.Contains(a2)))
             {
                 // now sort by content pack
-                string? a1Pack = AllergenManager.ALLERGEN_DATA[a1].AddedByContentPackId;
-                string? a2Pack = AllergenManager.ALLERGEN_DATA[a2].AddedByContentPackId;
+                string? a1Pack = AllergenManager.ALLERGEN_DATA_ASSET[a1].AddedByContentPackId;
+                string? a2Pack = AllergenManager.ALLERGEN_DATA_ASSET[a2].AddedByContentPackId;
                 if (a1Pack == a2Pack)
                 {
                     // sort by name

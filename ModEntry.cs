@@ -1,9 +1,9 @@
 ﻿using BZP_Allergies.Apis;
 using BZP_Allergies.Config;
-using BZP_Allergies.ContentPackFramework;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceCore.VanillaAssetExpansion;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
@@ -57,7 +57,6 @@ namespace BZP_Allergies
             // console commands
             modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);
             modHelper.ConsoleCommands.Add("bzpa_get_held_allergens", "Get the allergens of the currently-held item.", GetAllergensOfHeldItem);
-            modHelper.ConsoleCommands.Add("bzpa_reload", "Reload all content packs.", ReloadPacks);
             modHelper.ConsoleCommands.Add("bzpa_player_allergies", "Get the player's allergies.", GetPlayerAllergies);
         }
 
@@ -71,10 +70,15 @@ namespace BZP_Allergies
         /// <param name="e">The event data.</param>
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("Mods/BarleyZP.BzpAllergies/Sprites"))
+            if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.BzpAllergies/Sprites"))
             {
                 e.LoadFromModFile<Texture2D>(PathUtilities.NormalizePath(@"assets/Sprites.png"), AssetLoadPriority.Medium);
             }
+            else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.BzpAllergies/AllergyData"))
+            {
+                e.LoadFrom(() => AllergenManager.ALLERGEN_DATA, AssetLoadPriority.Low);
+            }
+                
         }
 
         /// <inheritdoc cref="IGameLoopEvents.GameLaunched"/>
@@ -88,9 +92,6 @@ namespace BZP_Allergies
                 Monitor.Log("No mod config menu API found.", LogLevel.Debug);
                 return;
             }
-
-            // content packs
-            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
 
             // config
             configMenu.Register(
@@ -118,7 +119,7 @@ namespace BZP_Allergies
             ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
             foreach (string id in has)
             {
-                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                if (!AllergenManager.ALLERGEN_DATA_ASSET.ContainsKey(id))
                 {
                     AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataHas, id);
                 }
@@ -126,7 +127,7 @@ namespace BZP_Allergies
 
             foreach (string id in discovered)
             {
-                if (!AllergenManager.ALLERGEN_DATA.ContainsKey(id))
+                if (!AllergenManager.ALLERGEN_DATA_ASSET.ContainsKey(id))
                 {
                     AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataDiscovered, id);
                 }
@@ -145,7 +146,7 @@ namespace BZP_Allergies
 
             string result = "\n{Allergen Id}: {Allergen Display Name}";
 
-            foreach (var item in AllergenManager.ALLERGEN_DATA)
+            foreach (var item in AllergenManager.ALLERGEN_DATA_ASSET)
             {
                 result += "\n  " + item.Key + ": " + item.Value.DisplayName;
             }
@@ -164,13 +165,6 @@ namespace BZP_Allergies
             }
 
             Monitor.Log(string.Join(", ", result), LogLevel.Info);
-        }
-
-        private void ReloadPacks(string command, string[] args)
-        {
-            AllergenManager.InitDefault();
-            LoadContentPacks.LoadPacks(Helper.ContentPacks.GetOwned(), Config);
-            Helper.GameContent.InvalidateCache(asset => asset.NameWithoutLocale.StartsWith("Characters/Dialogue/"));
         }
 
         private void GetPlayerAllergies(string command, string[] args)

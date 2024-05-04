@@ -36,7 +36,7 @@ namespace BZP_Allergies.Config
                 setValue: value =>
                 {
                     if (value < -1) value = -1;
-                    if (value > AllergenManager.ALLERGEN_DATA.Count) value = AllergenManager.ALLERGEN_DATA.Count;
+                    if (value > AllergenManager.ALLERGEN_DATA_ASSET.Count) value = AllergenManager.ALLERGEN_DATA_ASSET.Count;
                     ModEntry.Instance.Config.NumberRandomAllergies = value;
                 }
             );

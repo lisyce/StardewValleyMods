@@ -3,12 +3,7 @@ using BZP_Allergies.HarmonyPatches.UI;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using StardewValley.Menus;
-using Microsoft.Xna.Framework;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -61,7 +56,7 @@ namespace BZP_Allergies.HarmonyPatches
     internal class PatchCanStack
     {
         [HarmonyPostfix]
-        static void CanStackWith_Postfix(ISalable other, StardewValley.Item __instance, ref bool __result)
+        static void CanStackWith_Postfix(ISalable other, Item __instance, ref bool __result)
         {
             try
             {
