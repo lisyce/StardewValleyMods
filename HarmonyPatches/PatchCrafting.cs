@@ -2,8 +2,6 @@
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
-using System.Text;
-using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -20,13 +18,11 @@ namespace BZP_Allergies.HarmonyPatches
     }
 
 
-    [HarmonyPatch(typeof(CraftingRecipe), "createItem")]
     internal class PatchCreateItem
     {
         public static StardewValley.Object? craftedObj = null;
 
-        [HarmonyPostfix]
-        static void CreateItem_Postfix(ref Item __result)
+        public static void CreateItem_Postfix(ref Item __result)
         {
             try
             {
@@ -45,14 +41,11 @@ namespace BZP_Allergies.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(CraftingRecipe), "consumeIngredients")]
     internal class PatchConsumeIngredients
     {
-
-        [HarmonyPrefix]
-        [HarmonyBefore(new string[]{ "spacechase0.SpaceCore" })]
-        static void ConsumeIngredients_Prefix(out Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
+        public static void ConsumeIngredients_Prefix(out Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
         {
+            ModEntry.Instance.Monitor.Log("consume", LogLevel.Debug);
             try
             {
                 if (PatchCreateItem.craftedObj == null)
@@ -71,8 +64,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
         }
 
-        [HarmonyPostfix]
-        static void ConsumeIngredients_Postfix(Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
+        public static void ConsumeIngredients_Postfix(Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
         {
             try
             {

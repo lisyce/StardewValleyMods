@@ -9,12 +9,9 @@ using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    [HarmonyPatch(typeof(Farmer), nameof(Farmer.doneEating))]
     internal class PatchFarmerDoneEating
     {
-
-        [HarmonyPrefix]
-        static void DoneEating_Prefix(ref Farmer __instance, out int __state)
+        public static void DoneEating_Prefix(ref Farmer __instance, out int __state)
         {
             try
             {
@@ -105,9 +102,7 @@ namespace BZP_Allergies.HarmonyPatches
                 __state = int.MinValue;  // error value
             }
         }
-
-        [HarmonyPostfix]
-        static void DoneEating_Postfix(ref Farmer __instance, int __state)
+        public static void DoneEating_Postfix(ref Farmer __instance, int __state)
         {
             try
             {

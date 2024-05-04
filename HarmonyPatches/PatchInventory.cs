@@ -7,11 +7,9 @@ using System.Text;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    [HarmonyPatch(typeof(StardewValley.Object), "getDescription")]
     internal class PatchTooltip
     {
-        [HarmonyPostfix]
-        static void GetDescription_Postfix(StardewValley.Object __instance, ref string __result)
+        public static void GetDescription_Postfix(StardewValley.Object __instance, ref string __result)
         {
             // note: this method gets called A LOT. This prefix needs to be efficient
             // 25 chars max a line
@@ -52,11 +50,9 @@ namespace BZP_Allergies.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(Item), "canStackWith")]
     internal class PatchCanStack
     {
-        [HarmonyPostfix]
-        static void CanStackWith_Postfix(ISalable other, Item __instance, ref bool __result)
+        public static void CanStackWith_Postfix(ISalable other, Item __instance, ref bool __result)
         {
             try
             {
@@ -90,13 +86,9 @@ namespace BZP_Allergies.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(GameMenu))]
-    [HarmonyPatch(MethodType.Constructor)]
-    [HarmonyPatch(new Type[] { typeof(bool) })]
     internal class PatchGameMenuConstructor
     {
-        [HarmonyPostfix]
-        static void Constructor_Postfix(GameMenu __instance)
+        public static void Constructor_Postfix(GameMenu __instance)
         {
             try
             {

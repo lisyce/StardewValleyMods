@@ -1,5 +1,6 @@
 ﻿using BZP_Allergies.Apis;
 using BZP_Allergies.Config;
+using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,6 +9,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
+using StardewValley.Menus;
 using System;
 using static BZP_Allergies.AllergenManager;
 
@@ -52,7 +54,37 @@ namespace BZP_Allergies
 
             // harmony patches
             Harmony = new(ModManifest.UniqueID);
-            Harmony.PatchAll();
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem)),
+                postfix: new HarmonyMethod(typeof(PatchCreateItem), nameof(PatchCreateItem.CreateItem_Postfix))
+            );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.consumeIngredients)),
+                prefix: new HarmonyMethod(typeof(PatchConsumeIngredients), nameof(PatchConsumeIngredients.ConsumeIngredients_Prefix)),
+                postfix: new HarmonyMethod(typeof(PatchConsumeIngredients), nameof(PatchConsumeIngredients.ConsumeIngredients_Postfix))
+            );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) }),
+                prefix: new HarmonyMethod(typeof(PatchEatQuestionPopup), nameof(PatchEatQuestionPopup.CreateQuestionDialogue_Prefix))
+            );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(Farmer), nameof(Farmer.doneEating)),
+                prefix: new HarmonyMethod(typeof(PatchFarmerDoneEating), nameof(PatchFarmerDoneEating.DoneEating_Prefix)),
+                postfix: new HarmonyMethod(typeof(PatchFarmerDoneEating), nameof(PatchFarmerDoneEating.DoneEating_Postfix))
+            );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.getDescription)),
+                postfix: new HarmonyMethod(typeof(PatchTooltip), nameof(PatchTooltip.GetDescription_Postfix))
+            );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(Item), nameof(Item.canStackWith)),
+                postfix: new HarmonyMethod(typeof(PatchCanStack), nameof(PatchCanStack.CanStackWith_Postfix))
+            );
+
+            Harmony.Patch(
+                original: AccessTools.Constructor(typeof(GameMenu), new Type[] { typeof(bool) }),
+                postfix: new HarmonyMethod(typeof(PatchGameMenuConstructor), nameof(PatchGameMenuConstructor.Constructor_Postfix))
+            );
 
             // console commands
             modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);

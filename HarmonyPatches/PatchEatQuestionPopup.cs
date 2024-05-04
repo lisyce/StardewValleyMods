@@ -6,11 +6,9 @@ using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) })]
     internal class PatchEatQuestionPopup
     {
-        [HarmonyPrefix]
-        static void CreateQuestionDialogue_Prefix(ref string question)
+        public static void CreateQuestionDialogue_Prefix(ref string question)
         {
             try
             {

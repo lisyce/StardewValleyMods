@@ -174,6 +174,33 @@
       }
     },
     {
+      "LogName": "Add plant milk context tag (coconut)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "88", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
+      "LogName": "Add plant milk context tag (hazelnut)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "408", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
+      "LogName": "Add plant milk context tag (rice)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "423", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
       "LogName": "Add custom objects",
       "Action": "EditData",
       "Target": "Data/Objects",
