@@ -330,16 +330,16 @@ namespace BZP_Allergies
 
     internal class AllergenModel
     {
-        public ISet<string> ObjectIds { get; }
-        public ISet<string> ContextTags {  get; }
-        public string DisplayName { get; }
+        public List<string> ObjectIds { get; set; }
+        public List<string> ContextTags { get; set; }
+        public string DisplayName { get; set; }
 
-        public string? AddedByContentPackId { get; }
+        public string? AddedByContentPackId { get; set; }
 
         public AllergenModel (string displayName, string? addedByContentPackId = null)
         {
-            ObjectIds = new HashSet<string>();
-            ContextTags = new HashSet<string>();
+            ObjectIds = new();
+            ContextTags = new();
             DisplayName = displayName;
             AddedByContentPackId = addedByContentPackId;
         }

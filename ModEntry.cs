@@ -76,7 +76,7 @@ namespace BZP_Allergies
             }
             else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.BzpAllergies/AllergyData"))
             {
-                e.LoadFrom(() => AllergenManager.ALLERGEN_DATA, AssetLoadPriority.Low);
+                e.LoadFrom(() => AllergenManager.ALLERGEN_DATA, AssetLoadPriority.Medium);
             }
                 
         }
