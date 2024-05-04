@@ -78,7 +78,6 @@ namespace BZP_Allergies
             {
                 e.LoadFrom(() => AllergenManager.ALLERGEN_DATA, AssetLoadPriority.Medium);
             }
-                
         }
 
         /// <inheritdoc cref="IGameLoopEvents.GameLaunched"/>
