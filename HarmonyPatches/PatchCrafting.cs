@@ -42,7 +42,6 @@ namespace BZP_Allergies.HarmonyPatches
 
         public static void ConsumeIngredients_Prefix(out Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
         {
-            ModEntry.Instance.Monitor.Log("consume", LogLevel.Debug);
             try
             {
                 if (craftedObj == null)

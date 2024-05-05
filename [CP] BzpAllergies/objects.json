@@ -1,0 +1,142 @@
+{
+  "Changes": [
+    {
+      "LogName": "Add plant milk context tag (coconut)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "88", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
+      "LogName": "Add plant milk context tag (hazelnut)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "408", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
+      "LogName": "Add plant milk context tag (rice)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "423", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
+      }
+    },
+    {
+      "LogName": "Category Overrides",
+      "Action": "EditData",
+      "Target": "spacechase0.SpaceCore/ObjectExtensionData",
+      "Entries": {
+        "BarleyZP.BzpAllergies_PlantMilk": {
+          "CategoryTextOverride": ""
+        }
+      }
+    },
+    {
+      "LogName": "Add custom objects",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "Entries": {
+        "BarleyZP.BzpAllergies_AllergyMedicine": {
+          "Name": "Allergy Medicine",
+          "DisplayName": "Allergy Medicine",
+          "Description": "Drink for relief from an allergic reaction. Can be consumed even when nauseous.",
+          "Type": "Crafting",
+          "Category": 0,
+          "Price": 500,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 0,
+          "Edibility": 20,
+          "IsDrink": true,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "medicine_item",
+            "color_dark_purple",
+            "ginger_item"
+          ],
+          "CustomFields": null
+        },
+        "BarleyZP.BzpAllergies_LactasePills": {
+          "Name": "Lactase Pills",
+          "DisplayName": "Lactase Pills",
+          "Description": "Eat before consuming dairy if you're allergic for temporary protection.",
+          "Type": "Crafting",
+          "Category": 0,
+          "Price": 500,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 1,
+          "Edibility": 20,
+          "IsDrink": false,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "medicine_item",
+            "color_blue"
+          ],
+          "CustomFields": null
+        },
+        "BarleyZP.BzpAllergies_PlantMilk": {
+          "Name": "Plant Milk",
+          "DisplayName": "Plant Milk",
+          "Description": "A dairy-free alternative for cooking.",
+          "Type": "Basic",
+          "Category": -6,
+          "Price": 150,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 5,
+          "Edibility": 20,
+          "IsDrink": true,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "color_white"
+          ],
+          "CustomFields": null
+        },
+        "BarleyZP.BzpAllergies_GfFlour": {
+          "Name": "Gluten Free Flour",
+          "DisplayName": "Gluten Free Flour",
+          "Description": "A wheat-free alternative for cooking.",
+          "Type": "Basic",
+          "Category": 0,
+          "Price": 50,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 7,
+          "Edibility": 5,
+          "IsDrink": false,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "color_white"
+          ]
+        }
+      }
+    }
+  ]
+}

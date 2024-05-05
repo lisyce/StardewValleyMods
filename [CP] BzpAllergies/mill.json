@@ -1,0 +1,114 @@
+{
+  "Changes": [
+    {
+      "LogName": "Add gluten free flour to the mill",
+      "Action": "EditData",
+      "Target": "Data/Buildings",
+      "TargetField": [ "Mill", "ItemConversions" ],
+      "Entries": {
+        "BarleyZP.BzpAllergies_HazelnutGfFlour": {
+          "Id": "BarleyZP.BzpAllergies_HazelnutGfFlour",
+          "RequiredTags": [
+            "id_o_408"
+          ],
+          "RequiredCount": 1,
+          "MaxDailyConversions": -1,
+          "SourceChest": "Input",
+          "DestinationChest": "Output",
+          "ProducedItems": [
+            {
+              "Condition": null,
+              "Id": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "ItemId": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "RandomItemId": null,
+              "MaxItems": null,
+              "MinStack": 1,
+              "MaxStack": -1,
+              "Quality": -1,
+              "ObjectInternalName": null,
+              "ObjectDisplayName": null,
+              "ToolUpgradeLevel": -1,
+              "IsRecipe": false,
+              "StackModifiers": null,
+              "StackModifierMode": "Stack",
+              "QualityModifiers": null,
+              "QualityModifierMode": "Stack",
+              "ModData": {
+                "BarleyZP.BzpAllergies_MadeWith": "treenuts"
+              },
+              "PerItemCondition": null
+            }
+          ]
+        },
+        "BarleyZP.BzpAllergies_AmaranthGfFlour": {
+          "Id": "BarleyZP.BzpAllergies_AmaranthGfFlour",
+          "RequiredTags": [
+            "id_o_300"
+          ],
+          "RequiredCount": 1,
+          "MaxDailyConversions": -1,
+          "SourceChest": "Input",
+          "DestinationChest": "Output",
+          "ProducedItems": [
+            {
+              "Condition": null,
+              "Id": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "ItemId": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "RandomItemId": null,
+              "MaxItems": null,
+              "MinStack": 1,
+              "MaxStack": -1,
+              "Quality": -1,
+              "ObjectInternalName": null,
+              "ObjectDisplayName": null,
+              "ToolUpgradeLevel": -1,
+              "IsRecipe": false,
+              "StackModifiers": null,
+              "StackModifierMode": "Stack",
+              "QualityModifiers": null,
+              "QualityModifierMode": "Stack",
+              "ModData": {
+                "BarleyZP.BzpAllergies_MadeWith": ""
+              },
+              "PerItemCondition": null
+            }
+          ]
+        },
+        "BarleyZP.BzpAllergies_RiceGfFlour": {
+          "Id": "BarleyZP.BzpAllergies_RiceGfFlour",
+          "RequiredTags": [
+            "id_o_423"
+          ],
+          "RequiredCount": 1,
+          "MaxDailyConversions": -1,
+          "SourceChest": "Input",
+          "DestinationChest": "Output",
+          "ProducedItems": [
+            {
+              "Condition": null,
+              "Id": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "ItemId": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "RandomItemId": null,
+              "MaxItems": null,
+              "MinStack": 1,
+              "MaxStack": -1,
+              "Quality": -1,
+              "ObjectInternalName": null,
+              "ObjectDisplayName": null,
+              "ToolUpgradeLevel": -1,
+              "IsRecipe": false,
+              "StackModifiers": null,
+              "StackModifierMode": "Stack",
+              "QualityModifiers": null,
+              "QualityModifierMode": "Stack",
+              "ModData": {
+                "BarleyZP.BzpAllergies_MadeWith": "42"
+              },
+              "PerItemCondition": null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
