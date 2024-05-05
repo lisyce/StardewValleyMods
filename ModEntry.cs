@@ -70,6 +70,10 @@ namespace BZP_Allergies
                 original: AccessTools.PropertyGetter(AccessTools.TypeByName("SpaceCore.VanillaAssetExpansion.VAECustomCraftingRecipe"), "Description"),
                 postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.SpaceCoreVaeRecipeDescription_Postfix))
             );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(SpaceCore.Framework.CustomCraftingRecipe), nameof(SpaceCore.Framework.CustomCraftingRecipe.drawRecipeDescription)),
+                prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.SpaceCoreFrameworkRecipeDescription_Prefix))
+            );
 
             
             Harmony.Patch(
