@@ -2,94 +2,16 @@
   "Format": "2.0.0",
   "Changes": [
     {
-      "LogName": "wheat",
-      "Action": "EditData",
-      "Target": "BarleyZP.BzpAllergies/AllergyData",
-      "TargetField": [ "wheat", "ObjectIds" ],
-      "Entries": {
-        "#-1": "Cornucopia_Durum",
-        "#-2": "Cornucopia_SemolinaFlour",
-        "#-3": "Cornucopia_DarkAle"
-      }
+      "Action": "Include",
+      "FromFile": "allergies.json"
     },
     {
-      "LogName": "treenuts",
-      "Action": "EditData",
-      "Target": "BarleyZP.BzpAllergies/AllergyData",
-      "TargetField": [ "treenuts", "ObjectIds" ],
-      "Entries": {
-        "#-1": "Cornucopia_Almond",
-        "#-2": "Cornucopia_Cashew",
-        "#-3": "Cornucopia_Pecan",
-        "#-4": "Cornucopia_Pistachio",
-        "#-5": "Cornucopia_Walnut"
-      }
+      "Action": "Include",
+      "FromFile": "mill.json"
     },
     {
-      "LogName": "mushroom",
-      "Action": "EditData",
-      "Target": "BarleyZP.BzpAllergies/AllergyData",
-      "TargetField": [ "mushroom", "ContextTags" ],
-      "Entries": {
-        "#-1": "mushroom_item"
-      }
-    },
-    {
-      "LogName": "Add New Allergies",
-      "Action": "EditData",
-      "Target": "BarleyZP.BzpAllergies/AllergyData",
-      "Entries": {
-        "BarleyZP.CornucopiaPeanut": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Peanuts",
-          "ObjectIds": [
-            "Cornucopia_Peanut"
-          ]
-        },
-        "BarleyZP.CornucopiaAlmond": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Almonds",
-          "ObjectIds": [
-            "Cornucopia_Almond"
-          ]
-        },
-        "BarleyZP.CornucopiaCashew": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Cashews",
-          "ObjectIds": [
-            "Cornucopia_Cashew"
-          ]
-        },
-        "BarleyZP.CornucopiaPecan": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Pecans",
-          "ObjectIds": [
-            "Cornucopia_Pecan"
-          ]
-        },
-        "BarleyZP.CornucopiaPistachio": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Pistachios",
-          "ObjectIds": [
-            "Cornucopia_Pistachio"
-          ]
-        },
-        "BarleyZP.CornucopiaWalnut": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Walnuts",
-          "ObjectIds": [
-            "Cornucopia_Walnut"
-          ]
-        },
-        "BarleyZP.CornucopiaSoy": {
-          "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Soy",
-          "ObjectIds": [
-            "Cornucopia_Soybeans",
-            "Cornucopia_Tofu"
-          ]
-        }
-      }
+      "Action": "Include",
+      "FromFile": "objects.json"
     }
   ]
 }
