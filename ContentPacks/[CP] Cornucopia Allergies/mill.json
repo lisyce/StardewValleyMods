@@ -4,6 +4,35 @@
       "LogName": "Add gluten free flour to the mill",
       "Action": "EditData",
       "Target": "Data/Buildings",
+      "When": {
+        "Buckwheat Makes GF Flour": true
+      },
+      "TargetField": [ "Mill", "ItemConversions" ],
+      "Entries": {
+        "BarleyZP.BzpAllergiesCornucopia_BuckwheatGfFlour": {
+          "Id": "BarleyZP.BzpAllergiesCornucopia_BuckwheatGfFlour",
+          "RequiredTags": [
+            "id_o_cornucopia_buckwheat"
+          ],
+          "MaxDailyConversions": -1,
+          "SourceChest": "Input",
+          "DestinationChest": "Output",
+          "ProducedItems": [
+            {
+              "ItemId": "(O)BarleyZP.BzpAllergies_GfFlour",
+              "ModData": {
+                "BarleyZP.BzpAllergies_MadeWith": ""
+              }
+            }
+          ]
+        },
+        "Cornucopia_BuckwheatFlour": null
+      }
+    },
+    {
+      "LogName": "Add gluten free flour to the mill",
+      "Action": "EditData",
+      "Target": "Data/Buildings",
       "TargetField": [ "Mill", "ItemConversions" ],
       "Entries": {
         "BarleyZP.BzpAllergiesCornucopia_OatGfFlour": {

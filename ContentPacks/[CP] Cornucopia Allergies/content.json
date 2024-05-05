@@ -1,5 +1,12 @@
 {
   "Format": "2.0.0",
+  "ConfigSchema": {
+    "Buckwheat Makes GF Flour": {
+      "AllowValues": "true, false",
+      "Default": "false",
+      "Description": "Whether putting Buckwheat in the mill should produce GF Flour instead of Cornucopia's Buckwheat Flour"
+    }
+  },
   "Changes": [
     {
       "Action": "Include",
