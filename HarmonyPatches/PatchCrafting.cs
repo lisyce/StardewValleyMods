@@ -1,11 +1,13 @@
-﻿using HarmonyLib;
+﻿using BZP_Allergies.HarmonyPatches.UI;
+using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
+using StardewValley.Menus;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    public class InventoryData
+    internal class InventoryData
     {
         public InventoryData()
         {
@@ -20,6 +22,31 @@ namespace BZP_Allergies.HarmonyPatches
 
     internal class CraftingPatches
     {
+        public static void SpaceCoreVaeRecipeDescription_Postfix(SpaceCore.VanillaAssetExpansion.VAECraftingRecipe __instance, ref string __result)
+        {
+            try
+            {
+                if (__result.Length > 0)
+                {
+                    return;
+                }
+
+                Traverse traverse = Traverse.Create(__instance);
+                bool cooking = traverse.Field("cooking").GetValue<bool>();
+                if (cooking)
+                {
+                    string id = traverse.Field("id").GetValue<string>();
+                    CraftingRecipe vanillaRecipe = new(id, true);
+                    __result = vanillaRecipe.description;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(SpaceCoreVaeRecipeDescription_Postfix)}:\n{ex}", LogLevel.Error);
+            }
+        }
+
         public static StardewValley.Object? craftedObj = null;
 
         public static void CreateItem_Postfix(ref Item __result)

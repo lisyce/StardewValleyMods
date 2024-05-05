@@ -28,6 +28,15 @@
       }
     },
     {
+      "LogName": "Add flour context tag (wheat flour)",
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "TargetField": [ "246", "ContextTags" ],
+      "Entries": {
+        "#-1": "BarleyZP.BzpAllergies_FlourIngredient"
+      }
+    },
+    {
       "LogName": "Category Overrides",
       "Action": "EditData",
       "Target": "spacechase0.SpaceCore/ObjectExtensionData",
@@ -133,7 +142,8 @@
           "ExcludeFromShippingCollection": false,
           "ExcludeFromRandomSale": false,
           "ContextTags": [
-            "color_white"
+            "color_white",
+            "BarleyZP.BzpAllergies_FlourIngredient"
           ]
         }
       }

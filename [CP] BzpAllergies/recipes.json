@@ -1,7 +1,7 @@
 {
   "Changes": [
     {
-      "LogName": "Plant milk ingredient context tag recipe",
+      "LogName": "Context tag recipes for allergen-free alternatives",
       "Action": "EditData",
       "Target": "spacechase0.SpaceCore/CookingRecipeOverrides",
       "Entries": {
@@ -23,6 +23,35 @@
               }
             }
           ]
+        },
+        "Baked Fish": {
+          "ProductQualifiedId": "(O)198",
+          "ProductAmount": 1,
+          "Ingredients": [
+            {
+              "Type": "ContextTag",
+              "Value": "BarleyZP.BzpAllergies_FlourIngredient",
+              "Amount": 1,
+              "OverrideText": "Flour (Any)",
+              "OverrideTexturePath": "BarleyZP.BzpAllergies/Sprites",
+              "OverrideTextureRect": {
+                "X": 112,
+                "Y": 0,
+                "Width": 16,
+                "Height": 16
+              }
+            },
+            {
+              "Type": "Item",
+              "Value": "(O)145",
+              "Amount": 1
+            },
+            {
+              "Type": "Item",
+              "Value": "(O)132",
+              "Amount": 1
+            }
+          ]
         }
       }
     },
@@ -31,7 +60,7 @@
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
       "Entries": {
-        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/Plant Milk"
+        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/"
       }
     }
   ]

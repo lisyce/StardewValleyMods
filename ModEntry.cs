@@ -4,7 +4,6 @@ using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceCore.VanillaAssetExpansion;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
@@ -67,8 +66,12 @@ namespace BZP_Allergies
                 prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Prefix)) { before = new string[] { "spacechase0.SpaceCore" } },
                 postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Postfix))
             );
+            Harmony.Patch(
+                original: AccessTools.PropertyGetter(AccessTools.TypeByName("SpaceCore.VanillaAssetExpansion.VAECustomCraftingRecipe"), "Description"),
+                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.SpaceCoreVaeRecipeDescription_Postfix))
+            );
 
-
+            
             Harmony.Patch(
                 original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) }),
                 prefix: new HarmonyMethod(typeof(PatchEatQuestionPopup), nameof(PatchEatQuestionPopup.CreateQuestionDialogue_Prefix))
