@@ -109,6 +109,10 @@ namespace BZP_Allergies.HarmonyPatches
             {
                 ModEntry.Instance.Monitor.Log($"Failed in {nameof(ConsumeIngredients_Postfix)}:\n{ex}", LogLevel.Error);
             }
+            finally
+            {
+                craftedObj = null;  // reset for next run
+            }
         }
 
         // includes farmer inventory (Game1.player.Items)

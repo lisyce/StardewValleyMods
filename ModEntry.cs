@@ -59,6 +59,10 @@ namespace BZP_Allergies
                 postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
             );
             Harmony.Patch(
+                original: AccessTools.Method(typeof(SpaceCore.Framework.CustomCraftingRecipe), nameof(SpaceCore.Framework.CustomCraftingRecipe.createItem)),
+                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
+            );
+            Harmony.Patch(
                 original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.consumeIngredients)),
                 prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Prefix)) { before = new string[] { "spacechase0.SpaceCore" } },
                 postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Postfix))
