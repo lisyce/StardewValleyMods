@@ -126,7 +126,7 @@
         "BarleyZP.BzpAllergies_GfFlour": {
           "Name": "Gluten Free Flour",
           "DisplayName": "Gluten Free Flour",
-          "Description": "A wheat-free alternative for cooking.",
+          "Description": "A gluten-free alternative for cooking.",
           "Type": "Basic",
           "Category": 0,
           "Price": 50,

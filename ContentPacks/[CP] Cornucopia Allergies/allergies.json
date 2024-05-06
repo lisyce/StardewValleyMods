@@ -1,10 +1,10 @@
 {
   "Changes": [
     {
-      "LogName": "wheat",
+      "LogName": "gluten",
       "Action": "EditData",
       "Target": "BarleyZP.BzpAllergies/AllergyData",
-      "TargetField": [ "wheat", "ObjectIds" ],
+      "TargetField": [ "gluten", "ObjectIds" ],
       "Entries": {
         "#-1": "Cornucopia_Durum",
         "#-2": "Cornucopia_SemolinaFlour",

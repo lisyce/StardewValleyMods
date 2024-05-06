@@ -41,13 +41,13 @@ namespace BZP_Allergies
             egg.AddTags(new HashSet<string> { "egg_item", "mayo_item", "large_egg_item" });
             ALLERGEN_DATA["egg"] = egg;
 
-            AllergenModel wheat = new("Wheat");
-            wheat.AddObjectIds(new HashSet<string>{
+            AllergenModel gluten = new("Gluten");
+            gluten.AddObjectIds(new HashSet<string>{
                     "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
                     "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
                     "262", "346"
                 });
-            ALLERGEN_DATA["wheat"] = wheat;
+            ALLERGEN_DATA["gluten"] = gluten;
 
             AllergenModel fish = new("Fish");
             fish.AddObjectIds(new HashSet<string>{
