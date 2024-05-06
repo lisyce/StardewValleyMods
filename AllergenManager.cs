@@ -1,5 +1,8 @@
-﻿using StardewModdingAPI;
+﻿using Microsoft.Xna.Framework.Graphics;
+using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Buffs;
+using StardewValley.GameData.Buffs;
 using StardewValley.GameData.Objects;
 using System.Text.RegularExpressions;
 
@@ -325,6 +328,29 @@ namespace BZP_Allergies
             {
                 ModDataSetAdd(Game1.player, Constants.ModDataHas, allergyId);
             }
+        }
+
+        public static Buff GetAllergicReactionBuff(string source, int durationMilliseconds)
+        {
+            Texture2D sprites = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
+
+            BuffAttributesData buffAttributesData = new()
+            {
+                Speed = -2,
+                Defense = -1,
+                Attack = -1,
+            };
+
+            BuffEffects effects = new(buffAttributesData);
+
+            Buff reactionBuff = new(Constants.ReactionDebuff, "food", source,
+                durationMilliseconds, sprites, 2, effects,
+                true, "Allergic Reaction", "Probably shouldn't have eaten that...")
+            {
+                glow = Microsoft.Xna.Framework.Color.Green
+            };
+
+            return reactionBuff;
         }
     }
 

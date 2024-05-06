@@ -9,15 +9,28 @@ namespace BZP_Allergies.Config
         {
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "General Settings"
+                text: () => "Difficulty Settings"
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Hints before eating",
-                tooltip: () => "Select to get a hint in the popup before you eat something to warn you of your allergies.",
+                name: () => "Hints Before Eating",
+                tooltip: () => "Get a hint in the popup before you eat something to warn you of your allergies.",
                 getValue: () => ModEntry.Instance.Config.HintBeforeEating,
                 setValue: value => ModEntry.Instance.Config.HintBeforeEating = value
+            );
+
+            configMenu.AddBoolOption(
+                mod: modManifest,
+                name: () => "Reaction From Holding Foods",
+                tooltip: () => "Holding foods you're allergic to gives your farmer a reaction.",
+                getValue: () => ModEntry.Instance.Config.HoldingReaction,
+                setValue: value => ModEntry.Instance.Config.HoldingReaction = value
+            );
+
+            configMenu.AddSectionTitle(
+                mod: modManifest,
+                text: () => "Random Allergy Settings"
             );
 
             configMenu.AddBoolOption(

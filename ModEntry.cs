@@ -8,6 +8,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
+using StardewValley.ItemTypeDefinitions;
 using StardewValley.Menus;
 using System;
 using static BZP_Allergies.AllergenManager;
@@ -47,6 +48,7 @@ namespace BZP_Allergies
             modHelper.Events.Content.AssetRequested += OnAssetRequested;
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
             modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+            modHelper.Events.GameLoop.OneSecondUpdateTicking += OnOneSecondUpdateTicking;
 
             // config
             Config = Helper.ReadConfig<ModConfigModel>();
@@ -184,6 +186,24 @@ namespace BZP_Allergies
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             NpcsThatReactedToday.Clear();
+        }
+
+        /// <inheritdoc cref="IGameLoopEvents.OneSecondUpdateTicking"/>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        private void OnOneSecondUpdateTicking(object? sender, OneSecondUpdateTickingEventArgs e)
+        {
+            if (!Config.HoldingReaction) return;
+
+            bool hasReactionDebuff = Game1.player.hasBuff(Constants.ReactionDebuff);
+
+            StardewValley.Object? held = Game1.player.ActiveObject;
+            bool allergic = FarmerIsAllergic(held);
+            if (held is not null && allergic)
+            {
+                if (hasReactionDebuff && !e.IsMultipleOf(300)) return;
+                Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(held.DisplayName, 60000));
+            }
         }
 
         private void ListAllergens(string command, string[] args) {

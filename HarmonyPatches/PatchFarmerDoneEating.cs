@@ -27,6 +27,7 @@ namespace BZP_Allergies.HarmonyPatches
                 if (FarmerIsAllergic(itemToEat) && !__instance.hasBuff(Buff.squidInkRavioli))
                 {
                     ISet<string> itemToEatAllergens = GetAllergensInObject(itemToEat);
+
                     // is it dairy and do we have the buff?
                     if (itemToEatAllergens.Contains("dairy") && __instance.hasBuff(Constants.LactaseBuff))
                     {
@@ -41,21 +42,7 @@ namespace BZP_Allergies.HarmonyPatches
                     itemToEat.Edibility = -20;
 
                     // add the allergic reaction buff
-                    BuffAttributesData buffAttributesData = new()
-                    {
-                        Speed = -2,
-                        Defense = -1,
-                        Attack = -1,
-                    };
-
-                    BuffEffects effects = new(buffAttributesData);
-
-                    Buff reactionBuff = new(Constants.ReactionDebuff, "food", itemToEat.DisplayName,
-                        120000, sprites, 2, effects,
-                        true, "Allergic Reaction", "Probably shouldn't have eaten that...");
-                    reactionBuff.glow = Microsoft.Xna.Framework.Color.Green;
-
-                    __instance.applyBuff(reactionBuff);
+                    __instance.applyBuff(AllergenManager.GetAllergicReactionBuff(itemToEat.DisplayName, 120000));
                     
                     // randomly apply nausea
                     if (new Random().NextDouble() < 0.50)

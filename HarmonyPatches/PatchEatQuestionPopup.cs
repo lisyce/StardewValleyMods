@@ -20,7 +20,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 // is this the "Eat {0}?" or "Drink {0}?" popup?
-                IDictionary<string, string> stringsData = ModEntry.Instance.ModHelper.GameContent.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
+                IDictionary<string, string> stringsData = Game1.content.Load<Dictionary<string, string>>("Strings/StringsFromCSFiles");
                 
                 string activeObjectName = Game1.player.ActiveObject.DisplayName;
                 string eatQuestion = string.Format(stringsData["Game1.cs.3160"], activeObjectName);

@@ -5,5 +5,7 @@
         public bool HintBeforeEating { get; set; } = true;
         public int NumberRandomAllergies { get; set; } = -1;
         public bool AllergenCountHint { get; set; } = true;
+
+        public bool HoldingReaction { get; set; } = false;
     }
 }
