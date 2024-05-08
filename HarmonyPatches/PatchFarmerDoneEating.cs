@@ -41,8 +41,11 @@ namespace BZP_Allergies.HarmonyPatches
                     // change edibility
                     itemToEat.Edibility = -20;
 
+                    // clear any existing allergy buffs
+                    __instance.buffs.Remove(Constants.ReactionDebuff);
+
                     // add the allergic reaction buff
-                    __instance.applyBuff(AllergenManager.GetAllergicReactionBuff(itemToEat.DisplayName, 120000));
+                    __instance.applyBuff(AllergenManager.GetAllergicReactionBuff(itemToEat.DisplayName, "consume", 120000));
                     
                     // randomly apply nausea
                     if (new Random().NextDouble() < 0.50)
@@ -50,6 +53,7 @@ namespace BZP_Allergies.HarmonyPatches
                         __instance.applyBuff(Buff.nauseous);
                     }
 
+                    // TODO: abstract this out so that when holding or cooking a food you can get this mail and discover allergies
                     // send mail
                     if (!__instance.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
                     {

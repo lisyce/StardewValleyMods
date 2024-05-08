@@ -330,7 +330,7 @@ namespace BZP_Allergies
             }
         }
 
-        public static Buff GetAllergicReactionBuff(string source, int durationMilliseconds)
+        public static Buff GetAllergicReactionBuff(string itemSource, string actionSource, int durationMilliseconds)
         {
             Texture2D sprites = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
 
@@ -343,9 +343,16 @@ namespace BZP_Allergies
 
             BuffEffects effects = new(buffAttributesData);
 
-            Buff reactionBuff = new(Constants.ReactionDebuff, "food", source,
+            string desc = actionSource switch
+            {
+                "consume" => "Probably shouldn't have eaten that...",
+                "hold" => "Holding that with severe\nallergies was a bad idea!",
+                _ => throw new NotImplementedException()
+            };
+
+            Buff reactionBuff = new(Constants.ReactionDebuff, "food", itemSource,
                 durationMilliseconds, sprites, 2, effects,
-                true, "Allergic Reaction", "Probably shouldn't have eaten that...")
+                true, "Allergic Reaction", desc)
             {
                 glow = Microsoft.Xna.Framework.Color.Green
             };
