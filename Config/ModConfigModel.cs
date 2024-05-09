@@ -7,5 +7,6 @@
         public bool AllergenCountHint { get; set; } = true;
 
         public bool HoldingReaction { get; set; } = false;
+        public bool CookingReaction { get; set; } = false;
     }
 }

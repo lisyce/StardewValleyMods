@@ -308,16 +308,6 @@ namespace BZP_Allergies
             return ModDataSetContains(Game1.player, Constants.ModDataDiscovered, allergyId);
         }
 
-        public static bool DiscoverPlayerAllergy(string allergyId)
-        {
-            if (ModDataGet(Game1.player, Constants.ModDataRandom, out string val) && val == "true")
-            {
-                return ModDataSetAdd(Game1.player, Constants.ModDataDiscovered, allergyId);
-            }
-
-            return false;
-        }
-
         public static void TogglePlayerHasAllergy(string allergyId, bool has)
         {
             if (!has)
@@ -358,6 +348,35 @@ namespace BZP_Allergies
             };
 
             return reactionBuff;
+        }
+
+        public static void CheckForAllergiesToDiscover(Farmer farmer, ISet<string> allergens)
+        {
+            if (!farmer.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
+            {
+                Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
+            }
+
+            // discover allergies
+            foreach (string allergen in allergens)
+            {
+                if (FarmerIsAllergic(allergen) && DiscoverPlayerAllergy(allergen))
+                {
+                    Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                    Game1.playSound("newArtifact");
+                    break;
+                }
+            }
+        }
+
+        private static bool DiscoverPlayerAllergy(string allergyId)
+        {
+            if (ModDataGet(Game1.player, Constants.ModDataRandom, out string val) && val == "true")
+            {
+                return ModDataSetAdd(Game1.player, Constants.ModDataDiscovered, allergyId);
+            }
+
+            return false;
         }
     }
 

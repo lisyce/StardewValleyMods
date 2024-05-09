@@ -173,6 +173,13 @@ namespace BZP_Allergies.HarmonyPatches
                         AllergenManager.ModDataSetAdd(craftedObj, Constants.ModDataMadeWith, allergen);
                     }
                 }
+
+                // do we get a reaction from cooking it?
+                if (ModEntry.Instance.Config.CookingReaction)
+                {
+                    ISet<string> cookedWithAllergens = AllergenManager.ModDataSetGet(craftedObj, Constants.ModDataMadeWith);
+                    AllergenManager.CheckForAllergiesToDiscover(Game1.player, cookedWithAllergens);
+                }
             }
             catch (Exception ex)
             {

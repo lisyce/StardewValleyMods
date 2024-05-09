@@ -28,6 +28,14 @@ namespace BZP_Allergies.Config
                 setValue: value => ModEntry.Instance.Config.HoldingReaction = value
             );
 
+            configMenu.AddBoolOption(
+                mod: modManifest,
+                name: () => "Reaction From Cooking Foods",
+                tooltip: () => "Cooking foods you're allergic to gives your farmer a reaction.",
+                getValue: () => ModEntry.Instance.Config.CookingReaction,
+                setValue: value => ModEntry.Instance.Config.CookingReaction = value
+            );
+
             configMenu.AddSectionTitle(
                 mod: modManifest,
                 text: () => "Random Allergy Settings"

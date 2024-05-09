@@ -203,6 +203,7 @@ namespace BZP_Allergies
             {
                 if (hasReactionDebuff && !e.IsMultipleOf(300)) return;
                 Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(held.DisplayName, "hold", 60000));
+                CheckForAllergiesToDiscover(Game1.player, GetAllergensInObject(held));
             }
         }
 

@@ -53,23 +53,7 @@ namespace BZP_Allergies.HarmonyPatches
                         __instance.applyBuff(Buff.nauseous);
                     }
 
-                    // TODO: abstract this out so that when holding or cooking a food you can get this mail and discover allergies
-                    // send mail
-                    if (!__instance.mailReceived.Contains(ModEntry.MOD_ID + "_harvey_ad"))
-                    {
-                        Game1.addMailForTomorrow(ModEntry.MOD_ID + "_harvey_ad");
-                    }
-
-                    // discover allergies
-                    foreach (string allergen in itemToEatAllergens)
-                    {
-                        if (FarmerIsAllergic(allergen) && DiscoverPlayerAllergy(allergen))
-                        {
-                            Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
-                            Game1.playSound("newArtifact");
-                            break;
-                        }
-                    }
+                    CheckForAllergiesToDiscover(__instance, itemToEatAllergens);
                 }
                 else if (itemToEat.QualifiedItemId.Equals("(O)" + Constants.AllergyReliefId))
                 {
