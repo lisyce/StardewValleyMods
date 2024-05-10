@@ -1,13 +1,20 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Menus;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    [HarmonyPatch(typeof(NPC), nameof(NPC.checkAction))]
-    internal class PatchNpcBuffDialogue
+    internal class NpcDialogue_Patches
     {
-        [HarmonyPrefix]
+        public static void Patch(Harmony harmony)
+        {
+            harmony.Patch(
+                original: AccessTools.Method(typeof(NPC), nameof(NPC.checkAction)),
+                prefix: new HarmonyMethod(typeof(NpcDialogue_Patches), nameof(CheckAction_Prefix))
+            );
+        }
+
         static void CheckAction_Prefix(ref NPC __instance, ref Farmer who)
         {
             try

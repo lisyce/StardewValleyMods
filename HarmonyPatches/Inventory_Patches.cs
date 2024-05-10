@@ -1,4 +1,5 @@
 ﻿using BZP_Allergies.HarmonyPatches.UI;
+using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
@@ -6,8 +7,20 @@ using System.Text;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    internal class PatchTooltip
+    internal class Inventory_Patches
     {
+        public static void Patch(Harmony harmony)
+        {
+            harmony.Patch(
+                original: AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.getDescription)),
+                postfix: new HarmonyMethod(typeof(Inventory_Patches), nameof(GetDescription_Postfix))
+            );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Item), nameof(Item.canStackWith)),
+                postfix: new HarmonyMethod(typeof(Inventory_Patches), nameof(CanStackWith_Postfix))
+            );
+        }
+
         public static void GetDescription_Postfix(StardewValley.Object __instance, ref string __result)
         {
             // note: this method gets called A LOT. This prefix needs to be efficient
@@ -47,10 +60,7 @@ namespace BZP_Allergies.HarmonyPatches
                 ModEntry.Instance.Monitor.Log($"Failed in {nameof(GetDescription_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
-    }
 
-    internal class PatchCanStack
-    {
         public static void CanStackWith_Postfix(ISalable other, Item __instance, ref bool __result)
         {
             try
@@ -81,21 +91,6 @@ namespace BZP_Allergies.HarmonyPatches
             catch (Exception ex)
             {
                 ModEntry.Instance.Monitor.Log($"Failed in {nameof(CanStackWith_Postfix)}:\n{ex}", LogLevel.Error);
-            }
-        }
-    }
-
-    internal class PatchGameMenuConstructor
-    {
-        public static void Constructor_Postfix(GameMenu __instance)
-        {
-            try
-            {
-                __instance.pages[1] = new PatchedSkillsPage(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
-            }
-            catch (Exception ex)
-            {
-                ModEntry.Instance.Monitor.Log($"Failed in {nameof(Constructor_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
