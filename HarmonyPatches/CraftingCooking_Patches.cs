@@ -38,7 +38,7 @@ namespace BZP_Allergies.HarmonyPatches
             {
                 if (AllergenManager.FarmerIsAllergic(a))
                 {
-                    Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(JustCookedWithName!, "cook", 60000));
+                    Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(JustCookedWithName!, "cook", ModEntry.Instance.Config.EatingDebuffLengthSeconds / 2));
                     AllergenManager.CheckForAllergiesToDiscover(Game1.player, JustCookedWith);
                     break;
                 }

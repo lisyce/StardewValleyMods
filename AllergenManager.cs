@@ -320,15 +320,18 @@ namespace BZP_Allergies
             }
         }
 
-        public static Buff GetAllergicReactionBuff(string itemSource, string actionSource, int durationMilliseconds)
+        public static Buff GetAllergicReactionBuff(string itemSource, string actionSource, int durationSeconds)
         {
             Texture2D sprites = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
 
+            float mult = ModEntry.Instance.Config.DebuffSeverityMultiplier;
+            if (mult <= 0) mult = 1;
+
             BuffAttributesData buffAttributesData = new()
             {
-                Speed = -2,
-                Defense = -1,
-                Attack = -1,
+                Speed = -2 * mult,
+                Defense = -1 * mult,
+                Attack = -1 * mult
             };
 
             BuffEffects effects = new(buffAttributesData);
@@ -342,7 +345,7 @@ namespace BZP_Allergies
             };
 
             Buff reactionBuff = new(Constants.ReactionDebuff, "food", itemSource,
-                durationMilliseconds, sprites, 2, effects,
+                durationSeconds * 1000, sprites, 2, effects,
                 true, "Allergic Reaction", desc)
             {
                 glow = Microsoft.Xna.Framework.Color.Green

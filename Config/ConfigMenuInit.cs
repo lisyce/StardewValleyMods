@@ -36,6 +36,30 @@ namespace BZP_Allergies.Config
                 setValue: value => ModEntry.Instance.Config.CookingReaction = value
             );
 
+            configMenu.AddBoolOption(
+                mod: modManifest,
+                name: () => "Enable Nausea",
+                tooltip: () => "Enable/disable the random nausea that accompanies eating a food you're allergic to.",
+                getValue: () => ModEntry.Instance.Config.EnableNausea,
+                setValue: value => ModEntry.Instance.Config.EnableNausea = value
+            );
+
+            configMenu.AddNumberOption(
+                mod: modManifest,
+                name: () => "Debuff Length (Seconds)",
+                tooltip: () => "Length of the debuff from eating food; Other debuff lengths are based upon this value.",
+                getValue: () => ModEntry.Instance.Config.EatingDebuffLengthSeconds,
+                setValue: value => ModEntry.Instance.Config.EatingDebuffLengthSeconds = value
+            );
+
+            configMenu.AddNumberOption(
+                mod: modManifest,
+                name: () => "Debuff Severity Multiplier",
+                tooltip: () => "Severity multiplier for the allergic reaction debuff to speed, attack, and defense.",
+                getValue: () => ModEntry.Instance.Config.DebuffSeverityMultiplier,
+                setValue: value => ModEntry.Instance.Config.DebuffSeverityMultiplier = value
+            );
+
             configMenu.AddSectionTitle(
                 mod: modManifest,
                 text: () => "Random Allergy Settings"

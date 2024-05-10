@@ -8,5 +8,9 @@
 
         public bool HoldingReaction { get; set; } = false;
         public bool CookingReaction { get; set; } = false;
+        
+        public bool EnableNausea { get; set; } = true;
+        public int EatingDebuffLengthSeconds { get; set; } = 120;
+        public float DebuffSeverityMultiplier { get; set; } = 1;
     }
 }

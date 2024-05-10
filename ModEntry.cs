@@ -163,7 +163,7 @@ namespace BZP_Allergies
             if (held is not null && allergic)
             {
                 if (hasReactionDebuff && !e.IsMultipleOf(300)) return;
-                Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(held.DisplayName, "hold", 60000));
+                Game1.player.applyBuff(GetAllergicReactionBuff(held.DisplayName, "hold", Config.EatingDebuffLengthSeconds / 3));
                 CheckForAllergiesToDiscover(Game1.player, GetAllergensInObject(held));
             }
         }

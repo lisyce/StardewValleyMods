@@ -101,10 +101,10 @@ namespace BZP_Allergies.HarmonyPatches
                     __instance.buffs.Remove(Constants.ReactionDebuff);
 
                     // add the allergic reaction buff
-                    __instance.applyBuff(AllergenManager.GetAllergicReactionBuff(itemToEat.DisplayName, "consume", 120000));
+                    __instance.applyBuff(AllergenManager.GetAllergicReactionBuff(itemToEat.DisplayName, "consume", ModEntry.Instance.Config.EatingDebuffLengthSeconds));
                     
                     // randomly apply nausea
-                    if (new Random().NextDouble() < 0.50)
+                    if (ModEntry.Instance.Config.EnableNausea && new Random().NextDouble() < 0.50)
                     {
                         __instance.applyBuff(Buff.nauseous);
                     }
