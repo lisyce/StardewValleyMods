@@ -55,18 +55,22 @@ namespace BZP_Allergies
 
             // harmony patches
             Harmony = new(ModManifest.UniqueID);
+            //Harmony.Patch(
+            //    original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem)),
+            //    postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
+            //);
+            //Harmony.Patch(
+            //    original: AccessTools.Method(typeof(SpaceCore.Framework.CustomCraftingRecipe), nameof(SpaceCore.Framework.CustomCraftingRecipe.createItem)),
+            //    postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
+            //);
+            //Harmony.Patch(
+            //    original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.consumeIngredients)),
+            //    prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Prefix)) { before = new string[] { "spacechase0.SpaceCore" } },
+            //    postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Postfix))
+            //);
             Harmony.Patch(
-                original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem)),
-                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
-            );
-            Harmony.Patch(
-                original: AccessTools.Method(typeof(SpaceCore.Framework.CustomCraftingRecipe), nameof(SpaceCore.Framework.CustomCraftingRecipe.createItem)),
-                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CreateItem_Postfix))
-            );
-            Harmony.Patch(
-                original: AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.consumeIngredients)),
-                prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Prefix)) { before = new string[] { "spacechase0.SpaceCore" } },
-                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ConsumeIngredients_Postfix))
+                original: AccessTools.Method(typeof(CraftingPage), "clickCraftingRecipe"),
+                transpiler: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.ClickCraftingRecipe_Transpiler))
             );
             Harmony.Patch(
                 original: AccessTools.PropertyGetter(AccessTools.TypeByName("SpaceCore.VanillaAssetExpansion.VAECustomCraftingRecipe"), "Description"),

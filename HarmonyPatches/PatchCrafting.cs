@@ -6,6 +6,8 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Inventories;
 using StardewValley.Menus;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -92,107 +94,142 @@ namespace BZP_Allergies.HarmonyPatches
             return false;  // don't run original (this is pretty much a copy anyway)
         }
 
-        public static void CreateItem_Postfix(ref Item __result)
+        public static IEnumerable<CodeInstruction> ClickCraftingRecipe_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            try
+            // find the "createItem()" instruction
+            // its result is in local var 1
+            // we will use local 3 since it appears unused
+            var createItemMethod = AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem));
+
+            bool foundCreateItem = false;
+            bool done = false;
+
+            var inputInstrList = new List<CodeInstruction>(instructions);
+
+            var codes = new List<CodeInstruction>();
+            for (int i = 0; i < inputInstrList.Count(); i++)
             {
-                if (__result is StardewValley.Object obj && obj.Edibility > -300 && !obj.QualifiedItemId.Equals("(O)921"))  // must be edible and not the ravioli
+                var instr = inputInstrList[i];
+
+                if (foundCreateItem && !done)
                 {
-                    craftedObj = obj;
-                } else
+                    // put the recipe on the stack
+                    codes.Add(new CodeInstruction(OpCodes.Ldloc_0));
+
+                    // put the item back on the stack with lodloc.1
+                    codes.Add(new CodeInstruction(OpCodes.Ldloc_1));
+
+                    // put this._materialContainers on the stack
+                    // ldarg.0
+                    codes.Add(new CodeInstruction(OpCodes.Ldarg_0));
+
+                    // ldfld class(List<IInventory>) StardewValley.Menus.CraftingPage::_materialContainers
+                    var _materialContainers = AccessTools.Field(typeof(CraftingPage), nameof(CraftingPage._materialContainers));
+                    codes.Add(new CodeInstruction(OpCodes.Ldfld, _materialContainers));
+
+                    // call AddPotentialAllergiesFromCraftingToItem
+                    var mine = AccessTools.Method(typeof(CraftingPatches), nameof(AddPotentialAllergiesFromCraftingToItem));
+                    codes.Add(new CodeInstruction(OpCodes.Call, mine));
+                }
+
+                if (instr.opcode == OpCodes.Callvirt && instr.operand is MethodInfo minfo && minfo == createItemMethod)
                 {
-                    craftedObj = null;
+                    foundCreateItem = true;
+                    codes.Add(instr);
+                    i++;
+                    codes.Add(inputInstrList[i]);
+                }
+
+                else codes.Add(instr);
+            }       
+
+            return codes.AsEnumerable();
+        }
+
+        public static void AddPotentialAllergiesFromCraftingToItem(CraftingRecipe recipe, Item crafted, List<IInventory> additionalMaterials)
+        {
+            // copy the inventories
+            Inventory playerItems = CopyInventory(Game1.player.Items);
+
+            List<IInventory?> additionalMaterialsCopy = new();
+            foreach (IInventory inv in additionalMaterials)
+            {
+                if (inv == null)
+                {
+                    additionalMaterialsCopy.Add(inv);
+                    continue;
+                }
+                additionalMaterialsCopy.Add(CopyInventory(inv));
+            }
+
+            // consume ingredients
+            Dictionary<string, InventoryData> beforeConsume = CopyInventoryData(additionalMaterialsCopy);
+            recipe.consumeIngredients(additionalMaterialsCopy);
+
+            // see what was used
+            Dictionary<string, InventoryData> afterConsume = CopyInventoryData(additionalMaterialsCopy);
+
+            // subtract afterConsume amounts from beforeConsume to get the consumed materials
+            ISet<InventoryData> usedItems = new HashSet<InventoryData>();
+            foreach (var pair in beforeConsume)
+            {
+                beforeConsume[pair.Key].Stack -= afterConsume.GetValueOrDefault(pair.Key, new()).Stack;
+
+                if (beforeConsume[pair.Key].Stack > 0)
+                {
+                    // we used some of this item
+                    usedItems.Add(pair.Value);
                 }
             }
-            catch (Exception ex)
+            
+
+            // what allergens did we cook this with?
+            crafted.modData[Constants.ModDataMadeWith] = "";
+            foreach (InventoryData item in usedItems)
             {
-                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CreateItem_Postfix)}:\n{ex}", LogLevel.Error);
+                if (item == null || item.Item == null) continue;
+
+                // what allergens does it have?
+                ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
+                foreach (string allergen in allergens)
+                {
+                    AllergenManager.ModDataSetAdd(crafted, Constants.ModDataMadeWith, allergen);
+                }
+            }
+
+            // restore inventories
+            Game1.player.Items.OverwriteWith(playerItems);
+
+            for (int i=0; i < additionalMaterials.Count; i++)
+            {
+                if (additionalMaterials[i] == null) continue;
+                additionalMaterials[i].OverwriteWith(additionalMaterialsCopy[i]);
             }
         }
 
-        public static void ConsumeIngredients_Prefix(out Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
+        private static Inventory CopyInventory(IInventory inventory)
         {
-            try
+            Inventory result = new();
+
+            foreach (Item i in inventory)
             {
-                if (craftedObj == null)
+                if (i is null)
                 {
-                    __state = null;
-                    return;
+                    result.Add(i);
+                    continue;
                 }
 
-                // item counts and qualified ids in the original inventory
-                __state = CopyInventoryData(additionalMaterials);
+                Item copy = i.getOne();
+                copy.Stack = i.Stack;
+                result.Add(copy);
             }
-            catch (Exception ex)
-            {
-                ModEntry.Instance.Monitor.Log($"Failed in {nameof(ConsumeIngredients_Prefix)}:\n{ex}", LogLevel.Error);
-                __state = null;
-            }
-        }
 
-        public static void ConsumeIngredients_Postfix(Dictionary<string, InventoryData>? __state, List<IInventory> additionalMaterials)
-        {
-            try
-            {
-                if (craftedObj == null)
-                {
-                    return;
-                }
 
-                if (__state == null)
-                {
-                    throw new Exception(nameof(ConsumeIngredients_Prefix) + " did not set output state.");
-                }
-
-                // get the item counts after ingredients consumed
-                Dictionary<string, InventoryData> afterConsume = CopyInventoryData(additionalMaterials);
-
-                // subtract afterConsume amounts from __state (before consume) to get the consumed materials
-                ISet<InventoryData> usedItems = new HashSet<InventoryData>();
-                foreach (var pair in __state)
-                {
-                    __state[pair.Key].Stack -= afterConsume.GetValueOrDefault(pair.Key, new()).Stack;
-
-                    if (__state[pair.Key].Stack > 0)
-                    {
-                        // we used some of this item
-                        usedItems.Add(pair.Value);
-                    }
-                }
-
-                // what allergens did we cook this with?
-                craftedObj.modData[Constants.ModDataMadeWith] = "";
-                foreach (InventoryData item in usedItems)
-                {
-                    if (item == null || item.Item == null) continue;
-
-                    // what allergens does it have?
-                    ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
-                    foreach (string allergen in allergens)
-                    {
-                        AllergenManager.ModDataSetAdd(craftedObj, Constants.ModDataMadeWith, allergen);
-                    }
-                }
-
-                // do we get a reaction from cooking it?
-                if (ModEntry.Instance.Config.CookingReaction)
-                {
-                    ISet<string> cookedWithAllergens = AllergenManager.ModDataSetGet(craftedObj, Constants.ModDataMadeWith);
-                    AllergenManager.CheckForAllergiesToDiscover(Game1.player, cookedWithAllergens);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModEntry.Instance.Monitor.Log($"Failed in {nameof(ConsumeIngredients_Postfix)}:\n{ex}", LogLevel.Error);
-            }
-            finally
-            {
-                craftedObj = null;  // reset for next run
-            }
+            return result;
         }
 
         // includes farmer inventory (Game1.player.Items)
-        private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory>? inventories)
+        private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory?>? inventories)
         {
             Dictionary<string, InventoryData> results = new();
             foreach (Item i in Game1.player.Items)
@@ -212,8 +249,9 @@ namespace BZP_Allergies.HarmonyPatches
                 return results;
             }
 
-            foreach (IInventory container in inventories)
+            foreach (IInventory? container in inventories)
             {
+                if (container == null) continue;
                 foreach (Item i in container)
                 {
                     if (i == null) continue;
