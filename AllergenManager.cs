@@ -22,6 +22,7 @@ namespace BZP_Allergies
 
         public static readonly string AllergyReliefId = "BarleyZP.BzpAllergies_AllergyMedicine";
         public static readonly string LactasePillsId = "BarleyZP.BzpAllergies_LactasePills";
+        public static readonly string AllergyTeachBookId = "BarleyZP.BzpAllergies_AllergyTeachBook";
 
         public static readonly string NpcReactionDialogueKey = "BarleyZP.BzpAllergies_farmer_allergic_reaction";
     }
@@ -373,7 +374,7 @@ namespace BZP_Allergies
             }
         }
 
-        private static bool DiscoverPlayerAllergy(string allergyId)
+        public static bool DiscoverPlayerAllergy(string allergyId)
         {
             if (ModDataGet(Game1.player, Constants.ModDataRandom, out string val) && val == "true")
             {

@@ -55,10 +55,12 @@ namespace BZP_Allergies
 
             // harmony patches
             Harmony = new(ModManifest.UniqueID);
+
             CraftingCooking_Patches.Patch(Harmony);
             FarmerEating_Patches.Patch(Harmony);
             Inventory_Patches.Patch(Harmony);
             NpcDialogue_Patches.Patch(Harmony);
+            SkillBook_Patches.Patch(Harmony);
             SpaceCoreCustomCraftingRecipe_Patches.Patch(Harmony);
             UI_Patches.Patch(Harmony);
 

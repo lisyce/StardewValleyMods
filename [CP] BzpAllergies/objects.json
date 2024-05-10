@@ -145,6 +145,29 @@
             "color_white",
             "BarleyZP.BzpAllergies_FlourIngredient"
           ]
+        },
+        "BarleyZP.BzpAllergies_AllergyTeachBook": {
+          "Name": "All About Allergies",
+          "DisplayName": "All About Allergies",
+          "Description": "Helps you discover one of your food allergies.",
+          "Type": "asdf",
+          "Category": -102,
+          "Price": 1000,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 9,
+          "Edibility": -300,
+          "IsDrink": false,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "color_green",
+            "book_item"
+          ]
         }
       }
     }
