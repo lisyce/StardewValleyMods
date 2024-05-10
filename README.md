@@ -7,8 +7,9 @@
 # Installation
 
 1. Install [SMAPI](https://smapi.io/)
-1. Install [this mod](https://www.nexusmods.com/stardewvalley/mods/21238) from Nexus
+1. Install [this mod](https://www.nexusmods.com/stardewvalley/mods/21238)
 1. Install [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915)
+1. Install [SpaceCore](https://www.nexusmods.com/stardewvalley/mods/1348)
 1. Optionally, install [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) to easily configure the mod within the game
 1. Launch Stardew Valley through SMAPI
 1. Configure some allergies and enjoy the challenge!
@@ -16,20 +17,6 @@
 Ensure that both the "\[CP\] BzpAllergies" and the "BzpAllergies" mods are directly inside your mod folder. This mod contains both a content pack and a C# component, so SMAPI needs to be able to find both of these components.
 
 # For Mod Authors
-
-## Harmony Patches
-
-This mod changes core gameplay logic and thus employs some use of Harmony. Currently, the following methods are patched with prefix or postfix methods (no transpilers are used):
-
-- `GameLocation.createQuestionDialogue`
-- `Farmer.doneEating`
-- `NPC.checkAction`
-- `CraftingRecipe.createItem`
-- `CraftingRecipe.consumeIngredients`
-- `Object.getDescription`
-- `Item.canStackWith`
-
-All of these prefixes allow the original logic to run afterwards, so they should be fairly compatible with other mods that patch these methods.
 
 ## Creating Custom Allergens and Integrating Modded Items
 
@@ -60,11 +47,3 @@ Adding this dialogue is not currently supported through the BarleyZP's Allergies
 # Bug Reports and Feature Requests
 
 You may leave a comment on the linked Nexus mod page or create an issue on this GitHub repository's issues page. There is no guarantee that feature requests will be implemented, but I will take a look at your suggestions!
-
-## Planned Features
-
-- Public API
-- Randomized allergens for an extra challenge
-- Configurable allergies for NPCs that influence gift tastes, dialogue, etc.
-- Compatibility with Stardew Valley Expanded and Ridgeside Village
-- Translation support
