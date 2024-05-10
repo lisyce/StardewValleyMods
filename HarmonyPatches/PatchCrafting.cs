@@ -11,18 +11,6 @@ using System.Reflection;
 
 namespace BZP_Allergies.HarmonyPatches
 {
-    internal class InventoryData
-    {
-        public InventoryData()
-        {
-            Stack = 0;
-            @Item = null;
-        }
-
-        public int Stack {  get; set; }
-        public Item? @Item { get; set; }
-    }
-
 
     internal class CraftingPatches
     {
