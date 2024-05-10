@@ -1,0 +1,38 @@
+{
+	"Changes": [
+    {
+      "Action": "Load",
+      "FromFile": "PowerTabIcon.png",
+      "Target": "Mods/{{ModId}}/PowersTabIcon"
+    },
+		{
+			"Action": "EditData",
+			"Target": "Spiderbuttons.SpecialPowerUtilities/PowerSections",
+			"Entries": {
+				"BarleyZP.BzpAllergies": {
+					"SectionName": "BarleyZP's Allergies",
+					"IconPath": "Mods/{{ModId}}/PowersTabIcon"
+				}
+			}
+		},
+    {
+			"Action": "EditData",
+			"Target": "Data/Powers",
+			"Entries": {
+				"BarleyZP.BzpAllergies_AllergyTeachBook": {
+					"DisplayName": "All About Allergies",
+					"Description": "Helps you discover one of your food allergies.",
+					"TexturePath": "BarleyZP.BzpAllergies/Sprites",
+					"TexturePosition": {
+						"X": 144,
+						"Y": 0
+					},
+					"UnlockedCondition": "PLAYER_STAT Current BarleyZP.BzpAllergies_AllergyTeachBook 1",
+          "CustomFields": {
+            "Spiderbuttons.SpecialPowerUtilities/Section": "BarleyZP.BzpAllergies"
+          }
+				}
+			}
+		}
+  ]
+}

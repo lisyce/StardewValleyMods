@@ -19,6 +19,10 @@
     {
       "UniqueID": "spacechase0.GenericModConfigMenu",
       "IsRequired": false
+    },
+    {
+      "UniqueID": "Spiderbuttons.SpecialPowerUtilities",
+      "IsRequired": false
     }
   ]
 }

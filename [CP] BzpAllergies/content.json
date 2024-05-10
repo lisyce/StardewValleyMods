@@ -18,6 +18,10 @@
       "FromFile": "recipes.json"
     },
     {
+      "Action": "Include",
+      "FromFile": "powers.json"
+    },
+    {
       "LogName": "Add medicine to Harvey's clinic",
       "Action": "EditData",
       "Target": "Data/Shops",

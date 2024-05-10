@@ -10,7 +10,8 @@
 1. Install [this mod](https://www.nexusmods.com/stardewvalley/mods/21238)
 1. Install [Content Patcher](https://www.nexusmods.com/stardewvalley/mods/1915)
 1. Install [SpaceCore](https://www.nexusmods.com/stardewvalley/mods/1348)
-1. Optionally, install [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) to easily configure the mod within the game
+1. Optionally, install [Generic Mod Config Menu](https://www.nexusmods.com/stardewvalley/mods/5098) to easily configure the mod within the game.
+1. Optionally, install [Special Power Utilities](https://www.nexusmods.com/stardewvalley/mods/22300) for the skill books to show up in your powers tab.
 1. Launch Stardew Valley through SMAPI
 1. Configure some allergies and enjoy the challenge!
 
