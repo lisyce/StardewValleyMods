@@ -67,8 +67,12 @@ namespace BZP_Allergies
                 original: AccessTools.Method(typeof(SpaceCore.Framework.CustomCraftingRecipe), nameof(SpaceCore.Framework.CustomCraftingRecipe.drawRecipeDescription)),
                 prefix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.SpaceCoreFrameworkRecipeDescription_Prefix))
             );
+            Harmony.Patch(
+                original: AccessTools.Method(typeof(Farmer), nameof(Farmer.cookedRecipe)),
+                postfix: new HarmonyMethod(typeof(CraftingPatches), nameof(CraftingPatches.CookedRecipe_Postfix))
+            );
 
-            
+
             Harmony.Patch(
                 original: AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue), new Type[] { typeof(string), typeof(Response[]), typeof(string) }),
                 prefix: new HarmonyMethod(typeof(PatchEatQuestionPopup), nameof(PatchEatQuestionPopup.CreateQuestionDialogue_Prefix))

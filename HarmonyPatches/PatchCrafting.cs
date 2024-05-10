@@ -14,7 +14,9 @@ namespace BZP_Allergies.HarmonyPatches
 
     internal class CraftingPatches
     {
-        public static StardewValley.Object? craftedObj = null;
+        public static ISet<string>? JustCookedWith;
+        public static string? JustCookedWithName;
+
         public static void SpaceCoreVaeRecipeDescription_Postfix(SpaceCore.VanillaAssetExpansion.VAECraftingRecipe __instance, ref string __result)
         {
             try
@@ -80,6 +82,24 @@ namespace BZP_Allergies.HarmonyPatches
             Utility.drawTextWithShadow(b, Game1.parseText(privRecipe.Description, Game1.smallFont, width - 8), Game1.smallFont, position + new Vector2(0f, 76 + privRecipe.Ingredients.Length * 36 + lineExpansion), Game1.textColor * 0.75f);
 
             return false;  // don't run original (this is pretty much a copy anyway)
+        }
+
+        public static void CookedRecipe_Postfix()
+        {
+            if (!ModEntry.Instance.Config.CookingReaction || JustCookedWith == null) return;
+
+            foreach (string a in JustCookedWith)
+            {
+                if (AllergenManager.FarmerIsAllergic(a))
+                {
+                    Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(JustCookedWithName!, "cook", 60000));
+                    AllergenManager.CheckForAllergiesToDiscover(Game1.player, JustCookedWith);
+                    break;
+                }
+            }
+
+            JustCookedWith = null;
+            JustCookedWithName = null;
         }
 
         public static IEnumerable<CodeInstruction> ClickCraftingRecipe_Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -186,9 +206,14 @@ namespace BZP_Allergies.HarmonyPatches
                 ISet<string> allergens = AllergenManager.GetAllergensInObject(item as StardewValley.Object);
                 foreach (string allergen in allergens)
                 {
+                    JustCookedWith ??= new HashSet<string>();  // there are some allergies
+                    JustCookedWith.Add(allergen);
                     AllergenManager.ModDataSetAdd(crafted, Constants.ModDataMadeWith, allergen);
                 }
             }
+
+            // set static vars
+            JustCookedWithName = crafted.DisplayName;
 
             // restore inventories
             Game1.player.Items.OverwriteWith(playerItems);

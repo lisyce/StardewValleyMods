@@ -337,6 +337,7 @@ namespace BZP_Allergies
             {
                 "consume" => "Probably shouldn't have eaten that...",
                 "hold" => "Holding that with severe\nallergies was a bad idea!",
+                "cook" => "Cooking that gave you a reaction!",
                 _ => throw new NotImplementedException()
             };
 
