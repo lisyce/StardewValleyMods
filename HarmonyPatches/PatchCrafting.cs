@@ -90,7 +90,7 @@ namespace BZP_Allergies.HarmonyPatches
             }
             b.Draw(Game1.staminaRect, new Rectangle((int)position.X + 8, (int)position.Y + lineExpansion + 64 + 4 + privRecipe.Ingredients.Length * 36, width - 32, 2), Game1.textColor * 0.35f);
             Utility.drawTextWithShadow(b, Game1.parseText(privRecipe.Description, Game1.smallFont, width - 8), Game1.smallFont, position + new Vector2(0f, 76 + privRecipe.Ingredients.Length * 36 + lineExpansion), Game1.textColor * 0.75f);
-            
+
             return false;  // don't run original (this is pretty much a copy anyway)
         }
 
@@ -141,7 +141,7 @@ namespace BZP_Allergies.HarmonyPatches
                 }
 
                 else codes.Add(instr);
-            }       
+            }
 
             return codes.AsEnumerable();
         }
@@ -151,7 +151,7 @@ namespace BZP_Allergies.HarmonyPatches
             // copy the inventories
             Inventory playerItems = CopyInventory(Game1.player.Items);
 
-            List<IInventory?> additionalMaterialsCopy = new();
+            List<IInventory> additionalMaterialsCopy = new();
             foreach (IInventory inv in additionalMaterials)
             {
                 if (inv == null)
@@ -163,34 +163,39 @@ namespace BZP_Allergies.HarmonyPatches
             }
 
             // consume ingredients
-            Dictionary<string, InventoryData> beforeConsume = CopyInventoryData(additionalMaterialsCopy);
+            Dictionary<string, Item> beforeConsume = GetItemsInAllInventories(additionalMaterials);
+
             recipe.consumeIngredients(additionalMaterialsCopy);
 
             // see what was used
-            Dictionary<string, InventoryData> afterConsume = CopyInventoryData(additionalMaterialsCopy);
+            Dictionary<string, Item> afterConsume = GetItemsInAllInventories(additionalMaterialsCopy);
 
             // subtract afterConsume amounts from beforeConsume to get the consumed materials
-            ISet<InventoryData> usedItems = new HashSet<InventoryData>();
+            ISet<Item> usedItems = new HashSet<Item>();
             foreach (var pair in beforeConsume)
             {
-                beforeConsume[pair.Key].Stack -= afterConsume.GetValueOrDefault(pair.Key, new()).Stack;
+                int numAfter = 0;
+                if (afterConsume.ContainsKey(pair.Key))
+                {
+                    numAfter = afterConsume[pair.Key].Stack;
+                }
 
-                if (beforeConsume[pair.Key].Stack > 0)
+                if (pair.Value.Stack - numAfter > 0)
                 {
                     // we used some of this item
                     usedItems.Add(pair.Value);
                 }
             }
-            
+
 
             // what allergens did we cook this with?
             crafted.modData[Constants.ModDataMadeWith] = "";
-            foreach (InventoryData item in usedItems)
+            foreach (Item item in usedItems)
             {
-                if (item == null || item.Item == null) continue;
+                if (item == null) continue;
 
                 // what allergens does it have?
-                ISet<string> allergens = AllergenManager.GetAllergensInObject(item.Item as StardewValley.Object);
+                ISet<string> allergens = AllergenManager.GetAllergensInObject(item as StardewValley.Object);
                 foreach (string allergen in allergens)
                 {
                     AllergenManager.ModDataSetAdd(crafted, Constants.ModDataMadeWith, allergen);
@@ -200,11 +205,38 @@ namespace BZP_Allergies.HarmonyPatches
             // restore inventories
             Game1.player.Items.OverwriteWith(playerItems);
 
-            for (int i=0; i < additionalMaterials.Count; i++)
+            for (int i = 0; i < additionalMaterials.Count; i++)
             {
                 if (additionalMaterials[i] == null) continue;
                 additionalMaterials[i].OverwriteWith(additionalMaterialsCopy[i]);
             }
+        }
+
+        private static Dictionary<string, Item> GetItemsInAllInventories(List<IInventory> additionalMaterials)
+        {
+            Dictionary<string, Item> result = new();
+
+            foreach (Item i in Game1.player.Items)
+            {
+                if (i == null) continue;
+                Item copy = i.getOne();
+                copy.Stack = i.Stack;
+                result[i.ItemId] = copy;
+            }
+
+            foreach (IInventory inv in additionalMaterials)
+            {
+                if (inv is null) continue;
+                foreach (Item i in inv)
+                {
+                    if (i == null) continue;
+                    Item copy = i.getOne();
+                    copy.Stack = i.Stack;
+                    result[i.ItemId] = copy;
+                }
+            }
+
+            return result;
         }
 
         private static Inventory CopyInventory(IInventory inventory)
@@ -227,46 +259,5 @@ namespace BZP_Allergies.HarmonyPatches
 
             return result;
         }
-
-        // includes farmer inventory (Game1.player.Items)
-        private static Dictionary<string, InventoryData> CopyInventoryData (List<IInventory?>? inventories)
-        {
-            Dictionary<string, InventoryData> results = new();
-            foreach (Item i in Game1.player.Items)
-            {
-                if (i == null) continue;
-                if (!results.ContainsKey(i.QualifiedItemId))
-                {
-                    results[i.QualifiedItemId] = new();
-                }
-                InventoryData data = results[i.QualifiedItemId];
-                data.Stack += i.Stack;
-                data.Item = i;
-            }
-
-            if (inventories == null)
-            {
-                return results;
-            }
-
-            foreach (IInventory? container in inventories)
-            {
-                if (container == null) continue;
-                foreach (Item i in container)
-                {
-                    if (i == null) continue;
-                    if (!results.ContainsKey(i.QualifiedItemId))
-                    {
-                        results[i.QualifiedItemId] = new();
-                    }
-                    InventoryData data = results[i.QualifiedItemId];
-                    data.Stack += i.Stack;
-                    data.Item = i;
-                }
-            }
-
-            return results;
-        }
     }
-
 }
