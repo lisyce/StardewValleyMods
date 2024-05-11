@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using HarmonyLib;
+using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Buffs;
@@ -22,7 +23,9 @@ namespace BZP_Allergies
 
         public static readonly string AllergyReliefId = "BarleyZP.BzpAllergies_AllergyMedicine";
         public static readonly string LactasePillsId = "BarleyZP.BzpAllergies_LactasePills";
+        public static readonly string PlantMilkId = "BarleyZP.BzpAllergies_PlantMilk";
         public static readonly string AllergyTeachBookId = "BarleyZP.BzpAllergies_AllergyTeachBook";
+        public static readonly string AllergyCookbookId = "BarleyZP.BzpAllergies_AllergyCookbook";
 
         public static readonly string NpcReactionDialogueKey = "BarleyZP.BzpAllergies_farmer_allergic_reaction";
     }
@@ -382,6 +385,21 @@ namespace BZP_Allergies
             }
 
             return false;
+        }
+
+        public static IEnumerable<string> ReadAllergyCookbookToken()
+        {
+            List<string> result = new();
+
+            if (!Context.IsWorldReady || Game1.player.stats.Get(Constants.AllergyCookbookId) == 0)
+            {
+                result.Add("false");
+            }
+            else {
+                result.Add("true");
+            }
+
+            return result;
         }
     }
 

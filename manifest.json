@@ -9,10 +9,6 @@
   "UpdateKeys": [ "Nexus:21238" ],
   "Dependencies": [
     {
-      "UniqueID": "BarleyZP.BzpAllergies.CP",
-      "IsRequired": true
-    },
-    {
       "UniqueID": "spacechase0.SpaceCore",
       "IsRequired": true
     },
@@ -22,6 +18,10 @@
     },
     {
       "UniqueID": "Spiderbuttons.SpecialPowerUtilities",
+      "IsRequired": false
+    },
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
       "IsRequired": false
     }
   ]

@@ -1,8 +1,4 @@
-﻿using BZP_Allergies.HarmonyPatches.UI;
-using HarmonyLib;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using StardewModdingAPI;
+﻿using HarmonyLib;
 using StardewValley;
 using StardewValley.Inventories;
 using StardewValley.Menus;

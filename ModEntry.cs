@@ -2,15 +2,12 @@
 using BZP_Allergies.Config;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley;
-using StardewValley.ItemTypeDefinitions;
-using StardewValley.Menus;
-using System;
+
 using static BZP_Allergies.AllergenManager;
 
 namespace BZP_Allergies
@@ -95,15 +92,15 @@ namespace BZP_Allergies
         /// <param name="e">The event arguments.</param>
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
             // get Generic Mod Config Menu's API (if it's installed)
-            var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-            if (configMenu is null)
+            var GmcmApi = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+            if (GmcmApi is null)
             {
-                Monitor.Log("No mod config menu API found.", LogLevel.Debug);
+                Monitor.Log("GMCM API not found.", LogLevel.Error);
                 return;
             }
 
             // config
-            configMenu.Register(
+            GmcmApi.Register(
                 mod: ModManifest,
                 reset: () => {
                     Config = new ModConfigModel();
@@ -114,8 +111,18 @@ namespace BZP_Allergies
                     Config = Helper.ReadConfig<ModConfigModel>();
                 }
             );
+            
+            ConfigMenuInit.SetupMenuUI(GmcmApi, ModManifest);
 
-            ConfigMenuInit.SetupMenuUI(configMenu, ModManifest);
+            // CP API
+            var ContentPatcherApi = Helper.ModRegistry.GetApi<IContentPatcherAPI>("Pathoschild.ContentPatcher");
+            if (ContentPatcherApi is null)
+            {
+                Monitor.Log("CP API not found.", LogLevel.Error);
+                return;
+            }
+
+            ContentPatcherApi.RegisterToken(ModManifest, "ReadAllergyCookbook", ReadAllergyCookbookToken);
         }
 
         /// <inheritdoc cref="IGameLoopEvents.SaveLoaded"/>
@@ -124,21 +131,21 @@ namespace BZP_Allergies
         private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
         {
             // make sure all the allergens the player "has" and "discovered" still exist
-            ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
-            ISet<string> discovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+            ISet<string> has = ModDataSetGet(Game1.player, Constants.ModDataHas);
+            ISet<string> discovered = ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
             foreach (string id in has)
             {
-                if (!AllergenManager.ALLERGEN_DATA_ASSET.ContainsKey(id))
+                if (!ALLERGEN_DATA_ASSET.ContainsKey(id))
                 {
-                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataHas, id);
+                    ModDataSetRemove(Game1.player, Constants.ModDataHas, id);
                 }
             }
 
             foreach (string id in discovered)
             {
-                if (!AllergenManager.ALLERGEN_DATA_ASSET.ContainsKey(id))
+                if (!ALLERGEN_DATA_ASSET.ContainsKey(id))
                 {
-                    AllergenManager.ModDataSetRemove(Game1.player, Constants.ModDataDiscovered, id);
+                    ModDataSetRemove(Game1.player, Constants.ModDataDiscovered, id);
                 }
             }
         }
@@ -174,7 +181,7 @@ namespace BZP_Allergies
 
             string result = "\n{Allergen Id}: {Allergen Display Name}";
 
-            foreach (var item in AllergenManager.ALLERGEN_DATA_ASSET)
+            foreach (var item in ALLERGEN_DATA_ASSET)
             {
                 result += "\n  " + item.Key + ": " + item.Value.DisplayName;
             }

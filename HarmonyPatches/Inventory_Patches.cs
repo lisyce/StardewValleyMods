@@ -2,6 +2,7 @@
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.ItemTypeDefinitions;
 using StardewValley.Menus;
 using System.Text;
 
@@ -27,6 +28,27 @@ namespace BZP_Allergies.HarmonyPatches
             // 25 chars max a line
             try
             {
+                string itemId = Traverse.Create(__instance).Property("ItemId").GetValue<string>();
+
+                // is it the allergy teach book?
+                bool isAllergyTeachBook = itemId == Constants.AllergyTeachBookId;
+                bool alreadyRead = Game1.player.stats.Get(itemId) > 0;
+
+                ISet<string> playerHas = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
+                ISet<string> playerDiscovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+
+                bool canDiscoverMore = playerDiscovered.Count < playerHas.Count;
+                if (isAllergyTeachBook && alreadyRead && canDiscoverMore)
+                {
+                    ParsedItemData? originalBook = ItemRegistry.GetData("(O)" + itemId);
+                    if (originalBook != null)
+                    {
+                        __result = originalBook.Description;
+                    }
+                    return;
+                }
+
+                // see if it has allergens in it
                 ISet<string> allergens = AllergenManager.GetAllergensInObject(__instance);
                 if (allergens.Count == 0) return;
 

@@ -4,6 +4,10 @@
       "LogName": "Context tag recipes for allergen-free alternatives",
       "Action": "EditData",
       "Target": "spacechase0.SpaceCore/CookingRecipeOverrides",
+      "When": {
+        "HasMod": "BarleyZP.BzpAllergies",
+        "BarleyZP.BzpAllergies/ReadAllergyCookbook": "true"
+      },
       "Entries": {
         "BarleyZP.BzpAllergies_PlantMilk": {
           "ProductQualifiedId": "(O)BarleyZP.BzpAllergies_PlantMilk",
@@ -666,8 +670,12 @@
       "LogName": "Recipes",
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
+      "When": {
+        "HasMod": "BarleyZP.BzpAllergies",
+        "BarleyZP.BzpAllergies/ReadAllergyCookbook": "true"
+      },
       "Entries": {
-        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk/default/"
+        "BarleyZP.BzpAllergies_PlantMilk": "423 1//BarleyZP.BzpAllergies_PlantMilk//"
       }
     }
   ]

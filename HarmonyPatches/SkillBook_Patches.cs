@@ -21,14 +21,15 @@ namespace BZP_Allergies.HarmonyPatches
 
         public static void ReadBook_Postfix(ref StardewValley.Object __instance)
         {
-            if (!AllergenManager.ModDataGet(Game1.player, Constants.ModDataRandom, out string val) || val == "false")
-            {
-                return;  // we don't discover allergies
-            }
-
             string bookId = Traverse.Create(__instance).Property("ItemId").GetValue<string>();
+            
             if (bookId == Constants.AllergyTeachBookId)
             {
+                if (!AllergenManager.ModDataGet(Game1.player, Constants.ModDataRandom, out string val) || val == "false")
+                {
+                    return;  // we don't discover allergies
+                }
+
                 ISet<string> playerHas = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
                 ISet<string> playerDiscovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
 
@@ -44,8 +45,18 @@ namespace BZP_Allergies.HarmonyPatches
                     Game1.player.mailReceived.Add("read_a_book");
                 }
 
-                Game1.player.stats.Increment(bookId);
                 Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+            }
+            else if (bookId == Constants.AllergyCookbookId)
+            {
+                Game1.player.cookingRecipes.TryAdd(Constants.PlantMilkId, 0);
+                if (!Game1.player.mailReceived.Contains("read_a_book"))
+                {
+                    Game1.player.mailReceived.Add("read_a_book");
+                }
+
+                Game1.showGlobalMessage("You've got some new cooking knowledge to think about overnight.");
+
             }
         }
     }

@@ -22,22 +22,8 @@
       "FromFile": "powers.json"
     },
     {
-      "LogName": "Add medicine to Harvey's clinic",
-      "Action": "EditData",
-      "Target": "Data/Shops",
-      "TargetField": [ "Hospital", "Items" ],
-      "Entries": {
-        "BarleyZP.BzpAllergies_AllergyMedicine": {
-          "Id": "BarleyZP.BzpAllergies_AllergyMedicine",
-          "ItemId": "(O)BarleyZP.BzpAllergies_AllergyMedicine",
-          "Price": 1000
-        },
-        "BarleyZP.BzpAllergies_LactasePills": {
-          "Id": "BarleyZP.BzpAllergies_LactasePills",
-          "ItemId": "(O)BarleyZP.BzpAllergies_LactasePills",
-          "Price": 1500
-        }
-      }
+      "Action": "Include",
+      "FromFile": "shops.json"
     },
     {
       "LogName": "Add custom mail",

@@ -31,6 +31,19 @@
           "CustomFields": {
             "Spiderbuttons.SpecialPowerUtilities/Section": "BarleyZP.BzpAllergies"
           }
+				},
+				"BarleyZP.BzpAllergies_AllergyCookbook": {
+					"DisplayName": "Allergy-Sensitive Cooking",
+					"Description": "Learn to cook foods that are safe to eat when you have allergies.",
+					"TexturePath": "BarleyZP.BzpAllergies/Sprites",
+					"TexturePosition": {
+						"X": 128,
+						"Y": 0
+					},
+					"UnlockedCondition": "PLAYER_STAT Current BarleyZP.BzpAllergies_AllergyCookbook 1",
+					"CustomFields": {
+						"Spiderbuttons.SpecialPowerUtilities/Section": "BarleyZP.BzpAllergies"
+					}
 				}
 			}
 		}

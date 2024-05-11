@@ -168,6 +168,29 @@
             "color_green",
             "book_item"
           ]
+        },
+        "BarleyZP.BzpAllergies_AllergyCookbook": {
+          "Name": "Allergy-Sensitive Cooking",
+          "DisplayName": "Allergy-Sensitive Cooking",
+          "Description": "Learn to cook foods that are safe to eat when you have allergies.",
+          "Type": "asdf",
+          "Category": -102,
+          "Price": 1000,
+          "Texture": "BarleyZP.BzpAllergies/Sprites",
+          "SpriteIndex": 8,
+          "Edibility": -300,
+          "IsDrink": false,
+          "Buffs": null,
+          "GeodeDropsDefaultItems": false,
+          "GeodeDrops": null,
+          "ArtifactSpotChances": null,
+          "ExcludeFromFishingCollection": false,
+          "ExcludeFromShippingCollection": false,
+          "ExcludeFromRandomSale": false,
+          "ContextTags": [
+            "color_purple",
+            "book_item"
+          ]
         }
       }
     }
