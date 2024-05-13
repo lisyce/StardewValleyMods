@@ -52,6 +52,7 @@ namespace BZP_Allergies
 
             // harmony patches
             Harmony = new(ModManifest.UniqueID);
+            Harmony.DEBUG = true;  // disable for publishing
 
             CraftingCooking_Patches.Patch(Harmony);
             FarmerEating_Patches.Patch(Harmony);

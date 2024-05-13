@@ -49,15 +49,15 @@ namespace BZP_Allergies.HarmonyPatches
             // find the "createItem()" instruction
             // its result is in local var 1
             // we will use local 3 since it appears unused
-            var createItemMethod = AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem));
+            MethodInfo createItemMethod = AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem));
 
             bool foundCreateItem = false;
             bool done = false;
 
             var inputInstrList = new List<CodeInstruction>(instructions);
 
-            var codes = new List<CodeInstruction>();
-            for (int i = 0; i < inputInstrList.Count(); i++)
+            List<CodeInstruction> codes = new();
+            for (int i = 0; i < inputInstrList.Count; i++)
             {
                 var instr = inputInstrList[i];
 
@@ -78,7 +78,7 @@ namespace BZP_Allergies.HarmonyPatches
                     codes.Add(new CodeInstruction(OpCodes.Ldfld, _materialContainers));
 
                     // call AddPotentialAllergiesFromCraftingToItem
-                    var mine = AccessTools.Method(typeof(CraftingCooking_Patches), nameof(AddPotentialAllergiesFromCraftingToItem));
+                    MethodInfo mine = AccessTools.Method(typeof(CraftingCooking_Patches), nameof(AddPotentialAllergiesFromCraftingToItem));
                     codes.Add(new CodeInstruction(OpCodes.Call, mine));
                 }
 
