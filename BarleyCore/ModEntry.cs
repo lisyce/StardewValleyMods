@@ -9,5 +9,9 @@ namespace BarleyCore
             
         }
 
+        public override object GetApi(IModInfo mod)
+        {
+            return new BarleyCoreApi(mod);
+        }
     }
 }
