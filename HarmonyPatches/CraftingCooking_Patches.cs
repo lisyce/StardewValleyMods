@@ -4,6 +4,7 @@ using StardewValley.Inventories;
 using StardewValley.Menus;
 using System.Reflection.Emit;
 using System.Reflection;
+using StardewModdingAPI;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -28,27 +29,33 @@ namespace BZP_Allergies.HarmonyPatches
 
         public static void CookedRecipe_Postfix()
         {
-            if (!ModEntry.Instance.Config.CookingReaction || JustCookedWith == null) return;
-
-            foreach (string a in JustCookedWith)
+            try
             {
-                if (AllergenManager.FarmerIsAllergic(a))
-                {
-                    Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(JustCookedWithName!, "cook", ModEntry.Instance.Config.EatingDebuffLengthSeconds / 2));
-                    AllergenManager.CheckForAllergiesToDiscover(Game1.player, JustCookedWith);
-                    break;
-                }
-            }
+                if (!ModEntry.Instance.Config.CookingReaction || JustCookedWith == null) return;
 
-            JustCookedWith = null;
-            JustCookedWithName = null;
+                foreach (string a in JustCookedWith)
+                {
+                    if (AllergenManager.FarmerIsAllergic(a))
+                    {
+                        Game1.player.applyBuff(AllergenManager.GetAllergicReactionBuff(JustCookedWithName!, "cook", ModEntry.Instance.Config.EatingDebuffLengthSeconds / 2));
+                        AllergenManager.CheckForAllergiesToDiscover(Game1.player, JustCookedWith);
+                        break;
+                    }
+                }
+
+                JustCookedWith = null;
+                JustCookedWithName = null;
+            }
+            catch (Exception ex)
+            {
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(CookedRecipe_Postfix)}:\n{ex}", LogLevel.Error);
+            }
         }
 
         public static IEnumerable<CodeInstruction> ClickCraftingRecipe_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             // find the "createItem()" instruction
             // its result is in local var 1
-            // we will use local 3 since it appears unused
             MethodInfo createItemMethod = AccessTools.Method(typeof(CraftingRecipe), nameof(CraftingRecipe.createItem));
 
             bool foundCreateItem = false;
@@ -80,6 +87,8 @@ namespace BZP_Allergies.HarmonyPatches
                     // call AddPotentialAllergiesFromCraftingToItem
                     MethodInfo mine = AccessTools.Method(typeof(CraftingCooking_Patches), nameof(AddPotentialAllergiesFromCraftingToItem));
                     codes.Add(new CodeInstruction(OpCodes.Call, mine));
+
+                    done = true;
                 }
 
                 if (instr.opcode == OpCodes.Callvirt && instr.operand is MethodInfo minfo && minfo == createItemMethod)
@@ -121,9 +130,10 @@ namespace BZP_Allergies.HarmonyPatches
             Dictionary<string, Item> afterConsume = GetItemsInAllInventories(additionalMaterialsCopy);
 
             // subtract afterConsume amounts from beforeConsume to get the consumed materials
-            ISet<Item> usedItems = new HashSet<Item>();
+            List<Item> usedItems = new();
             foreach (var pair in beforeConsume)
             {
+                
                 int numAfter = 0;
                 if (afterConsume.ContainsKey(pair.Key))
                 {
@@ -133,11 +143,11 @@ namespace BZP_Allergies.HarmonyPatches
                 if (pair.Value.Stack - numAfter > 0)
                 {
                     // we used some of this item
-                    usedItems.Add(pair.Value);
+                    usedItems.Add(pair.Value.getOne());
                 }
             }
 
-
+            
             // what allergens did we cook this with?
             crafted.modData[Constants.ModDataMadeWith] = "";
             foreach (Item item in usedItems)

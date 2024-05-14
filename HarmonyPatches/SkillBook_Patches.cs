@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Reflection.Emit;
+using StardewModdingAPI;
 
 namespace BZP_Allergies.HarmonyPatches
 {
@@ -79,42 +80,49 @@ namespace BZP_Allergies.HarmonyPatches
 
         public static void ReadBook_Postfix(ref StardewValley.Object __instance)
         {
-            string bookId = Traverse.Create(__instance).Property("ItemId").GetValue<string>();
-            
-            if (bookId == Constants.AllergyTeachBookId)
+            try
             {
-                if (!AllergenManager.ModDataGet(Game1.player, Constants.ModDataRandom, out string val) || val == "false")
+                string bookId = Traverse.Create(__instance).Property("ItemId").GetValue<string>();
+
+                if (bookId == Constants.AllergyTeachBookId)
                 {
-                    return;  // we don't discover allergies
+                    if (!AllergenManager.ModDataGet(Game1.player, Constants.ModDataRandom, out string val) || val == "false")
+                    {
+                        return;  // we don't discover allergies
+                    }
+
+                    ISet<string> playerHas = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
+                    ISet<string> playerDiscovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
+
+                    if (playerDiscovered.Count == playerHas.Count) return;
+
+                    // pick a random one to discover
+                    List<string> diff = playerHas.Except(playerDiscovered).ToList();
+                    int discoverIdx = new Random().Next(0, diff.Count);
+                    AllergenManager.DiscoverPlayerAllergy(diff[discoverIdx]);
+
+                    if (!Game1.player.mailReceived.Contains("read_a_book"))
+                    {
+                        Game1.player.mailReceived.Add("read_a_book");
+                    }
+
+                    Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
                 }
-
-                ISet<string> playerHas = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
-                ISet<string> playerDiscovered = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataDiscovered);
-
-                if (playerDiscovered.Count == playerHas.Count) return;
-
-                // pick a random one to discover
-                List<string> diff = playerHas.Except(playerDiscovered).ToList();
-                int discoverIdx = new Random().Next(0, diff.Count);
-                AllergenManager.DiscoverPlayerAllergy(diff[discoverIdx]);
-
-                if (!Game1.player.mailReceived.Contains("read_a_book"))
+                else if (bookId == Constants.AllergyCookbookId)
                 {
-                    Game1.player.mailReceived.Add("read_a_book");
-                }
+                    Game1.player.cookingRecipes.TryAdd(Constants.PlantMilkId, 0);
+                    if (!Game1.player.mailReceived.Contains("read_a_book"))
+                    {
+                        Game1.player.mailReceived.Add("read_a_book");
+                    }
 
-                Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                    Game1.showGlobalMessage("You've got some new cooking knowledge to think about overnight.");
+
+                }
             }
-            else if (bookId == Constants.AllergyCookbookId)
+            catch (Exception ex)
             {
-                Game1.player.cookingRecipes.TryAdd(Constants.PlantMilkId, 0);
-                if (!Game1.player.mailReceived.Contains("read_a_book"))
-                {
-                    Game1.player.mailReceived.Add("read_a_book");
-                }
-
-                Game1.showGlobalMessage("You've got some new cooking knowledge to think about overnight.");
-
+                ModEntry.Instance.Monitor.Log($"Failed in {nameof(ReadBook_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
     }
