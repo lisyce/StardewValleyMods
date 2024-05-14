@@ -1,0 +1,13 @@
+{
+  "Name": "BarleyCore",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Framework and tools mod.",
+  "UniqueID": "BarleyZP.BarleyCore",
+  "EntryDll": "BarleyCore.dll",
+  "MinimumApiVersion": "3.8.0",
+  "UpdateKeys": [ "Nexus:21238" ],
+  "Dependencies": [
+    
+  ]
+}
