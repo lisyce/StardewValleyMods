@@ -107,6 +107,9 @@ namespace BZP_Allergies.HarmonyPatches
 
         public static void AddPotentialAllergiesFromCraftingToItem(CraftingRecipe recipe, Item crafted, List<IInventory> additionalMaterials)
         {
+            if (crafted is null || crafted is not StardewValley.Object o || o.Edibility == -300) return;
+
+
             // copy the inventories
             Inventory playerItems = CopyInventory(Game1.player.Items);
 

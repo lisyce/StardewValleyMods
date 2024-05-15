@@ -19,15 +19,6 @@
       }
     },
     {
-      "LogName": "Add flour context tag (Cornucopia_TapiocaFlour)",
-      "Action": "EditData",
-      "Target": "Data/Objects",
-      "TargetField": [ "Cornucopia_TapiocaFlour", "ContextTags" ],
-      "Entries": {
-        "#-1": "BarleyZP.BzpAllergies_FlourIngredient"
-      }
-    },
-    {
       "LogName": "Add plant milk context tag (Cornucopia_Oats)",
       "Action": "EditData",
       "Target": "Data/Objects",
@@ -46,10 +37,10 @@
       }
     },
     {
-      "LogName": "Add plant milk context tag (Cornucopia_Soybeans)",
+      "LogName": "Add plant milk context tag (Cornucopia_Pecan)",
       "Action": "EditData",
       "Target": "Data/Objects",
-      "TargetField": [ "Cornucopia_Soybeans", "ContextTags" ],
+      "TargetField": [ "Cornucopia_Pecan", "ContextTags" ],
       "Entries": {
         "#-1": "BarleyZP.BzpAllergies_PlantMilkIngredient"
       }

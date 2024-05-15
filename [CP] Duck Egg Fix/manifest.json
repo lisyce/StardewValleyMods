@@ -1,0 +1,18 @@
+{
+  "Name": "[CP] Duck Egg Fix",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Aligns the duck egg with the other eggs in inventories",
+  "UniqueID": "BarleyZP.DuckEggFix",
+  "MinimumApiVersion": "3.8.0",
+  "UpdateKeys": [ "Nexus:24061'" ],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  ]
+}

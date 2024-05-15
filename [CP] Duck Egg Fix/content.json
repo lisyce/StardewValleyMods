@@ -1,0 +1,17 @@
+{
+  "Format": "2.0.0",
+  "Changes": [
+    {
+      "Action": "EditImage",
+      "Target": "Maps/springobjects",
+      "FromFile": "FixedDuckEgg.png",
+      "ToArea": {
+        "X": 160,
+        "Y": 288,
+        "Width": 16,
+        "Height": 16
+      },
+      "PatchMode": "Replace"
+    }
+  ]
+}
