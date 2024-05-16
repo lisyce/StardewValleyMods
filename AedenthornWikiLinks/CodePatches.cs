@@ -30,9 +30,16 @@ namespace WikiLinks
                         {
                             if (__instance.actualInventory[slotNumber] != null)
                             {
-
-                                OpenPage(__instance.actualInventory[slotNumber].Name);
-
+                                                            
+                                if (__instance.actualInventory[slotNumber] is StardewValley.Object obj)
+                                {
+                                    OpenPage(GetWikiPageForObject(obj, SHelper.Translation));
+                                }
+                                else
+                                {
+                                    OpenPage(__instance.actualInventory[slotNumber].DisplayName);
+                                }
+                                
                             }
                         }
                         return false;
@@ -50,13 +57,13 @@ namespace WikiLinks
                     return true;
                 if (__instance.objects.TryGetValue(Game1.currentCursorTile, out Object obj))
                 {
-                    OpenPage(obj.Name);
+                    OpenPage(GetWikiPageForObject(obj, SHelper.Translation));
                     __result = true;
                     return false;
                 }
                 else if (__instance.objects.TryGetValue(Game1.currentCursorTile + new Vector2(0, 1), out Object obj2) && obj2.bigCraftable.Value)
                 {
-                    OpenPage(obj2.Name);
+                    OpenPage(obj2.DisplayName);
                     __result = true;
                     return false;
                 }
@@ -64,7 +71,7 @@ namespace WikiLinks
                 {
                     if (f.GetBoundingBox().Contains(Game1.currentCursorTile * 64))
                     {
-                        OpenPage(f.Name);
+                        OpenPage(f.DisplayName);
                         __result = true;
                         return false;
                     }
@@ -73,7 +80,7 @@ namespace WikiLinks
                 {
                     if (feature is HoeDirt && (feature as HoeDirt).crop != null)
                     {
-                        OpenPage(new Object((feature as HoeDirt).crop.indexOfHarvest.Value, 1).Name);
+                        OpenPage(new Object((feature as HoeDirt).crop.indexOfHarvest.Value, 1).DisplayName);
                         __result = true;
                         return false;
                     }
@@ -83,7 +90,7 @@ namespace WikiLinks
                     if ((c.IsVillager && c.Tile + new Vector2(0, - 1) == Game1.currentCursorTile ) || c.Tile == Game1.currentCursorTile)
                     {
                         if(c.IsVillager || c is Monster)
-                            OpenPage(c.Name);
+                            OpenPage(c.displayName);
                         else if(c is Pet)
                             OpenPage(c.GetType().Name);
                         __result = true;

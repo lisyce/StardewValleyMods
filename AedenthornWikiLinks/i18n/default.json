@@ -1,4 +1,12 @@
 {
-    "honey": "Honey",
-    ""
+    "(O)340": "Honey",
+    "(O)348": "Wine",
+    "(O)350": "Juice",
+    "(O)342": "Jellies_and_Pickles",
+    "(O)344": "Jellies_and_Pickles",
+    "(O)447": "Aged_Roe",
+    "(O)812": "Roe",
+    "(O)SmokedFish": "Smoked_Fish",
+    "(O)DriedFruit": "Dried_Fruit",
+    "(O)DriedMushrooms": "Dried_Mushrooms"
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StardewModdingAPI;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -36,6 +37,13 @@ namespace WikiLinks
                 Verb = "open"
             };
             Process.Start(ps);
+        }
+
+        public static string GetWikiPageForObject(StardewValley.Object obj, ITranslationHelper helper)
+        {
+            // is there a key in i18n json for qualified id?
+            string translated = helper.Get(obj.QualifiedItemId).UsePlaceholder(false);
+            return translated ?? obj.DisplayName;
         }
 
     }
