@@ -65,10 +65,11 @@ namespace WikiLinks
             );
             configMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => "Link Click Button",
+                name: () => "Wiki Language",
                 getValue: () => Config.WikiLang,
                 setValue: value => Config.WikiLang = value,
-                allowedValues: new string[] { "English", "Auto-Detect" }
+                allowedValues: new string[] { "English", "Auto-Detect" },
+                tooltip: () => "Auto-detect matches the wiki language to your game language; English always uses the English wiki."
             );
         }
     }

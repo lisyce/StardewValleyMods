@@ -62,15 +62,16 @@ namespace WikiLinks
 
         public static string GetWikiPageForItem(Item obj, ITranslationHelper helper)
         {
-            if (ModEntry.Config.WikiLang == "Auto-Detect")
+            bool englishGameEnglishWiki = Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
+                                          ModEntry.Config.WikiLang == "English";
+            if (ModEntry.Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
             {
                 // is there a key in i18n json for qualified id?
                 string translated = helper.Get(obj.QualifiedItemId).UsePlaceholder(false);
                 return translated ?? obj.DisplayName;
             }
 
-
-            // we use english wiki; search with internal name
+            // we use english wiki but we arent playing in english; search with internal name
             // is there a key in i18n default for internal name?
             var translatedDict = helper.GetInAllLocales(obj.QualifiedItemId);
             if (translatedDict.ContainsKey("default")) return translatedDict["default"] ?? obj.Name;
