@@ -4,11 +4,16 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using StardewValley;
 using StardewValley.Characters;
+using StardewValley.TerrainFeatures;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace WikiLinks
 {
     public partial class ModEntry
     {
+        private static bool englishGameEnglishWiki => Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
+                                          Config.WikiLang == "English";
+
         [DllImport("user32.dll")]
         static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
 
@@ -63,8 +68,6 @@ namespace WikiLinks
 
         public static string GetWikiPageForItem(Item obj, ITranslationHelper helper)
         {
-            bool englishGameEnglishWiki = Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
-                                          Config.WikiLang == "English";
             if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
             {
                 // is there a key in i18n json for qualified id?
@@ -87,8 +90,6 @@ namespace WikiLinks
 
         public static string GetWikiPageForFarmAnimal(FarmAnimal animal)
         {
-            bool englishGameEnglishWiki = Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
-                                          Config.WikiLang == "English";
             if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
             {
                 return animal.shortDisplayType();
@@ -98,6 +99,27 @@ namespace WikiLinks
             else if (animal.type.Value.Contains("Chicken")) return "Chicken";
             else if (animal.type.Value.Contains("Pig")) return "Pig";
             return animal.type.Value;
+        }
+
+        public static string GetWikiPageForNpcOrMonster(NPC npc)
+        {
+            if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
+            {
+                return npc.displayName;
+            }
+
+            return npc.Name;
+        }
+
+        public static string GetWikiPageForCrop(HoeDirt dirt)
+        {
+            var obj = new StardewValley.Object(dirt.crop.indexOfHarvest.Value, 1);
+
+            if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
+            {
+                return obj.DisplayName;
+            }
+            return obj.Name;
         }
     }
 }

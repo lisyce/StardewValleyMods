@@ -83,7 +83,7 @@ namespace WikiLinks
                 {
                     if (feature is HoeDirt && (feature as HoeDirt).crop != null)
                     {
-                        OpenPage(new Object((feature as HoeDirt).crop.indexOfHarvest.Value, 1).DisplayName);
+                        OpenPage(GetWikiPageForCrop(feature as HoeDirt));
                         __result = true;
                         return false;
                     }
@@ -93,7 +93,7 @@ namespace WikiLinks
                     if ((c.IsVillager && c.Tile + new Vector2(0, - 1) == Game1.currentCursorTile ) || c.Tile == Game1.currentCursorTile)
                     {
                         if(c.IsVillager || c is Monster)
-                            OpenPage(c.displayName);
+                            OpenPage(GetWikiPageForNpcOrMonster(c));
                         else if(c is Pet)
                             OpenPage(GetWikiPageForPet(SHelper.Translation));
                         __result = true;
