@@ -30,16 +30,7 @@ namespace WikiLinks
                         {
                             if (__instance.actualInventory[slotNumber] != null)
                             {
-                                                            
-                                if (__instance.actualInventory[slotNumber] is Item item)
-                                {
-                                    OpenPage(GetWikiPageForItem(item, SHelper.Translation));
-                                }
-                                else
-                                {
-                                    OpenPage(__instance.actualInventory[slotNumber].Name);
-                                }
-                                
+                                OpenPage(GetWikiPageForItem(__instance.actualInventory[slotNumber], SHelper.Translation));
                             }
                         }
                         return false;
@@ -92,7 +83,7 @@ namespace WikiLinks
                         if(c.IsVillager || c is Monster)
                             OpenPage(c.displayName);
                         else if(c is Pet)
-                            OpenPage(c.GetType().Name);
+                            OpenPage(GetWikiPageForPet(SHelper.Translation));
                         __result = true;
                         return false;
                     }

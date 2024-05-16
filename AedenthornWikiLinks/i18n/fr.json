@@ -8,5 +8,6 @@
     "(O)812": "Oeufs_de_poisson",
     "(O)SmokedFish": "Poisson_fumé",
     "(O)DriedMushrooms": "Champignons_séchés",
-    "(O)DriedFruit": "Fruits_séchés"
+    "(O)DriedFruit": "Fruits_séchés",
+    "pet": "Animaux#Chat_ou_Chien"
 }

@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using StardewValley;
+using StardewValley.Characters;
 
 namespace WikiLinks
 {
@@ -63,8 +64,8 @@ namespace WikiLinks
         public static string GetWikiPageForItem(Item obj, ITranslationHelper helper)
         {
             bool englishGameEnglishWiki = Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
-                                          ModEntry.Config.WikiLang == "English";
-            if (ModEntry.Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
+                                          Config.WikiLang == "English";
+            if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
             {
                 // is there a key in i18n json for qualified id?
                 string translated = helper.Get(obj.QualifiedItemId).UsePlaceholder(false);
@@ -79,5 +80,9 @@ namespace WikiLinks
             return obj.Name;
         }
 
+        public static string GetWikiPageForPet(ITranslationHelper helper)
+        { 
+            return Config.WikiLang == "Auto-Detect" ? helper.Get("pet").Default("Pet") : "Pet";
+        }
     }
 }
