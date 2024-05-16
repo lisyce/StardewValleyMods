@@ -47,7 +47,7 @@ namespace WikiLinks
                     LocalizedContentManager.LanguageCode.hu => "hu.",
                     LocalizedContentManager.LanguageCode.pt => "pt.",
                     LocalizedContentManager.LanguageCode.ru => "ru.",
-                    LocalizedContentManager.LanguageCode.zh => "zh."
+                    LocalizedContentManager.LanguageCode.zh => "zh.",
                     _ => ""
                 };
             }
