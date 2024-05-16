@@ -31,13 +31,13 @@ namespace WikiLinks
                             if (__instance.actualInventory[slotNumber] != null)
                             {
                                                             
-                                if (__instance.actualInventory[slotNumber] is StardewValley.Object obj)
+                                if (__instance.actualInventory[slotNumber] is Item item)
                                 {
-                                    OpenPage(GetWikiPageForObject(obj, SHelper.Translation));
+                                    OpenPage(GetWikiPageForItem(item, SHelper.Translation));
                                 }
                                 else
                                 {
-                                    OpenPage(__instance.actualInventory[slotNumber].DisplayName);
+                                    OpenPage(__instance.actualInventory[slotNumber].Name);
                                 }
                                 
                             }
@@ -57,7 +57,7 @@ namespace WikiLinks
                     return true;
                 if (__instance.objects.TryGetValue(Game1.currentCursorTile, out Object obj))
                 {
-                    OpenPage(GetWikiPageForObject(obj, SHelper.Translation));
+                    OpenPage(GetWikiPageForItem(obj, SHelper.Translation));
                     __result = true;
                     return false;
                 }

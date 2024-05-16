@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using StardewValley;
 
 namespace WikiLinks
 {
@@ -29,7 +30,16 @@ namespace WikiLinks
             if (Config.SendToBack)
                 SetWindowPos(Process.GetCurrentProcess().MainWindowHandle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
 
-                //ShowWindow(Process.GetCurrentProcess().MainWindowHandle, SW_MINIMIZE);
+            //ShowWindow(Process.GetCurrentProcess().MainWindowHandle, SW_MINIMIZE);
+
+            if (ModEntry.Config.WikiLang == "Auto-Detect")  // get the right wiki
+            {
+                LocalizedContentManager.LanguageCode code = Game1.content.GetCurrentLanguage();
+                string prefix = code switch
+                {
+
+                };
+            }
 
             var ps = new ProcessStartInfo($"https://stardewvalleywiki.com/{page}")
             {
@@ -39,11 +49,22 @@ namespace WikiLinks
             Process.Start(ps);
         }
 
-        public static string GetWikiPageForObject(StardewValley.Object obj, ITranslationHelper helper)
+        public static string GetWikiPageForItem(Item obj, ITranslationHelper helper)
         {
-            // is there a key in i18n json for qualified id?
-            string translated = helper.Get(obj.QualifiedItemId).UsePlaceholder(false);
-            return translated ?? obj.DisplayName;
+            if (ModEntry.Config.WikiLang == "Auto-Detect")
+            {
+                // is there a key in i18n json for qualified id?
+                string translated = helper.Get(obj.QualifiedItemId).UsePlaceholder(false);
+                return translated ?? obj.DisplayName;
+            }
+
+
+            // we use english wiki; search with internal name
+            // is there a key in i18n default for internal name?
+            var translatedDict = helper.GetInAllLocales(obj.QualifiedItemId);
+            if (translatedDict.ContainsKey("default")) return translatedDict["default"] ?? obj.Name;
+
+            return obj.Name;
         }
 
     }

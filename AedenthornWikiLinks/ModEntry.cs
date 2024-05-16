@@ -63,6 +63,13 @@ namespace WikiLinks
                 getValue: () => Config.LinkModButton,
                 setValue: value => Config.LinkModButton = value
             );
+            configMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => "Link Click Button",
+                getValue: () => Config.WikiLang,
+                setValue: value => Config.WikiLang = value,
+                allowedValues: new string[] { "English", "Auto-Detect" }
+            );
         }
     }
 }

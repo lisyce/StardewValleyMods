@@ -8,5 +8,7 @@ namespace WikiLinks
         public bool EnableMod { get; set; } = true;
         public bool SendToBack { get; set; } = true;
         public SButton LinkModButton { get; set; } = SButton.RightShift;
+
+        public string WikiLang { get; set; } = "English";
     }
 }
