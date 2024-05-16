@@ -14,6 +14,18 @@ namespace WikiLinks
 {
     public partial class ModEntry
     {
+        [HarmonyPatch(typeof(FarmAnimal), nameof(FarmAnimal.pet))]
+        public class FarmAnimal_pet_Patch
+        {
+            public static bool Prefix(ref FarmAnimal __instance)
+            {
+                if (!Config.EnableMod || !SHelper.Input.IsDown(Config.LinkModButton)) return true;
+
+                OpenPage(GetWikiPageForFarmAnimal(__instance));
+                return false;
+            }
+        }
+
         [HarmonyPatch(typeof(InventoryMenu), nameof(InventoryMenu.rightClick))]
         public class InventoryMenu_rightClick_Patch
         {
@@ -86,19 +98,6 @@ namespace WikiLinks
                             OpenPage(GetWikiPageForPet(SHelper.Translation));
                         __result = true;
                         return false;
-                    }
-                }
-                if(__instance is AnimalHouse)
-                {
-
-                    foreach (var c in (__instance as AnimalHouse).animals.Values)
-                    {
-                        if (c.Tile == Game1.currentCursorTile)
-                        {
-                            OpenPage(c.GetType().Name);
-                            __result = true;
-                            return false;
-                        }
                     }
                 }
                 return true;

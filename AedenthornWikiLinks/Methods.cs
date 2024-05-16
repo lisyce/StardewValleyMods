@@ -84,5 +84,20 @@ namespace WikiLinks
         { 
             return Config.WikiLang == "Auto-Detect" ? helper.Get("pet").Default("Pet") : "Pet";
         }
+
+        public static string GetWikiPageForFarmAnimal(FarmAnimal animal)
+        {
+            bool englishGameEnglishWiki = Game1.content.GetCurrentLanguage() == LocalizedContentManager.LanguageCode.en &&
+                                          Config.WikiLang == "English";
+            if (Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki)
+            {
+                return animal.shortDisplayType();
+            }
+
+            if (animal.type.Value.Contains("Cow")) return "Cow";
+            else if (animal.type.Value.Contains("Chicken")) return "Chicken";
+            else if (animal.type.Value.Contains("Pig")) return "Pig";
+            return animal.type.Value;
+        }
     }
 }
