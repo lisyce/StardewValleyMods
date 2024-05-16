@@ -32,16 +32,27 @@ namespace WikiLinks
 
             //ShowWindow(Process.GetCurrentProcess().MainWindowHandle, SW_MINIMIZE);
 
+            string prefix = "";
             if (ModEntry.Config.WikiLang == "Auto-Detect")  // get the right wiki
             {
                 LocalizedContentManager.LanguageCode code = Game1.content.GetCurrentLanguage();
-                string prefix = code switch
+                prefix = code switch
                 {
-
+                    LocalizedContentManager.LanguageCode.de => "de.",
+                    LocalizedContentManager.LanguageCode.es => "es.",
+                    LocalizedContentManager.LanguageCode.fr => "fr.",
+                    LocalizedContentManager.LanguageCode.it => "it.",
+                    LocalizedContentManager.LanguageCode.ja => "ja.",
+                    LocalizedContentManager.LanguageCode.ko => "ko.",
+                    LocalizedContentManager.LanguageCode.hu => "hu.",
+                    LocalizedContentManager.LanguageCode.pt => "pt.",
+                    LocalizedContentManager.LanguageCode.ru => "ru.",
+                    LocalizedContentManager.LanguageCode.zh => "zh."
+                    _ => ""
                 };
             }
 
-            var ps = new ProcessStartInfo($"https://stardewvalleywiki.com/{page}")
+            var ps = new ProcessStartInfo($"https://{prefix}stardewvalleywiki.com/{page}")
             {
                 UseShellExecute = true,
                 Verb = "open"
