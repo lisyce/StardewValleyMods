@@ -51,6 +51,7 @@ namespace WikiLinks
                 return true;
             }
         }
+
         [HarmonyPatch(typeof(GameLocation), nameof(GameLocation.checkAction))]
         public class GameLocation_checkAction_Patch
         {
@@ -84,6 +85,18 @@ namespace WikiLinks
                     if (feature is HoeDirt && (feature as HoeDirt).crop != null)
                     {
                         OpenPage(GetWikiPageForCrop(feature as HoeDirt));
+                        __result = true;
+                        return false;
+                    }
+                    else if (feature is Tree tree)
+                    {
+                        OpenPage(GetWikiPageForTree(tree));
+                        __result = true;
+                        return false;
+                    }
+                    else if (feature is FruitTree fTree)
+                    {
+                        OpenPage(GetWikiPageForFruitTree(fTree));
                         __result = true;
                         return false;
                     }

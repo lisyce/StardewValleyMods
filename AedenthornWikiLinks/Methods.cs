@@ -6,6 +6,9 @@ using StardewValley;
 using StardewValley.Characters;
 using StardewValley.TerrainFeatures;
 using Microsoft.Xna.Framework.Graphics;
+using StardewValley.GameData.WildTrees;
+using StardewValley.ItemTypeDefinitions;
+using System.Linq;
 
 namespace WikiLinks
 {
@@ -120,6 +123,22 @@ namespace WikiLinks
                 return obj.DisplayName;
             }
             return obj.Name;
+        }
+
+        public static string GetWikiPageForTree(Tree tree)
+        {
+            WildTreeData data = tree.GetData();
+            if (data == null) return "";
+            ParsedItemData seedData = ItemRegistry.GetData(data.SeedItemId);
+            return Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki ? seedData.DisplayName : seedData.InternalName;
+        }
+
+        public static string GetWikiPageForFruitTree(FruitTree tree)
+        {
+            StardewValley.GameData.FruitTrees.FruitTreeData data = tree.GetData();
+            if (data == null || data.Fruit.Count == 0) return "";
+            ParsedItemData fruitData = ItemRegistry.GetData(data.Fruit[0].ItemId);
+            return Config.WikiLang == "Auto-Detect" || englishGameEnglishWiki ? tree.GetDisplayName() : fruitData.InternalName;
         }
     }
 }
