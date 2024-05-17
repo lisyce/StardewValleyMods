@@ -3,12 +3,17 @@ using BZP_Allergies.Config;
 using BZP_Allergies.HarmonyPatches;
 using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceCore.Events;
+using SpaceCore.Interface;
+using SpaceCore;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
+using StardewValley.Menus;
 using StardewValley;
 
 using static BZP_Allergies.AllergenManager;
+using BZP_Allergies.HarmonyPatches.UI;
 
 namespace BZP_Allergies
 {
@@ -46,6 +51,7 @@ namespace BZP_Allergies
             modHelper.Events.GameLoop.DayStarted += OnDayStarted;
             modHelper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
             modHelper.Events.GameLoop.OneSecondUpdateTicking += OnOneSecondUpdateTicking;
+            modHelper.Events.Input.ButtonPressed += OnButtonPressed;
 
             // config
             Config = Helper.ReadConfig<ModConfigModel>();
@@ -72,6 +78,18 @@ namespace BZP_Allergies
         /*********
         ** Private methods
         *********/
+
+        private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
+        {
+            if (e.Button == Config.AllergyPageButton)
+            {
+                Game1.activeClickableMenu = new AllergyOptionsMenu(Game1.uiViewport.Width / 2 - (800 + IClickableMenu.borderWidth * 2) / 2,
+                    Game1.uiViewport.Height / 2 - (600 + IClickableMenu.borderWidth * 2) / 2,
+                    800 + IClickableMenu.borderWidth * 2,
+                    600 + IClickableMenu.borderWidth * 2,
+                    true);
+            }
+        }
 
         /// <inheritdoc cref="IContentEvents.AssetRequested"/>
         /// <param name="sender">The event sender.</param>

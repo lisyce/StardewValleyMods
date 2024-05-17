@@ -12,7 +12,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
         public Traverse HoverTextTraverse;
         private Traverse UpArrowTraverse;
         private Traverse DownArrowTraverse;
-        public AllergyOptionsMenu(int x, int y, int width, int height)
+        private bool StandAlone;
+        public AllergyOptionsMenu(int x, int y, int width, int height, bool standAlone = false)
             : base(x, y, width, height)
         {
             // do we start random or not?
@@ -31,16 +32,24 @@ namespace BZP_Allergies.HarmonyPatches.UI
             HoverTextTraverse = Traverse.Create(this).Field("hoverText");
             UpArrowTraverse = Traverse.Create(this).Field("upArrow");
             DownArrowTraverse = Traverse.Create(this).Field("downArrow");
+            StandAlone = standAlone;
         }
 
         public override void draw(SpriteBatch b)
         {
+            if (StandAlone)
+            {
+                b.Draw(Game1.fadeToBlackRect, new Rectangle(0, 0, Game1.uiViewport.Width, Game1.uiViewport.Height), Color.Black * 0.5f);
+                Game1.drawDialogueBox(xPositionOnScreen, yPositionOnScreen, width, height, speaker: false, drawOnlyBox: true);
+            }
             base.draw(b);
             ClickableTextureComponent upArrowRef = UpArrowTraverse.GetValue<ClickableTextureComponent>();
             ClickableTextureComponent downArrowRef = DownArrowTraverse.GetValue<ClickableTextureComponent>();
 
             upArrowRef.visible = options.Count > 7;
             downArrowRef.visible = options.Count > 7;
+
+            if (StandAlone) drawMouse(b, ignore_transparency: true);
         }
 
         public override void performHoverAction(int x, int y)

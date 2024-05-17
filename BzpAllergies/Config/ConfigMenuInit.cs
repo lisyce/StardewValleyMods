@@ -9,6 +9,28 @@ namespace BZP_Allergies.Config
         {
             configMenu.AddSectionTitle(
                 mod: modManifest,
+                text: () => "General Settings"
+            );
+
+            configMenu.AddKeybind(
+                mod: modManifest,
+                name: () => "Allergy Menu Keybind",
+                getValue: () => ModEntry.Instance.Config.AllergyPageButton,
+                setValue: value => ModEntry.Instance.Config.AllergyPageButton = value,
+                tooltip: () => "Set a keybind to open a standalone allergy menu"
+            );
+
+            configMenu.AddBoolOption(
+                mod: modManifest,
+                name: () => "Enable Skills Page Tab",
+                tooltip: () => "If you play with any custom skills, you may want to disable this for compatibility.",
+                getValue: () => ModEntry.Instance.Config.EnableTab,
+                setValue: value => ModEntry.Instance.Config.EnableTab = value
+            );
+
+
+            configMenu.AddSectionTitle(
+                mod: modManifest,
                 text: () => "Difficulty Settings"
             );
 

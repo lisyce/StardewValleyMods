@@ -1,7 +1,11 @@
-﻿namespace BZP_Allergies.Config
+﻿using StardewModdingAPI;
+
+namespace BZP_Allergies.Config
 {
     internal sealed class ModConfigModel
     {
+        public SButton AllergyPageButton { get; set; } = SButton.L;
+        public bool EnableTab { get; set; } = true;
         public bool HintBeforeEating { get; set; } = true;
         public int NumberRandomAllergies { get; set; } = -1;
         public bool AllergenCountHint { get; set; } = true;

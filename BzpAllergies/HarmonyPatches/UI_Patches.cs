@@ -16,17 +16,19 @@ namespace BZP_Allergies.HarmonyPatches
             );
         }
 
+        // we do this instead of an OnMenuChanged event because otherwise it may conflict with spacecore skills
         public static void GameMenuConstructor_Postfix(GameMenu __instance)
         {
             try
             {
-                __instance.pages[1] = new PatchedSkillsPage(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
+                if (ModEntry.Instance.Config.EnableTab)
+                    __instance.pages[1] = new PatchedSkillsPage(__instance.xPositionOnScreen, __instance.yPositionOnScreen, __instance.width + ((LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru || LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.it) ? 64 : 0), __instance.height);
             }
             catch (Exception ex)
             {
                 ModEntry.Instance.Monitor.Log($"Failed in {nameof(GameMenuConstructor_Postfix)}:\n{ex}", LogLevel.Error);
             }
         }
-        
+
     }
 }
