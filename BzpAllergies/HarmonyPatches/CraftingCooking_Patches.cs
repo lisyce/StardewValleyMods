@@ -114,14 +114,17 @@ namespace BZP_Allergies.HarmonyPatches
             Inventory playerItems = CopyInventory(Game1.player.Items);
 
             List<IInventory> additionalMaterialsCopy = new();
-            foreach (IInventory inv in additionalMaterials)
+            if (additionalMaterials != null)
             {
-                if (inv == null)
+                foreach (IInventory inv in additionalMaterials)
                 {
-                    additionalMaterialsCopy.Add(inv);
-                    continue;
+                    if (inv == null)
+                    {
+                        additionalMaterialsCopy.Add(inv);
+                        continue;
+                    }
+                    additionalMaterialsCopy.Add(CopyInventory(inv));
                 }
-                additionalMaterialsCopy.Add(CopyInventory(inv));
             }
 
             // consume ingredients
@@ -173,16 +176,20 @@ namespace BZP_Allergies.HarmonyPatches
             // restore inventories
             Game1.player.Items.OverwriteWith(playerItems);
 
-            for (int i = 0; i < additionalMaterials.Count; i++)
+            if (additionalMaterials != null)
             {
-                if (additionalMaterials[i] == null) continue;
-                additionalMaterials[i].OverwriteWith(additionalMaterialsCopy[i]);
+                for (int i = 0; i < additionalMaterials.Count; i++)
+                {
+                    if (additionalMaterials[i] == null) continue;
+                    additionalMaterials[i].OverwriteWith(additionalMaterialsCopy[i]);
+                }
             }
         }
 
         private static Dictionary<string, Item> GetItemsInAllInventories(List<IInventory> additionalMaterials)
         {
             Dictionary<string, Item> result = new();
+            if (additionalMaterials == null) return result;
 
             foreach (Item i in Game1.player.Items)
             {

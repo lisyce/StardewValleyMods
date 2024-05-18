@@ -81,7 +81,7 @@ namespace BZP_Allergies
 
         private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
         {
-            if (e.Button == Config.AllergyPageButton)
+            if (e.Button == Config.AllergyPageButton && Game1.activeClickableMenu == null)
             {
                 Game1.activeClickableMenu = new AllergyOptionsMenu(Game1.uiViewport.Width / 2 - (800 + IClickableMenu.borderWidth * 2) / 2,
                     Game1.uiViewport.Height / 2 - (600 + IClickableMenu.borderWidth * 2) / 2,
