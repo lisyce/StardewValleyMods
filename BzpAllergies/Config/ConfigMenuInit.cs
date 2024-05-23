@@ -7,23 +7,24 @@ namespace BZP_Allergies.Config
     {
         public static void SetupMenuUI(IGenericModConfigMenuApi configMenu, IManifest modManifest)
         {
+            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "General Settings"
+                text: () => translation.Get("config.general-settings")
             );
 
             configMenu.AddKeybind(
                 mod: modManifest,
-                name: () => "Allergy Menu Keybind",
+                name: () => translation.Get("config.allergy-menu-kb"),
                 getValue: () => ModEntry.Instance.Config.AllergyPageButton,
                 setValue: value => ModEntry.Instance.Config.AllergyPageButton = value,
-                tooltip: () => "Set a keybind to open a standalone allergy menu"
+                tooltip: () => translation.Get("config.allergy-menu-kb-tt")
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Enable Skills Page Tab",
-                tooltip: () => "If you play with any custom skills, you may want to disable this for compatibility.",
+                name: () => translation.Get("config.skills-tab"),
+                tooltip: () => translation.Get("config.skills-tab-tt"),
                 getValue: () => ModEntry.Instance.Config.EnableTab,
                 setValue: value => ModEntry.Instance.Config.EnableTab = value
             );
@@ -31,74 +32,74 @@ namespace BZP_Allergies.Config
 
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "Difficulty Settings"
+                text: () => translation.Get("config.difficulty")
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Hints Before Eating",
-                tooltip: () => "Get a hint in the popup before you eat something to warn you of your allergies.",
+                name: () => translation.Get("config.eating-hint"),
+                tooltip: () => translation.Get("config.eating-hint-tt"),
                 getValue: () => ModEntry.Instance.Config.HintBeforeEating,
                 setValue: value => ModEntry.Instance.Config.HintBeforeEating = value
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Reaction From Holding Foods",
-                tooltip: () => "Holding foods you're allergic to gives your farmer a reaction.",
+                name: () => translation.Get("config.holding-reaction"),
+                tooltip: () => translation.Get("config.holding-reaction-tt"),
                 getValue: () => ModEntry.Instance.Config.HoldingReaction,
                 setValue: value => ModEntry.Instance.Config.HoldingReaction = value
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Reaction From Cooking Foods",
-                tooltip: () => "Cooking foods you're allergic to gives your farmer a reaction.",
+                name: () => translation.Get("config.cooking-reaction"),
+                tooltip: () => translation.Get("config.cooking-reaction-tt"),
                 getValue: () => ModEntry.Instance.Config.CookingReaction,
                 setValue: value => ModEntry.Instance.Config.CookingReaction = value
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Enable Nausea",
-                tooltip: () => "Enable/disable the random nausea that accompanies eating a food you're allergic to.",
+                name: () => translation.Get("config.nausea"),
+                tooltip: () => translation.Get("config.nausea-tt"),
                 getValue: () => ModEntry.Instance.Config.EnableNausea,
                 setValue: value => ModEntry.Instance.Config.EnableNausea = value
             );
 
             configMenu.AddNumberOption(
                 mod: modManifest,
-                name: () => "Debuff Length (Seconds)",
-                tooltip: () => "Length of the debuff from eating food; Other debuff lengths are based upon this value.",
+                name: () => translation.Get("config.debuff-len"),
+                tooltip: () => translation.Get("config.debuff-len-tt"),
                 getValue: () => ModEntry.Instance.Config.EatingDebuffLengthSeconds,
                 setValue: value => ModEntry.Instance.Config.EatingDebuffLengthSeconds = value
             );
 
             configMenu.AddNumberOption(
                 mod: modManifest,
-                name: () => "Debuff Severity Multiplier",
-                tooltip: () => "Severity multiplier for the allergic reaction debuff to speed, attack, and defense.",
+                name: () => translation.Get("config.debuff-sev"),
+                tooltip: () => translation.Get("config.debuff-sev-tt"),
                 getValue: () => ModEntry.Instance.Config.DebuffSeverityMultiplier,
                 setValue: value => ModEntry.Instance.Config.DebuffSeverityMultiplier = value
             );
 
             configMenu.AddSectionTitle(
                 mod: modManifest,
-                text: () => "Random Allergy Settings"
+                text: () => translation.Get("config.random")
             );
 
             configMenu.AddBoolOption(
                 mod: modManifest,
-                name: () => "Random Allergy Count Hint",
-                tooltip: () => "Select to get a hint in allergy menu to see how many more allergies you haven't discovered.",
+                name: () => translation.Get("config.random-hint"),
+                tooltip: () => translation.Get("config.random-hint-tt"),
                 getValue: () => ModEntry.Instance.Config.AllergenCountHint,
                 setValue: value => ModEntry.Instance.Config.AllergenCountHint = value
             );
 
             configMenu.AddNumberOption(
                 mod: modManifest,
-                name: () => "Number of Random Allergies",
-                tooltip: () => "If you roll random allergies in-game, this determines how many you'll get.",
+                name: () => translation.Get("config.random-num"),
+                tooltip: () => translation.Get("config.random-num-tt"),
                 getValue: () => ModEntry.Instance.Config.NumberRandomAllergies,
                 setValue: value =>
                 {
@@ -108,7 +109,7 @@ namespace BZP_Allergies.Config
                 }
             );
 
-            configMenu.AddParagraph(modManifest, () => "Set to -1 for a random number of random allergies!");
+            configMenu.AddParagraph(modManifest, () => translation.Get("config.random-neg-1"));
         }
     }
 }
