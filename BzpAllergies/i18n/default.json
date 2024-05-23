@@ -22,5 +22,15 @@
   "config.random-hint-tt": "Select to get a hint in allergy menu to see how many more allergies you haven't discovered.",
   "config.random-num": "Number of Random Allergies",
   "config.random-num-tt": "If you roll random allergies in-game, this determines how many you'll get.",
-  "config.random-neg-1": "Set to -1 for a random number of random allergies!"
+  "config.random-neg-1": "Set to -1 for a random number of random allergies!",
+
+  "allergy-menu.title": "My Allergies",
+  "allergy-menu.from-hovertext": "From {{modName}}",
+  "allergy-menu.have-random": "You have random allergies.",
+  "allergy-menu.have-sel": "You have selected your allergies.",
+  "allergy-menu.none-discovered": "You haven't discovered any allergies yet.",
+  "allergy-menu.discovered-count": "You've discovered {{discoverCount}}/{{hasCount}} of your allergies.",
+  "allergy-menu.reroll": "Reroll Allergies",
+  "allergy-menu.switch-sel": "Switch to Selection",
+  "allergy-menu.switch-random": "Switch to Random"
 }

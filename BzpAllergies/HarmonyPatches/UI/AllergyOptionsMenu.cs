@@ -4,6 +4,7 @@ using StardewValley;
 using StardewValley.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Transactions;
 
 namespace BZP_Allergies.HarmonyPatches.UI
 {
@@ -54,6 +55,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         public override void performHoverAction(int x, int y)
         {
+            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
             base.performHoverAction(x, y);
 
             // do any of the options have tooltip?
@@ -70,7 +72,8 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
                 if (inLeftThirdOfSlot && el is CustomOptionsCheckbox customEl && customEl.HoverText.Length > 0)
                 {
-                    HoverTextTraverse.SetValue("From " + customEl.HoverText);
+                    string fromMod = translation.Get("allergy-menu.from-hovertext", new { modName = customEl.HoverText });
+                    HoverTextTraverse.SetValue(fromMod);
                     break;
                 }
             }
@@ -78,15 +81,15 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         public void PopulateOptions(bool random)
         {
+            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
             options.Clear();
-
-            options.Add(new OptionsElement("My Allergies"));
+            options.Add(new OptionsElement(translation.Get("allergy-menu.title")));
 
             ISet<string> has = AllergenManager.ModDataSetGet(Game1.player, Constants.ModDataHas);
 
             if (random)
             {
-                options.Add(new CustomOptionsSmallFontElement("You have random allergies."));
+                options.Add(new CustomOptionsSmallFontElement(translation.Get("allergy-menu.have-random")));
                 options.Add(new CustomOptionsHorizontalLine());
 
                 // get discovered allergies
@@ -95,7 +98,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 if (discovered.Count == 0)
                 {
                     // render 0 count message
-                    options.Add(new CustomOptionsSmallFontElement("You haven't discovered any allergies yet."));
+                    options.Add(new CustomOptionsSmallFontElement(translation.Get("allergy-menu.none-discovered")));
                 }
                 else
                 {
@@ -110,16 +113,18 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 // if hint, show many discovered/total
                 if (ModEntry.Instance.Config.AllergenCountHint)
                 {
-                    string hintCountText = "You've discovered " + discovered.Count + "/" + has.Count + " of your allergies.";
+                    string hintCountText = translation.Get("allergy-menu.discovered-count",
+                        new { discoverCount = discovered.Count, hasCount = has.Count });
                     options.Add(new CustomOptionsSmallFontElement(hintCountText));
                 }
 
                 options.Add(new CustomOptionsHorizontalLine());
-                options.Add(new CustomOptionsButtonPair("Reroll Allergies", "Switch to Selection", RerollAllergies, AllergySelectionToggle));
+                options.Add(new CustomOptionsButtonPair(translation.Get("allergy-menu.reroll"), translation.Get("allergy-menu.switch-sel"),
+                    RerollAllergies, AllergySelectionToggle));
             }
             else
             {
-                options.Add(new CustomOptionsSmallFontElement("You have selected your allergies."));
+                options.Add(new CustomOptionsSmallFontElement(translation.Get("allergy-menu.have-sel")));
                 options.Add(new CustomOptionsHorizontalLine());
 
                 // get all the possible allergies
@@ -145,7 +150,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
 
                 options.Add(new CustomOptionsHorizontalLine());
-                options.Add(new OptionsButton("Switch to Random", AllergySelectionToggle));
+                options.Add(new OptionsButton(translation.Get("allergy-menu.switch-random"), AllergySelectionToggle));
             }
 
             // reset scroll
