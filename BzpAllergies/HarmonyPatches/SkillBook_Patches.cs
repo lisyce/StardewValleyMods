@@ -106,7 +106,7 @@ namespace BZP_Allergies.HarmonyPatches
                         Game1.player.mailReceived.Add("read_a_book");
                     }
 
-                    Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                    Game1.showGlobalMessage(ModEntry.Instance.Translation.Get("books.allergy-teach"));
                 }
                 else if (bookId == Constants.AllergyCookbookId)
                 {
@@ -116,7 +116,7 @@ namespace BZP_Allergies.HarmonyPatches
                         Game1.player.mailReceived.Add("read_a_book");
                     }
 
-                    Game1.showGlobalMessage("You've got some new cooking knowledge to think about overnight.");
+                    Game1.showGlobalMessage(ModEntry.Instance.Translation.Get("books.allergy-cookbook"));
 
                 }
             }

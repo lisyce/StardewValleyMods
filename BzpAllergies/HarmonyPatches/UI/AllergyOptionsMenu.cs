@@ -4,7 +4,6 @@ using StardewValley;
 using StardewValley.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Transactions;
 
 namespace BZP_Allergies.HarmonyPatches.UI
 {
@@ -55,7 +54,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         public override void performHoverAction(int x, int y)
         {
-            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
+            ITranslationHelper translation = ModEntry.Instance.Translation;
             base.performHoverAction(x, y);
 
             // do any of the options have tooltip?
@@ -81,7 +80,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
 
         public void PopulateOptions(bool random)
         {
-            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
+            ITranslationHelper translation = ModEntry.Instance.Translation;
             options.Clear();
             options.Add(new OptionsElement(translation.Get("allergy-menu.title")));
 

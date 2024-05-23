@@ -24,7 +24,7 @@ namespace BZP_Allergies.HarmonyPatches.UI
                 "BarleyZP.BzpAllergies",
                 new Rectangle(xPositionOnScreen - 48, yPositionOnScreen + 64 * 2, 64, 64),
                 "",
-                "Allergies",
+                ModEntry.Instance.Translation.Get("allergy-menu.title"),
                 sprites,
                 new Rectangle(64, 0, 16, 16),
                 4f

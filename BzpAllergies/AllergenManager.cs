@@ -342,15 +342,15 @@ namespace BZP_Allergies
 
             string desc = actionSource switch
             {
-                "consume" => "Probably shouldn't have eaten that...",
-                "hold" => "Holding that with severe\nallergies was a bad idea!",
-                "cook" => "Cooking that gave you a reaction!",
+                "consume" => ModEntry.Instance.Translation.Get("debuff.consume"),
+                "hold" => ModEntry.Instance.Translation.Get("debuff.hold"),
+                "cook" => ModEntry.Instance.Translation.Get("debuff.cook"),
                 _ => throw new NotImplementedException()
             };
 
             Buff reactionBuff = new(Constants.ReactionDebuff, "food", itemSource,
                 durationSeconds * 1000, sprites, 2, effects,
-                true, "Allergic Reaction", desc)
+                true, ModEntry.Instance.Translation.Get("debuff.name"), desc)
             {
                 glow = Microsoft.Xna.Framework.Color.Green
             };
@@ -370,7 +370,7 @@ namespace BZP_Allergies
             {
                 if (FarmerIsAllergic(allergen) && DiscoverPlayerAllergy(allergen))
                 {
-                    Game1.showGlobalMessage("You've learned more about your dietary restrictions.");
+                    Game1.showGlobalMessage(ModEntry.Instance.Translation.Get("books.allergy-teach"));
                     Game1.playSound("newArtifact");
                     break;
                 }

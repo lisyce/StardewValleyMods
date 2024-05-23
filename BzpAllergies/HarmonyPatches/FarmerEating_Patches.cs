@@ -57,7 +57,7 @@ namespace BZP_Allergies.HarmonyPatches
 
                     if (FarmerIsAllergic(Game1.player.ActiveObject) && (!randomAllergies || (randomAllergies && hasDiscoveredAtLeastOneAllergy)))
                     {
-                        question += " You are allergic to it!";
+                        question += ModEntry.Instance.Translation.Get("allergic-hint");
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace BZP_Allergies.HarmonyPatches
                     // is it dairy and do we have the buff?
                     if (itemToEatAllergens.Contains("dairy") && __instance.hasBuff(Constants.LactaseBuff))
                     {
-                        HUDMessage lactaseProtectionMessage = new("Good thing you took your lactase!");
+                        HUDMessage lactaseProtectionMessage = new(ModEntry.Instance.Translation.Get("lactase-save"));
                         lactaseProtectionMessage.messageSubject = itemToEat;
                         Game1.addHUDMessage(lactaseProtectionMessage);
                         Game1.playSound("jingle1");
@@ -122,7 +122,7 @@ namespace BZP_Allergies.HarmonyPatches
                     // get that dairy immunity
                     Buff immuneBuff = new(Constants.LactaseBuff, "food", itemToEat.DisplayName,
                         120000, sprites, 3, null,
-                        false, "Dairy Immunity", "Quick, eat the cheese!");
+                        false, "Dairy Immunity", ModEntry.Instance.Translation.Get("dairy-immunity"));
 
                     __instance.applyBuff(immuneBuff);
                 }

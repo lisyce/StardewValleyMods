@@ -52,7 +52,7 @@ namespace BZP_Allergies.HarmonyPatches
                 ISet<string> allergens = AllergenManager.GetAllergensInObject(__instance);
                 if (allergens.Count == 0) return;
 
-                StringBuilder allergenText = new("\nAllergens: ");
+                StringBuilder allergenText = new("\n" + ModEntry.Instance.Translation.Get("item-desc-prefix"));
                 int currLineLen = allergenText.Length;
 
                 int i = 0;

@@ -32,5 +32,17 @@
   "allergy-menu.discovered-count": "You've discovered {{discoverCount}}/{{hasCount}} of your allergies.",
   "allergy-menu.reroll": "Reroll Allergies",
   "allergy-menu.switch-sel": "Switch to Selection",
-  "allergy-menu.switch-random": "Switch to Random"
+  "allergy-menu.switch-random": "Switch to Random",
+
+  "allergic-hint": " You are allergic to it!",
+  "lactase-save": "Good thing you took your lactase!",
+  "dairy-immunity": "Quick, eat the cheese!",
+  "item-desc-prefix": "Allergens: ",
+  "debuff.consume": "Probably shouldn't have eaten that...",
+  "debuff.hold": "Holding that with severe\nallergies was a bad idea!",
+  "debuff.cook": "Cooking that gave you a reaction!",
+  "debuff.name": "Allergic Reaction",
+
+  "books.allergy-teach": "You've learned more about your dietary restrictions.",
+  "books.allergy-cookbook": "You've got some new cooking knowledge to think about overnight."
 }

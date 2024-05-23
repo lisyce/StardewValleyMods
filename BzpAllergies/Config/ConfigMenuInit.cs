@@ -7,7 +7,7 @@ namespace BZP_Allergies.Config
     {
         public static void SetupMenuUI(IGenericModConfigMenuApi configMenu, IManifest modManifest)
         {
-            ITranslationHelper translation = ModEntry.Instance.Helper.Translation;
+            ITranslationHelper translation = ModEntry.Instance.Translation;
             configMenu.AddSectionTitle(
                 mod: modManifest,
                 text: () => translation.Get("config.general-settings")

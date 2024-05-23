@@ -26,6 +26,7 @@ namespace BZP_Allergies
         private Harmony Harmony;
         public ModConfigModel Config;
         public IModHelper ModHelper;
+        public ITranslationHelper Translation;
 
         public static readonly ISet<string> NpcsThatReactedToday = new HashSet<string>();
 
@@ -41,6 +42,7 @@ namespace BZP_Allergies
             Instance = this;
 
             ModHelper = modHelper;
+            Translation = modHelper.Translation;
 
             // allergen manager
             AllergenManager.InitDefault();
