@@ -5,7 +5,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Abigail",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You look a little green... did you eat something?"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.abigail}}"
       }
     },
     {
@@ -13,7 +13,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Alex",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Yikes! You don't look so good...$7"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.alex}}"
       }
     },
     {
@@ -21,7 +21,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Caroline",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Are you feeling OK? Maybe some tea would help.[614]"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.caroline}}"
       }
     },
     {
@@ -29,7 +29,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Clint",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "%Clint seems concerned for you.$2"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.clint}}"
       }
     },
     {
@@ -37,7 +37,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Demetrius",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Oh wow! Looks like you're having a reaction!$6#$b#I wonder if I could study a sample of what you ate...$0"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.demetrius}}"
       }
     },
     {
@@ -45,7 +45,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Elliott",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Are you unwell? Perhaps you should relax by the sea for a bit."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.elliot}}"
       }
     },
     {
@@ -53,7 +53,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Emily",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Oh! You've definitely got some bad energy surrounding you today!$6"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.emily}}"
       }
     },
     {
@@ -61,7 +61,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Evelyn",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Oh, my dear. Let me get you something from the medicine cabinet.[BarleyZP.BzpAllergies_AllergyMedicine]#$e#Don't tell George. He doesn't think I should be buying this 'newfangled medicine', as he likes to say."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.evelyn}}"
       }
     },
     {
@@ -69,7 +69,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/George",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Hmmph... Young people these days get sick so easily.#$b#Nobody had any 'allergies' when I was a kid."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.george}}"
       }
     },
     {
@@ -77,7 +77,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Gus",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "If you're sick, you should get some rest. I better not see you at the saloon if you should be in bed!$3"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.gus}}"
       }
     },
     {
@@ -85,7 +85,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Haley",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Ew, are you sick? Don't get me infected too!$12"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.haley}}"
       }
     },
     {
@@ -93,7 +93,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/MarriageDialogueHaley",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Honey, are you alright?$12"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.haley-m}}"
       }
     },
     {
@@ -101,7 +101,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Harvey",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Are you having an allergic reaction? Why didn't you come to me sooner!$8#$b#Here, drink this and you should feel much better.[BarleyZP.BzpAllergies_AllergyMedicine]#$0"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.harvey}}"
       }
     },
     {
@@ -109,7 +109,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Jas",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Umm... Are you ok?$b#$3"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.jas}}"
       }
     },
     {
@@ -117,7 +117,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Jodi",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Are you alright? I always tell my boys to make sure they get lots of rest when they're sick."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.jodi}}"
       }
     },
     {
@@ -125,7 +125,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Kent",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Woah... I haven't seen a reaction like that since my buddy ate the Algae Soup overseas.$4"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.kent}}"
       }
     },
     {
@@ -133,7 +133,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Krobus",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "It really is true that some humans get sick when they eat certain foods...$7"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.krobus}}"
       }
     },
     {
@@ -141,7 +141,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Leah",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Did you eat some bad mushrooms? You've got to be careful foraging for your own food!$6"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.leah}}"
       }
     },
     {
@@ -149,7 +149,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Leo",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Your green face is scaring the birds...$3"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.leo}}"
       }
     },
     {
@@ -157,7 +157,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Lewis",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You know overreacting like that isn't going to get you out of paying taxes.$5"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.lewis}}"
       }
     },
     {
@@ -165,7 +165,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Linus",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You look a bit under the weather."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.linus}}"
       }
     },
     {
@@ -173,7 +173,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Marnie",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Eek! Are you having an allergic reaction?$4"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.marnie}}"
       }
     },
     {
@@ -181,7 +181,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Maru",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "If you've got an allergy, you should get some medicine from the clinic.$3"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.maru}}"
       }
     },
     {
@@ -189,7 +189,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Pam",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You look like you had too much to drink last night. I know that feeling, farmer."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.pam}}"
       }
     },
     {
@@ -197,7 +197,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Penny",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Oh... I used to get allergies like that too when I was a kid! Be careful of what you eat!$12"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.penny}}"
       }
     },
     {
@@ -205,7 +205,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Pierre",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Hmmm... Maybe I should start selling some allergy relief too.$1"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.pierre}}"
       }
     },
     {
@@ -213,7 +213,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Robin",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Are you having a reaction? Make sure you're reading the labels on what you eat."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.robin}}"
       }
     },
     {
@@ -221,7 +221,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Sam",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Dude, I get pollen allergies myself, but definitely not as bad as that!$8"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.sam}}"
       }
     },
     {
@@ -229,7 +229,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Sebastian",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Hey... Are you feeling alright?"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.sebastian}}"
       }
     },
     {
@@ -237,7 +237,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Shane",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You look hungover. Don't make it a habit.$2"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.shane}}"
       }
     },
     {
@@ -245,7 +245,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Vincent",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Woah... That's the face I make when I eat a bug that doesn't taste good.$3"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.vincent}}"
       }
     },
     {
@@ -253,7 +253,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Willy",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "You look a bit seasick, son.^You look a bit seasick, lass.$2"
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.willy}}"
       }
     },
     {
@@ -261,7 +261,7 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Wizard",
       "Entries": {
-        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "Did you tamper with culinary magic? You look ill."
+        "BarleyZP.BzpAllergies_farmer_allergic_reaction": "{{i18n:dialogue.wizard}}"
       }
     }
   ]
