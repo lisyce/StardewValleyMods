@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ContentPacks\[CP] Cornucopia Allergies\i18n\" />
-    <Folder Include="[CP] BzpAllergies\i18n\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="ContentPatcher">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\ContentPatcher\ContentPatcher.dll</HintPath>
 	  <Private>false</Private>
