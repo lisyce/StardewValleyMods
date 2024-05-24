@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="[CP] BzpAllergies\" />
+    <Folder Include="ContentPacks\[CP] Cornucopia Allergies\i18n\" />
+    <Folder Include="[CP] BzpAllergies\i18n\" />
   </ItemGroup>
 
   <ItemGroup>

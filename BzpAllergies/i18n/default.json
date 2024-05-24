@@ -44,5 +44,13 @@
   "debuff.name": "Allergic Reaction",
 
   "books.allergy-teach": "You've learned more about your dietary restrictions.",
-  "books.allergy-cookbook": "You've got some new cooking knowledge to think about overnight."
+  "books.allergy-cookbook": "You've got some new cooking knowledge to think about overnight.",
+
+  "allergies.egg": "Eggs",
+  "allergies.gluten": "Gluten",
+  "allergies.fish": "Fish",
+  "allergies.shellfish": "Shellfish",
+  "allergies.treenuts": "Tree Nuts",
+  "allergies.dairy": "Dairy",
+  "allergies.mushroom": "Mushrooms"
 }

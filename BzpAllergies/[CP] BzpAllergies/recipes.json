@@ -17,7 +17,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_PlantMilkIngredient",
               "Amount": 1,
-              "OverrideText": "Milk Substitute",
+              "OverrideText": "{{i18n:recipe.milksub}}",
               "OverrideTexturePath": "BarleyZP.BzpAllergies/Sprites",
               "OverrideTextureRect": {
                 "X": 96,
@@ -46,7 +46,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -75,7 +75,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -99,7 +99,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -117,7 +117,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -136,7 +136,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -155,7 +155,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -173,7 +173,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -192,7 +192,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -210,7 +210,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -234,7 +234,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -247,7 +247,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -276,7 +276,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -305,7 +305,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -339,7 +339,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -358,7 +358,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -371,7 +371,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -395,7 +395,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -413,7 +413,7 @@
               "Type": "ContextTag",
               "Value": "category_egg",
               "Amount": 1,
-              "OverrideText": "Egg (Any)",
+              "OverrideText": "{{i18n:recipe.egg-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 129,
@@ -432,7 +432,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -466,7 +466,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -495,7 +495,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -524,7 +524,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -537,7 +537,7 @@
               "Type": "ContextTag",
               "Value": "category_milk",
               "Amount": 1,
-              "OverrideText": "Milk (Any)",
+              "OverrideText": "{{i18n:recipe.milk-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 256,
@@ -566,7 +566,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -590,7 +590,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -619,7 +619,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,
@@ -643,7 +643,7 @@
               "Type": "ContextTag",
               "Value": "BarleyZP.BzpAllergies_FlourIngredient",
               "Amount": 1,
-              "OverrideText": "Flour (Any)",
+              "OverrideText": "{{i18n:recipe.flour-any}}",
               "OverrideTexturePath": "Maps/springobjects",
               "OverrideTextureRect": {
                 "X": 96,

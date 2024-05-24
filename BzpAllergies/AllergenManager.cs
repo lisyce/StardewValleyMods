@@ -39,8 +39,9 @@ namespace BZP_Allergies
         public static void InitDefault()
         {
             ALLERGEN_DATA.Clear();
+            ITranslationHelper translation = ModEntry.Instance.Translation;
 
-            AllergenModel egg = new("Eggs");
+            AllergenModel egg = new(translation.Get("allergies.egg"));
             egg.AddObjectIds(new HashSet<string>{
                     "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
                     "732"
@@ -48,7 +49,7 @@ namespace BZP_Allergies
             egg.AddTags(new HashSet<string> { "egg_item", "mayo_item", "large_egg_item" });
             ALLERGEN_DATA["egg"] = egg;
 
-            AllergenModel gluten = new("Gluten");
+            AllergenModel gluten = new(translation.Get("allergies.gluten"));
             gluten.AddObjectIds(new HashSet<string>{
                     "198", "201", "202", "203", "206", "211", "214", "216", "220", "221", "222", "223",
                     "224", "234", "239", "241", "604", "608", "611", "618", "651", "731", "732", "246",
@@ -56,27 +57,27 @@ namespace BZP_Allergies
                 });
             ALLERGEN_DATA["gluten"] = gluten;
 
-            AllergenModel fish = new("Fish");
+            AllergenModel fish = new(translation.Get("allergies.fish"));
             fish.AddObjectIds(new HashSet<string>{
                     "198", "202", "204", "212", "213", "214", "219", "225", "226", "227", "228", "242",
                     "265", "445"
                 });
             ALLERGEN_DATA["fish"] = fish;
 
-            AllergenModel shellfish = new("Shellfish");
+            AllergenModel shellfish = new(translation.Get("allergies.shellfish"));
             shellfish.AddObjectIds(new HashSet<string>{
                     "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
                     "717", "718", "719", "720", "723", "716", "721", "722"
                 });
             ALLERGEN_DATA["shellfish"] = shellfish;
 
-            AllergenModel treenuts = new("Tree Nuts");
+            AllergenModel treenuts = new(translation.Get("allergies.treenuts"));
             treenuts.AddObjectIds(new HashSet<string>{
                     "239", "607", "408"
                 });
             ALLERGEN_DATA["treenuts"] = treenuts;
 
-            AllergenModel dairy = new("Dairy");
+            AllergenModel dairy = new(translation.Get("allergies.dairy"));
             dairy.AddObjectIds(new HashSet<string>{
                     "195", "197", "199", "201", "206", "215", "232", "233", "236", "240", "243", "605",
                     "608", "727", "730", "904", "424", "426"
@@ -84,7 +85,7 @@ namespace BZP_Allergies
             dairy.AddTags(new HashSet<string> { "milk_item", "large_milk_item", "cow_milk_item", "goat_milk_item" });
             ALLERGEN_DATA["dairy"] = dairy;
 
-            AllergenModel mushroom = new("Mushrooms");
+            AllergenModel mushroom = new(translation.Get("allergies.mushroom"));
             mushroom.AddObjectIds(new HashSet<string>{
                     "404", "205", "606", "218", "420", "422", "281", "257", "773", "851"
                 });

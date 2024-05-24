@@ -20,21 +20,21 @@
 			"Target": "Data/Powers",
 			"Entries": {
 				"BarleyZP.BzpAllergies_AllergyTeachBook": {
-					"DisplayName": "All About Allergies",
-					"Description": "Helps you discover one of your food allergies.",
+					"DisplayName": "{{i18n:obj.allergy-teach-book.name}}",
+					"Description": "{{i18n:obj.allergy-teach-book.desc}}",
 					"TexturePath": "BarleyZP.BzpAllergies/Sprites",
 					"TexturePosition": {
 						"X": 144,
 						"Y": 0
 					},
 					"UnlockedCondition": "PLAYER_STAT Current BarleyZP.BzpAllergies_AllergyTeachBook 1",
-          "CustomFields": {
-            "Spiderbuttons.SpecialPowerUtilities/Section": "BarleyZP.BzpAllergies"
-          }
+					"CustomFields": {
+						"Spiderbuttons.SpecialPowerUtilities/Section": "BarleyZP.BzpAllergies"
+					}
 				},
 				"BarleyZP.BzpAllergies_AllergyCookbook": {
-					"DisplayName": "Allergy-Sensitive Cooking",
-					"Description": "Learn to cook foods that are safe to eat when you have allergies.",
+					"DisplayName": "{{i18n:obj.allergy-cookbook.name}}",
+					"Description": "{{i18n:obj.allergy-cookbook.desc}}",
 					"TexturePath": "BarleyZP.BzpAllergies/Sprites",
 					"TexturePosition": {
 						"X": 128,

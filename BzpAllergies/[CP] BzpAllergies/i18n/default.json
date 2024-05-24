@@ -33,5 +33,23 @@
   "dialogue.shane": "You look hungover. Don't make it a habit.$2",
   "dialogue.vincent": "Woah... That's the face I make when I eat a bug that doesn't taste good.$3",
   "dialogue.willy": "You look a bit seasick, son.^You look a bit seasick, lass.$2",
-  "dialogue.wizard": "Did you tamper with culinary magic? You look ill."
+  "dialogue.wizard": "Did you tamper with culinary magic? You look ill.",
+
+  "obj.allergy-medicine.name": "Allergy Medicine",
+  "obj.allergy-medicine.desc": "Drink for relief from an allergic reaction. Can be consumed even when nauseous.",
+  "obj.lactase-pills.name": "Lactase Pills",
+  "obj.lactase-pills.desc": "Eat before consuming dairy if you're allergic for temporary protection.",
+  "obj.plantmilk.name": "Plant Milk",
+  "obj.plantmilk.desc": "A dairy-free alternative for cooking.",
+  "obj.gf-flour.name": "Gluten Free Flour",
+  "obj.gf-flour.desc": "A gluten-free alternative for cooking.",
+  "obj.allergy-teach-book.name": "All About Allergies",
+  "obj.allergy-teach-book.desc": "Helps you discover one of your food allergies.",
+  "obj.allergy-cookbook.name": "Allergy-Sensitive Cooking",
+  "obj.allergy-cookbook.desc": "Learn to cook foods that are safe to eat when you have allergies.",
+
+  "recipe.milksub": "Milk Substitute",
+  "recipe.flour-any": "Flour (Any)",
+  "recipe.egg-any": "Egg (Any)",
+  "recipe.milk-any": "Milk (Any)"
 }

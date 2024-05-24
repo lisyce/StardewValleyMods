@@ -40,49 +40,49 @@
       "Entries": {
         "peanut": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Peanuts",
+          "DisplayName": "{{i18n:peanut}}",
           "ObjectIds": [
             "Cornucopia_Peanut"
           ]
         },
         "almond": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Almonds",
+          "DisplayName": "{{i18n:almond}}",
           "ObjectIds": [
             "Cornucopia_Almond"
           ]
         },
         "cashew": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Cashews",
+          "DisplayName": "{{i18n:cashew}}",
           "ObjectIds": [
             "Cornucopia_Cashew"
           ]
         },
         "pecan": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Pecans",
+          "DisplayName": "{{i18n:pecan}}",
           "ObjectIds": [
             "Cornucopia_Pecan"
           ]
         },
         "pistachio": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Pistachios",
+          "DisplayName": "{{i18n:pistachio}}",
           "ObjectIds": [
             "Cornucopia_Pistachio"
           ]
         },
         "walnut": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Walnuts",
+          "DisplayName": "{{i18n:walnut}}",
           "ObjectIds": [
             "Cornucopia_Walnut"
           ]
         },
         "soy": {
           "AddedByContentPackId": "{{ModId}}",
-          "DisplayName": "Soy",
+          "DisplayName": "{{i18n:soy}}",
           "ObjectIds": [
             "Cornucopia_Soybeans",
             "Cornucopia_Tofu"
