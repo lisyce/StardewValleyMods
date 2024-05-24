@@ -30,7 +30,7 @@
       "Action": "EditData",
       "Target": "Data/Mail",
       "Entries": {
-        "BarleyZP.BzpAllergies_harvey_ad": "@,^I heard that you experienced an allergic reaction the other day.^You should come by the clinic sometime and get some medicine so it doesn't happen again!^I've enclosed some Allergy Medicine to get you by until you can stop in.^^-Dr. Harvey%item object BarleyZP.BzpAllergies_AllergyMedicine 1%%[#]Harvey's Allergy Medicine"
+        "BarleyZP.BzpAllergies_harvey_ad": "{{i18n:harvey-letter}}"
       }
     }
   ]
