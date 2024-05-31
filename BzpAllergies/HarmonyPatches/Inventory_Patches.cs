@@ -2,6 +2,7 @@
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Extensions;
 using StardewValley.ItemTypeDefinitions;
 using StardewValley.Menus;
 using System.Text;
@@ -28,6 +29,9 @@ namespace BZP_Allergies.HarmonyPatches
             // 25 chars max a line
             try
             {
+                // bigcraftables shouldn't have allergens haha
+                if (__instance.HasTypeBigCraftable()) return;
+
                 string itemId = Traverse.Create(__instance).Property("ItemId").GetValue<string>();
 
                 // is it the allergy teach book?
