@@ -2,10 +2,12 @@
 
 ## 1.4.0
 
-Released _____
+Released 31 May 2024
 
 - Fixed UI crash when crafting field snacks
 - Full i18n support; please reach out if you'd like to help translate!
+- Thanks to my friend Seb for the Spanish translation
+- Fixed bug where the telephone had Fish and Gluten allergens
 
 ## 1.3.2
 

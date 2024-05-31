@@ -14,6 +14,7 @@ using StardewValley;
 
 using static BZP_Allergies.AllergenManager;
 using BZP_Allergies.HarmonyPatches.UI;
+using System.Transactions;
 
 namespace BZP_Allergies
 {
@@ -43,9 +44,6 @@ namespace BZP_Allergies
 
             ModHelper = modHelper;
             Translation = modHelper.Translation;
-
-            // allergen manager
-            AllergenManager.InitDefault();
 
             // events
             modHelper.Events.GameLoop.GameLaunched += OnGameLaunched;
@@ -103,6 +101,7 @@ namespace BZP_Allergies
             }
             else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.BzpAllergies/AllergyData"))
             {
+                AllergenManager.InitDefault();
                 e.LoadFrom(() => AllergenManager.ALLERGEN_DATA, AssetLoadPriority.Medium);
             }
         }
