@@ -31,6 +31,8 @@ namespace FishingTackleTooltip
             );
 
             helper.Events.GameLoop.DayStarted += OnDayStarted;
+
+            helper.ConsoleCommands.Add("tackle_tooltip", "Get the bait/tackle you recently ran out of from the fishing rod you're holding.", GetLastUsed);
         }
 
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
@@ -66,6 +68,7 @@ namespace FishingTackleTooltip
                     baitStrIdx = i + 3;
 
                     result.Add(new CodeInstruction(OpCodes.Ldloc_2));
+                    result.Add(new CodeInstruction(OpCodes.Ldarg_0));
 
                     MethodInfo mine = AccessTools.Method(typeof(ModEntry), nameof(ShowBaitRunOutMessage));
                     result.Add(new CodeInstruction(OpCodes.Call, mine));
@@ -77,6 +80,8 @@ namespace FishingTackleTooltip
                     tackleStrIdx = i + 3;
 
                     result.Add(new CodeInstruction(OpCodes.Ldloc_S, 6));
+                    result.Add(new CodeInstruction(OpCodes.Ldarg_0));
+                    result.Add(new CodeInstruction(OpCodes.Ldloc_3));
 
                     MethodInfo mine = AccessTools.Method(typeof(ModEntry), nameof(ShowTackleRunOutMessage));
                     result.Add(new CodeInstruction(OpCodes.Call, mine));
@@ -89,8 +94,11 @@ namespace FishingTackleTooltip
             return result;
         }
 
-        public static void ShowBaitRunOutMessage(StardewValley.Object bait)
+        public static void ShowBaitRunOutMessage(StardewValley.Object bait, FishingRod rod)
         {
+            // bait is attachment slot 0
+            rod.modData["BarleyZP.FishingTackleTooltip.0"] = bait.DisplayName;
+
             if (bait.QualifiedItemId == "(O)703")
             {
                 Game1.showGlobalMessage(Translation.Get("baitGoneMagnet"));
@@ -101,9 +109,37 @@ namespace FishingTackleTooltip
             }
         }
 
-        public static void ShowTackleRunOutMessage(StardewValley.Object tackle)
+        public static void ShowTackleRunOutMessage(StardewValley.Object tackle, FishingRod rod, int i)
         {
+            rod.modData["BarleyZP.FishingTackleTooltip." + i] = tackle.DisplayName;
             Game1.showGlobalMessage(Translation.Get("tackleGone", new { tackleName = tackle.DisplayName }));
+        }
+
+        private void GetLastUsed(string command, string[] args)
+        {
+            Item? item = Game1.player.CurrentItem;
+            if (item is not null && item is FishingRod rod)
+            {
+                bool found = false;
+                foreach (var pair in rod.modData.Pairs)
+                {
+                    if (pair.Key.StartsWith("BarleyZP.FishingTackleTooltip.")) {
+                        string bait = pair.Value;
+                        Monitor.Log(bait, LogLevel.Info);
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    Monitor.Log("No known last-used bait.", LogLevel.Debug);
+                }
+                
+            }
+            else
+            {
+                Monitor.Log("You need to be holding a fishing rod.", LogLevel.Debug);
+            }
         }
     }
 }
