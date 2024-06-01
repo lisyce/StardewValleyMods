@@ -6,7 +6,7 @@
   "UniqueID": "BarleyZP.FishingTackleTooltip",
   "EntryDll": "FishingTackleTooltip.dll",
   "MinimumApiVersion": "3.8.0",
-  "UpdateKeys": [ "Nexus:____" ],
+  "UpdateKeys": [ "Nexus:24751" ],
   "Dependencies": [
     
   ]

@@ -24,28 +24,27 @@ namespace FishingTackleTooltip
             Translation = helper.Translation;
 
             Harmony harmony = new(ModManifest.UniqueID);
-            Harmony.DEBUG = true;
             harmony.Patch(
                 original: AccessTools.Method(typeof(FishingRod), "doDoneFishing"),
                 transpiler: new HarmonyMethod(typeof(ModEntry), nameof(doDoneFishing_Transpiler))
             );
 
-            helper.Events.GameLoop.DayStarted += OnDayStarted;
+            //helper.Events.GameLoop.DayStarted += OnDayStarted;
 
             helper.ConsoleCommands.Add("tackle_tooltip", "Get the bait/tackle you recently ran out of from the fishing rod you're holding.", GetLastUsed);
         }
 
-        private void OnDayStarted(object? sender, DayStartedEventArgs e)
-        {
-            // DELETE THIS FOR RELEASE
-            StardewValley.Object brokenTrapBobber = ItemRegistry.Create<StardewValley.Object>("(O)694");
-            brokenTrapBobber.uses.Value = FishingRod.maxTackleUses - 1;
-            Game1.player.Items.Add(brokenTrapBobber);
+        //private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        //{
+        //    // DELETE THIS FOR RELEASE
+        //    StardewValley.Object brokenTrapBobber = ItemRegistry.Create<StardewValley.Object>("(O)694");
+        //    brokenTrapBobber.uses.Value = FishingRod.maxTackleUses - 1;
+        //    Game1.player.Items.Add(brokenTrapBobber);
 
-            StardewValley.Object treasure = ItemRegistry.Create<StardewValley.Object>("(O)693");
-            treasure.uses.Value = FishingRod.maxTackleUses - 1;
-            Game1.player.Items.Add(treasure);
-        }
+        //    StardewValley.Object treasure = ItemRegistry.Create<StardewValley.Object>("(O)693");
+        //    treasure.uses.Value = FishingRod.maxTackleUses - 1;
+        //    Game1.player.Items.Add(treasure);
+        //}
 
         public static IEnumerable<CodeInstruction> doDoneFishing_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
