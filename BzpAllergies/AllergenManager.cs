@@ -67,7 +67,7 @@ namespace BZP_Allergies
             AllergenModel shellfish = new(translation.Get("allergies.shellfish"));
             shellfish.AddObjectIds(new HashSet<string>{
                     "203", "218", "227", "228", "727", "728", "729", "730", "732", "733", "715", "372",
-                    "717", "718", "719", "720", "723", "716", "721", "722"
+                    "717", "718", "719", "720", "723", "716", "721", "722", "151", "149"
                 });
             ALLERGEN_DATA["shellfish"] = shellfish;
 
@@ -98,6 +98,11 @@ namespace BZP_Allergies
             {
                 throw new Exception("No allergen found with Id " + allergen.ToString());
             }
+        }
+
+        public static bool AllergenExists(string allergen)
+        {
+            return ALLERGEN_DATA_ASSET.ContainsKey(allergen);
         }
 
         public static string GetAllergenDisplayName(string allergen)
@@ -214,13 +219,36 @@ namespace BZP_Allergies
                     }
                 }
             }
+            // has one of the allergen_{id} tags
+            else if (@object.GetContextTags().ToList().Find((string tag) => tag.StartsWith("allergen")) != null)
+            {
+                // get allergen tags
+                foreach (string tag in @object.GetContextTags())
+                {
+                    if (tag.StartsWith("allergen"))
+                    {
+                        string[] parts = tag.Split("_");
+                        if (parts.Length != 2) continue;
+
+                        string allergenId = parts[1];
+                        if (allergenId == "nut")
+                        {
+                            // special case since this doesn't match our name
+                            allergenId = "treenuts";
+                        }
+
+                        result.Add(allergenId);
+                    }
+                }
+            }
             // else: boring normal item
             else
             {
+
                 foreach (var allergenData in ALLERGEN_DATA_ASSET)
                 {
                     // do we have this allergen?
-                    if (allergenData.Value.ObjectIds.Contains(@object.ItemId))
+                    if (allergenData.Value.ObjectIds.Find(id => id.ToLower() == @object.ItemId.ToLower()) != null)
                     {
                         result.Add(allergenData.Key);
                     }
@@ -252,8 +280,7 @@ namespace BZP_Allergies
             ISet<string> tags = @object.GetContextTags();
 
             // find the "preserve_sheet_index_{id}" tag
-            Regex rx = new(@"^preserve_sheet_index_\d+$");
-            List<string> filteredTags = tags.Where(t => rx.IsMatch(t)).ToList();
+            List<string> filteredTags = tags.Where(t => t.StartsWith("preserve_sheet_index_")).ToList();
 
             if (filteredTags.Count == 0)  // no preserves index
             {
@@ -263,15 +290,12 @@ namespace BZP_Allergies
             foreach (string tag in filteredTags)
             {
                 // get the id of the object it was made from
-                Match m = Regex.Match(tag, @"\d+");
-                if (m.Success)
+                string madeFromId = tag.Split("preserve_sheet_index_").Last();
+                if (ItemRegistry.Create(madeFromId) is StardewValley.Object casted)
                 {
-                    string madeFromId = m.Value;
-                    if (ItemRegistry.Create(madeFromId) is StardewValley.Object casted)
-                    {
-                        result.Add(casted);
-                    }
+                    result.Add(casted);
                 }
+                
             }
             return result;
         }

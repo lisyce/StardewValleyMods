@@ -1,5 +1,14 @@
 # BarleyZP's Allergies Release Notes
 
+## 1.4.1
+
+Released _____
+
+- Now supports finding allergens in an object based on context tags. See documentation for details.
+- Object Ids in the Allergen Data asset are now case-insensitive
+- Squid and Octopus have been moved to the shellfish allergy
+- Replaced "BarleyZP.BzpAllergies_FlourIngredient" context tag with more general "flour_item"
+
 ## 1.4.0
 
 Released 31 May 2024

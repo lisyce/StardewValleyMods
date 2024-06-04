@@ -33,7 +33,7 @@
       "Target": "Data/Objects",
       "TargetField": [ "246", "ContextTags" ],
       "Entries": {
-        "#-1": "BarleyZP.BzpAllergies_FlourIngredient"
+        "#-1": "flour_item"
       }
     },
     {
@@ -143,7 +143,7 @@
           "ExcludeFromRandomSale": false,
           "ContextTags": [
             "color_white",
-            "BarleyZP.BzpAllergies_FlourIngredient"
+            "flour_item"
           ]
         },
         "BarleyZP.BzpAllergies_AllergyTeachBook": {

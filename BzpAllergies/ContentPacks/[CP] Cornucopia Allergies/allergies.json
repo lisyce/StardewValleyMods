@@ -8,7 +8,11 @@
       "Entries": {
         "#-1": "Cornucopia_Durum",
         "#-2": "Cornucopia_SemolinaFlour",
-        "#-3": "Cornucopia_DarkAle"
+        "#-3": "Cornucopia_DarkAle",
+        "#-4": "Cornucopia_SemolinaNoodles",
+        "#-5": "Cornucopia_Stout",
+        "#-6": "Cornucopia_WholeGrainFlour",
+        "#-7": "Cornucopia_WholeGrainNoodles"
       }
     },
     {
@@ -21,7 +25,17 @@
         "#-2": "Cornucopia_Cashew",
         "#-3": "Cornucopia_Pecan",
         "#-4": "Cornucopia_Pistachio",
-        "#-5": "Cornucopia_Walnut"
+        "#-5": "Cornucopia_Walnut",
+        "#-6": "Cornucopia_PineNuts"
+      }
+    },
+    {
+      "LogName": "dairy",
+      "Action": "EditData",
+      "Target": "BarleyZP.BzpAllergies/AllergyData",
+      "TargetField": [ "dairy", "ObjectIds" ],
+      "Entries": {
+        "#-1": "Cornucopia_PlainYogurt"
       }
     },
     {
@@ -42,7 +56,8 @@
           "AddedByContentPackId": "{{ModId}}",
           "DisplayName": "{{i18n:peanut}}",
           "ObjectIds": [
-            "Cornucopia_Peanut"
+            "Cornucopia_Peanut",
+            "Cornucopia_PeanutButter"
           ]
         },
         "almond": {
@@ -85,7 +100,10 @@
           "DisplayName": "{{i18n:soy}}",
           "ObjectIds": [
             "Cornucopia_Soybeans",
-            "Cornucopia_Tofu"
+            "Cornucopia_Tofu",
+            "Cornucopia_MisoPaste",
+            "Cornucopia_SoySauce",
+            "Cornucopia_StinkyTofu"
           ]
         }
       }

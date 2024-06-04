@@ -69,6 +69,8 @@ namespace BZP_Allergies.HarmonyPatches
                         currLineLen = 0;
                     }
 
+                    if (!AllergenManager.AllergenExists(a)) continue;
+
                     allergenText.Append(AllergenManager.GetAllergenDisplayName(a));
                     currLineLen += len;
 
