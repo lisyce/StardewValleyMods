@@ -1,13 +1,6 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
-using StardewValley.Inventories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BZP_Allergies.HarmonyPatches
 {
