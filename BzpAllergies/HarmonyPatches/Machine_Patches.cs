@@ -8,8 +8,6 @@ namespace BZP_Allergies.HarmonyPatches
     {
         public static void Patch(Harmony harmony)
         {
-            // plan: prefix placeInMachine to copy the inventory (Object.autoLoadFrom ?? who.Items)
-            // then, postfix placeInMachine to see what was spent from the inventory
             harmony.Patch(
                 original: AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.PlaceInMachine)),
                 prefix: new HarmonyMethod(typeof(Machine_Patches), nameof(PlaceInMachine_Prefix)),

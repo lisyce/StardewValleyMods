@@ -270,6 +270,22 @@ namespace BZP_Allergies
                 }
             }
 
+            // remove exclusions
+            foreach (var allergenData in ALLERGEN_DATA_ASSET)
+            {
+                if (!result.Contains(allergenData.Key)) continue;
+
+                if (allergenData.Value.ExceptObjectIds.Contains(@object.ItemId))
+                {
+                    result.Remove(allergenData.Key);
+                }
+
+                if (allergenData.Value.ExceptContextTags.Any(a => @object.HasContextTag(a)))
+                {
+                    result.Remove(allergenData.Key);
+                }
+            }
+
             return result;
         }
 
@@ -437,27 +453,34 @@ namespace BZP_Allergies
 
         public string? AddedByContentPackId { get; set; }
 
+        public List<string> ExceptObjectIds { get; set; }
+        public List<string> ExceptContextTags { get; set; }
+
         public AllergenModel (string displayName, string? addedByContentPackId = null)
         {
             ObjectIds = new();
             ContextTags = new();
+            ExceptObjectIds = new();
+            ExceptContextTags = new();
             DisplayName = displayName;
             AddedByContentPackId = addedByContentPackId;
         }
 
-        public void AddObjectIds (IEnumerable<string> ids)
+        public void AddObjectIds (IEnumerable<string> ids, bool except = false)
         {
+            List<string> addTo = except ? ExceptObjectIds : ObjectIds;
             foreach (string id in ids)
             {
-                ObjectIds.Add(id);
+                addTo.Add(id);
             }
         }
 
-        public void AddTags(IEnumerable<string> tags)
+        public void AddTags(IEnumerable<string> tags, bool except = false)
         {
+            List<string> addTo = except ? ExceptContextTags : ContextTags;
             foreach (string tag in tags)
             {
-                ContextTags.Add(tag);
+                addTo.Add(tag);
             }
         }
     }

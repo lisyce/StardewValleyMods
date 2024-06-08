@@ -35,7 +35,19 @@
       "Target": "BarleyZP.BzpAllergies/AllergyData",
       "TargetField": [ "dairy", "ObjectIds" ],
       "Entries": {
-        "#-1": "Cornucopia_PlainYogurt"
+        "#-1": "Cornucopia_PlainYogurt",
+        "#-2": "Cornucopia_HoneyButter",
+        "#-3": "Cornucopia_MapleButter"
+      }
+    },
+    {
+      "LogName": "Coconut milk exception",
+      "Action": "EditData",
+      "Target": "BarleyZP.BzpAllergies/AllergyData",
+      "TargetField": [ "dairy", "ExceptObjectIds" ],
+      "Entries": {
+        "#-1": "Cornucopia_CoconutMilk",
+        "#-2": "Cornucopia_NutMilk"
       }
     },
     {
