@@ -146,7 +146,7 @@ namespace BZP_Allergies
         }
 
         public static ISet<string> ModDataSetGet(IHaveModData obj, string key)
-        { 
+        {
             if (ModDataGet(obj, key, out string val) && val.Length > 0)
             {
                 return val.Split(',').ToHashSet();
@@ -171,7 +171,7 @@ namespace BZP_Allergies
             return ModDataSetContains(Game1.player, Constants.ModDataHas, allergen);
         }
 
-        public static bool FarmerIsAllergic (StardewValley.Object @object)
+        public static bool FarmerIsAllergic(StardewValley.Object @object)
         {
             ISet<string> containsAllergens = GetAllergensInObject(@object);
 
@@ -185,26 +185,18 @@ namespace BZP_Allergies
             return false;
         }
 
-        public static ISet<string> GetAllergensInObject(StardewValley.Object? @object)
+        public static ISet<string> GetAllergensInObject(Item? item)
         {
             ISet<string> result = new HashSet<string>();
-            if (@object == null)
+            if (item == null || item is not StardewValley.Object @object)
             {
                 return result;
             }
 
-            // special case: preserves item
-            List<StardewValley.Object> madeFrom = TryGetMadeFromObjects(@object);
+            List<StardewValley.Object> preservesInput = TryGetPreservesInputObjects(@object);
 
-            if (madeFrom.Any())
-            {
-                foreach (StardewValley.Object madeFromObj in madeFrom)
-                {
-                    result.UnionWith(GetAllergensInObject(madeFromObj));
-                }
-            }
-            // special case: cooked/milled/crafted (etc) item
-            else if (@object.modData.ContainsKey(Constants.ModDataMadeWith))
+            // special case: cooked/milled/crafted/machined (etc) item
+            if (@object.modData.ContainsKey(Constants.ModDataMadeWith))
             {
                 // try looking in the modData field for what the thing was crafted with
                 foreach (string allergenId in ModDataSetGet(@object, Constants.ModDataMadeWith))
@@ -219,6 +211,15 @@ namespace BZP_Allergies
                     }
                 }
             }
+            // special case: preserves item
+            else if (preservesInput.Any())
+            {
+                foreach (StardewValley.Object madeFromObj in preservesInput)
+                {
+                    result.UnionWith(GetAllergensInObject(madeFromObj));
+                }
+            }
+            
             // has one of the allergen_{id} tags
             else if (@object.GetContextTags().ToList().Find((string tag) => tag.StartsWith("allergen")) != null)
             {
@@ -272,7 +273,7 @@ namespace BZP_Allergies
             return result;
         }
 
-        public static List<StardewValley.Object> TryGetMadeFromObjects(StardewValley.Object @object)
+        public static List<StardewValley.Object> TryGetPreservesInputObjects(StardewValley.Object @object)
         {
             List<StardewValley.Object> result = new();
 

@@ -66,6 +66,7 @@ namespace BZP_Allergies
             SkillBook_Patches.Patch(Harmony);
             SpaceCoreCustomCraftingRecipe_Patches.Patch(Harmony);
             UI_Patches.Patch(Harmony);
+            Machine_Patches.Patch(Harmony);
 
             // console commands
             modHelper.ConsoleCommands.Add("bzpa_list_allergens", "Get a list of all possible allergens.", ListAllergens);
