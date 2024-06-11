@@ -166,7 +166,8 @@
           "ExcludeFromRandomSale": false,
           "ContextTags": [
             "color_green",
-            "book_item"
+            "book_item",
+            "spu_book_no_message"
           ]
         },
         "BarleyZP.BzpAllergies_AllergyCookbook": {
@@ -189,7 +190,8 @@
           "ExcludeFromRandomSale": false,
           "ContextTags": [
             "color_purple",
-            "book_item"
+            "book_item",
+            "spu_book_no_message"
           ]
         }
       }
