@@ -44,7 +44,7 @@ namespace BZP_Allergies
             AllergenModel egg = new(translation.Get("allergies.egg"));
             egg.AddObjectIds(new HashSet<string>{
                     "194", "195", "201", "203", "211", "213", "220", "221", "223", "234", "240", "648",
-                    "732"
+                    "732", "CalicoEgg"
                 });
             egg.AddTags(new HashSet<string> { "egg_item", "mayo_item", "large_egg_item" });
             ALLERGEN_DATA["egg"] = egg;

@@ -9,6 +9,8 @@ Released _____
 - Squid and Octopus have been moved to the shellfish allergy
 - Replaced "BarleyZP.BzpAllergies_FlourIngredient" context tag with more general "flour_item"
 - Changed how processed goods receive their allergies to allow for fuels and extra consumed items to count for allergy contributions
+- Books now use Special Power Utilities' `spu_book_no_message` context tag to avoid double-messages and remove a transpiler
+- Calico eggs can cause reactions in those with egg allergies (cause why not? it's an egg)
 
 ## 1.4.0
 
