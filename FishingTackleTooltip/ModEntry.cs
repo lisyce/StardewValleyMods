@@ -7,6 +7,7 @@ using StardewValley.Monsters;
 using StardewValley.Tools;
 using System.Reflection;
 using System.Reflection.Emit;
+using StardewValley.TerrainFeatures;
 
 namespace FishingTackleTooltip
 {
