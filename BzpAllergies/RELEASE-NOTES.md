@@ -11,6 +11,8 @@ Released _____
 - Changed how processed goods receive their allergies to allow for fuels and extra consumed items to count for allergy contributions
 - Books now use Special Power Utilities' `spu_book_no_message` context tag to avoid double-messages and remove a transpiler
 - Calico eggs can cause reactions in those with egg allergies (cause why not? it's an egg)
+- Added `ExceptObjectIds` and `ExceptContextTags` to the allergen data asset (see content pack docs)
+- Objects with the `allergen_{allergenid}` tag automatically get allergens assigned
 
 ## 1.4.0
 

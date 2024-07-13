@@ -18,7 +18,9 @@ Allergens are stored in the asset `BarleyZP.BzpAllergies/AllergyData`. This is a
 - `DisplayName`: Translated display name of the allergy.
 - `AddedByContentPackId`: For custom allergies, the unique Id of the mod that added it.
 - `ObjectIds`: A list of unqualified object Ids that have the allergy. Preserves Items (jelly, aged roe, etc.) are handled by the mod code, so you only need to list the input object. Additionally, any foods that are cooked with these items will retain the allergies of their ingredients. However, you should still assign the cooked foods to any allergens they may have as a backup, just in case the mod code needs something to fall back on.
-- `ContextTags`: A list of context tags. Any objects with at least one of these context tags will have the allergy. 
+- `ContextTags`: A list of context tags. Any objects with at least one of these context tags will have the allergy.
+- `ExceptObjectIds`: A list of unqualified object Ids that should be an exception to having this allergy. Useful if you just have one or two items under a context tag category that you want to not have the allergen.
+- `ExceptContextTags`: A list of context tags. Any object with at least one of these tags will NOT have the allergen.
 
 The allergens added by the base mod have Ids `"egg"`, `"gluten"`, `"fish"`, `"shellfish"`, `"treenuts"`, `"dairy"`, and `"mushroom"`, so you only need to edit the `ObjectIds` and `ContextTags` fields for these ones.
 
