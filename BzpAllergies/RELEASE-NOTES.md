@@ -2,7 +2,7 @@
 
 ## 1.4.1
 
-Released _____
+Released 7 July 2024
 
 - Object Ids in the Allergen Data asset are now case-insensitive
 - Squid and Octopus have been moved to the shellfish allergy
