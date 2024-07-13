@@ -64,7 +64,6 @@ namespace BZP_Allergies
             Inventory_Patches.Patch(Harmony);
             NpcDialogue_Patches.Patch(Harmony);
             SkillBook_Patches.Patch(Harmony);
-            SpaceCoreCustomCraftingRecipe_Patches.Patch(Harmony);
             UI_Patches.Patch(Harmony);
             Machine_Patches.Patch(Harmony);
 
