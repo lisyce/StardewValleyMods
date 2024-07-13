@@ -13,6 +13,7 @@ Released _____
 - Calico eggs can cause reactions in those with egg allergies (cause why not? it's an egg)
 - Added `ExceptObjectIds` and `ExceptContextTags` to the allergen data asset (see content pack docs)
 - Objects with the `allergen_{allergenid}` tag automatically get allergens assigned
+- When passing out due to allergic reaction energy loss, a global message is shown to explain what's happening
 
 ## 1.4.0
 

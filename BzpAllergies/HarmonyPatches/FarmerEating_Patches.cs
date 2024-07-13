@@ -142,7 +142,12 @@ namespace BZP_Allergies.HarmonyPatches
                 {
                     // change edibility back to original value
                     itemToEat.Edibility = __state;
-                }                
+                    if (__instance.Stamina <= -15f)
+                    {
+                        // passing out
+                        Game1.showGlobalMessage(ModEntry.Instance.Translation.Get("reaction-passout"));
+                    }
+                }
             }
             catch (Exception ex)
             {
