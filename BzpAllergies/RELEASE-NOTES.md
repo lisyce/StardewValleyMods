@@ -1,8 +1,14 @@
 # BarleyZP's Allergies Release Notes
 
+## 1.4.2
+
+Release 14 July 2024
+
+- Ingredients in fridges are no longer double-consumed when cooking
+
 ## 1.4.1
 
-Released 7 July 2024
+Released 13 July 2024
 
 - Object Ids in the Allergen Data asset are now case-insensitive
 - Squid and Octopus have been moved to the shellfish allergy

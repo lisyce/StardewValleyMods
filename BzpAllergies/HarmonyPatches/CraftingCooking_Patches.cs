@@ -158,17 +158,8 @@ namespace BZP_Allergies.HarmonyPatches
             // set static vars
             JustCookedWithName = crafted.DisplayName;
 
-            // restore inventories
+            // restore player inventory (additional materials were fully copied, so don't restore those)
             Game1.player.Items.OverwriteWith(playerItems);
-
-            if (additionalMaterials != null)
-            {
-                for (int i = 0; i < additionalMaterials.Count; i++)
-                {
-                    if (additionalMaterials[i] == null) continue;
-                    additionalMaterials[i].OverwriteWith(additionalMaterialsCopy[i]);
-                }
-            }
         }
     }
 }
