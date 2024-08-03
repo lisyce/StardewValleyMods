@@ -1,0 +1,10 @@
+{
+  "Name": "Items Have Weight",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "All items have weight! Hope your character is strong or they'll get tired of carrying it all...",
+  "UniqueID": "BarleyZP.ItemsHaveWeight",
+  "EntryDll": "ItemsHaveWeight.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": [ "Nexus:26693" ]
+}
