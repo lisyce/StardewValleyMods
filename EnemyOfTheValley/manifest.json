@@ -1,0 +1,10 @@
+{
+  "Name": "Enemy of the Valley",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "You either die a hero or live long enough to see yourself become the villain.",
+  "UniqueID": "BarleyZP.EnemyOfTheValley",
+  "EntryDll": "EnemyOfTheValley.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": []
+}
