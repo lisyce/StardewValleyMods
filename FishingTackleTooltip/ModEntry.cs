@@ -1,13 +1,10 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewModdingAPI.Utilities;
 using StardewValley;
-using StardewValley.Monsters;
 using StardewValley.Tools;
 using System.Reflection;
 using System.Reflection.Emit;
-using StardewValley.TerrainFeatures;
 
 namespace FishingTackleTooltip
 {
@@ -30,68 +27,60 @@ namespace FishingTackleTooltip
                 transpiler: new HarmonyMethod(typeof(ModEntry), nameof(doDoneFishing_Transpiler))
             );
 
-            //helper.Events.GameLoop.DayStarted += OnDayStarted;
+            // helper.Events.GameLoop.DayStarted += OnDayStarted;
 
             helper.ConsoleCommands.Add("tackle_tooltip", "Get the bait/tackle you recently ran out of from the fishing rod you're holding.", GetLastUsed);
         }
 
-        //private void OnDayStarted(object? sender, DayStartedEventArgs e)
-        //{
-        //    // DELETE THIS FOR RELEASE
-        //    StardewValley.Object brokenTrapBobber = ItemRegistry.Create<StardewValley.Object>("(O)694");
-        //    brokenTrapBobber.uses.Value = FishingRod.maxTackleUses - 1;
-        //    Game1.player.Items.Add(brokenTrapBobber);
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        {
+            StardewValley.Object brokenTrapBobber = ItemRegistry.Create<StardewValley.Object>("(O)694");
+            brokenTrapBobber.uses.Value = FishingRod.maxTackleUses - 1;
+            Game1.player.addItemToInventory(brokenTrapBobber);
 
-        //    StardewValley.Object treasure = ItemRegistry.Create<StardewValley.Object>("(O)693");
-        //    treasure.uses.Value = FishingRod.maxTackleUses - 1;
-        //    Game1.player.Items.Add(treasure);
-        //}
+            StardewValley.Object treasure = ItemRegistry.Create<StardewValley.Object>("(O)693");
+            treasure.uses.Value = FishingRod.maxTackleUses - 1;
+            Game1.player.addItemToInventory(treasure);
+        }
 
         public static IEnumerable<CodeInstruction> doDoneFishing_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             List<CodeInstruction> inputInstrList = new(instructions);
-            List<CodeInstruction> result = new();
 
             string baitStr = "Strings\\StringsFromCSFiles:FishingRod.cs.14085";
-            int baitStrIdx = -1;
 
             string tackleStr = "Strings\\StringsFromCSFiles:FishingRod.cs.14086";
-            int tackleStrIdx = -1;
 
-            for (int i=0; i < inputInstrList.Count; i++)
-            {
-                // find the "Strings\\StringsFromCSFiles:FishingRode.cs.14085" ldstr call
-                CodeInstruction instr = inputInstrList[i];
-                if (instr.opcode == OpCodes.Ldstr && instr.operand is string s && s == baitStr)
-                {
-                    result.AddRange(inputInstrList.Take(i - 1));
-                    baitStrIdx = i + 3;
+            CodeMatcher matcher = new(inputInstrList);
 
-                    result.Add(new CodeInstruction(OpCodes.Ldloc_2));
-                    result.Add(new CodeInstruction(OpCodes.Ldarg_0));
+            MethodInfo baitRunOut = AccessTools.Method(typeof(ModEntry), nameof(ShowBaitRunOutMessage));
+            MethodInfo tackleRunOut = AccessTools.Method(typeof(ModEntry), nameof(ShowTackleRunOutMessage));
 
-                    MethodInfo mine = AccessTools.Method(typeof(ModEntry), nameof(ShowBaitRunOutMessage));
-                    result.Add(new CodeInstruction(OpCodes.Call, mine));
-                    i += 2;
-                }
-                else if (instr.opcode == OpCodes.Ldstr && instr.operand is string s1 && s1 == tackleStr)
-                {
-                    result.AddRange(inputInstrList.Skip(baitStrIdx).Take(i - baitStrIdx - 1));
-                    tackleStrIdx = i + 3;
+            matcher.MatchStartForward(
+                new CodeMatch(OpCodes.Ldstr, baitStr)
+                )
+                .ThrowIfNotMatch("could not find bait string to replace")
+                .Advance(-1)
+                .RemoveInstructions(4)
+                .Insert(
+                    new CodeInstruction(OpCodes.Ldloc_2),
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Call, baitRunOut)
+                )
+            .MatchStartForward(
+                new CodeMatch(OpCodes.Ldstr, tackleStr)
+             )
+            .ThrowIfNotMatch("could not find tackle string to replace")
+            .Advance(-1)
+            .RemoveInstructions(4)
+            .Insert(
+                new CodeInstruction(OpCodes.Ldloc_S, 5),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldloc_3),
+                new CodeInstruction(OpCodes.Call, tackleRunOut)
+            );
 
-                    result.Add(new CodeInstruction(OpCodes.Ldloc_S, 6));
-                    result.Add(new CodeInstruction(OpCodes.Ldarg_0));
-                    result.Add(new CodeInstruction(OpCodes.Ldloc_3));
-
-                    MethodInfo mine = AccessTools.Method(typeof(ModEntry), nameof(ShowTackleRunOutMessage));
-                    result.Add(new CodeInstruction(OpCodes.Call, mine));
-                    break;
-                }
-            }
-
-            result.AddRange(inputInstrList.Skip(tackleStrIdx));
-
-            return result;
+            return matcher.InstructionEnumeration();
         }
 
         public static void ShowBaitRunOutMessage(StardewValley.Object bait, FishingRod rod)
