@@ -10,7 +10,6 @@ namespace EnemyOfTheValley.Patches
 {
     internal class SocialPagePatches
     {
-        static Texture2D? sprites;
         public static void Patch(Harmony harmony)
         {
             harmony.Patch(
@@ -23,14 +22,13 @@ namespace EnemyOfTheValley.Patches
         {
             if (entry is null || entry.Friendship is null || entry.Friendship.Points >= 0) return true;
 
-            sprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/Sprites");
             if (hearts >= Math.Abs(entry.HeartLevel))
             {
                 b.Draw(Game1.mouseCursors, new Vector2(__instance.xPositionOnScreen + 320 - 4 + hearts * 32, __instance.sprites[npcIndex].bounds.Y + 64 - 28), new Rectangle(218, 428, 7, 6), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
             }
             else
             {
-                b.Draw(sprites, new Vector2(__instance.xPositionOnScreen + 320 - 4 + hearts * 32, __instance.sprites[npcIndex].bounds.Y + 64 - 28), new Rectangle(0, 0, 7, 6), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
+                b.Draw(ModEntry.sprites, new Vector2(__instance.xPositionOnScreen + 320 - 4 + hearts * 32, __instance.sprites[npcIndex].bounds.Y + 64 - 28), new Rectangle(0, 0, 7, 6), Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
             }
 
 
