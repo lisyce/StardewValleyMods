@@ -20,6 +20,15 @@ namespace EnemyOfTheValley.Patches
             CodeMatcher matcher = new(instructions);
 
             MethodInfo getPoints = AccessTools.PropertyGetter(typeof(Friendship), nameof(Friendship.Points));
+            MethodInfo min = AccessTools.Method(typeof(Math), nameof(Math.Min), new Type[] { typeof(int), typeof(int) });
+            MethodInfo max = AccessTools.Method(typeof(Math), nameof(Math.Max), new Type[] { typeof(int), typeof(int) });
+
+            matcher.MatchStartForward(
+                new CodeMatch(OpCodes.Call, min),
+                new CodeMatch(OpCodes.Call, max))
+                .ThrowIfNotMatch("failed to find min and max calls")
+                .Advance(-13)
+                .Set(OpCodes.Ldc_I4, -2500);
 
             matcher.MatchStartForward(
                 new CodeMatch(OpCodes.Ldloc_0),

@@ -1,7 +1,5 @@
 ﻿using HarmonyLib;
 using StardewValley;
-using System.Reflection;
-using System.Reflection.Emit;
 using StardewValley.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;

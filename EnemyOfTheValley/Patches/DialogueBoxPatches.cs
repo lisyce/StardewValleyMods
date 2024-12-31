@@ -32,6 +32,7 @@ namespace EnemyOfTheValley.Patches
             }
 
             int friendshipHearts = Game1.player.getFriendshipHeartLevelForNPC(speaker.Name);
+          
 
             if (friendshipHearts >= 0) return;
             friendshipHearts = Math.Abs(friendshipHearts);
@@ -41,7 +42,7 @@ namespace EnemyOfTheValley.Patches
                 b.Draw(
                     ModEntry.sprites,
                     new Vector2(__instance.friendshipJewel.X, __instance.friendshipJewel.Y),
-                    (friendshipHearts >= 10) ? new Rectangle(0, 51, 11, 11) : new Rectangle(Math.Max(0, (int)(Game1.currentGameTime.TotalGameTime.TotalMilliseconds % 1000.0 / 250.0) * 11), Math.Max(7, 7 + friendshipHearts / 2 * 11), 11, 11),
+                    (friendshipHearts >= 10) ? new Rectangle(0, 62, 11, 11) : new Rectangle(Math.Max(0, (int)(Game1.currentGameTime.TotalGameTime.TotalMilliseconds % 1000.0 / 250.0) * 11), Math.Max(7, 7 + friendshipHearts / 2 * 11), 11, 11),
                     Color.White, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
             }
         }
