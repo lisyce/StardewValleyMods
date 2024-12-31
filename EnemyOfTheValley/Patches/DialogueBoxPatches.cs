@@ -3,8 +3,6 @@ using StardewValley;
 using StardewValley.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System.Reflection.Emit;
-using System.Reflection;
 
 
 namespace EnemyOfTheValley.Patches
