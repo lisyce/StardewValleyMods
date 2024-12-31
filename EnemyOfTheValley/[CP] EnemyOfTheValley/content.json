@@ -1,0 +1,9 @@
+{
+  "Format": "2.4.0",
+  "Changes": [
+    {
+      "Action": "Include",
+      "FromFile": "dialogue/Abigail.json"
+    }
+  ]
+}

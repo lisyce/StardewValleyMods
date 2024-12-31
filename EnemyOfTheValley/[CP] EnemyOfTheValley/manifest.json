@@ -1,0 +1,11 @@
+{
+  "Name": "[CP] Enemy of the Valley",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Content Patcher portion for BarleyZP.EnemyOfTheValley",
+  "UniqueID": "BarleyZP.EnemyOfTheValley.CP",
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  }
+}

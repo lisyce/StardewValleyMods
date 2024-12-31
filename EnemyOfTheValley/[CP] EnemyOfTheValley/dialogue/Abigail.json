@@ -1,0 +1,11 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Abigail",
+      "Entries": {
+        "Sun-2": "We have mild beef and it's sunday"
+      }
+    }
+  ]
+}

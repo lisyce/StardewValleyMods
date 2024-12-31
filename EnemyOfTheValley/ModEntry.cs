@@ -20,6 +20,7 @@ namespace EnemyOfTheValley
             FarmerPatches.Patch(harmony);
             SocialPagePatches.Patch(harmony);
             DialogueBoxPatches.Patch(harmony);
+            NPCPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             LoadSprites();
