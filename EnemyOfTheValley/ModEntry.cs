@@ -4,6 +4,7 @@ using EnemyOfTheValley.Patches;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
 using StardewValley;
+using EnemyOfTheValley.Common;
 
 namespace EnemyOfTheValley
 {
@@ -14,7 +15,7 @@ namespace EnemyOfTheValley
         public override void Entry(IModHelper helper)
         {
             MonitorRef = Monitor;
-            Harmony.DEBUG = true;
+            //Harmony.DEBUG = true;
 
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
@@ -24,6 +25,9 @@ namespace EnemyOfTheValley
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             LoadSprites();
+
+            helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
+            helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchEnemy);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
@@ -38,6 +42,15 @@ namespace EnemyOfTheValley
         {
             sprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/Sprites");
             return sprites;
+        }
+
+        public static void SetEnemy(string command, string[] args) {
+            Relationships.SetEnemy(args[0]);
+        }
+
+        public static void SetArchEnemy(string command, string[] args)
+        {
+            Relationships.SetArchEnemy(args[0]);
         }
     }
 }

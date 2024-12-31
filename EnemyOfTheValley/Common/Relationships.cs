@@ -18,5 +18,15 @@ namespace EnemyOfTheValley.Common
             if (entry is null || entry.Friendship is null) return false;
             return entry.Friendship.Status == ArchEnemy;
         }
+
+        public static void SetEnemy(string name)
+        {
+            Game1.player.friendshipData[name].Status = Enemy;
+        }
+
+        public static void SetArchEnemy(string name)
+        {
+            Game1.player.friendshipData[name].Status = ArchEnemy;
+        }
     }
 }
