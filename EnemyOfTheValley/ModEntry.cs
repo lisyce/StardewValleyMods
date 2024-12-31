@@ -22,6 +22,7 @@ namespace EnemyOfTheValley
             SocialPagePatches.Patch(harmony);
             DialogueBoxPatches.Patch(harmony);
             NPCPatches.Patch(harmony);
+            ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             LoadSprites();
