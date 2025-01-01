@@ -4,6 +4,9 @@ using StardewValley.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using EnemyOfTheValley.Common;
+using static StardewValley.Menus.SocialPage;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection.Emit;
 
 namespace EnemyOfTheValley.Patches
 {
@@ -14,6 +17,12 @@ namespace EnemyOfTheValley.Patches
             harmony.Patch(
                 original: AccessTools.Method(typeof(SocialPage), "drawNPCSlotHeart"),
                 prefix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlotHeart_Prefix))
+                );
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(SocialPage), "drawNPCSlot"),
+                transpiler: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Transpiler)),
+                postfix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Postfix))
                 );
         }
 
@@ -33,5 +42,46 @@ namespace EnemyOfTheValley.Patches
 
             return false;
         }
+
+        public static void drawNPCSlot_Postfix(ref SocialPage __instance, SpriteBatch b, int i)
+        {
+            SocialEntry entry = __instance.GetSocialEntry(i);
+            if (entry == null) return;
+
+            string? text = Relationships.IsEnemy(entry) ? ModEntry.Translation.Get("enemy") : Relationships.IsArchEnemy(entry) ? ModEntry.Translation.Get("archenemy") : null;
+            if (text is null && entry.IsDatable && !entry.IsRoommateForCurrentPlayer() && !entry.IsMarriedToAnyone() && !entry.IsDivorcedFromCurrentPlayer() && !(!Game1.player.isMarriedOrRoommates() && entry.IsDatingCurrentPlayer()))
+            {
+                text = (entry.Gender == Gender.Male) ? Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Male") : Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Female");
+            }
+
+            if (text is null) return;
+
+            int width = (IClickableMenu.borderWidth * 3 + 128 - 40 + 192) / 2;
+            text = Game1.parseText(text, Game1.smallFont, width);
+            Vector2 textSize = Game1.smallFont.MeasureString(text);
+            float lineHeight = Game1.smallFont.MeasureString("W").Y;
+
+            b.DrawString(Game1.smallFont, text, new Vector2(__instance.xPositionOnScreen + 192 + 8 - textSize.X / 2f, __instance.sprites[i].bounds.Bottom - (textSize.Y - lineHeight)), Game1.textColor);
+        }
+
+        public static IEnumerable<CodeInstruction> drawNPCSlot_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            // goal is to look at where we first assign to "text" variable and make it empty if it's "single" since the postfix will rewrite it
+            CodeMatcher matcher = new(instructions);
+            matcher.MatchEndForward(
+                new CodeMatch(OpCodes.Ldsfld),
+                new CodeMatch(OpCodes.Ldstr, "Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Male"),
+                new CodeMatch(OpCodes.Callvirt),
+                new CodeMatch(OpCodes.Br_S),
+                new CodeMatch(OpCodes.Ldsfld),
+                new CodeMatch(OpCodes.Ldstr, "Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Female"),
+                new CodeMatch(OpCodes.Callvirt))
+                .ThrowIfNotMatch("could not find place to remove \"single\" text")
+                .Advance(2)
+                .Insert(new CodeInstruction[] { new(OpCodes.Ldstr, ""), new(OpCodes.Stloc_S, (byte)10) });
+
+            return matcher.InstructionEnumeration();
+        }
+
     }
 }

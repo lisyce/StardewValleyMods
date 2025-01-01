@@ -10,12 +10,14 @@ namespace EnemyOfTheValley
 {
     public class ModEntry : Mod
     {
-        public static IMonitor MonitorRef;
+        public static IMonitor Monitor;
+        public static ITranslationHelper Translation;
         public static Texture2D? sprites;  // do not reference directly in transpilers
         public override void Entry(IModHelper helper)
         {
-            MonitorRef = Monitor;
-            //Harmony.DEBUG = true;
+            Monitor = base.Monitor;
+            Translation = helper.Translation;
+            Harmony.DEBUG = true;
 
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
