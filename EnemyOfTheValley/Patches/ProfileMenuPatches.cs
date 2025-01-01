@@ -15,6 +15,15 @@ namespace EnemyOfTheValley.Patches
                 original: AccessTools.Method(typeof(ProfileMenu), "drawNPCSlotHeart"),
                 prefix: new HarmonyMethod(typeof(ProfileMenuPatches), nameof(drawNPCSlotHeart_Prefix))
                 );
+
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ProfileMenu), "_SetCharacter"),
+                postfix: new HarmonyMethod(typeof(ProfileMenuPatches), nameof(_SetCharacter_Postfix))
+                );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(ProfileMenu), nameof(ProfileMenu.SetupLayout)),
+                prefix: new HarmonyMethod(typeof(ProfileMenuPatches), nameof(SetupLayout_Prefix))
+                );
         }
 
         public static bool drawNPCSlotHeart_Prefix(ref ProfileMenu __instance, SpriteBatch b, float heartDrawStartX, float heartDrawStartY, SocialPage.SocialEntry entry, int hearts)
@@ -33,6 +42,20 @@ namespace EnemyOfTheValley.Patches
             b.Draw(spriteSheet, new Vector2(heartDrawStartX + hearts * 32, heartDisplayPos.Y + heartDrawStartY), sourceRect, heartTint, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
 
             return false;
+        }
+
+        public static void _SetCharacter_Postfix(ref ProfileMenu __instance, SocialPage.SocialEntry entry)
+        {
+            Traverse traverse = Traverse.Create(__instance);
+            if (Relationships.IsEnemy(entry)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("enemy_no_paren"));
+            if (Relationships.IsArchEnemy(entry)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("archenemy_no_paren"));
+        }
+
+        public static void SetupLayout_Prefix(ref ProfileMenu __instance)
+        {
+            Traverse traverse = Traverse.Create(__instance);
+            if (Relationships.IsEnemy(__instance.Current)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("enemy_no_paren"));
+            if (Relationships.IsArchEnemy(__instance.Current)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("archenemy_no_paren"));
         }
     }
 }

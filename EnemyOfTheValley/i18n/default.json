@@ -1,4 +1,6 @@
 {
   "enemy": "(enemy)",
-  "archenemy": "(archenemy)"
+  "enemy_no_paren": "Enemy",
+  "archenemy": "(archenemy)",
+  "archenemy_no_paren": "Archenemy"
 }
