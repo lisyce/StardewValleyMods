@@ -4,7 +4,8 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Abigail",
       "Entries": {
-        "Sun-2": "We have mild beef and it's sunday"
+        "Sun-2": "We have mild beef and it's sunday",
+        "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!$a"
       }
     }
   ]

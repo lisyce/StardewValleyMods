@@ -5,28 +5,24 @@ namespace EnemyOfTheValley.Common
 {
     internal class Relationships
     {
-        public static FriendshipStatus Enemy = (FriendshipStatus)100;
-        public static FriendshipStatus ArchEnemy = (FriendshipStatus)101;
-        public static bool IsEnemy(SocialEntry entry)
+        public static FriendshipStatus Enemy = (FriendshipStatus)(-1);
+        public static FriendshipStatus Archenemy = (FriendshipStatus)(-2);
+        public static FriendshipStatus ExArchenemy = (FriendshipStatus)(-3);
+
+        public static void SetRelationship(string name, FriendshipStatus status)
+        {
+            Game1.player.friendshipData[name].Status = status;
+        }
+
+        public static bool IsRelationship(SocialEntry entry, FriendshipStatus status)
         {
             if (entry is null || entry.Friendship is null) return false;
-            return entry.Friendship.Status == Enemy;
+            return IsRelationship(entry.Friendship, status);
         }
 
-        public static bool IsArchEnemy(SocialEntry entry)
+        public static bool IsRelationship(Friendship friendship, FriendshipStatus status)
         {
-            if (entry is null || entry.Friendship is null) return false;
-            return entry.Friendship.Status == ArchEnemy;
-        }
-
-        public static void SetEnemy(string name)
-        {
-            Game1.player.friendshipData[name].Status = Enemy;
-        }
-
-        public static void SetArchEnemy(string name)
-        {
-            Game1.player.friendshipData[name].Status = ArchEnemy;
+            return friendship.Status == status;
         }
     }
 }

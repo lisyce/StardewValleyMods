@@ -30,7 +30,7 @@ namespace EnemyOfTheValley
             LoadSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
-            helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchEnemy);
+            helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
@@ -48,12 +48,12 @@ namespace EnemyOfTheValley
         }
 
         public static void SetEnemy(string command, string[] args) {
-            Relationships.SetEnemy(args[0]);
+            Relationships.SetRelationship(args[0], Relationships.Enemy);
         }
 
-        public static void SetArchEnemy(string command, string[] args)
+        public static void SetArchenemy(string command, string[] args)
         {
-            Relationships.SetArchEnemy(args[0]);
+            Relationships.SetRelationship(args[0], Relationships.Archenemy);
         }
     }
 }

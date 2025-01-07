@@ -30,7 +30,7 @@ namespace EnemyOfTheValley.Patches
         {
             if (entry is null || entry.Friendship is null || entry.Friendship.Points >= 0) return true;
 
-            bool isLockedHeart = !Relationships.IsEnemy(entry) && !Relationships.IsArchEnemy(entry) && hearts >= 8;
+            bool isLockedHeart = !Relationships.IsRelationship(entry, Relationships.Enemy) && !Relationships.IsRelationship(entry, Relationships.Archenemy) && hearts >= 8;
             Color heartTint = ((hearts < 10 && isLockedHeart) ? (Color.Black * 0.35f) : Color.White);
 
             Texture2D spriteSheet = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? ModEntry.sprites : Game1.mouseCursors;
@@ -48,7 +48,7 @@ namespace EnemyOfTheValley.Patches
             SocialEntry entry = __instance.GetSocialEntry(i);
             if (entry == null) return;
 
-            string? text = Relationships.IsEnemy(entry) ? ModEntry.Translation.Get("enemy") : Relationships.IsArchEnemy(entry) ? ModEntry.Translation.Get("archenemy") : null;
+            string? text = Relationships.IsRelationship(entry, Relationships.Enemy) ? ModEntry.Translation.Get("enemy") : Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("archenemy") : null;
             if (text is null && entry.IsDatable && !entry.IsRoommateForCurrentPlayer() && !entry.IsMarriedToAnyone() && !entry.IsDivorcedFromCurrentPlayer() && !(!Game1.player.isMarriedOrRoommates() && entry.IsDatingCurrentPlayer()))
             {
                 text = (entry.Gender == Gender.Male) ? Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Male") : Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Female");

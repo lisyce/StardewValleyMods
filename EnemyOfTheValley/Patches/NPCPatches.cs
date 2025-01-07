@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using EnemyOfTheValley.Common;
+using HarmonyLib;
 using StardewValley;
 using StardewValley.Extensions;
 using System.Reflection;
@@ -86,7 +87,10 @@ namespace EnemyOfTheValley.Patches
                 .Pos;
             matcher.Advance(1)
                 .Insert(
+                    new(OpCodes.Ldarg_0),
+                    new(OpCodes.Ldarg_1),
                     new(OpCodes.Ldarg_2),
+                    new(OpCodes.Ldloc_2),
                     new(OpCodes.Call, cakeMethod),
                     new(OpCodes.Ret)
                 )
@@ -105,9 +109,61 @@ namespace EnemyOfTheValley.Patches
             return matcher.InstructionEnumeration();
         }
 
-        public static bool HandleCake(bool probe)
+        public static bool HandleCake(NPC npc, Farmer who, bool probe, bool canReceiveGifts)
         {
-            if (!probe) Game1.showGlobalMessage("Hey we got a new switch case");
+            if (!canReceiveGifts) return false;
+
+            if (!probe)
+            {
+                who.friendshipData.TryGetValue(npc.Name, out var friendship);
+
+                friendship ??= (who.friendshipData[npc.Name] = new Friendship());
+
+                if (Relationships.IsRelationship(friendship, Relationships.Enemy))
+                {
+
+                }
+                else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
+                {
+
+                }
+                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                {
+
+                }
+                else if (friendship.Points > -250)  // don't even have 1 negative heart yet
+                {
+
+                }
+                else if (friendship.Points > -1000) // > -4 hearts
+                {
+
+                }
+                else if (friendship.Points > -2000)  // > -8 hearts
+                {
+
+                }
+                else  // we become enemies!
+                {
+                    Relationships.SetRelationship(npc.Name, Relationships.Enemy);
+                    // TODO: Multiplayer requires some patching to work
+                    // Game1.multiplayer.globalChatInfoMessage("Dating", Game1.player.Name, this.GetTokenizedDisplayName());
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
+                    
+                    // Next two lines are in the original bouquet accept code, but not in use for enemies for now
+                    //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);
+                    //who.autoGenerateActiveDialogueEvent("enemies");
+
+                    who.changeFriendship(-25, npc);
+                    who.reduceActiveItemByOne();
+                    who.completelyStopAnimatingOrDoingAction();
+                    npc.facePlayer(who);
+                    npc.doEmote(12);  // angryEmote
+                    Game1.drawDialogue(npc);
+                }
+
+            }
+
             return true;
         }
     }
