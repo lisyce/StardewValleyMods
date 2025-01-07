@@ -78,7 +78,7 @@ namespace EnemyOfTheValley.Patches
                 new CodeMatch(OpCodes.Callvirt))
                 .ThrowIfNotMatch("could not find place to remove \"single\" text")
                 .Advance(2)
-                .Insert(new CodeInstruction[] { new(OpCodes.Ldstr, ""), new(OpCodes.Stloc_S, (byte)10) });
+                .Insert(new(OpCodes.Ldstr, ""), new(OpCodes.Stloc_S, (byte)10));
 
             return matcher.InstructionEnumeration();
         }

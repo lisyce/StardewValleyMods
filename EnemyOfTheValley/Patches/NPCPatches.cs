@@ -1,6 +1,9 @@
 ﻿using HarmonyLib;
 using StardewValley;
+using StardewValley.Extensions;
+using System.Reflection;
 using System.Reflection.Emit;
+using SObject = StardewValley.Object;
 
 namespace EnemyOfTheValley.Patches
 {
@@ -15,6 +18,10 @@ namespace EnemyOfTheValley.Patches
             harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue)),
                 transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(tryToRetrieveDialogue_Transpiler))
+                );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToReceiveActiveObject)),
+                transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(tryToReceiveActiveObject_Transpiler))
                 );
         }
 
@@ -58,6 +65,50 @@ namespace EnemyOfTheValley.Patches
                 .Set(OpCodes.Ldc_I4, -10);
 
             return matcher.InstructionEnumeration();
+        }
+
+        public static IEnumerable<CodeInstruction> tryToReceiveActiveObject_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+        {
+            // we insert switch cases (eek)
+            CodeMatcher matcher = new(instructions, generator);
+
+            // our handlers
+            MethodInfo cakeMethod = AccessTools.Method(typeof(NPCPatches), nameof(HandleCake));
+
+            // add the new case bodies
+            int cakePos = matcher.MatchEndForward(
+                new CodeMatch(OpCodes.Ldloc_S),
+                new CodeMatch(OpCodes.Ldstr, "(O)460"),
+                new CodeMatch(OpCodes.Call),
+                new CodeMatch(OpCodes.Brtrue),
+                new CodeMatch(OpCodes.Br))
+                .ThrowIfNotMatch("could not find place to add new switch case bodies")
+                .Pos;
+            matcher.Advance(1)
+                .Insert(
+                    new(OpCodes.Ldarg_2),
+                    new(OpCodes.Call, cakeMethod),
+                    new(OpCodes.Ret)
+                )
+                .CreateLabel(out Label cakeLabel);
+
+            // add the new case control flow
+            MethodInfo strEquality = AccessTools.Method(typeof(string), "op_Equality");
+            matcher.Start().Advance(cakePos)
+                .Insert(
+                    new(OpCodes.Ldloc_S, (byte)11),
+                    new(OpCodes.Ldstr, "(O)582"),
+                    new(OpCodes.Call, strEquality),
+                    new(OpCodes.Brtrue, cakeLabel)
+                );
+
+            return matcher.InstructionEnumeration();
+        }
+
+        public static bool HandleCake(bool probe)
+        {
+            if (!probe) Game1.showGlobalMessage("Hey we got a new switch case");
+            return true;
         }
     }
 }
