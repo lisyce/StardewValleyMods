@@ -125,19 +125,23 @@ namespace EnemyOfTheValley.Patches
                 }
                 else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
                 {
-
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_Archenemies") ?? new Dialogue(npc, "RejectEnemyCake_Archenemies", ModEntry.Translation.Get("RejectEnemyCake_Archenemies")));
+                    Game1.drawDialogue(npc);
                 }
                 else if (friendship.Points > -250)  // don't even have 1 negative heart yet
                 {
-
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_NoNegativeHearts") ?? new Dialogue(npc, "RejectEnemyCake_NoNegativeHearts", ModEntry.Translation.Get("RejectEnemyCake_NoNegativeHearts")));
+                    Game1.drawDialogue(npc);
                 }
                 else if (friendship.Points > -1000) // > -4 hearts
                 {
-
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_VeryLowNegativeHearts") ?? new Dialogue(npc, "RejectEnemyCake_VeryLowNegativeHearts", ModEntry.Translation.Get("RejectEnemyCake_VeryLowNegativeHearts")));
+                    Game1.drawDialogue(npc);
                 }
                 else if (friendship.Points > -2000)  // > -8 hearts
                 {
-
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_LowNegativeHearts") ?? new Dialogue(npc, "RejectEnemyCake_LowNegativeHearts", ModEntry.Translation.Get("RejectEnemyCake_LowNegativeHearts")));
+                    Game1.drawDialogue(npc);
                 }
                 else  // we become enemies!
                 {

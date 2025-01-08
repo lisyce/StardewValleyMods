@@ -8,15 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.2.0" />
+    <ContentPacks Include="[CP] EnemyOfTheValley" Version="$(Version)" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="[CP] EnemyOfTheValley\dialogue\" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
   </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	    <Exec Command="if not exist &quot;$(GameModsPath)/[CP] EnemyOfTheValley&quot; (mkdir &quot;$(GameModsPath)/[CP] EnemyOfTheValley&quot;) else (echo [CP] EnemyOfTheValley dir exists)&#xD;&#xA;xcopy &quot;$(ProjectDir)[CP] EnemyOfTheValley&quot; &quot;$(GameModsPath)\[CP] EnemyOfTheValley&quot; /E /Y" />
-    </Target>
 
 </Project>

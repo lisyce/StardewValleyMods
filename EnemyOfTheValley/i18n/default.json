@@ -7,6 +7,10 @@
   "ExArchenemyNoParen": "Ex-Archenemy",
 
   "RejectEnemyCake_AlreadyEnemies": "You've already sworn to be enemies with {{name}}.",
+  "RejectEnemyCake_Archenemies": "Why are you giving me this? You know we're already past enemies, right?",
+  "RejectEnemyCake_NoNegativeHearts": "Uh... I'm not sure what you mean by that, but I'm just going to go...",
+  "RejectEnemyCake_VeryLowNegativeHearts": "What, do I bother you that much? This isn't worth my time right now.",
+  "RejectEnemyCake_LowNegativeHearts": "Keep acting like that and we might have to make this thing official soon!",
   "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!",
-  "AcceptEnemyCake_ExArchenemies":  "We're doing this again? Fine by me!"
+  "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!"
 }
