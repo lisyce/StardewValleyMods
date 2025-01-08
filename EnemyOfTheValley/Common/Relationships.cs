@@ -9,8 +9,17 @@ namespace EnemyOfTheValley.Common
         public static FriendshipStatus Archenemy = (FriendshipStatus)(-2);
         public static FriendshipStatus ExArchenemy = (FriendshipStatus)(-3);
 
-        public static void SetRelationship(string name, FriendshipStatus status)
+        public static void SetRelationship(string name, FriendshipStatus status, bool printValidation = false)
         {
+            if (printValidation)
+            {
+                if (!Game1.player.friendshipData.ContainsKey(name))
+                {
+                    Console.WriteLine("No NPC with the name " +  name + " found. Remember this is case-sensitive!");
+                    return;
+                }
+            }
+
             Game1.player.friendshipData[name].Status = status;
         }
 

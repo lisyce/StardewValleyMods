@@ -47,15 +47,17 @@ namespace EnemyOfTheValley.Patches
         public static void _SetCharacter_Postfix(ref ProfileMenu __instance, SocialPage.SocialEntry entry)
         {
             Traverse traverse = Traverse.Create(__instance);
-            if (Relationships.IsRelationship(entry, Relationships.Enemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("enemy_no_paren"));
-            if (Relationships.IsRelationship(entry, Relationships.Archenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("archenemy_no_paren"));
+            if (Relationships.IsRelationship(entry, Relationships.Enemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("EnemyNoParen"));
+            else if (Relationships.IsRelationship(entry, Relationships.Archenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("ArchenemyNoParen"));
+            else if (Relationships.IsRelationship(__instance.Current, Relationships.ExArchenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("ExArchenemyNoParen"));
         }
 
         public static void SetupLayout_Prefix(ref ProfileMenu __instance)
         {
             Traverse traverse = Traverse.Create(__instance);
-            if (Relationships.IsRelationship(__instance.Current, Relationships.Enemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("enemy_no_paren"));
-            if (Relationships.IsRelationship(__instance.Current, Relationships.Archenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("archenemy_no_paren"));
+            if (Relationships.IsRelationship(__instance.Current, Relationships.Enemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("EnemyNoParen"));
+            else if (Relationships.IsRelationship(__instance.Current, Relationships.Archenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("ArchenemyNoParen"));
+            else if (Relationships.IsRelationship(__instance.Current, Relationships.ExArchenemy)) traverse.Field("_status").SetValue((string)ModEntry.Translation.Get("ExArchenemyNoParen"));
         }
     }
 }

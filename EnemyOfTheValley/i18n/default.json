@@ -1,7 +1,11 @@
 {
-  "enemy": "(enemy)",
-  "enemy_no_paren": "Enemy",
-  "archenemy": "(archenemy)",
-  "archenemy_no_paren": "Archenemy",
+  "Enemy": "(enemy)",
+  "EnemyNoParen": "Enemy",
+  "Archenemy": "(archenemy)",
+  "ArchenemyNoParen": "Archenemy",
+  "ExArchenemy": "(ex-archenemy)",
+  "ExArchenemyNoParen": "Ex-Archenemy",
+
+  "AlreadyEnemies": "You've already sworn to be enemies with {0}.",
   "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!"
 }

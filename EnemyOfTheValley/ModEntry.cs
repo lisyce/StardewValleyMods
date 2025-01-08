@@ -17,7 +17,7 @@ namespace EnemyOfTheValley
         {
             Monitor = base.Monitor;
             Translation = helper.Translation;
-            Harmony.DEBUG = true;
+            //Harmony.DEBUG = true;
 
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
@@ -31,6 +31,7 @@ namespace EnemyOfTheValley
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
+            helper.ConsoleCommands.Add("exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
@@ -48,12 +49,17 @@ namespace EnemyOfTheValley
         }
 
         public static void SetEnemy(string command, string[] args) {
-            Relationships.SetRelationship(args[0], Relationships.Enemy);
+            Relationships.SetRelationship(args[0], Relationships.Enemy, printValidation: true);
         }
 
         public static void SetArchenemy(string command, string[] args)
         {
-            Relationships.SetRelationship(args[0], Relationships.Archenemy);
+            Relationships.SetRelationship(args[0], Relationships.Archenemy, printValidation: true);
+        }
+
+        public static void SetExArchenemy(string command, string[] args)
+        {
+            Relationships.SetRelationship(args[0], Relationships.ExArchenemy, printValidation: true);
         }
     }
 }

@@ -121,7 +121,7 @@ namespace EnemyOfTheValley.Patches
 
                 if (Relationships.IsRelationship(friendship, Relationships.Enemy))
                 {
-
+                    Game1.drawObjectDialogue(Game1.content.LoadString(ModEntry.Translation.Get("AlreadyEnemies"), npc.displayName));
                 }
                 else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
                 {

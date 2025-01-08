@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using EnemyOfTheValley.Common;
 using static StardewValley.Menus.SocialPage;
-using static System.Net.Mime.MediaTypeNames;
 using System.Reflection.Emit;
 
 namespace EnemyOfTheValley.Patches
@@ -48,7 +47,9 @@ namespace EnemyOfTheValley.Patches
             SocialEntry entry = __instance.GetSocialEntry(i);
             if (entry == null) return;
 
-            string? text = Relationships.IsRelationship(entry, Relationships.Enemy) ? ModEntry.Translation.Get("enemy") : Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("archenemy") : null;
+            string? text = Relationships.IsRelationship(entry, Relationships.Enemy) ? ModEntry.Translation.Get("Enemy") :
+                Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("Archenemy") : 
+                Relationships.IsRelationship(entry, Relationships.ExArchenemy) ? ModEntry.Translation.Get("ExArchenemy") : null;
             if (text is null && entry.IsDatable && !entry.IsRoommateForCurrentPlayer() && !entry.IsMarriedToAnyone() && !entry.IsDivorcedFromCurrentPlayer() && !(!Game1.player.isMarriedOrRoommates() && entry.IsDatingCurrentPlayer()))
             {
                 text = (entry.Gender == Gender.Male) ? Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Male") : Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Female");
