@@ -121,13 +121,9 @@ namespace EnemyOfTheValley.Patches
 
                 if (Relationships.IsRelationship(friendship, Relationships.Enemy))
                 {
-                    Game1.drawObjectDialogue(Game1.content.LoadString(ModEntry.Translation.Get("AlreadyEnemies"), npc.displayName));
+                    Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectEnemyCake_AlreadyEnemies", new { name = npc.displayName }));
                 }
                 else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
-                {
-
-                }
-                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
                 {
 
                 }
@@ -145,11 +141,19 @@ namespace EnemyOfTheValley.Patches
                 }
                 else  // we become enemies!
                 {
+                    Traverse traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
+                    traverse.GetValue<Multiplayer>().globalChatInfoMessage("Enemies", Game1.player.Name, npc.GetTokenizedDisplayName());
+
+                    if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                    {
+                        npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake_ExArchenemies") ?? new Dialogue(npc, "AcceptEnemyCake_ExArchenemies", ModEntry.Translation.Get("AcceptEnemyCake_ExArchenemies")));
+                    } else
+                    {
+                        npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
+                    }
+
                     Relationships.SetRelationship(npc.Name, Relationships.Enemy);
-                    // TODO: Multiplayer requires some patching to work
-                    // Game1.multiplayer.globalChatInfoMessage("Dating", Game1.player.Name, this.GetTokenizedDisplayName());
-                    npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
-                    
+
                     // Next two lines are in the original bouquet accept code, but not in use for enemies for now
                     //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);
                     //who.autoGenerateActiveDialogueEvent("enemies");

@@ -4,6 +4,13 @@
     {
       "Action": "Include",
       "FromFile": "dialogue/Abigail.json"
+    },
+    {
+      "Action": "EditData",
+      "Target": "Strings/UI",
+      "Entries": {
+        "Chat_Enemies": "{0} and {1} just became enemies."
+      }
     }
   ]
 }

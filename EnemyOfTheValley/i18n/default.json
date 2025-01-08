@@ -6,6 +6,7 @@
   "ExArchenemy": "(ex-archenemy)",
   "ExArchenemyNoParen": "Ex-Archenemy",
 
-  "AlreadyEnemies": "You've already sworn to be enemies with {0}.",
-  "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!"
+  "RejectEnemyCake_AlreadyEnemies": "You've already sworn to be enemies with {{name}}.",
+  "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!",
+  "AcceptEnemyCake_ExArchenemies":  "We're doing this again? Fine by me!"
 }
