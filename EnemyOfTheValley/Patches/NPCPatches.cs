@@ -101,7 +101,7 @@ namespace EnemyOfTheValley.Patches
             matcher.Start().Advance(cakePos)
                 .Insert(
                     new(OpCodes.Ldloc_S, (byte)11),
-                    new(OpCodes.Ldstr, "(O)582"),
+                    new(OpCodes.Ldstr, "(O)BarleyZP.EnemyOfTheValley.AvoidMeCake"),
                     new(OpCodes.Call, strEquality),
                     new(OpCodes.Brtrue, cakeLabel)
                 );

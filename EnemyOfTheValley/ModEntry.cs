@@ -12,7 +12,8 @@ namespace EnemyOfTheValley
     {
         public static IMonitor Monitor;
         public static ITranslationHelper Translation;
-        public static Texture2D? sprites;  // do not reference directly in transpilers
+        public static Texture2D? MiscSprites;  // do not reference directly in transpilers
+        public static Texture2D? StandardSprites;
         public override void Entry(IModHelper helper)
         {
             Monitor = base.Monitor;
@@ -27,7 +28,7 @@ namespace EnemyOfTheValley
             ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
-            LoadSprites();
+            LoadMiscSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
@@ -36,16 +37,20 @@ namespace EnemyOfTheValley
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
         {
-            if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.EnemyOfTheValley/Sprites"))
+            if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.EnemyOfTheValley/MiscSprites"))
             {
-                e.LoadFromModFile<Texture2D>("assets/Sprites.png", AssetLoadPriority.Medium);
+                e.LoadFromModFile<Texture2D>("assets/MiscSprites.png", AssetLoadPriority.Medium);
+            }
+            else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.EnemyOfTheValley/StandardSprites"))
+            {
+                e.LoadFromModFile<Texture2D>("assets/StandardSprites.png", AssetLoadPriority.Medium);
             }
         }
 
-        public static Texture2D LoadSprites()
+        public static Texture2D LoadMiscSprites()
         {
-            sprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/Sprites");
-            return sprites;
+            MiscSprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/MiscSprites");
+            return MiscSprites;
         }
 
         public static void SetEnemy(string command, string[] args) {

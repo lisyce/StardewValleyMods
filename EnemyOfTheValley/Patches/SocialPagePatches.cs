@@ -32,7 +32,7 @@ namespace EnemyOfTheValley.Patches
             bool isLockedHeart = !Relationships.IsRelationship(entry, Relationships.Enemy) && !Relationships.IsRelationship(entry, Relationships.Archenemy) && hearts >= 8;
             Color heartTint = ((hearts < 10 && isLockedHeart) ? (Color.Black * 0.35f) : Color.White);
 
-            Texture2D spriteSheet = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? ModEntry.sprites : Game1.mouseCursors;
+            Texture2D spriteSheet = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? ModEntry.MiscSprites : Game1.mouseCursors;
             Rectangle sourceRect = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? new Rectangle(0, 0, 7, 6) : new Rectangle(218, 428, 7, 6);
 
             hearts %= 10;

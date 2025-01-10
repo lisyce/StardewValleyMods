@@ -9,7 +9,32 @@
       "Action": "EditData",
       "Target": "Strings/UI",
       "Entries": {
-        "Chat_Enemies": "{0} and {1} just became enemies."
+        "Chat_Enemies": "{{i18n: Chat_Enemies}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley.AvoidMeCake": {
+          "Name": "\"A-Void Me\" Cake",
+          "DisplayName": "{{i18n: AvoidMeCakeName}}",
+          "Description": "{{i18n: AvoidMeCakeDescription}}",
+          "Type": "Cooking",
+          "Category": -7,
+          "Price": 520,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 0,
+          "Edibility": 60,
+          "ContextTags": [ "color_black" ]
+        }
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/CookingRecipes",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley.AvoidMeCake": "308 1 246 1 245 1 305 1//BarleyZP.EnemyOfTheValley.AvoidMeCake/default/"
       }
     }
   ]

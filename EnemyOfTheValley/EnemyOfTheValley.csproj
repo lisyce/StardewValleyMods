@@ -15,4 +15,8 @@
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="[CP] EnemyOfTheValley\i18n\" />
+  </ItemGroup>
+
 </Project>
