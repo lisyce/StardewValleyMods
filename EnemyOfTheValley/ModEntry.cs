@@ -28,6 +28,8 @@ namespace EnemyOfTheValley
             ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
+            helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;  // TODO remove for release
+            helper.Events.GameLoop.DayEnding += OnDayEnding;
             LoadMiscSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
@@ -44,6 +46,30 @@ namespace EnemyOfTheValley
             else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.EnemyOfTheValley/StandardSprites"))
             {
                 e.LoadFromModFile<Texture2D>("assets/StandardSprites.png", AssetLoadPriority.Medium);
+            }
+        }
+
+        // FOR DEBUG ONLY
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        {
+            Game1.player.mailReceived.Remove("enemyCake");
+            Game1.player.cookingRecipes.Remove("BarleyZP.EnemyOfTheValley.AvoidMeCake");
+        }
+
+        private void OnDayEnding(object? sender, DayEndingEventArgs e)
+        {
+            if (Game1.player.mailReceived.Contains("enemyCake")) return;
+
+            foreach (var item in Game1.player.friendshipData)
+            {
+                foreach (var friendship in item.Values)
+                {
+                    if (friendship.Points <= -2000)
+                    {
+                        Game1.player.mailForTomorrow.Add("enemyCake");
+                        break;
+                    }
+                }
             }
         }
 

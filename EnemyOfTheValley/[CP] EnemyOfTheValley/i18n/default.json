@@ -2,5 +2,7 @@
   "Chat_Enemies": "{0} and {1} just became enemies.",
 
   "AvoidMeCakeName": "\"A-Void Me\" Cake",
-  "AvoidMeCakeDescription": "A \"gift\" that officially states your distaste for someone."
+  "AvoidMeCakeDescription": "A \"gift\" that officially states your distaste for someone.",
+
+  "CakeMail": "I see you’re starting to ruffle some feathers in Pelican Town. It’s a long-held tradition in the valley to bake a rather unpleasant flavor of cake that makes your distaste for someone official.^^Here, I’ll give you the recipe, kid. It’s up to you if you want to take things that far.^^Your friend, Mr. Qi%item cookingRecipe BarleyZP.EnemyOfTheValley.AvoidMeCake%%[#]Regarding Enemies"
 }

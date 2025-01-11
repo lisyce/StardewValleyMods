@@ -34,7 +34,14 @@
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley.AvoidMeCake": "308 1 246 1 245 1 305 1//BarleyZP.EnemyOfTheValley.AvoidMeCake/default/"
+        "BarleyZP.EnemyOfTheValley.AvoidMeCake": "308 1 246 1 245 1 305 1//BarleyZP.EnemyOfTheValley.AvoidMeCake/none/"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Mail",
+      "Entries": {
+        "enemyCake": "{{i18n: CakeMail}}"
       }
     }
   ]
