@@ -18,7 +18,7 @@ namespace EnemyOfTheValley
         {
             Monitor = base.Monitor;
             Translation = helper.Translation;
-            //Harmony.DEBUG = true;
+            Harmony.DEBUG = true;
 
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
