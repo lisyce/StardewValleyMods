@@ -12,5 +12,7 @@
   "RejectEnemyCake_VeryLowNegativeHearts": "What, do I bother you that much? This isn't worth my time right now.",
   "RejectEnemyCake_LowNegativeHearts": "Keep acting like that and we might have to make this thing official soon!",
   "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!",
-  "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!"
+  "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!",
+
+  "RejectMermaidPendant_NegativeHearts": "Are you crazy? We aren't even friends!"
 }

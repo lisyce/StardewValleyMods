@@ -4,13 +4,9 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Abigail",
       "Entries": {
-        "Sun-2": "We have mild beef and it's sunday",
-        "summer_Fri-2": "-2 friday",
-        "summer_Fri-6": "-6 friday",
-        "summer_Fri-8": "-8 friday",
-        "SeedShop-2": "-2 seedshop",
         "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!$a",
-        "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!$a"
+        "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!$a",
+        "RejectMermaidPendant_NegativeHearts": "Are you crazy? We aren't even friends!$a"
       }
     }
   ]

@@ -19,3 +19,9 @@ Shown when an NPC rejects the "A-void Me" Cake:
 | `RejectEnemyCake_NoNegativeHearts` | Player has > -1 hearts with the NPC |
 | `RejectEnemyCake_VeryLowNegativeHearts` | Player has > -4 hearts with the NPC |
 | `RejectEnemyCake_LowNegativeHearts` | Player has > -8 hearts with the NPC |
+
+## Misc
+
+| Key | Description |
+| --- | ----------- |
+| `RejectMermaidPendant_NegativeHearts` | The player offered an NPC a Mermaid's Pendant, but they have negative friendship with that NPC |

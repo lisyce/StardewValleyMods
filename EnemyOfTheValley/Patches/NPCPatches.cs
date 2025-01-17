@@ -52,6 +52,18 @@ namespace EnemyOfTheValley.Patches
             return null;
         }
 
+        public static bool NegativeMermaidPendantDialogue(NPC npc, bool probe, bool canReceiveGifts)
+        {
+            if (!canReceiveGifts) return false;
+            if (!probe)
+            {
+                npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectMermaidPendant_NegativeHearts") ?? new Dialogue(npc, "RejectMermaidPendant_NegativeHearts", ModEntry.Translation.Get("RejectMermaidPendant_NegativeHearts")));
+                Game1.drawDialogue(npc);
+            }
+
+            return true;
+        }
+
         public static IEnumerable<CodeInstruction> tryToRetrieveDialogue_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             CodeMatcher matcher = new(instructions, generator);
@@ -121,14 +133,59 @@ namespace EnemyOfTheValley.Patches
 
         public static IEnumerable<CodeInstruction> tryToReceiveActiveObject_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
-            // we insert switch cases (eek)
             CodeMatcher matcher = new(instructions, generator);
+            // part 1: more dialogue options for bouquet and pendant
+            // todo: need the jump instruction to THIS branch from the previous one too, not just to the next one
+            MethodInfo get_Points = AccessTools.PropertyGetter(typeof(Friendship), nameof(Friendship.Points));
+            MethodInfo isMarriedOrRoommates = AccessTools.Method(typeof(Farmer), nameof(Farmer.isMarriedOrRoommates));
+            MethodInfo isEngaged = AccessTools.Method(typeof(Farmer), nameof(Farmer.isEngaged));
 
-            // our handlers
+            MethodInfo mermaidHandler = AccessTools.Method(typeof(NPCPatches), nameof(NegativeMermaidPendantDialogue));
+            matcher.MatchStartForward(
+                    new CodeMatch(OpCodes.Ldstr, "Strings\\StringsFromCSFiles:NPC.cs.3967"))
+                .MatchEndForward(
+                    new CodeMatch(OpCodes.Ldc_I4_1),
+                    new CodeMatch(OpCodes.Ret))
+                .ThrowIfNotMatch("could not find end of else-if statement to insert after")
+                .Advance(1)
+                .CreateLabel(out Label afterMermaidElseifLabel)
+                .Insert(
+                    // if friendship is null or we DON'T have negative friendship points, break to the label we just created (key name: RejectMermaidPendant_NegativeHearts)
+                    // (since this else if branch will handle mermaid pendant when there are negative hearts
+                    new(OpCodes.Ldloc_1),
+                    new(OpCodes.Brfalse, afterMermaidElseifLabel),
+                    new(OpCodes.Ldloc_1),
+                    new(OpCodes.Call, get_Points),
+                    new(OpCodes.Ldc_I4_0),
+                    new(OpCodes.Bge, afterMermaidElseifLabel),
+                    // our stuff
+                    new(OpCodes.Ldarg_0),
+                    new(OpCodes.Ldarg_2),
+                    new(OpCodes.Ldloc_2),
+                    new(OpCodes.Call, mermaidHandler),
+                    new(OpCodes.Ret)  // so we don't have to jump down
+                    )
+                .CreateLabel(out Label startMermaidElseif)
+                // change the previous else-if's labels
+                .Start().MatchEndForward(
+                    new CodeMatch(OpCodes.Ldloc_0),
+                    new CodeMatch(OpCodes.Ldfld),
+                    new CodeMatch(OpCodes.Callvirt, isMarriedOrRoommates),
+                    new CodeMatch(OpCodes.Brtrue_S),
+                    new CodeMatch(OpCodes.Ldloc_0),
+                    new CodeMatch(OpCodes.Ldfld),
+                    new CodeMatch(OpCodes.Callvirt, isEngaged),
+                    new CodeMatch(OpCodes.Brfalse))
+                .ThrowIfNotMatch("failed to go back to change if statement's label to point to the mermaid handler")
+                .Set(OpCodes.Brfalse, startMermaidElseif);
+
+
+            // we insert switch cases (eek)
+            // our handler
             MethodInfo cakeMethod = AccessTools.Method(typeof(NPCPatches), nameof(HandleCake));
 
-            // add the new case bodies
-            int cakePos = matcher.MatchEndForward(
+            // add the new case body
+            int cakePos = matcher.Start().MatchEndForward(
                 new CodeMatch(OpCodes.Ldloc_S),
                 new CodeMatch(OpCodes.Ldstr, "(O)460"),
                 new CodeMatch(OpCodes.Call),
