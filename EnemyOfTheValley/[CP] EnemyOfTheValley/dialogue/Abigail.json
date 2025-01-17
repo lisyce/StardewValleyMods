@@ -6,7 +6,8 @@
       "Entries": {
         "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!$a",
         "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!$a",
-        "RejectMermaidPendant_NegativeHearts": "Are you crazy? We aren't even friends!$a"
+        "RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?$a",
+        "RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!$a"
       }
     }
   ]

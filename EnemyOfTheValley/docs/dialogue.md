@@ -25,3 +25,4 @@ Shown when an NPC rejects the "A-void Me" Cake:
 | Key | Description |
 | --- | ----------- |
 | `RejectMermaidPendant_NegativeHearts` | The player offered an NPC a Mermaid's Pendant, but they have negative friendship with that NPC |
+| `RejectBouquet_NegativeHearts` | The player offered an NPC a Bouquet, but they have negative friendship with that NPC |
