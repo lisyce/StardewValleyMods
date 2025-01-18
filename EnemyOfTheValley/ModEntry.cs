@@ -35,6 +35,8 @@ namespace EnemyOfTheValley
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
             helper.ConsoleCommands.Add("exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
+
+            Event.RegisterPrecondition("NegativeFriendship", Preconditions.NegativeFriendship);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
