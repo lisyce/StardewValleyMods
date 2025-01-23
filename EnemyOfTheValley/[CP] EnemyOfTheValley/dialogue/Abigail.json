@@ -24,20 +24,20 @@
         "summer_Tue-2": "",
         "summer_Wed-2": "",
         "summer_Thu-2": "",
-        "summer_Fri-2": "I've been thinking about exploring the mines this weekend after I finish my homework.$b#Oh, sorry. That wasn't an invitation.$u",
+        "summer_Fri-2": "I've been thinking about exploring the mines this weekend after I finish my homework.#$b#Oh, sorry. That wasn't an invitation.$u",
         "summer_Sat-2": "",
         "summer_Sun-2": "",
 
         "summer_Wed-4": "$query PLAYER_HAS_PET current#I bet little you don't even pet little %pet. They'd probably be happier living with me.$u|It's no wonder you don't have any pets. They probably wouldn't like you very much.$u",
         "summer_Tue-8": "Ugh, my life sucks. First, I'm living in this boring town and then this annoying farmer moves in too.$u",
 
-        "fall_Mon-2": "The leaves are falling... I hope the wind blows away all of my problems.$e#%Abigail looks at you for a bit too long.",
+        "fall_Mon-2": "The leaves are falling... I hope the wind blows away all of my problems.#$e#%Abigail looks at you for a bit too long.",
 
         "fall_Fri-6": "%Abigail is ignoring you.",
 
         "winter_Mon-2": "Hmm... that snow goon kinda looks like you, @.$9",
 
-        "winter_Mon-6": "You know, if you fell of the docks at the beach at night, you might not be able to find your way back to shore.$b#Scary thought, isn't it, @?",
+        "winter_Mon-6": "You know, if you fell of the docks at the beach at night, you might not be able to find your way back to shore.#$b#Scary thought, isn't it, @?",
         "winter_Sat-8": "I hope it snows a lot soon. Then, maybe you'll be stuck on your farm and I won't have to see you for a day or two.$u"
       }
     }

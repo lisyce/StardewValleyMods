@@ -17,6 +17,10 @@ namespace EnemyOfTheValley.Patches
                 transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(checkForNewCurrentDialogue_Transpiler))
                 );
             harmony.Patch(
+                original: AccessTools.Method(typeof(NPC), nameof(NPC.grantConversationFriendship)),
+                transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(grantConversationFriendship_Transpiler))
+                );
+            harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue)),
                 transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(tryToRetrieveDialogue_Transpiler))
                 );
@@ -24,6 +28,34 @@ namespace EnemyOfTheValley.Patches
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToReceiveActiveObject)),
                 transpiler: new HarmonyMethod(typeof(NPCPatches), nameof(tryToReceiveActiveObject_Transpiler))
                 );
+            
+        }
+
+        public static int ChangeConversationFriendshipAmount(int amount, Farmer who, Friendship friendship)
+        {
+            if (who.hasBuff("statue_of_blessings_4")) return amount;
+            return friendship.Points <= -500 ? -amount : amount;
+        }
+
+        public static IEnumerable<CodeInstruction> grantConversationFriendship_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            CodeMatcher matcher = new(instructions);
+            MethodInfo changeAmt = AccessTools.Method(typeof(NPCPatches), nameof(ChangeConversationFriendshipAmount));
+
+            matcher.MatchEndForward(
+                new CodeMatch(OpCodes.Ldc_I4_S),
+                new CodeMatch(OpCodes.Starg_S),
+                new CodeMatch(OpCodes.Ldarg_1),
+                new CodeMatch(OpCodes.Ldarg_2))
+                .ThrowIfNotMatch("could not find place to insert method")
+                .Advance(1)
+                .Insert(
+                    // we keep the ldarg.2 instruction to load the amount arg and instead feed it into our method
+                    new(OpCodes.Ldarg_1),
+                    new(OpCodes.Ldloc_0),
+                    new(OpCodes.Call, changeAmt));  // return val goes onto stack for changeFriendship to use
+
+            return matcher.InstructionEnumeration();
         }
 
         public static Dialogue? NegativeLocationDialogue(NPC npc, Dialogue? currDialogue, int heartLevel, string preface)
