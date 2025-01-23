@@ -6,6 +6,10 @@
       "FromFile": "dialogue/Abigail.json"
     },
     {
+      "Action": "Include",
+      "FromFile": "events.json"
+    },
+    {
       "Action": "EditData",
       "Target": "Strings/UI",
       "Entries": {

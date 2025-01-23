@@ -46,6 +46,8 @@ namespace EnemyOfTheValley.Patches
                 if (heartLevel <= hearts)
                 {
                     Dialogue? d = npc.TryGetDialogue(preface + day_name + hearts + "_" + year + appendToEnd) ?? npc.TryGetDialogue(preface + day_name + hearts + appendToEnd);
+                    ModEntry.Monitor.Log(preface + day_name + hearts + "_" + year + appendToEnd, StardewModdingAPI.LogLevel.Debug);
+                    ModEntry.Monitor.Log(preface + day_name + hearts + appendToEnd, StardewModdingAPI.LogLevel.Debug);
                     if (d != null) return d;
                 }
             }
