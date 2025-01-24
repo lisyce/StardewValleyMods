@@ -2,6 +2,10 @@
 
 If a specific dialogue is not set for an NPC, defaults will be used. Dialogue in a table is shown in order of precedence.
 
+## Negative Heart Dialogue
+
+TODO
+
 ## Becoming Enemies
 
 Shown when an NPC accepts the "A-void Me" Cake and becomes enemies with the player:

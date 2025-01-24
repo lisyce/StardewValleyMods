@@ -24,7 +24,8 @@ namespace EnemyOfTheValley
             FarmerPatches.Patch(harmony);
             SocialPagePatches.Patch(harmony);
             DialogueBoxPatches.Patch(harmony);
-            NPCPatches.Patch(harmony);
+            NPCActionPatches.Patch(harmony);
+            NPCDialoguePatches.Patch(harmony);
             ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
