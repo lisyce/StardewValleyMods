@@ -68,6 +68,7 @@ namespace EnemyOfTheValley
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
         {
+            // check if we need to send Qi mail
             if (Game1.player.mailReceived.Contains("enemyCake")) return;
 
             foreach (var item in Game1.player.friendshipData)
@@ -79,6 +80,15 @@ namespace EnemyOfTheValley
                         Game1.player.mailForTomorrow.Add("enemyCake");
                         break;
                     }
+                }
+            }
+
+            // get rid of door unlock for NPCs that fell below 0 hearts
+            foreach (string name in Game1.player.friendshipData.Keys)
+            {
+                if (Game1.player.mailReceived.Contains("doorUnlock" + name) && Game1.player.friendshipData[name].Points < 0)
+                {
+                    Game1.player.mailReceived.Remove("doorUnlock" + name);
                 }
             }
         }

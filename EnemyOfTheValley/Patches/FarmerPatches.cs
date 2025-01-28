@@ -39,7 +39,6 @@ namespace EnemyOfTheValley.Patches
             {
                 NPC npc = Game1.getCharacterFromName(name);
                 if (npc == null) continue;
-                ModEntry.Monitor.Log(npc.Name, StardewModdingAPI.LogLevel.Debug);
 
                 int before = __state[name].Points;
                 if (before > 0)
