@@ -29,8 +29,9 @@ namespace EnemyOfTheValley
             ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
-            helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;  // TODO remove for release
+            //helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;  // TODO remove for release
             helper.Events.GameLoop.DayEnding += OnDayEnding;
+            //helper.Events.GameLoop.DayStarted += OnDayStarted;  // TODO remove for release
             LoadMiscSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
@@ -52,7 +53,13 @@ namespace EnemyOfTheValley
             }
         }
 
-        // FOR DEBUG ONLY
+        // TODO FOR DEBUG ONLY
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        {
+            Game1.player.friendshipData["Pierre"].Points = -500;            
+        }
+
+        // TODO FOR DEBUG ONLY
         private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
         {
             Game1.player.mailReceived.Remove("enemyCake");

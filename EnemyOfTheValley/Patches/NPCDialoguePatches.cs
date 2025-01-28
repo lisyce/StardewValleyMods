@@ -12,22 +12,22 @@ namespace EnemyOfTheValley.Patches
         {
             harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.checkForNewCurrentDialogue)),
-                transpiler: new HarmonyMethod(typeof(NPCActionPatches), nameof(checkForNewCurrentDialogue_Transpiler))
+                transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(checkForNewCurrentDialogue_Transpiler))
                 );
             harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.grantConversationFriendship)),
-                transpiler: new HarmonyMethod(typeof(NPCActionPatches), nameof(grantConversationFriendship_Transpiler))
+                transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(grantConversationFriendship_Transpiler))
                 );
             harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue)),
-                transpiler: new HarmonyMethod(typeof(NPCActionPatches), nameof(tryToRetrieveDialogue_Transpiler))
+                transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(tryToRetrieveDialogue_Transpiler))
                 );
         }
 
         public static IEnumerable<CodeInstruction> grantConversationFriendship_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             CodeMatcher matcher = new(instructions);
-            MethodInfo changeAmt = AccessTools.Method(typeof(NPCActionPatches), nameof(ChangeConversationFriendshipAmount));
+            MethodInfo changeAmt = AccessTools.Method(typeof(NPCDialoguePatches), nameof(ChangeConversationFriendshipAmount));
 
             matcher.MatchEndForward(
                 new CodeMatch(OpCodes.Ldc_I4_S),
@@ -48,7 +48,7 @@ namespace EnemyOfTheValley.Patches
         public static IEnumerable<CodeInstruction> tryToRetrieveDialogue_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
         {
             CodeMatcher matcher = new(instructions, generator);
-            MethodInfo negativeDayDialogue = AccessTools.Method(typeof(NPCActionPatches), nameof(NegativeDayDialogue));
+            MethodInfo negativeDayDialogue = AccessTools.Method(typeof(NPCDialoguePatches), nameof(NegativeDayDialogue));
 
             // we want to insert after the for-loop
             matcher.MatchEndForward(
@@ -83,7 +83,7 @@ namespace EnemyOfTheValley.Patches
 
         public static IEnumerable<CodeInstruction> checkForNewCurrentDialogue_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            MethodInfo negativeLocDialogue = AccessTools.Method(typeof(NPCActionPatches), nameof(NegativeLocationDialogue));
+            MethodInfo negativeLocDialogue = AccessTools.Method(typeof(NPCDialoguePatches), nameof(NegativeLocationDialogue));
             CodeMatcher matcher = new(instructions);
 
             // we want to insert under the while loop
