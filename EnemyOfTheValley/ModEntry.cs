@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
 using StardewValley;
 using EnemyOfTheValley.Common;
+using EOVPreconditions = EnemyOfTheValley.Common.Preconditions;
+using StardewValley.Locations;
+using Microsoft.Xna.Framework;
+using SObject = StardewValley.Object;
 
 namespace EnemyOfTheValley
 {
@@ -29,16 +33,16 @@ namespace EnemyOfTheValley
             ProfileMenuPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
-            //helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;  // TODO remove for release
+            helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.DayEnding += OnDayEnding;
-            //helper.Events.GameLoop.DayStarted += OnDayStarted;  // TODO remove for release
+            helper.Events.Player.Warped += OnWarped;
             LoadMiscSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
             helper.ConsoleCommands.Add("exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
 
-            Event.RegisterPrecondition("NegativeFriendship", Preconditions.NegativeFriendship);
+            Event.RegisterPrecondition("NegativeFriendship", EOVPreconditions.NegativeFriendship);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
@@ -53,17 +57,34 @@ namespace EnemyOfTheValley
             }
         }
 
-        // TODO FOR DEBUG ONLY
-        private void OnDayStarted(object? sender, DayStartedEventArgs e)
+        private void OnWarped(object? sender, WarpedEventArgs e)
         {
-            Game1.player.friendshipData["Pierre"].Points = -500;            
+            // "mariner showed up yesterday, we have a -10 heart enemy, we warped to the beach, and it's not raining at the beach"
+            if (e.IsLocalPlayer && Game1.wasRainingYesterday && Relationships.HasAnEnemyWithHeartLevel(Game1.player, -10) && e.NewLocation.Name == "Beach" && !e.NewLocation.IsRainingHere())
+            {
+                Beach beach = (Beach) e.NewLocation;
+                NPC oldMariner = Traverse.Create(beach).Field<NPC>("oldMariner").Value;
+                if (oldMariner != null) return;  // somehow the mariner is here even though it isn't raining; we can't place the shards
+
+                Vector2 marinerPos = new(80, 5);
+                beach.overlayObjects.Remove(marinerPos);
+                SObject shards = ItemRegistry.Create<SObject>("BarleyZP.EnemyOfTheValley.ShatteredAmulet");
+                shards.TileLocation = marinerPos;
+                shards.IsSpawnedObject = true;
+                beach.overlayObjects.Add(marinerPos, shards);
+            }
         }
 
-        // TODO FOR DEBUG ONLY
-        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
+        private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
-            Game1.player.mailReceived.Remove("enemyCake");
-            Game1.player.cookingRecipes.Remove("BarleyZP.EnemyOfTheValley.AvoidMeCake");
+            // set the friendship status of each npc to what was stored in moddata
+            foreach (string name in Game1.player.friendshipData.Keys)
+            {
+                NPC npc = Game1.getCharacterFromName(name);
+                if (npc == null || !npc.modData.TryGetValue("BarleyZP.EnemyOfTheValley.FriendshipStatus", out string status)) continue;
+
+                Relationships.SetRelationship(name, (FriendshipStatus)int.Parse(status));
+            }
         }
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
@@ -90,6 +111,16 @@ namespace EnemyOfTheValley
                 {
                     Game1.player.mailReceived.Remove("doorUnlock" + name);
                 }
+            }
+
+            // set the friendship status of each NPC to something safe
+            foreach (string name in Game1.player.friendshipData.Keys)
+            {
+                NPC npc = Game1.getCharacterFromName(name);
+                if (npc == null) continue;
+                npc.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = ((int) Game1.player.friendshipData[name].Status).ToString();
+
+                Relationships.SetRelationship(name, FriendshipStatus.Friendly);
             }
         }
 

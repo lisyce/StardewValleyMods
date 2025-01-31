@@ -1,6 +1,6 @@
 ﻿using StardewValley;
 
-namespace EnemyOfTheValley
+namespace EnemyOfTheValley.Common
 {
     internal class Preconditions
     {

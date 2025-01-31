@@ -35,6 +35,19 @@
           "SpriteIndex": 0,
           "Edibility": 60,
           "ContextTags": [ "color_black" ]
+        },
+        "BarleyZP.EnemyOfTheValley.ShatteredAmulet": {
+          "Name": "Shattered Amulet",
+          "DisplayName": "{{i18n: ShatteredAmuletName}}",
+          "Description": "{{i18n: ShatteredAmuletDescription}}",
+          "Type": "Basic",
+          "Category": 0,
+          "Price": 0,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 1,
+          "Edibility": -300,
+          "CanBeTrashed": false,
+          "ExcludeFromRandomSale": true
         }
       }
     },

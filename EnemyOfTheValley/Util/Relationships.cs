@@ -33,5 +33,17 @@ namespace EnemyOfTheValley.Common
         {
             return friendship.Status == status;
         }
+
+        /// <summary>
+        /// Returns whether the specified farmer has an enemy with at least <c>heartLevel</c> negative hearts.
+        /// </summary>
+        public static bool HasAnEnemyWithHeartLevel(Farmer who, int heartLevel)
+        {
+            foreach (Friendship friendship in who.friendshipData.Values)
+            {
+                if (IsRelationship(friendship, Relationships.Enemy) && friendship.Points <= 250 * heartLevel) return true;
+            }
+            return false;
+        }
     }
 }
