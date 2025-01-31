@@ -35,7 +35,6 @@ namespace EnemyOfTheValley
             helper.Events.Content.AssetRequested += OnAssetRequested;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.DayEnding += OnDayEnding;
-            helper.Events.Player.Warped += OnWarped;
             LoadMiscSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
@@ -57,24 +56,6 @@ namespace EnemyOfTheValley
             }
         }
 
-        private void OnWarped(object? sender, WarpedEventArgs e)
-        {
-            // "mariner showed up yesterday, we have a -10 heart enemy, we warped to the beach, and it's not raining at the beach"
-            if (e.IsLocalPlayer && Game1.wasRainingYesterday && Relationships.HasAnEnemyWithHeartLevel(Game1.player, -10) && e.NewLocation.Name == "Beach" && !e.NewLocation.IsRainingHere())
-            {
-                Beach beach = (Beach) e.NewLocation;
-                NPC oldMariner = Traverse.Create(beach).Field<NPC>("oldMariner").Value;
-                if (oldMariner != null) return;  // somehow the mariner is here even though it isn't raining; we can't place the shards
-
-                Vector2 marinerPos = new(80, 5);
-                beach.overlayObjects.Remove(marinerPos);
-                SObject shards = ItemRegistry.Create<SObject>("BarleyZP.EnemyOfTheValley.ShatteredAmulet");
-                shards.TileLocation = marinerPos;
-                shards.IsSpawnedObject = true;
-                beach.overlayObjects.Add(marinerPos, shards);
-            }
-        }
-
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             // set the friendship status of each npc to what was stored in moddata
@@ -84,6 +65,21 @@ namespace EnemyOfTheValley
                 if (npc == null || !npc.modData.TryGetValue("BarleyZP.EnemyOfTheValley.FriendshipStatus", out string status)) continue;
 
                 Relationships.SetRelationship(name, (FriendshipStatus)int.Parse(status));
+            }
+
+            // do the beach shards
+            Beach beach = (Beach)Game1.getLocationFromName("Beach");
+            if (Game1.wasRainingYesterday && Relationships.HasAnEnemyWithHeartLevel(Game1.player, -10) && !beach.IsRainingHere())
+            {
+                NPC oldMariner = Traverse.Create(beach).Field<NPC>("oldMariner").Value;
+                if (oldMariner != null) return;  // somehow the mariner is here even though it isn't raining; we can't place the shards
+
+                Vector2 marinerPos = new(80, 5);
+                beach.overlayObjects.Remove(marinerPos);
+                SObject shards = ItemRegistry.Create<SObject>("BarleyZP.EnemyOfTheValley.ShatteredAmulet");
+                shards.TileLocation = marinerPos;
+                shards.IsSpawnedObject = true;
+                beach.overlayObjects.Add(marinerPos, shards);
             }
         }
 
@@ -122,6 +118,11 @@ namespace EnemyOfTheValley
 
                 Relationships.SetRelationship(name, FriendshipStatus.Friendly);
             }
+
+            // remove beach shards
+            Beach beach = (Beach)Game1.getLocationFromName("Beach");
+            Vector2 marinerPos = new(80, 5);
+            beach.overlayObjects.Remove(marinerPos);
         }
 
         public static Texture2D LoadMiscSprites()
