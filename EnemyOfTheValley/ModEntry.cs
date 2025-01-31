@@ -31,6 +31,7 @@ namespace EnemyOfTheValley
             NPCActionPatches.Patch(harmony);
             NPCDialoguePatches.Patch(harmony);
             ProfileMenuPatches.Patch(harmony);
+            BeachPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
