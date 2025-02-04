@@ -31,15 +31,22 @@ namespace EnemyOfTheValley.Patches
 
         public static bool GetMaximumHeartsForCharacter_Prefix(Character character, ref int __result)
         {
-            if (character == null) return true;
+            if (character == null || !Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) || friendship.Points >= 0) return true;
 
-            if (Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) && Relationships.IsRelationship(friendship, Relationships.Archenemy))
-            {
+            if (Relationships.IsRelationship(friendship, Relationships.Archenemy)) {
                 __result = 14;
                 return false;
             }
-
-            return true;
+            else if (Relationships.IsRelationship(friendship, Relationships.Enemy))
+            {
+                __result = 10;
+                return false;
+            }
+            else
+            {
+                __result = 8;
+                return false;
+            }
         }
 
         public static bool drawNPCSlotHeart_Prefix(ref SocialPage __instance, SpriteBatch b, int npcIndex, SocialPage.SocialEntry entry, int hearts)
