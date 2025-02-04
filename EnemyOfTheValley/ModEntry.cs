@@ -36,7 +36,9 @@ namespace EnemyOfTheValley
             helper.Events.Content.AssetRequested += OnAssetRequested;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
             helper.Events.GameLoop.DayEnding += OnDayEnding;
+
             LoadMiscSprites();
+            LoadStandardSprites();
 
             helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
@@ -130,6 +132,12 @@ namespace EnemyOfTheValley
         {
             MiscSprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/MiscSprites");
             return MiscSprites;
+        }
+
+        public static Texture2D LoadStandardSprites()
+        {
+            StandardSprites ??= Game1.content.Load<Texture2D>("BarleyZP.EnemyOfTheValley/StandardSprites");
+            return StandardSprites;
         }
 
         public static void SetEnemy(string command, string[] args) {

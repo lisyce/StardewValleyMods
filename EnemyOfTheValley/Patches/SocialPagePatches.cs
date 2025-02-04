@@ -67,7 +67,7 @@ namespace EnemyOfTheValley.Patches
             if (entry == null) return;
 
             string? text = Relationships.IsRelationship(entry, Relationships.Enemy) ? ModEntry.Translation.Get("Enemy") :
-                Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("Archenemy") : 
+                Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("Archenemy") :
                 Relationships.IsRelationship(entry, Relationships.ExArchenemy) ? ModEntry.Translation.Get("ExArchenemy") : null;
             if (text is null && entry.IsDatable && !entry.IsRoommateForCurrentPlayer() && !entry.IsMarriedToAnyone() && !entry.IsDivorcedFromCurrentPlayer() && !(!Game1.player.isMarriedOrRoommates() && entry.IsDatingCurrentPlayer()))
             {
@@ -82,8 +82,17 @@ namespace EnemyOfTheValley.Patches
             float lineHeight = Game1.smallFont.MeasureString("W").Y;
 
             b.DrawString(Game1.smallFont, text, new Vector2(__instance.xPositionOnScreen + 192 + 8 - textSize.X / 2f, __instance.sprites[i].bounds.Bottom - (textSize.Y - lineHeight)), Game1.textColor);
-        }
 
+            // draw the little icons for the cake and amulet
+            if (Relationships.IsRelationship(entry, Relationships.Enemy))
+            {
+                b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
+            }
+            else if (Relationships.IsRelationship(entry, Relationships.Archenemy))
+            {
+                b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
+            }
+        }
         public static IEnumerable<CodeInstruction> drawNPCSlot_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             // goal is to look at where we first assign to "text" variable and make it empty if it's "single" since the postfix will rewrite it
