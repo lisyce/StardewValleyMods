@@ -1,5 +1,6 @@
 {
   "Chat_Enemies": "{0} and {1} just became enemies.",
+  "Chat_Archnemies": "{0} and {1} just swore to be archenemies.",
 
   "AvoidMeCakeName": "\"A-Void Me\" Cake",
   "AvoidMeCakeDescription": "A \"gift\" that officially states your distaste for someone.",
@@ -10,7 +11,8 @@
 
   // Abigail Dialogue
   "Abigail.AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!$a",
-  "Abigail.AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!$a",
+  "Abigail.AcceptShatteredAmulet": "Yeah, I think it's time we took this to another level, @!$a",
+  "Abigail.RejectEnemyCake_ExArchenemies": "I thought we'd made amends... why are you doing this again?$s",
   "Abigail.RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?$a",
   "Abigail.RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!$a",
   "Abigail.Mon-2": "Uh... hi?$u",

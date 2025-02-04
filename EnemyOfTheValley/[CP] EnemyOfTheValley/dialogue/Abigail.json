@@ -5,7 +5,8 @@
       "Target": "Characters/Dialogue/Abigail",
       "Entries": {
         "AcceptEnemyCake": "{{i18n:Abigail.AcceptEnemyCake}}",
-        "AcceptEnemyCake_ExArchenemies": "{{i18n:Abigail.AcceptEnemyCake_ExArchenemies}}",
+        "AcceptShatteredAmulet": "{{i18n:Abigail.AcceptShatteredAmulet}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Abigail.RejectEnemyCake_ExArchenemies}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Abigail.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Abigail.RejectBouquet_NegativeHearts}}",
 

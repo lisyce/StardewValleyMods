@@ -14,6 +14,10 @@ namespace EnemyOfTheValley.Patches
         public static void Patch(Harmony harmony)
         {
             harmony.Patch(
+                original: AccessTools.Method(typeof(Utility), nameof(Utility.GetMaximumHeartsForCharacter)),
+                prefix: new HarmonyMethod(typeof(SocialPagePatches), nameof(GetMaximumHeartsForCharacter_Prefix))
+                );
+            harmony.Patch(
                 original: AccessTools.Method(typeof(SocialPage), "drawNPCSlotHeart"),
                 prefix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlotHeart_Prefix))
                 );
@@ -23,6 +27,19 @@ namespace EnemyOfTheValley.Patches
                 transpiler: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Transpiler)),
                 postfix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Postfix))
                 );
+        }
+
+        public static bool GetMaximumHeartsForCharacter_Prefix(Character character, ref int __result)
+        {
+            if (character == null) return true;
+
+            if (Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) && Relationships.IsRelationship(friendship, Relationships.Archenemy))
+            {
+                __result = 14;
+                return false;
+            }
+
+            return true;
         }
 
         public static bool drawNPCSlotHeart_Prefix(ref SocialPage __instance, SpriteBatch b, int npcIndex, SocialPage.SocialEntry entry, int hearts)
@@ -35,8 +52,10 @@ namespace EnemyOfTheValley.Patches
             Texture2D spriteSheet = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? ModEntry.MiscSprites : Game1.mouseCursors;
             Rectangle sourceRect = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? new Rectangle(0, 0, 7, 6) : new Rectangle(218, 428, 7, 6);
 
+            int yOffset = hearts < 10 ? 28 : 0;
             hearts %= 10;
-            b.Draw(spriteSheet, new Vector2(__instance.xPositionOnScreen + 320 - 4 + hearts * 32, __instance.sprites[npcIndex].bounds.Y + 64 - 28), sourceRect, heartTint, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
+            
+            b.Draw(spriteSheet, new Vector2(__instance.xPositionOnScreen + 320 - 4 + hearts * 32, __instance.sprites[npcIndex].bounds.Y + 64 - yOffset), sourceRect, heartTint, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
             
 
             return false;

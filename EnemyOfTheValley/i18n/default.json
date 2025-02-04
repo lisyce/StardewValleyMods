@@ -12,10 +12,17 @@
   "RejectEnemyCake_VeryLowNegativeHearts": "What, do I bother you that much? This isn't worth my time right now.",
   "RejectEnemyCake_LowNegativeHearts": "Keep acting like that and we might have to make this thing official soon!",
   "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!",
-  "AcceptEnemyCake_ExArchenemies": "We're doing this again? Fine by me!",
+  "RejectEnemyCake_ExArchenemies": "I thought we'd made amends... why are you doing this again?",
+
+  "RejectShatteredAmulet_AlreadyArchenemies": "You've already sworn to be archenemies with {{name}}.",
+  "RejectShatteredAmulet_ExArchenemies": "Didn't we apologize? There's no need to start this again.",
+  "RejectShatteredAmulet_NoNegativeHearts": "Where did you even find this broken jewelry? Be careful not to cut your hands on it.",
+  "RejectShatteredAmulet_VeryLowNegativeHearts": "Ok, I know we're not getting along too well, but this just seems like too big of a step.",
+  "RejectShatteredAmulet_LowNegativeHearts": "If you're not careful, I might just take you up on that offer soon.",
+  "AcceptShatteredAmulet": "Alright then, @. I swear to be your archenemy!",
 
   "RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?",
   "RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!",
 
-  "PickupShards":  "You've found a Shattered Amulet! You suspect nobody would find it a friendly gift..."
+  "PickupShards": "You've found a Shattered Amulet! You suspect nobody would find it a friendly gift..."
 }

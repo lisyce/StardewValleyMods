@@ -105,10 +105,11 @@ namespace EnemyOfTheValley.Patches
 
 
             // we insert switch cases (eek)
-            // our handler
+            // our handlers
             MethodInfo cakeMethod = AccessTools.Method(typeof(NPCActionPatches), nameof(HandleCake));
+            MethodInfo amuletMethod = AccessTools.Method(typeof(NPCActionPatches), nameof(HandleShatteredAmulet));
 
-            // add the new case body
+            // add the new cases' bodies
             int cakePos = matcher.Start().MatchEndForward(
                 new CodeMatch(OpCodes.Ldloc_S),
                 new CodeMatch(OpCodes.Ldstr, "(O)460"),
@@ -126,16 +127,31 @@ namespace EnemyOfTheValley.Patches
                     new(OpCodes.Call, cakeMethod),
                     new(OpCodes.Ret)
                 )
-                .CreateLabel(out Label cakeLabel);
+                .CreateLabel(out Label cakeLabel)
+                .Advance(6)
+                .Insert(
+                    new(OpCodes.Ldarg_0),
+                    new(OpCodes.Ldarg_1),
+                    new(OpCodes.Ldarg_2),
+                    new(OpCodes.Ldloc_2),
+                    new(OpCodes.Call, amuletMethod),
+                    new(OpCodes.Ret)
+                    )
+                .CreateLabel(out Label amuletLabel);
 
-            // add the new case control flow
+            // add the new cases' control flow
             MethodInfo strEquality = AccessTools.Method(typeof(string), "op_Equality");
             matcher.Start().Advance(cakePos)
                 .Insert(
                     new(OpCodes.Ldloc_S, (byte)11),
                     new(OpCodes.Ldstr, "(O)BarleyZP.EnemyOfTheValley.AvoidMeCake"),
                     new(OpCodes.Call, strEquality),
-                    new(OpCodes.Brtrue, cakeLabel)
+                    new(OpCodes.Brtrue, cakeLabel),
+
+                    new(OpCodes.Ldloc_S, (byte)11),
+                    new(OpCodes.Ldstr, "(O)BarleyZP.EnemyOfTheValley.ShatteredAmulet"),
+                    new(OpCodes.Call, strEquality),
+                    new(OpCodes.Brtrue, amuletLabel)
                 );
 
             return matcher.InstructionEnumeration();
@@ -162,6 +178,65 @@ namespace EnemyOfTheValley.Patches
             }
         }
 
+        public static bool HandleShatteredAmulet(NPC npc, Farmer who, bool probe, bool canReceiveGifts)
+        {
+            if (!canReceiveGifts) return false;
+
+            if (!probe)
+            {
+                who.friendshipData.TryGetValue(npc.Name, out var friendship);
+
+                friendship ??= (who.friendshipData[npc.Name] = new Friendship());
+
+                if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
+                {
+                    Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectShatteredAmulet_AlreadyArchenemies", new { name = npc.displayName }));
+                }
+                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_ExArchenemies") ?? new Dialogue(npc, "RejectShatteredAmulet_ExArchenemies", ModEntry.Translation.Get("RejectShatteredAmulet_ExArchenemies")));
+                    Game1.drawDialogue(npc);
+                }
+                else if (friendship.Points > -250)  // don't even have 1 negative heart yet
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_NoNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_NoNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_NoNegativeHearts")));
+                    Game1.drawDialogue(npc);
+                }
+                else if (friendship.Points > -2000) // > -8 hearts
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_VeryLowNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_VeryLowNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_VeryLowNegativeHearts")));
+                    Game1.drawDialogue(npc);
+                }
+                else if (friendship.Points > -2500)  // > -10 hearts
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_LowNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_LowNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_LowNegativeHearts")));
+                    Game1.drawDialogue(npc);
+                }
+                else  // we become archenemies!
+                {
+                    Traverse traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
+                    traverse.GetValue<Multiplayer>().globalChatInfoMessage("Archenemies", Game1.player.Name, npc.GetTokenizedDisplayName());
+
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptShatteredAmulet") ?? new Dialogue(npc, "AcceptShatteredAmulet", ModEntry.Translation.Get("AcceptShatteredAmulet")));
+                    Relationships.SetRelationship(npc.Name, Relationships.Archenemy);
+
+                    // Next two lines are in the original bouquet accept code, but not in use for enemies for now
+                    //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);
+                    //who.autoGenerateActiveDialogueEvent("enemies");
+
+                    who.changeFriendship(-50, npc);
+                    who.reduceActiveItemByOne();
+                    who.completelyStopAnimatingOrDoingAction();
+                    npc.facePlayer(who);
+                    npc.doEmote(12);  // angryEmote
+                    Game1.drawDialogue(npc);
+                }
+
+            }
+
+            return true;
+        }
+
         public static bool HandleCake(NPC npc, Farmer who, bool probe, bool canReceiveGifts)
         {
             if (!canReceiveGifts) return false;
@@ -179,6 +254,11 @@ namespace EnemyOfTheValley.Patches
                 else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
                 {
                     npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_Archenemies") ?? new Dialogue(npc, "RejectEnemyCake_Archenemies", ModEntry.Translation.Get("RejectEnemyCake_Archenemies")));
+                    Game1.drawDialogue(npc);
+                }
+                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_ExArchenemies") ?? new Dialogue(npc, "RejectEnemyCake_ExArchenemies", ModEntry.Translation.Get("RejectEnemyCake_ExArchenemies")));
                     Game1.drawDialogue(npc);
                 }
                 else if (friendship.Points > -250)  // don't even have 1 negative heart yet
@@ -200,15 +280,8 @@ namespace EnemyOfTheValley.Patches
                 {
                     Traverse traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
                     traverse.GetValue<Multiplayer>().globalChatInfoMessage("Enemies", Game1.player.Name, npc.GetTokenizedDisplayName());
-
-                    if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
-                    {
-                        npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake_ExArchenemies") ?? new Dialogue(npc, "AcceptEnemyCake_ExArchenemies", ModEntry.Translation.Get("AcceptEnemyCake_ExArchenemies")));
-                    } else
-                    {
-                        npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
-                    }
-
+                    
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
                     Relationships.SetRelationship(npc.Name, Relationships.Enemy);
 
                     // Next two lines are in the original bouquet accept code, but not in use for enemies for now

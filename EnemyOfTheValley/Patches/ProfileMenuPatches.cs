@@ -38,8 +38,9 @@ namespace EnemyOfTheValley.Patches
 
             Vector2 heartDisplayPos = Traverse.Create(__instance).Field("_heartDisplayPosition").GetValue<Vector2>();
 
+            int yOffset = hearts < 10 ? 0 : 32;
             hearts %= 10;
-            b.Draw(spriteSheet, new Vector2(heartDrawStartX + hearts * 32, heartDisplayPos.Y + heartDrawStartY), sourceRect, heartTint, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
+            b.Draw(spriteSheet, new Vector2(heartDrawStartX + hearts * 32, heartDisplayPos.Y + heartDrawStartY + yOffset), sourceRect, heartTint, 0f, Vector2.Zero, 4f, SpriteEffects.None, 0.88f);
 
             return false;
         }

@@ -17,7 +17,8 @@
       "Action": "EditData",
       "Target": "Strings/UI",
       "Entries": {
-        "Chat_Enemies": "{{i18n: Chat_Enemies}}"
+        "Chat_Enemies": "{{i18n: Chat_Enemies}}",
+        "Chat_Archenemies": "{{i18n: Chat_Archenemies}}"
       }
     },
     {
