@@ -1,0 +1,10 @@
+{
+  "Name": "Run In The Bath House (Spa)",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Lets you power walk in the spa/bath house (who needs a lifeguard anyway?)",
+  "UniqueID": "BarleyZP.RunningInTheSpa",
+  "EntryDll": "RunningInTheBathHouse.dll",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": [ "Nexus:31470" ]
+}
