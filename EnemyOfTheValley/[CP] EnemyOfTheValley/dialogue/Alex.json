@@ -1,0 +1,45 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Alex",
+      "Entries": {
+        "Mon-2": "I won a ton of championships back in high school. I bet you've never done that.",
+        "Tue-2": "",
+        "Wed-2": "What, you want to play catch? What makes you think you're good enough to play with me?$u",
+        "Thu-2": "Why don't you go work out or something? You could use it.",
+        "Fri-2": "Did you get new pants? Not sure I'm a fan.#$e#Anyway, it's my day for pushups. See ya!",
+        "Sat-2": "I did so many pushups yesterday and I got so sore...#$e#I bet my dedicated strength training easily stands up to your farm work.",
+        "Sun-2": "",
+        "Sun-4": "Hey, @! You've been getting on my nerves so much I remember your name now.$a",
+
+        "summer_Mon-2": "The beach is real nice this time of year.#$e#${You're looking burnt, you know.^I've been thinking you should get a swimsuit in a different color. Yours doesn't really suit you.}$",
+        "summer_Tue-2": "What are you, some sort of nerd? I never see you outside catching these rays.",
+        "summer_Wed-2": "",
+        "summer_Thu-2": "",
+        "summer_Fri-2": "",
+        "summer_Sat-2": "",
+        "summer_Sun-2": "Check out my new shoes! My old ones got dirty, so I threw them away.#$e#I would have donated them, but the idea of someone like you wearing my shoes weirded me out.#$e#...what?",
+
+        "fall_Mon-2": "",
+        "fall_Tue-2": "",
+        "fall_Wed-2": "",
+        "fall_Thu-2": "Oh, it's %firstnameletter%name.#$e#You're name's @? Whatever.",
+        "fall_Fri-2": "",
+        "fall_Sat-2": "You better not be fishing all of the salmon out of the river. Save some for the rest of us!$a",
+        "fall_Sun-2": "Hey, the gridball game is on today!$h#$e#Oh, I'm not trying to invite you to see it, though.$0",
+
+        "winter_Mon-2": "",
+        "winter_Tue-2": "",
+        "winter_Wed-2": "",
+        "winter_Thu-2": "",
+        "winter_Fri-2": "Ugh, if only it was warm enough for sports outside.#$e#Not that I'd play with you, though.",
+        "winter_Sat-2": "",
+        "winter_Sun-2": "Oh yeah, there's gridball on today!#$e#$q 2275390/2275391 winter_Sun-2_followup#Do you root for the local team?#$r 2275390 0 winter_Sun-2_yes#Oh yeah!#$r 2275391 -20 winter_Sun-2_no#No, I root for another team...",
+        "winter_Sun-2_yes": "I guess you're cool then...",
+        "winter_Sun-2_no": "Yeah, figures. I don't have time for people who aren't loyal to the local team.$a",
+        "winter_Sun-2_followup": "...need something?"
+      }
+    }
+  ]
+}
