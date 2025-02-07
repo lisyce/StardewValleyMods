@@ -3,7 +3,11 @@
   "Changes": [
     {
       "Action": "Include",
-      "FromFile": "dialogue/Abigail.json"
+      "FromFile": "dialogue/abigail.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "dialogue/alex.json"
     },
     {
       "Action": "Include",

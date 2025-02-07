@@ -1,20 +1,10 @@
 {
-  "Chat_Enemies": "{0} and {1} just became enemies.",
-  "Chat_Archnemies": "{0} and {1} just swore to be archenemies.",
-
-  "AvoidMeCakeName": "\"A-Void Me\" Cake",
-  "AvoidMeCakeDescription": "A \"gift\" that officially states your distaste for someone.",
-  "ShatteredAmuletName": "Shattered Amulet",
-  "ShatteredAmuletDescription": "Shards of an amulet washed up by the sea. Give this to your enemies to take things to the next level.",
-
-  "CakeMail": "I see you’re starting to ruffle some feathers in Pelican Town. It’s a long-held tradition in the valley to bake a rather unpleasant flavor of cake that makes your distaste for someone official.^^Here, I’ll give you the recipe, kid. It’s up to you if you want to take things that far.^^Your friend, Mr. Qi%item cookingRecipe BarleyZP.EnemyOfTheValley.AvoidMeCake%%[#]Regarding Enemies",
-
-  // Abigail Dialogue
   "Abigail.AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!$a",
   "Abigail.AcceptShatteredAmulet": "Yeah, I think it's time we took this to another level, @!$a",
   "Abigail.RejectEnemyCake_ExArchenemies": "I thought we'd made amends... why are you doing this again?$s",
   "Abigail.RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?$a",
   "Abigail.RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!$a",
+
   "Abigail.Mon-2": "Uh... hi?$u",
   "Abigail.Tue-2": "Ugh... I don't feel like talking right now.$u#$e#Weren't you listening? I don't want to talk right now, especially not with you.$a",
   "Abigail.Wed-2": "Do you need something? I'm kinda busy right now.$u",
@@ -23,11 +13,11 @@
   "Abigail.Sat-2": "Not now, @.$u",
   "Abigail.Sun-2": "$d joja#I bet you buy all your seeds at Joja instead of supporting my family's business.$u|Now that Joja has shut down, you have no choice but to support my family's business. Ha!$h",
   "Abigail.Mon-4": "What, here to give me another stupid gift?$a",
-  "Abigail.Sat-4": "Why do you keep trying to talk to me? Do you think we're friends or something?",
+  "Abigail.Sat-4": "Why do you keep trying to talk to me? Do you think we're friends or something?$u",
   "Abigail.Wed-6": "Oh, @. I was just avoiding you.$u",
   "Abigail.Thu-6": "I need to practice my flute, but talking to you makes me too annoyed to do it.$a",
   "Abigail.summer_Mon-2": "I'm getting so hungry...#$e#If you aren't offering me a snack, why are you bothering me?$u",
-  "Abigail.summer_Tue-2": "Ugh, it's so hot outside",
+  "Abigail.summer_Tue-2": "Ugh, it's so hot outside.$u",
   "Abigail.summer_Wed-2": "Achoo!$7#$b#Oh, @. Not sure if I'm allergic to the pollen or to you.$u",
   "Abigail.summer_Thu-2": "*sigh*... Do you need something, @?$u",
   "Abigail.summer_Fri-2": "I've been thinking about exploring the mines this weekend after I finish my homework.#$b#Oh, sorry. That wasn't an invitation.$u",
@@ -37,7 +27,7 @@
   "Abigail.summer_Tue-8": "Ugh, my life sucks. First, I'm living in this boring town and then this annoying farmer moves in too.$u",
   "Abigail.fall_Mon-2": "The leaves are falling... I hope the wind blows away all of my problems.#$e#%Abigail looks at you for a bit too long.",
   "Abigail.fall_Tue-2": "@, I bet you're the type of person to get super scared during Spirit's Eve.$u",
-  "Abigail.fall_Wed-2": "You better not buy up all the pumpkin seeds. The rest of us might want to plant some too, you know.$u",
+  "Abigail.fall_Wed-2": "You better not buy up all the pumpkin seeds. The rest of us might want to plant some too, you know.$a",
   "Abigail.fall_Thu-2": "How long do you plan to stay in Pelican Town anyway?$u",
   "Abigail.fall_Fri-2": "Please don't bother me right now.$u",
   "Abigail.fall_Sat-2": "Oops, just remembered I have some homework I need to do. Can't talk right now!",
@@ -45,7 +35,7 @@
   "Abigail.fall_Fri-6": "%Abigail is ignoring you.",
   "Abigail.fall_Sun-8": "I'm learning how to use a sword, you know.$a",
   "Abigail.winter_Mon-2": "Hmm... that snow goon kinda looks like you, @.$9",
-  "Abigail.winter_Tue-2": "I found this gross thing on the ground earlier and I don't want it.$u#b#Here, @. You take it.[(O)238]$0",
+  "Abigail.winter_Tue-2": "I found this gross thing on the ground earlier and I don't want it.$u#$b#Here, @. You take it.[(O)168]$0",
   "Abigail.winter_Wed-2": "I bet you don't even do anything during the winter.$u",
   "Abigail.winter_Thu-2": "Brr...#$e#What are you looking at? I'm not cold!$a",
   "Abigail.winter_Fri-2": "Honestly, I'd rather be playing video games right now, @.$u",
