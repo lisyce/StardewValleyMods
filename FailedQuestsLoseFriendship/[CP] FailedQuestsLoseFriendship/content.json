@@ -1,0 +1,19 @@
+{
+  "Format": "2.4.0",
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Emily",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_Gus": "At my shift the other night, I heard you broke a promise with Gus. That's seriously bad vibes.$a"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Maru",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_Harvey": "Harvey told me that you said you'd do a favor for him but you didn't. Maybe you should be a bit more responsible.$a"
+      }
+    }
+  ]
+}

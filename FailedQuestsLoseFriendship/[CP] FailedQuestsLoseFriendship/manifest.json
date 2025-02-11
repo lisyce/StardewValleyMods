@@ -1,0 +1,17 @@
+{
+  "Name": "[CP] Failed Quests Lose Friendship",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Content Patcher portion for BarleyZP.FailedQuestsLoseFriendship",
+  "UniqueID": "BarleyZP.FailedQuestsLoseFriendship.CP",
+  "UpdateKeys": [],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  ]
+}
