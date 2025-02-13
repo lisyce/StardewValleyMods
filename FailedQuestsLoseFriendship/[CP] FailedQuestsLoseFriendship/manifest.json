@@ -4,7 +4,7 @@
   "Version": "1.0.0",
   "Description": "Content Patcher portion for BarleyZP.FailedQuestsLoseFriendship",
   "UniqueID": "BarleyZP.FailedQuestsLoseFriendship.CP",
-  "UpdateKeys": [],
+  "UpdateKeys": [ "Nexus:31655" ],
   "ContentPackFor": {
     "UniqueID": "Pathoschild.ContentPatcher"
   },

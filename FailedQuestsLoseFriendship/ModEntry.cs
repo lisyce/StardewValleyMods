@@ -26,11 +26,11 @@ namespace FailedQuestsLoseFriendship
                 if (q.IsTimedQuest() && q.daysLeft.Value <= 1 && !q.completed.Value)
                 {
                     failed++;
-                    string? target = GetQuestTarget(q);
-                    if (target != null)
+                    string? topic = GetQuestConvoTopic(q);
+                    if (topic != null)
                     {
-                        Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_{target}", 4);
-                        Monitor.Log($"{UniqueID}_questFailed_{target}", LogLevel.Debug);
+                        ChangeFriendshipFailedQuest(GetQuestTarget(q));
+                        Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_{topic}", 1);
                     }
                 }
             }
@@ -39,13 +39,31 @@ namespace FailedQuestsLoseFriendship
             {
                 if (so.questState.Value != SpecialOrderStatus.Complete && so.GetDaysLeft() <= 1) {
                     failed++;
-                    Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_{so.requester.Value}", 4);
-                    Monitor.Log($"{UniqueID}_questFailed_{so.requester.Value}", LogLevel.Debug);
+                    ChangeFriendshipFailedQuest(so.requester.Value);
+                    Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_so_{so.questKey}", 1);
                 }
             }
 
             AddFailedQuests(Game1.player, failed);
             RemoveConvoTopicsMail();
+
+            List<int> mailAmounts = new() { 3, 10, 20, 50 };
+            int failedQuests = GetFailedQuests(Game1.player);
+            foreach (int amount in mailAmounts)
+            {
+                if (failedQuests >= amount && !Game1.player.mailReceived.Contains($"{UniqueID}{amount}"))
+                {
+                    Game1.player.mailForTomorrow.Add($"{UniqueID}{amount}");
+                }
+            }
+        }
+
+        private static void ChangeFriendshipFailedQuest(string name)
+        {
+            NPC npc = Game1.getCharacterFromName(name);
+            if (npc == null) return;
+            
+            Game1.player.changeFriendship(-50, npc);
         }
 
         private static void RemoveConvoTopicsMail()
@@ -59,6 +77,32 @@ namespace FailedQuestsLoseFriendship
             Game1.player.mailReceived.ExceptWith(toRemove);
         }
 
+        private static string? GetQuestConvoTopic(Quest q)
+        {
+            if (q is ResourceCollectionQuest rcq)
+            {
+                return $"rc_{rcq.target.Value}";
+            }
+            else if (q is SlayMonsterQuest smq)
+            {
+                return $"sm_{smq.target.Value}";
+            }
+            else if (q is FishingQuest fq)
+            {
+                return $"f_{fq.target.Value}";
+            }
+            else if (q is ItemDeliveryQuest idq)
+            {
+                return $"id_{idq.target.Value}";
+            }
+            else if (q is SocializeQuest sq)
+            {
+                return "socialize";
+            }
+
+            return null;
+        }
+        
         private static string? GetQuestTarget(Quest q)
         {
             if (q is ResourceCollectionQuest rcq)
@@ -76,6 +120,10 @@ namespace FailedQuestsLoseFriendship
             else if (q is ItemDeliveryQuest idq)
             {
                 return idq.target.Value;
+            }
+            else if (q is SocializeQuest sq)
+            {
+                return "Emily";
             }
 
             return null;
