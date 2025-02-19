@@ -69,5 +69,5 @@ The player failed a Slay Monsters "Help Wanted" quest for Clint, and Clint himse
 
 ## Compat With Other Mods
 
-While this mod does not work out-of-the-box to add dialogue for custom NPCs or Quests/Special Orders added by other mods,
+While this mod does not add dialogue for custom NPCs or Quests/Special Orders added by other mods,
 it should be compatible with them. Please see the documentation above to add dialogue for custom quests!
