@@ -1,0 +1,72 @@
+{
+  "BarleyZP.FailedQuestsLoseFriendship3.title": "3 Missed Requests",
+  "BarleyZP.FailedQuestsLoseFriendship3.text": "Hey, @.^I heard that you've been promising the townspeople that you'll fulfill their requests but then choosing not to.^Please be more responsible in the future!^^-Mayor Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship10.title": "10 Missed Requests",
+  "BarleyZP.FailedQuestsLoseFriendship10.text": "Hi, @.^Multiple people have come forward to tell me that you still are flaking on their requests posted in town.^If this continues, we will have to discuss the honor system in place in Pelican Town.^^-Mayor Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship20.title": "20 Missed Requests",
+  "BarleyZP.FailedQuestsLoseFriendship20.text": "@,^This is getting ridiculous. You've now broken 20 promises to fulfill the requests of the townspeople (that I know of, at least).^You will be fined for these infractions.^^-Mayor Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship50.title": "50 Missed Requests",
+  "BarleyZP.FailedQuestsLoseFriendship50.text": "@,^This is absurd! You must be picking up quests and leaving them unfulfilled on purpose. You have been fined a heftier sum than last time.^^-Mayor Lewis",
+
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus": "At my shift the other night, I heard you broke a promise with Gus. That's seriously bad vibes.$a",
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize": "You promised me you'd say hi to everyone and you didn't! What's up with that?$a",
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily": "What, do you think the energy in crystals is a joke or something? You didn't need to pretend like you were going to help me collect them.$a",
+
+  "Maru.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey": "Harvey told me that you said you'd do a favor for him but you didn't. Maybe you should be a bit more responsible.$a",
+
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint": "Hey, how come you never finished gathering those ores the other day?$3",
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint": "Hey, how come you never finished slaying those monsters the other day?$3",
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint": "Hey, how come you never finished slaying those monsters the other day?$3#$e#You promised to keep the mines safe for other miners.$3",
+
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "Hey, if you tell my wife you'll gather materials, you better make good on it next time.$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius": "Why wouldn't you finish slaying those monsters you promised you'd slay? This really sets back my research.$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius": "I heard you didn't finish the fishing you said you'd do. You know overpopulation is a serious threat to the ecosystem!$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius": "You didn't finish the fishing you said you'd do. You know overpopulation is a serious threat to the ecosystem!$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2": "You didn't finish the fishing you said you'd do. You know overpopulation is a serious threat to the ecosystem!$4",
+
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis": "I'm disappointed you promised to slay monsters in the mines and then went back on it. The safety of Pelican Town is very important to me.$3",
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis": "Does that notice board outside Pierre's even work? You said you'd complete my offer and then didn't.$3",
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis": "I guess I'll have to put that reward from the Agricultural Fund to another use since you didn't ship as much produce as you promised.$3",
+
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy": "I must say, I thought you'd be better at keeping your promises...$2",
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy": "My crabs are sure going to be disappointed without that bug meat you had promised to bring me...$2",
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2": "A true angler would keep the art of tropical fishing alive when they promise to...$2",
+
+  "Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny": "Next time, if you don't actually want to do it, I'd prefer if you didn't accept my notice board quests...$s",
+  "Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam": "My mom's disappointed, but I am glad you decided not to make those spirits for her like you said you would.",
+
+  "Alex.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex": "Dude, you forgot to bring it!$a#$b#You know, the paper I put up outside of Pierre's!",
+
+  "Shane.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane": "I guess my \"help wanted\" postings are as forgettable as I am...$s",
+
+  "Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley": "Wow... I really thought I could trust you to do me a favor but I guess I was wrong.$3",
+  "Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily": "I know my sister and I don't really get along sometimes, but you can't just break promises to her like that!$3",
+
+  "Elliott.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott": "Ah, I see you've forgotten what you promised to bring me as if my request was just a passing breeze...$2",
+
+  "Leah.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah": "Oh... hi.$s#$b#Did you forget that you were supposed to bring me something the other day?$s",
+
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "It's fine... I guess I didn't really need those materials I posted an ad for anyway.$2",
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin": "I guess I won't be able to make that new style of bed after all...$2",
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2": "If you weren't interested in my resource collection promotion, you didn't need to pretend like you were going to participate.$2",
+
+  "Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "Oh, my dear. Of course I forgive you for forgetting about your promise to bring me that the other day.",
+  "Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn": "How will I surprise George without those leeks you had promised to bring me?$2",
+
+  "George.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "Hmph... my wife may forgive you for forgetting to bring what you promised, but I won't.",
+
+  "Jodi.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi": "I'm so busy, you know. That's why I posted that notice outside Pierre's the other day.#$e#If I'd known you wouldn't make good on it, I would have found someone else to do it.$2",
+
+  "Marnie.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie": "No, it's ok... I didn't really need you to fulfill that \"help wanted\" posting anyway...$2",
+
+  "Pam.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam": "Hey, kid. You better be careful breaking promises to me.$4",
+
+  "Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre": "Why do I even have that notice board if people like you will promise to fulfill offers and then decide not to?$3",
+  "Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre": "Now how am I supposed to run that promotion? You forgot to bring me the produce!$3",
+
+  "Gus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus": "If you didn't want to try my giant omelet, you could have just said so.$3#$b#No need to make promises you don't intend to keep.$3",
+
+  "Linus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus": "Is it funny to you when you promise to help clean up the valley and then decide not to?$2",
+
+  "Caroline.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline": "I suppose I'll find someone else to ship tropical produce so that I can experiment with them some other time...$2"
+}
