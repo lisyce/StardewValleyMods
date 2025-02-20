@@ -1,4 +1,5 @@
-﻿using StardewModdingAPI;
+﻿using Microsoft.Xna.Framework;
+using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Quests;
@@ -8,14 +9,104 @@ namespace FailedQuestsLoseFriendship
 {
     public class ModEntry : Mod
     {
-        static IMonitor Monitor;
-        static string UniqueID;
+        public IMonitor Monitor;
+        public string UniqueID;
+        public Config Config;
         public override void Entry(IModHelper helper)
         {
             Monitor = base.Monitor;
             UniqueID = ModManifest.UniqueID;
+            Config = Helper.ReadConfig<Config>();
 
             helper.Events.GameLoop.DayEnding += OnDayEnding;
+            helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+        }
+
+        private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+        {
+            var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+            if (configMenu is null)
+            {
+                Monitor.Log($"Failed to get GMCM API.", LogLevel.Warn);
+                return;
+            }
+            
+            configMenu.Register(
+                mod: ModManifest,
+                reset: () =>
+                {
+                    Config = new Config();
+                    Config.Populate(DataLoader.SpecialOrders(Game1.content));
+                },
+                save: () => Helper.WriteConfig(Config)
+            );
+            
+            configMenu.AddSectionTitle(
+                mod: ModManifest,
+                text: () => "General Settings");
+            
+            configMenu.AddNumberOption(
+                mod: ModManifest,
+                name: () => "Friendship Penalty",
+                getValue: () => Config.FriendshipLost,
+                setValue: value => Config.FriendshipLost = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Resource Collection Quests",
+                getValue: () => Config.ResourceCollectionQuestsEnabled,
+                setValue: value => Config.ResourceCollectionQuestsEnabled = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Slay Monster Quests",
+                getValue: () => Config.SlayMonsterQuestsEnabled,
+                setValue: value => Config.SlayMonsterQuestsEnabled = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Fishing Quests",
+                getValue: () => Config.FishingQuestsEnabled,
+                setValue: value => Config.FishingQuestsEnabled = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Item Delivery Quests",
+                getValue: () => Config.ItemDeliveryQuestsEnabled,
+                setValue: value => Config.ItemDeliveryQuestsEnabled = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Socialize Quest",
+                getValue: () => Config.SocializeQuestsEnabled,
+                setValue: value => Config.SocializeQuestsEnabled = value);
+            
+            configMenu.AddBoolOption(
+                mod: ModManifest,
+                name: () => "Enable Special Orders",
+                getValue: () => Config.SpecialOrdersEnabled,
+                setValue: value => Config.SpecialOrdersEnabled = value);
+            
+            configMenu.AddSectionTitle(
+                mod: ModManifest,
+                text: () => "Toggle Individual Special Orders");
+
+            foreach (var orderData in DataLoader.SpecialOrders(Game1.content))
+            {
+                SpecialOrder order = SpecialOrder.GetSpecialOrder(orderData.Key, null);
+                if (orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) continue;  // filter out invalid ones
+                
+                configMenu.AddBoolOption(
+                    mod: ModManifest,
+                    name: () => order.GetName(),
+                    tooltip: () => order.GetDescription(),
+                    getValue: () => Config.EnabledSpecialOrders.Contains(orderData.Key),
+                    setValue: value =>
+                    {
+                        if (value) Config.EnabledSpecialOrders.Add(orderData.Key);
+                        else Config.EnabledSpecialOrders.Remove(orderData.Key);
+                    });
+            }
         }
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
@@ -66,7 +157,7 @@ namespace FailedQuestsLoseFriendship
             Game1.player.changeFriendship(-50, npc);
         }
 
-        private static void RemoveConvoTopicsMail()
+        private void RemoveConvoTopicsMail()
         {
             HashSet<string> toRemove = new();
             foreach (string mail in Game1.player.mailReceived)
@@ -129,12 +220,12 @@ namespace FailedQuestsLoseFriendship
             return null;
         }
 
-        private static int GetFailedQuests(Farmer who)
+        private int GetFailedQuests(Farmer who)
         {
             return int.Parse(who.modData.GetValueOrDefault($"{UniqueID}.failedQuests", "0"));
         }
 
-        private static void AddFailedQuests(Farmer who, int failed)
+        private void AddFailedQuests(Farmer who, int failed)
         {
             who.modData[$"{UniqueID}.failedQuests"] = (GetFailedQuests(who) + failed).ToString();
         }
