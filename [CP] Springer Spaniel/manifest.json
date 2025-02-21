@@ -1,0 +1,17 @@
+{
+  "Name": "[CP] Springer Spaniel",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Adds a new dog breed: English Springer Spaniel",
+  "UniqueID": "BarleyZP.SpringerSpaniel",
+  "UpdateKeys": [ "" ],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  ]
+}
