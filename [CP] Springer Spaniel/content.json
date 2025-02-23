@@ -1,10 +1,226 @@
 {
   "Format": "2.0.0",
+  "ConfigSchema": {
+    "Add or Replace": {
+      "AllowValues": "Add as New Breed, Replace Dog 0, Replace Dog 1, Replace Dog 2, Replace Dog 3, Replace Dog 4",
+      "Default": "Add as New Breed",
+      "Description": "Whether to add the Spaniel as a new breed or replace one of the existing breeds."
+    },
+    "Adoption Price": {
+      "Default": "40000",
+      "Description": "Must be a non-negative integer value."
+    }
+  },
   "Changes": [
+    // new breed
+    {
+      "Action": "Load",
+      "Target": "Mods/{{ModId}}/Spaniel",
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Add as New Breed"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds" ],
+      "Entries": {
+        "{{ModId}}/Spaniel": {
+          "Id": "{{ModId}}/Spaniel",
+          "Texture": "Mods/{{ModId}}/Spaniel",
+          "IconTexture": "Mods/{{ModId}}/SpanielIcon",
+          "IconSourceRect": {
+            "X": 0,
+            "Y": 0,
+            "Width": 16,
+            "Height": 16
+          },
+          "CanBeChosenAtStart": true,
+          "CanBeAdoptedFromMarnie": true,
+          "AdoptionPrice": "{{Adoption Price}}",
+          "BarkOverride": null,
+          "VoicePitch": 1.0
+        }
+      },
+      "When": {
+        "Add or Replace": "Add as New Breed"
+      }
+    },
+
+    // dog0
+    {
+      "Action": "Load",
+      "Target": "Animals/dog",
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Replace Dog 0"
+      }
+    },
+    {
+      "Action": "EditImage",
+      "Target": "LooseSprites/Cursors",
+      "FromFile": "SpanielIcon.png",
+      "ToArea": {
+        "X": 208,
+        "Y": 208,
+        "Width": 16,
+        "Height": 16
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 0"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds", "0" ],
+      "Entries": {
+        "AdoptionPrice": "{{Adoption Price}}"
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 0"
+      }
+    },
+
+    // dog1
+    {
+      "Action": "Load",
+      "Target": "Animals/dog1",
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Replace Dog 1"
+      }
+    },
+    {
+      "Action": "EditImage",
+      "Target": "LooseSprites/Cursors",
+      "FromFile": "SpanielIcon.png",
+      "ToArea": {
+        "X": 224,
+        "Y": 208,
+        "Width": 16,
+        "Height": 16
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 1"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds", "1" ],
+      "Entries": {
+        "AdoptionPrice": "{{Adoption Price}}"
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 1"
+      }
+    },
+
+    // dog2
     {
       "Action": "Load",
       "Target": "Animals/dog2",
-      "FromFile": "Spaniel.png"
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Replace Dog 2"
+      }
+    },
+    {
+      "Action": "EditImage",
+      "Target": "LooseSprites/Cursors",
+      "FromFile": "SpanielIcon.png",
+      "ToArea": {
+        "X": 240,
+        "Y": 208,
+        "Width": 16,
+        "Height": 16
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 2"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds", "2" ],
+      "Entries": {
+        "AdoptionPrice": "{{Adoption Price}}"
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 2"
+      }
+    },
+
+    // dog3
+    {
+      "Action": "Load",
+      "Target": "Animals/dog3",
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Replace Dog 3"
+      }
+    },
+    {
+      "Action": "EditImage",
+      "Target": "LooseSprites/Cursors_1_6",
+      "FromFile": "SpanielIcon.png",
+      "ToArea": {
+        "X": 272,
+        "Y": 381,
+        "Width": 16,
+        "Height": 16
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 3"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds", "3" ],
+      "Entries": {
+        "AdoptionPrice": "{{Adoption Price}}"
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 3"
+      }
+    },
+
+    // dog4
+    {
+      "Action": "Load",
+      "Target": "Animals/dog4",
+      "FromFile": "Spaniel.png",
+      "When": {
+        "Add or Replace": "Replace Dog 4"
+      }
+    },
+    {
+      "Action": "EditImage",
+      "Target": "LooseSprites/Cursors_1_6",
+      "FromFile": "SpanielIcon.png",
+      "ToArea": {
+        "X": 272,
+        "Y": 365,
+        "Width": 16,
+        "Height": 16
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 4"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [ "Dog", "Breeds", "4" ],
+      "Entries": {
+        "AdoptionPrice": "{{Adoption Price}}"
+      },
+      "When": {
+        "Add or Replace": "Replace Dog 4"
+      }
     }
   ]
 }
