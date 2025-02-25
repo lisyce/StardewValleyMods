@@ -4,7 +4,7 @@
   "Version": "1.0.0",
   "Description": "Adds a new dog breed: English Springer Spaniel",
   "UniqueID": "BarleyZP.SpringerSpaniel",
-  "UpdateKeys": [ "" ],
+  "UpdateKeys": [ "Nexus:31889" ],
   "ContentPackFor": {
     "UniqueID": "Pathoschild.ContentPatcher"
   },
