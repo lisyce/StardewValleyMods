@@ -2,9 +2,9 @@
   "Format": "2.0.0",
   "ConfigSchema": {
     "Dog to Replace": {
-      "AllowValues": "Replace Dog 0, Replace Dog 1, Replace Dog 2, Replace Dog 3, Replace Dog 4",
+      "AllowValues": "Add as New Breed, Replace Dog 0, Replace Dog 1, Replace Dog 2, Replace Dog 3, Replace Dog 4",
       "Default": "Replace Dog 2",
-      "Description": "Which dog breed to replace the textures of."
+      "Description": "Which dog breed to replace the textures of (or add a new breed!)."
     },
     "Adoption Price": {
       "Default": "40000",
@@ -12,6 +12,32 @@
     }
   },
   "Changes": [
+    // new breed
+    {
+      "Action": "EditData",
+      "Target": "Data/Pets",
+      "TargetField": [
+        "Dog",
+        "Breeds"
+      ],
+      "Entries": {
+        "{{ModId}}.Spaniel": {
+          "Id": "{{ModId}}.Spaniel",
+          "Texture": "{{InternalAssetKey: Spaniel.png}}",
+          "IconTexture": "{{InternalAssetKey: SpanielIcon.png}}",
+          "IconSourceRect": {
+            "X": 0,
+            "Y": 0,
+            "Width": 16,
+            "Height": 16
+          },
+          "CanBeChosenAtStart": true,
+          "CanBeAdoptedFromMarnie": true,
+          "AdoptionPrice": "{{Adoption Price}}"
+        }
+      }
+    },
+
      // dog0
     {
       "Action": "Load",
