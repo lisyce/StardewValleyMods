@@ -5,15 +5,10 @@ namespace FailedQuestsLoseFriendship;
 
 public class Config
 {
-    public void Populate(Dictionary<string, SpecialOrderData> specialOrders)
-    {
-        EnabledSpecialOrders.UnionWith(specialOrders.Keys);
-    }
-    
-    public int FriendshipLost { get; set; } = 50;
+    public int FriendshipLost { get; set; } = 20;
     
     public bool SpecialOrdersEnabled { get; set; } = true;
-    public HashSet<string> EnabledSpecialOrders { get; init; } = new();
+    public HashSet<string> DisabledSpecialOrders { get; init; } = new();
     
     public bool ResourceCollectionQuestsEnabled { get; set; } = true;
     public bool SlayMonsterQuestsEnabled { get; set; } = true;
