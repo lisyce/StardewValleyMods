@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using StardewModdingAPI;
+﻿using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.GameData.SpecialOrders;
@@ -10,10 +9,11 @@ namespace FailedQuestsLoseFriendship
 {
     public class ModEntry : Mod
     {
-        public string UniqueID;
+        public static string UniqueID;
         public Config Config;
         public Dictionary<string, SpecialOrderData> SpecialOrders => _specialOrders ??= Helper.GameContent.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders");
         private Dictionary<string, SpecialOrderData> _specialOrders;
+        
         public override void Entry(IModHelper helper)
         {
             UniqueID = ModManifest.UniqueID;
@@ -24,12 +24,12 @@ namespace FailedQuestsLoseFriendship
             helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
         }
 
-        private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+        private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
             UpdateGMCM();
         }
 
-        private void OnAssetsInvalidated(object sender, AssetsInvalidatedEventArgs e)
+        private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
         {
             foreach (var name in e.NamesWithoutLocale)
             {
@@ -61,7 +61,7 @@ namespace FailedQuestsLoseFriendship
 
             foreach (SpecialOrder so in Game1.player.team.specialOrders)
             {
-                if (so.questState.Value != SpecialOrderStatus.Complete && so.GetDaysLeft() <= 1 && !Config.DisabledSpecialOrders.Contains(so.questKey.Value)) {
+                if (so.questState.Value != SpecialOrderStatus.Complete && so.GetDaysLeft() <= 1 && Config.SpecialOrdersEnabled && !Config.DisabledSpecialOrders.Contains(so.questKey.Value)) {
                     failed++;
                     ChangeFriendshipFailedQuest(so.requester.Value);
                     Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_so_{so.questKey}", 1);
@@ -69,8 +69,11 @@ namespace FailedQuestsLoseFriendship
             }
 
             AddFailedQuests(Game1.player, failed);
+            
+            // make the convo topics repeatable
             RemoveConvoTopicsMail();
 
+            // check if we need to send a letter from Lewis
             List<int> mailAmounts = new() { 3, 10, 20, 50 };
             int failedQuests = GetFailedQuests(Game1.player);
             foreach (int amount in mailAmounts)
@@ -81,7 +84,7 @@ namespace FailedQuestsLoseFriendship
                 }
             }
         }
-
+        
         private void ChangeFriendshipFailedQuest(string name)
         {
             NPC npc = Game1.getCharacterFromName(name);
