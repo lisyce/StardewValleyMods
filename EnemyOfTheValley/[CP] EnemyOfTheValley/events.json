@@ -7,6 +7,13 @@
         "BarleyZP.EnemyOfTheValley_HaleyNegative2/NegativeFriendship Haley -500/p Haley": "50s/6 20/farmer 2 23 0 Haley 12 20 3/move farmer 0 -3 1 Haley -7 0 3/speak Haley \"@? What are you doing here?\"/quickQuestion #I came to visit you.#I came to see Emily.(break)speak Haley \"Why, finally here for some fashion advice?\"\\questionAnswered cameToSeeHaley(break)speak Haley \"Emily isn't going to give you the fashion advice you clearly need.$3\"/move Haley -2 0 3/faceDirection farmer 2/pause 500/faceDirection farmer 1/pause 500/emote farmer 8/speak Haley \"Your shirt and shoes don't match at all! Is this how all farmers are?\"/quickQuestion #Honestly, I've never thought a lot about my outfits.#Stop insulting me! I know how to dress!(break)speak Haley \"Great, you do understand you need help!$h\"(break)friendship Haley -20\\speak Haley \"I'm just being brutally honest. Someone had to tell you!\"/emote farmer 12/pause 500/fork cameToSeeHaley BarleyZP.EnemyOfTheValley_cameToSeeHaleySpeak/pause 1000/speak Haley \"Anyway, I've got things to do. Have fun with Emily.$3\"/faceDirection Haley 1/move Haley 7 0 3 true/globalFade/viewport -1000 -1000/end",
         "BarleyZP.EnemyOfTheValley_cameToSeeHaleySpeak": "speak Haley \"So anyway, did you need something else from me?\"/globalFade/viewport -1000 -1000/end"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Events/SeedShop",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_PierreNegative2/NegativeFriendship Pierre -500/p Pierre/t 900 1700": "playful/5 21/farmer 6 27 0 Pierre 4 17 2/move farmer 0 -7 0/move farmer -2 0 3/move farmer 0 -1 0/speak Pierre \"Hey, @. Here to do business again?#$b#You know, the townspeople have been saying I've got *quite* the green thumb.$1\"/emote farmer 8/speak Pierre \"Well, of course you know I resell what you sell me. That's just business.#$b#But, it appears our neighbors seem to think that it's me who grows all this!$1\"/quickQuestion #Why would you lie like that?#Careful. You don't want to get on my bad side.(break)speak Pierre \"Well, I'm not the one who's spreading the rumors!$1\"(break)stopMusic\\speak Pierre \"What, do you think we're more than just business competitors?#$b#I'm not afraid of you.$3\"\\friendship Pierre -30/playMusic playful/speak Pierre \"Anyway, let's not get too heated. Shall we get back to business?\"/globalFade/viewport -1000 -1000/end"
+      }
     }
   ]
 }
