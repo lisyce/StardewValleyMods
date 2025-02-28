@@ -11,9 +11,6 @@ namespace FailedQuestsLoseFriendship
     {
         public static string UniqueID;
         public Config Config;
-        public Dictionary<string, SpecialOrderData> SpecialOrders => _specialOrders ??= Helper.GameContent.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders");
-        private Dictionary<string, SpecialOrderData> _specialOrders;
-        
         public override void Entry(IModHelper helper)
         {
             UniqueID = ModManifest.UniqueID;
@@ -35,7 +32,6 @@ namespace FailedQuestsLoseFriendship
             {
                 if (name.IsEquivalentTo("Data/SpecialOrders"))
                 {
-                    _specialOrders = null;
                     UpdateGMCM();
                     break;
                 }
@@ -230,10 +226,11 @@ namespace FailedQuestsLoseFriendship
                 mod: ModManifest,
                 text: () => "Toggle Individual Special Orders");
 
-            foreach (var orderData in SpecialOrders)
+            foreach (var orderData in Game1.content.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders"))
             {
                 SpecialOrder order = SpecialOrder.GetSpecialOrder(orderData.Key, null);
-                if (orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) continue;  // filter out invalid ones
+                if (order == null || (orderData.Value.RequiredTags != null &&
+                                      orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED"))) continue;  // filter out invalid ones
                 
                 configMenu.AddBoolOption(
                     mod: ModManifest,
