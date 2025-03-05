@@ -17,13 +17,16 @@ namespace FailedQuestsLoseFriendship
             Config = Helper.ReadConfig<Config>();
 
             helper.Events.GameLoop.DayEnding += OnDayEnding;
-            helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
             helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
         }
 
-        private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
+        private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
         {
-            UpdateGMCM();
+            if (e.Ticks == 5)  // wait for Content Patcher to finish its initialization
+            {
+                UpdateGMCM();
+            }
         }
 
         private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
@@ -229,8 +232,13 @@ namespace FailedQuestsLoseFriendship
             foreach (var orderData in Game1.content.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders"))
             {
                 SpecialOrder order = SpecialOrder.GetSpecialOrder(orderData.Key, null);
-                if (order == null || (orderData.Value.RequiredTags != null &&
-                                      orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED"))) continue;  // filter out invalid ones
+                
+                // filter out invalid special orders
+                // for mods like RSV, some of the patches to load to Strings/SpecialOrderStrings only happen when a save
+                // is loaded. Until then, their namese/descs are just "Strings/SpecialOrderStrings/.....".
+                if (order == null ||
+                    (orderData.Value.RequiredTags != null && orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) ||
+                    order.GetName().StartsWith("Strings") || order.GetDescription().StartsWith("Strings")) continue;
                 
                 configMenu.AddBoolOption(
                     mod: ModManifest,
