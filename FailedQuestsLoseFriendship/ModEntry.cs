@@ -235,7 +235,7 @@ namespace FailedQuestsLoseFriendship
                 
                 // filter out invalid special orders
                 // for mods like RSV, some of the patches to load to Strings/SpecialOrderStrings only happen when a save
-                // is loaded. Until then, their namese/descs are just "Strings/SpecialOrderStrings/.....".
+                // is loaded. Until then, their names/descs are just "Strings/SpecialOrderStrings/.....".
                 if (order == null ||
                     (orderData.Value.RequiredTags != null && orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) ||
                     order.GetName().StartsWith("Strings") || order.GetDescription().StartsWith("Strings")) continue;

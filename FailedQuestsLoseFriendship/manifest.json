@@ -1,7 +1,7 @@
 {
   "Name": "Failed Quests Lose Friendship",
   "Author": "BarleyZP",
-  "Version": "1.1.1",
+  "Version": "1.1.2",
   "Description": "Failing to complete help wanted quests or special orders results in a loss of friendship.",
   "UniqueID": "BarleyZP.FailedQuestsLoseFriendship",
   "EntryDll": "FailedQuestsLoseFriendship.dll",
