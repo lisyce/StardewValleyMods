@@ -138,10 +138,20 @@ namespace BZP_Allergies
             if (ContentPatcherApi is null)
             {
                 Monitor.Log("CP API not found.", LogLevel.Error);
-                return;
+            } else
+            {
+                ContentPatcherApi.RegisterToken(ModManifest, "ReadAllergyCookbook", ReadAllergyCookbookToken);
             }
 
-            ContentPatcherApi.RegisterToken(ModManifest, "ReadAllergyCookbook", ReadAllergyCookbookToken);
+            // BetterGameMenu API
+            var BetterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
+            BetterGameMenuApi?.RegisterImplementation(
+                    nameof(VanillaTabOrders.Skills),
+                    priority: 90,
+                    getPageInstance: gm => new PatchedSkillsPage(gm.xPositionOnScreen, gm.yPositionOnScreen, gm.width, gm.height),
+                    getWidth: width => width + (LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru ? 64 : 0),
+                    onResize: input => new PatchedSkillsPage(input.Menu.xPositionOnScreen, input.Menu.yPositionOnScreen, input.Menu.width, input.Menu.height)
+                );
         }
 
         /// <inheritdoc cref="IGameLoopEvents.SaveLoaded"/>
