@@ -1,0 +1,91 @@
+{
+  "Format": "2.5.0",
+  "ConfigSchema": {
+    "Recolor": {
+      "AllowValues": "Vanilla, DaisyNiko's Earthy, Starblue, Vibrant Pastoral",
+      "Default": "Vanilla"
+    }
+  },
+  "Changes": [
+      {
+        "Action": "EditImage",
+        "Target": "Maps/springobjects",
+        "When": {
+          "Season": "spring"
+        },
+        "FromFile": "assets/fiber_{{Recolor}}.png",
+        "FromArea": {
+          "X": 0,
+          "Y": 0,
+          "Width": 16,
+          "Height": 16
+        },
+        "ToArea": {
+          "X": 48,
+          "Y": 512,
+          "Width": 16,
+          "Height": 16
+        }
+      },
+      {
+        "Action": "EditImage",
+        "Target": "Maps/springobjects",
+        "When": {
+          "Season": "summer"
+        },
+        "FromFile": "assets/fiber_{{Recolor}}.png",
+        "FromArea": {
+          "X": 16,
+          "Y": 0,
+          "Width": 16,
+          "Height": 16
+        },
+        "ToArea": {
+          "X": 48,
+          "Y": 512,
+          "Width": 16,
+          "Height": 16
+        }
+      },
+      {
+        "Action": "EditImage",
+        "Target": "Maps/springobjects",
+        "When": {
+          "Season": "fall"
+        },
+        "FromFile": "assets/fiber_{{Recolor}}.png",
+        "FromArea": {
+          "X": 32,
+          "Y": 0,
+          "Width": 16,
+          "Height": 16
+        },
+        "ToArea": {
+          "X": 48,
+          "Y": 512,
+          "Width": 16,
+          "Height": 16
+        }
+      },
+      {
+        "Action": "EditImage",
+        "Target": "Maps/springobjects",
+        "When": {
+          "Season": "winter"
+        },
+        "FromFile": "assets/fiber_{{Recolor}}.png",
+        "FromArea": {
+          "X": 48,
+          "Y": 0,
+          "Width": 16,
+          "Height": 16
+        },
+        "ToArea": {
+          "X": 48,
+          "Y": 512,
+          "Width": 16,
+          "Height": 16
+        }
+      }
+  ]
+}

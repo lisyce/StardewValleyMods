@@ -1,0 +1,18 @@
+{
+  "Name": "[CP] Seasonal Fiber Sprites",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Makes the fiber sprite match the colors of the weeds you harvest it from! (Recolor-compatible)",
+  "UniqueID": "BarleyZP.SeasonalFiberSprites",
+  "MinimumApiVersion": "4.0.0",
+  "UpdateKeys": [ "Nexus:32271" ],
+  "ContentPackFor": {
+    "UniqueID": "Pathoschild.ContentPatcher"
+  },
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  ]
+}
