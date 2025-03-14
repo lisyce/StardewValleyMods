@@ -5,7 +5,7 @@ using StardewValley.Menus;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BZP_Allergies.HarmonyPatches.UI
+namespace BzpAllergies.HarmonyPatches.UI
 {
     internal class AllergyOptionsMenu : OptionsPage
     {

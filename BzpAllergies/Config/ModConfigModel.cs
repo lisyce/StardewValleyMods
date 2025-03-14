@@ -1,6 +1,6 @@
 ﻿using StardewModdingAPI;
 
-namespace BZP_Allergies.Config
+namespace BzpAllergies.Config
 {
     internal sealed class ModConfigModel
     {

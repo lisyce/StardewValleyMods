@@ -1,4 +1,4 @@
-﻿using BZP_Allergies.HarmonyPatches.UI;
+﻿using BzpAllergies.HarmonyPatches.UI;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
@@ -7,7 +7,7 @@ using StardewValley.ItemTypeDefinitions;
 using StardewValley.Menus;
 using System.Text;
 
-namespace BZP_Allergies.HarmonyPatches
+namespace BzpAllergies.HarmonyPatches
 {
     internal class Inventory_Patches
     {

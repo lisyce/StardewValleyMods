@@ -7,7 +7,7 @@ using StardewValley.GameData.Buffs;
 using StardewValley.GameData.Objects;
 using System.Text.RegularExpressions;
 
-namespace BZP_Allergies
+namespace BzpAllergies
 {
     internal class Constants
     {

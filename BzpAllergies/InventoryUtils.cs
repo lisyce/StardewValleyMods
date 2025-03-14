@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BZP_Allergies
+namespace BzpAllergies
 {
     public class InventoryUtils
     {

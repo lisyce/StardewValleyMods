@@ -5,9 +5,9 @@ using StardewValley.Buffs;
 using StardewValley.GameData.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 
-using static BZP_Allergies.AllergenManager;
+using static BzpAllergies.AllergenManager;
 
-namespace BZP_Allergies.HarmonyPatches
+namespace BzpAllergies.HarmonyPatches
 {
     internal class FarmerEating_Patches
     {

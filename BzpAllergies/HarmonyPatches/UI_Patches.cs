@@ -1,10 +1,10 @@
-﻿using BZP_Allergies.HarmonyPatches.UI;
+﻿using BzpAllergies.HarmonyPatches.UI;
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
 
-namespace BZP_Allergies.HarmonyPatches
+namespace BzpAllergies.HarmonyPatches
 {
     internal class UI_Patches
     {

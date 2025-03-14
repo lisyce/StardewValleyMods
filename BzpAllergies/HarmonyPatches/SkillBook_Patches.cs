@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using StardewModdingAPI;
 
-namespace BZP_Allergies.HarmonyPatches
+namespace BzpAllergies.HarmonyPatches
 {
     internal class SkillBook_Patches
     {

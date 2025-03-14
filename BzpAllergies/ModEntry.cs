@@ -1,22 +1,18 @@
-﻿using BZP_Allergies.Apis;
-using BZP_Allergies.Config;
-using BZP_Allergies.HarmonyPatches;
-using HarmonyLib;
+﻿using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceCore.Events;
-using SpaceCore.Interface;
-using SpaceCore;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley.Menus;
 using StardewValley;
 
-using static BZP_Allergies.AllergenManager;
-using BZP_Allergies.HarmonyPatches.UI;
-using System.Transactions;
+using static BzpAllergies.AllergenManager;
+using BzpAllergies.Apis;
+using BzpAllergies.Config;
+using BzpAllergies.HarmonyPatches;
+using BzpAllergies.HarmonyPatches.UI;
 
-namespace BZP_Allergies
+namespace BzpAllergies
 {
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
@@ -112,40 +108,37 @@ namespace BZP_Allergies
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e) {
             // get Generic Mod Config Menu's API (if it's installed)
             var GmcmApi = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-            if (GmcmApi is null)
+            if (GmcmApi is not null)
             {
-                Monitor.Log("GMCM API not found.", LogLevel.Error);
-                return;
+                // config
+                GmcmApi.Register(
+                    mod: ModManifest,
+                    reset: () => {
+                        Config = new ModConfigModel();
+                    },
+                    save: () =>
+                    {
+                        Helper.WriteConfig(Config);
+                        Config = Helper.ReadConfig<ModConfigModel>();
+                    }
+                );
+            
+                ConfigMenuInit.SetupMenuUI(GmcmApi, ModManifest);
             }
 
-            // config
-            GmcmApi.Register(
-                mod: ModManifest,
-                reset: () => {
-                    Config = new ModConfigModel();
-                },
-                save: () =>
-                {
-                    Helper.WriteConfig(Config);
-                    Config = Helper.ReadConfig<ModConfigModel>();
-                }
-            );
-            
-            ConfigMenuInit.SetupMenuUI(GmcmApi, ModManifest);
-
             // CP API
-            var ContentPatcherApi = Helper.ModRegistry.GetApi<IContentPatcherAPI>("Pathoschild.ContentPatcher");
-            if (ContentPatcherApi is null)
+            var contentPatcherApi = Helper.ModRegistry.GetApi<IContentPatcherAPI>("Pathoschild.ContentPatcher");
+            if (contentPatcherApi is null)
             {
-                Monitor.Log("CP API not found.", LogLevel.Error);
+                Monitor.Log("CP API not found. Some features may not work correctly.", LogLevel.Error);
             } else
             {
-                ContentPatcherApi.RegisterToken(ModManifest, "ReadAllergyCookbook", ReadAllergyCookbookToken);
+                contentPatcherApi.RegisterToken(ModManifest, "ReadAllergyCookbook", ReadAllergyCookbookToken);
             }
 
             // BetterGameMenu API
-            var BetterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
-            BetterGameMenuApi?.RegisterImplementation(
+            var betterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
+            betterGameMenuApi?.RegisterImplementation(
                     nameof(VanillaTabOrders.Skills),
                     priority: 90,
                     getPageInstance: gm => new PatchedSkillsPage(gm.xPositionOnScreen, gm.yPositionOnScreen, gm.width, gm.height),

@@ -1,7 +1,6 @@
 ﻿using StardewModdingAPI;
-using ContentPatcher;
 
-namespace BZP_Allergies.Apis
+namespace BzpAllergies.Apis
 {
     /// <summary>The Content Patcher API which other mods can access.</summary>
     public interface IContentPatcherAPI

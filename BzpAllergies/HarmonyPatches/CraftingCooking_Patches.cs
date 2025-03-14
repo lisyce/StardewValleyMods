@@ -5,9 +5,9 @@ using StardewValley.Menus;
 using System.Reflection.Emit;
 using System.Reflection;
 using StardewModdingAPI;
-using static BZP_Allergies.InventoryUtils;
+using static BzpAllergies.InventoryUtils;
 
-namespace BZP_Allergies.HarmonyPatches
+namespace BzpAllergies.HarmonyPatches
 {
 
     internal class CraftingCooking_Patches

@@ -6,7 +6,7 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Menus;
 
-namespace BZP_Allergies.HarmonyPatches.UI
+namespace BzpAllergies.HarmonyPatches.UI
 {
     internal class PatchedSkillsPage : SkillsPage
     {

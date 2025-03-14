@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using StardewValley.Menus;
 using StardewModdingAPI;
 
-namespace BZP_Allergies.HarmonyPatches.UI
+namespace BzpAllergies.HarmonyPatches.UI
 {
     internal class CustomOptionsButtonPair : OptionsElement
     {

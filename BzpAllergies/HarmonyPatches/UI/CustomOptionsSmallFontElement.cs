@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 using StardewValley.Menus;
 
-namespace BZP_Allergies.HarmonyPatches.UI
+namespace BzpAllergies.HarmonyPatches.UI
 {
     internal class CustomOptionsSmallFontElement : OptionsElement
     {

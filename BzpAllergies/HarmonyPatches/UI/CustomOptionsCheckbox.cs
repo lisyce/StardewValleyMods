@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using StardewValley;
 using StardewValley.Menus;
 
-namespace BZP_Allergies.HarmonyPatches.UI
+namespace BzpAllergies.HarmonyPatches.UI
 {
     internal class CustomOptionsCheckbox : OptionsCheckbox
     {

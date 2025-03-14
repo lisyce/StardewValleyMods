@@ -10,7 +10,7 @@ using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Menus;
 
-namespace BZP_Allergies.Apis;
+namespace BzpAllergies.Apis;
 
 
 /// <summary>

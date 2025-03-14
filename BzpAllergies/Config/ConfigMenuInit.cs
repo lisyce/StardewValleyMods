@@ -1,7 +1,7 @@
-﻿using BZP_Allergies.Apis;
+﻿using BzpAllergies.Apis;
 using StardewModdingAPI;
 
-namespace BZP_Allergies.Config
+namespace BzpAllergies.Config
 {
     internal class ConfigMenuInit
     {

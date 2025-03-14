@@ -2,29 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>BZP_Allergies</RootNamespace>
+    <RootNamespace>BzpAllergies</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <EnableHarmony>true</EnableHarmony>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.1.1" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="ContentPatcher">
-      <HintPath>$(GameModsPath)\ContentPatcher\ContentPatcher.dll</HintPath>
-	  <Private>false</Private>
-    </Reference>
-    <Reference Include="SpaceCore">
-      <HintPath>$(GameModsPath)\SpaceCore\SpaceCore.dll</HintPath>
-	  <Private>false</Private>
-    </Reference>
+    <ContentPacks Include="[CP] BzpAllergies" Version="$(Version)" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if not exist &quot;$(GameModsPath)/[CP] BzpAllergies&quot; (mkdir &quot;$(GameModsPath)/[CP] BzpAllergies&quot;) else (echo [CP] BzpAllergies dir exists)&#xD;&#xA;xcopy &quot;$(ProjectDir)[CP] BzpAllergies&quot; &quot;$(GameModsPath)\[CP] BzpAllergies&quot; /E /Y&#xD;&#xA;if not exist &quot;$(GameModsPath)/[CP] Cornucopia Allergies&quot; (mkdir &quot;$(GameModsPath)\[CP] Cornucopia Allergies&quot;) else (echo [CP] Corncuopia Allergies dir exists)&#xD;&#xA;xcopy &quot;$(ProjectDir)ContentPacks\[CP] Cornucopia Allergies&quot; &quot;$(GameModsPath)\[CP] Cornucopia Allergies&quot; /E /Y" />
-  </Target>
 
 </Project>
