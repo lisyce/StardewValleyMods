@@ -14,11 +14,11 @@
 
   <ItemGroup>
     <Reference Include="ContentPatcher">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\ContentPatcher\ContentPatcher.dll</HintPath>
+      <HintPath>$(GameModsPath)\ContentPatcher\ContentPatcher.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
     <Reference Include="SpaceCore">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\Mods\SpaceCore\SpaceCore.dll</HintPath>
+      <HintPath>$(GameModsPath)\SpaceCore\SpaceCore.dll</HintPath>
 	  <Private>false</Private>
     </Reference>
   </ItemGroup>
