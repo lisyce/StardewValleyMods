@@ -32,13 +32,11 @@ namespace BzpAllergies.HarmonyPatches
         {
             try
             {
-                if (__state is null) return;
+                if (__state is null || __instance.heldObject.Value is null) return;
 
                 Dictionary<string, Item> afterConsume = InventoryUtils.GetInventoryItemLookup(StardewValley.Object.autoLoadFrom ?? who.Items);
                 List<Item> spentItems = InventoryUtils.InventoryUsedItems(__state, afterConsume);
-
-                if (__instance.heldObject.Value is null) return;
-
+                
                 __instance.heldObject.Value.modData[Constants.ModDataMadeWith] = "";
                 foreach (Item item in spentItems)
                 {
