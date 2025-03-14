@@ -15,8 +15,6 @@
 1. Launch Stardew Valley through SMAPI
 1. Configure some allergies and enjoy the challenge!
 
-Ensure that both the "\[CP\] BzpAllergies" and the "BzpAllergies" mods are directly inside your mod folder. This mod contains both a content pack and a C# component, so SMAPI needs to be able to find both of these components.
-
 # For Mod Authors
 
 ## Creating Custom Allergens and Integrating Modded Items
