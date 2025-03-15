@@ -140,8 +140,6 @@ namespace BzpAllergies
             }
 
             // BetterGameMenu API
-            // TODO remove the honk button
-
             Texture2D tabIconSheet = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
             var betterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
             betterGameMenuApi?.RegisterTab(
