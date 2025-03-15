@@ -33,11 +33,11 @@ namespace EnemyOfTheValley.Patches
         {
             if (character == null || !Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) || friendship.Points >= 0) return true;
 
-            if (Relationships.IsRelationship(friendship, Relationships.Archenemy)) {
+            if (Relationships.IsRelationship(character.Name, Relationships.Archenemy, Game1.player)) {
                 __result = 14;
                 return false;
             }
-            else if (Relationships.IsRelationship(friendship, Relationships.Enemy))
+            else if (Relationships.IsRelationship(character.Name, Relationships.Enemy, Game1.player))
             {
                 __result = 10;
                 return false;
@@ -53,7 +53,7 @@ namespace EnemyOfTheValley.Patches
         {
             if (entry is null || entry.Friendship is null || entry.Friendship.Points >= 0) return true;
 
-            bool isLockedHeart = !Relationships.IsRelationship(entry, Relationships.Enemy) && !Relationships.IsRelationship(entry, Relationships.Archenemy) && hearts >= 8;
+            bool isLockedHeart = !Relationships.IsRelationship(entry, Relationships.Enemy, Game1.player) && !Relationships.IsRelationship(entry, Relationships.Archenemy, Game1.player) && hearts >= 8;
             Color heartTint = ((hearts < 10 && isLockedHeart) ? (Color.Black * 0.35f) : Color.White);
 
             Texture2D spriteSheet = hearts < Math.Abs(entry.HeartLevel) || isLockedHeart ? ModEntry.MiscSprites : Game1.mouseCursors;
@@ -73,9 +73,9 @@ namespace EnemyOfTheValley.Patches
             SocialEntry entry = __instance.GetSocialEntry(i);
             if (entry == null) return;
 
-            string? text = Relationships.IsRelationship(entry, Relationships.Enemy) ? ModEntry.Translation.Get("Enemy") :
-                Relationships.IsRelationship(entry, Relationships.Archenemy) ? ModEntry.Translation.Get("Archenemy") :
-                Relationships.IsRelationship(entry, Relationships.ExArchenemy) ? ModEntry.Translation.Get("ExArchenemy") : null;
+            string? text = Relationships.IsRelationship(entry, Relationships.Enemy, Game1.player) ? ModEntry.Translation.Get("Enemy") :
+                Relationships.IsRelationship(entry, Relationships.Archenemy, Game1.player) ? ModEntry.Translation.Get("Archenemy") :
+                Relationships.IsRelationship(entry, Relationships.ExArchenemy, Game1.player) ? ModEntry.Translation.Get("ExArchenemy") : null;
             if (text is null && entry.IsDatable && !entry.IsRoommateForCurrentPlayer() && !entry.IsMarriedToAnyone() && !entry.IsDivorcedFromCurrentPlayer() && !(!Game1.player.isMarriedOrRoommates() && entry.IsDatingCurrentPlayer()))
             {
                 text = (entry.Gender == Gender.Male) ? Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Male") : Game1.content.LoadString("Strings\\StringsFromCSFiles:SocialPage_Relationship_Single_Female");
@@ -91,11 +91,11 @@ namespace EnemyOfTheValley.Patches
             b.DrawString(Game1.smallFont, text, new Vector2(__instance.xPositionOnScreen + 192 + 8 - textSize.X / 2f, __instance.sprites[i].bounds.Bottom - (textSize.Y - lineHeight)), Game1.textColor);
 
             // draw the little icons for the cake and amulet
-            if (Relationships.IsRelationship(entry, Relationships.Enemy))
+            if (Relationships.IsRelationship(entry, Relationships.Enemy, Game1.player))
             {
                 b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(0, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
             }
-            else if (Relationships.IsRelationship(entry, Relationships.Archenemy))
+            else if (Relationships.IsRelationship(entry, Relationships.Archenemy, Game1.player))
             {
                 b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
             }

@@ -188,11 +188,11 @@ namespace EnemyOfTheValley.Patches
 
                 friendship ??= (who.friendshipData[npc.Name] = new Friendship());
 
-                if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
+                if (Relationships.IsRelationship(npc.Name, Relationships.Archenemy, who))
                 {
                     Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectShatteredAmulet_AlreadyArchenemies", new { name = npc.displayName }));
                 }
-                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                else if (Relationships.IsRelationship(npc.Name, Relationships.ExArchenemy, who))
                 {
                     npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_ExArchenemies") ?? new Dialogue(npc, "RejectShatteredAmulet_ExArchenemies", ModEntry.Translation.Get("RejectShatteredAmulet_ExArchenemies")));
                     Game1.drawDialogue(npc);
@@ -247,16 +247,16 @@ namespace EnemyOfTheValley.Patches
 
                 friendship ??= (who.friendshipData[npc.Name] = new Friendship());
 
-                if (Relationships.IsRelationship(friendship, Relationships.Enemy))
+                if (Relationships.IsRelationship(npc.Name, Relationships.Enemy, who))
                 {
                     Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectEnemyCake_AlreadyEnemies", new { name = npc.displayName }));
                 }
-                else if (Relationships.IsRelationship(friendship, Relationships.Archenemy))
+                else if (Relationships.IsRelationship(npc.Name, Relationships.Archenemy, who))
                 {
                     npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_Archenemies") ?? new Dialogue(npc, "RejectEnemyCake_Archenemies", ModEntry.Translation.Get("RejectEnemyCake_Archenemies")));
                     Game1.drawDialogue(npc);
                 }
-                else if (Relationships.IsRelationship(friendship, Relationships.ExArchenemy))
+                else if (Relationships.IsRelationship(npc.Name, Relationships.ExArchenemy, who))
                 {
                     npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_ExArchenemies") ?? new Dialogue(npc, "RejectEnemyCake_ExArchenemies", ModEntry.Translation.Get("RejectEnemyCake_ExArchenemies")));
                     Game1.drawDialogue(npc);

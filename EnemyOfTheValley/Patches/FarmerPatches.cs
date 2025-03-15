@@ -54,11 +54,11 @@ namespace EnemyOfTheValley.Patches
                     __instance.friendshipData[name].Points = before;
                     if (__state[name].TalkedToToday) continue;
 
-                    if (Relationships.IsRelationship(__instance.friendshipData[name], Relationships.Archenemy))
+                    if (Relationships.IsRelationship(name, Relationships.Archenemy, __instance))
                     {
                         __instance.changeFriendship(20, npc);
                     }
-                    else if (Relationships.IsRelationship(__instance.friendshipData[name], Relationships.Enemy) && __instance.friendshipData[name].Points > -2500)
+                    else if (Relationships.IsRelationship(name, Relationships.Enemy, __instance) && __instance.friendshipData[name].Points > -2500)
                     {
                         __instance.changeFriendship(10, npc);
                     }

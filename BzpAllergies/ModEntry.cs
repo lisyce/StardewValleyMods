@@ -14,6 +14,7 @@ using BzpAllergies.Config;
 using BzpAllergies.HarmonyPatches;
 using BzpAllergies.HarmonyPatches.UI;
 using Microsoft.Xna.Framework;
+using StardewValley.GameData.Machines;
 
 namespace BzpAllergies
 {

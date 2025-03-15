@@ -4,6 +4,7 @@
   "Abigail.RejectEnemyCake_ExArchenemies": "I thought we'd made amends... why are you doing this again?$s",
   "Abigail.RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?$a",
   "Abigail.RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!$a",
+  "Abigail.apologized_Abigail": "Hey, @. I got your letter. I'm not sure I trust you yet, though.$u",
 
   "Abigail.Mon-2": "Uh... hi?$u",
   "Abigail.Tue-2": "Ugh... I don't feel like talking right now.$u#$e#Weren't you listening? I don't want to talk right now, especially not with you.$a",

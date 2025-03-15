@@ -5,6 +5,7 @@ using StardewValley.Menus;
 using System.Reflection.Emit;
 using System.Reflection;
 using StardewModdingAPI;
+using StardewValley.GameData.Machines;
 using static BzpAllergies.InventoryUtils;
 
 namespace BzpAllergies.HarmonyPatches

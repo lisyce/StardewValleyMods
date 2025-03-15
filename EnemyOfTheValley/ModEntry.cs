@@ -32,6 +32,7 @@ namespace EnemyOfTheValley
             NPCDialoguePatches.Patch(harmony);
             ProfileMenuPatches.Patch(harmony);
             BeachPatches.Patch(harmony);
+            GameLocationPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
@@ -61,29 +62,44 @@ namespace EnemyOfTheValley
 
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
-            // set the friendship status of each npc to what was stored in moddata
-            foreach (string name in Game1.player.friendshipData.Keys)
-            {
-                NPC npc = Game1.getCharacterFromName(name);
-                if (npc == null || !npc.modData.TryGetValue("BarleyZP.EnemyOfTheValley.FriendshipStatus", out string status)) continue;
-
-                Relationships.SetRelationship(name, (FriendshipStatus)int.Parse(status));
-            }
-
             // do the beach shards
             Beach beach = (Beach)Game1.getLocationFromName("Beach");
             if (Game1.wasRainingYesterday && Relationships.HasAnEnemyWithHeartLevel(Game1.player, -10) && !beach.IsRainingHere())
             {
-                NPC oldMariner = Traverse.Create(beach).Field<NPC>("oldMariner").Value;
+                var oldMariner = Traverse.Create(beach).Field<NPC>("oldMariner").Value;
                 if (oldMariner != null) return;  // somehow the mariner is here even though it isn't raining; we can't place the shards
 
                 Vector2 marinerPos = new(80, 5);
                 beach.overlayObjects.Remove(marinerPos);
-                SObject shards = ItemRegistry.Create<SObject>("BarleyZP.EnemyOfTheValley.ShatteredAmulet");
+                var shards = ItemRegistry.Create<SObject>("BarleyZP.EnemyOfTheValley.ShatteredAmulet");
                 shards.TileLocation = marinerPos;
                 shards.IsSpawnedObject = true;
                 beach.overlayObjects.Add(marinerPos, shards);
             }
+            
+            // do apology letters
+            List<string> toRemove = new();
+            foreach (string key in Game1.player.mailReceived)
+            {
+                if (key.StartsWith("apologyLetter_"))
+                {
+                    var npcName = key.Replace("apologyLetter_", "");
+                    Relationships.SetRelationship(npcName, FriendshipStatus.Friendly, true);
+                    if (Game1.player.friendshipData.TryGetValue(npcName, out var friendship))
+                    {
+                        friendship.Points = Math.Max(-1250, friendship.Points);
+                    }
+                    var npc = Game1.getCharacterFromName(npcName);
+                    var traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
+                    traverse.GetValue<Multiplayer>().globalChatInfoMessage("Apologized", Game1.player.Name, npc?.GetTokenizedDisplayName() ?? "Unknown NPC");
+
+                    Game1.player.activeDialogueEvents.TryAdd("apologized_" + npcName, 4);
+                    toRemove.Add(key);
+                }
+            }
+            
+            // make these repeatable
+            Game1.player.mailReceived.ExceptWith(toRemove);
         }
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
@@ -110,16 +126,6 @@ namespace EnemyOfTheValley
                 {
                     Game1.player.mailReceived.Remove("doorUnlock" + name);
                 }
-            }
-
-            // set the friendship status of each NPC to something safe
-            foreach (string name in Game1.player.friendshipData.Keys)
-            {
-                NPC npc = Game1.getCharacterFromName(name);
-                if (npc == null) continue;
-                npc.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = ((int) Game1.player.friendshipData[name].Status).ToString();
-
-                Relationships.SetRelationship(name, FriendshipStatus.Friendly);
             }
 
             // remove beach shards

@@ -1,9 +1,7 @@
 ﻿using HarmonyLib;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
 using StardewValley;
 using StardewValley.Locations;
-using System;
 using System.Reflection;
 using System.Reflection.Emit;
 using SObject = StardewValley.Object;
@@ -20,7 +18,7 @@ namespace EnemyOfTheValley.Patches
                 );
         }
 
-        public static bool checkShardsAction(Beach beach, xTile.Dimensions.Location tileLocation, Farmer who)
+        public static bool CheckShardsAction(Beach beach, xTile.Dimensions.Location tileLocation, Farmer who)
         {
             Vector2 tilePos = new(tileLocation.X, tileLocation.Y);
             if (beach.objects.TryGetValue(tilePos, out SObject obj) && obj.IsSpawnedObject && who.couldInventoryAcceptThisItem(obj))
@@ -39,7 +37,7 @@ namespace EnemyOfTheValley.Patches
               
                 who.FarmerSprite.animateOnce(new FarmerSprite.AnimationFrame[1]
                 {
-                    new FarmerSprite.AnimationFrame(57, 2500, secondaryArm: false, flip: false, delegate(Farmer who)
+                    new (57, 2500, secondaryArm: false, flip: false, delegate(Farmer who)
                     {
                         Farmer.showHoldingItem(who, obj);
                     })
@@ -62,7 +60,7 @@ namespace EnemyOfTheValley.Patches
             CodeMatcher matcher = new(instructions, generator);
 
             MethodInfo baseCheckAction = AccessTools.Method(typeof(GameLocation), nameof(GameLocation.checkAction));
-            MethodInfo ours = AccessTools.Method(typeof(BeachPatches), nameof(checkShardsAction));
+            MethodInfo ours = AccessTools.Method(typeof(BeachPatches), nameof(CheckShardsAction));
 
             matcher.MatchStartForward(
                 new CodeMatch(OpCodes.Ldarg_0),
