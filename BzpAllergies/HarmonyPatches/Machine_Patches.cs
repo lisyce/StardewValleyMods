@@ -15,6 +15,17 @@ namespace BzpAllergies.HarmonyPatches
             );
         }
 
+        // TODO replace with a transpiler
+        public static IEnumerable<CodeInstruction> PlaceInMachine_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            CodeMatcher matcher = new(instructions);
+            
+            // plan: get the input item and any additional used items and use that to apply allergens to output item
+            // make sure it works with EMC...
+            
+            return matcher.InstructionEnumeration();
+        }
+        
         public static void PlaceInMachine_Prefix(Farmer who, bool probe, out Dictionary<string, Item>? __state)
         {
             try

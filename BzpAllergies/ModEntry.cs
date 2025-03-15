@@ -140,22 +140,22 @@ namespace BzpAllergies
             }
 
             // BetterGameMenu API
-            // TODO this config only works if we can unregister the tab when the config changes
-            if (Config.EnableTab)
-            {
-                Texture2D tabIconSheet = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
-                var betterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
-                betterGameMenuApi?.RegisterTab(
-                    MOD_ID,
-                    21,
-                    () => Translation.Get("allergy-menu.title"),
-                    () => (betterGameMenuApi.CreateDraw(tabIconSheet, new Rectangle(64, 0, 16, 16), scale: 4), false),
-                    90,
-                    gm => new AllergyOptionsMenu(gm.xPositionOnScreen, gm.yPositionOnScreen, gm.width, gm.height),
-                    getWidth: width => width + (LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru ? 64 : 0),
-                    onResize: input => new AllergyOptionsMenu(input.Menu.xPositionOnScreen, input.Menu.yPositionOnScreen, input.Menu.width, input.Menu.height)
-                );
-            }
+            // TODO remove the honk button
+
+            Texture2D tabIconSheet = Game1.content.Load<Texture2D>("BarleyZP.BzpAllergies/Sprites");
+            var betterGameMenuApi = Helper.ModRegistry.GetApi<IBetterGameMenuApi>("leclair.bettergamemenu");
+            betterGameMenuApi?.RegisterTab(
+                MOD_ID,
+                21,
+                () => Translation.Get("allergy-menu.title"),
+                () => (betterGameMenuApi.CreateDraw(tabIconSheet, new Rectangle(64, 0, 16, 16), scale: 4), false),
+                90,
+                gm => new AllergyOptionsMenu(gm.xPositionOnScreen, gm.yPositionOnScreen, gm.width, gm.height),
+                getTabVisible: () => Config.EnableTab,
+                getWidth: width => width + (LocalizedContentManager.CurrentLanguageCode == LocalizedContentManager.LanguageCode.ru ? 64 : 0),
+                onResize: input => new AllergyOptionsMenu(input.Menu.xPositionOnScreen, input.Menu.yPositionOnScreen, input.Menu.width, input.Menu.height)
+            );
+            
         }
         
         
