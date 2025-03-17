@@ -14,7 +14,7 @@ namespace EnemyOfTheValley.Util
             if (printValidation)
             {
                 if (!Game1.player.friendshipData.ContainsKey(name))
-                {
+                {   
                     Console.WriteLine("No NPC with the name " +  name + " found. Remember this is case-sensitive!");
                     return;
                 }
@@ -64,6 +64,19 @@ namespace EnemyOfTheValley.Util
             return false;
         }
         
+        public static bool HasAnExArchenemy(Farmer who)
+        {
+            foreach (var name in who.friendshipData.Keys)
+            {
+                if (IsRelationship(name, ExArchenemy, who))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
         /// <param name="who">The farmer to check relationships on</param>
         /// <returns>Tuples of (display name, internal name) for each NPC the player is enemies with.</returns>
         public static List<(string, string)> Enemies(Farmer who)
@@ -82,6 +95,27 @@ namespace EnemyOfTheValley.Util
             }
             
             return result;
+        }
+        
+        public static void WipeExArchenemyMemories()
+        {
+            Farmer who = Game1.player;
+            
+            foreach (string npcName in who.friendshipData.Keys)
+            {
+                var friendship = who.friendshipData[npcName];
+                if (IsRelationship(npcName, ExArchenemy, who))
+                {
+                    friendship.Clear();
+                    var i = Game1.getCharacterFromName(npcName);
+                    if (i == null) continue;
+                    
+                    i.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = "";
+                    i.CurrentDialogue.Clear();
+                    i.CurrentDialogue.Push(i.TryGetDialogue("WipedMemory") ?? new Dialogue(i, "Strings\\Characters:WipedMemory"));
+                    Game1.stats.Increment("exArchenemyMemoriesWiped");
+                }
+            }
         }
     }
 }

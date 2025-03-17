@@ -84,6 +84,13 @@
           "Title": "{{i18n: ApologyLetterNoteTitle}}"
         }
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Strings/Locations",
+      "Entries": {
+        "WitchHut_EvilShrineCenter": "{{i18n: WitchHut_EvilShrineCenter}}"
+      }
     }
   ]
 }
