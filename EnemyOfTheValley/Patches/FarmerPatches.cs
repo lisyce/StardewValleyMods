@@ -89,15 +89,18 @@ namespace EnemyOfTheValley.Patches
             
             if (!__instance.friendshipData.TryGetValue(n.Name, out var friendship)) return true; // run original
             
-            ModEntry.Monitor.Log(friendship.Points.ToString(), LogLevel.Debug);
-            
             var maxNegativePoints = -1 * ((Utility.GetMaximumHeartsForCharacter(n) + 1) * 250 - 1);
             friendship.Points = Math.Min(0, Math.Max(friendship.Points + amount, maxNegativePoints));
-            ModEntry.Monitor.Log(friendship.Points.ToString(), LogLevel.Debug);
             
             if (friendship.Points <= -2000 && !__instance.hasOrWillReceiveMail("BarleyZP.EnemyOfTheValley.EnemyCake"))
             {
                 Game1.addMailForTomorrow("BarleyZP.EnemyOfTheValley.EnemyCake");
+            }
+
+            if (friendship.Points <= -3125 && Relationships.IsRelationship(n.Name, Relationships.Archenemy, __instance) && !__instance.hasOrWillReceiveMail("CF_Spouse"))
+            {
+                // stardrop mail
+                Game1.addMailForTomorrow("BarleyZP.EnemyOfTheValley.StardropMail");
             }
 
             return false;

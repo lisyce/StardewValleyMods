@@ -8,6 +8,6 @@
   "ShatteredAmuletName": "Shattered Amulet",
   "ShatteredAmuletDescription": "Shards of an amulet washed up by the sea. Give this to your enemies to take things to the next level.",
 
-  "CakeMail": "I see you're starting to ruffle some feathers in Pelican Town. It's a long-held tradition in the valley to bake a rather unpleasant flavor of cake that makes your distaste for someone official.^^Here, I'll give you the recipe, kid. It's up to you if you want to take things that far.^^Your friend, Mr. Qi%item cookingRecipe BarleyZP.EnemyOfTheValley.AvoidMeCake%%[#]Regarding Enemies"
-
+  "CakeMail": "I see you're starting to ruffle some feathers in Pelican Town. It's a long-held tradition in the valley to bake a rather unpleasant flavor of cake that makes your distaste for someone official.^^Here, I'll give you the recipe, kid. It's up to you if you want to take things that far.^^Your friend, Mr. Qi%item cookingRecipe BarleyZP.EnemyOfTheValley.AvoidMeCake%%[#]Regarding Enemies",
+  "StardropMail": "You seem to have a new archenemy. I've never seen anybody go so far as to give someone a shattered Mermaid's Pendant. At the least, your creativity is intriguing to me.^^Have a taste of this. I'm interested to see what other choices you make.^^Your friend, Mr. Qi.%item object 434 1%% %action AddMail Current CF_Spouse received%%[#]An Archenemy Acknowledgement"
 }

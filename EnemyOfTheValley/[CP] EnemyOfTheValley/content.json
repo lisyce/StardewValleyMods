@@ -67,7 +67,8 @@
       "Action": "EditData",
       "Target": "Data/Mail",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley.EnemyCake": "{{i18n: CakeMail}}"
+        "BarleyZP.EnemyOfTheValley.EnemyCake": "{{i18n: CakeMail}}",
+        "BarleyZP.EnemyOfTheValley.StardropMail": "{{i18n: StardropMail}}"
       }
     }
   ]
