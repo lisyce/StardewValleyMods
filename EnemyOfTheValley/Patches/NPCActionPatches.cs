@@ -21,7 +21,6 @@ namespace EnemyOfTheValley.Patches
         {
             CodeMatcher matcher = new(instructions, generator);
             // part 1: more dialogue options for bouquet and pendant
-            // todo: need the jump instruction to THIS branch from the previous one too, not just to the next one
             MethodInfo get_Points = AccessTools.PropertyGetter(typeof(Friendship), nameof(Friendship.Points));
             MethodInfo isMarriedOrRoommates = AccessTools.Method(typeof(Farmer), nameof(Farmer.isMarriedOrRoommates));
             MethodInfo isEngaged = AccessTools.Method(typeof(Farmer), nameof(Farmer.isEngaged));
