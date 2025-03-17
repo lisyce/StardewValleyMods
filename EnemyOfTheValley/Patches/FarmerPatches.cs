@@ -6,6 +6,8 @@ using StardewValley;
 using StardewValley.Network;
 using System.Reflection;
 using System.Reflection.Emit;
+using StardewModdingAPI;
+using StardewValley.Characters;
 
 namespace EnemyOfTheValley.Patches
 {
@@ -15,7 +17,7 @@ namespace EnemyOfTheValley.Patches
         {
             harmony.Patch(
                 original: AccessTools.Method(typeof(Farmer), "changeFriendship"),
-                transpiler: new HarmonyMethod(typeof(FarmerPatches), nameof(changeFriendship_Transpiler))
+                prefix: new HarmonyMethod(typeof(FarmerPatches), nameof(changeFriendship_Prefix))
                 );
             harmony.Patch(
                 original: AccessTools.Method(typeof(Farmer), nameof(Farmer.resetFriendshipsForNewDay)),
@@ -73,36 +75,33 @@ namespace EnemyOfTheValley.Patches
             }
         }
 
-        public static IEnumerable<CodeInstruction> changeFriendship_Transpiler(IEnumerable<CodeInstruction> instructions)
+        public static bool changeFriendship_Prefix(ref Farmer __instance, int amount, NPC? n)
         {
-            CodeMatcher matcher = new(instructions);
+            if (amount >= 0 || n == null || (n is not Child && !n.IsVillager))
+            {
+                return true;  // run original
+            }
 
-            MethodInfo getPoints = AccessTools.PropertyGetter(typeof(Friendship), nameof(Friendship.Points));
-            MethodInfo min = AccessTools.Method(typeof(Math), nameof(Math.Min), new Type[] { typeof(int), typeof(int) });
-            MethodInfo max = AccessTools.Method(typeof(Math), nameof(Math.Max), new Type[] { typeof(int), typeof(int) });
+            if (n.SpeaksDwarvish() && !__instance.canUnderstandDwarves)
+            {
+                return false;  // do nothing, skip original
+            }
+            
+            if (!__instance.friendshipData.TryGetValue(n.Name, out var friendship)) return true; // run original
+            
+            ModEntry.Monitor.Log(friendship.Points.ToString(), LogLevel.Debug);
+            
+            var maxNegativePoints = -1 * ((Utility.GetMaximumHeartsForCharacter(n) + 1) * 250 - 1);
+            friendship.Points = Math.Min(0, Math.Max(friendship.Points + amount, maxNegativePoints));
+            ModEntry.Monitor.Log(friendship.Points.ToString(), LogLevel.Debug);
+            
+            if (friendship.Points <= -2000 && !__instance.hasOrWillReceiveMail("BarleyZP.EnemyOfTheValley.EnemyCake"))
+            {
+                Game1.addMailForTomorrow("BarleyZP.EnemyOfTheValley.EnemyCake");
+            }
 
-            matcher.MatchStartForward(
-                new CodeMatch(OpCodes.Call, min),
-                new CodeMatch(OpCodes.Call, max))
-                .ThrowIfNotMatch("failed to find min and max calls")
-                .Advance(-13)
-                .Set(OpCodes.Ldc_I4, -2500);
+            return false;
 
-            matcher.MatchStartForward(
-                new CodeMatch(OpCodes.Ldloc_0),
-                new CodeMatch(OpCodes.Callvirt, getPoints),
-                new CodeMatch(OpCodes.Ldc_I4_0),
-                new CodeMatch(OpCodes.Bge_S))
-                .ThrowIfNotMatch("failed to find where it's checked that friendship is < 0")
-                .Advance(2)
-                .Set(OpCodes.Ldc_I4, -2500)
-                .MatchStartForward(
-                new CodeMatch(OpCodes.Ldloc_0),
-                new CodeMatch(OpCodes.Ldc_I4_0))
-                .Advance(1)
-                .Set(OpCodes.Ldc_I4, -2500);
-
-            return matcher.InstructionEnumeration();
         }
     }
 }

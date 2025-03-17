@@ -41,9 +41,10 @@ namespace EnemyOfTheValley
             LoadMiscSprites();
             LoadStandardSprites();
 
-            helper.ConsoleCommands.Add("enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
-            helper.ConsoleCommands.Add("archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
-            helper.ConsoleCommands.Add("exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
+            helper.ConsoleCommands.Add("EOTV_enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
+            helper.ConsoleCommands.Add("EOTV_archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
+            helper.ConsoleCommands.Add("EOTV_exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
+            helper.ConsoleCommands.Add("EOTV_change_friendship", "Changes the friendship of the NPC (first arg) by the amount given in the second arg", ChangeFriendship);
 
             Event.RegisterPrecondition("NegativeFriendship", EOVPreconditions.NegativeFriendship);
         }
@@ -93,7 +94,7 @@ namespace EnemyOfTheValley
                     var traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
                     traverse.GetValue<Multiplayer>().globalChatInfoMessage("Apologized", Game1.player.Name, npc?.GetTokenizedDisplayName() ?? "Unknown NPC");
 
-                    Game1.player.activeDialogueEvents.TryAdd("apologized_" + npcName, 4);
+                    Game1.player.activeDialogueEvents.TryAdd("BarleyZP.EnemyOfTheValley.apologized_" + npcName, 4);
                     toRemove.Add(key);
                 }
             }
@@ -104,21 +105,6 @@ namespace EnemyOfTheValley
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
         {
-            // check if we need to send Qi mail
-            if (Game1.player.mailReceived.Contains("enemyCake")) return;
-
-            foreach (var item in Game1.player.friendshipData)
-            {
-                foreach (var friendship in item.Values)
-                {
-                    if (friendship.Points <= -2000)
-                    {
-                        Game1.player.mailForTomorrow.Add("enemyCake");
-                        break;
-                    }
-                }
-            }
-
             // get rid of door unlock for NPCs that fell below 0 hearts
             foreach (string name in Game1.player.friendshipData.Keys)
             {
@@ -158,6 +144,31 @@ namespace EnemyOfTheValley
         public static void SetExArchenemy(string command, string[] args)
         {
             Relationships.SetRelationship(args[0], Relationships.ExArchenemy, printValidation: true);
+        }
+
+        public static void ChangeFriendship(string command, string[] args)
+        {
+            if (!ArgUtility.TryGetInt(args, 1, out int amt, out string err))
+            {
+                Monitor.Log(err, LogLevel.Error);
+            }
+            else
+            {
+                var npc = Game1.getCharacterFromName<NPC>(args[0]);
+                if (!Game1.player.friendshipData.TryGetValue(args[0], out var friendship))
+                {
+                    Monitor.Log("NPC not found in player's friendship data.", LogLevel.Error);
+                }
+                else
+                {
+                    int before = friendship.Points;
+                    Game1.player.changeFriendship(amt, npc);
+                    int after = friendship.Points;
+                    
+                    Monitor.Log("Before: " + before + ". After: " + after, LogLevel.Info);
+                }
+            }
+            
         }
     }
 }

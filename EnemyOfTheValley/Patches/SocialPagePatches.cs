@@ -29,7 +29,7 @@ namespace EnemyOfTheValley.Patches
                 );
         }
 
-        public static bool GetMaximumHeartsForCharacter_Prefix(Character character, ref int __result)
+        public static bool GetMaximumHeartsForCharacter_Prefix(Character? character, ref int __result)
         {
             if (character == null || !Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) || friendship.Points >= 0) return true;
 
