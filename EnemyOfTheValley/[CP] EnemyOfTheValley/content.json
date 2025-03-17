@@ -70,6 +70,20 @@
         "BarleyZP.EnemyOfTheValley.EnemyCake": "{{i18n: CakeMail}}",
         "BarleyZP.EnemyOfTheValley.StardropMail": "{{i18n: StardropMail}}"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Mods/ichortower.SecretNoteFramework/Notes",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_amulet": {
+          "Contents": "{{i18n: ShatteredAmuletNote}}",
+          "Title": "{{i18n: ShatteredAmuletNoteTitle}}"
+        },
+        "BarleyZP.EnemyOfTheValley_apology": {
+          "Contents": "{{i18n: ApologyLetterNote}}",
+          "Title": "{{i18n: ApologyLetterNoteTitle}}"
+        }
+      }
     }
   ]
 }

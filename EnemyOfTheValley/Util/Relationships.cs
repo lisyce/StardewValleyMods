@@ -1,7 +1,7 @@
 ﻿using StardewValley;
 using static StardewValley.Menus.SocialPage;
 
-namespace EnemyOfTheValley.Common
+namespace EnemyOfTheValley.Util
 {
     internal class Relationships
     {

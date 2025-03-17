@@ -12,6 +12,10 @@
     {
       "UniqueID": "Pathoschild.ContentPatcher",
       "IsRequired": true
+    },
+    {
+      "UniqueID": "ichortower.SecretNoteFramework",
+      "IsRequired": false
     }
   ]
 }

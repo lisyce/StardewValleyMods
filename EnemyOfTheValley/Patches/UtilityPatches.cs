@@ -1,7 +1,6 @@
 using System.Reflection.Emit;
-using EnemyOfTheValley.Common;
+using EnemyOfTheValley.Util;
 using HarmonyLib;
-using StardewModdingAPI;
 using StardewValley;
 
 namespace EnemyOfTheValley.Patches;

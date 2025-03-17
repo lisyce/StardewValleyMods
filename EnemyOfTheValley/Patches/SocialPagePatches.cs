@@ -3,7 +3,7 @@ using StardewValley;
 using StardewValley.Menus;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using EnemyOfTheValley.Common;
+using EnemyOfTheValley.Util;
 using static StardewValley.Menus.SocialPage;
 using System.Reflection.Emit;
 

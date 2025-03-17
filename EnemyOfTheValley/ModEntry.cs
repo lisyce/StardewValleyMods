@@ -4,8 +4,9 @@ using EnemyOfTheValley.Patches;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
 using StardewValley;
-using EnemyOfTheValley.Common;
-using EOVPreconditions = EnemyOfTheValley.Common.Preconditions;
+using EnemyOfTheValley.Util;
+using EOTVPreconditions = EnemyOfTheValley.Util.Preconditions;
+using EOTVGameStateQueries = EnemyOfTheValley.Util.GameStateQueries;
 using StardewValley.Locations;
 using Microsoft.Xna.Framework;
 using SObject = StardewValley.Object;
@@ -48,7 +49,11 @@ namespace EnemyOfTheValley
             helper.ConsoleCommands.Add("EOTV_change_friendship", "Changes the friendship of the NPC (first arg) by the amount given in the second arg", ChangeFriendship);
             helper.ConsoleCommands.Add("EOTV_maxed_friends", "Outputs Utility::getMaxedFriendshipPercent", MaxedFriendshipPercent);
             
-            Event.RegisterPrecondition("NegativeFriendship", EOVPreconditions.NegativeFriendship);
+            Event.RegisterPrecondition("EOTV_NegativeFriendship", EOTVPreconditions.NegativeFriendship);
+            
+            GameStateQuery.Register("EOTV_PLAYER_NPC_ENEMY", EOTVGameStateQueries.PlayerNpcEnemy);
+            GameStateQuery.Register("EOTV_PLAYER_NPC_ARCHENEMY", EOTVGameStateQueries.PlayerNpcArchenemy);
+            GameStateQuery.Register("EOTV_PLAYER_NPC_EXARCHENEMY", EOTVGameStateQueries.PlayerNpcExArchenemy);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)

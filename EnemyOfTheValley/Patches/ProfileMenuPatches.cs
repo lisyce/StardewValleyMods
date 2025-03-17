@@ -1,4 +1,4 @@
-﻿using EnemyOfTheValley.Common;
+﻿using EnemyOfTheValley.Util;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

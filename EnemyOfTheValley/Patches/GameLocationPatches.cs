@@ -1,6 +1,6 @@
 using System.Reflection;
 using System.Reflection.Emit;
-using EnemyOfTheValley.Common;
+using EnemyOfTheValley.Util;
 using HarmonyLib;
 using StardewValley;
 
