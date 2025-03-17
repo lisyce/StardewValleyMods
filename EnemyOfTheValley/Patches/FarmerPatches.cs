@@ -77,7 +77,7 @@ namespace EnemyOfTheValley.Patches
 
         public static bool changeFriendship_Prefix(ref Farmer __instance, int amount, NPC? n)
         {
-            if (amount >= 0 || n == null || (n is not Child && !n.IsVillager))
+            if (n == null || (n is not Child && !n.IsVillager))
             {
                 return true;  // run original
             }
@@ -87,7 +87,7 @@ namespace EnemyOfTheValley.Patches
                 return false;  // do nothing, skip original
             }
             
-            if (!__instance.friendshipData.TryGetValue(n.Name, out var friendship)) return true; // run original
+            if (!__instance.friendshipData.TryGetValue(n.Name, out var friendship) || friendship.Points + amount >= 0) return true; // run original
             
             var maxNegativePoints = -1 * ((Utility.GetMaximumHeartsForCharacter(n) + 1) * 250 - 1);
             friendship.Points = Math.Min(0, Math.Max(friendship.Points + amount, maxNegativePoints));

@@ -33,6 +33,7 @@ namespace EnemyOfTheValley
             ProfileMenuPatches.Patch(harmony);
             BeachPatches.Patch(harmony);
             GameLocationPatches.Patch(harmony);
+            UtilityPatches.Patch(harmony);
 
             helper.Events.Content.AssetRequested += OnAssetRequested;
             helper.Events.GameLoop.DayStarted += OnDayStarted;
@@ -45,7 +46,8 @@ namespace EnemyOfTheValley
             helper.ConsoleCommands.Add("EOTV_archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
             helper.ConsoleCommands.Add("EOTV_exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
             helper.ConsoleCommands.Add("EOTV_change_friendship", "Changes the friendship of the NPC (first arg) by the amount given in the second arg", ChangeFriendship);
-
+            helper.ConsoleCommands.Add("EOTV_maxed_friends", "Outputs Utility::getMaxedFriendshipPercent", MaxedFriendshipPercent);
+            
             Event.RegisterPrecondition("NegativeFriendship", EOVPreconditions.NegativeFriendship);
         }
 
@@ -169,6 +171,11 @@ namespace EnemyOfTheValley
                 }
             }
             
+        }
+
+        public static void MaxedFriendshipPercent(string command, string[] args)
+        {
+            Monitor.Log(Utility.getMaxedFriendshipPercent().ToString(), LogLevel.Info);
         }
     }
 }

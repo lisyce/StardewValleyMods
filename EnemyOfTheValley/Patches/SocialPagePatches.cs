@@ -13,10 +13,7 @@ namespace EnemyOfTheValley.Patches
     {
         public static void Patch(Harmony harmony)
         {
-            harmony.Patch(
-                original: AccessTools.Method(typeof(Utility), nameof(Utility.GetMaximumHeartsForCharacter)),
-                prefix: new HarmonyMethod(typeof(SocialPagePatches), nameof(GetMaximumHeartsForCharacter_Prefix))
-                );
+            
             harmony.Patch(
                 original: AccessTools.Method(typeof(SocialPage), "drawNPCSlotHeart"),
                 prefix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlotHeart_Prefix))
@@ -27,26 +24,6 @@ namespace EnemyOfTheValley.Patches
                 transpiler: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Transpiler)),
                 postfix: new HarmonyMethod(typeof(SocialPagePatches), nameof(drawNPCSlot_Postfix))
                 );
-        }
-
-        public static bool GetMaximumHeartsForCharacter_Prefix(Character? character, ref int __result)
-        {
-            if (character == null || !Game1.player.friendshipData.TryGetValue(character.Name, out var friendship) || friendship.Points >= 0) return true;
-
-            if (Relationships.IsRelationship(character.Name, Relationships.Archenemy, Game1.player)) {
-                __result = 14;
-                return false;
-            }
-            else if (Relationships.IsRelationship(character.Name, Relationships.Enemy, Game1.player))
-            {
-                __result = 10;
-                return false;
-            }
-            else
-            {
-                __result = 8;
-                return false;
-            }
         }
 
         public static bool drawNPCSlotHeart_Prefix(ref SocialPage __instance, SpriteBatch b, int npcIndex, SocialPage.SocialEntry entry, int hearts)
