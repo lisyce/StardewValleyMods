@@ -24,7 +24,9 @@ namespace EnemyOfTheValley
             Monitor = base.Monitor;
             Translation = helper.Translation;
             Harmony.DEBUG = true;
-
+            
+            Monitor.Log("This mod patches the way dialogue keys are handled. If you are having issues with a dialogue key not showing, ensure that it happens without this mod installed before reporting it to the respective mod authors.", LogLevel.Debug);
+            
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
             SocialPagePatches.Patch(harmony);
