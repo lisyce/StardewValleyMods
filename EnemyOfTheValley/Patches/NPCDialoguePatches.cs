@@ -203,8 +203,6 @@ namespace EnemyOfTheValley.Patches
 
         public static Dialogue? NegativeDayDialogue(NPC npc, int heartLevel, string preface, string appendToEnd, string day_name, int year)
         {
-            ModEntry.Monitor.Log(npc.Name, LogLevel.Debug);
-            ModEntry.Monitor.Log(heartLevel.ToString(), LogLevel.Debug);
             for (int hearts = -10; hearts <= -2; hearts += 2)
             {
                 if (heartLevel <= hearts)

@@ -2,7 +2,7 @@
   "Changes": [
     {
       "Action": "EditData",
-      "Target": "Characters/Dialogue/Alex",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
       "Entries": {
         "Mon-2": "{{i18n:Alex.Mon-2}}",
         "Tue-2": "{{i18n:Alex.Tue-2}}",

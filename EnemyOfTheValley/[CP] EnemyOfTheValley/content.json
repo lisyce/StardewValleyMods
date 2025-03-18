@@ -1,6 +1,7 @@
 {
   "Format": "2.4.0",
   "Changes": [
+    // includes
     {
       "Action": "Include",
       "FromFile": "dialogue/abigail.json"
@@ -18,12 +19,19 @@
       "FromFile": "saloon.json"
     },
 
+    // load blanks for vanilla NPC negative dialogue files
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
       "FromFile": "blank.json"
     },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
+      "FromFile": "blank.json"
+    },
     
+    // misc patches
     {
       "Action": "EditData",
       "Target": "Strings/UI",
