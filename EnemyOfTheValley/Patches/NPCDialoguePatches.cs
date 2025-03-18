@@ -2,6 +2,8 @@
 using StardewValley;
 using System.Reflection.Emit;
 using System.Reflection;
+using Microsoft.Xna.Framework.Content;
+using StardewModdingAPI;
 
 
 namespace EnemyOfTheValley.Patches
@@ -22,6 +24,73 @@ namespace EnemyOfTheValley.Patches
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue)),
                 transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(tryToRetrieveDialogue_Transpiler))
                 );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(NPC), nameof(NPC.TryGetDialogue), new [] {typeof(string)}),
+                prefix: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(TryGetDialogue_Prefix_V1))
+                );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(NPC), nameof(NPC.TryGetDialogue), new [] {typeof(string), typeof(object[])}),
+                prefix: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(TryGetDialogue_Prefix_V2))
+                );
+        }
+
+        public static Dictionary<string, string> DialogueLoader(string npcName)
+        {
+            try
+            {
+                return Game1.content
+                    .Load<Dictionary<string, string>>("BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + npcName)
+                    .Select(delegate(KeyValuePair<string, string> pair)
+                    {
+                        string key = pair.Key;
+                        string value2 = Dialogue.applyGenderSwitch(str: pair.Value, gender: Game1.player.Gender,
+                            altTokenOnly: true);
+                        return new KeyValuePair<string, string>(key, value2);
+                    }).ToDictionary((p) => p.Key, (p) => p.Value);
+            }
+            catch (ContentLoadException)
+            {
+                return new Dictionary<string, string>();
+            }
+            
+        }
+
+        public static bool TryGetDialogue_Prefix_V1(ref NPC __instance, ref Dialogue __result, string key)
+        {
+            if (!Game1.player.friendshipData.TryGetValue(__instance.Name, out var friendship) ||
+                friendship.Points > -250)  // only go to negative dialogue asset if we have at least 1 negative heart
+            {
+                return true;  // run original
+            }
+            
+            // try to get negative dialogue first
+            var dialogue = DialogueLoader(__instance.Name);
+            if (dialogue.TryGetValue(key, out var text))
+            {
+                __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, text);
+                return false;  // skip original because we found something loaded on the negative sheet
+            }
+            
+            return true;  // continue to the original method
+        }
+        
+        public static bool TryGetDialogue_Prefix_V2(ref NPC __instance, ref Dialogue __result, string key, params object[] substitutions)
+        {
+            if (!Game1.player.friendshipData.TryGetValue(__instance.Name, out var friendship) ||
+                friendship.Points > -250)  // only go to negative dialogue asset if we have at least 1 negative heart
+            {
+                return true;  // run original
+            }
+            
+            // try to get negative dialogue first
+            var dialogue = DialogueLoader(__instance.Name);
+            if (dialogue.TryGetValue(key, out var text))
+            {
+                __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, string.Format(text, substitutions));
+                return false;  // skip original because we found something loaded on the negative sheet
+            }
+            
+            return true;  // continue to the original method
         }
 
         public static IEnumerable<CodeInstruction> grantConversationFriendship_Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -52,13 +121,13 @@ namespace EnemyOfTheValley.Patches
 
             // we want to insert after the for-loop
             matcher.MatchEndForward(
-               new CodeMatch(OpCodes.Ldloc_S),
-                new CodeMatch(OpCodes.Ldc_I4_2),
-                new CodeMatch(OpCodes.Sub),
-                new CodeMatch(OpCodes.Stloc_S),
-                new CodeMatch(OpCodes.Ldloc_S),
-                new CodeMatch(OpCodes.Ldc_I4_2),
-                new CodeMatch(OpCodes.Bge)
+                    new CodeMatch(OpCodes.Ldloc_S),
+                    new CodeMatch(OpCodes.Ldc_I4_2),
+                    new CodeMatch(OpCodes.Sub),
+                    new CodeMatch(OpCodes.Stloc_S),
+                    new CodeMatch(OpCodes.Ldloc_S),
+                    new CodeMatch(OpCodes.Ldc_I4_2),
+                    new CodeMatch(OpCodes.Bge)
                 )
                 .ThrowIfNotMatch("could not find end of for loop to insert after")
                 .Advance(1)
@@ -134,6 +203,8 @@ namespace EnemyOfTheValley.Patches
 
         public static Dialogue? NegativeDayDialogue(NPC npc, int heartLevel, string preface, string appendToEnd, string day_name, int year)
         {
+            ModEntry.Monitor.Log(npc.Name, LogLevel.Debug);
+            ModEntry.Monitor.Log(heartLevel.ToString(), LogLevel.Debug);
             for (int hearts = -10; hearts <= -2; hearts += 2)
             {
                 if (heartLevel <= hearts)

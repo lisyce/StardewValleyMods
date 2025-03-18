@@ -17,6 +17,13 @@
       "Action": "Include",
       "FromFile": "saloon.json"
     },
+
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
+      "FromFile": "blank.json"
+    },
+    
     {
       "Action": "EditData",
       "Target": "Strings/UI",

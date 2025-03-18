@@ -2,7 +2,7 @@
   "Changes": [
     {
       "Action": "EditData",
-      "Target": "Characters/Dialogue/Abigail",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
       "Entries": {
         "AcceptEnemyCake": "{{i18n:Abigail.AcceptEnemyCake}}",
         "AcceptShatteredAmulet": "{{i18n:Abigail.AcceptShatteredAmulet}}",
@@ -10,6 +10,7 @@
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Abigail.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Abigail.RejectBouquet_NegativeHearts}}",
         "BarleyZP.EnemyOfTheValley.apologized_Abigail": "{{i18n:Abigail.apologized_Abigail}}",
+        "HitBySlingshot": "GRRRRRRRRRRR",
 
         "Mon-2": "{{i18n:Abigail.Mon-2}}",
         "Tue-2": "{{i18n:Abigail.Tue-2}}",
@@ -33,15 +34,15 @@
         "summer_Wed-4": "{{i18n:Abigail.summer_Wed-4}}",
         "summer_Tue-8": "{{i18n:Abigail.summer_Tue-8}}",
 
-        "fall_Mon-2": "{{i18n:Abigail.fall_Mon-2}}",
-        "fall_Tue-2": "{{i18n:Abigail.fall_Tue-2}}",
-        "fall_Wed-2": "{{i18n:Abigail.fall_Wed-2}}",
-        "fall_Thu-2": "{{i18n:Abigail.fall_Thu-2}}",
-        "fall_Fri-2": "{{i18n:Abigail.fall_Fri-2}}",
-        "fall_Sat-2": "{{i18n:Abigail.fall_Sat-2}}",
-        "fall_Sun-2": "{{i18n:Abigail.fall_Sun-2}}",
-        "fall_Fri-6": "{{i18n:Abigail.fall_Fri-6}}",
-        "fall_Sun-8": "{{i18n:Abigail.fall_Sun-8}}",
+        "fall_Mon2": "{{i18n:Abigail.fall_Mon-2}}",
+        "fall_Tue2": "{{i18n:Abigail.fall_Tue-2}}",
+        "fall_Wed2": "{{i18n:Abigail.fall_Wed-2}}",
+        "fall_Thu2": "{{i18n:Abigail.fall_Thu-2}}",
+        "fall_Fri2": "{{i18n:Abigail.fall_Fri-2}}",
+        "fall_Sat2": "{{i18n:Abigail.fall_Sat-2}}",
+        "fall_Sun2": "{{i18n:Abigail.fall_Sun-2}}",
+        "fall_Fri6": "{{i18n:Abigail.fall_Fri-6}}",
+        "fall_Sun8": "{{i18n:Abigail.fall_Sun-8}}",
 
         "winter_Mon-2": "{{i18n:Abigail.winter_Mon-2}}",
         "winter_Tue-2": "{{i18n:Abigail.winter_Tue-2}}",
