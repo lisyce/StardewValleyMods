@@ -1,0 +1,11 @@
+{
+  "AcceptBirthdayGift_Loved": "Oh, um... are you trying to be friends again or something? Bribery won't work, you know.$2",
+  
+  "Haley.Mon-2": "I hate this small town. I can't get a moment of peace and quiet!$3",
+  "Haley.Tue-2": "Ew, did you step in something on your farm? It smells.$u",
+  "Haley.Wed-2": "The only thing I like about this town is the beach.$u#$b#${You'd better not be thinking about staring at me in my swimsuit!^Ew, no. I won't loan you a swimsuit.}#$u",
+  "Haley.Thu-2": "What, looking for fashion advice? Your shoes don't match your shirt, you know.$u#$e#Oh, did you need something?$0",
+  "Haley.Fri-2": "%Haley is ignoring you.#$e#Can't you tell I don't want to talk right now?$u",
+  "Haley.Sat-2": "I want to go shopping so bad!$s#$b#Did the city have good malls when you lived there?$0#$e#Actually, never mind. I don't care what your life was like before.$u",
+  "Haley.Sun-2": "Ugh...$u#$e#You know, Emily is weird, but I'm glad I'm related to her and not you.$u"
+}

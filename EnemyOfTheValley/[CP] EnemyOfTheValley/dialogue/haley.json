@@ -1,0 +1,26 @@
+{
+  "Changes": [
+//    {
+//      "Action": "EditData",
+//      "Target": "Characters/Dialogue/Haley",
+//      "Entries": {
+//        
+//      }
+//    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
+      "Entries": {
+        "AcceptBirthdayGift_Loved": "{{i18n:AcceptBirthdayGift_Loved}}",
+        
+        "Mon-2": "{{i18n:Haley.Mon-2}}",
+        "Tue-2": "{{i18n:Haley.Tue-2}}",
+        "Wed-2": "{{i18n:Haley.Wed-2}}",
+        "Thu-2": "{{i18n:Haley.Thu-2}}",
+        "Fri-2": "{{i18n:Haley.Fri-2}}",
+        "Sat-2": "{{i18n:Haley.Sat-2}}",
+        "Sun-2": "{{i18n:Haley.Sun-2}}"
+      }
+    }
+  ]
+}
