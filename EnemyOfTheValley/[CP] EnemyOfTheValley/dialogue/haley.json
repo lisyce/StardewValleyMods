@@ -11,7 +11,7 @@
       "Action": "EditData",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
       "Entries": {
-        "AcceptBirthdayGift_Loved": "{{i18n:AcceptBirthdayGift_Loved}}",
+        "AcceptBirthdayGift_Loved": "{{i18n:Haley.AcceptBirthdayGift_Loved}}",
         
         "Mon-2": "{{i18n:Haley.Mon-2}}",
         "Tue-2": "{{i18n:Haley.Tue-2}}",
