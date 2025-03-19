@@ -21,6 +21,13 @@
       "Entries": {
         "BarleyZP.EnemyOfTheValley_ShaneNegative2/EOTV_NegativeFriendship Shane -500/p Shane/p Gus": "{{i18n:Events.Shane-2}}"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Events/JoshHouse",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_AlexNegative2/EOTV_NegativeFriendship Alex -500/p Alex/p Evelyn": "{{i18n:Events.Alex-2}}"
+      }
     }
   ]
 }
