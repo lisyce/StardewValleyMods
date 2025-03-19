@@ -11,22 +11,35 @@ namespace FailedQuestsLoseFriendship
     {
         public static string UniqueID;
         public Config Config;
+        public bool SaveLoaded;
         public override void Entry(IModHelper helper)
         {
             UniqueID = ModManifest.UniqueID;
             Config = Helper.ReadConfig<Config>();
+            SaveLoaded = false;
 
             helper.Events.GameLoop.DayEnding += OnDayEnding;
-            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
+            helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+            helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+            helper.Events.GameLoop.ReturnedToTitle += OnReturnedToTitle;
             helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
         }
 
-        private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs e)
         {
-            if (e.Ticks == 5)  // wait for Content Patcher to finish its initialization
-            {
-                UpdateGMCM();
-            }
+            SaveLoaded = true;
+            UpdateGMCM();
+        }
+
+        private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
+        {
+            UpdateGMCM();
+        }
+
+        private void OnReturnedToTitle(object? sender, ReturnedToTitleEventArgs e)
+        {
+            SaveLoaded = false;
+            UpdateGMCM();
         }
 
         private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
@@ -151,8 +164,9 @@ namespace FailedQuestsLoseFriendship
         {
             who.modData[$"{UniqueID}.failedQuests"] = (GetFailedQuests(who) + failed).ToString();
         }
+        
 
-        private void UpdateGMCM()
+        private void UpdateGMCM(bool specialOrders = false)
         {
             var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
             if (configMenu is null)
@@ -181,76 +195,86 @@ namespace FailedQuestsLoseFriendship
             
             configMenu.AddSectionTitle(
                 mod: ModManifest,
-                text: () => "General Settings");
+                text: () => Helper.Translation.Get("Config.GeneralSettings"));
             
             configMenu.AddNumberOption(
                 mod: ModManifest,
-                name: () => "Friendship Penalty",
+                name: () => Helper.Translation.Get("Config.Penalty"),
                 getValue: () => Config.FriendshipLost,
                 setValue: value => Config.FriendshipLost = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Collection Quests",
+                name: () => Helper.Translation.Get("Config.Collection"),
                 getValue: () => Config.ResourceCollectionQuestsEnabled,
                 setValue: value => Config.ResourceCollectionQuestsEnabled = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Slay Monster Quests",
+                name: () => Helper.Translation.Get("Config.Slay"),
                 getValue: () => Config.SlayMonsterQuestsEnabled,
                 setValue: value => Config.SlayMonsterQuestsEnabled = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Fishing Quests",
+                name: () => Helper.Translation.Get("Config.Fish"),
                 getValue: () => Config.FishingQuestsEnabled,
                 setValue: value => Config.FishingQuestsEnabled = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Item Delivery Quests",
+                name: () => Helper.Translation.Get("Config.Delivery"),
                 getValue: () => Config.ItemDeliveryQuestsEnabled,
                 setValue: value => Config.ItemDeliveryQuestsEnabled = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Socialize Quest",
+                name: () => Helper.Translation.Get("Config.Socialize"),
                 getValue: () => Config.SocializeQuestsEnabled,
                 setValue: value => Config.SocializeQuestsEnabled = value);
             
             configMenu.AddBoolOption(
                 mod: ModManifest,
-                name: () => "Enable Special Orders",
+                name: () => Helper.Translation.Get("Config.SO"),
                 getValue: () => Config.SpecialOrdersEnabled,
                 setValue: value => Config.SpecialOrdersEnabled = value);
             
             configMenu.AddSectionTitle(
                 mod: ModManifest,
-                text: () => "Toggle Individual Special Orders");
+                text: () => Helper.Translation.Get("Config.SOToggle"));
 
-            foreach (var orderData in Game1.content.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders"))
+            if (SaveLoaded)
             {
-                SpecialOrder order = SpecialOrder.GetSpecialOrder(orderData.Key, null);
+                foreach (var orderData in Game1.content.Load<Dictionary<string, SpecialOrderData>>("Data/SpecialOrders"))
+                {
+                    SpecialOrder order = SpecialOrder.GetSpecialOrder(orderData.Key, null);
                 
-                // filter out invalid special orders
-                // for mods like RSV, some of the patches to load to Strings/SpecialOrderStrings only happen when a save
-                // is loaded. Until then, their names/descs are just "Strings/SpecialOrderStrings/.....".
-                if (order == null ||
-                    (orderData.Value.RequiredTags != null && orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) ||
-                    order.GetName().StartsWith("Strings") || order.GetDescription().StartsWith("Strings")) continue;
+                    // filter out invalid special orders
+                    // for mods like RSV, some of the patches to load to Strings/SpecialOrderStrings only happen when a save
+                    // is loaded. Until then, their names/descs are just "Strings/SpecialOrderStrings/.....".
+                    if (order == null ||
+                        (orderData.Value.RequiredTags != null && orderData.Value.RequiredTags.Contains("NOT_IMPLEMENTED")) ||
+                        order.GetName().StartsWith("Strings") || order.GetDescription().StartsWith("Strings")) continue;
                 
-                configMenu.AddBoolOption(
-                    mod: ModManifest,
-                    name: () => order.GetName(),
-                    tooltip: () => order.GetDescription(),
-                    getValue: () => !Config.DisabledSpecialOrders.Contains(orderData.Key),
-                    setValue: value =>
-                    {
-                        if (value) Config.DisabledSpecialOrders.Remove(orderData.Key);
-                        else Config.DisabledSpecialOrders.Add(orderData.Key);
-                    });
+                    configMenu.AddBoolOption(
+                        mod: ModManifest,
+                        name: () => order.GetName(),
+                        tooltip: () => order.GetDescription(),
+                        getValue: () => !Config.DisabledSpecialOrders.Contains(orderData.Key),
+                        setValue: value =>
+                        {
+                            if (value) Config.DisabledSpecialOrders.Remove(orderData.Key);
+                            else Config.DisabledSpecialOrders.Add(orderData.Key);
+                        });
+                }
             }
+            else
+            {
+                configMenu.AddParagraph(
+                    mod: ModManifest,
+                    text: () => Helper.Translation.Get("Config.LoadSave"));
+            }
+            
         }
     }
 }

@@ -1,3 +1,12 @@
 {
-  "default_questFailed": "How come you didn't make good on your promise to complete that task for me the other day?"
+  "Config.GeneralSettings": "General Settings",
+  "Config.Penalty": "Friendship Penalty",
+  "Config.Collection": "Enable Collection Quests",
+  "Config.Slay": "Enable Slay Monster Quests",
+  "Config.Fish": "Enable Fishing Quests",
+  "Config.Delivery": "Enable Item Delivery Quests",
+  "Config.Socialize": "Enable Socialize Quests",
+  "Config.SO": "Enable Special Orders",
+  "Config.SOToggle": "Toggle Individual Special Orders",
+  "Config.LoadSave": "Load a save to access these options."
 }
