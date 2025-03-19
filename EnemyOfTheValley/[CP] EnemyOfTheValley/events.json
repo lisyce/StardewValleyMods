@@ -14,6 +14,13 @@
       "Entries": {
         "BarleyZP.EnemyOfTheValley_PierreNegative2/EOTV_NegativeFriendship Pierre -500/p Pierre/t 900 1700": "{{i18n:Events.Pierre-2}}"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Events/Saloon",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_ShaneNegative2/EOTV_NegativeFriendship Shane -500/p Shane/p Gus": "{{i18n:Events.Shane-2}}"
+      }
     }
   ]
 }
