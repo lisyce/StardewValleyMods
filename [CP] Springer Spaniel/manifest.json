@@ -1,7 +1,7 @@
 {
   "Name": "[CP] Springer Spaniel",
   "Author": "BarleyZP",
-  "Version": "1.1.1",
+  "Version": "1.2.1",
   "Description": "Adds a new dog breed: English Springer Spaniel",
   "UniqueID": "BarleyZP.SpringerSpaniel",
   "UpdateKeys": [ "Nexus:31889" ],

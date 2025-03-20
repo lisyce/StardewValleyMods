@@ -6,6 +6,10 @@
       "Default": "Replace Dog 2",
       "Description": "Which dog breed to replace the textures of (or add a new breed!)."
     },
+    "Color": {
+      "AllowValues": "Light Brown, Dark Brown (Warm), Dark Brown (Cool), Black",
+      "Default": "Light Brown"
+    },
     "Adoption Price": {
       "Default": "40000",
       "Description": "Must be a non-negative integer value."
@@ -23,8 +27,8 @@
       "Entries": {
         "{{ModId}}.Spaniel": {
           "Id": "{{ModId}}.Spaniel",
-          "Texture": "{{InternalAssetKey: Spaniel.png}}",
-          "IconTexture": "{{InternalAssetKey: SpanielIcon.png}}",
+          "Texture": "{{InternalAssetKey: Spaniel_{{Color}}.png}}",
+          "IconTexture": "{{InternalAssetKey: SpanielIcon_{{Color}}.png}}",
           "IconSourceRect": {
             "X": 0,
             "Y": 0,
@@ -42,7 +46,7 @@
     {
       "Action": "Load",
       "Target": "Animals/dog",
-      "FromFile": "Spaniel.png",
+      "FromFile": "Spaniel_{{Color}}.png",
       "When": {
         "Dog to Replace": "Replace Dog 0"
       }
@@ -50,7 +54,7 @@
     {
       "Action": "EditImage",
       "Target": "LooseSprites/Cursors",
-      "FromFile": "SpanielIcon.png",
+      "FromFile": "SpanielIcon_{{Color}}.png",
       "ToArea": {
         "X": 208,
         "Y": 208,
@@ -77,7 +81,7 @@
     {
       "Action": "Load",
       "Target": "Animals/dog1",
-      "FromFile": "Spaniel.png",
+      "FromFile": "Spaniel_{{Color}}.png",
       "When": {
         "Dog to Replace": "Replace Dog 1"
       }
@@ -85,7 +89,7 @@
     {
       "Action": "EditImage",
       "Target": "LooseSprites/Cursors",
-      "FromFile": "SpanielIcon.png",
+      "FromFile": "SpanielIcon_{{Color}}.png",
       "ToArea": {
         "X": 224,
         "Y": 208,
@@ -112,7 +116,7 @@
     {
       "Action": "Load",
       "Target": "Animals/dog2",
-      "FromFile": "Spaniel.png",
+      "FromFile": "Spaniel_{{Color}}.png",
       "When": {
         "Dog to Replace": "Replace Dog 2"
       }
@@ -120,7 +124,7 @@
     {
       "Action": "EditImage",
       "Target": "LooseSprites/Cursors",
-      "FromFile": "SpanielIcon.png",
+      "FromFile": "SpanielIcon_{{Color}}.png",
       "ToArea": {
         "X": 240,
         "Y": 208,
@@ -147,7 +151,7 @@
     {
       "Action": "Load",
       "Target": "Animals/dog3",
-      "FromFile": "Spaniel.png",
+      "FromFile": "Spaniel_{{Color}}.png",
       "When": {
         "Dog to Replace": "Replace Dog 3"
       }
@@ -155,7 +159,7 @@
     {
       "Action": "EditImage",
       "Target": "LooseSprites/Cursors_1_6",
-      "FromFile": "SpanielIcon.png",
+      "FromFile": "SpanielIcon_{{Color}}.png",
       "ToArea": {
         "X": 272,
         "Y": 381,
@@ -182,7 +186,7 @@
     {
       "Action": "Load",
       "Target": "Animals/dog4",
-      "FromFile": "Spaniel.png",
+      "FromFile": "Spaniel_{{Color}}.png",
       "When": {
         "Dog to Replace": "Replace Dog 4"
       }
@@ -190,7 +194,7 @@
     {
       "Action": "EditImage",
       "Target": "LooseSprites/Cursors_1_6",
-      "FromFile": "SpanielIcon.png",
+      "FromFile": "SpanielIcon_{{Color}}.png",
       "ToArea": {
         "X": 272,
         "Y": 365,
