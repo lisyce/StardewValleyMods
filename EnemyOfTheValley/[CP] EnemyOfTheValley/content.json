@@ -46,7 +46,9 @@
       "Target": "Strings/UI",
       "Entries": {
         "Chat_Enemies": "{{i18n: Chat_Enemies}}",
-        "Chat_Archenemies": "{{i18n: Chat_Archenemies}}"
+        "Chat_Archenemies": "{{i18n: Chat_Archenemies}}",
+        "Chat_Exarchenemies": "{{i18n: Chat_Exarchenemies}}",
+        "Chat_Apologized": "{{i18n: Chat_Apologized}}"
       }
     },
     {

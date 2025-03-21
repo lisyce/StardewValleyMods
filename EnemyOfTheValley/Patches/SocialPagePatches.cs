@@ -76,6 +76,10 @@ namespace EnemyOfTheValley.Patches
             {
                 b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(16, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
             }
+            else if (Relationships.IsRelationship(entry, Relationships.ExArchenemy, Game1.player))
+            {
+                b.Draw(ModEntry.StandardSprites, new Vector2(__instance.xPositionOnScreen + IClickableMenu.borderWidth * 7 / 4 + 192, __instance.sprites[i].bounds.Y), new Rectangle(32, 0, 16, 16), Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.None, 0.88f);
+            }
         }
         public static IEnumerable<CodeInstruction> drawNPCSlot_Transpiler(IEnumerable<CodeInstruction> instructions)
         {

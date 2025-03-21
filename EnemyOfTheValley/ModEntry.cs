@@ -64,6 +64,10 @@ namespace EnemyOfTheValley
                 ModManifest,
                 "(O)BarleyZP.EnemyOfTheValley.ShatteredAmulet",
                 NPCActionPatches.HandleShatteredAmulet);
+            NpcReceiveObjectApi.Instance.RegisterItemHandler(
+                ModManifest,
+                "(O)BarleyZP.EnemyOfTheValley.ReconciliationDust",
+                NPCActionPatches.HandleReconciliationDust);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)

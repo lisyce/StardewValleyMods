@@ -28,5 +28,8 @@
   
   "ApologyLetterPrompt": "Post an apology letter to one of your enemies?",
   "ApologyLetterPromptCancelOption": "(cancel)",
-  "ApologyLetterSent": "You've sent a letter to apologize to {{npc}}! They will receive it tomorrow."
+  "ApologyLetterSent": "You've sent a letter to apologize to {{npc}}! They will receive it tomorrow.",
+  
+  "ReconciliationDustInvalid": "Reconciliation Dust won't work on {{npc}}.",
+  "ReconciliationDustUsed": "You know, @? We've both done some things we regret. Maybe it's time we started making amends."
 }

@@ -2,6 +2,7 @@
   "Chat_Enemies": "{0} and {1} just became enemies.",
   "Chat_Archnemies": "{0} and {1} just swore to be archenemies.",
   "Chat_Apologized": "{0} and {1} are no longer enemies.",
+  "Chat_Exarchenemies": "{0} and {1} are now ex-archenemies",
 
   "AvoidMeCakeName": "\"A-Void Me\" Cake",
   "AvoidMeCakeDescription": "A \"gift\" that officially states your distaste for someone.",

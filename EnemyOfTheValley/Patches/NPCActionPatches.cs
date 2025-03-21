@@ -3,6 +3,7 @@ using HarmonyLib;
 using StardewValley;
 using System.Reflection;
 using System.Reflection.Emit;
+using Microsoft.Xna.Framework;
 
 namespace EnemyOfTheValley.Patches
 {
@@ -136,6 +137,48 @@ namespace EnemyOfTheValley.Patches
             {
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectBouquet_NegativeHearts") ?? new Dialogue(npc, "RejectBouquet_NegativeHearts", ModEntry.Translation.Get("RejectBouquet_NegativeHearts")));
                 Game1.drawDialogue(npc);
+            }
+        }
+
+        public static void HandleReconciliationDust(NPC npc, Farmer who)
+        {
+            who.friendshipData.TryGetValue(npc.Name, out var friendship);
+
+            friendship ??= (who.friendshipData[npc.Name] = new Friendship());
+
+            if (!Relationships.IsRelationship(npc.Name, Relationships.Archenemy, who))
+            {
+                Game1.drawObjectDialogue(ModEntry.Translation.Get("ReconciliationDustInvalid", new { npc = npc.displayName }));
+            }
+            else
+            {
+                who.reduceActiveItemByOne();
+
+                var loc = npc.currentLocation;
+                
+                friendship.Points = 0;
+                Relationships.SetRelationship(npc.Name, Relationships.ExArchenemy);
+                
+                Game1.playSound("fireball");
+                var sparkleRect = npc.GetBoundingBox();
+                sparkleRect.Inflate(0, 32);
+                sparkleRect.Y -= 64;
+                sparkleRect.X -= 32;
+                loc.temporarySprites.AddRange(Utility.sparkleWithinArea(sparkleRect, 6, Color.Gold));
+
+                DelayedAction.functionAfterDelay(() =>
+                {
+                    npc.CurrentDialogue.Push(npc.TryGetDialogue("ReconciliationDustUsed") ?? new Dialogue(npc, "ReconciliationDustUsed", ModEntry.Translation.Get("ReconciliationDustUsed")));
+                    Game1.drawDialogue(npc);
+                }, 1000);
+                
+                npc.faceTowardFarmerForPeriod(3000, 4, faceAway: false, who);
+                npc.doEmote(16);  // exclamation emote
+                npc.facePlayer(who);
+                
+                Traverse traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
+                traverse.GetValue<Multiplayer>().globalChatInfoMessage("Chat_Exarchenemies", Game1.player.Name, npc.GetTokenizedDisplayName());
+                
             }
         }
 
