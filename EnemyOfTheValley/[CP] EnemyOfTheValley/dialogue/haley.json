@@ -1,12 +1,12 @@
 {
   "Changes": [
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Haley",
-//      "Entries": {
-//        
-//      }
-//    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Haley",
+      "Entries": {
+
+      }
+    },
     {
       "Action": "EditData",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",

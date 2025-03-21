@@ -3,3 +3,4 @@ obj/
 *.sln
 .vs/
 .idea/
+*.sln.DotSettings.user
