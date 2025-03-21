@@ -88,3 +88,4 @@ Shown when an NPC rejects a Shattered Amulet:
 | `RejectMermaidPendant_NegativeHearts`        | The player offered an NPC a Mermaid's Pendant, but they have negative friendship with that NPC    | Vanilla           |
 | `RejectBouquet_NegativeHearts`               | The player offered an NPC a Bouquet, but they have negative friendship with that NPC              | Vanilla           |
 | `BarleyZP.EnemyOfTheValley.apologized_{NPC}` | A conversation topic set the morning after the player posts an apology letter to the provided NPC | Vanilla           |
+| `ReconciliationDustUsed`                     | The player just used Reconciliation Dust on the NPC and they are now ex-archenemies at 0 hearts   | Vanilla           |
