@@ -2,6 +2,27 @@
   "Changes": [
     {
       "Action": "EditData",
+      "Target": "Characters/Dialogue/Alex",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Alex.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Alex.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Alex.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_NoNegativeHearts": "{{i18n:Alex.RejectEnemyCake_NoNegativeHearts}}",
+        "RejectEnemyCake_VeryLowNegativeHearts": "{{i18n:Alex.RejectEnemyCake_VeryLowNegativeHearts}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Alex.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Alex.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Alex.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_NoNegativeHearts": "{{i18n:Alex.RejectShatteredAmulet_NoNegativeHearts}}",
+        "RejectShatteredAmulet_VeryLowNegativeHearts": "{{i18n:Alex.RejectShatteredAmulet_VeryLowNegativeHearts}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Alex.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Alex.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Alex.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Alex": "{{i18n:Alex.BarleyZP.EnemyOfTheValley.apologized_Alex}}",
+        "ReconciliationDustUsed": "{{i18n:Alex.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
       "Entries": {
         "Mon-2": "{{i18n:Alex.Mon-2}}",

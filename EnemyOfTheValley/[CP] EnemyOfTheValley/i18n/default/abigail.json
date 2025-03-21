@@ -5,7 +5,13 @@
   "Abigail.RejectMermaidPendant_NegativeHearts": "Why would I ever even think about marrying you?$a",
   "Abigail.RejectBouquet_NegativeHearts": "Are you crazy? We aren't even friends!$a",
   "Abigail.apologized_Abigail": "Hey, @. I got your letter. I'm not sure I trust you yet, though.$u",
-
+  "Abigail.apologized_Sebastian": "I heard you apologized to Sebastian. I don't know why you guys were so upset with each other in the first place...",
+  "Abigail.RejectEnemyCake_Archenemies": "Why are you giving me this? You know we're already past enemies, right?$a",
+  "Abigail.RejectEnemyCake_NoNegativeHearts": "Uh... I'm not sure what you mean by that, but I'm just going to go...$s",
+  "Abigail.RejectEnemyCake_LowNegativeHearts": "Keep acting like that and we might have to make this thing official soon!$a",
+  "Abigail.RejectShatteredAmulet_LowNegativeHearts": "If you're not careful, I might just take you up on that offer soon.$a",
+  "Abigail.ReconciliationDustUsed": "I suddenly feel like we could be friends again someday...#$b#Wanna come over and play a game sometime?$h",
+  
   "Abigail.Mon-2": "Uh... hi?$u",
   "Abigail.Tue-2": "Ugh... I don't feel like talking right now.$u#$e#Weren't you listening? I don't want to talk right now, especially not with you.$a",
   "Abigail.Wed-2": "Do you need something? I'm kinda busy right now.$u",

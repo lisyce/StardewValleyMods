@@ -9,7 +9,13 @@
         "RejectEnemyCake_ExArchenemies": "{{i18n:Abigail.RejectEnemyCake_ExArchenemies}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Abigail.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Abigail.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Abigail": "{{i18n:Abigail.apologized_Abigail}}"
+        "BarleyZP.EnemyOfTheValley.apologized_Abigail": "{{i18n:Abigail.apologized_Abigail}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Sebastian": "{{i18n:Abigail.apologized_Sebastian}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Abigail.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_NoNegativeHearts": "{{i18n:Abigail.RejectEnemyCake_NoNegativeHearts}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Abigail.RejectEnemyCake_LowNegativeHearts}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Abigail.RejectShatteredAmulet_LowNegativeHearts}}",
+        "ReconciliationDustUsed": "{{i18n:Abigail.ReconciliationDustUsed}}"
       }
     },
     {
