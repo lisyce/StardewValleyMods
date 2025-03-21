@@ -28,13 +28,13 @@ namespace EnemyOfTheValley.Util
                 switch (status)
                 {
                     case (FriendshipStatus)(-1):  // a bit hacky, but need a constant value here
-                        who.modData["BarleyZP.EnemyOfTheValley.BeenEnemies_" + npcName] = "true";
+                        who.mailReceived.Add("BarleyZP.EnemyOfTheValley.BeenEnemies_" + npcName);
                         break;
                     case (FriendshipStatus)(-2):
-                        who.modData["BarleyZP.EnemyOfTheValley.BeenArchenemies_" + npcName] = "true";
+                        who.mailReceived.Add("BarleyZP.EnemyOfTheValley.BeenArchenemies_" + npcName);
                         break;
                     case (FriendshipStatus)(-3):
-                        who.modData["BarleyZP.EnemyOfTheValley.BeenExArchenemies_" + npcName] = "true";
+                        who.mailReceived.Add("BarleyZP.EnemyOfTheValley.BeenExArchenemies_" + npcName);
                         break;
                 }
             }

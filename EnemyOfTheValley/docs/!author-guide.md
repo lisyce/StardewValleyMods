@@ -5,13 +5,28 @@ These docs outline how to add your mod's NPCs, etc. to work with Enemy of the Va
 Table of Contents:
 
 - [Adding negative heart dialogue for an NPC](dialogue.md)
-- [Adding negative heart events](events.md)
+- [Adding negative heart events](#events)
 - [Unlocking recipes and perfection](#unlocking-recipes-and-perfection)
 - [New Game State Queries](#game-state-queries)
 
+## Events
+
+This mod introduces a new event precondition: `NegativeFriendship`. It is used identically to the vanilla [Friendship Precondition](https://stardewvalleywiki.com/Modding:Event_data#Current_player): `NegativeFriendship <name> <number>+`.
+The precondition is satisfied if the current player has at least as many *negative* friendship points with all of the given NPCs (can specify multiple name/number pairs). So, for example, `NegativeFriendship Sam -500` is satisfied if the
+current player has -2 hearts (or -3, or -8, etc.) with Sam.
+
 ## Game State Queries
 
-TODO
+| Condition                      | Returns                                                                                                                                                    |
+|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `EOTV_PLAYER_NPC_RELATIONSHIP` | Identical behavior to the vanilla `PLAYER_NPC_RELATIONSHIP` GSQ, but also adds support for the `Enemy`, `Archenemy`, and `ExArchenemy` relationship types. |
+
+This mod also sets the following mail flags, which can be used in the `PLAYER_HAS_MAIL` GSQ or anywhere else mail flags are used.
+All mail flags listed use the NPC's *internal* name.
+
+- `BarleyZP.EnemyOfTheValley.BeenEnemies_{NPC}`: The player has been enemies with the NPC named `{NPC}` at any point in time.
+- `BarleyZP.EnemyOfTheValley.BeenArchenemies_{NPC}`: The player has been archenemies with the NPC named `{NPC}` at any point in time.
+- `BarleyZP.EnemyOfTheValley.BeenExArchenemies_{NPC}`: The player has been ex-archenemies with the NPC named `{NPC}` at any point in time.
 
 ## Unlocking Recipes and Perfection
 
