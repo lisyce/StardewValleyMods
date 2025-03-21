@@ -55,6 +55,15 @@ namespace EnemyOfTheValley
             GameStateQuery.Register("EOTV_PLAYER_NPC_ENEMY", EOTVGameStateQueries.PlayerNpcEnemy);
             GameStateQuery.Register("EOTV_PLAYER_NPC_ARCHENEMY", EOTVGameStateQueries.PlayerNpcArchenemy);
             GameStateQuery.Register("EOTV_PLAYER_NPC_EXARCHENEMY", EOTVGameStateQueries.PlayerNpcExArchenemy);
+            
+            NpcReceiveObjectApi.Instance.RegisterItemHandler(
+                ModManifest,
+                "(O)BarleyZP.EnemyOfTheValley.AvoidMeCake",
+                NPCActionPatches.HandleCake);
+            NpcReceiveObjectApi.Instance.RegisterItemHandler(
+                ModManifest,
+                "(O)BarleyZP.EnemyOfTheValley.ShatteredAmulet",
+                NPCActionPatches.HandleShatteredAmulet);
         }
 
         private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)

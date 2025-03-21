@@ -3,6 +3,20 @@
     {
       "Action": "EditData",
       "Target": "Data/Shops",
+      "TargetField": [ "DesertTrade", "Items" ],
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley.ReconciliationDust": {
+          "Id": "BarleyZP.EnemyOfTheValley.ReconciliationDust",
+          "TradeItemId": "(O)768",
+          "TradeItemAmount": 50,
+          "ItemId": "(O)BarleyZP.EnemyOfTheValley.ReconciliationDust",
+          "Condition": "EOTV_PLAYER_NPC_ARCHENEMY Current Any"
+        }
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Shops",
       "TargetField": [ "Saloon", "Items" ],
       "Entries": {
         "BarleyZP.EnemyOfTheValley_SaladRecipe": {

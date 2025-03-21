@@ -20,7 +20,7 @@
     },
     {
       "Action": "Include",
-      "FromFile": "saloon.json"
+      "FromFile": "shops.json"
     },
 
     // load blanks for vanilla NPC negative dialogue files
@@ -76,7 +76,21 @@
           "SpriteIndex": 1,
           "Edibility": -300,
           "CanBeTrashed": false,
-          "ExcludeFromRandomSale": true
+          "ExcludeFromRandomSale": true,
+          "ExcludeFromShippingCollection": true
+        },
+        "BarleyZP.EnemyOfTheValley.ReconciliationDust": {
+          "Name": "Reconciliation Dust",
+          "DisplayName": "{{i18n: ReconciliationDustName}}",
+          "Description": "{{i18n: ReconciliationDustDescription}}",
+          "Type": "Basic",
+          "Category": 0,
+          "Price": 0,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 2,
+          "Edibility": -300,
+          "ExcludeFromRandomSale": true,
+          "ExcludeFromShippingCollection": true
         }
       }
     },
