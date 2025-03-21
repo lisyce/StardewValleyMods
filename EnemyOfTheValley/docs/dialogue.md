@@ -75,7 +75,6 @@ Shown when an NPC rejects a Shattered Amulet:
 
 | Key                                           | Description                                | Recommended Asset |
 |-----------------------------------------------|--------------------------------------------|-------------------|
-| `RejectShatteredAmulet_AlreadyArchenemies`    | The NPC and player are already archenemies | Vanilla           |
 | `RejectShatteredAmulet_ExArchenemies`         | The NPC and player were ex-archenemies     | Vanilla           |
 | `RejectShatteredAmulet_NoNegativeHearts`      | Player has > -1 hearts with the NPC        | Vanilla           |
 | `RejectShatteredAmulet_VeryLowNegativeHearts` | Player has > -8 hearts with the NPC        | Vanilla           |
