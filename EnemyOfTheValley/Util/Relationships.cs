@@ -9,27 +9,39 @@ namespace EnemyOfTheValley.Util
         public static FriendshipStatus Archenemy = (FriendshipStatus)(-2);
         public static FriendshipStatus ExArchenemy = (FriendshipStatus)(-3);
 
-        public static void SetRelationship(string name, FriendshipStatus status, bool printValidation = false)
+        public static void SetRelationship(string npcName, Farmer who, FriendshipStatus status, bool printValidation = false)
         {
             if (printValidation)
             {
-                if (!Game1.player.friendshipData.ContainsKey(name))
+                if (!who.friendshipData.ContainsKey(npcName))
                 {   
-                    Console.WriteLine("No NPC with the name " +  name + " found. Remember this is case-sensitive!");
+                    Console.WriteLine("No NPC with the name " +  npcName + " found. Remember this is case-sensitive!");
                     return;
                 }
             }
-            var npc = Game1.getCharacterFromName(name);
+            var npc = Game1.getCharacterFromName(npcName);
             if (npc == null) return;
             
             if (status == Enemy || status == Archenemy || status == ExArchenemy)
             {
-                npc.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = ((int)status).ToString();
+                who.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus_" + npcName] = ((int)status).ToString();
+                switch (status)
+                {
+                    case (FriendshipStatus)(-1):  // a bit hacky, but need a constant value here
+                        who.modData["BarleyZP.EnemyOfTheValley.BeenEnemies_" + npcName] = "true";
+                        break;
+                    case (FriendshipStatus)(-2):
+                        who.modData["BarleyZP.EnemyOfTheValley.BeenArchenemies_" + npcName] = "true";
+                        break;
+                    case (FriendshipStatus)(-3):
+                        who.modData["BarleyZP.EnemyOfTheValley.BeenExArchenemies_" + npcName] = "true";
+                        break;
+                }
             }
             else
             {
-                npc.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = "";
-                Game1.player.friendshipData[name].Status = status;
+                who.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus_" + npcName] = "";
+                who.friendshipData[npcName].Status = status;
             }
         }
 
@@ -37,12 +49,30 @@ namespace EnemyOfTheValley.Util
         {
             return entry?.Friendship is not null && IsRelationship(entry.InternalName, status, who);
         }
+        
+        public static bool TryConvertToFriendshipStatus(string str, out FriendshipStatus status)
+        {
+            status = str.ToLower() switch
+            {
+                "enemy" => Enemy,
+                "archenemy" => Archenemy,
+                "exarchenemy" => ExArchenemy,
+                "friendly" => FriendshipStatus.Friendly,
+                "dating" => FriendshipStatus.Dating,
+                "engaged" => FriendshipStatus.Engaged,
+                "divorced" => FriendshipStatus.Divorced,
+                "married" => FriendshipStatus.Married,
+                _ => (FriendshipStatus) int.MinValue // default value since we cannot use null
+            };
+            
+            return status != (FriendshipStatus) int.MinValue;
+        }
 
         public static bool IsRelationship(string npcName, FriendshipStatus status, Farmer who)
         {
             var npc = Game1.getCharacterFromName(npcName);
             if (npc == null) return false;
-            var savedStatus = npc.modData.GetValueOrDefault("BarleyZP.EnemyOfTheValley.FriendshipStatus");
+            var savedStatus = who.modData.GetValueOrDefault("BarleyZP.EnemyOfTheValley.FriendshipStatus_" + npcName);
             if (savedStatus != null)
             {
                 return savedStatus == ((int)status).ToString();
@@ -110,7 +140,7 @@ namespace EnemyOfTheValley.Util
                     var i = Game1.getCharacterFromName(npcName);
                     if (i == null) continue;
                     
-                    i.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus"] = "";
+                    who.modData["BarleyZP.EnemyOfTheValley.FriendshipStatus_" + npcName] = "";
                     i.CurrentDialogue.Clear();
                     i.CurrentDialogue.Push(i.TryGetDialogue("WipedMemory") ?? new Dialogue(i, "Strings\\Characters:WipedMemory"));
                     Game1.stats.Increment("exArchenemyMemoriesWiped");

@@ -15,7 +15,7 @@ namespace EnemyOfTheValley.Patches
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToReceiveActiveObject)),
                 prefix: new HarmonyMethod(typeof(NPCActionPatches), nameof(tryToReceiveActiveObject_Prefix)),
                 transpiler: new HarmonyMethod(typeof(NPCActionPatches), nameof(tryToReceiveActiveObject_Transpiler))
-                );       
+                );
         }
 
         public static bool tryToReceiveActiveObject_Prefix(ref NPC __instance, Farmer who, bool probe, ref bool __result)
@@ -157,7 +157,7 @@ namespace EnemyOfTheValley.Patches
                 var loc = npc.currentLocation;
                 
                 friendship.Points = 0;
-                Relationships.SetRelationship(npc.Name, Relationships.ExArchenemy);
+                Relationships.SetRelationship(npc.Name, who, Relationships.ExArchenemy);
                 
                 Game1.playSound("fireball");
                 var sparkleRect = npc.GetBoundingBox();
@@ -218,7 +218,7 @@ namespace EnemyOfTheValley.Patches
                 traverse.GetValue<Multiplayer>().globalChatInfoMessage("Archenemies", Game1.player.Name, npc.GetTokenizedDisplayName());
 
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptShatteredAmulet") ?? new Dialogue(npc, "AcceptShatteredAmulet", ModEntry.Translation.Get("AcceptShatteredAmulet")));
-                Relationships.SetRelationship(npc.Name, Relationships.Archenemy);
+                Relationships.SetRelationship(npc.Name, who, Relationships.Archenemy);
 
                 // Next two lines are in the original bouquet accept code, but not in use for enemies for now
                 //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);
@@ -274,7 +274,7 @@ namespace EnemyOfTheValley.Patches
                 traverse.GetValue<Multiplayer>().globalChatInfoMessage("Enemies", Game1.player.Name, npc.GetTokenizedDisplayName());
                     
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
-                Relationships.SetRelationship(npc.Name, Relationships.Enemy);
+                Relationships.SetRelationship(npc.Name, who, Relationships.Enemy);
 
                 // Next two lines are in the original bouquet accept code, but not in use for enemies for now
                 //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);

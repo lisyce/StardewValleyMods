@@ -44,17 +44,16 @@ namespace EnemyOfTheValley
             LoadMiscSprites();
             LoadStandardSprites();
 
+            helper.ConsoleCommands.Add("EOTV_friendly", "Sets the specified NPC to have the 'friendly' relationship with the player", SetFriendly);
             helper.ConsoleCommands.Add("EOTV_enemy", "Sets the specified NPC to be the player's enemy", SetEnemy);
             helper.ConsoleCommands.Add("EOTV_archenemy", "Sets the specified NPC to be the player's archenemy", SetArchenemy);
             helper.ConsoleCommands.Add("EOTV_exarchenemy", "Sets the specified NPC to be the player's ex-archenemy", SetExArchenemy);
-            helper.ConsoleCommands.Add("EOTV_change_friendship", "Changes the friendship of the NPC (first arg) by the amount given in the second arg", ChangeFriendship);
-            helper.ConsoleCommands.Add("EOTV_maxed_friends", "Outputs Utility::getMaxedFriendshipPercent", MaxedFriendshipPercent);
+            helper.ConsoleCommands.Add("EOTV_changefriendship", "Changes the friendship of the NPC (first arg) by the amount given in the second arg", ChangeFriendship);
+            helper.ConsoleCommands.Add("EOTV_maxedfriends", "Outputs Utility::getMaxedFriendshipPercent", MaxedFriendshipPercent);
             
             Event.RegisterPrecondition("EOTV_NegativeFriendship", EOTVPreconditions.NegativeFriendship);
             
-            GameStateQuery.Register("EOTV_PLAYER_NPC_ENEMY", EOTVGameStateQueries.PlayerNpcEnemy);
-            GameStateQuery.Register("EOTV_PLAYER_NPC_ARCHENEMY", EOTVGameStateQueries.PlayerNpcArchenemy);
-            GameStateQuery.Register("EOTV_PLAYER_NPC_EXARCHENEMY", EOTVGameStateQueries.PlayerNpcExArchenemy);
+            GameStateQuery.Register("EOTV_PLAYER_NPC_RELATIONSHIP", EOTVGameStateQueries.EotvPlayerNpcRelationship);
             
             NpcReceiveObjectApi.Instance.RegisterItemHandler(
                 ModManifest,
@@ -100,38 +99,44 @@ namespace EnemyOfTheValley
             }
             
             // do apology letters
-            List<string> toRemove = new();
-            foreach (string key in Game1.player.mailReceived)
+            foreach (var farmer in Game1.getAllFarmers())
             {
-                if (key.StartsWith("apologyLetter_"))
+                List<string> toRemove = new();
+                foreach (string key in farmer.mailReceived)
                 {
-                    var npcName = key.Replace("apologyLetter_", "");
-                    Relationships.SetRelationship(npcName, FriendshipStatus.Friendly, true);
-                    if (Game1.player.friendshipData.TryGetValue(npcName, out var friendship))
+                    if (key.StartsWith("apologyLetter_"))
                     {
-                        friendship.Points = Math.Max(-1250, friendship.Points);
-                    }
-                    var npc = Game1.getCharacterFromName(npcName);
-                    var traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
-                    traverse.GetValue<Multiplayer>().globalChatInfoMessage("Apologized", Game1.player.Name, npc?.GetTokenizedDisplayName() ?? "Unknown NPC");
+                        var npcName = key.Replace("apologyLetter_", "");
+                        Relationships.SetRelationship(npcName, farmer, FriendshipStatus.Friendly, true);
+                        if (farmer.friendshipData.TryGetValue(npcName, out var friendship))
+                        {
+                            friendship.Points = Math.Max(-1250, friendship.Points);
+                        }
+                        var npc = Game1.getCharacterFromName(npcName);
+                        var traverse = Traverse.Create(typeof(Game1)).Field("multiplayer");
+                        traverse.GetValue<Multiplayer>().globalChatInfoMessage("Apologized", farmer.Name, npc?.GetTokenizedDisplayName() ?? "Unknown NPC");
 
-                    Game1.player.activeDialogueEvents.TryAdd("BarleyZP.EnemyOfTheValley.apologized_" + npcName, 4);
-                    toRemove.Add(key);
+                        farmer.activeDialogueEvents.TryAdd("BarleyZP.EnemyOfTheValley.apologized_" + npcName, 4);
+                        toRemove.Add(key);
+                    }
                 }
-            }
             
-            // make these repeatable
-            Game1.player.mailReceived.ExceptWith(toRemove);
+                // make these repeatable
+                farmer.mailReceived.ExceptWith(toRemove);
+            }
         }
 
         private void OnDayEnding(object? sender, DayEndingEventArgs e)
         {
             // get rid of door unlock for NPCs that fell below 0 hearts
-            foreach (string name in Game1.player.friendshipData.Keys)
+            foreach (var farmer in Game1.getAllFarmers())
             {
-                if (Game1.player.mailReceived.Contains("doorUnlock" + name) && Game1.player.friendshipData[name].Points < 0)
+                foreach (string name in farmer.friendshipData.Keys)
                 {
-                    Game1.player.mailReceived.Remove("doorUnlock" + name);
+                    if (farmer.mailReceived.Contains("doorUnlock" + name) && farmer.friendshipData[name].Points < 0)
+                    {
+                        farmer.mailReceived.Remove("doorUnlock" + name);
+                    }
                 }
             }
 
@@ -154,17 +159,22 @@ namespace EnemyOfTheValley
         }
 
         public static void SetEnemy(string command, string[] args) {
-            Relationships.SetRelationship(args[0], Relationships.Enemy, printValidation: true);
+            Relationships.SetRelationship(args[0], Game1.player, Relationships.Enemy, printValidation: true);
         }
 
         public static void SetArchenemy(string command, string[] args)
         {
-            Relationships.SetRelationship(args[0], Relationships.Archenemy, printValidation: true);
+            Relationships.SetRelationship(args[0], Game1.player, Relationships.Archenemy, printValidation: true);
         }
 
         public static void SetExArchenemy(string command, string[] args)
         {
-            Relationships.SetRelationship(args[0], Relationships.ExArchenemy, printValidation: true);
+            Relationships.SetRelationship(args[0], Game1.player, Relationships.ExArchenemy, printValidation: true);
+        }
+
+        public static void SetFriendly(string command, string[] args)
+        {
+            Relationships.SetRelationship(args[0], Game1.player, FriendshipStatus.Friendly, printValidation: true);
         }
 
         public static void ChangeFriendship(string command, string[] args)
