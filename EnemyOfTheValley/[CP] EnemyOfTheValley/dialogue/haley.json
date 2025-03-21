@@ -4,7 +4,21 @@
       "Action": "EditData",
       "Target": "Characters/Dialogue/Haley",
       "Entries": {
-
+        "AcceptEnemyCake": "{{i18n:Haley.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Haley.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_NoNegativeHearts": "{{i18n:Haley.RejectEnemyCake_NoNegativeHearts}}",
+        "RejectEnemyCake_VeryLowNegativeHearts": "{{i18n:Haley.RejectEnemyCake_VeryLowNegativeHearts}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Haley.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Haley.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Haley.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_NoNegativeHearts": "{{i18n:Haley.RejectShatteredAmulet_NoNegativeHearts}}",
+        "RejectShatteredAmulet_VeryLowNegativeHearts": "{{i18n:Haley.RejectShatteredAmulet_VeryLowNegativeHearts}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Haley.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Haley.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Haley.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Haley": "{{i18n:Haley.BarleyZP.EnemyOfTheValley.apologized_Haley}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Alex": "{{i18n:Haley.BarleyZP.EnemyOfTheValley.apologized_Alex}}",
+        "ReconciliationDustUsed": "{{i18n:Haley.ReconciliationDustUsed}}"
       }
     },
     {
@@ -19,7 +33,31 @@
         "Thu-2": "{{i18n:Haley.Thu-2}}",
         "Fri-2": "{{i18n:Haley.Fri-2}}",
         "Sat-2": "{{i18n:Haley.Sat-2}}",
-        "Sun-2": "{{i18n:Haley.Sun-2}}"
+        "Sun-2": "{{i18n:Haley.Sun-2}}",
+        "summer_Mon-2": "{{i18n:Haley.summer_Mon-2}}",
+        "summer_Mon-4": "{{i18n:Haley.summer_Mon-4}}",
+        "summer_Tue-2": "{{i18n:Haley.summer_Tue-2}}",
+        "summer_Wed-2": "{{i18n:Haley.summer_Wed-2}}",
+        "summer_Wed-4": "{{i18n:Haley.summer_Wed-4}}",
+        "summer_Thu-2": "{{i18n:Haley.summer_Thu-2}}",
+        "summer_Fri-2": "{{i18n:Haley.summer_Fri-2}}",
+        "summer_Sat-2": "{{i18n:Haley.summer_Sat-2}}",
+        "summer_Sun-2": "{{i18n:Haley.summer_Sun-2}}",
+        "summer_Sun-6": "{{i18n:Haley.summer_Sun-6}}",
+        "fall_Mon-2": "{{i18n:Haley.fall_Mon-2}}",
+        "fall_Tue-2": "{{i18n:Haley.fall_Tue-2}}",
+        "fall_Wed-2": "{{i18n:Haley.fall_Wed-2}}",
+        "fall_Thu-2": "{{i18n:Haley.fall_Thu-2}}",
+        "fall_Fri-2": "{{i18n:Haley.fall_Fri-2}}",
+        "fall_Sat-2": "{{i18n:Haley.fall_Sat-2}}",
+        "fall_Sun-2": "{{i18n:Haley.fall_Sun-2}}",
+        "winter_Mon-2": "{{i18n:Haley.winter_Mon-2}}",
+        "winter_Tue-2": "{{i18n:Haley.winter_Tue-2}}",
+        "winter_Wed-2": "{{i18n:Haley.winter_Wed-2}}",
+        "winter_Thu-2": "{{i18n:Haley.winter_Thu-2}}",
+        "winter_Fri-2": "{{i18n:Haley.winter_Fri-2}}",
+        "winter_Sat-2": "{{i18n:Haley.winter_Sat-2}}",
+        "winter_Sun-2": "{{i18n:Haley.winter_Sun-2}}"
       }
     }
   ]
