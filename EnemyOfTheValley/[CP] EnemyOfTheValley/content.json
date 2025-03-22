@@ -123,6 +123,11 @@
         "BarleyZP.EnemyOfTheValley_apology": {
           "Contents": "{{i18n: ApologyLetterNote}}",
           "Title": "{{i18n: ApologyLetterNoteTitle}}"
+        },
+        "BarleyZP.EnemyOfTheValley_dust": {
+          "Contents": "{{i18n: DustNote}}",
+          "Title": "{{i18n: DustNoteTitle}}",
+          "Conditions": "PLAYER_NPC_RELATIONSHIP Current Any Archenemy"
         }
       }
     },

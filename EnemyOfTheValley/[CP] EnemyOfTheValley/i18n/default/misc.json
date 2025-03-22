@@ -13,12 +13,14 @@
   
   "CakeMail": "I see you're starting to ruffle some feathers in Pelican Town. It's a long-held tradition in the valley to bake a rather unpleasant flavor of cake that makes your distaste for someone official.^^Here, I'll give you the recipe, kid. It's up to you if you want to take things that far.^^Your friend, Mr. Qi%item cookingRecipe BarleyZP.EnemyOfTheValley.AvoidMeCake%%[#]Regarding Enemies",
   "StardropMail": "You seem to have a new archenemy. I've never seen anybody go so far as to give someone a shattered Mermaid's Pendant. At the least, your creativity is intriguing to me.^^Have a taste of this. I'm interested to see what other choices you make.^^Your friend, Mr. Qi.%item object 434 1%% %action AddMail Current CF_Spouse received%%[#]An Archenemy Acknowledgement",
-  "ApologyLetterMail": "Current Resident:^Feeling remorseful? For a small fee, we'll mail an apology letter on your behalf! Drop the enclosed form back into your mailbox and specify the recipient's name and address.^^Say goodbye to not knowing what to write and say hello to stress-free apologies!^^-The Mail-In Apology Specialists[#]Apology Specialists",
+  "ApologyLetterMail": "Current Resident:^Feeling remorseful? For a small fee, we'll mail an apology letter on your behalf! Drop the enclosed form back into your mailbox and specify the recipient's name and address.^^Say goodbye to not knowing what to write and say hello to stress-free apologies!^^-The Mail-In Apology Specialists[#]Mail-In Apologies",
   
   "ShatteredAmuletNote": "It rained the other day and I saw an Old Mariner standing out on the beach, but I was too afraid to talk to him.^^When I came back the next day, he was gone. In his place were the sparkly shards of a Mermaid's Pendant. Most peculiar!^^I made sure to clean them up so nobody would step on them!",
   "ShatteredAmuletNoteTitle": "A Shattered Mermaid's Pendant",
   "ApologyLetterNote": "I can't believe I'm writing this!^^I had another huge fight with someone the other day. We might as well be enemies! But today, they sent me an apology letter in the mail. Maybe we can make up after all?",
   "ApologyLetterNoteTitle": "Apologizing",
+  "DustNote": "It's a page from an old alchemist's diary^^I've finally discovered a way to make even my greatest enemy forgive me! My painstaking work on this magical dust has paid off!^^Now... to convince my ex-wife to take me back...",
+  "DustNoteTitle": "Reconciliation",
   
   "WitchHut_EvilShrineCenter": "-Dark Shrine of Memory-^The relationship between you and your ex-spouses and ex-archenemies will be wiped from memory. It will be like you've never met.^Make an offering of 30,000g?"
 }
