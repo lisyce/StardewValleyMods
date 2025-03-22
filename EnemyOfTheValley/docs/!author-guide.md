@@ -6,8 +6,9 @@ Table of Contents:
 
 - [Adding negative heart dialogue for an NPC](dialogue.md)
 - [Adding negative heart events](#events)
-- [Unlocking recipes and perfection](#unlocking-recipes-and-perfection)
 - [New Game State Queries](#game-state-queries)
+- [Console Commands](#console-commands)
+- [Unlocking recipes and perfection](#unlocking-recipes-and-perfection)
 
 ## Events
 
@@ -17,7 +18,7 @@ current player has -2 hearts (or -3, or -8, etc.) with Sam.
 
 ## Game State Queries
 
-| Condition                      | Returns                                                                                                                                                    |
+| Condition                      | Description                                                                                                                                                |
 |--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `EOTV_PLAYER_NPC_RELATIONSHIP` | Identical behavior to the vanilla `PLAYER_NPC_RELATIONSHIP` GSQ, but also adds support for the `Enemy`, `Archenemy`, and `ExArchenemy` relationship types. |
 
@@ -27,6 +28,17 @@ All mail flags listed use the NPC's *internal* name.
 - `BarleyZP.EnemyOfTheValley.BeenEnemies_{NPC}`: The player has been enemies with the NPC named `{NPC}` at any point in time.
 - `BarleyZP.EnemyOfTheValley.BeenArchenemies_{NPC}`: The player has been archenemies with the NPC named `{NPC}` at any point in time.
 - `BarleyZP.EnemyOfTheValley.BeenExArchenemies_{NPC}`: The player has been ex-archenemies with the NPC named `{NPC}` at any point in time.
+
+## Console Commands
+
+| Command                                     | Description                                                                                       |
+|---------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `EOTV_friendly <NPC name>`                  | Sets the specified NPC to have the 'friendly' relationship with the player (no relationship)      |
+| `EOTV_enemy <NPC name>`                     | Sets the specified NPC to be the player's enemy                                                   |
+| `EOTV_archenemy <NPC name>`                 | Sets the specified NPC to be the player's archenemy                                               |
+| `EOTV_exarchenemy <NPC name>`               | Sets the specified NPC to be the player's ex-archenemy                                            |
+| `EOTV_changefriendship <NPC name> <amount>` | Changes the friendship of the provided NPC by the given amount and prints the before/after values |
+| `EOTV_maxedfriends`                         | Outputs `Utility::getMaxedFriendshipPercent`                                                      |
 
 ## Unlocking Recipes and Perfection
 
