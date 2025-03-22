@@ -127,7 +127,7 @@
         "BarleyZP.EnemyOfTheValley_dust": {
           "Contents": "{{i18n: DustNote}}",
           "Title": "{{i18n: DustNoteTitle}}",
-          "Conditions": "PLAYER_NPC_RELATIONSHIP Current Any Archenemy"
+          "Conditions": "EOTV_PLAYER_NPC_RELATIONSHIP Current Any Archenemy"
         }
       }
     },

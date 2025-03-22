@@ -28,6 +28,13 @@
       "Entries": {
         "BarleyZP.EnemyOfTheValley_AlexNegative2/EOTV_NegativeFriendship Alex -500/p Alex/p Evelyn": "{{i18n:Events.Alex-2}}"
       }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Events/Beach",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_ElliottNegative2/EOTV_NegativeFriendship Elliott -500/p Elliott": "{{i18n:Events.Elliott-2}}"
+      }
     }
   ]
 }
