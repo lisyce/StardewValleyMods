@@ -3,6 +3,7 @@ using System.Reflection.Emit;
 using EnemyOfTheValley.Util;
 using HarmonyLib;
 using StardewValley;
+using StardewValley.Extensions;
 using xTile.Dimensions;
 
 namespace EnemyOfTheValley.Patches;
@@ -74,9 +75,12 @@ public class GameLocationPatches
 
     public static bool CheckApologyMail(GameLocation location)
     {
-        var playerEnemies = Relationships.Enemies(Game1.player);
-        if (playerEnemies.Count == 0) return false;
+        if (!Game1.player.mailReceived.Contains("BarleyZP.EnemyOfTheValley.ApologyLetterMail")) return false;  // we haven't gotten this feature yet
         
+        var playerEnemies = Relationships.Enemies(Game1.player);
+        playerEnemies.RemoveWhere(x => Game1.player.hasOrWillReceiveMail("apologyLetter_" + x.Item2));  // if we already sent a letter today, can't do it again
+        if (playerEnemies.Count == 0) return false;
+
         Response[] responses = new Response[playerEnemies.Count + 1];
         for (var i = 0; i < responses.Length; i++)
         {
@@ -102,8 +106,19 @@ public class GameLocationPatches
         {
             if (whichAnswer == nonDisplay)
             {
-                Game1.addMailForTomorrow("apologyLetter_" + nonDisplay, noLetter: true);
-                Game1.drawObjectDialogue(ModEntry.Translation.Get("ApologyLetterSent", new { npc = display }));
+                if (who.Money >= 500)
+                {
+                    who.Money -= 500;
+                    Game1.addMailForTomorrow("apologyLetter_" + nonDisplay, noLetter: true);
+                    Game1.drawObjectDialogue(ModEntry.Translation.Get("ApologyLetterSent", new { npc = display }));
+                    Game1.playSound("purchaseClick");
+                }
+                else
+                {
+                    Game1.playSound("cancel");
+                }
+                
+                Game1.dayTimeMoneyBox.moneyShakeTimer = 1000;
             }
         }
     }
@@ -112,7 +127,7 @@ public class GameLocationPatches
     {
         CodeMatcher matcher = new (instructions, generator);
         
-        var apologyMailMethod = AccessTools.Method(typeof(GameLocationPatches), nameof(GameLocationPatches.CheckApologyMail));
+        var apologyMailMethod = AccessTools.Method(typeof(GameLocationPatches), nameof(CheckApologyMail));
 
         matcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, "Strings\\StringsFromCSFiles:GameLocation.cs.8429"))
             .ThrowIfNotMatch("Could not find entry point for " + nameof(mailbox_Transpiler))

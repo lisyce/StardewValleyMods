@@ -275,6 +275,7 @@ namespace EnemyOfTheValley.Patches
                     
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("AcceptEnemyCake") ?? new Dialogue(npc, "AcceptEnemyCake", ModEntry.Translation.Get("AcceptEnemyCake")));
                 Relationships.SetRelationship(npc.Name, who, Relationships.Enemy);
+                who.activeDialogueEvents.TryAdd("BarleyZP.EnemyOfTheValley_firstEnemy", 3);
 
                 // Next two lines are in the original bouquet accept code, but not in use for enemies for now
                 //who.autoGenerateActiveDialogueEvent("enemies_" + npc.Name);
