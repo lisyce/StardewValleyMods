@@ -26,8 +26,17 @@
       "Action": "Include",
       "FromFile": "shops.json"
     },
+    {
+      "Action": "Include",
+      "FromFile": "dialogue/rainy.json"
+    },
 
     // load blanks for vanilla NPC negative dialogue files
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
+      "FromFile": "blank.json"
+    },
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",

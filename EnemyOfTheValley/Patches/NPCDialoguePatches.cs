@@ -32,14 +32,17 @@ namespace EnemyOfTheValley.Patches
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.TryGetDialogue), new [] {typeof(string), typeof(object[])}),
                 prefix: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(TryGetDialogue_Prefix_V2))
                 );
+            harmony.Patch(
+                original: AccessTools.Method(typeof(Dialogue), nameof(Dialogue.TryGetDialogue)),
+                prefix: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(StaticTryGetDialogue_Prefix)));
         }
 
-        public static Dictionary<string, string> DialogueLoader(string npcName)
+        public static Dictionary<string, string> DialogueLoader(NPC npc)
         {
             try
             {
                 return Game1.content
-                    .Load<Dictionary<string, string>>("BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + npcName)
+                    .Load<Dictionary<string, string>>("BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + npc.GetDialogueSheetName())
                     .Select(delegate(KeyValuePair<string, string> pair)
                     {
                         string key = pair.Key;
@@ -54,8 +57,18 @@ namespace EnemyOfTheValley.Patches
             }
             
         }
+        
+        public static void StaticTryGetDialogue_Prefix(NPC speaker, ref string translationKey)
+        {
+            if (translationKey.Contains("rainy") &&
+                Game1.player.friendshipData.TryGetValue(speaker.Name, out var friendship) && friendship.Points <= -250)
+            {
+                translationKey = "BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\Rainy:" + speaker.GetDialogueSheetName();
 
-        public static bool TryGetDialogue_Prefix_V1(ref NPC __instance, ref Dialogue __result, string key)
+            }
+        }
+
+        public static bool TryGetDialogue_Prefix_V1(ref NPC __instance, ref Dialogue __result, ref string key)
         {
             if (!Game1.player.friendshipData.TryGetValue(__instance.Name, out var friendship) ||
                 friendship.Points > -250)  // only go to negative dialogue asset if we have at least 1 negative heart
@@ -64,9 +77,9 @@ namespace EnemyOfTheValley.Patches
             }
             
             // try to get negative dialogue first
-            var dialogue = DialogueLoader(__instance.Name);
+            var dialogue = DialogueLoader(__instance);
             if (dialogue.TryGetValue(key, out var text))
-            {
+            {   
                 __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, text);
                 return false;  // skip original because we found something loaded on the negative sheet
             }
@@ -74,7 +87,7 @@ namespace EnemyOfTheValley.Patches
             return true;  // continue to the original method
         }
         
-        public static bool TryGetDialogue_Prefix_V2(ref NPC __instance, ref Dialogue __result, string key, params object[] substitutions)
+        public static bool TryGetDialogue_Prefix_V2(ref NPC __instance, ref Dialogue __result, ref string key, params object[] substitutions)
         {
             if (!Game1.player.friendshipData.TryGetValue(__instance.Name, out var friendship) ||
                 friendship.Points > -250)  // only go to negative dialogue asset if we have at least 1 negative heart
@@ -83,7 +96,7 @@ namespace EnemyOfTheValley.Patches
             }
             
             // try to get negative dialogue first
-            var dialogue = DialogueLoader(__instance.Name);
+            var dialogue = DialogueLoader(__instance);
             if (dialogue.TryGetValue(key, out var text))
             {
                 __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, string.Format(text, substitutions));

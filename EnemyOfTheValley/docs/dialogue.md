@@ -22,6 +22,11 @@ use for best practices. As a shorthand, `Vanilla` means the original dialogue as
 
 Since this mod uses this scheme for vanilla NPCs, you can check out the content pack folder (\[CP\] EnemyOfTheValley) for examples.
 
+## Rainy Day Dialogue
+
+This mod supports negative heart dialogue on rainy days. These dialogue keys go in the asset `BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy`.
+This asset is of the same format of the `Characters/Dialogue/Rainy` [vanilla asset](https://stardewvalleywiki.com/Modding:Dialogue#Rain_dialogue).
+
 ## Location-Specific Dialogue
 
 > Recommended Asset: EOTV
