@@ -12,6 +12,10 @@
     },
     {
       "Action": "Include",
+      "FromFile": "dialogue/elliott.json"
+    },
+    {
+      "Action": "Include",
       "FromFile": "dialogue/haley.json"
     },
     {
@@ -32,6 +36,11 @@
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Elliott",
       "FromFile": "blank.json"
     },
     {
