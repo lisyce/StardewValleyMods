@@ -1,0 +1,21 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.ModListPageGen",
+  "Name": "Mod List Page Generator",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Provides a console command to generate an HTML-formmated mod list based on the mods SMAPI has currently loaded.",
+  "MinimumApiVersion": "4.1.10",
+  "MinimumGameVersion": "1.6.15",
+  "EntryDll": "ModListPageGen.dll",
+  "UpdateKeys": [
+    "Nexus:32589"
+  ]
+}
