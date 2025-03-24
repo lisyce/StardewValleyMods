@@ -33,12 +33,19 @@ public class ModEntry : Mod
         
         var client = new NexusApiClient(apiKey, Monitor);
 
-        if (!client.Validated)
+        if (!client.Validate(printReqLeft: true))
         {
-            Monitor.Log("Could not validate with the Nexus Mods API.", LogLevel.Warn);
+            Monitor.Log("Could not authenticate with the Nexus Mods API.", LogLevel.Warn);
+        }
+
+        int len = _helper.ModRegistry.GetAll().Count();
+        if (client.Validated && client.HourlyRequestsLeft < len)
+        {
+            Monitor.Log("Not enough hourly requests left with the Nexus Mods API to add Nexus information to this mod list. Try generating a list without using your API key or come back later.", LogLevel.Error);
+            return;
         }
         
-        Monitor.Log($"Building Mod List of {_helper.ModRegistry.GetAll().Count()} Mods...", LogLevel.Info);
+        Monitor.Log($"Building Mod List of {len} Mods...", LogLevel.Info);
         
         var tasks = _helper.ModRegistry.GetAll().Select(x => GetModInfo(x, client)).ToList();
         
@@ -49,7 +56,7 @@ public class ModEntry : Mod
             var source = File.ReadAllText(_helper.DirectoryPath + "/template.html");
             var template = Handlebars.Compile(source);
 
-            var modData = completed.Result.Select(x => x.Item1?.ToTemplate())
+            var modData = completed.Result.Select(x => x.Item1?.ToTemplate(_helper))
                 .Where(x => x is not null)
                 .OrderBy(x => x!.Name);
             var data = new
@@ -58,7 +65,6 @@ public class ModEntry : Mod
                 Author = author,
                 ModCount = modData.Count(),
                 Mods = modData,
-                NotShownCount = modData.Count(x => !x.HasNexus),
             };
             var result = template(data);
 
@@ -81,7 +87,7 @@ public class ModEntry : Mod
         {
             // call the nexus API
             var (result, errMsg) = await client.GetNexusInfo(nexusId);
-            return (new ModInfo(info.Manifest, result), errMsg);
+            return (new ModInfo(info.Manifest, result, nexusId), errMsg);
         }
 
         return (new ModInfo(info.Manifest, null), "No Nexus update keys found");

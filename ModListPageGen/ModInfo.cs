@@ -9,10 +9,12 @@ public class ModInfo
 {
     private IManifest _manifest;
     private NexusInfo? _nexusInfo;
-    public ModInfo(IManifest manifest, NexusInfo? nexus)
+    private string? _nexusId;
+    public ModInfo(IManifest manifest, NexusInfo? nexus, string? nexusId = null)
     {
         _manifest = manifest;
         _nexusInfo = nexus;
+        _nexusId = nexusId;
     }
 
     public class TemplatedModInfo
@@ -20,15 +22,16 @@ public class ModInfo
         public bool HasNexus;
         public string Name;
         public string Author;
-        public int? NexusId;
+        public string? NexusId;
         public string Summary;
         public string Downloads;
         public string Endorsements;
         public bool? AdultContent;
         public string? PictureUrl;
+        public string? ContentPackFor;
     }
 
-    public TemplatedModInfo ToTemplate()
+    public TemplatedModInfo ToTemplate(IModHelper helper)
     {
         return new TemplatedModInfo
         {
@@ -36,12 +39,13 @@ public class ModInfo
             
             Name = _manifest.Name,
             Author = _manifest.Author,
-            NexusId = _nexusInfo?.ModId,
+            NexusId = _nexusId,
             Summary = _nexusInfo?.Summary ?? _manifest.Description,
             Downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-",
             Endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-",
             AdultContent = _nexusInfo?.AdultContent,
             PictureUrl = _nexusInfo?.PictureUrl,
+            ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
         };
     }
 };

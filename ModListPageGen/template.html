@@ -34,22 +34,15 @@
     }
     
     .details {
-      max-width: 70%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 100%;
     }
     
     .notice {
-      padding: 1.25rem;
-      height: 215px;
-    }
-    
-    .notice-row {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: nowrap;
-      align-items: center;
+      padding: 1rem;
+      margin: 0;
     }
     
     .stats {
@@ -57,20 +50,13 @@
       gap: 1rem;
       flex-wrap: wrap;
       border-top: 1px solid var(--border);
-      padding-top: 10px;
       margin-top: 10px 
     }
     
-    .notice-row .details p {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
+    .details p {
       font-size: 1rem;
-    }
-    
-    img {
-      object-fit: cover;
-      aspect-ratio: 16/9;
-      height: 170px;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
     }
     
     .card-title {
@@ -78,7 +64,6 @@
       margin-bottom: 10px;
       font-size: 1.5rem;
     }
-    
     
     .adult-content {
       color: var(--code);
@@ -105,6 +90,12 @@
     ul {
       padding-left: 1rem;
     }
+    
+    #detail-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+      grid-gap: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -112,50 +103,55 @@
   <h1 id="top">{{Title}}</h1>
   <p>Author: {{Author}} | {{ModCount}} Mods</p>
   <div class="credit-toggle">
-    <p>Created with <a href="https://www.nexusmods.com/stardewvalley/mods/32589" target="_blank">BarleyZP's Mod List Generator</a></p>
-    <div><input type="checkbox" id="toggle" name="toggle"><label for="toggle">Simple Layout</label></div>
+    <p>Created with <a href="https://www.nexusmods.com/stardewvalley/mods/32589" target="_blank">BarleyZP's Mod List Generator</a>.</p>
+    <div><input type="checkbox" id="toggle" name="toggle"><label for="toggle">Simple List</label></div>
   </div>
   <hr>
   
   <div id="detail-list">
   {{#each Mods}}
-  {{#if HasNexus}}
   <div class="notice">
-    <div class="notice-row">
-      <img src="{{PictureUrl}}" alt="{{Name}}'s Nexus Mods cover image">
-      <div class="details">
+    <div class="details">
+      <div>
         <h2 class="card-title">{{Name}}</h2>
-        <p>By: {{Author}} | <a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">Nexus Mods: {{Name}}</a></p>
+        <p>By: {{Author}} {{#if ContentPackFor}}| For {{ContentPackFor}}{{/if}}</p>
         
-        <div class="summary">{{Summary}}</div>
-        <div class="stats">
-          <p>{{Downloads}} Downloads</p>
-          <p>{{Endorsements}} Endorsements</p>
-          {{#if AdultContent}}
-          <p class="adult-content">Contains Adult Content</p>
-          {{/if}}
-        </div>
+        {{#if NexusId}}
+        <p><a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">Nexus: {{Name}}</a></p>
+        {{/if}}
+        <p class="summary">{{Summary}}</p>
+
       </div>
+      
+
+      {{#if HasNexus}}
+      <div class="stats">
+        <p>{{Downloads}} Downloads</p>
+        <p>{{Endorsements}} Endorsements</p>
+        {{#if AdultContent}}
+        <p class="adult-content">Contains Adult Content</p>
+        {{/if}}
+      </div>
+      {{/if}}
+
     </div>
   </div>
-  {{/if}}
   {{/each}}
     
-  <p>{{NotShownCount}} mods are not shown because their info could not be fetched from the Nexus Mods API. Switch to Simple Layout to see them.</p>
   </div>
   
   <div id="simple-list">
     <ul>
       {{#each Mods}}
-      {{#if HasNexus}}
+      
       <li>
-        <a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">{{Name}}</a> by {{Author}} {{#if AdultContent}}| <span class="adult-content">Contains Adult Content</span>{{/if}}
+        {{#if NexusId}}
+          <a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">{{Name}}</a>
+        {{else}}
+          {{Name}}
+        {{/if}}
+        by {{Author}} {{#if AdultContent}}| <span class="adult-content">Contains Adult Content</span>{{/if}}
       </li>
-      {{else}}
-        <li>
-          {{Name}} by {{Author}}
-        </li>
-      {{/if}}
       {{/each}}
     </ul>
   </div>
@@ -177,7 +173,7 @@
       detailed.style.display = "none";
     } else {
       simple.style.display = "none";
-      detailed.style.display = "block";
+      detailed.style.display = "grid";
     }
   })
 

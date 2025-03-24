@@ -12,7 +12,8 @@ public class NexusApiClient
     private readonly HttpClient _httpClient;
     private readonly IMonitor _monitor;
 
-    public bool Validated { get; }
+    public bool Validated { get; private set; }
+    public int HourlyRequestsLeft { get; private set; }
 
     private class NexusApiGetResponse
     {
@@ -46,23 +47,29 @@ public class NexusApiClient
         Validated = Validate();
     }
     
-    private bool Validate()
+    public bool Validate(bool printReqLeft = false)
     {
         var task = _httpClient.GetAsync("users/validate");
         task.Wait();
-        
-        if (task.Result.Headers.TryGetValues("x-rl-daily-remaining", out var vals))
+
+        if (printReqLeft)
         {
-            var remaining = vals.FirstOrDefault("Unknown");
-            _monitor.Log($"Daily API calls remaining: {remaining}", LogLevel.Info);
+            if (task.Result.Headers.TryGetValues("x-rl-daily-remaining", out var vals))
+            {
+                var remaining = vals.FirstOrDefault("0");
+                _monitor.Log($"Daily API calls remaining: {remaining}", LogLevel.Info);
+            }
+        
+            if (task.Result.Headers.TryGetValues("x-rl-hourly-remaining", out var vals2))
+            {
+                var remaining = vals2.FirstOrDefault("0");
+                HourlyRequestsLeft = int.Parse(remaining);
+                _monitor.Log($"Hourly API calls remaining: {remaining}", LogLevel.Info);
+            }
         }
         
-        if (task.Result.Headers.TryGetValues("x-rl-hourly-remaining", out var vals2))
-        {
-            var remaining = vals2.FirstOrDefault("Unknown");
-            _monitor.Log($"Hourly API calls remaining: {remaining}", LogLevel.Info);
-        }
-        
+
+        Validated = task.Result.IsSuccessStatusCode;
         return task.Result.IsSuccessStatusCode;
     }
     
@@ -79,7 +86,7 @@ public class NexusApiClient
         {
             return (null, $"Failed to call Nexus API. Status Code: {response.StatusCode}. Reason: {response.ReasonPhrase}");
         }
-
+        
         var body = await response.Content.ReadAsStringAsync();
         var json = JsonSerializer.Deserialize<NexusApiGetResponse>(body);
         
