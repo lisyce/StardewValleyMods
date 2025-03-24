@@ -17,9 +17,42 @@ public class ModEntry : Mod
         _helper.ConsoleCommands.Add("bzp_mod_list",
             "Generates an HTML-formatted mod list. Usage: bzp_mod_list \"<title>\" \"<author>\" <nexus API key (optional)>",
             GenerateList);
+        _helper.ConsoleCommands.Add("bzp_share_mod_list", "Creates a shareable link for an existing mod list. Usage: bzp_share_mod_list \"<title>\"",
+            ShareList);
     }
 
-    public void GenerateList(string command, string[] args)
+    private void ShareList(string command, string[] args)
+    {
+        if (args.Length < 1)
+        {
+            Monitor.Log("Not enough arguments provided to bzp_share_mod_list. Usage: bzp_share_mod_list \"<title>\"", LogLevel.Error);
+            return;
+        }
+        var title = args[0];
+        
+        // does the list exist?
+        var outputPath = Path.Combine(_helper.DirectoryPath, "GeneratedModLists", $"{MakeValidFileName(title)}.html");
+        if (!File.Exists(outputPath))
+        {
+            Monitor.Log("Mod list with that name could not be found. Is there a file with that name in the <this mod's folder>/GeneratedModLists folder?", LogLevel.Error);
+            return;
+        }
+        Monitor.Log("Generating shareable link. This may take a few seconds...", LogLevel.Info);
+        
+        var html = File.ReadAllText(outputPath);
+        // post
+        var client = new ShareableLinkClient(Monitor);
+        if (!client.TryCreateLink(html, out string link))
+        {
+            Monitor.Log("Could not create shareable link. Please try again in a few minutes.", LogLevel.Error);
+            return;
+        }
+        
+        Monitor.Log($"Shareable link generated: {link}", LogLevel.Info);
+        Monitor.Log("Links are valid for four weeks.", LogLevel.Debug);
+    }
+
+    private void GenerateList(string command, string[] args)
     {
         if (args.Length < 2)
         {
