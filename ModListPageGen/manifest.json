@@ -7,11 +7,11 @@
    | 
    */
   "$schema": "https://smapi.io/schemas/manifest.json",
-  "UniqueID": "BarleyZP.ModListPageGen",
-  "Name": "Mod List Page Generator",
+  "UniqueID": "BarleyZP.ShareableModLists",
+  "Name": "Shareable Mod List Generator",
   "Author": "BarleyZP",
   "Version": "1.0.0",
-  "Description": "Provides a console command to generate an HTML-formmated mod list based on the mods SMAPI has currently loaded.",
+  "Description": "Provides console commands to generate an HTML-formmated mod list and shareable links based on the mods SMAPI has currently loaded.",
   "MinimumApiVersion": "4.1.10",
   "MinimumGameVersion": "1.6.15",
   "EntryDll": "ModListPageGen.dll",

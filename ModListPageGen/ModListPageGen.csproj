@@ -11,10 +11,10 @@
         <Version_AppendConfiguration>false</Version_AppendConfiguration>
         <MinimumApiVersion>4.1.10</MinimumApiVersion>
         <MinimumGameVersion>1.6.15</MinimumGameVersion>
-        <Name>Mod List Page Generator</Name>
+        <Name>Shareable Mod List Generator</Name>
         <Authors>BarleyZP</Authors>
-        <Description>Provides a console command to generate an HTML-formmated mod list based on the mods SMAPI has currently loaded.</Description>
-        <UniqueId>BarleyZP.ModListPageGen</UniqueId>
+        <Description>Provides console commands to generate an HTML-formmated mod list and shareable links based on the mods SMAPI has currently loaded.</Description>
+        <UniqueId>BarleyZP.ShareableModLists</UniqueId>
         <UpdateKeys>Nexus:32589</UpdateKeys>
     </PropertyGroup>
 

@@ -43,6 +43,8 @@ public class NexusApiClient
         
         _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         _httpClient.DefaultRequestHeaders.Add("apikey", apiKey);
+        _httpClient.DefaultRequestHeaders.Add("Application-Version", "1.0.0");
+        _httpClient.DefaultRequestHeaders.Add("Application-Name", "Shareable Mod List Generator");
         
         Validated = Validate();
     }
