@@ -19,13 +19,15 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="GraphQL.Client" Version="6.1.0" />
+      <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0" />
       <PackageReference Include="Handlebars.Net" Version="2.1.6" />
       <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
       <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
     </ItemGroup>
 
     <PropertyGroup>
-        <BundleExtraAssemblies>ThirdParty</BundleExtraAssemblies>
+        <BundleExtraAssemblies>ThirdParty, System</BundleExtraAssemblies>
     </PropertyGroup>
 
     <ItemGroup>

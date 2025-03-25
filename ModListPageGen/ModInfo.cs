@@ -3,13 +3,16 @@ using StardewModdingAPI;
 namespace ModListPageGen;
 
 public record NexusInfo(string Name, string Summary, string PictureUrl, int Downloads,
-    int UniqueDownloads, int ModId, int Endorsements, bool AdultContent);
+    int ModId, int Endorsements, bool AdultContent, string categoryName);
 
 public class ModInfo
 {
     private IManifest _manifest;
     private NexusInfo? _nexusInfo;
     private string? _nexusId;
+
+    public string Name => _manifest.Name;
+
     public ModInfo(IManifest manifest, NexusInfo? nexus, string? nexusId = null)
     {
         _manifest = manifest;
