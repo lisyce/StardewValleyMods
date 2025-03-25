@@ -32,6 +32,8 @@ public class ModInfo
         public bool? AdultContent;
         public string? PictureUrl;
         public string? ContentPackFor;
+        public string? CategoryName;
+        public string? CategoryClass;
     }
 
     public TemplatedModInfo ToTemplate(IModHelper helper)
@@ -49,6 +51,8 @@ public class ModInfo
             AdultContent = _nexusInfo?.AdultContent,
             PictureUrl = _nexusInfo?.PictureUrl,
             ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
+            CategoryName = _nexusInfo?.categoryName,
+            CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
         };
     }
 };

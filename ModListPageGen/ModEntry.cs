@@ -77,8 +77,10 @@ public class ModEntry : Mod
         {
             Title = title,
             Author = author,
-            ModCount = result.Count(),
+            ModCount = result.Count,
             Mods = result,
+            Categories = result.Where(x => x.CategoryName != null)
+                .Select(x => new { CategoryName = x.CategoryName, CategoryClass = x.CategoryClass}).Distinct().ToList()
         };
         var templated = template(data);
         

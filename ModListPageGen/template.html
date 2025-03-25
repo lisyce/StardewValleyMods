@@ -96,6 +96,12 @@
       grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
       grid-gap: 1rem;
     }
+    
+    .category-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
@@ -108,9 +114,21 @@
   </div>
   <hr>
   
+  <details class="filters">
+    <summary>Filters</summary>
+    <p>Categories</p>
+    <div class="category-list">
+      {{#each Categories}}
+      <div><input class="category-box" type="checkbox" id="{{CategoryClass}}" name="{{CategoryClass}}" value="{{CategoryClass}}" checked><label for="{{CategoryClass}}">{{CategoryName}}</label></div>
+      {{/each}}
+      <div><input class="category-box" type="checkbox" id="No_Category" name="No_Category" value="No_Category" checked><label for="No_Category">No Category</label></div>
+    </div>
+  </details>
+  
+  <hr>
   <div id="detail-list">
   {{#each Mods}}
-  <div class="notice">
+  <div class="notice {{CategoryClass}}">
     <div class="details">
       <div>
         <h2 class="card-title">{{Name}}</h2>
@@ -144,7 +162,7 @@
     <ul>
       {{#each Mods}}
       
-      <li>
+      <li class="{{CategoryClass}}">
         {{#if NexusId}}
           <a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">{{Name}}</a>
         {{else}}
@@ -176,6 +194,14 @@
       detailed.style.display = "grid";
     }
   })
+  
+  for (let box of document.getElementsByClassName("category-box")) {
+    box.addEventListener("change", () => {
+        for (let el of document.getElementsByClassName(box.value)) {
+          el.style.display = box.checked ? "block" : "none";
+      }
+    })
+  }
 
 </script>
 </body>
