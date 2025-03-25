@@ -117,7 +117,7 @@ public class ModEntry : Mod
             {
                 var uniqueId = nexusIds[nexusInfo.ModId];
                 var modInfo = Helper.ModRegistry.Get(uniqueId);
-                result.Add(new ModInfo(modInfo.Manifest, nexusInfo));
+                result.Add(new ModInfo(modInfo.Manifest, nexusInfo, nexusInfo.ModId.ToString()));
             }
         }
         catch (Exception ex)
