@@ -1,10 +1,23 @@
 {
   "Changes": [
     {
+      "Action": "Load",
+      "Priority": "Low",
+      "Target": "Data/Events/Blacksmith",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Events/Blacksmith",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_ClintNegative2/EOTV_NegativeFriendship Clint -500/p Clint": "none/8 19/Clint 10 13 0 farmer -10 -10 0/pause 500/playSound clank/pause 1000/playSound clank/pause 750/playSound clank/pause 1000/warp farmer 5 18/playSound doorClose/faceDirection Clint 2/jump Clint/move farmer 0 -5 1/move farmer 3 0 1/faceDirection Clint 3/speak Clint \"{{i18n:Events.Clint-2.0}}\"/question null \"#{{i18n:Events.Clint-2.1}}#{{i18n:Events.Clint-2.2}}\"/speak Clint \"{{i18n:Events.Clint-2.3}}\"/emote Clint 40/pause 2000/speak Clint \"{{i18n:Events.Clint-2.4}}\"/quickQuestion #{{i18n:Events.Clint-2.5}}#{{i18n:Events.Clint-2.6}}(break)speak Clint \"{{i18n:Events.Clint-2.7}}\"(break)friendship Clint -40\\speak Clint \"{{i18n:Events.Clint-2.8}}\"/speak Clint \"{{i18n:Events.Clint-2.9}}\"/globalFade/viewport -1000 -1000/end"
+      }
+    },
+    {
       "Action": "EditData",
       "Target": "Data/Events/HaleyHouse",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley_HaleyNegative2/EOTV_NegativeFriendship Haley -500": "50s/6 20/farmer 2 23 0 Haley 12 20 3/skippable/move farmer 0 -3 1 Haley -7 0 3/speak Haley \"{{i18n:Events.Haley-2.0}}\"/quickQuestion #{{i18n:Events.Haley-2.7}}#{{i18n:Events.Haley-2.8}}(break)speak Haley \"{{i18n:Events.Haley-2.1}}\"\\questionAnswered cameToSeeHaley(break)speak Haley \"{{i18n:Events.Haley-2.2}}\"/move Haley -2 0 3/faceDirection farmer 2/pause 500/faceDirection farmer 1/pause 500/emote farmer 8/speak Haley \"{{i18n:Events.Haley-2.3}}\"/quickQuestion #{{i18n:Events.Haley-2.9}}#{{i18n:Events.Haley-2.10}}(break)speak Haley \"{{i18n:Events.Haley-2.4}}\"(break)friendship Haley -20\\speak Haley \"{{i18n:Events.Haley-2.5}}\"/emote farmer 12/pause 500/fork cameToSeeHaley BarleyZP.EnemyOfTheValley_cameToSeeHaleySpeak/pause 1000/speak Haley \"{{i18n:Events.Haley-2.6}}\"/faceDirection Haley 1/move Haley 7 0 3 true/globalFade/viewport -1000 -1000/end",
+        "BarleyZP.EnemyOfTheValley_HaleyNegative2/EOTV_NegativeFriendship Haley -500/p Haley": "50s/6 20/farmer 2 23 0 Haley 12 20 3/skippable/move farmer 0 -3 1 Haley -7 0 3/speak Haley \"{{i18n:Events.Haley-2.0}}\"/quickQuestion #{{i18n:Events.Haley-2.7}}#{{i18n:Events.Haley-2.8}}(break)speak Haley \"{{i18n:Events.Haley-2.1}}\"\\questionAnswered cameToSeeHaley(break)speak Haley \"{{i18n:Events.Haley-2.2}}\"/move Haley -2 0 3/faceDirection farmer 2/pause 500/faceDirection farmer 1/pause 500/emote farmer 8/speak Haley \"{{i18n:Events.Haley-2.3}}\"/quickQuestion #{{i18n:Events.Haley-2.9}}#{{i18n:Events.Haley-2.10}}(break)speak Haley \"{{i18n:Events.Haley-2.4}}\"(break)friendship Haley -20\\speak Haley \"{{i18n:Events.Haley-2.5}}\"/emote farmer 12/pause 500/fork cameToSeeHaley BarleyZP.EnemyOfTheValley_cameToSeeHaleySpeak/pause 1000/speak Haley \"{{i18n:Events.Haley-2.6}}\"/faceDirection Haley 1/move Haley 7 0 3 true/globalFade/viewport -1000 -1000/end",
         "BarleyZP.EnemyOfTheValley_cameToSeeHaleySpeak": "pause 500/speak Haley \"{{i18n:Events.Haley-2.Fork.0}}\"/globalFade/viewport -1000 -1000/end"
       }
     },

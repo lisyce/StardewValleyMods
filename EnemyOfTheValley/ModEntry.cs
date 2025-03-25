@@ -21,8 +21,6 @@ namespace EnemyOfTheValley
         public static Texture2D? StandardSprites;
         public override void Entry(IModHelper helper)
         {
-            helper.ModRegistry.Get("").
-            
             Monitor = base.Monitor;
             Translation = helper.Translation;
             
