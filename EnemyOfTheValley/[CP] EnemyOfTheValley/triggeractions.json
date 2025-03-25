@@ -1,0 +1,26 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/TriggerActions",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_OnHaley-6": {
+          "Id": "BarleyZP.EnemyOfTheValley_OnHaley-6",
+          "Trigger": "DayEnding",
+          "Condition": "PLAYER_HEARTS  Current Haley -14 -6",
+          "Actions": [
+            "AddMail Current BarleyZP.EnemyOfTheValley.Haley-6"
+          ]
+        },
+        "BarleyZP.EnemyOfTheValley_ApologyLetterMail": {
+          "Id": "\"BarleyZP.EnemyOfTheValley_ApologyLetterMail",
+          "Trigger": "DayStarted",
+          "Condition": "!PLAYER_HAS_CONVERSATION_TOPIC Current BarleyZP.EnemyOfTheValley_firstEnemy, EOTV_PLAYER_NPC_RELATIONSHIP Current Any Enemy, !PLAYER_HAS_MAIL Current BarleyZP.EnemyOfTheValley.ApologyLetterMail",
+          "Actions": [
+            "AddMail Current BarleyZP.EnemyOfTheValley.ApologyLetterMail"
+          ]
+        }
+      }
+    }
+  ]
+}

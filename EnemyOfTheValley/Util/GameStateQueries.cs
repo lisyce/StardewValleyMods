@@ -1,10 +1,22 @@
 using StardewValley;
 using StardewValley.Delegates;
+using StardewValley.Objects;
 
 namespace EnemyOfTheValley.Util;
 
 public class GameStateQueries
 {
+    public static bool PlayerWearingHat(string[] query, GameStateQueryContext context)
+    {
+        if (!ArgUtility.TryGet(query, 1, out var playerKey, out var error, allowBlank: false) ||
+            !ArgUtility.TryGet(query, 2, out var hatId, out error, allowBlank: false))
+        {
+            return GameStateQuery.Helpers.ErrorResult(query, error);
+        }
+        
+        return GameStateQuery.Helpers.WithPlayer(context.Player, playerKey, target => target.hat?.Value?.ItemId == hatId);
+    }
+    
     public static bool EotvPlayerNpcRelationship(string[] query, GameStateQueryContext context)
     {
         if (!ArgUtility.TryGet(query, 1, out var playerKey, out var error, allowBlank: false) || !ArgUtility.TryGet(query, 2, out var npcName, out error, allowBlank: false))

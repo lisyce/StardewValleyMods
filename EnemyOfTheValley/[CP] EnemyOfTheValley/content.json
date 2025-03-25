@@ -30,6 +30,10 @@
       "Action": "Include",
       "FromFile": "dialogue/rainy.json"
     },
+    {
+      "Action": "Include",
+      "FromFile": "triggeractions.json"
+    },
 
     // load blanks for vanilla NPC negative dialogue files
     {
@@ -127,7 +131,8 @@
       "Entries": {
         "BarleyZP.EnemyOfTheValley.EnemyCake": "{{i18n: CakeMail}}",
         "BarleyZP.EnemyOfTheValley.StardropMail": "{{i18n: StardropMail}}",
-        "BarleyZP.EnemyOfTheValley.ApologyLetterMail": "{{i18n: ApologyLetterMail}}"
+        "BarleyZP.EnemyOfTheValley.ApologyLetterMail": "{{i18n: ApologyLetterMail}}",
+        "BarleyZP.EnemyOfTheValley.Haley-6": "{{i18n:HaleyNegative6Mail}}"
       }
     },
     {
@@ -154,20 +159,6 @@
       "Target": "Strings/Locations",
       "Entries": {
         "WitchHut_EvilShrineCenter": "{{i18n: WitchHut_EvilShrineCenter}}"
-      }
-    },
-    {
-      "Action": "EditData",
-      "Target": "Data/TriggerActions",
-      "Entries": {
-        "BarleyZP.EnemyOfTheValley_ApologyLetterMail": {
-          "Id": "\"BarleyZP.EnemyOfTheValley_ApologyLetterMail",
-          "Trigger": "DayStarted",
-          "Condition": "!PLAYER_HAS_CONVERSATION_TOPIC Current BarleyZP.EnemyOfTheValley_firstEnemy, EOTV_PLAYER_NPC_RELATIONSHIP Current Any Enemy, !PLAYER_HAS_MAIL Current BarleyZP.EnemyOfTheValley.ApologyLetterMail",
-          "Actions": [
-            "AddMail Current BarleyZP.EnemyOfTheValley.ApologyLetterMail"
-          ]
-        }
       }
     }
   ]

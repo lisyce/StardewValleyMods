@@ -9,6 +9,7 @@ using EOTVPreconditions = EnemyOfTheValley.Util.Preconditions;
 using EOTVGameStateQueries = EnemyOfTheValley.Util.GameStateQueries;
 using StardewValley.Locations;
 using Microsoft.Xna.Framework;
+using StardewValley.Delegates;
 using SObject = StardewValley.Object;
 
 namespace EnemyOfTheValley
@@ -54,6 +55,7 @@ namespace EnemyOfTheValley
             Event.RegisterPrecondition("EOTV_NegativeFriendship", EOTVPreconditions.NegativeFriendship);
             
             GameStateQuery.Register("EOTV_PLAYER_NPC_RELATIONSHIP", EOTVGameStateQueries.EotvPlayerNpcRelationship);
+            GameStateQuery.Register("PLAYER_WEARING_HAT", EOTVGameStateQueries.PlayerWearingHat);
             
             NpcReceiveObjectApi.Instance.RegisterItemHandler(
                 ModManifest,

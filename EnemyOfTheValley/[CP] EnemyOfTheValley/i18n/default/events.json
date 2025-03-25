@@ -11,6 +11,18 @@
   "Events.Haley-2.9": "Honestly, I've never thought a lot about my outfits.",
   "Events.Haley-2.10": "Stop insulting me! I know how to dress!",
   "Events.Haley-2.Fork.0": "So anyway, did you need something else from me?",
+  
+  "Events.Haley-6.0": "I'm a bit surprised you decided to come, Haley. But welcome!$h",
+  "Events.Haley-6.1": "I figured I'd give it a go since it's community day and all. I invited @, too!",
+  "Events.Haley-6.2": "Ah, they're here!$h",
+  "Events.Haley-6.3": "Um... that's an interesting choice for aerobics.$1",
+  "Events.Haley-6.4": "It might get pretty sweaty working out in that mask!$1",
+  "Events.Haley-6.5": "I will say it's a bit... off-putting. Where did you even get it?$2",
+  "Events.Haley-6.6": "I thought it was costume day!",
+  "Events.Haley-6.7": "What is this, Haley? Some kind of sick joke?",
+  "Events.Haley-6.8": "What are you talking about? That's so silly!$1",
+  "Events.Haley-6.9": "Oh come on, it's funny!$h#$b#You gotta admit you look a bit ridiculous!$h",
+  "Events.Haley-6.10": "$query EOTV_NegativeFriendship Emily -250#I really don't think it's practical for working out... but it is community day after all.$u#$b#Let's get back to it.$0|Well, I for one don't mind a bit of fun during fitness class! Let's get back to it!$h",
 
   "Events.Pierre-2.0": "Hey, @. Here to do business again?#$b#You know, the townspeople have been saying I've got *quite* the green thumb.$1",
   "Events.Pierre-2.1": "Well, of course you know I resell what you sell me. That's just business.#$b#But, it appears our neighbors seem to think that it's me who grows all this!$1",
