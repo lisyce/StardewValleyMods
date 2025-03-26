@@ -73,14 +73,14 @@ public class NexusApiClient
             var graphQLResponse = await _graphQl.SendQueryAsync<GraphqlSchemas.LegacyModsType>(request);
             if (graphQLResponse.Errors?.Length > 0)
             {
-                _monitor.Log(graphQLResponse.Errors?[0].Message, LogLevel.Error);
+                _monitor.Log("Failed to call the Nexus API, but your mod list will still be generated. Logging an error at TRACE level...", LogLevel.Error);
+                _monitor.Log(graphQLResponse.Errors?[0].Message ?? "Unknown Error", LogLevel.Trace);
                 return new Dictionary<int, NexusInfo>();
             }
         
             var result = graphQLResponse.Data.legacyMods.nodes.Select(x => x.ToNexusInfo()).ToList();
             nexusInfoList.AddRange(result);
         }
-        
         
         return nexusInfoList.ToDictionary(x => x.ModId, x => x);
     }

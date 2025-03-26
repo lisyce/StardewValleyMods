@@ -177,18 +177,28 @@ public class ModEntry : Mod
             {
                 if (TryGetNexusModId(mod.Manifest, out int id))
                 {
-                    var nexusInfo = task.Result[id];
-                    var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
-                    if (match == null) continue;
+                    if (task.Result.TryGetValue(id, out var nexusInfo))
+                    {
+                        var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
+                        if (match == null) continue;
 
-                    result.Remove(match);
-                    result.Add(new ModInfo(mod.Manifest, nexusInfo, id.ToString()));
+                        result.Remove(match);  // replace with the nexus info
+                        result.Add(new ModInfo(mod.Manifest, nexusInfo, id.ToString()));
+                    }
+                    else
+                    {
+                        var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
+                        if (match == null) continue;
+
+                        result.Remove(match);  // replace with the nexus info
+                        result.Add(new ModInfo(mod.Manifest, null, id.ToString()));
+                    }
                 }
             }
         }
         catch (Exception ex)
         {
-            Monitor.Log("Could not build mod list.", LogLevel.Error);
+            Monitor.Log("Could not add Nexus info to mod list.", LogLevel.Error);
             Monitor.Log(ex.Message, LogLevel.Error);
         }
         
@@ -202,7 +212,7 @@ public class ModEntry : Mod
             if (key.ToLower().Contains("nexus"))
             {
                 var strId = NexusIdRegex.Match(key).Value;
-                if (int.TryParse(strId, out nexusId))
+                if (int.TryParse(strId, out nexusId) && nexusId > 0)
                 {
                     return true;
                 }

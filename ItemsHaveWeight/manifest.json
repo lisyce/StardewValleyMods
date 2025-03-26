@@ -6,5 +6,5 @@
   "UniqueID": "BarleyZP.ItemsHaveWeight",
   "EntryDll": "ItemsHaveWeight.dll",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [ "Nexus:26693" ]
+  "UpdateKeys": ["Nexus:122953"]
 }
