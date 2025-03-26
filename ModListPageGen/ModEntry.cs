@@ -6,6 +6,9 @@ namespace ModListPageGen;
 
 public class ModEntry : Mod
 {
+    private static string CSS = "";
+    private static string JS = "";
+    
     private static readonly Regex NexusIdRegex = new(@"\d+");
         
     private IModHelper _helper;
@@ -86,7 +89,9 @@ public class ModEntry : Mod
                     CategoryCount = x.Count()
                 })
                 .ToList(),
-            DependencyTree = GetDependencyTree(Helper.ModRegistry.GetAll())
+            DependencyTree = GetDependencyTree(Helper.ModRegistry.GetAll()),
+            MainCssCDNLink = CSS,
+            MainJsCDNLink = JS,
         };
         var templated = template(data);
         
