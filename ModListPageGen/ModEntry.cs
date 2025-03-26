@@ -69,7 +69,6 @@ public class ModEntry : Mod
         
         var result = GetMods(_helper.ModRegistry.GetAll(), client).OrderBy(x => x.Name)
             .Select(x => x.ToTemplate(_helper)).ToList();
-        
         var source = File.ReadAllText(_helper.DirectoryPath + "/template.html");
         var template = Handlebars.Compile(source);
         
@@ -151,7 +150,7 @@ public class ModEntry : Mod
     {
         List<ModInfo> result = new();
         Dictionary<int, string> nexusIds = new();
-        
+
         foreach (var mod in mods)
         {
             // does this mod have nexus update keys?
@@ -159,27 +158,31 @@ public class ModEntry : Mod
             {
                 nexusIds.TryAdd(id, mod.Manifest.UniqueID);
             }
-            else
-            {
-                result.Add(new ModInfo(mod.Manifest, null));
-            }
+
+            result.Add(new ModInfo(mod.Manifest, null));
         }
-        
+
         // call the api for all the nexus Ids
         var task = client.GetMods(nexusIds.Keys.ToHashSet());
         try
         {
             task.Wait();
-            foreach (var nexusInfo in task.Result)
+            foreach (var mod in mods)
             {
-                var uniqueId = nexusIds[nexusInfo.ModId];
-                var modInfo = Helper.ModRegistry.Get(uniqueId);
-                result.Add(new ModInfo(modInfo.Manifest, nexusInfo, nexusInfo.ModId.ToString()));
+                if (TryGetNexusModId(mod.Manifest, out int id))
+                {
+                    var nexusInfo = task.Result[id];
+                    var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
+                    if (match == null) continue;
+
+                    result.Remove(match);
+                    result.Add(new ModInfo(mod.Manifest, nexusInfo, id.ToString()));
+                }
             }
         }
         catch (Exception ex)
         {
-            Monitor.Log("Could not get Mods from Nexus API.", LogLevel.Error);
+            Monitor.Log("Could not build mod list.", LogLevel.Error);
             Monitor.Log(ex.Message, LogLevel.Error);
         }
         

@@ -8,7 +8,6 @@
     
     <PropertyGroup>
         <Version>1.0.0</Version>
-        <Version_AppendConfiguration>false</Version_AppendConfiguration>
         <MinimumApiVersion>4.1.10</MinimumApiVersion>
         <MinimumGameVersion>1.6.15</MinimumGameVersion>
         <Name>Shareable Mod List Generator</Name>

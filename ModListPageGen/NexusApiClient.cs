@@ -25,7 +25,7 @@ public class NexusApiClient
         _graphQl.HttpClient.DefaultRequestHeaders.Add("Application-Name", "Shareable Mod List Generator");
     }
 
-    public async Task<List<NexusInfo>> GetMods(HashSet<int> modIds)
+    public async Task<Dictionary<int, NexusInfo>> GetMods(HashSet<int> modIds)
     {
         var loggedHalfway = false;
         List<GraphqlSchemas.LegacyModId> legacyModIds = modIds.Select(x => new GraphqlSchemas.LegacyModId { gameId = 1303, modId = x}).ToList();
@@ -74,7 +74,7 @@ public class NexusApiClient
             if (graphQLResponse.Errors?.Length > 0)
             {
                 _monitor.Log(graphQLResponse.Errors?[0].Message, LogLevel.Error);
-                return new List<NexusInfo>();
+                return new Dictionary<int, NexusInfo>();
             }
         
             var result = graphQLResponse.Data.legacyMods.nodes.Select(x => x.ToNexusInfo()).ToList();
@@ -82,6 +82,6 @@ public class NexusApiClient
         }
         
         
-        return nexusInfoList;
+        return nexusInfoList.ToDictionary(x => x.ModId, x => x);
     }
 }

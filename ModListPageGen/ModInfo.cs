@@ -12,6 +12,7 @@ public class ModInfo
     private string? _nexusId;
 
     public string Name => _manifest.Name;
+    public string UniqueId => _manifest.UniqueID;
 
     public ModInfo(IManifest manifest, NexusInfo? nexus, string? nexusId = null)
     {
