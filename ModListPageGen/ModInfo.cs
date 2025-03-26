@@ -32,8 +32,8 @@ public class ModInfo
         public bool? AdultContent;
         public string? PictureUrl;
         public string? ContentPackFor;
-        public string? CategoryName;
-        public string? CategoryClass;
+        public string CategoryName;
+        public string CategoryClass;
         public string DepsClasses;
     }
 
@@ -70,7 +70,7 @@ public class ModInfo
             AdultContent = _nexusInfo?.AdultContent,
             PictureUrl = _nexusInfo?.PictureUrl,
             ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
-            CategoryName = _nexusInfo?.categoryName,
+            CategoryName = _nexusInfo?.categoryName ?? "No Category",
             CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
             DepsClasses = string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))),
         };

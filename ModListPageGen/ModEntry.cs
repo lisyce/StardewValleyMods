@@ -79,10 +79,14 @@ public class ModEntry : Mod
             Author = author,
             ModCount = result.Count,
             Mods = result,
-            Categories = result.Where(x => x.CategoryName != null)
-                .Select(x => new { CategoryName = x.CategoryName, CategoryClass = x.CategoryClass})
-                .OrderBy(x => x.CategoryName)
-                .Distinct().ToList(),
+            Categories = result.GroupBy(x => x.CategoryName)
+                .Select(x => new
+                {
+                    CategoryName = x.First().CategoryName,
+                    CategoryClass = x.First().CategoryClass,
+                    CategoryCount = x.Count()
+                })
+                .ToList(),
             DependencyTree = GetDependencyTree(Helper.ModRegistry.GetAll())
         };
         var templated = template(data);

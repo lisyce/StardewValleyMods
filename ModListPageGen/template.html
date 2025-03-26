@@ -78,7 +78,7 @@
       grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
       grid-gap: 1rem;
     }
-    #dep-tree span {
+    .accent {
       color: var(--accent);
     }
     button {
@@ -116,9 +116,8 @@
     <div class="btn-group"><button id="category-enable">Enable All</button><button id="category-disable">Disable All</button></div>
     <div class="two-col">
       {{#each Categories}}
-      <div><input class="category-box" type="checkbox" id="{{CategoryClass}}" name="{{CategoryClass}}" value="{{CategoryClass}}" checked><label for="{{CategoryClass}}">{{CategoryName}}</label></div>
+      <div><input class="category-box" type="checkbox" id="{{CategoryClass}}" name="{{CategoryClass}}" value="{{CategoryClass}}" checked><label for="{{CategoryClass}}">{{CategoryName}} <span class="accent">({{CategoryCount}})</span></label></div>
       {{/each}}
-      <div><input class="category-box" type="checkbox" id="No_Category" name="No_Category" value="No_Category" checked><label for="No_Category">No Category</label></div>
     </div>
   </details>
   <details class="filters">
@@ -126,7 +125,7 @@
     <div class="btn-group"><button id="dep-enable">Enable All</button><button id="dep-disable">Disable All</button></div>
     <div id="dep-tree" class="two-col">
       {{#each DependencyTree}}
-      <div><input class="dep-box" type="checkbox" id="{{ClassName}}" name="{{ClassName}}" value="{{ClassName}}" checked><label for="{{ClassName}}">{{Name}} <span>({{DepsCount}})</span></label></div>
+      <div><input class="dep-box" type="checkbox" id="{{ClassName}}" name="{{ClassName}}" value="{{ClassName}}" checked><label for="{{ClassName}}">{{Name}} <span class="accent">({{DepsCount}})</span></label></div>
       {{/each}}
     </div>
   </details>
