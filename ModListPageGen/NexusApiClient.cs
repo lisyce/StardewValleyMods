@@ -73,8 +73,8 @@ public class NexusApiClient
             var graphQLResponse = await _graphQl.SendQueryAsync<GraphqlSchemas.LegacyModsType>(request);
             if (graphQLResponse.Errors?.Length > 0)
             {
-                _monitor.Log("Failed to call the Nexus API, but your mod list will still be generated. Logging an error at TRACE level...", LogLevel.Error);
-                _monitor.Log(graphQLResponse.Errors?[0].Message ?? "Unknown Error", LogLevel.Trace);
+                _monitor.Log("Failed to call the Nexus API, but your mod list will still be generated. Category filters may be unavailable. Logging the error at TRACE level...", LogLevel.Warn);
+                _monitor.Log(graphQLResponse.Errors?[0].Message ?? "Unknown Error");
                 return new Dictionary<int, NexusInfo>();
             }
         

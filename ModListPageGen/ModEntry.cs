@@ -124,7 +124,7 @@ public class ModEntry : Mod
 
             foreach (var dep in mod.Manifest.Dependencies)
             {
-                if (dep.UniqueID == null) continue;
+                if (dep.UniqueID == null || !dep.IsRequired) continue;
                 dependsOn.Add(dep.UniqueID);
             }
             
@@ -140,7 +140,7 @@ public class ModEntry : Mod
 
             if (dependsOn.Count == 0)
             {
-                if (!tree.ContainsKey("No Dependencies")) tree.Add("No Dependencies", new DepTreeElement { Name = "No Dependenies", ClassName = "No_Deps", DepsCount = 0 });
+                if (!tree.ContainsKey("No Dependencies")) tree.Add("No Dependencies", new DepTreeElement { Name = "No Dependencies", ClassName = "No_Deps", DepsCount = 0 });
                 tree["No Dependencies"].DepsCount += 1;
             }
         }

@@ -54,7 +54,7 @@ public class ModInfo
         foreach (var dep in _manifest.Dependencies)
         {
             var depManifest = helper.ModRegistry.Get(dep.UniqueID)?.Manifest;
-            if (depManifest == null) continue;
+            if (depManifest == null || !dep.IsRequired) continue;
             dependsOn.Add(depManifest.Name);
         }
         
