@@ -80,7 +80,10 @@ public class ModEntry : Mod
             ModCount = result.Count,
             Mods = result,
             Categories = result.Where(x => x.CategoryName != null)
-                .Select(x => new { CategoryName = x.CategoryName, CategoryClass = x.CategoryClass}).Distinct().ToList()
+                .Select(x => new { CategoryName = x.CategoryName, CategoryClass = x.CategoryClass})
+                .OrderBy(x => x.CategoryName)
+                .Distinct().ToList(),
+            DependencyTree = GetDependencyTree(Helper.ModRegistry.GetAll())
         };
         var templated = template(data);
         
@@ -91,7 +94,49 @@ public class ModEntry : Mod
         Monitor.Log($"Saved mod list to {outputPath}.", LogLevel.Info);
     }
 
+    public class DepTreeElement
+    {
+        public string Name { get; set; }
+        public int DepsCount { get; set; }
+        public string ClassName { get; set; }
+    }
+    
+    private List<DepTreeElement> GetDependencyTree(IEnumerable<IModInfo> mods)
+    {
+        var tree = new Dictionary<string, DepTreeElement>();
+        foreach (var mod in mods)
+        {
+            // find everything this mod depends on
+            HashSet<string> dependsOn = new();
+            if (mod.Manifest.ContentPackFor?.UniqueID != null)
+            {
+                dependsOn.Add(mod.Manifest.ContentPackFor.UniqueID);
+            }
 
+            foreach (var dep in mod.Manifest.Dependencies)
+            {
+                if (dep.UniqueID == null) continue;
+                dependsOn.Add(dep.UniqueID);
+            }
+            
+            // add to the output reverse lookup
+            foreach (var uniqueId in dependsOn)
+            {
+                var depMod = Helper.ModRegistry.Get(uniqueId);
+                if (depMod == null) continue;
+                
+                if (!tree.ContainsKey(uniqueId)) tree.Add(uniqueId, new DepTreeElement { Name = depMod.Manifest.Name, ClassName = depMod.Manifest.Name.Replace(" ", "_"), DepsCount = 0 });
+                tree[uniqueId].DepsCount += 1;
+            }
+        }
+        
+        var list = tree.Select(x => x.Value)
+            .OrderByDescending(x => x.DepsCount)
+            .ThenBy(x => x.Name)
+            .ToList();
+        return list;
+    }
+    
     private List<ModInfo> GetMods(IEnumerable<IModInfo> mods, NexusApiClient client)
     {
         List<ModInfo> result = new();
@@ -100,7 +145,7 @@ public class ModEntry : Mod
         foreach (var mod in mods)
         {
             // does this mod have nexus update keys?
-            if (TryGetNexusModId(mod.Manifest, out string nexusId) &&  int.TryParse(nexusId, out int id))
+            if (TryGetNexusModId(mod.Manifest, out int id))
             {
                 nexusIds.TryAdd(id, mod.Manifest.UniqueID);
             }
@@ -127,23 +172,25 @@ public class ModEntry : Mod
             Monitor.Log("Could not get Mods from Nexus API.", LogLevel.Error);
             Monitor.Log(ex.Message, LogLevel.Error);
         }
-
-
+        
         return result;
     }
 
-    private static bool TryGetNexusModId(IManifest manifest, out string nexusId)
+    private static bool TryGetNexusModId(IManifest manifest, out int nexusId)
     {
         foreach (var key in manifest.UpdateKeys)
         {
             if (key.ToLower().Contains("nexus"))
             {
-                nexusId = NexusIdRegex.Match(key).Value;
-                return true;
+                var strId = NexusIdRegex.Match(key).Value;
+                if (int.TryParse(strId, out nexusId))
+                {
+                    return true;
+                }
             }
         }
 
-        nexusId = "-";
+        nexusId = -1;
         return false;
     }
     

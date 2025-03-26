@@ -16,6 +16,7 @@
   "MinimumGameVersion": "1.6.15",
   "EntryDll": "ModListPageGen.dll",
   "UpdateKeys": [
+    "Nexus:32609",
     "Nexus:32589"
   ]
 }

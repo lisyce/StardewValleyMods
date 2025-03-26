@@ -3,48 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>{{Title}}</title>
-
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-  
   <style>
     footer {
       display: flex;
       gap: 40px;
       font-size: 1rem;
     }
-    
     .credit-toggle p {
       margin: 0;
     }
-    
-    .credit-toggle div label {
+    label {
       margin-left: 5px;
     }
-    
     #simple-list {
       display: none;
     }
-    
     h1 {
       margin-bottom: 1rem;  
     }
-    
     body {
       grid-template-columns: 1fr min(55em,90%) 1fr;
     }
-    
     .details {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
     }
-    
     .notice {
       padding: 1rem;
       margin: 0;
     }
-    
     .stats {
       display: flex;
       gap: 1rem;
@@ -52,23 +42,19 @@
       border-top: 1px solid var(--border);
       margin-top: 10px 
     }
-    
     .details p {
       font-size: 1rem;
       margin-top: 0.25rem;
       margin-bottom: 0.25rem;
     }
-    
     .card-title {
       margin-top: 0;
       margin-bottom: 10px;
       font-size: 1.5rem;
     }
-    
     .adult-content {
       color: var(--code);
     }
-    
     .summary {
       font-size: 1rem;
       overflow: hidden;
@@ -77,30 +63,42 @@
       line-clamp: 2;
       -webkit-box-orient: vertical;
     }
-    
     li {
       margin-bottom: 0.5rem;
     }
-    
     .credit-toggle {
       display: flex;
       justify-content: space-between;
     }
-    
     ul {
       padding-left: 1rem;
     }
-    
     #detail-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
       grid-gap: 1rem;
     }
-    
-    .category-list {
+    #dep-tree span {
+      color: var(--accent);
+    }
+    button {
+      padding: 7px;
+      color: var(--accent);
+      background-color: transparent;
+      margin-bottom: 15px;
+    }
+    button:hover {
+      color: var(--accent-text);
+      background-color: var(--accent);
+    }
+    .btn-group {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 20px;
+    }
+    .two-col {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
     }
   </style>
 </head>
@@ -113,35 +111,38 @@
     <div><input type="checkbox" id="toggle" name="toggle"><label for="toggle">Simple List</label></div>
   </div>
   <hr>
-  
   <details class="filters">
-    <summary>Filters</summary>
-    <p>Categories</p>
-    <div class="category-list">
+    <summary>Category Filters</summary>
+    <div class="btn-group"><button id="category-enable">Enable All</button><button id="category-disable">Disable All</button></div>
+    <div class="two-col">
       {{#each Categories}}
       <div><input class="category-box" type="checkbox" id="{{CategoryClass}}" name="{{CategoryClass}}" value="{{CategoryClass}}" checked><label for="{{CategoryClass}}">{{CategoryName}}</label></div>
       {{/each}}
       <div><input class="category-box" type="checkbox" id="No_Category" name="No_Category" value="No_Category" checked><label for="No_Category">No Category</label></div>
     </div>
   </details>
-  
+  <details class="filters">
+    <summary>Dependency Filters</summary>
+    <div class="btn-group"><button id="dep-enable">Enable All</button><button id="dep-disable">Disable All</button></div>
+    <div id="dep-tree" class="two-col">
+      {{#each DependencyTree}}
+      <div><input class="dep-box" type="checkbox" id="{{ClassName}}" name="{{ClassName}}" value="{{ClassName}}" checked><label for="{{ClassName}}">{{Name}} <span>({{DepsCount}})</span></label></div>
+      {{/each}}
+    </div>
+  </details>
   <hr>
   <div id="detail-list">
   {{#each Mods}}
-  <div class="notice {{CategoryClass}}">
+  <div class="notice {{CategoryClass}} {{DepsClasses}}">
     <div class="details">
       <div>
         <h2 class="card-title">{{Name}}</h2>
         <p>By: {{Author}} {{#if ContentPackFor}}| For {{ContentPackFor}}{{/if}}</p>
-        
         {{#if NexusId}}
         <p><a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">Nexus: {{Name}}</a></p>
         {{/if}}
         <p class="summary">{{Summary}}</p>
-
       </div>
-      
-
       {{#if HasNexus}}
       <div class="stats">
         <p>{{Downloads}} Downloads</p>
@@ -151,40 +152,35 @@
         {{/if}}
       </div>
       {{/if}}
-
     </div>
   </div>
   {{/each}}
-    
   </div>
-  
   <div id="simple-list">
     <ul>
       {{#each Mods}}
-      
-      <li class="{{CategoryClass}}">
+      <li class="{{CategoryClass}} {{DepsClasses}}">
         {{#if NexusId}}
           <a target="_blank" href="https://www.nexusmods.com/stardewvalley/mods/{{NexusId}}">{{Name}}</a>
         {{else}}
           {{Name}}
         {{/if}}
-        by {{Author}} {{#if AdultContent}}| <span class="adult-content">Contains Adult Content</span>{{/if}}
+        by {{Author}}
+        {{#if ContentPackFor}} | For {{ContentPackFor}}{{/if}}
+        {{#if AdultContent}} | <span class="adult-content">Contains Adult Content</span>{{/if}}
       </li>
       {{/each}}
     </ul>
   </div>
 </main>
-
 <footer>
   <a href="#top">Back to top</a>
   <a href="https://github.com/lisyce/StardewValleyMods/tree/main/ModListPageGen">GitHub</a>
 </footer>
-
 <script>
   const checkbox = document.getElementById("toggle");
   const detailed = document.getElementById("detail-list");
   const simple = document.getElementById("simple-list");
-
   checkbox.addEventListener("change", () => {
     if (checkbox.checked) {
       simple.style.display = "block";
@@ -194,15 +190,59 @@
       detailed.style.display = "grid";
     }
   })
-  
-  for (let box of document.getElementsByClassName("category-box")) {
+  for (let box of document.querySelectorAll(".category-box, .dep-box")) {
     box.addEventListener("change", () => {
         for (let el of document.getElementsByClassName(box.value)) {
-          el.style.display = box.checked ? "block" : "none";
+          if (visible(el)) {
+            el.style.removeProperty("display");
+          } else {
+            el.style.display = "none";
+          }
       }
     })
   }
-
+  function visible(el) {
+    // a box is visible if its category is on and all dep filters are on
+    let foundCategoryOn = false;
+    for (let box of document.getElementsByClassName("category-box")) {
+      if (box.checked && el.classList.contains(box.value)) {
+        foundCategoryOn = true;
+        break;
+      }
+    }
+    if (!foundCategoryOn) return false;
+    // check dep filters
+    for (let box of document.getElementsByClassName("dep-box")) {
+      if (!box.checked && el.classList.contains(box.value)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  document.getElementById("category-enable").addEventListener("click", () => {
+    for (let box of document.getElementsByClassName("category-box")) {
+      box.checked = true
+      box.dispatchEvent(new Event("change"))
+    }
+  })
+  document.getElementById("dep-enable").addEventListener("click", () => {
+    for (let box of document.getElementsByClassName("dep-box")) {
+      box.checked = true
+      box.dispatchEvent(new Event("change"))
+    }
+  })
+  document.getElementById("category-disable").addEventListener("click", () => {
+    for (let box of document.getElementsByClassName("category-box")) {
+      box.checked = false
+      box.dispatchEvent(new Event("change"))
+    }
+  })
+  document.getElementById("dep-disable").addEventListener("click", () => {
+    for (let box of document.getElementsByClassName("dep-box")) {
+      box.checked = false
+      box.dispatchEvent(new Event("change"))
+    }
+  })
 </script>
 </body>
 </html>

@@ -34,10 +34,29 @@ public class ModInfo
         public string? ContentPackFor;
         public string? CategoryName;
         public string? CategoryClass;
+        public string DepsClasses;
     }
 
     public TemplatedModInfo ToTemplate(IModHelper helper)
     {
+        // find everything this mod depends on
+        HashSet<string> dependsOn = new();
+        if (_manifest.ContentPackFor != null)
+        {
+            var depManifest = helper.ModRegistry.Get(_manifest.ContentPackFor.UniqueID)?.Manifest;
+            if (depManifest != null)
+            {
+                dependsOn.Add(depManifest.Name);
+            }
+        }
+
+        foreach (var dep in _manifest.Dependencies)
+        {
+            var depManifest = helper.ModRegistry.Get(dep.UniqueID)?.Manifest;
+            if (depManifest == null) continue;
+            dependsOn.Add(depManifest.Name);
+        }
+        
         return new TemplatedModInfo
         {
             HasNexus = _nexusInfo != null,
@@ -53,6 +72,7 @@ public class ModInfo
             ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
             CategoryName = _nexusInfo?.categoryName,
             CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
+            DepsClasses = string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))),
         };
     }
 };
