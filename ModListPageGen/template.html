@@ -201,7 +201,7 @@
     })
   }
   function visible(el) {
-    // a box is visible if its category is on and all dep filters are on
+    // chekc category filter
     let foundCategoryOn = false;
     for (let box of document.getElementsByClassName("category-box")) {
       if (box.checked && el.classList.contains(box.value)) {
@@ -210,13 +210,13 @@
       }
     }
     if (!foundCategoryOn) return false;
-    // check dep filters
+    // check dep filters (at least one gotta be on)
     for (let box of document.getElementsByClassName("dep-box")) {
-      if (!box.checked && el.classList.contains(box.value)) {
-        return false;
+      if (box.checked && el.classList.contains(box.value)) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
   document.getElementById("category-enable").addEventListener("click", () => {
     for (let box of document.getElementsByClassName("category-box")) {

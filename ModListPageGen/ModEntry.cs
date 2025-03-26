@@ -132,6 +132,12 @@ public class ModEntry : Mod
                 if (!tree.ContainsKey(uniqueId)) tree.Add(uniqueId, new DepTreeElement { Name = depMod.Manifest.Name, ClassName = depMod.Manifest.Name.Replace(" ", "_"), DepsCount = 0 });
                 tree[uniqueId].DepsCount += 1;
             }
+
+            if (dependsOn.Count == 0)
+            {
+                if (!tree.ContainsKey("No Dependencies")) tree.Add("No Dependencies", new DepTreeElement { Name = "No Dependenies", ClassName = "No_Deps", DepsCount = 0 });
+                tree["No Dependencies"].DepsCount += 1;
+            }
         }
         
         var list = tree.Select(x => x.Value)

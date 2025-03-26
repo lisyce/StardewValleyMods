@@ -72,7 +72,7 @@ public class ModInfo
             ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
             CategoryName = _nexusInfo?.categoryName ?? "No Category",
             CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
-            DepsClasses = string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))),
+            DepsClasses = dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps",
         };
     }
 };
