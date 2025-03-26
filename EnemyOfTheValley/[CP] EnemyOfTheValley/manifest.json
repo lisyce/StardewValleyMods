@@ -16,6 +16,10 @@
     {
       "UniqueID": "ichortower.SecretNoteFramework",
       "IsRequired": false
+    },
+    {
+      "UniqueID": "BarleyZP.EnemyOfTheValley",
+      "IsRequired": true
     }
   ]
 }

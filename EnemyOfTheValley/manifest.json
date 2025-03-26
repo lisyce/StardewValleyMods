@@ -6,11 +6,5 @@
   "UniqueID": "BarleyZP.EnemyOfTheValley",
   "EntryDll": "EnemyOfTheValley.dll",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [ "Nexus:30688" ],
-  "Dependencies": [
-    {
-      "UniqueID": "BarleyZP.EnemyOfTheValley.CP",
-      "IsRequired": true
-    }
-  ]
+  "UpdateKeys": [ "Nexus:30688" ]
 }
