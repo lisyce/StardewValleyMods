@@ -1,13 +1,24 @@
 ﻿using System.Text.RegularExpressions;
 using HandlebarsDotNet;
 using StardewModdingAPI;
+using StardewValley;
 
 namespace ModListPageGen;
 
 public class ModEntry : Mod
 {
-    private static string CSS = "";
-    private static string JS = "";
+    private static readonly string CSS = "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/style.min.css";
+    private static readonly string JS = "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/script.min.js";
+
+    private static readonly Dictionary<string, string> ColorSchemes = new()
+    {
+        { "pastel-red", "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/CssThemes/pastel-red.min.css" },
+        { "pastel-orange", "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/CssThemes/pastel-orange.css" },
+        { "pastel-yellow", "" },
+        { "pastel-green", "" },
+        { "pastel-blue", "" },
+        { "pastel-purple", "" }
+    };
     
     private static readonly Regex NexusIdRegex = new(@"\d+");
         
@@ -64,6 +75,13 @@ public class ModEntry : Mod
         }
         var title = args[0];
         var author = args[1];
+
+        string? colorSchemeUrl = null;
+        if (!ArgUtility.TryGet(args, 2, out var colorScheme, out var error, allowBlank: true) || !ColorSchemes.TryGetValue(colorScheme, out colorSchemeUrl))
+        {
+            Monitor.Log("Invalid color scheme. Choices are: " + string.Join(", ", ColorSchemes.Keys), LogLevel.Error);
+            return;
+        }
         
         var client = new NexusApiClient(Monitor);
 
@@ -92,6 +110,7 @@ public class ModEntry : Mod
             DependencyTree = GetDependencyTree(Helper.ModRegistry.GetAll()),
             MainCssCDNLink = CSS,
             MainJsCDNLink = JS,
+            ColorSchemeUrl = colorSchemeUrl,
         };
         var templated = template(data);
         

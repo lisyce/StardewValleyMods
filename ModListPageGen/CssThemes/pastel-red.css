@@ -1,11 +1,11 @@
 :root {
     /* Default (light) theme */
     --bg: #fff;
-    --accent-bg: #f5f7ff;
+    --accent-bg: #FFFCFC;
     --text: #212121;
     --text-light: #585858;
     --border: #DDAEAB;
-    --accent: #F57670;
+    --accent: #BF3D37;
     --accent-hover: #FD8882;
     --accent-text: var(--text);
     --code: #d81b60;
