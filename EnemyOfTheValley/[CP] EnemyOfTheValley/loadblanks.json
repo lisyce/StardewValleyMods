@@ -1,0 +1,35 @@
+{
+  "Changes": [
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
+      "FromFile": "blank.json"
+    },
+    
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Elliott",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Vincent",
+      "FromFile": "blank.json"
+    }
+  ]
+}

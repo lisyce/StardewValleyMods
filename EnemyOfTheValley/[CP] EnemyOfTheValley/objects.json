@@ -1,0 +1,49 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley.AvoidMeCake": {
+          "Name": "\"A-Void Me\" Cake",
+          "DisplayName": "{{i18n: AvoidMeCakeName}}",
+          "Description": "{{i18n: AvoidMeCakeDescription}}",
+          "Type": "Cooking",
+          "Category": -7,
+          "Price": 520,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 0,
+          "Edibility": 60,
+          "ContextTags": [ "color_black" ]
+        },
+        "BarleyZP.EnemyOfTheValley.ShatteredAmulet": {
+          "Name": "Shattered Amulet",
+          "DisplayName": "{{i18n: ShatteredAmuletName}}",
+          "Description": "{{i18n: ShatteredAmuletDescription}}",
+          "Type": "Basic",
+          "Category": 0,
+          "Price": 0,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 1,
+          "Edibility": -300,
+          "CanBeTrashed": false,
+          "ExcludeFromRandomSale": true,
+          "ExcludeFromShippingCollection": true
+        },
+        "BarleyZP.EnemyOfTheValley.ReconciliationDust": {
+          "Name": "Reconciliation Dust",
+          "DisplayName": "{{i18n: ReconciliationDustName}}",
+          "Description": "{{i18n: ReconciliationDustDescription}}",
+          "Type": "Basic",
+          "Category": 0,
+          "Price": 0,
+          "Texture": "BarleyZP.EnemyOfTheValley/StandardSprites",
+          "SpriteIndex": 2,
+          "Edibility": -300,
+          "ExcludeFromRandomSale": true,
+          "ExcludeFromShippingCollection": true
+        }
+      }
+    }
+  ]
+}
