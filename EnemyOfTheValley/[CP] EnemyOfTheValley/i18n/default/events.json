@@ -81,5 +81,17 @@
   "Events.Clint-2.6": "She's not going to want your stupid gift...",
   "Events.Clint-2.7": "Like I'd let you look at my work! I have no reason to believe you have anything nice to say about it!$3",
   "Events.Clint-2.8": "I didn't even say who it was for!$3#$b#And don't you dare sabotage me! It's hard enough for guys like me to find love as it is.$3",
-  "Events.Clint-2.9": "At any rate, were you going to buy something? If not, please just go.$s"
+  "Events.Clint-2.9": "At any rate, were you going to buy something? If not, please just go.$s",
+  
+  "Events.Sebastian-2.0": "Oh, @.  This is my room, you know. Is it urgent or something?$u",
+  "Events.Sebastian-2.1": "What are you working on?",
+  "Events.Sebastian-2.2": "Hey, what kind of games do you have on your computer?",
+  "Events.Sebastian-2.3": "I’m working on some software for a client right now. And we have a meeting soon, so you’ll have to go.$u",
+  "Events.Sebastian-2.4": "Of course you don’t take me seriously either. I’m working right now, @.$a",
+  "Events.Sebastian-2.5": "You’re being such a pain right now, you know? This room is supposed to be my one place of peace and quiet, and I can’t even get that!",
+  "Events.Sebastian-2.6": "Apologize and leave",
+  "Events.Sebastian-2.7": "Peek at Sebastian's computer screen",
+  "Events.Sebastian-2.8": "Sigh... thank you.$u#$b#And make sure you knock next time!$a",
+  "Events.Sebastian-2.9": "Hmm... looks like some client emails and payment agreements.",
+  "Events.Sebastian-2.10": "Hey! Those are confidential!$a#$b#I don't know what your problem is, but get out!$a"
 }
