@@ -8,6 +8,13 @@
     },
     {
       "Action": "EditData",
+      "Target": "Data/Events/Town",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley_LewisNegative2/EOTV_NegativeFriendship Lewis -500/p Lewis/Time 1100 1500": "distantBanjo/35 59/farmer 40 65 3 Lewis 33 57 2/pause 500/skippable/move farmer -7 0 0 true/emote Lewis 40/pause 1000/textAboveHead Lewis \"{{i18n:Events.Lewis-2.0}}\"/pause 1000/quickQuestion #{{i18n:Events.Lewis-2.1}}#{{i18n:Events.Lewis-2.2}}(break)faceDirection farmer 3\\emote Lewis 16\\advancedMove Lewis false 0 4 -4 0\\move farmer -6 0 3\\move farmer 0 -4 1\\faceDirection farmer 1\\pause 500\\speak Lewis \"{{i18n:Events.Lewis-2.3}}\"(break)move farmer 0 -4 0 Lewis 0 2 2/pause 500/speak Lewis \"{{i18n:Events.Lewis-2.4}}\"/pause 1000/speak Lewis \"{{i18n:Events.Lewis-2.5}}\"/quickQuestion #{{i18n:Events.Lewis-2.6}}#{{i18n:Events.Lewis-2.7}}#{{i18n:Events.Lewis-2.8}}(break)speak Lewis \"{{i18n:Events.Lewis-2.9}}\"(break)friendship Lewis -20\\speak Lewis \"{{i18n:Events.Lewis-2.10}}\"(break)friendship Lewis -50\\emote Lewis 12 true\\jump Lewis 4\\speak Lewis \"{{i18n:Events.Lewis-2.11}}\"/pause 1000/speak Lewis \"{{i18n:Events.Lewis-2.12}}\"/faceDirection Lewis 1/move Lewis 7 0 1 true//globalFade/viewport -1000 -1000/end"
+      }
+    },
+    {
+      "Action": "EditData",
       "Target": "Data/Events/SebastianRoom",
       "Entries": {
         "BarleyZP.EnemyOfTheValley_SebastianNegative2/EOTV_NegativeFriendship Sebastian -500/p Sebastian": "none/6 5/Sebastian 9 4 3 farmer 1 1 2/showFrame Sebastian 23/pause 1000/animate Sebastian false true 200 25 26 27 26/playSound keyboardTyping/skippable/playSound doorOpen/doAction 1 3/pause 500/move farmer 0 4 2/move farmer 5 0 1/stopSound keyboardTyping/stopAnimation Sebastian 24/speak Sebastian \"{{i18n:Events.Sebastian-2.0}}\"/quickQuestion #{{i18n:Events.Sebastian-2.1}}#{{i18n:Events.Sebastian-2.2}}(break)speak Sebastian \"{{i18n:Events.Sebastian-2.3}}\"(break)speak Sebastian \"{{i18n:Events.Sebastian-2.4}}\"/playSound dwoop/jump Sebastian 3/warp Sebastian 9 5/faceDirection Sebastian 3/pause 500/emote Sebastian 12/pause 500/question fork0 \"{{i18n:Events.Sebastian-2.5}}#{{i18n:Events.Sebastian-2.6}}#{{i18n:Events.Sebastian-2.7}}\"/fork BarleyZP.EnemyOfTheValley_choseToLeave/move farmer 0 2 2/faceDirection Sebastian 2 true/move farmer 4 0 1/faceDirection Sebastian 1 true/move farmer 0 -3 3/faceDirection Sebastian 0/pause 500/emote farmer 8/pause 500/message \"{{i18n:Events.Sebastian-2.9}}\"/friendship Sebastian -50/speak Sebastian \"{{i18n:Events.Sebastian-2.10}}\"/globalFade/viewport -1000 -1000/end warpOut",

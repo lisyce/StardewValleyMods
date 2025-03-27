@@ -11,7 +11,7 @@
   "Events.Haley-2.9": "Honestly, I've never thought a lot about my outfits.",
   "Events.Haley-2.10": "Stop insulting me! I know how to dress!",
   "Events.Haley-2.Fork.0": "So anyway, did you need something else from me?",
-  
+
   "Events.Haley-6.0": "I'm a bit surprised you decided to come, Haley. But welcome!$h",
   "Events.Haley-6.1": "I figured I'd give it a go since it's community day and all. I invited @, too!",
   "Events.Haley-6.2": "Ah, they're here!$h",
@@ -33,14 +33,14 @@
   "Events.Pierre-2.6": "Careful. You don't want to get on my bad side.",
 
   "Events.Shane-2.0": "What do you want now? You keep bothering me for no reason. Leave me alone!$a",
-  "Events.Shane-2.1": "Don’t play dumb with me! You never leave me alone!$a",
-  "Events.Shane-2.2": "I don’t have to be all buddy-buddy with anyone if I don’t want to.$2#$b#Ever since you moved to Pelican Town, you've been making my life even harder than it already is.$a#$b#Not that I think you'd understand what it's like, anyway.$s",
+  "Events.Shane-2.1": "Don't play dumb with me! You never leave me alone!$a",
+  "Events.Shane-2.2": "I don't have to be all buddy-buddy with anyone if I don't want to.$2#$b#Ever since you moved to Pelican Town, you've been making my life even harder than it already is.$a#$b#Not that I think you'd understand what it's like, anyway.$s",
   "Events.Shane-2.3": "*sigh*",
   "Events.Shane-2.4": "Gus! I need another beer!",
   "Events.Shane-2.5": "Another already?",
   "Events.Shane-2.6": "Just stay out of my business, @.$2",
-  "Events.Shane-2.7": "What are you talking about? I haven’t done anything!",
-  "Events.Shane-2.8": "You’ve been so rude to me since I got here, so I don’t know why you’re surprised.",
+  "Events.Shane-2.7": "What are you talking about? I haven't done anything!",
+  "Events.Shane-2.8": "You've been so rude to me since I got here, so I don't know why you're surprised.",
 
   "Events.Alex-2.0": "Alex, what's the matter?",
   "Events.Alex-2.1": "That darn new farmer has been messing with me!$5#$b#I don't know what their deal is!$5",
@@ -62,16 +62,16 @@
   "Events.Elliott-2.4": "I see I was a fool to think you would understand.$a",
   "Events.Elliott-2.5": "This is true. But, I believe this novel will come to fruition one day, whether you have faith or not.",
   "Events.Elliott-2.6": "Although I may seem a solitary person, the support of my community is important to me, @.#$b#If that's not your plan, I can certainly find that somewhere else.$a",
-  "Events.Elliott-2.7": "Now, if you'll excuse me...$a",  
+  "Events.Elliott-2.7": "Now, if you'll excuse me...$a",
   "Events.Elliott-2.8": "I bet they're right.",
   "Events.Elliott-2.9": "Well, writing a novel is a lot of work...",
-  
+
   "Events.Elliott-4.0": "Ah, @. Remember our chat about my in-progress novel?#$b#I've finally found a title for it: How to Deal With Difficult People.$h",
   "Events.Elliott-4.1": "Yes, I've found moving to Pelican Town gave me *quite* the inspiration for a book such as this one.$h#$b#I hope that others find it enlightening.",
   "Events.Elliott-4.2": "#Now just what do you mean by that?#I think you're giving me a reason to need that book!",
   "Events.Elliott-4.3": "Oh, you truly are humorous!$h",
   "Events.Elliott-4.4": "I think I shall get a drink then.#$b#Perhaps I will see you around.",
-  
+
   "Events.Clint-2.0": "@! I wasn't expecting you!$4",
   "Events.Clint-2.1": "What are you working on?",
   "Events.Clint-2.2": "You totally just hid something, didn't you?",
@@ -82,16 +82,30 @@
   "Events.Clint-2.7": "Like I'd let you look at my work! I have no reason to believe you have anything nice to say about it!$3",
   "Events.Clint-2.8": "I didn't even say who it was for!$3#$b#And don't you dare sabotage me! It's hard enough for guys like me to find love as it is.$3",
   "Events.Clint-2.9": "At any rate, were you going to buy something? If not, please just go.$s",
-  
+
   "Events.Sebastian-2.0": "Oh, @.  This is my room, you know. Is it urgent or something?$u",
   "Events.Sebastian-2.1": "What are you working on?",
   "Events.Sebastian-2.2": "Hey, what kind of games do you have on your computer?",
-  "Events.Sebastian-2.3": "I’m working on some software for a client right now. And we have a meeting soon, so you’ll have to go.$u",
-  "Events.Sebastian-2.4": "Of course you don’t take me seriously either. I’m working right now, @.$a",
-  "Events.Sebastian-2.5": "You’re being such a pain right now, you know? This room is supposed to be my one place of peace and quiet, and I can’t even get that!",
+  "Events.Sebastian-2.3": "I'm working on some software for a client right now. And we have a meeting soon, so you'll have to go.$u",
+  "Events.Sebastian-2.4": "Of course you don't take me seriously either. I'm working right now, @.$a",
+  "Events.Sebastian-2.5": "You're being such a pain right now, you know? This room is supposed to be my one place of peace and quiet, and I can't even get that!",
   "Events.Sebastian-2.6": "Apologize and leave",
   "Events.Sebastian-2.7": "Peek at Sebastian's computer screen",
   "Events.Sebastian-2.8": "Sigh... thank you.$u#$b#And make sure you knock next time!$a",
   "Events.Sebastian-2.9": "Hmm... looks like some client emails and payment agreements.",
-  "Events.Sebastian-2.10": "Hey! Those are confidential!$a#$b#I don't know what your problem is, but get out!$a"
+  "Events.Sebastian-2.10": "Hey! Those are confidential!$a#$b#I don't know what your problem is, but get out!$a",
+
+  "Events.Lewis-2.0": "Ah, farmer!",
+  "Events.Lewis-2.1": "Ignore him...",
+  "Events.Lewis-2.2": "Talk to Lewis",
+  "Events.Lewis-2.3": "Why are you avoiding me?$3",
+  "Events.Lewis-2.4": "Look, I've been mayor for a long time. Nobody ever runs against me. I like to think I do a good job.",
+  "Events.Lewis-2.5": "What I don't understand is why you seem to have a problem with me!$3",
+  "Events.Lewis-2.6": "I just think there's some policies you could improve.",
+  "Events.Lewis-2.7": "Even I could be a better mayor than you!",
+  "Events.Lewis-2.8": "To be honest, I just don't like your moustache.",
+  "Events.Lewis-2.9": "Sigh... well there are better ways to communicate that, you know.$2",
+  "Events.Lewis-2.10": "Well, it's not election season any time soon.#$b#But between you and me, I don't think the residents of Pelican Town would even think of voting for you.$5",
+  "Events.Lewis-2.11": "That's absolutely uncalled for!$4",
+  "Events.Lewis-2.12": "I pride myself in serving my town. Seeing as how you've been treating me, I'm not sure you have the same kind of character.$3#$b#Good afternoon, @.$3"
 }
