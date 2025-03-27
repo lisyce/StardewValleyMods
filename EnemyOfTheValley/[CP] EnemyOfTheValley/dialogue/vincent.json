@@ -1,0 +1,52 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Vincent",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Vincent.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Vincent.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Vincent.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_NoNegativeHearts": "{{i18n:Vincent.RejectEnemyCake_NoNegativeHearts}}",
+        "RejectEnemyCake_VeryLowNegativeHearts": "{{i18n:Vincent.RejectEnemyCake_VeryLowNegativeHearts}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Vincent.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Vincent.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Vincent.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_NoNegativeHearts": "{{i18n:Vincent.RejectShatteredAmulet_NoNegativeHearts}}",
+        "RejectShatteredAmulet_VeryLowNegativeHearts": "{{i18n:Vincent.RejectShatteredAmulet_VeryLowNegativeHearts}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Vincent.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Vincent.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Vincent.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Vincent": "{{i18n:Vincent.BarleyZP.EnemyOfTheValley.apologized_Vincent}}",
+        "ReconciliationDustUsed": "{{i18n:Vincent.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Vincent",
+      "Entries": {
+        "Mon-2": "{{i18n:Vincent.Mon-2}}",
+        "Mon-8": "{{i18n:Vincent.Mon-8}}",
+        "Mon-10": "{{i18n:Vincent.Mon-10}}",
+        "Tue-2": "{{i18n:Vincent.Tue-2}}",
+        "Tue-8": "{{i18n:Vincent.Tue-8}}",
+        "Tue-10": "{{i18n:Vincent.Tue-10}}",
+        "Wed-2": "{{i18n:Vincent.Wed-2}}",
+        "Wed-8": "{{i18n:Vincent.Wed-8}}",
+        "Wed-10": "{{i18n:Vincent.Wed-10}}",
+        "Thu-2": "{{i18n:Vincent.Thu-2}}",
+        "Thu-8": "{{i18n:Vincent.Thu-8}}",
+        "Thu-10": "{{i18n:Vincent.Thu-10}}",
+        "Fri-2": "{{i18n:Vincent.Fri-2}}",
+        "Fri-8": "{{i18n:Vincent.Fri-8}}",
+        "Fri-10": "{{i18n:Vincent.Fri-10}}",
+        "Sat-2": "{{i18n:Vincent.Sat-2}}",
+        "Sat-8": "{{i18n:Vincent.Sat-8}}",
+        "Sat-10": "{{i18n:Vincent.Sat-10}}",
+        "Sun-2": "{{i18n:Vincent.Sun-2}}",
+        "Sun-8": "{{i18n:Vincent.Sun-8}}",
+        "Sun-10": "{{i18n:Vincent.Sun-10}}"
+      }
+    }
+  ]
+}
