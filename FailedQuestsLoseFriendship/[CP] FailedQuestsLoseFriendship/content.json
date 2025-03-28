@@ -4,14 +4,18 @@
     {
       "Action": "EditData",
       "Target": "BarleyZP.CTU",
+      "When": {
+        "HasMod": "BarleyZP.ConversationTopicUtilities"
+      },
       "Entries": {
-        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_": {
           "KeyIsPrefix": true,
-          "Defaults": [
-            {
-              "HEY U DIDN'T DO THAT THING": {}
-            }
-          ]
+          "Repeatable": true,
+          "Defaults": {
+            "So, you don't keep your promises, huh? You took that quest from me and didn't complete it!": [
+              "NpcIs: Current"
+            ]
+          }
         }
       }
     },
@@ -25,177 +29,177 @@
         "BarleyZP.FailedQuestsLoseFriendship50": "{{i18n:BarleyZP.FailedQuestsLoseFriendship50.text}}%item money -5000%%[#]{{i18n:BarleyZP.FailedQuestsLoseFriendship50.title}}"
       }
     },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Emily",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Maru",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey": "{{i18n:Maru.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Clint",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Demetrius",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Lewis",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Willy",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Penny",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny": "{{i18n:Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam": "{{i18n:Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Alex",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex": "{{i18n:Alex.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Shane",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane": "{{i18n:Shane.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Haley",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley": "{{i18n:Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily": "{{i18n:Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Elliott",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott": "{{i18n:Elliott.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Leah",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah": "{{i18n:Leah.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Robin",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Evelyn",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "{{i18n:Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn": "{{i18n:Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/George",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "{{i18n:George.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Jodi",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi": "{{i18n:Jodi.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Marnie",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie": "{{i18n:Marnie.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Pam",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam": "{{i18n:Pam.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Pierre",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre": "{{i18n:Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre}}",
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre": "{{i18n:Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Gus",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus": "{{i18n:Gus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Linus",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus": "{{i18n:Linus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus}}"
-//      }
-//    },
-//    {
-//      "Action": "EditData",
-//      "Target": "Characters/Dialogue/Caroline",
-//      "Entries": {
-//        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline": "{{i18n:Caroline.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline}}"
-//      }
-//    }
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Emily",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily": "{{i18n:Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Maru",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey": "{{i18n:Maru.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Clint",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint": "{{i18n:Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Demetrius",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2": "{{i18n:Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Lewis",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis": "{{i18n:Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Willy",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2": "{{i18n:Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Penny",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny": "{{i18n:Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam": "{{i18n:Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Alex",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex": "{{i18n:Alex.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Shane",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane": "{{i18n:Shane.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Haley",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley": "{{i18n:Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily": "{{i18n:Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Elliott",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott": "{{i18n:Elliott.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Leah",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah": "{{i18n:Leah.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Robin",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2": "{{i18n:Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Evelyn",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "{{i18n:Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn": "{{i18n:Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/George",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "{{i18n:George.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Jodi",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi": "{{i18n:Jodi.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Marnie",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie": "{{i18n:Marnie.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Pam",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam": "{{i18n:Pam.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Pierre",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre": "{{i18n:Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre}}",
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre": "{{i18n:Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Gus",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus": "{{i18n:Gus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Linus",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus": "{{i18n:Linus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Caroline",
+      "Entries": {
+        "BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline": "{{i18n:Caroline.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline}}"
+      }
+    }
   ]
 }

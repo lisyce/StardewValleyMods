@@ -81,9 +81,6 @@ namespace FailedQuestsLoseFriendship
             }
 
             AddFailedQuests(Game1.player, failed);
-            
-            // make the convo topics repeatable
-            RemoveConvoTopicsMail();
 
             // check if we need to send a letter from Lewis
             List<int> mailAmounts = new() { 3, 10, 20, 50 };
@@ -104,18 +101,7 @@ namespace FailedQuestsLoseFriendship
             
             Game1.player.changeFriendship(-1 * Config.FriendshipLost, npc);
         }
-
-        private void RemoveConvoTopicsMail()
-        {
-            HashSet<string> toRemove = new();
-            foreach (string mail in Game1.player.mailReceived)
-            {
-                if (mail.Contains($"{UniqueID}_questFailed_")) toRemove.Add(mail);
-            }
-
-            Game1.player.mailReceived.ExceptWith(toRemove);
-        }
-
+        
         private bool QuestEnabled(Quest quest)
         {
             return quest switch
