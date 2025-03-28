@@ -1,0 +1,18 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.ConversationTopicUtilities",
+  "Name": "Conversation Topic Utilities",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "Provides utilities to modders for default CT dialogue, repeatable CTs, etc.",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "Conversation Topic Utilities.dll"
+}

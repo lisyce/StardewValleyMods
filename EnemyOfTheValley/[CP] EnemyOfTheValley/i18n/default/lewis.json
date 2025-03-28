@@ -1,0 +1,17 @@
+{
+  "Lewis.AcceptEnemyCake": "It's about time someone made this official. You're my enemy, @!$4",
+  "Lewis.RejectEnemyCake_Archenemies": "We're past this, @.$5",
+  "Lewis.RejectEnemyCake_ExArchenemies": "Now now, I thought we were over this.$5",
+  "Lewis.RejectEnemyCake_NoNegativeHearts": "Oh, don't be silly. We're friends!$1",
+  "Lewis.RejectEnemyCake_VeryLowNegativeHearts": "This tradition goes back even older than me, but I don't think I want to participate just yet.$2",
+  "Lewis.RejectEnemyCake_LowNegativeHearts": "Hmph... I always thought this tradition was silly. Now, I might not be so sure.$3",
+  "Lewis.AcceptShatteredAmulet": "You're a stain on the good name of Pelican Town! I swear to be your archenemy, @!$4",
+  "Lewis.RejectShatteredAmulet_ExArchenemies": "I'm disappointed you're doing this again. I thought you were better than this.$2",
+  "Lewis.RejectShatteredAmulet_NoNegativeHearts": "What's this? You found litter on the beach? I'll have to find out who keeps doing this!$3",
+  "Lewis.RejectShatteredAmulet_VeryLowNegativeHearts": "This is a dangerous thing to give someone!$3",
+  "Lewis.RejectShatteredAmulet_LowNegativeHearts": "Is this a shattered Mermaid's Pendant? I'm offended you'd try to give me something like this.$3",
+  "Lewis.RejectMermaidPendant_NegativeHearts": "You're being fully ridiculous, @.$5",
+  "Lewis.RejectBouquet_NegativeHearts": "Yes yes, very funny. You're far too rude for anyone to want to date you.$5",
+  "Lewis.BarleyZP.EnemyOfTheValley.apologized_Lewis": "We've both said some things we regret. I hope we can repair our relationship in time.",
+  "Lewis.ReconciliationDustUsed": "Augh, that itches!$3#$e#Woah! I suddenly feel great! @, would you like to take a walk together sometime?$1"
+}

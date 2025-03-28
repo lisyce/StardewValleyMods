@@ -1,0 +1,32 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Lewis",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Lewis.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Lewis.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Lewis.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_NoNegativeHearts": "{{i18n:Lewis.RejectEnemyCake_NoNegativeHearts}}",
+        "RejectEnemyCake_VeryLowNegativeHearts": "{{i18n:Lewis.RejectEnemyCake_VeryLowNegativeHearts}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Lewis.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Lewis.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Lewis.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_NoNegativeHearts": "{{i18n:Lewis.RejectShatteredAmulet_NoNegativeHearts}}",
+        "RejectShatteredAmulet_VeryLowNegativeHearts": "{{i18n:Lewis.RejectShatteredAmulet_VeryLowNegativeHearts}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Lewis.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Lewis.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Lewis.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Lewis": "{{i18n:Lewis.BarleyZP.EnemyOfTheValley.apologized_Lewis}}",
+        "ReconciliationDustUsed": "{{i18n:Lewis.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Lewis",
+      "Entries": {
+        
+      }
+    }
+  ]
+}
