@@ -16,7 +16,6 @@ public class Util
         
         if (TryGetRule(data, topicKey, out var value) && TryGetNpcDefaultDialogue(topicKey, value, npc, out var dialogue))
         {
-            ModEntry.StaticMonitor.Log(topicKey, LogLevel.Debug);
             return new Dialogue(npc, topicKey, dialogue);
         }
 
@@ -98,12 +97,22 @@ public class Util
 
         var validTypes = new HashSet<string>{ "GSQ", "TopicContains", "NpcIs" };
         if (!validTypes.Contains(type)) return false;
+
+        var isCurrentNpc = false;
+        if (topicKey.Contains("_memory_"))
+        {
+            if (topicKey.Split("_memory_")[0].EndsWith(npc.Name)) isCurrentNpc = true;
+        }
+        else
+        {
+            if (topicKey.EndsWith(npc.Name)) isCurrentNpc = true;
+        }
         
         result = type switch
         {
             "GSQ" => GameStateQuery.CheckConditions(query),
             "TopicContains" => topicKey.Contains(query),
-            "NpcIs" => query.Split(",").ToList().Select(x => x.Trim()).Contains(npc.Name)
+            "NpcIs" => query == "Current" ? isCurrentNpc : query.Split(",").ToList().Select(x => x.Trim()).Contains(npc.Name)
         };
 
         return true;
