@@ -20,6 +20,10 @@
     {
       "UniqueID": "BarleyZP.EnemyOfTheValley",
       "IsRequired": true
+    },
+    {
+      "UniqiueID": "BarleyZP.ConversationTopicUtilities",
+      "IsRequired": false
     }
   ]
 }

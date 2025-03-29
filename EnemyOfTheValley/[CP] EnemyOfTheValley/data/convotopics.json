@@ -1,0 +1,14 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.CTU",
+      "Entries": {
+        "BarleyZP.EnemyOfTheValley.apologized_": {
+          "KeyIsPrefix": true,
+          "Repeatable": true
+        }
+      }
+    }
+  ]
+}

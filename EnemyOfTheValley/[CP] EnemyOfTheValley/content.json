@@ -24,7 +24,7 @@
     },
     {
       "Action": "Include",
-      "FromFile": "events.json"
+      "FromFile": "data/events.json"
     },
     {
       "Action": "Include",
@@ -32,19 +32,23 @@
     },
     {
       "Action": "Include",
-      "FromFile": "triggeractions.json"
+      "FromFile": "data/triggeractions.json"
     },
     {
       "Action": "Include",
-      "FromFile": "objects.json"
+      "FromFile": "data/objects.json"
     },
     {
       "Action": "Include",
-      "FromFile": "strings.json"
+      "FromFile": "data/strings.json"
     },
     {
       "Action": "Include",
-      "FromFile": "shops.json"
+      "FromFile": "data/shops.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "data/convotopics.json"
     },
     {
       "Action": "Include",
