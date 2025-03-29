@@ -3,6 +3,7 @@ using StardewValley;
 using System.Reflection.Emit;
 using System.Reflection;
 using Microsoft.Xna.Framework.Content;
+using Sickhead.Engine.Util;
 using StardewModdingAPI;
 
 
@@ -21,8 +22,8 @@ namespace EnemyOfTheValley.Patches
                 transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(grantConversationFriendship_Transpiler))
                 );
             harmony.Patch(
-                original: AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue)),
-                transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(tryToRetrieveDialogue_Transpiler))
+                original: AccessTools.Method(typeof(NPC), "loadCurrentDialogue"),
+                transpiler: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(loadCurrentDialogue_Transpiler))
                 );
             harmony.Patch(
                 original: AccessTools.Method(typeof(NPC), nameof(NPC.TryGetDialogue), new [] {typeof(string)}),
@@ -37,12 +38,13 @@ namespace EnemyOfTheValley.Patches
                 prefix: new HarmonyMethod(typeof(NPCDialoguePatches), nameof(StaticTryGetDialogue_Prefix)));
         }
 
-        public static Dictionary<string, string> DialogueLoader(NPC npc)
+        public static Dictionary<string, string> NegativeDialogueLoader(NPC npc)
         {
             try
             {
+                var dialogueFile = "BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + npc.GetDialogueSheetName();
                 return Game1.content
-                    .Load<Dictionary<string, string>>("BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + npc.GetDialogueSheetName())
+                    .Load<Dictionary<string, string>>(dialogueFile)
                     .Select(delegate(KeyValuePair<string, string> pair)
                     {
                         string key = pair.Key;
@@ -55,7 +57,6 @@ namespace EnemyOfTheValley.Patches
             {
                 return new Dictionary<string, string>();
             }
-            
         }
         
         public static void StaticTryGetDialogue_Prefix(NPC speaker, ref string translationKey)
@@ -77,10 +78,10 @@ namespace EnemyOfTheValley.Patches
             }
             
             // try to get negative dialogue first
-            var dialogue = DialogueLoader(__instance);
+            var dialogue = NegativeDialogueLoader(__instance);
             if (dialogue.TryGetValue(key, out var text))
             {   
-                __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, text);
+                __result = new Dialogue(__instance, "BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + __instance.GetDialogueSheetName() + ":" + key, text);
                 return false;  // skip original because we found something loaded on the negative sheet
             }
             
@@ -96,10 +97,10 @@ namespace EnemyOfTheValley.Patches
             }
             
             // try to get negative dialogue first
-            var dialogue = DialogueLoader(__instance);
+            var dialogue = NegativeDialogueLoader(__instance);
             if (dialogue.TryGetValue(key, out var text))
             {
-                __result = new Dialogue(__instance, __instance.LoadedDialogueKey + ":" + key, string.Format(text, substitutions));
+                __result = new Dialogue(__instance, "BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\" + __instance.GetDialogueSheetName() + ":" + key, string.Format(text, substitutions));
                 return false;  // skip original because we found something loaded on the negative sheet
             }
             
@@ -126,43 +127,7 @@ namespace EnemyOfTheValley.Patches
 
             return matcher.InstructionEnumeration();
         }
-       
-        public static IEnumerable<CodeInstruction> tryToRetrieveDialogue_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
-        {
-            CodeMatcher matcher = new(instructions, generator);
-            MethodInfo negativeDayDialogue = AccessTools.Method(typeof(NPCDialoguePatches), nameof(NegativeDayDialogue));
-
-            // we want to insert after the for-loop
-            matcher.MatchEndForward(
-                    new CodeMatch(OpCodes.Ldloc_S),
-                    new CodeMatch(OpCodes.Ldc_I4_2),
-                    new CodeMatch(OpCodes.Sub),
-                    new CodeMatch(OpCodes.Stloc_S),
-                    new CodeMatch(OpCodes.Ldloc_S),
-                    new CodeMatch(OpCodes.Ldc_I4_2),
-                    new CodeMatch(OpCodes.Bge)
-                )
-                .ThrowIfNotMatch("could not find end of for loop to insert after")
-                .Advance(1)
-                .CreateLabel(out Label jmpLabel)
-                .Insert(
-                    new(OpCodes.Ldarg_0),
-                    new(OpCodes.Ldarg_2),
-                    new(OpCodes.Ldarg_1),
-                    new(OpCodes.Ldarg_3),
-                    new(OpCodes.Ldloc_S, (byte)1),
-                    new(OpCodes.Ldloc_S, (byte)0),
-                    new(OpCodes.Call, negativeDayDialogue),
-                    new(OpCodes.Stloc_S, (byte)8),
-                    new(OpCodes.Ldloc_S, (byte)8),
-                    new(OpCodes.Brfalse, jmpLabel),
-                    new(OpCodes.Ldloc_S, (byte)8),
-                    new(OpCodes.Ret));
-
-
-            return matcher.InstructionEnumeration();
-        }
-
+        
         public static IEnumerable<CodeInstruction> checkForNewCurrentDialogue_Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             MethodInfo negativeLocDialogue = AccessTools.Method(typeof(NPCDialoguePatches), nameof(NegativeLocationDialogue));
@@ -194,6 +159,45 @@ namespace EnemyOfTheValley.Patches
             return matcher.InstructionEnumeration();
         }
 
+        public static IEnumerable<CodeInstruction> loadCurrentDialogue_Transpiler(
+            IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+        {
+            var matcher = new CodeMatcher(instructions, generator);
+            var helper = AccessTools.Method(typeof(NPCDialoguePatches),
+                nameof(LoadCurrentDialogueTranspilerHelper));
+            var tryToRetrieveDialogue = AccessTools.Method(typeof(NPC), nameof(NPC.tryToRetrieveDialogue));
+            var getSeason = AccessTools.PropertyGetter(typeof(Game1), nameof(Game1.currentSeason));
+            var extraDialogueThisMorning = AccessTools.Field(typeof(NPC), "extraDialogueMessageToAddThisMorning");
+
+            matcher.MatchStartForward(
+                    new CodeMatch(OpCodes.Ldarg_0),
+                    new CodeMatch(OpCodes.Ldfld, extraDialogueThisMorning))
+                .ThrowIfNotMatch($"Cannot find forward match entrypoint for {nameof(loadCurrentDialogue_Transpiler)}")
+                .CreateLabel(out var label);
+            
+            var labels = matcher.MatchStartBackwards(
+                    new CodeMatch(OpCodes.Ldarg_0),
+                    new CodeMatch(OpCodes.Call, getSeason),
+                    new CodeMatch(OpCodes.Ldstr, "_"),
+                    new CodeMatch(OpCodes.Call), // string concat
+                    new CodeMatch(OpCodes.Ldloc_2),
+                    new CodeMatch(OpCodes.Ldstr, ""),
+                    new CodeMatch(OpCodes.Call, tryToRetrieveDialogue))
+                .ThrowIfNotMatch($"Cannot find backwards match entrypoint for {nameof(loadCurrentDialogue_Transpiler)}")
+                .Labels;
+                
+                
+                matcher.Insert(
+                    new CodeInstruction(OpCodes.Ldarg_0),
+                    new CodeInstruction(OpCodes.Ldloc_2),
+                    new CodeInstruction(OpCodes.Ldloc_0),
+                    new CodeInstruction(OpCodes.Call, helper),
+                    new CodeInstruction(OpCodes.Brtrue, label))
+                    .AddLabels(labels);
+
+            return matcher.InstructionEnumeration();
+        }
+        
         public static int ChangeConversationFriendshipAmount(int amount, Farmer who, Friendship friendship)
         {
             if (who.hasBuff("statue_of_blessings_4")) return amount;
@@ -214,17 +218,81 @@ namespace EnemyOfTheValley.Patches
             return currDialogue;
         }
 
-        public static Dialogue? NegativeDayDialogue(NPC npc, int heartLevel, string preface, string appendToEnd, string day_name, int year)
+        public static bool LoadCurrentDialogueTranspilerHelper(NPC npc, int heartLevel, Stack<Dialogue> currentDialogue)
         {
-            for (int hearts = -10; hearts <= -2; hearts += 2)
+            var seasonal = TryToRetrieveNegativeDailyDialogue(npc, Game1.currentSeason + "_", heartLevel);
+            if (seasonal != null && seasonal.TranslationKey.Contains("NegativeHeartDialogue"))
+            {
+                currentDialogue.Push(seasonal);
+                return true;
+            }
+            
+            var nonSeasonal = TryToRetrieveNegativeDailyDialogue(npc, "", heartLevel);
+            if (nonSeasonal != null && nonSeasonal.TranslationKey.Contains("NegativeHeartDialogue"))
+            {
+                currentDialogue.Push(nonSeasonal);
+                return true;
+            }
+
+            return false;
+        }
+        
+        public static Dialogue? TryToRetrieveNegativeDailyDialogue(NPC npc, string preface, int heartLevel, string appendToEnd = "")
+        {
+            if (!string.IsNullOrEmpty(Game1.player.spouse) && appendToEnd.Equals(""))
+            {
+                if (Game1.player.hasCurrentOrPendingRoommate())
+                {
+                    var roommateDialogue = TryToRetrieveNegativeDailyDialogue(npc, preface, heartLevel, "_roommate_" + Game1.player.spouse);
+                    if (roommateDialogue != null)
+                    {
+                        return roommateDialogue;
+                    }
+                }
+                else
+                {
+                    var inlawDialogue = TryToRetrieveNegativeDailyDialogue(npc, preface, heartLevel, "_inlaw_" + Game1.player.spouse);
+                    if (inlawDialogue != null)
+                    {
+                        return inlawDialogue;
+                    }
+                }
+            }
+            
+            var dayName = Game1.shortDayNameFromDayOfSeason(Game1.dayOfMonth);
+            var year = Game1.year;
+            if (Game1.year > 2)
+            {
+                year = 2;
+            }
+            
+            if (year == 1)
+            {
+                var yearOneDayOfMonthDialogue = npc.TryGetDialogue(preface + Game1.dayOfMonth);
+                if (yearOneDayOfMonthDialogue != null)
+                {
+                    return yearOneDayOfMonthDialogue;
+                }
+            }
+            var firstOrLaterYearDayOfMonthDialogue = npc.TryGetDialogue(preface + Game1.dayOfMonth + "_" + year);
+            if (firstOrLaterYearDayOfMonthDialogue != null)
+            {
+                return firstOrLaterYearDayOfMonthDialogue;
+            }
+            for (var hearts = -10; hearts <= -2; hearts += 2)
             {
                 if (heartLevel <= hearts)
                 {
-                    Dialogue? d = npc.TryGetDialogue(preface + day_name + hearts + "_" + year + appendToEnd) ?? npc.TryGetDialogue(preface + day_name + hearts + appendToEnd);
-                    if (d != null) return d;
+                    var heartDialogue = npc.TryGetDialogue(preface + dayName + hearts + "_" + year) ?? npc.TryGetDialogue(preface + dayName + hearts);
+                    if (heartDialogue != null)
+                    {
+                        return heartDialogue;
+                    }
                 }
             }
-            return null;
+            var dayNameDialogue = npc.TryGetDialogue(preface + dayName);
+            var firstOrLaterYearDayNameDialogue = npc.TryGetDialogue(preface + dayName + "_" + year);
+            return firstOrLaterYearDayNameDialogue ?? dayNameDialogue;
         }
     }
 }

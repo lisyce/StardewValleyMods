@@ -25,7 +25,13 @@
       "Action": "EditData",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Lewis",
       "Entries": {
-        
+        "Mon-2": "{{i18n:Lewis.Mon-2}}",
+        "Tue-2": "{{i18n:Lewis.Tue-2}}",
+        "Wed-2": "{{i18n:Lewis.Wed-2}}",
+        "Thu-2": "{{i18n:Lewis.Thu-2}}",
+        "Fri-2": "{{i18n:Lewis.Fri-2}}",
+        "Sat-2": "{{i18n:Lewis.Sat-2}}",
+        "Sun-2": "{{i18n:Lewis.Sun-2}}"
       }
     }
   ]

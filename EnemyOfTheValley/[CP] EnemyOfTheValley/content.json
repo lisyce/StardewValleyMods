@@ -20,6 +20,10 @@
     },
     {
       "Action": "Include",
+      "FromFile": "dialogue/lewis.json"
+    },
+    {
+      "Action": "Include",
       "FromFile": "dialogue/vincent.json"
     },
     {

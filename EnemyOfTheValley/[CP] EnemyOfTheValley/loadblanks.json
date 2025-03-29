@@ -3,9 +3,8 @@
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
-      "FromFile": "blank.json"
+      "FromFile": "dialogue/rainy.json"
     },
-    
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",

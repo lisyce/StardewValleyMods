@@ -8,7 +8,6 @@
         "Alex": "{{i18n:Rainy.Alex}}",
         "Elliott": "{{i18n:Rainy.Elliott}}",
         "Haley": "{{i18n:Rainy.Haley}}",
-
         "Robin": "The rain doesn't stop me from getting a job done!$h#$e#Although soggy wood isn't a joy to work with.$s",
         "Demetrius": "Greetings. Stay inside if you want to keep warm.",
         "Maru": "When it rains I have a good excuse to work on my gadgets all day.$h#$e#It must be kind of boring for you, though.",
@@ -18,7 +17,7 @@
         "Caroline": "My garden is happy today.$h#$e#...and our water bill will be lower this month.",
         "George": "It's awful cold, isn't it? What a rotten day.",
         "Evelyn": "When I woke up I heard dripping from somewhere... I think the roof might be leaking.$s#$e#In the old days, George would've scampered right up and fixed it... *sigh*$s",
-        "Lewis": "Hi there, @. Taking a break?#$e#I hope the river doesn't overflow...$s",
+        "Lewis": "{{i18n:Rainy.Lewis}}",
         "Clint": "Today would be a good day to explore the mines... Who knows, you might find some rare ores.",
         "Penny": "The raindrops are really loud on the metal roof of our trailer.#$e#...It's soothing, though.$h",
         "Pam": "Howdy, kid. Stayin' dry?",
