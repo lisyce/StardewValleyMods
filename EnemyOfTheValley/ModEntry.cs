@@ -16,16 +16,16 @@ namespace EnemyOfTheValley
 {
     public class ModEntry : Mod
     {
-        public static IMonitor Monitor;
+        public static IMonitor StaticMonitior;
         public static ITranslationHelper Translation;
         public static Texture2D? MiscSprites;  // do not reference directly in transpilers
         public static Texture2D? StandardSprites;
         public override void Entry(IModHelper helper)
         {
-            Monitor = base.Monitor;
+            StaticMonitior = Monitor;
             Translation = helper.Translation;
             
-            Monitor.Log("This mod patches the way dialogue keys are handled. If you are having issues with a dialogue key not showing, ensure that it happens without this mod installed before reporting it to the respective mod authors.", LogLevel.Debug);
+            StaticMonitior.Log("This mod patches the way dialogue keys are handled. If you are having issues with a dialogue key not showing, ensure that it happens without this mod installed before reporting it to the respective mod authors.", LogLevel.Debug);
             
             Harmony harmony = new(ModManifest.UniqueID);
             FarmerPatches.Patch(harmony);
@@ -183,14 +183,14 @@ namespace EnemyOfTheValley
         {
             if (!ArgUtility.TryGetInt(args, 1, out int amt, out string err))
             {
-                Monitor.Log(err, LogLevel.Error);
+                StaticMonitior.Log(err, LogLevel.Error);
             }
             else
             {
                 var npc = Game1.getCharacterFromName<NPC>(args[0]);
                 if (!Game1.player.friendshipData.TryGetValue(args[0], out var friendship))
                 {
-                    Monitor.Log("NPC not found in player's friendship data.", LogLevel.Error);
+                    StaticMonitior.Log("NPC not found in player's friendship data.", LogLevel.Error);
                 }
                 else
                 {
@@ -198,7 +198,7 @@ namespace EnemyOfTheValley
                     Game1.player.changeFriendship(amt, npc);
                     int after = friendship.Points;
                     
-                    Monitor.Log("Before: " + before + ". After: " + after, LogLevel.Info);
+                    StaticMonitior.Log("Before: " + before + ". After: " + after, LogLevel.Info);
                 }
             }
             
@@ -206,7 +206,7 @@ namespace EnemyOfTheValley
 
         public static void MaxedFriendshipPercent(string command, string[] args)
         {
-            Monitor.Log(Utility.getMaxedFriendshipPercent().ToString(), LogLevel.Info);
+            StaticMonitior.Log(Utility.getMaxedFriendshipPercent().ToString(), LogLevel.Info);
         }
     }
 }

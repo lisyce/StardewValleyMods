@@ -6,12 +6,24 @@
     <Nullable>enable</Nullable>
 	<EnableHarmony>true</EnableHarmony>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <Name>Enemy of the Valley</Name>
+    <Authors>BarleyZP</Authors>
+    <Description>You either die a hero or live long enough to see yourself become the villain.</Description>
+    <UniqueId>BarleyZP.EnemyOfTheValley</UniqueId>
+    <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
+    <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
+    <UpdateKeys>Nexus:30688</UpdateKeys>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
 
   <ItemGroup>
     <ContentPacks Include="[CP] EnemyOfTheValley" Version="$(Version)" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
     <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
   </ItemGroup>
 

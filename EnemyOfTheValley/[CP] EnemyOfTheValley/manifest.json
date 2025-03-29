@@ -22,7 +22,7 @@
       "IsRequired": true
     },
     {
-      "UniqiueID": "BarleyZP.ConversationTopicUtilities",
+      "UniqueID": "BarleyZP.ConversationTopicUtilities",
       "IsRequired": false
     }
   ]

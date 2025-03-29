@@ -1,10 +1,21 @@
 {
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.EnemyOfTheValley",
   "Name": "Enemy of the Valley",
   "Author": "BarleyZP",
-  "Version": "1.0.0",
+  "Version": "1.0.0-Debug",
   "Description": "You either die a hero or live long enough to see yourself become the villain.",
-  "UniqueID": "BarleyZP.EnemyOfTheValley",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
   "EntryDll": "EnemyOfTheValley.dll",
-  "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [ "Nexus:30688" ]
+  "UpdateKeys": [
+    "Nexus:30688"
+  ]
 }
