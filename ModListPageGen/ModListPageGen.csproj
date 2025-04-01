@@ -7,8 +7,8 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <Version>1.0.2</Version>
-        <MinimumApiVersion>4.1.10</MinimumApiVersion>
+        <Version>2.0.0</Version>
+        <MinimumApiVersion>4.2.1</MinimumApiVersion>
         <MinimumGameVersion>1.6.15</MinimumGameVersion>
         <Name>Shareable Mod List Generator</Name>
         <Authors>BarleyZP</Authors>

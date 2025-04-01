@@ -58,6 +58,7 @@ public class ModEntry : Mod
 
     private void GenerateList(string command, string[] args)
     {
+        
         if (args.Length < 2)
         {
             Monitor.Log("Not enough arguments provided to bzp_mod_list. Usage: bzp_mod_list \"<title>\" \"<author>\"", LogLevel.Error);
@@ -67,7 +68,7 @@ public class ModEntry : Mod
         var author = args[1];
         
         var client = new NexusApiClient(Monitor);
-
+        
         int len = _helper.ModRegistry.GetAll().Count();
         Monitor.Log($"Building Mod List of {len} Mods...", LogLevel.Info);
         
@@ -154,45 +155,54 @@ public class ModEntry : Mod
     
     private List<ModInfo> GetMods(IEnumerable<IModInfo> mods, NexusApiClient client)
     {
+        
         List<ModInfo> result = new();
-        Dictionary<int, string> nexusIds = new();
+        Dictionary<string, int> nexusIds = new();
+        HashSet<(string name, string uniqueId, string nexusId)> modsWithInvalidIds = new();
 
         foreach (var mod in mods)
         {
             // does this mod have nexus update keys?
-            if (TryGetNexusModId(mod.Manifest, out int id))
+            if (TryGetNexusModId(mod.Manifest, out int id, out string verbatimUpdateKey))
             {
-                nexusIds.TryAdd(id, mod.Manifest.UniqueID);
+                nexusIds.TryAdd(mod.Manifest.UniqueID, id);
             }
-
-            result.Add(new ModInfo(mod.Manifest, null));
+            else if (verbatimUpdateKey.Length > 0)
+            {
+                modsWithInvalidIds.Add((mod.Manifest.Name, mod.Manifest.UniqueID, verbatimUpdateKey));
+            }
         }
 
-        // call the api for all the nexus Ids
-        var task = client.GetMods(nexusIds.Keys.ToHashSet());
+        var task = client.GetNexusInfo(nexusIds.Values.ToHashSet());
         try
         {
             task.Wait();
             foreach (var mod in mods)
             {
-                if (TryGetNexusModId(mod.Manifest, out int id))
+                if (!nexusIds.ContainsKey(mod.Manifest.UniqueID))
                 {
-                    if (task.Result.TryGetValue(id, out var nexusInfo))
-                    {
-                        var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
-                        if (match == null) continue;
+                    result.Add(new ModInfo(mod.Manifest, null));
+                    continue;
+                }
 
-                        result.Remove(match);  // replace with the nexus info
-                        result.Add(new ModInfo(mod.Manifest, nexusInfo, id.ToString()));
-                    }
-                    else
-                    {
-                        var match = result.First(x => x.UniqueId == mod.Manifest.UniqueID);
-                        if (match == null) continue;
+                var modNexusId = nexusIds[mod.Manifest.UniqueID];
+                if (task.Result.foundNexusInfo.TryGetValue(modNexusId, out var nexusInfo))
+                {
+                    // we have data!
+                    result.Add(new ModInfo(mod.Manifest, nexusInfo, modNexusId.ToString()));
+                }
+                else if (task.Result.invalidNexusIds.Contains(modNexusId))
+                {
+                    modsWithInvalidIds.Add((mod.Manifest.Name, mod.Manifest.UniqueID, modNexusId.ToString()));
+                }
+            }
 
-                        result.Remove(match);  // replace with the nexus info
-                        result.Add(new ModInfo(mod.Manifest, null, id.ToString()));
-                    }
+            if (modsWithInvalidIds.Any())
+            {
+                Monitor.Log($"{modsWithInvalidIds.Count} mods have invalid Nexus update keys. Your list will still be generated!", LogLevel.Info);
+                foreach (var (name, uniqueId, nexusId) in modsWithInvalidIds)
+                {
+                    Monitor.Log($"{name} ({uniqueId}): \"Nexus:{nexusId}\".", LogLevel.Debug);    
                 }
             }
         }
@@ -205,12 +215,16 @@ public class ModEntry : Mod
         return result;
     }
 
-    private static bool TryGetNexusModId(IManifest manifest, out int nexusId)
+    private static bool TryGetNexusModId(IManifest manifest, out int nexusId, out string verbatimUpdateKey)
     {
+        verbatimUpdateKey = "";
+        nexusId = -1;
+        
         foreach (var key in manifest.UpdateKeys)
         {
             if (key.ToLower().Contains("nexus"))
             {
+                verbatimUpdateKey = key[6..];  // shave off "Nexus:"
                 var strId = NexusIdRegex.Match(key).Value;
                 if (int.TryParse(strId, out nexusId) && nexusId > 0)
                 {
@@ -219,7 +233,6 @@ public class ModEntry : Mod
             }
         }
 
-        nexusId = -1;
         return false;
     }
     
