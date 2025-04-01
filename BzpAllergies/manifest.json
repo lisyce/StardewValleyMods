@@ -23,6 +23,10 @@
     {
       "UniqueID": "Pathoschild.ContentPatcher",
       "IsRequired": false
+    },
+    {
+      "UniqueID": "leclair.bettergamemenu",
+      "IsRequired": false
     }
   ]
 }
