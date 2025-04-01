@@ -4,7 +4,7 @@
   "Version": "1.5.0",
   "Description": "BarleyZP's Allergy Mod Content Patcher Component",
   "UniqueID": "BarleyZP.BzpAllergies.CP",
-  "MinimumApiVersion": "3.8.0",
+  "MinimumApiVersion": "4.0.0",
   "UpdateKeys": [ "Nexus:21238'" ],
   "ContentPackFor": {
     "UniqueID": "Pathoschild.ContentPatcher"

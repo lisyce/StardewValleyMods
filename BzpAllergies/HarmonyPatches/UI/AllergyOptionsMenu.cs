@@ -13,7 +13,6 @@ namespace BzpAllergies.HarmonyPatches.UI
         private Traverse UpArrowTraverse;
         private Traverse DownArrowTraverse;
         private bool StandAlone;
-        private bool FirstDraw;
         public AllergyOptionsMenu(int x, int y, int width, int height, bool standAlone = false)
             : base(x, y, width, height)
         {
@@ -34,21 +33,10 @@ namespace BzpAllergies.HarmonyPatches.UI
             UpArrowTraverse = Traverse.Create(this).Field("upArrow");
             DownArrowTraverse = Traverse.Create(this).Field("downArrow");
             StandAlone = standAlone;
-            FirstDraw = true;
         }
 
         public override void draw(SpriteBatch b)
         {
-            if (FirstDraw && !StandAlone)
-            {
-                if (options.Last() is OptionsButton &&
-                    ModEntry.Instance.Helper.ModRegistry.IsLoaded("leclair.bettergamemenu"))
-                {
-                    options.RemoveAt(options.Count - 1);
-                }
-                FirstDraw = false;
-            }
-            
             if (StandAlone)
             {
                 b.Draw(Game1.fadeToBlackRect, new Rectangle(0, 0, Game1.uiViewport.Width, Game1.uiViewport.Height), Color.Black * 0.5f);

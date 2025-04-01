@@ -21,7 +21,7 @@ namespace EnemyOfTheValley.Patches
         public static bool CheckShardsAction(Beach beach, xTile.Dimensions.Location tileLocation, Farmer who)
         {
             Vector2 tilePos = new(tileLocation.X, tileLocation.Y);
-            if (beach.objects.TryGetValue(tilePos, out SObject obj) && obj.IsSpawnedObject && who.couldInventoryAcceptThisItem(obj))
+            if (beach.objects.TryGetValue(tilePos, out SObject obj) && obj.QualifiedItemId == "(O)BarleyZP.EnemyOfTheValley.ShatteredAmulet" && obj.IsSpawnedObject && who.couldInventoryAcceptThisItem(obj))
             {
                 if (who.IsLocalPlayer)
                 {

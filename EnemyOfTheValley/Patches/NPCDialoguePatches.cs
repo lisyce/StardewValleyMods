@@ -65,7 +65,6 @@ namespace EnemyOfTheValley.Patches
                 Game1.player.friendshipData.TryGetValue(speaker.Name, out var friendship) && friendship.Points <= -250)
             {
                 translationKey = "BarleyZP.EnemyOfTheValley\\NegativeHeartDialogue\\Rainy:" + speaker.GetDialogueSheetName();
-
             }
         }
 

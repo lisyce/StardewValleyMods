@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
+      <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <SMAPIDependency Include="focustense.StardewUI" Version="0.6.0" Reference="true" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Name>Mobile Farm Computer</Name>
+        <Authors>BarleyZP</Authors>
+        <Description>Bring a more powerful farm computer around in your pocket! Get a configurable, automatic TODO list every morning that checks itself off as you complete it.</Description>
+        <UniqueId>BarleyZP.MobileFarmComputer</UniqueId>
+        <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
+        <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+
+</Project>
