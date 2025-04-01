@@ -19,7 +19,7 @@ public class ModEntry : Mod
         _helper = helper;
 
         _helper.ConsoleCommands.Add("bzp_mod_list",
-            "Generates an HTML-formatted mod list. Usage: bzp_mod_list \"<title>\" \"<author>\"",
+            "Generates an HTML-formatted mod list. Usage: bzp_mod_list \"<title>\" \"<author>\" <(optional bool) skip Nexus API>",
             GenerateList);
         _helper.ConsoleCommands.Add("bzp_share_mod_list", "Creates a shareable link for an existing mod list. Usage: bzp_share_mod_list \"<title>\"",
             ShareList);
@@ -61,19 +61,29 @@ public class ModEntry : Mod
         
         if (args.Length < 2)
         {
-            Monitor.Log("Not enough arguments provided to bzp_mod_list. Usage: bzp_mod_list \"<title>\" \"<author>\"", LogLevel.Error);
+            Monitor.Log("Not enough arguments provided to bzp_mod_list. Usage: bzp_mod_list \"<title>\" \"<author>\" <(optional bool) skip Nexus API>", LogLevel.Error);
             return;
         }
         var title = args[0];
         var author = args[1];
+        var skipNexus = args.Length >= 3;
         
-        var client = new NexusApiClient(Monitor);
-        
-        int len = _helper.ModRegistry.GetAll().Count();
+        var len = _helper.ModRegistry.GetAll().Count();
         Monitor.Log($"Building Mod List of {len} Mods...", LogLevel.Info);
+
+        var result = new List<ModInfo.TemplatedModInfo>();
+
+        if (!skipNexus)
+        {
+            var client = new NexusApiClient(Monitor);
+            result = GetMods(_helper.ModRegistry.GetAll(), client).OrderBy(x => x.Name)
+                .Select(x => x.ToTemplate(_helper)).ToList();
+        }
+        else
+        {
+            Monitor.Log("Skipping Nexus API calls because that argument was provided to this command. Category information may be unavailable.", LogLevel.Info);
+        }
         
-        var result = GetMods(_helper.ModRegistry.GetAll(), client).OrderBy(x => x.Name)
-            .Select(x => x.ToTemplate(_helper)).ToList();
         var source = File.ReadAllText(_helper.DirectoryPath + "/template.html");
         var template = Handlebars.Compile(source);
         
@@ -104,7 +114,7 @@ public class ModEntry : Mod
         Monitor.Log($"Saved mod list to {outputPath}.", LogLevel.Info);
     }
 
-    public class DepTreeElement
+    private class DepTreeElement
     {
         public string Name { get; set; }
         public int DepsCount { get; set; }
