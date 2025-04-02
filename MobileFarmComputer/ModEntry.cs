@@ -31,8 +31,16 @@ public class ModEntry : Mod
     {
         if (e.Button == SButton.B)
         {
-            Monitor.Log("press", LogLevel.Debug);
-            Game1.activeClickableMenu = viewEngine.CreateMenuFromAsset($"{viewAssetPrefix}/FarmComputer");
+            var items = TodoGenerators.GetTodos();
+            
+            var context = new
+            {
+                Location = "Report for: " + (Game1.player.currentLocation.GetRootLocation().GetDisplayName() ??
+                                             "Unnamed Location"),
+                TodoItems = items.todo,
+                DoneItems = items.done
+            };
+            Game1.activeClickableMenu = viewEngine.CreateMenuFromAsset($"{viewAssetPrefix}/FarmComputer", context);
         }
     }
 }

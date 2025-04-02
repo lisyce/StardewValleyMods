@@ -11,10 +11,6 @@
       <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
     </ItemGroup>
 
-    <ItemGroup>
-        <SMAPIDependency Include="focustense.StardewUI" Version="0.6.0" Reference="true" />
-    </ItemGroup>
-
     <PropertyGroup>
         <Name>Mobile Farm Computer</Name>
         <Authors>BarleyZP</Authors>
