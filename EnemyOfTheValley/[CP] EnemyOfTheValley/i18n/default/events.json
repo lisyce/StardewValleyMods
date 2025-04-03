@@ -107,5 +107,20 @@
   "Events.Lewis-2.9": "Sigh... well there are better ways to communicate that, you know.$2",
   "Events.Lewis-2.10": "Well, it's not election season any time soon.#$b#But between you and me, I don't think the residents of Pelican Town would even think of voting for you.$5",
   "Events.Lewis-2.11": "That's absolutely uncalled for!$4",
-  "Events.Lewis-2.12": "I pride myself in serving my town. Seeing as how you've been treating me, I'm not sure you have the same kind of character.$3#$b#Good afternoon, @.$3"
+  "Events.Lewis-2.12": "I pride myself in serving my town. Seeing as how you've been treating me, I'm not sure you have the same kind of character.$3#$b#Good afternoon, @.$3",
+
+  "Events.Demetrius-2.0": "Oh, it's @. Maru and I were just doing some lab work on samples of moss from the nearby forest.",
+  "Events.Demetrius-2.1": "Maru, I think I left some of our samples out front. Could you please run and get them?",
+  "Events.Demetrius-2.2": "Sure, Dad! I'll check by the garage. I think we might have forgotten them there.",
+  "Events.Demetrius-2.3": "Come closer, @.",
+  "Events.Demetrius-2.4": "No, come *all* the way over here.",
+  "Events.Demetrius-2.5": "I sense that you might have some reservations about me. I've been collecting data on our interactions and only 3 of the last 10 were friendly.",
+  "Events.Demetrius-2.6": "Are you sure? I think we've been getting along great",
+  "Events.Demetrius-2.7": "I'm always busy when you try and talk to me. I don't have time.",
+  "Events.Demetrius-2.8": "Hmmm... perhaps my data collection methods have some flaw?$3",
+  "Events.Demetrius-2.9": "I'm not sure that's the case. My records show you initiated 90% of the most recent interactions we had.$5",
+  "Events.Demetrius-2.10": "Anyway, @, I wanted to discuss something with you.$5#$b#I'm starting to be mistrustful of your character. I'm sure you know my Maru is very important to me.$4#$b#I think it would be in your best interests to not become involved with her.$4",
+  "Events.Demetrius-2.11": "Demetrius looks at you pointedly...",
+  "Events.Demetrius-2.12": "Oh! My samples are done. I've got to check on them.#$b#You should get going before she's back.$4",
+  "Events.Demetrius-2.13": "Don't forget what I said!"
 }
