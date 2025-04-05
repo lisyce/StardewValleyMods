@@ -5,8 +5,18 @@
         <label text={:Location} margin="0,0,0,30" />
         
         <label font="dialogue" text="To-Do" margin="0,0,0,20" />
-        <label *repeat={:TodoItems} text={:TaskName} margin="30,0,0,15" />
-        
+        <lane orientation="vertical">
+            <lane *repeat={:TodoItems}>
+                <expander *if={:RenderSubtasks} layout="stretch content" margin="0,0,0,15">
+                    <label *outlet="header" text={:TaskName}  />
+                    <lane orientation="vertical">
+                        <label *repeat={:UncompletedSubtasks} text={:this} margin="90,15,0,0"/>
+                    </lane>
+                </expander>
+
+                <label *!if={:RenderSubtasks} text={:TaskName} margin="50,0,0,15" />
+            </lane>
+        </lane>
         <label font="dialogue" text="Completed" margin="0,40,0,20" color="#5c5c5c" />
         <label *repeat={:DoneItems} text={:TaskName} margin="30,0,0,15" color="#5c5c5c" />
     </lane>

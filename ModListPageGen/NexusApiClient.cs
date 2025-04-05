@@ -13,8 +13,8 @@ public class NexusApiClient
 {
     public class GetNexusInfoResponse
     {
-        public Dictionary<int, NexusInfo> foundNexusInfo;
-        public HashSet<int> invalidNexusIds;
+        public Dictionary<int, NexusInfo> foundNexusInfo = new();
+        public HashSet<int> invalidNexusIds = new();
     }
     
     private readonly GraphQLHttpClient _graphQl;
@@ -34,11 +34,7 @@ public class NexusApiClient
 
     public async Task<GetNexusInfoResponse> GetNexusInfo(HashSet<int> modIds)
     {
-        var result = new GetNexusInfoResponse
-        {
-            foundNexusInfo = new Dictionary<int, NexusInfo>(),
-            invalidNexusIds = new HashSet<int>()
-        };
+        var result = new GetNexusInfoResponse();
         
         var legacyModIds = modIds.Select(x => new GraphqlSchemas.LegacyModId { gameId = 1303, modId = x})
             .Where(x => !result.invalidNexusIds.Contains(x.modId)).ToList();
@@ -68,11 +64,7 @@ public class NexusApiClient
     private async Task<(GetNexusInfoResponse sureOf, List<GraphqlSchemas.LegacyModId> unsureOf)> GetNexusInfoHelper(List<GraphqlSchemas.LegacyModId> legacyModIds, int batchSize) {
         var unsureOf = new List<GraphqlSchemas.LegacyModId>();
 
-        var sureOf = new GetNexusInfoResponse
-        {
-            foundNexusInfo = new Dictionary<int, NexusInfo>(),
-            invalidNexusIds = new HashSet<int>()
-        };
+        var sureOf = new GetNexusInfoResponse();
 
         for (var i = 0; i < legacyModIds.Count; i += batchSize)
         {

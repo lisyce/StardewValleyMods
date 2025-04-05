@@ -1,5 +1,6 @@
 using StardewValley;
 using StardewValley.Buildings;
+using StardewValley.Extensions;
 using StardewValley.Locations;
 using StardewValley.Objects;
 using SObject = StardewValley.Object;
@@ -13,8 +14,9 @@ public class TodoGenerators
         public string TaskName;
         public bool Completed;
         public List<string> UncompletedSubtasks;
+        public bool RenderSubtasks;
 
-        public TodoItem(string taskName, bool completed, int remaining, List<(string name, int remaining)>? uncompletedSubtasks = null)
+        public TodoItem(string taskName, bool completed, int remaining, Dictionary<string, int>? uncompletedSubtasks = null)
         {
             TaskName = "* " + taskName;
             if (!completed)
@@ -23,8 +25,9 @@ public class TodoGenerators
             }
             
             Completed = completed;
-            uncompletedSubtasks ??= new List<(string name, int remaining)>();
-            UncompletedSubtasks = uncompletedSubtasks.Select(x => ($"* {x.name} ({x.remaining} remaining)")).ToList();
+            uncompletedSubtasks ??= new Dictionary<string, int>();
+            UncompletedSubtasks = uncompletedSubtasks.Select(x => ($"* {x.Key} ({x.Value} remaining)")).ToList();
+            RenderSubtasks = UncompletedSubtasks.Any();
         }
     }
 
@@ -57,11 +60,12 @@ public class TodoGenerators
         return new TodoItem("Harvest farm cave", completed, 1);
     }
 
-    // TODO subtasks that show where each machine is
     private static TodoItem GetMachinesTask(GameLocation location)
     {
-        var ready = location.getNumberOfMachinesReadyForHarvest();
-        return new TodoItem("Collect from machines", ready == 0, ready);
+        var toCollect = MachinesToCollect(location);
+        var ready = toCollect.Values.Sum();
+        
+        return new TodoItem("Collect from machines", ready == 0, ready, toCollect);
     }
 
     private static TodoItem GetPetBowlsTask(GameLocation location)
@@ -91,7 +95,7 @@ public class TodoGenerators
     private static TodoItem GetCropsHarvestTask(GameLocation location)
     {
         var crops = location.getTotalCropsReadyForHarvest();
-        return new TodoItem("Water crops", crops == 0, crops);
+        return new TodoItem("Harvests crops", crops == 0, crops);
     }
     
     // TODO should include crops/garden pots both in and outside
@@ -102,4 +106,32 @@ public class TodoGenerators
     }
     
     // helpers
+    private static Dictionary<string, int> MachinesToCollect(GameLocation location)
+    {
+        var result = new Dictionary<string, int>();
+        
+        result["This location"] = location.Objects.Values.Count(x => x.IsConsideredReadyMachineForComputer());
+
+        var houseName = location is Farm ? "FarmHouse" :
+            location is IslandWest iw && iw.farmhouseRestored.Value ? "IslandFarmHouse" : null;
+        if (houseName != null)
+        {
+            result["Farmhouse"] = Game1.RequireLocation(houseName).Objects.Values
+                .Count(x => x.IsConsideredReadyMachineForComputer());
+        }
+
+        foreach (var building in location.buildings)
+        {
+            var indoors = building.GetIndoors();
+            if (indoors == null) continue;
+            
+            result.TryAdd(building.buildingType.Value + "s", 0);
+            result[building.buildingType.Value + "s"] +=
+                indoors.Objects.Values.Count(x => x.IsConsideredReadyMachineForComputer());
+        }
+
+        result.RemoveWhere(x => x.Value == 0);
+
+        return result;
+    }
 }
