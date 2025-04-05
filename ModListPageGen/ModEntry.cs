@@ -10,7 +10,7 @@ public class ModEntry : Mod
     private static readonly string CSS = "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/style.min.css";
     private static readonly string JS = "https://cdn.jsdelivr.net/gh/lisyce/StardewValleyMods@main/ModListPageGen/script.min.js";
     
-    private static readonly Regex NexusIdRegex = new(@"\d+");
+    private static readonly Regex NexusIdRegex = new(@"[-]?\d+");
         
     private IModHelper _helper;
     
