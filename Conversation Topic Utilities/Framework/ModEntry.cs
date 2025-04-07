@@ -38,25 +38,18 @@ public class ModEntry : Mod
         {
             // CT mail keys start with NPC names. skip others
             var split = topicKey.Split("_");
-            if (split.Length < 2) continue;
+            if (split.Length < 2 || Game1.getCharacterFromName(split[0]) == null) continue;
             
             var toCheck = string.Join('_', split[1..]);
             
-            // is the CT associated actually expiring tonight?
+            // is the associated CT actually expiring tonight?
             if (Game1.player.activeDialogueEvents.TryGetValue(toCheck, out int daysLeft) && daysLeft >= 0) continue;  // CTs are removed when daysLeft < 0
             
             // find the matching key in data, if any
-            foreach (var (k, v) in data)
+            if (Util.TryGetTopicRule(data, toCheck, out TopicRule rule) && Util.ShouldRepeat(rule, toCheck))
             {
-                if ((v.KeyIsPrefix && Util.PrefixKeyApplies(toCheck, k)) || toCheck == k)
-                {
-                    if (Util.ShouldRepeat(v, toCheck))
-                    {
-                        Monitor.Log($"Removing CT {topicKey} from mail flags since it is repeatable.", LogLevel.Debug);
-                        toRemove.Add(topicKey);
-                        break;
-                    }
-                }
+                Monitor.Log($"Removing CT {topicKey} from mail flags since it is repeatable.", LogLevel.Debug);
+                toRemove.Add(topicKey);
             }
         }
 
