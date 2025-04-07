@@ -22,6 +22,8 @@ Note that the *first* matching topic rule is used for a CT, so consider placing 
 ### Default Dialogue Rules
 
 > Default dialogue rules are only used if the NPC does not already have a line in their dialogue file for the CT. The game will first check if they have a dialogue line in their respective dialogue file. If not, only then will the default dialogue rules for the CT be checked.
+>
+> This feature is not intended to be a replacement for the existing method of specifying CT keys in an NPC's dialogue file.
 
 The `DefaultDialogueRules` field of a Topic Rule allows you to specify a default dialogue line, the NPCs that should say it, and under what conditions they should say it. For example, maybe all NPCs have a default dialogue line for a CT, but only if it's not raining. This field is a list of entries. The first default dialogue rule where all `Rules` are true will be used when talking to an NPC.
 

@@ -7,7 +7,7 @@ namespace Conversation_Topic_Utilities;
 
 public class ModEntry : Mod
 {
-    public static readonly string ASSET_NAME = "BarleyZP.CTU";
+    public static readonly string ASSET_NAME = "BarleyZP.CTU/TopicRules";
     public static IMonitor StaticMonitor;
     
     public override void Entry(IModHelper helper)
@@ -24,13 +24,13 @@ public class ModEntry : Mod
     {
         if (e.Name.IsEquivalentTo(ASSET_NAME))
         {
-            e.LoadFrom(() => new Dictionary<string, CtRule>(), AssetLoadPriority.Medium);
+            e.LoadFrom(() => new List<TopicRule>(), AssetLoadPriority.Medium);
         }
     }
 
     private void OnDayEnding(object? sender, DayEndingEventArgs e)
     {
-        var data = Game1.content.Load<Dictionary<string, CtRule>>(ASSET_NAME);
+        var data = Game1.content.Load<List<TopicRule>>(ASSET_NAME);
         
         HashSet<string> toRemove = new();
         
