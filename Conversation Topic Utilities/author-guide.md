@@ -17,21 +17,30 @@ Note that the *first* matching topic rule is used for a CT, so consider placing 
 | `IdIsPrefix` | Whether the Id for this entry is a prefix that may match many CTs. For example, "somePrefix_" is a prefix that matches the CTs "somePrefix_" and "somePrefix_Abigail" but *not* "Abigail_somePrefix_". | `false` |
 | `RepeatableOnExpire` | Whether to immediately mark all matching CTs as repeatable (by clearing the associated mail flags) on the night they expire. | `false` |
 | `MemoriesRepeatableOnExpire` | Whether to immediately mark all matching CTs' *memories* as repeatable on the night they expire. (e.g. "someKey_memory_oneweek" is a memory for the key "someKey"). | `false` |
-| `DefaultDialogueRules` | A mapping of string keys to lists of string values, describing default dialogue lines for matching CTs and the conditions under which they appear. More details can be found in below. | `{}` |
+| `DefaultDialogueRules` | A list of entries, describing default dialogue lines for matching CTs and the conditions under which they appear. More details can be found below. | `[]` |
 
 ### Default Dialogue Rules
 
-The `DefaultDialogueRules` field of a Topic Rule allows you to specify a default dialogue line, the NPCs that should say it, and under what conditions they should say it. For example, maybe all NPCs have a default dialogue line for a CT that changes depending on whether it's raining or not. This field is a list of entries.
+> Default dialogue rules are only used if the NPC does not already have a line in their dialogue file for the CT. The game will first check if they have a dialogue line in their respective dialogue file. If not, only then will the default dialogue rules for the CT be checked.
 
-TODO FIXME
+The `DefaultDialogueRules` field of a Topic Rule allows you to specify a default dialogue line, the NPCs that should say it, and under what conditions they should say it. For example, maybe all NPCs have a default dialogue line for a CT, but only if it's not raining. This field is a list of entries. The first default dialogue rule where all `Rules` are true will be used when talking to an NPC.
+
+Note that *all* rules must evaluate to true for an NPC to say a default dialogue line for a CT. An empty list of rules can be used for a default dialogue line that all NPCs will use in all circumstances for a CT.
+
+#### Fields
+
+| Field | Description | Default Value |
+| - | - | - |
+| `Id` | The default dialogue line itself. Unique identifier among all default dialogue rules for a topic rule. | Required field; no default value. |
+| `Rules` | A list of string rules in the form `"RuleType: Arguments"`. All rules must apply for a default dialogue line to be said by an NPC. | `[]` |
+
+#### Available Rules
 
 | Rule Type | Arguments | Description | Example |
 | - | - | - | - |
 | `ForNPC` | The NPCs this dialogue is for. Either `Any` or a list of internal NPC names. | Allows a default dialogue line to only be applied when speaking to specific NPCs. | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
 | `GSQ` | A Game State Query | Allows a default dialogue to only be applied when a given GSQ is true. | `"GSQ: WEATHER Here Rain"` |
 | `TopicContains` | A string to match. This is an exact match. | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"` |
-
-Note that *all* rules must evaluate to true for an NPC to say a default dialogue line for a CT. An empty list of rules (e.g. `"Default dialogue here!": []`) can be used for a default dialogue line that all NPCs will use in all circumstances for a CT.
 
 ## Examples
 
@@ -50,6 +59,7 @@ This example would make the "{{ModId}}_myConversationTopic" CT and its memories 
       "Target": "BarleyZP.CTU/TopicRules",
       "Entries": {
         "{{ModId}}_myConversationTopic": {
+          "Id": "{{ModId}}_myConversationTopic",
           "RepeatableOnExpire": true,
           "MemoriesRepeatableOnExpire": true
         }
@@ -61,7 +71,7 @@ This example would make the "{{ModId}}_myConversationTopic" CT and its memories 
 
 ### Matching Many CTs with one Topic Rule
 
-This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics (and their memories) repeatable (perhaps if you break up with Sebastian but get back together, you still want people to say something about it the second time!)
+This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics (and their memories) repeatable.
 
 ```json
 {
@@ -72,7 +82,8 @@ This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics 
       "Target": "BarleyZP.CTU/TopicRules",
       "Entries": {
         "dating_": {
-          "KeyIsPrefix": true,
+          "Id": "dating_"
+          "IdIsPrefix": true,
           "RepeatableOnExpire": true,
           "MemoriesRepeatableOnExpire": true
         }
@@ -84,4 +95,36 @@ This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics 
 
 ### Default Dialogue
 
-This example gives every NPC 
+This example provides default dialogue lines for the vanilla CT that activates when the Community Center is completed. If it's raining, Sam will say "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h". All other NPCs will say "Hey, it's raining and you completed the CC!" if it's raining when you speak to them. Otherwise, the NPC will say "Hey, it's cool you completed the CC!".
+
+Notice that the order of the default dialogue rules from specific to general allows for this behavior.
+
+```json
+{
+  "Format": "2.6.0",
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.CTU/TopicRules",
+      "Entries": {
+        "cc_Complete": {
+          "Id": "cc_Complete",
+          "DefaultDialogueRules": [
+            {
+              "Id": "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h",
+              "Rules": [ "ForNPC: Sam", "GSQ: WEATHER Here Rain" ]
+            },
+            {
+              "Id": "Hey, it's raining and you completed the CC!",
+              "Rules": [ "GSQ: WEATHER Here Rain" ]
+            },
+            {
+              "Id": "Hey, it's cool you completed the CC!"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+```
