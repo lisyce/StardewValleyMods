@@ -60,6 +60,30 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 | `GSQ`           | A [Game State Query](https://stardewvalleywiki.com/Modding:Game_state_queries) | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
 | `TopicContains` | A string to match. This is an exact match.                                     | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
 
+### The %CurrentNPC% Token
+
+`%CurrentNPC%` is a special token that is populated with the internal name of the NPC the player is currently talking to.
+As of now, it can only be used default dialogue rules: `"GSQ: PLAYER_HEARTS Current %CurrentNPC% 2"`, `"TopicContains: %CurrentNPC%"`
+
+```json
+{
+  "Id": "{{ModId}}_myConversationTopic_",
+  "IdIsPrefix": true,
+  "DefaultDialogueRules": [
+    {
+      "Id": "I only say this line if my name is in the CT key!",
+      "Rules": [ "TopicContains: _%CurrentNPC%" ]      
+    }      
+  ]
+}
+```
+
+In the above example, if the player has an active CT "{{ModId}}_myConversationTopic_Sam", then only Sam will use the default dialogue rule.
+This is because the rule evaluates to `"TopicContains: _Sam"` when the player talks to Sam and the topic contains "Sam". 
+Note that Sam would also reply to a CT with key "{{ModID}}_myConversationTopic_Sameday" (this name has no significance) because this key matches the topic rule
+and the default dialogue rule is still true. You should think carefully about how you name your conversation topics if you
+wish to use any string-matching features like the `TopicContains` rule.
+
 ### Examples
 
 The below are example Content Patcher snippets to accomplish common tasks with CTU.

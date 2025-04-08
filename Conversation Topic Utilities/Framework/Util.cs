@@ -102,7 +102,7 @@ public class Util
         result = false;
         
         if (!rule.Contains(':')) return false;
-        var query = rule.Split(":")[1].Trim();
+        var query = rule.Split(":")[1].Trim().Replace("%CurrentNPC%", npc.Name);
         var type = rule.Split(":")[0].Trim();
 
         var validTypes = new HashSet<string>{ "GSQ", "TopicContains", "ForNPC" };

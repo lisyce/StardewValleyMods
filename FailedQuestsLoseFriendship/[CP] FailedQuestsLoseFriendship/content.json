@@ -1,21 +1,22 @@
 {
-  "Format": "2.4.0",
+  "Format": "2.6.0",
   "Changes": [
     {
       "Action": "EditData",
-      "Target": "BarleyZP.CTU",
+      "Target": "BarleyZP.CTU/TopicRules",
       "When": {
-        "HasMod": "BarleyZP.ConversationTopicUtilities"
+        "HasMod": "BarleyZP.CTU"
       },
       "Entries": {
         "BarleyZP.FailedQuestsLoseFriendship_questFailed_": {
-          "KeyIsPrefix": true,
-          "Repeatable": true,
-          "Defaults": {
-            "So, you don't keep your promises, huh? You took that quest from me and didn't complete it!": [
-              "NpcIs: Current"
-            ]
-          }
+          "IdIsPrefix": true,
+          "RepeatableOnExpire": true,
+          "DefaultDialogueRules": [
+            {
+              "Id": "So, you don't keep your promises, huh? You took that quest from me and didn't complete it!",
+              "Rules": [ "TopicContains: _%CurrentNPC%" ]
+            }
+          ]
         }
       }
     },
