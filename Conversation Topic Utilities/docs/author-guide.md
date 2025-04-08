@@ -2,7 +2,23 @@
 
 This guide describes how to use Conversation Topic Utilities (CTU). In this guide, "Conversation Topic" is abbreviated as "CT".
 
-## The Asset
+## Trigger Actions
+
+CTU provides the following new [Trigger Actions](https://stardewvalleywiki.com/Modding:Trigger_actions):
+
+| Action                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `CTU.MarkCtRepeatable <topic Id> [include memories]` | Immediately marks the provided topic as repeatable by clearing the associated dialogue mail flags. If the memories argument is `true` (default `false`), it also marks all memories for that topic as repeatable. Note that you will again need to mark this topic (and optionally the memories) as repeatable every time you want them repeated. To do this automatically, see the `RepeatableOnExpire` and `MemoriesRepeatableOnExpire` fields in the asset later in this document. |
+
+## Console Commands
+
+CTU provides the following utility console commands:
+
+| Command          | Description                                                                            |
+|------------------|----------------------------------------------------------------------------------------|
+| `CTU_ListActive` | Lists all of the current player's active CTs and the number of days until they expire. |
+
+## Conversation Topic Rules (Default Dialogue, Repeatable Dialogue, etc.)
 
 Other mods can interface with CTU by editing the asset it exposes (normally, this would be done through Content Patcher
 or by using the C# asset editing events). This asset has the name `BarleyZP.CTU/TopicRules`. It's a list of entries, the fields of which are described below. See the [Content Patcher List Editing Docs](https://github.com/Pathoschild/StardewMods/blob/develop/ContentPatcher/docs/author-guide/action-editdata.md#edit-a-list).
@@ -38,17 +54,17 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 
 #### Available Rules
 
-| Rule Type       | Arguments                                                                    | Description                                                                                                                                     | Example                                     |
-|-----------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names. | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
-| `GSQ`           | A Game State Query                                                           | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
-| `TopicContains` | A string to match. This is an exact match.                                   | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
+| Rule Type       | Arguments                                                                      | Description                                                                                                                                     | Example                                     |
+|-----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names.   | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
+| `GSQ`           | A [Game State Query](https://stardewvalleywiki.com/Modding:Game_state_queries) | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
+| `TopicContains` | A string to match. This is an exact match.                                     | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
 
-## Examples
+### Examples
 
 The below are example Content Patcher snippets to accomplish common tasks with CTU.
 
-### Making Topics Repeatable
+#### Making Topics Repeatable
 
 This example would make the "{{ModId}}_myConversationTopic" CT and its memories (e.g. "{{ModId}}_myConversationTopic_memory_oneweek") instantly able to be repeated when the CT expires for a player. Note that this does not reactivate the CT. Consider using trigger actions, etc. for this purpose.
 
@@ -71,7 +87,7 @@ This example would make the "{{ModId}}_myConversationTopic" CT and its memories 
 }
 ```
 
-### Matching Many CTs with one Topic Rule
+#### Matching Many CTs with one Topic Rule
 
 This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics (and their memories) repeatable.
 
@@ -95,7 +111,7 @@ This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics 
 }
 ```
 
-### Default Dialogue
+#### Default Dialogue
 
 This example provides default dialogue lines for the vanilla CT that activates when the Community Center is completed. If it's raining, Sam will say "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h". All other NPCs will say "Hey, it's raining and you completed the CC!" if it's raining when you speak to them. Otherwise, the NPC will say "Hey, it's cool you completed the CC!".
 

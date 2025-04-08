@@ -2,6 +2,8 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.Delegates;
+using StardewValley.Triggers;
 
 namespace Conversation_Topic_Utilities;
 
@@ -20,6 +22,8 @@ public class ModEntry : Mod
         Patches.Patch(harmony);
 
         helper.ConsoleCommands.Add("CTU_ListActive", "Lists the current player's active CTs.", ListActiveTopics);
+        
+        TriggerActionManager.RegisterAction("CTU.MarkCtRepeatable", MarkConversationTopicRepeatable);
     }
 
     private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
@@ -54,7 +58,7 @@ public class ModEntry : Mod
             {
                 Monitor.Log($"Removing CT \"{topicKey}\" from mail flags since it is repeatable. (Rule: \"{rule.Id}\")", LogLevel.Info);
                 toRemove.Add(topicKey);
-                Game1.player.previousActiveDialogueEvents.Remove(toCheck);
+                if (rule.MemoriesRepeatableOnExpire) Game1.player.previousActiveDialogueEvents.Remove(toCheck);
             }
             else
             {
@@ -71,5 +75,41 @@ public class ModEntry : Mod
         {
             StaticMonitor.Log($"{pair.Key}: {pair.Value}", LogLevel.Debug);
         }
+    }
+
+    /// <inheritdoc cref="T:StardewValley.Delegates.TriggerActionDelegate" />
+    private static bool MarkConversationTopicRepeatable(string[] args, TriggerActionContext context, out string error)
+    {
+        if (!ArgUtility.TryGet(args, 1, out var conversationTopic, out error) ||
+            !ArgUtility.TryGetOptionalBool(args, 2, out var includeMemories, out error, defaultValue: false))
+        {
+            return false;
+        }
+
+        // find all matching mail flags
+        HashSet<string> toRemove = new();
+        foreach (var mailFlag in Game1.player.mailReceived)
+        {
+            // CT mail keys start with NPC names. skip others
+            var split = mailFlag.Split("_");
+            if (split.Length < 2 || Game1.getCharacterFromName(split[0]) == null) continue;
+            
+            var toCheck = string.Join('_', split[1..]);
+            var memoryStripped = Util.StripMemory(toCheck);
+            
+            // is this a relevant topic we should clear?
+            if (toCheck == conversationTopic || memoryStripped == conversationTopic)
+            {
+                StaticMonitor.Log($"Removing CT \"{mailFlag}\" from mail flags after running trigger action \"CTU.MarkCtRepeatable {conversationTopic} {includeMemories}\"", LogLevel.Info);
+                toRemove.Add(mailFlag);
+                if (includeMemories)
+                {
+                    Game1.player.previousActiveDialogueEvents.Remove(toCheck);
+                }
+            }
+        }
+        
+        Game1.player.mailReceived.ExceptWith(toRemove);
+        return true;
     }
 }
