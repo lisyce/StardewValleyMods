@@ -1,13 +1,18 @@
+using Newtonsoft.Json;
+
 namespace Conversation_Topic_Utilities;
+
 
 public class TopicRule
 {
     public class DefaultDialogueRule {
-        public string Id { get; set; }
+        [JsonRequired]
+        public string Id { get; set; }  // required field
         public List<string> Rules = new();
     }
 
-    public string Id { get; set; }
+    [JsonRequired]
+    public string Id { get; set; }  // required field
     public bool IdIsPrefix { get; set; } = false;
     public bool RepeatableOnExpire { get; set; } = false;
     public bool MemoriesRepeatableOnExpire { get; set; } = false;

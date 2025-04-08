@@ -66,7 +66,7 @@ namespace FailedQuestsLoseFriendship
                     if (topic != null)
                     {
                         ChangeFriendshipFailedQuest(GetQuestTarget(q));
-                        Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_{topic}", 1);
+                        Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_{topic}", 4);
                     }
                 }
             }
@@ -76,7 +76,7 @@ namespace FailedQuestsLoseFriendship
                 if (so.questState.Value != SpecialOrderStatus.Complete && so.GetDaysLeft() <= 1 && Config.SpecialOrdersEnabled && !Config.DisabledSpecialOrders.Contains(so.questKey.Value)) {
                     failed++;
                     ChangeFriendshipFailedQuest(so.requester.Value);
-                    Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_so_{so.questKey}", 1);
+                    Game1.player.activeDialogueEvents.TryAdd($"{UniqueID}_questFailed_so_{so.questKey}", 4);
                 }
             }
 

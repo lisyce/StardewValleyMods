@@ -9,6 +9,7 @@
       },
       "Entries": {
         "BarleyZP.FailedQuestsLoseFriendship_questFailed_": {
+          "Id": "BarleyZP.FailedQuestsLoseFriendship_questFailed_",
           "IdIsPrefix": true,
           "RepeatableOnExpire": true,
           "DefaultDialogueRules": [
