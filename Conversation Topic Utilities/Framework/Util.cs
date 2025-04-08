@@ -52,7 +52,7 @@ public class Util
         return rule.RepeatableOnExpire;
     }
 
-    private static string StripMemory(string conversationTopic)
+    public static string StripMemory(string conversationTopic)
     {
         if (conversationTopic.Contains("_memory_"))  // vanilla checks this string, so we can hardcode it too.
         {
