@@ -14,5 +14,8 @@
   "Description": "Provides utilities to modders for default CT dialogue, repeatable CTs, etc.",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "Conversation Topic Utilities.dll"
+  "EntryDll": "Conversation Topic Utilities.dll",
+  "UpdateKeys": [
+    "Nexus:33032"
+  ]
 }

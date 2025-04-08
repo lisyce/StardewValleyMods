@@ -19,6 +19,7 @@
         <Authors>BarleyZP</Authors>
         <Description>Provides utilities to modders for default CT dialogue, repeatable CTs, etc.</Description>
         <UniqueId>BarleyZP.CTU</UniqueId>
+        <UpdateKeys>Nexus:33032</UpdateKeys>
         
         <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
         <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
