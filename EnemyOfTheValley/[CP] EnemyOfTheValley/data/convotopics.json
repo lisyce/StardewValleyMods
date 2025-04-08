@@ -2,11 +2,11 @@
   "Changes": [
     {
       "Action": "EditData",
-      "Target": "BarleyZP.CTU",
+      "Target": "BarleyZP.CTU/TopicRules",
       "Entries": {
         "BarleyZP.EnemyOfTheValley.apologized_": {
-          "KeyIsPrefix": true,
-          "Repeatable": true
+          "IdIsPrefix": true,
+          "RepeatableOnExpire": true
         }
       }
     }
