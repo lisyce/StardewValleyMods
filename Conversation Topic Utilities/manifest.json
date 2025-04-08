@@ -7,10 +7,10 @@
    | 
    */
   "$schema": "https://smapi.io/schemas/manifest.json",
-  "UniqueID": "BarleyZP.ConversationTopicUtilities",
+  "UniqueID": "BarleyZP.CTU",
   "Name": "Conversation Topic Utilities",
   "Author": "BarleyZP",
-  "Version": "1.0.0-Debug",
+  "Version": "0.1.0",
   "Description": "Provides utilities to modders for default CT dialogue, repeatable CTs, etc.",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",

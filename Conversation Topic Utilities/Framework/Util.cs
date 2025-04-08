@@ -31,7 +31,7 @@ public class Util
         foreach (var topicRule in data)
         {
             if (conversationTopic == topicRule.Id ||
-                (conversationTopic.StartsWith(topicRule.Id) && topicRule.IdIsPrefix))
+                (topicRule.IdIsPrefix && !conversationTopic.Contains("_memory_") && conversationTopic.StartsWith(topicRule.Id)))
             {
                 value = topicRule;
                 return true;
@@ -40,16 +40,34 @@ public class Util
 
         return false;
     }
+    
 
     public static bool ShouldRepeat(TopicRule rule, string conversationTopic)
     {
-        return true; // TODO
+        if (conversationTopic.Contains("_memory_"))
+        {
+            // if it's a _memory_ CT, it has to be an *exact* match for the rule's Id to use RepeatableOnExpire.
+            return rule.Id == conversationTopic ? rule.RepeatableOnExpire : rule.MemoriesRepeatableOnExpire;
+        }
+        return rule.RepeatableOnExpire;
+    }
+
+    private static string StripMemory(string conversationTopic)
+    {
+        if (conversationTopic.Contains("_memory_"))  // vanilla checks this string, so we can hardcode it too.
+        {
+            var removeFrom = conversationTopic.IndexOf("_memory_", StringComparison.Ordinal);
+            return conversationTopic.Remove(removeFrom);
+        }
+
+        return conversationTopic;
     }
     
     private static bool TryGetNpcDefaultDialogue(TopicRule topicRule, NPC npc, string conversationTopic, out string dialogue)
     {
         foreach (var defaultDialogueRule in topicRule.DefaultDialogueRules)
         {
+            ModEntry.StaticMonitor.Log($"Testing if default dialogue line \"{defaultDialogueRule.Id}\" applies...", LogLevel.Debug);
             if (DefaultDialogueRuleApplies(defaultDialogueRule, npc, conversationTopic))
             {
                 dialogue = defaultDialogueRule.Id;
@@ -66,11 +84,15 @@ public class Util
         foreach (var rule in defaultDialogueRule.Rules)
         {
             if (!TryParseDefaultDialogueRule(rule, npc, conversationTopic, out bool result)) {
-                ModEntry.StaticMonitor.Log($"Could not parse default dialogue rule {rule} for default dialogue line {defaultDialogueRule.Id}", LogLevel.Warn);
+                ModEntry.StaticMonitor.Log($"Could not parse default dialogue rule \"{rule}\" for default dialogue line \"{defaultDialogueRule.Id}\"", LogLevel.Warn);
                 return false;
             }
 
-            if (!result) return false;
+            if (!result)
+            {
+                ModEntry.StaticMonitor.Log($"Rule \"{rule}\" is false.", LogLevel.Debug);
+                return false;
+            }
         }
         return true;
     }
@@ -83,24 +105,14 @@ public class Util
         var query = rule.Split(":")[1].Trim();
         var type = rule.Split(":")[0].Trim();
 
-        var validTypes = new HashSet<string>{ "GSQ", "TopicContains", "NpcIs" };
+        var validTypes = new HashSet<string>{ "GSQ", "TopicContains", "ForNPC" };
         if (!validTypes.Contains(type)) return false;
-
-        var isCurrentNpc = false;
-        if (conversationTopic.Contains("_memory_"))
-        {
-            if (conversationTopic.Split("_memory_")[0].EndsWith(npc.Name)) isCurrentNpc = true;
-        }
-        else
-        {
-            if (conversationTopic.EndsWith(npc.Name)) isCurrentNpc = true;
-        }
         
         result = type switch
         {
             "GSQ" => GameStateQuery.CheckConditions(query),
             "TopicContains" => conversationTopic.Contains(query),
-            "NpcIs" => query == "Current" ? isCurrentNpc : query.Split(",").ToList().Select(x => x.Trim()).Contains(npc.Name),
+            "ForNPC" => query == "ANY" || query.Split(",").ToList().Select(x => x.Trim()).Contains(npc.Name),
             _ => false
         };
 

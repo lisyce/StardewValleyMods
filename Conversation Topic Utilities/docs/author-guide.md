@@ -11,13 +11,13 @@ Note that the *first* matching topic rule is used for a CT, so consider placing 
 
 ### Fields
 
-| Field | Description | Default Value |
-| ----- | ----------- | ------------- |
-| `Id` | The CT itself. For example, `"dating_Abigail"`. Must be unique among all entries in the asset. | Required field; no default value. |
-| `IdIsPrefix` | Whether the Id for this entry is a prefix that may match many CTs. For example, "somePrefix_" is a prefix that matches the CTs "somePrefix_" and "somePrefix_Abigail" but *not* "Abigail_somePrefix_". | `false` |
-| `RepeatableOnExpire` | Whether to immediately mark all matching CTs as repeatable (by clearing the associated mail flags) on the night they expire. | `false` |
-| `MemoriesRepeatableOnExpire` | Whether to immediately mark all matching CTs' *memories* as repeatable on the night they expire. (e.g. "someKey_memory_oneweek" is a memory for the key "someKey"). | `false` |
-| `DefaultDialogueRules` | A list of entries, describing default dialogue lines for matching CTs and the conditions under which they appear. More details can be found below. | `[]` |
+| Field                        | Description                                                                                                                                                                                                                                                                                                                                                                                         | Default Value                     |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `Id`                         | The CT itself. For example, `"dating_Abigail"`. Must be unique among all entries in the asset.                                                                                                                                                                                                                                                                                                      | Required field; no default value. |
+| `IdIsPrefix`                 | Whether the Id for this entry is a prefix that may match many CTs. For example, "somePrefix_" is a prefix that matches the CTs "somePrefix_" and "somePrefix_Abigail" but *not* "Abigail_somePrefix_". Note that a prefix also does not match memory keys unless it's an exact match. For example, "myOtherPrefix_" is a prefix for "myOtherPrefix_Sam" but not "myOtherPrefix_Sam_memory_oneweek". | `false`                           |
+| `RepeatableOnExpire`         | Whether to immediately mark all matching CTs as repeatable (by clearing the associated mail flags) on the night they expire.                                                                                                                                                                                                                                                                        | `false`                           |
+| `MemoriesRepeatableOnExpire` | Whether to immediately mark all matching CTs' *memories* as repeatable on the night they expire. (e.g. "someKey_memory_oneweek" is a memory for the key "someKey").                                                                                                                                                                                                                                 | `false`                           |
+| `DefaultDialogueRules`       | A list of entries, describing default dialogue lines for matching CTs and the conditions under which they appear. More details can be found below.                                                                                                                                                                                                                                                  | `[]`                              |
 
 ### Default Dialogue Rules
 
@@ -31,18 +31,18 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 
 #### Fields
 
-| Field | Description | Default Value |
-| - | - | - |
-| `Id` | The default dialogue line itself. Unique identifier among all default dialogue rules for a topic rule. | Required field; no default value. |
-| `Rules` | A list of string rules in the form `"RuleType: Arguments"`. All rules must apply for a default dialogue line to be said by an NPC. | `[]` |
+| Field   | Description                                                                                                                        | Default Value                     |
+|---------|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `Id`    | The default dialogue line itself. Unique identifier among all default dialogue rules for a topic rule.                             | Required field; no default value. |
+| `Rules` | A list of string rules in the form `"RuleType: Arguments"`. All rules must apply for a default dialogue line to be said by an NPC. | `[]`                              |
 
 #### Available Rules
 
-| Rule Type | Arguments | Description | Example |
-| - | - | - | - |
-| `ForNPC` | The NPCs this dialogue is for. Either `Any` or a list of internal NPC names. | Allows a default dialogue line to only be applied when speaking to specific NPCs. | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
-| `GSQ` | A Game State Query | Allows a default dialogue to only be applied when a given GSQ is true. | `"GSQ: WEATHER Here Rain"` |
-| `TopicContains` | A string to match. This is an exact match. | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"` |
+| Rule Type       | Arguments                                                                    | Description                                                                                                                                     | Example                                     |
+|-----------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
+| `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names. | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
+| `GSQ`           | A Game State Query                                                           | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
+| `TopicContains` | A string to match. This is an exact match.                                   | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
 
 ## Examples
 
@@ -84,7 +84,7 @@ This example makes all of the vanilla "dating_{{NPC Name}}" conversation topics 
       "Target": "BarleyZP.CTU/TopicRules",
       "Entries": {
         "dating_": {
-          "Id": "dating_"
+          "Id": "dating_",
           "IdIsPrefix": true,
           "RepeatableOnExpire": true,
           "MemoriesRepeatableOnExpire": true

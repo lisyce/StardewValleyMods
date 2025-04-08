@@ -48,7 +48,7 @@ public class ModEntry : Mod
             // find the matching key in data, if any
             if (Util.TryGetTopicRule(data, toCheck, out TopicRule rule) && Util.ShouldRepeat(rule, toCheck))
             {
-                Monitor.Log($"Removing CT {topicKey} from mail flags since it is repeatable.", LogLevel.Debug);
+                Monitor.Log($"Removing CT \"{topicKey}\" from mail flags since it is repeatable.", LogLevel.Debug);
                 toRemove.Add(topicKey);
             }
         }
