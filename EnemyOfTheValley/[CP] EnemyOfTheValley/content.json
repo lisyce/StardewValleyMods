@@ -4,59 +4,31 @@
     // includes
     {
       "Action": "Include",
-      "FromFile": "dialogue/abigail.json"
+      "FromFile": "Dialogue/!All.json, Dialogue/!LoadBlanks.json"
     },
     {
       "Action": "Include",
-      "FromFile": "dialogue/alex.json"
+      "FromFile": "Data/Events.json"
     },
     {
       "Action": "Include",
-      "FromFile": "dialogue/elliott.json"
+      "FromFile": "Data/TriggerActions.json"
     },
     {
       "Action": "Include",
-      "FromFile": "dialogue/haley.json"
+      "FromFile": "Data/Objects.json"
     },
     {
       "Action": "Include",
-      "FromFile": "dialogue/lewis.json"
+      "FromFile": "Data/Strings.json"
     },
     {
       "Action": "Include",
-      "FromFile": "dialogue/vincent.json"
+      "FromFile": "Data/Shops.json"
     },
     {
       "Action": "Include",
-      "FromFile": "data/events.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "dialogue/rainy.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "data/triggeractions.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "data/objects.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "data/strings.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "data/shops.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "data/convotopics.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "loadblanks.json"
+      "FromFile": "Data/CTU.json"
     },
     
     // misc patches

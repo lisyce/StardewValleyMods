@@ -1,9 +1,9 @@
-{
+﻿{
   "Changes": [
     {
       "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
-      "FromFile": "dialogue/rainy.json"
+      "FromFile": "blank.json"
     },
     {
       "Action": "Load",

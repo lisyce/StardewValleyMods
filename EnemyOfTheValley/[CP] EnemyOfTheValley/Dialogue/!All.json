@@ -1,0 +1,28 @@
+﻿{
+  "Changes": [
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Rainy.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Abigail.json, Dialogue/Alex.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Elliott.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Haley.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Lewis.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Vincent.json"
+    }
+  ]
+}

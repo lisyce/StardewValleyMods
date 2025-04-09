@@ -26,7 +26,7 @@
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
       "Entries": {
         "AcceptBirthdayGift_Loved": "{{i18n:Haley.AcceptBirthdayGift_Loved}}",
-        
+
         "Mon-2": "{{i18n:Haley.Mon-2}}",
         "Tue-2": "{{i18n:Haley.Tue-2}}",
         "Wed-2": "{{i18n:Haley.Wed-2}}",
