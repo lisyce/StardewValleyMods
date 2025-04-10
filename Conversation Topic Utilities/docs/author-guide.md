@@ -63,7 +63,7 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 ### The %CurrentNPC% Token
 
 `%CurrentNPC%` is a special token that is populated with the internal name of the NPC the player is currently talking to.
-As of now, it can only be used default dialogue rules: `"GSQ: PLAYER_HEARTS Current %CurrentNPC% 2"`, `"TopicContains: %CurrentNPC%"`
+As of now, it can only be used in default dialogue rules: `"GSQ: PLAYER_HEARTS Current %CurrentNPC% 2"`, `"TopicContains: %CurrentNPC%"`
 
 ```json
 {
