@@ -56,13 +56,13 @@ public class ModEntry : Mod
             if ((Util.TryGetTopicRule(data, toCheck, out TopicRule rule) && Util.ShouldRepeat(rule, toCheck)) ||
                 (Util.TryGetTopicRule(data, memoryStripped, out rule) && Util.ShouldRepeat(rule, memoryStripped)))
             {
-                Monitor.Log($"Removing CT \"{topicKey}\" from mail flags since it is repeatable. (Rule: \"{rule.Id}\")", LogLevel.Info);
+                Monitor.Log($"Removing CT \"{topicKey}\" from mail flags since it is repeatable. (Rule: \"{rule.Id}\")");
                 toRemove.Add(topicKey);
                 if (rule.MemoriesRepeatableOnExpire) Game1.player.previousActiveDialogueEvents.Remove(toCheck);
             }
             else
             {
-                Monitor.Log($"No matching topic rule for mail flag {topicKey} (CT: {toCheck})", LogLevel.Debug);
+                Monitor.Log($"No matching topic rule for mail flag {topicKey} (CT: {toCheck})");
             }
         }
 
@@ -100,7 +100,7 @@ public class ModEntry : Mod
             // is this a relevant topic we should clear?
             if (toCheck == conversationTopic || memoryStripped == conversationTopic)
             {
-                StaticMonitor.Log($"Removing CT \"{mailFlag}\" from mail flags after running trigger action \"CTU.MarkCtRepeatable {conversationTopic} {includeMemories}\"", LogLevel.Info);
+                StaticMonitor.Log($"Removing CT \"{mailFlag}\" from mail flags after running trigger action \"CTU.MarkCtRepeatable {conversationTopic} {includeMemories}\"");
                 toRemove.Add(mailFlag);
                 if (includeMemories)
                 {

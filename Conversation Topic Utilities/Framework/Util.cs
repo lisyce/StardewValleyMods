@@ -67,7 +67,7 @@ public class Util
     {
         foreach (var defaultDialogueRule in topicRule.DefaultDialogueRules)
         {
-            ModEntry.StaticMonitor.Log($"Testing if default dialogue line \"{defaultDialogueRule.Id}\" applies...", LogLevel.Debug);
+            ModEntry.StaticMonitor.Log($"Testing if default dialogue line \"{defaultDialogueRule.Id}\" applies...");
             if (DefaultDialogueRuleApplies(defaultDialogueRule, npc, conversationTopic))
             {
                 dialogue = defaultDialogueRule.Id;
@@ -90,7 +90,7 @@ public class Util
 
             if (!result)
             {
-                ModEntry.StaticMonitor.Log($"Rule \"{rule}\" is false.", LogLevel.Debug);
+                ModEntry.StaticMonitor.Log($"Rule \"{rule}\" is false.");
                 return false;
             }
         }
