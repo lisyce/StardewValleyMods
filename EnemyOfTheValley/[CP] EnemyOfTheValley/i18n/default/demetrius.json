@@ -1,0 +1,21 @@
+{
+  "Demetrius.AcceptEnemyCake": "Ah, so by accepting this we are enemies? I didn't know these occasions were also commemorated with cakes...$3#$b#Wait, this has an awful flavor!$6",
+  "Demetrius.RejectEnemyCake_Archenemies": "Traditionally, this would make us archenemies, yes?#$b#I wonder what the protocol is if we're already archenemies...$4",
+  "Demetrius.RejectEnemyCake_ExArchenemies": "But it says in my notes that we were no longer enemies...$2",
+  "Demetrius.RejectEnemyCake_LowNegativeHearts": "No, it doesn't make sense for you to give me this now.",
+  "Demetrius.AcceptShatteredAmulet": "Based on how our interactions have been going, I wholeheartedly agree! We should be archenemies!$4",
+  "Demetrius.RejectShatteredAmulet_ExArchenemies": "So was our reconciliation meaningless? I don't think we should do this again, @.",
+  "Demetrius.RejectShatteredAmulet_LowNegativeHearts": "No, it doesn't make sense for you to give me this now.",
+  "Demetrius.RejectMermaidPendant_NegativeHearts": "My blessing? Absolutely not. Stay away from Maru!$4",
+  "Demetrius.RejectBouquet_NegativeHearts": "No, I won't allow you to date my daughter.$4",
+  "Demetrius.BarleyZP.EnemyOfTheValley.apologized_Demetrius": "I've run the numbers... I accept your apology, but it will likely take time for us to reconcile.$2",
+  "Demetrius.ReconciliationDustUsed": "What is this substance made of? Why do I feel amicable towards you?$6#$b#Would you allow me to study this further?",
+
+  "Demetrius.Mon-2": "Please refrain from interfering with my studies.$4",
+  "Demetrius.Tue-2": "Why are you engaging with me? You have no respect for me or for science.$4",
+  "Demetrius.Wed-2": "Farming advice? Why should I give you that?$4",
+  "Demetrius.Thu-2": "You'd better be giving Maru a wide berth. I don't want you influencing her.$4",
+  "Demetrius.Fri-2": "Hold on... I'm observing an alien life form!$6#$b#Oh... it's just you, @.$4",
+  "Demetrius.Sat-2": "Hmm... I wonder if I could model the probability that you say something rude to me...",
+  "Demetrius.Sun-2": "Taking another break from work? This is why your farm progress isn't as fast as it could be.$3"
+}

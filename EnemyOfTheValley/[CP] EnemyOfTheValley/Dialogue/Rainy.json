@@ -9,7 +9,7 @@
         "Elliott": "{{i18n:Rainy.Elliott}}",
         "Haley": "{{i18n:Rainy.Haley}}",
         "Robin": "The rain doesn't stop me from getting a job done!$h#$e#Although soggy wood isn't a joy to work with.$s",
-        "Demetrius": "Greetings. Stay inside if you want to keep warm.",
+        "Demetrius": "{{i18n:Rainy.Demetrius}}",
         "Maru": "When it rains I have a good excuse to work on my gadgets all day.$h#$e#It must be kind of boring for you, though.",
         "Sebastian": "If you're lucky, you might see a frog in this weather.",
         "Linus": "A warm rain is a pleasant way to get clean.$h",

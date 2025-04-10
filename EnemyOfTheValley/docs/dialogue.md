@@ -64,8 +64,6 @@ Shown when an NPC rejects the "A-void Me" Cake:
 |-----------------------------------------|--------------------------------------------|-------------------|
 | `RejectEnemyCake_Archenemies`           | The NPC and player are already archenemies | Vanilla           |
 | `RejectEnemyCake_ExArchenemies`         | The NPC and player were ex-archenemies     | Vanilla           |
-| `RejectEnemyCake_NoNegativeHearts`      | Player has > -1 hearts with the NPC        | Vanilla           |
-| `RejectEnemyCake_VeryLowNegativeHearts` | Player has > -4 hearts with the NPC        | Vanilla           |
 | `RejectEnemyCake_LowNegativeHearts`     | Player has > -8 hearts with the NPC        | Vanilla           |
 
 ## Becoming Archenemies
@@ -81,8 +79,6 @@ Shown when an NPC rejects a Shattered Amulet:
 | Key                                           | Description                                | Recommended Asset |
 |-----------------------------------------------|--------------------------------------------|-------------------|
 | `RejectShatteredAmulet_ExArchenemies`         | The NPC and player were ex-archenemies     | Vanilla           |
-| `RejectShatteredAmulet_NoNegativeHearts`      | Player has > -1 hearts with the NPC        | Vanilla           |
-| `RejectShatteredAmulet_VeryLowNegativeHearts` | Player has > -8 hearts with the NPC        | Vanilla           |
 | `RejectShatteredAmulet_LowNegativeHearts`     | Player has > -10 hearts with the NPC       | Vanilla           |
 
 ## Misc

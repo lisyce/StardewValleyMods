@@ -1,0 +1,34 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Demetrius",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Demetrius.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Demetrius.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Demetrius.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Demetrius.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Demetrius.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Demetrius.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Demetrius.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Demetrius.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Demetrius.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Demetrius": "{{i18n:Demetrius.BarleyZP.EnemyOfTheValley.apologized_Demetrius}}",
+        "ReconciliationDustUsed": "{{i18n:Demetrius.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Demetrius",
+      "Entries": {
+        "Mon-2": "{{i18n:Demetrius.Mon-2}}",
+        "Tue-2": "{{i18n:Demetrius.Tue-2}}",
+        "Wed-2": "{{i18n:Demetrius.Wed-2}}",
+        "Thu-2": "{{i18n:Demetrius.Thu-2}}",
+        "Fri-2": "{{i18n:Demetrius.Fri-2}}",
+        "Sat-2": "{{i18n:Demetrius.Sat-2}}",
+        "Sun-2": "{{i18n:Demetrius.Sun-2}}"
+      }
+    }
+  ]
+}

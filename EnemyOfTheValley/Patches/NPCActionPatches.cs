@@ -197,16 +197,6 @@ namespace EnemyOfTheValley.Patches
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_ExArchenemies") ?? new Dialogue(npc, "RejectShatteredAmulet_ExArchenemies", ModEntry.Translation.Get("RejectShatteredAmulet_ExArchenemies")));
                 Game1.drawDialogue(npc);
             }
-            else if (friendship.Points > -250)  // don't even have 1 negative heart yet
-            {
-                npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_NoNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_NoNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_NoNegativeHearts")));
-                Game1.drawDialogue(npc);
-            }
-            else if (friendship.Points > -2000) // > -8 hearts
-            {
-                npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_VeryLowNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_VeryLowNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_VeryLowNegativeHearts")));
-                Game1.drawDialogue(npc);
-            }
             else if (friendship.Points > -2500)  // > -10 hearts
             {
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectShatteredAmulet_LowNegativeHearts") ?? new Dialogue(npc, "RejectShatteredAmulet_LowNegativeHearts", ModEntry.Translation.Get("RejectShatteredAmulet_LowNegativeHearts")));
@@ -251,16 +241,6 @@ namespace EnemyOfTheValley.Patches
             else if (Relationships.IsRelationship(npc.Name, Relationships.ExArchenemy, who))
             {
                 npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_ExArchenemies") ?? new Dialogue(npc, "RejectEnemyCake_ExArchenemies", ModEntry.Translation.Get("RejectEnemyCake_ExArchenemies")));
-                Game1.drawDialogue(npc);
-            }
-            else if (friendship.Points > -250)  // don't even have 1 negative heart yet
-            {
-                npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_NoNegativeHearts") ?? new Dialogue(npc, "RejectEnemyCake_NoNegativeHearts", ModEntry.Translation.Get("RejectEnemyCake_NoNegativeHearts")));
-                Game1.drawDialogue(npc);
-            }
-            else if (friendship.Points > -1000) // > -4 hearts
-            {
-                npc.CurrentDialogue.Push(npc.TryGetDialogue("RejectEnemyCake_VeryLowNegativeHearts") ?? new Dialogue(npc, "RejectEnemyCake_VeryLowNegativeHearts", ModEntry.Translation.Get("RejectEnemyCake_VeryLowNegativeHearts")));
                 Game1.drawDialogue(npc);
             }
             else if (friendship.Points > -2000)  // > -8 hearts
