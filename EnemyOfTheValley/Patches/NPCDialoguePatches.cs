@@ -200,7 +200,7 @@ namespace EnemyOfTheValley.Patches
         public static int ChangeConversationFriendshipAmount(int amount, Farmer who, Friendship friendship)
         {
             if (who.hasBuff("statue_of_blessings_4")) return amount;
-            return friendship.Points <= -250 ? -amount : amount;
+            return friendship.Points <= -50 ? -amount : amount;
         }
 
         public static Dialogue? NegativeLocationDialogue(NPC npc, Dialogue? currDialogue, int heartLevel, string preface)

@@ -4,9 +4,6 @@
     {
       "Action": "EditData",
       "Target": "BarleyZP.CTU/TopicRules",
-      "When": {
-        "HasMod": "BarleyZP.CTU"
-      },
       "Entries": {
         "BarleyZP.FailedQuestsLoseFriendship_questFailed_": {
           "Id": "BarleyZP.FailedQuestsLoseFriendship_questFailed_",
