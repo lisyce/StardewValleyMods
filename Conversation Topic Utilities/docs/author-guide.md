@@ -56,14 +56,14 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 
 | Rule Type       | Arguments                                                                      | Description                                                                                                                                     | Example                                     |
 |-----------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
-| `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names.   | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: Any"` |
+| `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names.   | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: ANY"` |
 | `GSQ`           | A [Game State Query](https://stardewvalleywiki.com/Modding:Game_state_queries) | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
 | `TopicContains` | A string to match. This is an exact match.                                     | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
 
 ### The %CurrentNPC% Token
 
 `%CurrentNPC%` is a special token that is populated with the internal name of the NPC the player is currently talking to.
-As of now, it can only be used default dialogue rules: `"GSQ: PLAYER_HEARTS Current %CurrentNPC% 2"`, `"TopicContains: %CurrentNPC%"`
+As of now, it can only be used in default dialogue rules: `"GSQ: PLAYER_HEARTS Current %CurrentNPC% 2"`, `"TopicContains: %CurrentNPC%"`
 
 ```json
 {
