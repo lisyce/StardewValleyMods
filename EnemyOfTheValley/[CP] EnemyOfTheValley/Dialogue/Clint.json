@@ -1,0 +1,36 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Clint",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Clint.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Clint.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Clint.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Clint.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Clint.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Clint.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Clint.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Clint.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Clint.RejectBouquet_NegativeHearts}}",
+        "BarleyZP.EnemyOfTheValley.apologized_Clint": "{{i18n:Clint.BarleyZP.EnemyOfTheValley.apologized_Clint}}",
+        "ReconciliationDustUsed": "{{i18n:Clint.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Clint",
+      "Entries": {
+        "Mon-2": "{{i18n:Clint.Mon-2}}",
+        "Mon-6": "{{i18n:Clint.Mon-6}}",
+        "Tue-2": "{{i18n:Clint.Tue-2}}",
+        "Wed-2": "{{i18n:Clint.Wed-2}}",
+        "Thu-2": "{{i18n:Clint.Thu-2}}",
+        "Fri-2": "{{i18n:Clint.Fri-2}}",
+        "Sat-2": "{{i18n:Clint.Sat-2}}",
+        "Sun-2": "{{i18n:Clint.Sun-2}}",
+        "Sun-8": "{{i18n:Clint.Sun-8}}"
+      }
+    }
+  ]
+}

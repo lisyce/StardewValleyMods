@@ -18,7 +18,7 @@
         "George": "It's awful cold, isn't it? What a rotten day.",
         "Evelyn": "When I woke up I heard dripping from somewhere... I think the roof might be leaking.$s#$e#In the old days, George would've scampered right up and fixed it... *sigh*$s",
         "Lewis": "{{i18n:Rainy.Lewis}}",
-        "Clint": "Today would be a good day to explore the mines... Who knows, you might find some rare ores.",
+        "Clint": "{{i18n:Rainy.Clint}}",
         "Penny": "The raindrops are really loud on the metal roof of our trailer.#$e#...It's soothing, though.$h",
         "Pam": "Howdy, kid. Stayin' dry?",
         "Emily": "It never rains in Calico Desert... That's where my friend Sandy lives.#$e#I wish I could've visited her today.$s",

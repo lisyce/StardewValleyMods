@@ -1,0 +1,23 @@
+{
+  "Clint.AcceptEnemyCake": "Fine, then! Be my enemy. Don't forget you still need my expertise to upgrade your tools!$3",
+  "Clint.RejectEnemyCake_Archenemies": "Stop bringing me these! Once was enough!$3",
+  "Clint.RejectEnemyCake_ExArchenemies": "I thought out of all my relationships, I'd at least be able to fix this one...$2",
+  "Clint.RejectEnemyCake_LowNegativeHearts": "Oh... you believe in that tradition? I don't really want this, though...$2",
+  "Clint.AcceptShatteredAmulet": "I'm so sick of you! I wish you'd never moved to Pelican Town! You'd better watch out, @...$3",
+  "Clint.RejectShatteredAmulet_ExArchenemies": "I thought out of all my relationships, I'd at least be able to fix this one...$2",
+  "Clint.RejectShatteredAmulet_LowNegativeHearts": "What, you want me to fix this or something?",
+  "Clint.RejectMermaidPendant_NegativeHearts": "Wow... to think that this is the closest thing I have to experiencing romance. Pathetic.$2",
+  "Clint.RejectBouquet_NegativeHearts": "Wow... to think that this is the closest thing I have to experiencing romance. Pathetic.$2",
+  "Clint.BarleyZP.EnemyOfTheValley.apologized_Clint": "So you want to be friends again? Hmph. I'll think about it.$3",
+  "Clint.ReconciliationDustUsed": "Woah... what was that?$4#$b#I think we can put the past behind us now, @.$1",
+
+  "Clint.Mon-2": "I know your grandfather was a farmer like you. But was he rude, too?$3",
+  "Clint.Mon-6": "I wish someone else would give me some work. I'm tired of upgrading your tools.$3",
+  "Clint.Tue-2": "Man, I wish they had sold the farm to someone else. Then maybe I could upgrade the tools of someone nicer instead.$3",
+  "Clint.Wed-2": "Need something? I'm busy right now.$3",
+  "Clint.Thu-2": "I'll upgrade your tools, but only because I need the cash.$3",
+  "Clint.Fri-2": "I know I typically stay near my shop year-round, but that doesn't give you a license to come bother me all the time!$3",
+  "Clint.Sat-2": "I used to think this town was boring, but now that you've moved here I see it can be much worse than just boring.$3",
+  "Clint.Sun-2": "Are you going to buy something from me? If not, leave me alone.$3",
+  "Clint.Sun-8": "I take pride in my work. Even though it's tempting to leave your tools rough around the edges, I still do my best blacksmithing for you.$3"
+}

@@ -17,6 +17,11 @@
     },
     {
       "Action": "Load",
+      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Clint",
+      "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
       "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Demetrius",
       "FromFile": "blank.json"
     },
