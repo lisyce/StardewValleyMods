@@ -2,6 +2,7 @@
 using StardewValley;
 using System.Reflection.Emit;
 using System.Reflection;
+using EnemyOfTheValley.Util;
 using Microsoft.Xna.Framework.Content;
 using Sickhead.Engine.Util;
 using StardewModdingAPI;
@@ -122,6 +123,7 @@ namespace EnemyOfTheValley.Patches
                     // we keep the ldarg.2 instruction to load the amount arg and instead feed it into our method
                     new(OpCodes.Ldarg_1),
                     new(OpCodes.Ldloc_0),
+                    new(OpCodes.Ldarg_0),
                     new(OpCodes.Call, changeAmt));  // return val goes onto stack for changeFriendship to use
 
             return matcher.InstructionEnumeration();
@@ -197,9 +199,10 @@ namespace EnemyOfTheValley.Patches
             return matcher.InstructionEnumeration();
         }
         
-        public static int ChangeConversationFriendshipAmount(int amount, Farmer who, Friendship friendship)
+        public static int ChangeConversationFriendshipAmount(int amount, Farmer who, Friendship friendship, NPC npc)
         {
-            if (who.hasBuff("statue_of_blessings_4")) return amount;
+            if (!CustomFields.CanHaveNegativeFriendship(npc) || who.hasBuff("statue_of_blessings_4")) return amount;
+            
             return friendship.Points <= -50 ? -amount : amount;
         }
 

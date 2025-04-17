@@ -6,6 +6,7 @@
   "ExArchenemy": "(ex-archenemy)",
   "ExArchenemyNoParen": "Ex-Archenemy",
 
+  "RejectEnemyCake_OptedOut": "You can't be enemies with {{name}}.",
   "RejectEnemyCake_AlreadyEnemies": "You've already sworn to be enemies with {{name}}.",
   "RejectEnemyCake_Archenemies": "Why are you giving me this? You know we're already past enemies, right?",
   "RejectEnemyCake_NoNegativeHearts": "Uh... I'm not sure what you mean by that, but I'm just going to go...",
@@ -14,6 +15,7 @@
   "AcceptEnemyCake": "Oh, so that's how it is? Well, I feel the same way about you, @!",
   "RejectEnemyCake_ExArchenemies": "I thought we'd made amends... why are you doing this again?",
 
+  "RejectShatteredAmulet_OptedOut": "You can't swear to be archenemies with {{name}}.",
   "RejectShatteredAmulet_AlreadyArchenemies": "You've already sworn to be archenemies with {{name}}.",
   "RejectShatteredAmulet_ExArchenemies": "Didn't we apologize? There's no need to start this again.",
   "RejectShatteredAmulet_NoNegativeHearts": "Where did you even find this broken jewelry? Be careful not to cut your hands on it.",

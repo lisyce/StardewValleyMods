@@ -77,7 +77,7 @@ namespace EnemyOfTheValley.Patches
 
         public static bool changeFriendship_Prefix(ref Farmer __instance, int amount, NPC? n)
         {
-            if (n == null || (n is not Child && !n.IsVillager))
+            if (n == null || (!(n is Child) && !n.IsVillager) || !CustomFields.CanHaveNegativeFriendship(n))
             {
                 return true;  // run original
             }

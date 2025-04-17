@@ -10,6 +10,7 @@ using EOTVGameStateQueries = EnemyOfTheValley.Util.GameStateQueries;
 using StardewValley.Locations;
 using Microsoft.Xna.Framework;
 using StardewValley.Delegates;
+using StardewValley.GameData.Characters;
 using SObject = StardewValley.Object;
 
 namespace EnemyOfTheValley
@@ -20,6 +21,8 @@ namespace EnemyOfTheValley
         public static ITranslationHelper Translation;
         public static Texture2D? MiscSprites;  // do not reference directly in transpilers
         public static Texture2D? StandardSprites;
+
+        private static readonly HashSet<string> OptedInNpcs = new() { "Abigail", "Alex", "Clint", "Demetrius", "Elliott", "Haley", "Lewis" };
         public override void Entry(IModHelper helper)
         {
             StaticMonitor = Monitor;
@@ -28,7 +31,7 @@ namespace EnemyOfTheValley
             StaticMonitor.Log("This mod patches the way dialogue keys are handled. If you are having issues with a dialogue key not showing, ensure that it happens without this mod installed before reporting it to the respective mod authors.", LogLevel.Debug);
             
             Harmony harmony = new(ModManifest.UniqueID);
-            Harmony.DEBUG = true;
+            // Harmony.DEBUG = true;
             FarmerPatches.Patch(harmony);
             SocialPagePatches.Patch(harmony);
             DialogueBoxPatches.Patch(harmony);
@@ -81,6 +84,19 @@ namespace EnemyOfTheValley
             else if (e.NameWithoutLocale.IsEquivalentTo("BarleyZP.EnemyOfTheValley/StandardSprites"))
             {
                 e.LoadFromModFile<Texture2D>("assets/StandardSprites.png", AssetLoadPriority.Medium);
+            } else if (e.NameWithoutLocale.IsEquivalentTo("Data/Characters"))
+            {
+                e.Edit(asset =>
+                {
+                    var data = asset.AsDictionary<string, CharacterData>().Data;
+                    foreach (var (name, character) in data)
+                    {
+                        if (!OptedInNpcs.Contains(name)) continue;
+                        character.CustomFields ??= new Dictionary<string, string>();
+                        character.CustomFields.TryAdd("BarleyZP.EnemyOfTheValley.CanHaveNegativeFriendship", "");
+                        character.CustomFields.TryAdd("BarleyZP.EnemyOfTheValley.CanBecomeEnemies", "");
+                    }
+                });
             }
         }
 

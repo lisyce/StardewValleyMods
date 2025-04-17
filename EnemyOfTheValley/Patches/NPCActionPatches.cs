@@ -188,7 +188,11 @@ namespace EnemyOfTheValley.Patches
 
             friendship ??= (who.friendshipData[npc.Name] = new Friendship());
 
-            if (Relationships.IsRelationship(npc.Name, Relationships.Archenemy, who))
+            if (!CustomFields.CanBecomeEnemies(npc))
+            {
+                Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectShatteredAmulet_OptedOut", new { name = npc.displayName }));
+            }
+            else if (Relationships.IsRelationship(npc.Name, Relationships.Archenemy, who))
             {
                 Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectShatteredAmulet_AlreadyArchenemies", new { name = npc.displayName }));
             }
@@ -229,7 +233,11 @@ namespace EnemyOfTheValley.Patches
 
             friendship ??= (who.friendshipData[npc.Name] = new Friendship());
 
-            if (Relationships.IsRelationship(npc.Name, Relationships.Enemy, who))
+            if (!CustomFields.CanBecomeEnemies(npc))
+            {
+                Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectEnemyCake_OptedOut", new { name = npc.displayName }));
+            }
+            else if (Relationships.IsRelationship(npc.Name, Relationships.Enemy, who))
             {
                 Game1.drawObjectDialogue(ModEntry.Translation.Get("RejectEnemyCake_AlreadyEnemies", new { name = npc.displayName }));
             }
