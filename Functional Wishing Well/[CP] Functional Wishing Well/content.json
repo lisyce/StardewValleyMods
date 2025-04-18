@@ -25,6 +25,20 @@
           "Entries": {
             "{{ModId}}_WishingWell": "388 10 390 20//{{ModId}}_WishingWell/true/default/"
           }
+        },
+        {
+          "Action": "EditData",
+          "Target": "Data/TriggerActions",
+          "Entries": {
+            "{{ModId}}_Letter10": {
+              "Id": "{{ModId}}_Letter10",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 10",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter10"
+              ]
+            }
+          }
         }
     ]
 }

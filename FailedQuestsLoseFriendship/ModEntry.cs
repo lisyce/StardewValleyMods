@@ -87,7 +87,7 @@ namespace FailedQuestsLoseFriendship
             int failedQuests = GetFailedQuests(Game1.player);
             foreach (int amount in mailAmounts)
             {
-                if (failedQuests >= amount && !Game1.player.mailReceived.Contains($"{UniqueID}{amount}"))
+                if (failedQuests >= amount && !Game1.player.hasOrWillReceiveMail($"{UniqueID}{amount}"))
                 {
                     Game1.player.mailForTomorrow.Add($"{UniqueID}{amount}");
                 }
