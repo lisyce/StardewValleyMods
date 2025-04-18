@@ -2,7 +2,7 @@
   "Name": "Functional Wishing Well",
   "Author": "BarleyZP",
   "Version": "1.0.0",
-  "Description": "A craftable wishing well that you can refill your watering can at. Toss a penny in for good luck!",
+  "Description": "A craftable wishing well that you can refill your watering can at. Toss a coin in for good luck!",
   "UniqueID": "BarleyZP.FunctionalWishingWell",
   "UpdateKeys": [ "Nexus:33336" ],
   "ContentPackFor": {

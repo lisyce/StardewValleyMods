@@ -7,8 +7,8 @@
             "Entries": {
               "{{ModId}}_WishingWell": {
                 "Name": "{{ModId}}_WishingWell",
-                "DisplayName": "Wishing Well",
-                "Description": "Description",
+                "DisplayName": "{{i18n:Well_Name}}",
+                "Description": "{{i18n:Well_Desc}}",
                 "Fragility": 0,
                 "Texture": "{{ModId}}/WishingWell"
               }
@@ -23,7 +23,7 @@
           "Action": "EditData",
           "Target": "Data/CraftingRecipes",
           "Entries": {
-            "{{ModId}}_WishingWell": "388 10 390 20//{{ModId}}_WishingWell/true/s Farming 1/"
+            "{{ModId}}_WishingWell": "388 10 390 20//{{ModId}}_WishingWell/true/default/"
           }
         }
     ]
