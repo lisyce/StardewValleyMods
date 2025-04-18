@@ -10,7 +10,7 @@
   "UniqueID": "BarleyZP.FunctionalWishingWell.Code",
   "Name": "Functional Wishing Well (C#)",
   "Author": "BarleyZP",
-  "Version": "1.0.0-Debug",
+  "Version": "1.0.0",
   "Description": "C# component for BarleyZP.FunctionalWishingWell",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",

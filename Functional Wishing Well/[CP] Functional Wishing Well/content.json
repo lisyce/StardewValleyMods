@@ -26,6 +26,18 @@
             "{{ModId}}_WishingWell": "388 10 390 20//{{ModId}}_WishingWell/true/default/"
           }
         },
+      {
+        "Action": "EditData",
+        "Target": "Data/Mail",
+        "Entries": {
+          "{{ModId}}_Letter10": "{{i18n:Letter10}}",
+          "{{ModId}}_Letter20": "{{i18n:Letter20}}",
+          "{{ModId}}_Letter30": "{{i18n:Letter30}}",
+          "{{ModId}}_Letter50": "{{i18n:Letter50}}",
+          "{{ModId}}_Letter70": "{{i18n:Letter70}}",
+          "{{ModId}}_Letter100": "{{i18n:Letter100}}"
+        }
+      },
         {
           "Action": "EditData",
           "Target": "Data/TriggerActions",
@@ -36,6 +48,46 @@
               "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 10",
               "Actions": [
                 "AddMail Current {{ModId}}_Letter10"
+              ]
+            },
+            "{{ModId}}_Letter20": {
+              "Id": "{{ModId}}_Letter20",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 20",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter20"
+              ]
+            },
+            "{{ModId}}_Letter30": {
+              "Id": "{{ModId}}_Letter30",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 30",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter30"
+              ]
+            },
+            "{{ModId}}_Letter50": {
+              "Id": "{{ModId}}_Letter50",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 50",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter50"
+              ]
+            },
+            "{{ModId}}_Letter70": {
+              "Id": "{{ModId}}_Letter70",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 70",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter70"
+              ]
+            },
+            "{{ModId}}_Letter100": {
+              "Id": "{{ModId}}_Letter100",
+              "Trigger": "DayEnding",
+              "Condition": "PLAYER_HAS_MAIL Current hatter, PLAYER_STAT Current {{ModId}}_CoinsTossed 100",
+              "Actions": [
+                "AddMail Current {{ModId}}_Letter100"
               ]
             }
           }

@@ -72,10 +72,7 @@ public class ModEntry : Mod
                     Game1.dayTimeMoneyBox.moneyShakeTimer = 250;
 
                     var msgNum = Game1.random.Next(1, 6);
-                    DelayedAction.functionAfterDelay(() =>
-                    {
-                        Game1.showGlobalMessage(StaticTranslation.Get($"AfterTossCoin{msgNum}"));
-                    }, 1000);
+                    Game1.showGlobalMessage(StaticTranslation.Get($"AfterTossCoin{msgNum}"));
                     
                     who.stats.Increment("BarleyZP.FunctionalWishingWell_CoinsTossed", 1);
                     who.modData["BarleyZP.FunctionalWishingWell_TossCoinToday"] = "1";

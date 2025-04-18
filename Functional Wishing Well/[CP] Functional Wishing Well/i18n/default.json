@@ -3,8 +3,8 @@
   "Well_Desc": "A small well to refill your watering can at. Toss a coin in for good luck!",
   "Letter10": "Hi.^^Me notice you drop coines in the well, poke.^^Very shiny coines. Me bring to hat mouse and get hat.^^Poke, don't worry about your water, okay? Me very clean mouse.^^-stylish mouse[#]Wishing Well #1",
   "Letter20": "Again hi.^^Me keep seeing coines in the well, poke.^^Thank you for coines. Me get more hats to impress pretty mouse friend.^^-stylish mouse[#]Wishing Well #2",
-  "Letter30": "Poke!^^Me thankful for the coines, but need more. Many more.^^Pretty mouse friend say if me get fancier hat then she dance with me.^^Please, poke. Me need dance with her at mouse masquerade ball!^^-stylish mouse[#]Wishing Well #3",
+  "Letter30": "Poke!^^Me thankful for the coines, but need more.^^Pretty mouse friend say if me get fancier hat then she dance with me.^^Please, poke. Me need dance with her!^^-stylish mouse[#]Wishing Well #3",
   "Letter50": "Hi poke.^^Me send you lots of letters now. Me get better at writing.^^With new fancy hat, pretty mouse friend dance with me!^^Thank you thank you, poke!^^-stylish mouse[#]Wishing Well #4",
-  "Letter70": "Wow, poke.^^You drop so many coines in the well.^^Me already had all the coines needed. Me got you a shirt with the coines to say thanks!^^-stylish mouse%item (S)1066%%[#]Wishing Well #5",
-  "Letter100": "Poke, me be honest now.^^You very generous. But me can no longer write so many letter to you.^^Thank you for all of the coines. Me and pretty mouse friend are happy together now.^^Hope you have good life, poke.^^-stylish mouse[#]Wishing Well $6"
+  "Letter70": "Wow, poke.^^You drop so many coines in the well.^^Me already had all the coines needed. Me got you a shirt with the coines to say thanks!^^-stylish mouse%item id (S)1066%%[#]Wishing Well #5",
+  "Letter100": "Poke, me be honest now.^^You very generous. But me can't write more letters.^^Me and pretty mouse friend are happy together now.^^Hope you have good life, poke. I give you best cheese as thanks.^^-stylish mouse%item object 424 1%%[#]Wishing Well $6"
 }
