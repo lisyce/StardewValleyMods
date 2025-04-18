@@ -1,0 +1,21 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.FunctionalWishingWell.Code",
+  "Name": "Functional Wishing Well (C#)",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "C# component for BarleyZP.FunctionalWishingWell",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "Functional Wishing Well.dll",
+  "UpdateKeys": [
+    "Nexus:33336"
+  ]
+}

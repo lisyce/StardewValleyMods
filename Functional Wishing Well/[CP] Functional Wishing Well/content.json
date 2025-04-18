@@ -1,0 +1,30 @@
+{
+    "Format": "2.6.0",
+    "Changes": [
+        {
+            "Action": "EditData",
+            "Target": "Data/BigCraftables",
+            "Entries": {
+              "{{ModId}}_WishingWell": {
+                "Name": "{{ModId}}_WishingWell",
+                "DisplayName": "Wishing Well",
+                "Description": "Description",
+                "Fragility": 0,
+                "Texture": "{{ModId}}/WishingWell"
+              }
+            }
+        },
+        {
+          "Action": "Load",
+          "Target": "{{ModId}}/WishingWell",
+          "FromFile": "WishingWell.png"
+        },
+        {
+          "Action": "EditData",
+          "Target": "Data/CraftingRecipes",
+          "Entries": {
+            "{{ModId}}_WishingWell": "388 10 390 20//{{ModId}}_WishingWell/true/s Farming 1/"
+          }
+        }
+    ]
+}
