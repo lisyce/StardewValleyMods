@@ -17,13 +17,13 @@
         "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Alex.RejectShatteredAmulet_LowNegativeHearts}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Alex.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Alex.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Alex": "{{i18n:Alex.BarleyZP.EnemyOfTheValley.apologized_Alex}}",
+        "{{MainModId}}.apologized_Alex": "{{i18n:Alex.{{MainModId}}.apologized_Alex}}",
         "ReconciliationDustUsed": "{{i18n:Alex.ReconciliationDustUsed}}"
       }
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Alex",
       "Entries": {
         "Mon-2": "{{i18n:Alex.Mon-2}}",
         "Tue-2": "{{i18n:Alex.Tue-2}}",

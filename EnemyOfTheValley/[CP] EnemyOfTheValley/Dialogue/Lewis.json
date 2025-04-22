@@ -17,13 +17,13 @@
         "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Lewis.RejectShatteredAmulet_LowNegativeHearts}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Lewis.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Lewis.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Lewis": "{{i18n:Lewis.BarleyZP.EnemyOfTheValley.apologized_Lewis}}",
+        "{{MainModId}}.apologized_Lewis": "{{i18n:Lewis.{{MainModId}}.apologized_Lewis}}",
         "ReconciliationDustUsed": "{{i18n:Lewis.ReconciliationDustUsed}}"
       }
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Lewis",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Lewis",
       "Entries": {
         "Mon-2": "{{i18n:Lewis.Mon-2}}",
         "Tue-2": "{{i18n:Lewis.Tue-2}}",

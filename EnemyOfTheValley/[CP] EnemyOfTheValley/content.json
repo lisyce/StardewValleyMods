@@ -1,5 +1,11 @@
 {
   "Format": "2.4.0",
+  "DynamicTokens": [
+    {
+      "Name": "MainModId",
+      "Value": "BarleyZP.EnemyOfTheValley"
+    }
+  ],
   "Changes": [
     // includes
     {
@@ -8,27 +14,7 @@
     },
     {
       "Action": "Include",
-      "FromFile": "Data/Events.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "Data/TriggerActions.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "Data/Objects.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "Data/Strings.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "Data/Shops.json"
-    },
-    {
-      "Action": "Include",
-      "FromFile": "Data/CTU.json"
+      "FromFile": "Data/CTU.json, Data/Events.json, Data/Mail.json, Data/Objects.json, Data/Shops.json, Data/Strings.json, Data/TriggerActions.json"
     },
     
     // misc patches
@@ -36,32 +22,22 @@
       "Action": "EditData",
       "Target": "Data/CookingRecipes",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley.AvoidMeCake": "308 1 246 1 245 1 305 1//BarleyZP.EnemyOfTheValley.AvoidMeCake/none/"
-      }
-    },
-    {
-      "Action": "EditData",
-      "Target": "Data/Mail",
-      "Entries": {
-        "BarleyZP.EnemyOfTheValley.EnemyCake": "{{i18n: CakeMail}}",
-        "BarleyZP.EnemyOfTheValley.StardropMail": "{{i18n: StardropMail}}",
-        "BarleyZP.EnemyOfTheValley.ApologyLetterMail": "{{i18n: ApologyLetterMail}}",
-        "BarleyZP.EnemyOfTheValley.Haley-6": "{{i18n:HaleyNegative6Mail}}"
+        "{{MainModId}}.AvoidMeCake": "308 1 246 1 245 1 305 1//{{MainModId}}.AvoidMeCake/none/"
       }
     },
     {
       "Action": "EditData",
       "Target": "Mods/ichortower.SecretNoteFramework/Notes",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley_amulet": {
+        "{{MainModId}}_amulet": {
           "Contents": "{{i18n: ShatteredAmuletNote}}",
           "Title": "{{i18n: ShatteredAmuletNoteTitle}}"
         },
-        "BarleyZP.EnemyOfTheValley_apology": {
+        "{{MainModId}}_apology": {
           "Contents": "{{i18n: ApologyLetterNote}}",
           "Title": "{{i18n: ApologyLetterNoteTitle}}"
         },
-        "BarleyZP.EnemyOfTheValley_dust": {
+        "{{MainModId}}_dust": {
           "Contents": "{{i18n: DustNote}}",
           "Title": "{{i18n: DustNoteTitle}}",
           "Conditions": "EOTV_PLAYER_NPC_RELATIONSHIP Current Any Archenemy"

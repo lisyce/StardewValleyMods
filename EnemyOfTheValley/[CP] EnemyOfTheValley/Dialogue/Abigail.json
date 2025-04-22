@@ -9,8 +9,8 @@
         "RejectEnemyCake_ExArchenemies": "{{i18n:Abigail.RejectEnemyCake_ExArchenemies}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Abigail.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Abigail.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Abigail": "{{i18n:Abigail.apologized_Abigail}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Sebastian": "{{i18n:Abigail.apologized_Sebastian}}",
+        "{{MainModId}}.apologized_Abigail": "{{i18n:Abigail.apologized_Abigail}}",
+        "{{MainModId}}.apologized_Sebastian": "{{i18n:Abigail.apologized_Sebastian}}",
         "RejectEnemyCake_Archenemies": "{{i18n:Abigail.RejectEnemyCake_Archenemies}}",
         "RejectEnemyCake_NoNegativeHearts": "{{i18n:Abigail.RejectEnemyCake_NoNegativeHearts}}",
         "RejectEnemyCake_LowNegativeHearts": "{{i18n:Abigail.RejectEnemyCake_LowNegativeHearts}}",
@@ -20,7 +20,7 @@
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Abigail",
       "Entries": {
         "Mon-2": "{{i18n:Abigail.Mon-2}}",
         "Tue-2": "{{i18n:Abigail.Tue-2}}",

@@ -2,42 +2,42 @@
   "Changes": [
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Rainy",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Abigail",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Abigail",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Alex",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Alex",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Clint",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Clint",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Demetrius",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Demetrius",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Elliott",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Elliott",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Haley",
       "FromFile": "blank.json"
     },
     {
       "Action": "Load",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Lewis",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Lewis",
       "FromFile": "blank.json"
     }
   ]

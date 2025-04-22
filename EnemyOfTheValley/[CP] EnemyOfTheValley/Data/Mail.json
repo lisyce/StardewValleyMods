@@ -1,0 +1,15 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Data/Mail",
+      "Entries": {
+        "{{MainModId}}.EnemyCake": "{{i18n: CakeMail}}",
+        "{{MainModId}}.StardropMail": "{{i18n: StardropMail}}",
+        "{{MainModId}}.ApologyLetterMail": "{{i18n: ApologyLetterMail}}",
+        "{{MainModId}}.Haley-6": "{{i18n:HaleyNegative6Mail}}",
+        "{{MainModId}}.PierreCoupon": ""
+      }
+    }
+  ]
+}

@@ -16,14 +16,14 @@
         "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Haley.RejectShatteredAmulet_LowNegativeHearts}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Haley.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Haley.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Haley": "{{i18n:Haley.BarleyZP.EnemyOfTheValley.apologized_Haley}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Alex": "{{i18n:Haley.BarleyZP.EnemyOfTheValley.apologized_Alex}}",
+        "{{MainModId}}.apologized_Haley": "{{i18n:Haley.{{MainModId}}.apologized_Haley}}",
+        "{{MainModId}}.apologized_Alex": "{{i18n:Haley.{{MainModId}}.apologized_Alex}}",
         "ReconciliationDustUsed": "{{i18n:Haley.ReconciliationDustUsed}}"
       }
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Haley",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Haley",
       "Entries": {
         "AcceptBirthdayGift_Loved": "{{i18n:Haley.AcceptBirthdayGift_Loved}}",
 

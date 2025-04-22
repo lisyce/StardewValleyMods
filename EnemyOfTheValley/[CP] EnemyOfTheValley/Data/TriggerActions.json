@@ -4,20 +4,20 @@
       "Action": "EditData",
       "Target": "Data/TriggerActions",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley_OnHaley-6": {
-          "Id": "BarleyZP.EnemyOfTheValley_OnHaley-6",
+        "{{MainModId}}_OnHaley-6": {
+          "Id": "{{MainModId}}_OnHaley-6",
           "Trigger": "DayEnding",
           "Condition": "PLAYER_HEARTS  Current Haley -14 -6",
           "Actions": [
-            "AddMail Current BarleyZP.EnemyOfTheValley.Haley-6"
+            "AddMail Current {{MainModId}}.Haley-6"
           ]
         },
-        "BarleyZP.EnemyOfTheValley_ApologyLetterMail": {
-          "Id": "\"BarleyZP.EnemyOfTheValley_ApologyLetterMail",
+        "{{MainModId}}_ApologyLetterMail": {
+          "Id": "\"{{MainModId}}_ApologyLetterMail",
           "Trigger": "DayStarted",
-          "Condition": "!PLAYER_HAS_CONVERSATION_TOPIC Current BarleyZP.EnemyOfTheValley_firstEnemy, EOTV_PLAYER_NPC_RELATIONSHIP Current Any Enemy, !PLAYER_HAS_MAIL Current BarleyZP.EnemyOfTheValley.ApologyLetterMail",
+          "Condition": "!PLAYER_HAS_CONVERSATION_TOPIC Current {{MainModId}}_firstEnemy, EOTV_PLAYER_NPC_RELATIONSHIP Current Any Enemy, !PLAYER_HAS_MAIL Current {{MainModId}}.ApologyLetterMail",
           "Actions": [
-            "AddMail Current BarleyZP.EnemyOfTheValley.ApologyLetterMail"
+            "AddMail Current {{MainModId}}.ApologyLetterMail"
           ]
         }
       }

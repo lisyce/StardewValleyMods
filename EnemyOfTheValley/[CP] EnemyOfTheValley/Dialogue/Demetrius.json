@@ -13,13 +13,13 @@
         "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Demetrius.RejectShatteredAmulet_LowNegativeHearts}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Demetrius.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Demetrius.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Demetrius": "{{i18n:Demetrius.BarleyZP.EnemyOfTheValley.apologized_Demetrius}}",
+        "{{MainModId}}.apologized_Demetrius": "{{i18n:Demetrius.{{MainModId}}.apologized_Demetrius}}",
         "ReconciliationDustUsed": "{{i18n:Demetrius.ReconciliationDustUsed}}"
       }
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Demetrius",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Demetrius",
       "Entries": {
         "Mon-2": "{{i18n:Demetrius.Mon-2}}",
         "Tue-2": "{{i18n:Demetrius.Tue-2}}",

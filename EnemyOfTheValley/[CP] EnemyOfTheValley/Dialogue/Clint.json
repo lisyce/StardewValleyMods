@@ -13,13 +13,13 @@
         "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Clint.RejectShatteredAmulet_LowNegativeHearts}}",
         "RejectMermaidPendant_NegativeHearts": "{{i18n:Clint.RejectMermaidPendant_NegativeHearts}}",
         "RejectBouquet_NegativeHearts": "{{i18n:Clint.RejectBouquet_NegativeHearts}}",
-        "BarleyZP.EnemyOfTheValley.apologized_Clint": "{{i18n:Clint.BarleyZP.EnemyOfTheValley.apologized_Clint}}",
+        "{{MainModId}}.apologized_Clint": "{{i18n:Clint.{{MainModId}}.apologized_Clint}}",
         "ReconciliationDustUsed": "{{i18n:Clint.ReconciliationDustUsed}}"
       }
     },
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Clint",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Clint",
       "Entries": {
         "Mon-2": "{{i18n:Clint.Mon-2}}",
         "Mon-6": "{{i18n:Clint.Mon-6}}",

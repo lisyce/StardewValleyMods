@@ -5,11 +5,11 @@
       "Target": "Data/Shops",
       "TargetField": [ "DesertTrade", "Items" ],
       "Entries": {
-        "BarleyZP.EnemyOfTheValley.ReconciliationDust": {
-          "Id": "BarleyZP.EnemyOfTheValley.ReconciliationDust",
+        "{{MainModId}}.ReconciliationDust": {
+          "Id": "{{MainModId}}.ReconciliationDust",
           "TradeItemId": "(O)768",
           "TradeItemAmount": 50,
-          "ItemId": "(O)BarleyZP.EnemyOfTheValley.ReconciliationDust",
+          "ItemId": "(O){{MainModId}}.ReconciliationDust",
           "Condition": "EOTV_PLAYER_NPC_ARCHENEMY Current Any"
         }
       }
@@ -19,260 +19,260 @@
       "Target": "Data/Shops",
       "TargetField": [ "Saloon", "Items" ],
       "Entries": {
-        "BarleyZP.EnemyOfTheValley_SaladRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SaladRecipe",
+        "{{MainModId}}_SaladRecipe": {
+          "Id": "{{MainModId}}_SaladRecipe",
           "ItemId": "(O)196",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Emily -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_CheeseCauliflowerRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_CheeseCauliflower",
+        "{{MainModId}}_CheeseCauliflowerRecipe": {
+          "Id": "{{MainModId}}_CheeseCauliflower",
           "ItemId": "(O)197",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Pam -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_ParsnipSoupRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_ParsnipSoupRecipe",
+        "{{MainModId}}_ParsnipSoupRecipe": {
+          "Id": "{{MainModId}}_ParsnipSoupRecipe",
           "ItemId": "(O)199",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Caroline -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_VegetableMedleyRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_VegetableMedleyRecipe",
+        "{{MainModId}}_VegetableMedleyRecipe": {
+          "Id": "{{MainModId}}_VegetableMedleyRecipe",
           "ItemId": "(O)200",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Caroline -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_FriedCalamariRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_FriedCalamariRecipe",
+        "{{MainModId}}_FriedCalamariRecipe": {
+          "Id": "{{MainModId}}_FriedCalamariRecipe",
           "ItemId": "(O)202",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Jodi -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_StrangeBunRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_StrangeBunRecipe",
+        "{{MainModId}}_StrangeBunRecipe": {
+          "Id": "{{MainModId}}_StrangeBunRecipe",
           "ItemId": "(O)203",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Shane -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_FriedMushroomRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_FriedMushroomRecipe",
+        "{{MainModId}}_FriedMushroomRecipe": {
+          "Id": "{{MainModId}}_FriedMushroomRecipe",
           "ItemId": "(O)205",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Demetrius -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_BeanHotpotRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_BeanHotpotRecipe",
+        "{{MainModId}}_BeanHotpotRecipe": {
+          "Id": "{{MainModId}}_BeanHotpotRecipe",
           "ItemId": "(O)207",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Clint -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_SalmonDinnerRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SalmonDinnerRecipe",
+        "{{MainModId}}_SalmonDinnerRecipe": {
+          "Id": "{{MainModId}}_SalmonDinnerRecipe",
           "ItemId": "(O)212",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Gus -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_FishTacoRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_FishTacoRecipe",
+        "{{MainModId}}_FishTacoRecipe": {
+          "Id": "{{MainModId}}_FishTacoRecipe",
           "ItemId": "(O)213",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Linus -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_CrispyBassRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_CrispyBassRecipe",
+        "{{MainModId}}_CrispyBassRecipe": {
+          "Id": "{{MainModId}}_CrispyBassRecipe",
           "ItemId": "(O)214",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Kent -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_PepperPoppersRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_PepperPoppersRecipe",
+        "{{MainModId}}_PepperPoppersRecipe": {
+          "Id": "{{MainModId}}_PepperPoppersRecipe",
           "ItemId": "(O)215",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Shane -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_TomKhaSoupRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_TomKhaSoupRecipe",
+        "{{MainModId}}_TomKhaSoupRecipe": {
+          "Id": "{{MainModId}}_TomKhaSoupRecipe",
           "ItemId": "(O)218",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Sandy -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_RhubarbPieRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_RhubarbPieRecipe",
+        "{{MainModId}}_RhubarbPieRecipe": {
+          "Id": "{{MainModId}}_RhubarbPieRecipe",
           "ItemId": "(O)222",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Marnie -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_CookieRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_CookieRecipe",
+        "{{MainModId}}_CookieRecipe": {
+          "Id": "{{MainModId}}_CookieRecipe",
           "ItemId": "(O)223",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Evelyn -14 -4"
         },
-        "BarleyZP.EnemyOfTheValley_SpaghettiRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SpaghettiRecipe",
+        "{{MainModId}}_SpaghettiRecipe": {
+          "Id": "{{MainModId}}_SpaghettiRecipe",
           "ItemId": "(O)224",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Lewis -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_FriedEelRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_FriedEelRecipe",
+        "{{MainModId}}_FriedEelRecipe": {
+          "Id": "{{MainModId}}_FriedEelRecipe",
           "ItemId": "(O)225",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current George -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_SpicyEelRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SpicyEelRecipe",
+        "{{MainModId}}_SpicyEelRecipe": {
+          "Id": "{{MainModId}}_SpicyEelRecipe",
           "ItemId": "(O)226",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current George -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_SashimiRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SashimiRecipe",
+        "{{MainModId}}_SashimiRecipe": {
+          "Id": "{{MainModId}}_SashimiRecipe",
           "ItemId": "(O)227",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Linus -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_RedPlateRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_RedPlateRecipe",
+        "{{MainModId}}_RedPlateRecipe": {
+          "Id": "{{MainModId}}_RedPlateRecipe",
           "ItemId": "(O)230",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Emily -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_EggplantParmesanRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_EggplantParmesanRecipe",
+        "{{MainModId}}_EggplantParmesanRecipe": {
+          "Id": "{{MainModId}}_EggplantParmesanRecipe",
           "ItemId": "(O)231",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Lewis -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_RicePuddingRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_RicePuddingRecipe",
+        "{{MainModId}}_RicePuddingRecipe": {
+          "Id": "{{MainModId}}_RicePuddingRecipe",
           "ItemId": "(O)232",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Evelyn -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_IceCreamRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_IceCreamRecipe",
+        "{{MainModId}}_IceCreamRecipe": {
+          "Id": "{{MainModId}}_IceCreamRecipe",
           "ItemId": "(O)233",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Jodi -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_BlueberryTartRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_BlueberryTartRecipe",
+        "{{MainModId}}_BlueberryTartRecipe": {
+          "Id": "{{MainModId}}_BlueberryTartRecipe",
           "ItemId": "(O)234",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Pierre -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_Autumn'sBountyRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_Autumn'sBountyRecipe",
+        "{{MainModId}}_Autumn'sBountyRecipe": {
+          "Id": "{{MainModId}}_Autumn'sBountyRecipe",
           "ItemId": "(O)235",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Demetrius -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_PumpkinSoupRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_PumpkinSoupRecipe",
+        "{{MainModId}}_PumpkinSoupRecipe": {
+          "Id": "{{MainModId}}_PumpkinSoupRecipe",
           "ItemId": "(O)236",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Robin -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_SuperMealRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_SuperMealRecipe",
+        "{{MainModId}}_SuperMealRecipe": {
+          "Id": "{{MainModId}}_SuperMealRecipe",
           "ItemId": "(O)237",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Kent -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_CranberrySauceRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_CranberrySauceRecipe",
+        "{{MainModId}}_CranberrySauceRecipe": {
+          "Id": "{{MainModId}}_CranberrySauceRecipe",
           "ItemId": "(O)238",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Gus -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_StuffingRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_StuffingRecipe",
+        "{{MainModId}}_StuffingRecipe": {
+          "Id": "{{MainModId}}_StuffingRecipe",
           "ItemId": "(O)239",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Pam -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_AlgaeSoupRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_AlgaeSoupRecipe",
+        "{{MainModId}}_AlgaeSoupRecipe": {
+          "Id": "{{MainModId}}_AlgaeSoupRecipe",
           "ItemId": "(O)456",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Clint -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_PaleBrothRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_PaleBrothRecipe",
+        "{{MainModId}}_PaleBrothRecipe": {
+          "Id": "{{MainModId}}_PaleBrothRecipe",
           "ItemId": "(O)457",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Marnie -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_ChowderRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_ChowderRecipe",
+        "{{MainModId}}_ChowderRecipe": {
+          "Id": "{{MainModId}}_ChowderRecipe",
           "ItemId": "(O)727",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Willy -14 -3"
         },
-        "BarleyZP.EnemyOfTheValley_FishStewRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_FishStewRecipe",
+        "{{MainModId}}_FishStewRecipe": {
+          "Id": "{{MainModId}}_FishStewRecipe",
           "ItemId": "(O)728",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Willy -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_EscargotRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_EscargotRecipe",
+        "{{MainModId}}_EscargotRecipe": {
+          "Id": "{{MainModId}}_EscargotRecipe",
           "ItemId": "(O)729",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Willy -14 -5"
         },
-        "BarleyZP.EnemyOfTheValley_LobsterBisqueRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_LobsterBisqueRecipe",
+        "{{MainModId}}_LobsterBisqueRecipe": {
+          "Id": "{{MainModId}}_LobsterBisqueRecipe",
           "ItemId": "(O)730",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Willy -14 -9"
         },
-        "BarleyZP.EnemyOfTheValley_MangoStickyRiceRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_MangoStickyRiceRecipe",
+        "{{MainModId}}_MangoStickyRiceRecipe": {
+          "Id": "{{MainModId}}_MangoStickyRiceRecipe",
           "ItemId": "(O)905",
           "Price": 150,
           "IsRecipe": true,
           "Condition": "PLAYER_HEARTS Current Leo -14 -7"
         },
-        "BarleyZP.EnemyOfTheValley_PoiRecipe": {
-          "Id": "BarleyZP.EnemyOfTheValley_PoiRecipe",
+        "{{MainModId}}_PoiRecipe": {
+          "Id": "{{MainModId}}_PoiRecipe",
           "ItemId": "(O)906",
           "Price": 150,
           "IsRecipe": true,

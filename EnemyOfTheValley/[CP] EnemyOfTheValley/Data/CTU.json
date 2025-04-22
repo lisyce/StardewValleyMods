@@ -4,8 +4,8 @@
       "Action": "EditData",
       "Target": "BarleyZP.CTU/TopicRules",
       "Entries": {
-        "BarleyZP.EnemyOfTheValley.apologized_": {
-          "Id": "BarleyZP.EnemyOfTheValley.apologized_",
+        "{{MainModId}}.apologized_": {
+          "Id": "{{MainModId}}.apologized_",
           "IdIsPrefix": true,
           "RepeatableOnExpire": true
         }

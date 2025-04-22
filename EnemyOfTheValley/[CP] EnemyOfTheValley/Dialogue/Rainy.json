@@ -2,7 +2,7 @@
   "Changes": [
     {
       "Action": "EditData",
-      "Target": "BarleyZP.EnemyOfTheValley/NegativeHeartDialogue/Rainy",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Rainy",
       "Entries": {
         "Abigail": "{{i18n:Rainy.Abigail}}",
         "Alex": "{{i18n:Rainy.Alex}}",
