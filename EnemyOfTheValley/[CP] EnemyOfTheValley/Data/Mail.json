@@ -8,7 +8,7 @@
         "{{MainModId}}.StardropMail": "{{i18n: StardropMail}}",
         "{{MainModId}}.ApologyLetterMail": "{{i18n: ApologyLetterMail}}",
         "{{MainModId}}.Haley-6": "{{i18n:HaleyNegative6Mail}}",
-        "{{MainModId}}.PierreCoupon": ""
+        "{{MainModId}}.PierreCoupon": "{{i18n:PierreCouponMail}}"
       }
     }
   ]

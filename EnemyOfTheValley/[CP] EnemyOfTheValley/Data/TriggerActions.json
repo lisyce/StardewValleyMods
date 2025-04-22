@@ -7,9 +7,17 @@
         "{{MainModId}}_OnHaley-6": {
           "Id": "{{MainModId}}_OnHaley-6",
           "Trigger": "DayEnding",
-          "Condition": "PLAYER_HEARTS  Current Haley -14 -6",
+          "Condition": "PLAYER_HEARTS Current Haley -14 -6",
           "Actions": [
             "AddMail Current {{MainModId}}.Haley-6"
+          ]
+        },
+        "{{MainModId}}_OnPierre-2": {
+          "Id": "{{MainModId}}_OnPierre-2",
+          "Trigger": "DayEnding",
+          "Condition": "PLAYER_HEARTS Current Pierre -14 -2",
+          "Actions": [
+            "AddMail Current {{MainModId}}.PierreCoupon"
           ]
         },
         "{{MainModId}}_ApologyLetterMail": {
