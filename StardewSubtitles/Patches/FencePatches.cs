@@ -17,7 +17,7 @@ public class FencePatches : IPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("doorClose", SoundCueCodeMatcher.GameLocationPlaySound)
-            .RegisterSubtitleForNextCue("doorClose", "environment.fenceGate");
+            .RegisterSubtitleForNextCue("doorClose", "interaction.fenceGate");
         
         return matcher.InstructionEnumeration();
     }

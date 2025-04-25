@@ -23,6 +23,8 @@ public class ModEntry : Mod
         
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
+        _subtitleHudMessage = new SubtitleHUDMessage(_config);
+        _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor, _config);
 
         SoundsHelperPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
@@ -43,9 +45,6 @@ public class ModEntry : Mod
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         SetupGmcmIntegration();
-        
-        _subtitleHudMessage = new SubtitleHUDMessage(_config);
-        _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor);
         RegisterDefaultSubtitles();
     }
 
@@ -58,7 +57,11 @@ public class ModEntry : Mod
         configMenu.Register(
             mod: ModManifest,
             reset: () => _config = new ModConfig(),
-            save: () => Helper.WriteConfig(_config)
+            save: () =>
+            {
+                Helper.WriteConfig(_config);
+                _subtitleManager.Config = _config;
+            }
             );
         
         configMenu.AddSectionTitle(
@@ -109,6 +112,41 @@ public class ModEntry : Mod
                 _config.DefaultDurationTicks = value;
                 _subtitleHudMessage.DefaultDurationTicks = value;
             });
+
+        configMenu.AddSectionTitle(
+            mod: ModManifest,
+            text: () => Helper.Translation.Get("config.toggleIndividualSectionTitle"));
+        
+        configMenu.AddParagraph(
+            mod: ModManifest,
+            text: () => Helper.Translation.Get("config.categories.paragraph"));
+        
+        var categories = _subtitleManager.SubtitlesByCategory();
+
+        foreach (var category in categories)
+        {
+            configMenu.AddPageLink(
+                mod: ModManifest,
+                pageId: category.Key,
+                text: () => Helper.Translation.Get(category.Key + ".category"));
+        }
+        
+        foreach (var category in categories)
+        {
+            configMenu.AddPage(
+                mod: ModManifest,
+                pageId: category.Key,
+                pageTitle: () => Helper.Translation.Get(category.Key + ".category"));
+
+            foreach (var subtitleId in category.Value)
+            {
+                configMenu.AddBoolOption(
+                    mod: ModManifest,
+                    name: () => Helper.Translation.Get(subtitleId + ".subtitle"),
+                    getValue: () => _config.SubtitleToggles.GetValueOrDefault(subtitleId, true),
+                    setValue: value => _config.SubtitleToggles[subtitleId] = value);
+            }
+        }
     }
 
     private void RegisterDefaultSubtitles()

@@ -11,12 +11,15 @@ public class SubtitleManager
     private readonly Dictionary<string, List<string>> _subtitlesOnNextCue;
     private readonly Dictionary<string, string> _defaultCueSubtitles;
     
-    public SubtitleManager(IModHelper helper, SubtitleHUDMessage hudMessage, IMonitor monitor)
+    public ModConfig Config { get; set; }
+    
+    public SubtitleManager(IModHelper helper, SubtitleHUDMessage hudMessage, IMonitor monitor, ModConfig config)
     {
         _subtitleIds = helper.ModContent.Load<List<string>>("assets/subtitles.json").ToHashSet();
         _hudMessage = hudMessage;
         _monitor = monitor;
         _helper = helper;
+        Config = config;
         _subtitlesOnNextCue = new Dictionary<string, List<string>>();
         _defaultCueSubtitles = new Dictionary<string, string>();
     }
@@ -71,8 +74,23 @@ public class SubtitleManager
         }
     }
 
+    public Dictionary<string, HashSet<string>> SubtitlesByCategory()
+    {
+        var result = new Dictionary<string, HashSet<string>>();
+        foreach (var subtitle in _subtitleIds)
+        {
+            var category = subtitle.Split(".")[0];
+            if (!result.ContainsKey(category)) result.Add(category, new HashSet<string>());
+            result[category].Add(subtitle);
+        }
+        
+        return result;
+    }
+
     private void AddSubtitle(string subtitleId)
     {
+        if (!Config.SubtitleToggles.GetValueOrDefault(subtitleId, true)) return;
+        
         if (!_subtitleIds.Contains(subtitleId))
         {
             _monitor.Log($"Invalid subtitle id: {subtitleId}", LogLevel.Warn);
@@ -85,7 +103,7 @@ public class SubtitleManager
             _monitor.Log($"No translation found for subtitle id: {subtitleId}. Translation key: {subtitleTranslationKey}");
             return;
         }
-
+        
         var translatedSubtitle = _helper.Translation.Get(subtitleTranslationKey);
         _hudMessage.AddSubtitle(translatedSubtitle, _hudMessage.DefaultDurationTicks);
     }

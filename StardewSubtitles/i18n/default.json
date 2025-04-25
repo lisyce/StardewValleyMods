@@ -9,6 +9,11 @@
   "config.maxVisibleSubtitles.tooltip": "The max number of subtitles to be shown at once (to prevent UI clutter).",
   "config.defaultDurationTicks": "Default Duration (Ticks)",
   "config.defaultDurationTicks.tooltip": "The default length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks.",
+  "config.categories.paragraph": "The following links go link to other pages where you can turn individual subtitles on and off.",
+  "config.toggleIndividualSectionTitle": "Toggle Individual Subtitles",
+  
+  // subtitle categories
+  "interaction.category": "Interactions",
   
   // subtitle definitions
   "interaction.doorClose.subtitle": "Door Closes",
