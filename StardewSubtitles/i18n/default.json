@@ -18,5 +18,6 @@
   // subtitle definitions
   "interaction.doorClose.subtitle": "Door Closes",
   "interaction.fenceGate.subtitle": "Fence Gate Toggles",
-  "interaction.trashCan.subtitle": "Trash Rustles"
+  "interaction.trashCan.subtitle": "Trash Rustles",
+  "interaction.chest.subtitle": "Chest Creaks"
 }

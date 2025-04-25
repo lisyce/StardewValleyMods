@@ -1,5 +1,6 @@
 [
   "interaction.doorClose",
   "interaction.fenceGate",
-  "interaction.trashCan"
+  "interaction.trashCan",
+  "interaction.chest"
 ]

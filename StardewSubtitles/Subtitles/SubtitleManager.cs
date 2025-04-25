@@ -60,6 +60,21 @@ public class SubtitleManager
         
         _subtitlesOnNextCue[cueId].Add(subtitleId);
     }
+    
+    /// <summary>
+    /// Removes a subtitle for the next sound cue that was added by <see cref="RegisterSubtitleForNextCue"/>.
+    /// Usually used with a prefix/postfix pair to avoid a transpiler.
+    /// </summary>
+    /// <param name="cueId"></param>
+    /// <param name="subtitleId"></param>
+    public void UnRegisterSubtitleForNextCue(string cueId, string subtitleId)
+    {
+        if (_subtitlesOnNextCue.TryGetValue(cueId, out var subtitles))
+        {
+            subtitles.Remove(subtitleId);
+            if (subtitles.Count == 0) _subtitlesOnNextCue.Remove(cueId);
+        }
+    }
 
     /// <summary>
     /// Registers a persistent default subtitle for a sound cue.
