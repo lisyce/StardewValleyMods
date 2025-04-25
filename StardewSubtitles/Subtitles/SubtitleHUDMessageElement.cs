@@ -1,10 +1,9 @@
-using Microsoft.Xna.Framework;
-
-namespace StardewSubtitles;
+namespace StardewSubtitles.Subtitles;
 
 public class SubtitleHUDMessageElement
 {
     private int _ticksLeft;
+    private readonly int _originalDuration;
     
     public string Message { get; }
     public float Transparency { get; private set; }
@@ -13,6 +12,7 @@ public class SubtitleHUDMessageElement
     {
         Message = message;
         _ticksLeft = ticksLeft;
+        _originalDuration = ticksLeft;
         Transparency = 1f;
     }
 
@@ -32,5 +32,11 @@ public class SubtitleHUDMessageElement
             Transparency = Math.Min(Transparency + 0.02f, 1f);
         }
         return false;
+    }
+
+    public void Reset()
+    {
+        _ticksLeft = _originalDuration;
+        Transparency = 1f;
     }
 }

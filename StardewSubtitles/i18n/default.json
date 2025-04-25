@@ -1,9 +1,14 @@
 {
+  // config
   "config.generalSectionTitle": "General Settings",
   "config.fontScaling": "Font Scaling",
   "config.fontScaling.tooltip": "A multiplier for the subtitle font size. Default 1.",
   "config.maxVisibleSubtitles": "Maximum Visible Subtitles",
   "config.maxVisibleSubtitles.tooltip": "The max number of subtitles to be shown at once (to prevent UI clutter).",
   "config.defaultDurationTicks": "Default Duration (Ticks)",
-  "config.defaultDurationTicks.tooltip": "The default length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks."
+  "config.defaultDurationTicks.tooltip": "The default length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks.",
+  
+  // subtitle definitions
+  "environment.doorClose.subtitle": "Door Closed",
+  "environment.fenceGate.subtitle": "Fence Gate Toggled"
 }

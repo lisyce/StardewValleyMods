@@ -1,13 +1,19 @@
-﻿using StardewModdingAPI;
+﻿using HarmonyLib;
+using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewSubtitles.APIs;
+using StardewSubtitles.Patches;
+using StardewSubtitles.Subtitles;
 using StardewValley;
 
 namespace StardewSubtitles;
 
 public class ModEntry : Mod
 {
-    public static ModConfig Config;
+    private ModConfig _config;
+    public static SubtitleManager _subtitleManager;  // has to be public static so that harmony patches can use it
+    private SubtitleHUDMessage _subtitleHudMessage;
+    private Harmony _harmony;
     
     public override void Entry(IModHelper helper)
     {
@@ -15,23 +21,33 @@ public class ModEntry : Mod
         Helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         
-        Config = Helper.ReadConfig<ModConfig>();
+        _config = Helper.ReadConfig<ModConfig>();
+        _harmony = new Harmony(ModManifest.UniqueID);
+
+        SoundsHelperPatches.Patch(_harmony);
+        FencePatches.Patch(_harmony);
     }
 
     private void OnRenderedHud(object? sender, RenderedHudEventArgs e)
     {
         if (Game1.game1.takingMapScreenshot || Game1.HostPaused) return;
-        SubtitleHUDMessage.Instance.Draw(e.SpriteBatch);
+        _subtitleHudMessage.Draw(e.SpriteBatch);
     }
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
     {
-        SubtitleHUDMessage.Instance.Update();
+        _subtitleHudMessage.Update();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         SetupGmcmIntegration();
+        _subtitleHudMessage = new SubtitleHUDMessage(_config.FontScaling, _config.MaxVisibleSubtitles,
+            _config.DefaultDurationTicks);
+        
+        _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor);
+        
+        _subtitleManager.RegisterDefaultSubtitle("doorClose", "environment.doorClose");
     }
 
     private void SetupGmcmIntegration()
@@ -42,8 +58,8 @@ public class ModEntry : Mod
         
         configMenu.Register(
             mod: ModManifest,
-            reset: () => Config = new ModConfig(),
-            save: () => Helper.WriteConfig(Config)
+            reset: () => _config = new ModConfig(),
+            save: () => Helper.WriteConfig(_config)
             );
         
         configMenu.AddSectionTitle(
@@ -55,21 +71,33 @@ public class ModEntry : Mod
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.fontScaling"),
             tooltip: () => Helper.Translation.Get("config.fontScaling.tooltip"),
-            getValue: () => Config.FontScaling,
-            setValue: value => Config.FontScaling = value);
+            getValue: () => _config.FontScaling,
+            setValue: value =>
+            {
+                _config.FontScaling = value;
+                _subtitleHudMessage.FontScaling = value;
+            });
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.maxVisibleSubtitles"),
             tooltip: () => Helper.Translation.Get("config.maxVisibleSubtitles.tooltip"),
-            getValue: () => Config.MaxVisibleSubtitles,
-            setValue: value => Config.MaxVisibleSubtitles = value);
+            getValue: () => _config.MaxVisibleSubtitles,
+            setValue: value =>
+            {
+                _config.MaxVisibleSubtitles = value;
+                _subtitleHudMessage.MaxVisible = value;
+            });
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.defaultDurationTicks"),
             tooltip: () => Helper.Translation.Get("config.defaultDurationTicks.tooltip"),
-            getValue: () => Config.DefaultDurationTicks,
-            setValue: value => Config.DefaultDurationTicks = value);
+            getValue: () => _config.DefaultDurationTicks,
+            setValue: value =>
+            {
+                _config.DefaultDurationTicks = value;
+                _subtitleHudMessage.DefaultDurationTicks = value;
+            });
     }
 }
