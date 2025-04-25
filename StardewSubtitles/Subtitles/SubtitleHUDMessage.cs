@@ -14,14 +14,17 @@ public class SubtitleHUDMessage
     public float FontScaling { get; set; }
     public int MaxVisible { get; set; }
     public int DefaultDurationTicks { get; set; }
+    
+    public bool SubtitlesOn { get; set; }
 
-    public SubtitleHUDMessage(float fontScaling, int maxVisible, int defaultDurationTicks)
+    public SubtitleHUDMessage(ModConfig config)
     {
         _subtitles = new List<SubtitleHUDMessageElement>();
         _font = Game1.smallFont;
-        FontScaling = fontScaling;
-        MaxVisible = maxVisible;
-        DefaultDurationTicks = defaultDurationTicks;
+        FontScaling = config.FontScaling;
+        MaxVisible = config.MaxVisibleSubtitles;
+        DefaultDurationTicks = config.DefaultDurationTicks;
+        SubtitlesOn = config.SubtitlesOn;
     }
 
     public void AddSubtitle(string message, int durationTicks)
@@ -47,7 +50,7 @@ public class SubtitleHUDMessage
 
     public void Draw(SpriteBatch b)
     {
-        if (_subtitles.Count == 0) return;
+        if (_subtitles.Count == 0 || !SubtitlesOn) return;
         
         var elHeight = (int) (_font.MeasureString("Ing!").Y * FontScaling);
         var elPadding = (int) (8 * FontScaling);

@@ -1,6 +1,8 @@
 {
   // config
   "config.generalSectionTitle": "General Settings",
+  "config.subtitlesEnabled": "Subtitles Enabled",
+  "config.subtitlesEnabled.tooltip": "Disabling this setting will turn off all subtitle functionality from this mod.",
   "config.fontScaling": "Font Scaling",
   "config.fontScaling.tooltip": "A multiplier for the subtitle font size. Default 1.",
   "config.maxVisibleSubtitles": "Maximum Visible Subtitles",

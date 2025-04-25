@@ -5,6 +5,7 @@ using StardewSubtitles.APIs;
 using StardewSubtitles.Patches;
 using StardewSubtitles.Subtitles;
 using StardewValley;
+using StardewValley.Mods;
 
 namespace StardewSubtitles;
 
@@ -43,8 +44,7 @@ public class ModEntry : Mod
     {
         SetupGmcmIntegration();
         
-        _subtitleHudMessage = new SubtitleHUDMessage(_config.FontScaling, _config.MaxVisibleSubtitles,
-            _config.DefaultDurationTicks);
+        _subtitleHudMessage = new SubtitleHUDMessage(_config);
         _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor);
         RegisterDefaultSubtitles();
     }
@@ -65,6 +65,17 @@ public class ModEntry : Mod
             mod: ModManifest, 
             text: () => Helper.Translation.Get("config.generalSectionTitle")
             );
+        
+        configMenu.AddBoolOption(
+            mod: ModManifest,
+            name: () => Helper.Translation.Get("config.subtitlesEnabled"),
+            tooltip: () => Helper.Translation.Get("config.subtitlesEnabled.tooltip"),
+            getValue: () => _config.SubtitlesOn,
+            setValue: value =>
+            {
+                _config.SubtitlesOn = value;
+                _subtitleHudMessage.SubtitlesOn = value;
+            });
         
         configMenu.AddNumberOption(
             mod: ModManifest,
