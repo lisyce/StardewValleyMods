@@ -10,7 +10,6 @@ namespace StardewSubtitles.Subtitles;
 public class SubtitleHUDMessage
 {
     private readonly List<SubtitleHUDMessageElement> _subtitles;
-    private readonly SpriteFont _font;
     public float FontScaling { get; set; }
     public int MaxVisible { get; set; }
     public int DefaultDurationTicks { get; set; }
@@ -20,7 +19,6 @@ public class SubtitleHUDMessage
     public SubtitleHUDMessage(ModConfig config)
     {
         _subtitles = new List<SubtitleHUDMessageElement>();
-        _font = Game1.smallFont;
         FontScaling = config.FontScaling;
         MaxVisible = config.MaxVisibleSubtitles;
         DefaultDurationTicks = config.DefaultDurationTicks;
@@ -52,7 +50,7 @@ public class SubtitleHUDMessage
     {
         if (_subtitles.Count == 0 || !SubtitlesOn) return;
         
-        var elHeight = (int) (_font.MeasureString("Ing!").Y * FontScaling);
+        var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * FontScaling);
         var elPadding = (int) (8 * FontScaling);
         var mainPadding = 16;
 
@@ -60,7 +58,7 @@ public class SubtitleHUDMessage
         for (var i=0; i < MaxVisible && i < _subtitles.Count; i++)
         {
             var sub = _subtitles[i];
-            height += (_font.MeasureString(sub.Message).Y * FontScaling) + elPadding;
+            height += (Game1.smallFont.MeasureString(sub.Message).Y * FontScaling) + elPadding;
         }
         
 
@@ -78,7 +76,7 @@ public class SubtitleHUDMessage
         {
             var sub = _subtitles[i];
             var pos = new Vector2(x + mainPadding, y);
-            b.DrawString(_font, sub.Message, pos, Color.White * sub.Transparency, 0, Vector2.Zero, FontScaling, SpriteEffects.None, 1f);
+            b.DrawString(Game1.smallFont, sub.Message, pos, Color.White * sub.Transparency, 0, Vector2.Zero, FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace StardewSubtitles.Patches;
 
-public interface IPatch
+public interface ISubtitlePatch
 {
     public void Patch(Harmony harmony);
 }

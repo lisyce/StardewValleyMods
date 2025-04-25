@@ -3,14 +3,15 @@ using StardewValley;
 
 namespace StardewSubtitles.Patches;
 
-public class FencePatches : IPatch
+public class FencePatches : ISubtitlePatch
 {
     public void Patch(Harmony harmony)
     {
         harmony.Patch(
-            original: AccessTools.Method(typeof(Fence), nameof(Fence.toggleGate), new []{ typeof(bool), typeof(bool), typeof(Farmer)}),
+            original: AccessTools.Method(typeof(Fence), nameof(Fence.toggleGate),
+                new[] { typeof(bool), typeof(bool), typeof(Farmer) }),
             transpiler: new HarmonyMethod(typeof(FencePatches), nameof(ToggleGateTranspiler))
-            );
+        );
     }
 
     private static IEnumerable<CodeInstruction> ToggleGateTranspiler(IEnumerable<CodeInstruction> instructions)

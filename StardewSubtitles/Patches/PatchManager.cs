@@ -15,7 +15,7 @@ public class PatchManager
 
     public void Patch()
     {
-        var type = typeof(IPatch);
+        var type = typeof(ISubtitlePatch);
         var toInstantiate = System.Reflection.Assembly
             .GetExecutingAssembly().GetTypes()
             .Where(t => t.GetInterfaces().Contains(type));
@@ -25,7 +25,7 @@ public class PatchManager
             try
             {
                 var patcher = Activator.CreateInstance(patchType);
-                if (patcher is not IPatch iPatch)
+                if (patcher is not ISubtitlePatch iPatch)
                 {
                     _monitor.Log($"Could not apply subtitle patches for type {patchType}.", LogLevel.Warn);
                     continue;
