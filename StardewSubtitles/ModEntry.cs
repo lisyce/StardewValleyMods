@@ -113,6 +113,6 @@ public class ModEntry : Mod
 
     private void RegisterDefaultSubtitles()
     {
-        _subtitleManager.RegisterDefaultSubtitle("doorClose", "environment.doorClose");
+        _subtitleManager.RegisterDefaultSubtitle("doorClose", "interaction.doorClose");
     }
 }

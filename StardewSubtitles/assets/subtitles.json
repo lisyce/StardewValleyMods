@@ -1,4 +1,4 @@
 [
-  "environment.doorClose",
-  "environment.fenceGate"
+  "interaction.doorClose",
+  "interaction.fenceGate"
 ]
