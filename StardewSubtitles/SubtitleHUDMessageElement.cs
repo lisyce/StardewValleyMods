@@ -4,22 +4,22 @@ namespace StardewSubtitles;
 
 public class SubtitleHUDMessageElement
 {
-    private float _timeLeft;
+    private int _ticksLeft;
     
     public string Message { get; }
     public float Transparency { get; private set; }
 
-    public SubtitleHUDMessageElement(string message, float timeLeft)
+    public SubtitleHUDMessageElement(string message, int ticksLeft)
     {
         Message = message;
-        _timeLeft = timeLeft;
+        _ticksLeft = ticksLeft;
         Transparency = 1f;
     }
 
-    public bool Update(GameTime time)
+    public bool Update()
     {
-        _timeLeft -= time.ElapsedGameTime.Milliseconds;
-        if (_timeLeft < 0f)
+        _ticksLeft--;
+        if (_ticksLeft < 0)
         {
             Transparency -= 0.02f;
             if (Transparency < 0f)
