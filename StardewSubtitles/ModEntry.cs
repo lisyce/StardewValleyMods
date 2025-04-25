@@ -5,7 +5,6 @@ using StardewSubtitles.APIs;
 using StardewSubtitles.Patches;
 using StardewSubtitles.Subtitles;
 using StardewValley;
-using StardewValley.Mods;
 
 namespace StardewSubtitles;
 

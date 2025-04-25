@@ -11,6 +11,6 @@
   "config.defaultDurationTicks.tooltip": "The default length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks.",
   
   // subtitle definitions
-  "environment.doorClose.subtitle": "Door Closed",
-  "environment.fenceGate.subtitle": "Fence Gate Toggled"
+  "environment.doorClose.subtitle": "Door Closes",
+  "environment.fenceGate.subtitle": "Fence Gate Toggles"
 }
