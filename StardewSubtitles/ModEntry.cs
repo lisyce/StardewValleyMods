@@ -26,7 +26,8 @@ public class ModEntry : Mod
         _harmony = new Harmony(ModManifest.UniqueID);
 
         SoundsHelperPatches.Patch(_harmony);
-        FencePatches.Patch(_harmony);
+        var patchManager = new PatchManager(Monitor, _harmony);
+        patchManager.Patch();
     }
 
     private void OnRenderedHud(object? sender, RenderedHudEventArgs e)

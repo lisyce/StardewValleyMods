@@ -3,9 +3,9 @@ using StardewValley;
 
 namespace StardewSubtitles.Patches;
 
-public class FencePatches
+public class FencePatches : IPatch
 {
-    public static void Patch(Harmony harmony)
+    public void Patch(Harmony harmony)
     {
         harmony.Patch(
             original: AccessTools.Method(typeof(Fence), nameof(Fence.toggleGate), new []{ typeof(bool), typeof(bool), typeof(Farmer)}),
