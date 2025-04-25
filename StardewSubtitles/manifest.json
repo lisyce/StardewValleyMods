@@ -1,0 +1,18 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.StardewSubtitles",
+  "Name": "Stardew Subtitles",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "Highly-configurable subtitles for game audio. Intended for anyone who may benefit from subtitled audio, including individuals with hearing loss or people who play with the game muted.",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "StardewSubtitles.dll"
+}
