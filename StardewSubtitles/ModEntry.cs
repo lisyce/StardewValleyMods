@@ -42,12 +42,11 @@ public class ModEntry : Mod
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         SetupGmcmIntegration();
+        
         _subtitleHudMessage = new SubtitleHUDMessage(_config.FontScaling, _config.MaxVisibleSubtitles,
             _config.DefaultDurationTicks);
-        
         _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor);
-        
-        _subtitleManager.RegisterDefaultSubtitle("doorClose", "environment.doorClose");
+        RegisterDefaultSubtitles();
     }
 
     private void SetupGmcmIntegration()
@@ -99,5 +98,10 @@ public class ModEntry : Mod
                 _config.DefaultDurationTicks = value;
                 _subtitleHudMessage.DefaultDurationTicks = value;
             });
+    }
+
+    private void RegisterDefaultSubtitles()
+    {
+        _subtitleManager.RegisterDefaultSubtitle("doorClose", "environment.doorClose");
     }
 }
