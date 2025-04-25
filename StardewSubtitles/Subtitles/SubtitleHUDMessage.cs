@@ -8,11 +8,11 @@ namespace StardewSubtitles;
 
 public class SubtitleHUDMessage
 {
-    private const int DefaultDurationTicks = 120;
     private List<SubtitleHUDMessageElement> _subtitles;
     private SpriteFont _font;
     private float _fontScaling;
     private int _maxVisible;
+    private int _defaultDurationTicks;
 
     private static SubtitleHUDMessage? _instance;
 
@@ -20,22 +20,24 @@ public class SubtitleHUDMessage
     {
         get
         {
-            _instance ??= new SubtitleHUDMessage(Game1.smallFont, 0.75f, 6);
+            var config = ModEntry.Config;
+            _instance ??= new SubtitleHUDMessage(config.FontScaling, config.MaxVisibleSubtitles, config.DefaultDurationTicks);
             return _instance;
         }
     }
 
-    private SubtitleHUDMessage(SpriteFont font, float fontScaling, int maxVisible)
+    private SubtitleHUDMessage(float fontScaling, int maxVisible, int defaultDurationTicks)
     {
         _subtitles = new List<SubtitleHUDMessageElement>();
-        _font = font;
+        _font = Game1.smallFont;
         _fontScaling = fontScaling;
         _maxVisible = maxVisible;
+        _defaultDurationTicks = defaultDurationTicks;
     }
 
     public void AddSubtitle(string message)
     {
-        var el = new SubtitleHUDMessageElement(message, DefaultDurationTicks);
+        var el = new SubtitleHUDMessageElement(message, _defaultDurationTicks);
         _subtitles.Add(el);
     }
     
