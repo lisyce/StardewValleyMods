@@ -37,6 +37,7 @@ public class PatchManager
             catch (Exception e)
             {
                 _monitor.Log($"Failed to apply harmony patch {patchType}; skipping these subtitles.", LogLevel.Warn);
+                _monitor.Log($"Error: {e}", LogLevel.Warn);
             }
         }
     }
