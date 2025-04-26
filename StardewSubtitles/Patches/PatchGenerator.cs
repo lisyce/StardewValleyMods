@@ -1,57 +1,54 @@
 using System.Reflection;
-using System.Reflection.Emit;
 using HarmonyLib;
+using StardewModdingAPI;
 
 namespace StardewSubtitles.Patches;
 
 public class PatchGenerator
 {
-    private delegate void PatchDelegate();
+    private static readonly Dictionary<MethodBase, List<(string cueId, string subtitleId)>> SubtitleLookup = new();
     
-    public static void PrefixPostfixPatch(Harmony harmony, MethodInfo original, string cueId, string subtitleId)
+    public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodInfo original, string cueId, string subtitleId)
     {
-        harmony.Patch(
-            original: original,
-            prefix: new HarmonyMethod(PrefixFactory(cueId, subtitleId)),
-            postfix: new HarmonyMethod(PostfixFactory(cueId, subtitleId))
-        );
-    }
+        try
+        {
+            if (!SubtitleLookup.ContainsKey(original)) SubtitleLookup.Add(original, new List<(string, string)>());
 
-    private static MethodInfo PrefixFactory(string cueId, string subtitleId)
-    {
-        var helper = AccessTools.Method(typeof(PatchGenerator), nameof(PrefixHelper));
+            var list = SubtitleLookup[original];
+            list.Add((cueId, subtitleId));
         
-        var dm = new DynamicMethod("DynamicPrefix", typeof(void), Array.Empty<Type>());
-        var generator = dm.GetILGenerator();
-        generator.Emit(OpCodes.Ldstr, cueId);
-        generator.Emit(OpCodes.Ldstr, subtitleId);
-        generator.Emit(OpCodes.Call, helper);
-
-        return dm;
-    }
-
-    private static void PrefixHelper(string cueId, string subtitleId)
-    {
-        ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitleId);
+            harmony.Patch(
+                original: original,
+                prefix: new HarmonyMethod(typeof(PatchGenerator), nameof(Prefix)),
+                finalizer: new HarmonyMethod(typeof(PatchGenerator), nameof(Finalizer))
+            ); 
+        }
+        catch (Exception e)
+        {
+            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these subtitles.", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Warn);
+        }
     }
     
-    private static MethodInfo PostfixFactory(string cueId, string subtitleId)
+    private static void Prefix(MethodBase __originalMethod)
     {
-        var helper = AccessTools.Method(typeof(PatchGenerator), nameof(PostfixHelper));
-        
-        var dm = new DynamicMethod("DynamicPostfix", typeof(void), Array.Empty<Type>());
-        var generator = dm.GetILGenerator();
-        generator.Emit(OpCodes.Ldstr, cueId);
-        generator.Emit(OpCodes.Ldstr, subtitleId);
-        generator.Emit(OpCodes.Call, helper);
-        
-        
+        if (!SubtitleLookup.TryGetValue(__originalMethod, out var pairs)) return;  // should never happen
 
-        return dm;
+        foreach (var (cueId, subtitleId) in pairs)
+        {
+            ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitleId);
+        }
     }
 
-    private static void PostfixHelper(string cueId, string subtitleId)
+    private static void Finalizer(MethodBase __originalMethod)
     {
-        ModEntry._subtitleManager.UnRegisterSubtitleForNextCue(cueId, subtitleId);
+        if (!SubtitleLookup.TryGetValue(__originalMethod, out var pairs)) return;  // should never happen
+
+        foreach (var (cueId, subtitleId) in pairs)
+        {
+            ModEntry._subtitleManager.UnRegisterSubtitleForNextCue(cueId, subtitleId);
+        }
     }
+    
+    
 }

@@ -22,23 +22,15 @@ public class PatchManager
         
         foreach (var patchType in toInstantiate)
         {
-            try
+            var patcher = Activator.CreateInstance(patchType);
+            if (patcher is not ISubtitlePatch iPatch)
             {
-                var patcher = Activator.CreateInstance(patchType);
-                if (patcher is not ISubtitlePatch iPatch)
-                {
-                    _monitor.Log($"Could not apply subtitle patches for type {patchType}.", LogLevel.Warn);
-                    continue;
-                }
+                _monitor.Log($"Could not apply subtitle patches for type {patchType}.", LogLevel.Warn);
+                continue;
+            }
 
-                iPatch.Patch(_harmony);
-                _monitor.Log($"Applied harmony patch {patcher.GetType()}", LogLevel.Debug);
-            }
-            catch (Exception e)
-            {
-                _monitor.Log($"Failed to apply harmony patch {patchType}; skipping these subtitles.", LogLevel.Warn);
-                _monitor.Log($"Error: {e}", LogLevel.Warn);
-            }
+            iPatch.Patch(_harmony, _monitor);
+            _monitor.Log($"Applied harmony patch {patcher.GetType()}", LogLevel.Debug);
         }
     }
 }
