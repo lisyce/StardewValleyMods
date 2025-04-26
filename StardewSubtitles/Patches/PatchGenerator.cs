@@ -44,6 +44,8 @@ public class PatchGenerator
         generator.Emit(OpCodes.Ldstr, cueId);
         generator.Emit(OpCodes.Ldstr, subtitleId);
         generator.Emit(OpCodes.Call, helper);
+        
+        
 
         return dm;
     }
