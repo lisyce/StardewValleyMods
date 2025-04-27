@@ -1,21 +1,21 @@
 using System.Reflection;
 using HarmonyLib;
 using StardewModdingAPI;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
 public class PatchGenerator
 {
-    private static readonly Dictionary<MethodBase, List<Subtitle>> SubtitleLookup = new();
+    private static readonly Dictionary<MethodBase, List<Caption>> CaptionLookup = new();
     
-    public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodInfo original, Subtitle subtitle)
+    public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodInfo original, Caption caption)
     {
         try
         {
-            if (!SubtitleLookup.ContainsKey(original))
+            if (!CaptionLookup.ContainsKey(original))
             {
-                SubtitleLookup.Add(original, new List<Subtitle>());
+                CaptionLookup.Add(original, new List<Caption>());
                 
                 // we only want to patch once!
                 harmony.Patch(
@@ -25,43 +25,43 @@ public class PatchGenerator
                 );
             }
 
-            var list = SubtitleLookup[original];
-            list.Add(subtitle);
-            monitor.Log($"Registered prefix/finalizer pair for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}. cueId: {subtitle.CueId}, subtitleId: {subtitle.SubtitleId}");
+            var list = CaptionLookup[original];
+            list.Add(caption);
+            monitor.Log($"Registered prefix/finalizer pair for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}. cueId: {caption.CueId}, captionId: {caption.CaptionId}");
         }
         catch (Exception e)
         {
-            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these subtitles.", LogLevel.Warn);
+            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
             monitor.Log($"Error: {e}", LogLevel.Warn);
         }
     }
 
     public static void GeneratePatchPairs(Harmony harmony, IMonitor monitor, MethodInfo original,
-        params Subtitle[] subtitles)
+        params Caption[] captions)
     {
-        foreach (var subtitle in subtitles)
+        foreach (var caption in captions)
         {
-            GeneratePatchPair(harmony, monitor, original, subtitle);
+            GeneratePatchPair(harmony, monitor, original, caption);
         }
     }
     
     private static void Prefix(MethodBase __originalMethod)
     {
-        if (!SubtitleLookup.TryGetValue(__originalMethod, out var subtitles)) return;  // should never happen
+        if (!CaptionLookup.TryGetValue(__originalMethod, out var captions)) return;  // should never happen
 
-        foreach (var subtitle in subtitles)
+        foreach (var caption in captions)
         {
-            ModEntry._subtitleManager.RegisterSubtitleForNextCue(subtitle);
+            ModEntry.CaptionManager.RegisterCaptionForNextCue(caption);
         }
     }
 
     private static void Finalizer(MethodBase __originalMethod)
     {
-        if (!SubtitleLookup.TryGetValue(__originalMethod, out var subtitles)) return;  // should never happen
+        if (!CaptionLookup.TryGetValue(__originalMethod, out var captions)) return;  // should never happen
 
-        foreach (var subtitle in subtitles)
+        foreach (var caption in captions)
         {
-            ModEntry._subtitleManager.UnRegisterSubtitleForNextCue(subtitle.CueId, subtitle.SubtitleId);
+            ModEntry.CaptionManager.UnRegisterCaptionForNextCue(caption.CueId, caption.CaptionId);
         }
     }
     

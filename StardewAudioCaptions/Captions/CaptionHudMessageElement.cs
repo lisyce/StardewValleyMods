@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework.Audio;
 
-namespace StardewSubtitles.Subtitles;
+namespace StardewAudioCaptions.Captions;
 
-public class SubtitleHUDMessageElement
+public class CaptionHudMessageElement
 {
     private int _ticksElapsed;
     private readonly Cue _cue;
@@ -11,7 +11,7 @@ public class SubtitleHUDMessageElement
     public string Message { get; }
     public float Transparency { get; private set; }
 
-    public SubtitleHUDMessageElement(Cue cue, string message, int maxDurationTicks)
+    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks)
     {
         Message = message;
         _cue = cue;
@@ -22,7 +22,7 @@ public class SubtitleHUDMessageElement
 
     public bool Update()
     {
-        _ticksElapsed = Math.Min(_ticksElapsed + 1, SubtitleManager.InfiniteDuration);
+        _ticksElapsed = Math.Min(_ticksElapsed + 1, CaptionManager.InfiniteDuration);
         if (VisibleLongEnough() && (!_cue.IsPlaying || _ticksElapsed >= _maxDurationTicks))
         {
             Transparency -= 0.02f;
@@ -46,6 +46,6 @@ public class SubtitleHUDMessageElement
 
     private bool VisibleLongEnough()
     {
-        return _ticksElapsed >= SubtitleManager.MinDurationTicks;
+        return _ticksElapsed >= CaptionManager.MinDurationTicks;
     }
 }

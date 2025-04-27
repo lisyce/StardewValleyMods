@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
 public class PatchManager
 {
@@ -15,7 +15,7 @@ public class PatchManager
 
     public void Patch()
     {
-        var type = typeof(ISubtitlePatch);
+        var type = typeof(ICaptionPatch);
         var toInstantiate = System.Reflection.Assembly
             .GetExecutingAssembly().GetTypes()
             .Where(t => t.GetInterfaces().Contains(type));
@@ -23,9 +23,9 @@ public class PatchManager
         foreach (var patchType in toInstantiate)
         {
             var patcher = Activator.CreateInstance(patchType);
-            if (patcher is not ISubtitlePatch iPatch)
+            if (patcher is not ICaptionPatch iPatch)
             {
-                _monitor.Log($"Could not apply subtitle patches for type {patchType}.", LogLevel.Warn);
+                _monitor.Log($"Could not apply caption patches for type {patchType}.", LogLevel.Warn);
                 continue;
             }
 

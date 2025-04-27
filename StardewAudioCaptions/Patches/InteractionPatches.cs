@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using StardewModdingAPI;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
 using StardewValley;
 using StardewValley.Objects;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
-public class InteractionPatches : ISubtitlePatch
+public class InteractionPatches : ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor)
     {
@@ -16,20 +16,20 @@ public class InteractionPatches : ISubtitlePatch
             monitor,
             AccessTools.Method(typeof(Fence), nameof(Fence.toggleGate),
                 new[] { typeof(bool), typeof(bool), typeof(Farmer) }),
-            new Subtitle("doorClose", "interaction.fenceGate"));
+            new Caption("doorClose", "interaction.fenceGate"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.CheckGarbage)),
-            new Subtitle("trashcan", "interaction.trashCan"));
+            new Caption("trashcan", "interaction.trashCan"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
             monitor,
             AccessTools.Method(typeof(Chest), nameof(Chest.checkForAction)),
-            new Subtitle("openChest", "interaction.chest"),
-            new Subtitle("Ship", "interaction.giftbox"));
+            new Caption("openChest", "interaction.chest"),
+            new Caption("Ship", "interaction.giftbox"));
 
         if (TryGetChestDelegate(out var chestDelegate))
         {
@@ -37,12 +37,12 @@ public class InteractionPatches : ISubtitlePatch
                 harmony,
                 monitor,
                 chestDelegate!,
-                new Subtitle("openChest", "interaction.chest"),
-                new Subtitle("doorCreak", "interaction.fridge"));
+                new Caption("openChest", "interaction.chest"),
+                new Caption("doorCreak", "interaction.fridge"));
         }
         else
         {
-            monitor.Log("Failed to apply harmony patch on the Chest::checkForAction delegate; skipping these subtitles.", LogLevel.Warn);
+            monitor.Log("Failed to apply harmony patch on the Chest::checkForAction delegate; skipping these captions.", LogLevel.Warn);
         }
     }
 

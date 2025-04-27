@@ -1,18 +1,18 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using StardewSubtitles.APIs;
-using StardewSubtitles.Patches;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.APIs;
+using StardewAudioCaptions.Patches;
+using StardewAudioCaptions.Captions;
 using StardewValley;
 
-namespace StardewSubtitles;
+namespace StardewAudioCaptions;
 
 public class ModEntry : Mod
 {
     private ModConfig _config;
-    public static SubtitleManager _subtitleManager;  // has to be public static so that harmony patches can use it
-    private SubtitleHUDMessage _subtitleHudMessage;
+    public static CaptionManager CaptionManager;  // has to be public static so that harmony patches can use it
+    private CaptionHudMessage _captionHudMessage;
     private Harmony _harmony;
     
     public override void Entry(IModHelper helper)
@@ -23,8 +23,8 @@ public class ModEntry : Mod
         
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
-        _subtitleHudMessage = new SubtitleHUDMessage(_config);
-        _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor, _config);
+        _captionHudMessage = new CaptionHudMessage(_config);
+        CaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
 
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
@@ -34,18 +34,18 @@ public class ModEntry : Mod
     private void OnRenderedHud(object? sender, RenderedHudEventArgs e)
     {
         if (Game1.game1.takingMapScreenshot || Game1.HostPaused) return;
-        _subtitleHudMessage.Draw(e.SpriteBatch);
+        _captionHudMessage.Draw(e.SpriteBatch);
     }
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
     {
-        _subtitleHudMessage.Update();
+        _captionHudMessage.Update();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         SetupGmcmIntegration();
-        RegisterDefaultSubtitles();
+        RegisterDefaultCaptions();
     }
 
     private void SetupGmcmIntegration()
@@ -60,7 +60,7 @@ public class ModEntry : Mod
             save: () =>
             {
                 Helper.WriteConfig(_config);
-                _subtitleManager.Config = _config;
+                CaptionManager.Config = _config;
             }
             );
         
@@ -71,13 +71,13 @@ public class ModEntry : Mod
         
         configMenu.AddBoolOption(
             mod: ModManifest,
-            name: () => Helper.Translation.Get("config.subtitlesEnabled"),
-            tooltip: () => Helper.Translation.Get("config.subtitlesEnabled.tooltip"),
-            getValue: () => _config.SubtitlesOn,
+            name: () => Helper.Translation.Get("config.captionsEnabled"),
+            tooltip: () => Helper.Translation.Get("config.captionsEnabled.tooltip"),
+            getValue: () => _config.CaptionsOn,
             setValue: value =>
             {
-                _config.SubtitlesOn = value;
-                _subtitleHudMessage.SubtitlesOn = value;
+                _config.CaptionsOn = value;
+                _captionHudMessage.CaptionsOn = value;
             });
         
         configMenu.AddNumberOption(
@@ -88,18 +88,18 @@ public class ModEntry : Mod
             setValue: value =>
             {
                 _config.FontScaling = value;
-                _subtitleHudMessage.FontScaling = value;
+                _captionHudMessage.FontScaling = value;
             });
         
         configMenu.AddNumberOption(
             mod: ModManifest,
-            name: () => Helper.Translation.Get("config.maxVisibleSubtitles"),
-            tooltip: () => Helper.Translation.Get("config.maxVisibleSubtitles.tooltip"),
-            getValue: () => _config.MaxVisibleSubtitles,
+            name: () => Helper.Translation.Get("config.maxVisibleCaptions"),
+            tooltip: () => Helper.Translation.Get("config.maxVisibleCaptions.tooltip"),
+            getValue: () => _config.MaxVisibleCaptions,
             setValue: value =>
             {
-                _config.MaxVisibleSubtitles = value;
-                _subtitleHudMessage.MaxVisible = value;
+                _config.MaxVisibleCaptions = value;
+                _captionHudMessage.MaxVisible = value;
             });
         
         configMenu.AddNumberOption(
@@ -110,7 +110,7 @@ public class ModEntry : Mod
             setValue: value =>
             {
                 _config.MinDurationTicks = value;
-                SubtitleManager.MinDurationTicks = value;
+                CaptionManager.MinDurationTicks = value;
             });
 
         configMenu.AddSectionTitle(
@@ -121,7 +121,7 @@ public class ModEntry : Mod
             mod: ModManifest,
             text: () => Helper.Translation.Get("config.categories.paragraph"));
         
-        var categories = _subtitleManager.SubtitlesByCategory();
+        var categories = CaptionManager.CaptionsByCategory();
 
         foreach (var category in categories)
         {
@@ -138,30 +138,30 @@ public class ModEntry : Mod
                 pageId: category.Key,
                 pageTitle: () => Helper.Translation.Get(category.Key + ".category"));
 
-            foreach (var subtitleId in category.Value)
+            foreach (var captionId in category.Value)
             {
                 configMenu.AddBoolOption(
                     mod: ModManifest,
-                    name: () => Helper.Translation.Get(subtitleId + ".subtitle"),
-                    getValue: () => _config.SubtitleToggles.GetValueOrDefault(subtitleId, true),
-                    setValue: value => _config.SubtitleToggles[subtitleId] = value);
+                    name: () => Helper.Translation.Get(captionId + ".caption"),
+                    getValue: () => _config.CaptionToggles.GetValueOrDefault(captionId, true),
+                    setValue: value => _config.CaptionToggles[captionId] = value);
             }
         }
     }
 
-    private void RegisterDefaultSubtitles()
+    private void RegisterDefaultCaptions()
     {
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("doorClose", "interaction.doorClose"));
+        CaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
         
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("eat", "player.eating"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("gulp", "player.drinking"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("ow", "player.hurts"));
+        CaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
+        CaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
+        CaptionManager.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
         
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("throwDownITem", "environment.itemThrown"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("thunder", "environment.thunder"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("thunder_small", "environment.thunder"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("trainWhistle", "environment.trainWhistle"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("distantTrain", "environment.distantTrain"));
-        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("trainLoop", "environment.trainLoop", 80 * 60));
+        CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "environment.itemThrown"));
+        CaptionManager.RegisterDefaultCaption(new Caption("thunder", "environment.thunder"));
+        CaptionManager.RegisterDefaultCaption(new Caption("thunder_small", "environment.thunder"));
+        CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "environment.trainWhistle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "environment.distantTrain"));
+        CaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "environment.trainLoop", 80 * 60));
     }
 }

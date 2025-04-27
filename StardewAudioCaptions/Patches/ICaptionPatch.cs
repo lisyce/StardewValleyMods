@@ -1,9 +1,9 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
-public interface ISubtitlePatch
+public interface ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor);
 }

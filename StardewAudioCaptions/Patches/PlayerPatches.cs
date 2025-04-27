@@ -1,11 +1,11 @@
 ﻿using HarmonyLib;
 using StardewModdingAPI;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
 using StardewValley;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
-public class PlayerPatches : ISubtitlePatch
+public class PlayerPatches : ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor)
     {
@@ -13,6 +13,6 @@ public class PlayerPatches : ISubtitlePatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Debris), nameof(Debris.updateChunks)),
-            new Subtitle("coin", "environment.itemCollect"));
+            new Caption("coin", "environment.itemCollect"));
     }
 }

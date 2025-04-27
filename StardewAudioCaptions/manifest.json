@@ -7,12 +7,12 @@
    | 
    */
   "$schema": "https://smapi.io/schemas/manifest.json",
-  "UniqueID": "BarleyZP.StardewSubtitles",
-  "Name": "Stardew Subtitles",
+  "UniqueID": "BarleyZP.StardewAudioCaptions",
+  "Name": "Stardew Audio Captions",
   "Author": "BarleyZP",
   "Version": "1.0.0-Debug",
-  "Description": "Highly-configurable subtitles for game audio. Intended for anyone who may benefit from subtitled audio, including individuals with hearing loss or people who play with the game muted.",
+  "Description": "A highly-configurable and open-source mod for audio captions in Stardew Valley. Intended for anyone who may benefit from captioned audio, including individuals with hearing loss or people who play with the game muted.",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "StardewSubtitles.dll"
+  "EntryDll": "StardewAudioCaptions.dll"
 }

@@ -1,10 +1,11 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
+using StardewAudioCaptions.Captions;
 using StardewValley;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
 public class SoundCueCodeMatcher
 {
@@ -26,13 +27,13 @@ public class SoundCueCodeMatcher
         return this;
     }
 
-    public SoundCueCodeMatcher RegisterSubtitleForNextCue(string cueId, string subtitleId)
+    public SoundCueCodeMatcher RegisterCaptionForNextCue(string cueId, string captionId)
     {
-        var helper = AccessTools.Method(typeof(SoundCueCodeMatcher), nameof(RegisterSubtitleForNextCueHelper));
+        var helper = AccessTools.Method(typeof(SoundCueCodeMatcher), nameof(RegisterCaptionForNextCueHelper));
 
         _matcher.Insert(
             new CodeInstruction(OpCodes.Ldstr, cueId),
-            new CodeInstruction(OpCodes.Ldstr, subtitleId),
+            new CodeInstruction(OpCodes.Ldstr, captionId),
             new CodeInstruction(OpCodes.Call, helper));
         return this;
     }
@@ -42,8 +43,8 @@ public class SoundCueCodeMatcher
         return _matcher.InstructionEnumeration();
     }
 
-    private static void RegisterSubtitleForNextCueHelper(Subtitle subtitle)
+    private static void RegisterCaptionForNextCueHelper(Caption caption)
     {
-        ModEntry._subtitleManager.RegisterSubtitleForNextCue(subtitle);
+        ModEntry.CaptionManager.RegisterCaptionForNextCue(caption);
     }
 }

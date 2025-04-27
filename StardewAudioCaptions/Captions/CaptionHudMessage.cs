@@ -6,57 +6,57 @@ using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.Menus;
 
-namespace StardewSubtitles.Subtitles;
+namespace StardewAudioCaptions.Captions;
 
-public class SubtitleHUDMessage
+public class CaptionHudMessage
 {
-    private readonly List<SubtitleHUDMessageElement> _subtitles;
+    private readonly List<CaptionHudMessageElement> _captions;
     public float FontScaling { get; set; }
     public int MaxVisible { get; set; }
     
-    public bool SubtitlesOn { get; set; }
+    public bool CaptionsOn { get; set; }
 
-    public SubtitleHUDMessage(ModConfig config)
+    public CaptionHudMessage(ModConfig config)
     {
-        _subtitles = new List<SubtitleHUDMessageElement>();
+        _captions = new List<CaptionHudMessageElement>();
         FontScaling = config.FontScaling;
-        MaxVisible = config.MaxVisibleSubtitles;
-        SubtitlesOn = config.SubtitlesOn;
+        MaxVisible = config.MaxVisibleCaptions;
+        CaptionsOn = config.CaptionsOn;
     }
 
-    public void AddSubtitle(Cue cue, string message, int maxDurationTicks)
+    public void AddCaption(Cue cue, string message, int maxDurationTicks)
     {
-        // is this subtitle already displayed?
-        foreach (var subtitle in _subtitles)
+        // is this caption already displayed?
+        foreach (var caption in _captions)
         {
-            if (subtitle.Message == message)
+            if (caption.Message == message)
             {
-                subtitle.Reset();
+                caption.Reset();
                 return;
             }
         }
         
-        var el = new SubtitleHUDMessageElement(cue, message, maxDurationTicks);
-        _subtitles.Add(el);
+        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks);
+        _captions.Add(el);
     }
     
     public void Update()
     {
-        _subtitles.RemoveWhere(s => s.Update());
+        _captions.RemoveWhere(s => s.Update());
     }
 
     public void Draw(SpriteBatch b)
     {
-        if (_subtitles.Count == 0 || !SubtitlesOn) return;
+        if (_captions.Count == 0 || !CaptionsOn) return;
         
         var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * FontScaling);
         var elPadding = (int) (8 * FontScaling);
         var mainPadding = 16;
 
         var height = 2f * mainPadding - elPadding;  // we trim off the padding from the last element
-        for (var i=0; i < MaxVisible && i < _subtitles.Count; i++)
+        for (var i=0; i < MaxVisible && i < _captions.Count; i++)
         {
-            var sub = _subtitles[i];
+            var sub = _captions[i];
             height += (Game1.smallFont.MeasureString(sub.Message).Y * FontScaling) + elPadding;
         }
         
@@ -69,11 +69,11 @@ public class SubtitleHUDMessage
         IClickableMenu.drawTextureBox(b, Game1.mouseCursors, boxSourceRect, x, y, 300, (int) height, Color.White, drawShadow: false, scale: 4f);
         
         
-        // draw the actual subtitles
+        // draw the actual captions
         y += mainPadding;
-        for (var i=0; i < MaxVisible && i < _subtitles.Count; i++)
+        for (var i=0; i < MaxVisible && i < _captions.Count; i++)
         {
-            var sub = _subtitles[i];
+            var sub = _captions[i];
             var pos = new Vector2(x + mainPadding, y);
             b.DrawString(Game1.smallFont, sub.Message, pos, Color.White * sub.Transparency, 0, Vector2.Zero, FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;

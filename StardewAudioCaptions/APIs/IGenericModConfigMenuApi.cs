@@ -4,7 +4,7 @@ using StardewModdingAPI;
 using StardewModdingAPI.Utilities;
 using StardewValley;
 
-namespace StardewSubtitles.APIs;
+namespace StardewAudioCaptions.APIs;
 
 public interface IGenericModConfigMenuApi
 {

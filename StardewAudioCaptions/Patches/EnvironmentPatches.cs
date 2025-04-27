@@ -1,11 +1,11 @@
 using HarmonyLib;
 using StardewModdingAPI;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
 using StardewValley.Locations;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
-public class EnvironmentPatches : ISubtitlePatch
+public class EnvironmentPatches : ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor)
     {
@@ -13,6 +13,6 @@ public class EnvironmentPatches : ISubtitlePatch
             harmony,
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.UpdateWhenCurrentLocation)),
-            new Subtitle("crystal", "environment.elevator"));
+            new Caption("crystal", "environment.elevator"));
     }
 }

@@ -1,11 +1,11 @@
 using HarmonyLib;
 using StardewModdingAPI;
-using StardewSubtitles.Subtitles;
+using StardewAudioCaptions.Captions;
 using StardewValley.Events;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
-public class EventsPatches : ISubtitlePatch
+public class EventsPatches : ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor)
     {
@@ -13,12 +13,12 @@ public class EventsPatches : ISubtitlePatch
             harmony,
             monitor,
             AccessTools.Method(typeof(SoundInTheNightEvent), nameof(SoundInTheNightEvent.tickUpdate)),
-            new Subtitle("thunder_small", "events.earthquake"),
-            new Subtitle("windstorm", "events.racoon0", 9 * 60),
-            new Subtitle("windstorm", "events.racoon1", 9 * 60),
-            new Subtitle("UFO", "events.ufo", 3 * 60),
-            new Subtitle("Meteorite", "events.meteorite", 3 * 60),
-            new Subtitle("dogs", "events.dogs", 4 * 60),
-            new Subtitle("owl", "events.owl"));
+            new Caption("thunder_small", "events.earthquake"),
+            new Caption("windstorm", "events.racoon0", 9 * 60),
+            new Caption("windstorm", "events.racoon1", 9 * 60),
+            new Caption("UFO", "events.ufo", 3 * 60),
+            new Caption("Meteorite", "events.meteorite", 3 * 60),
+            new Caption("dogs", "events.dogs", 4 * 60),
+            new Caption("owl", "events.owl"));
     }
 }

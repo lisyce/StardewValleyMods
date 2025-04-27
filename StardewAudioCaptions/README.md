@@ -7,7 +7,7 @@ This mod is for anyone who may benefit from captioned audio, including individua
 the game muted.
 
 This mod's source is licensed under the [GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007](https://www.gnu.org/licenses/gpl-3.0.en.html).
-If you're interested in contributing subtitles, I welcome pull requests to this repository!
+If you're interested in contributing captions, I welcome pull requests to this repository!
 
 ## List of Captions By Category
 

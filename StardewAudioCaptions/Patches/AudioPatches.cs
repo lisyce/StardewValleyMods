@@ -1,7 +1,7 @@
 using HarmonyLib;
 using Microsoft.Xna.Framework.Audio;
 
-namespace StardewSubtitles.Patches;
+namespace StardewAudioCaptions.Patches;
 
 public class AudioPatches
 {
@@ -15,6 +15,6 @@ public class AudioPatches
 
     private static void PlayPostfix(Cue __instance)
     {
-        ModEntry._subtitleManager.OnSoundPlayed(__instance);
+        ModEntry.CaptionManager.OnSoundPlayed(__instance);
     }
 }
