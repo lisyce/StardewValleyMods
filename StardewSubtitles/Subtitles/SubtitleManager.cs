@@ -122,6 +122,4 @@ public class SubtitleManager
         var translatedSubtitle = _helper.Translation.Get(subtitleTranslationKey);
         _hudMessage.AddSubtitle(translatedSubtitle, _hudMessage.DefaultDurationTicks);
     }
-
-    
 }

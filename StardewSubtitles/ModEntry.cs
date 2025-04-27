@@ -26,7 +26,7 @@ public class ModEntry : Mod
         _subtitleHudMessage = new SubtitleHUDMessage(_config);
         _subtitleManager = new SubtitleManager(Helper, _subtitleHudMessage, Monitor, _config);
 
-        SoundsHelperPatches.Patch(_harmony);
+        AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
     }
@@ -152,5 +152,8 @@ public class ModEntry : Mod
     private void RegisterDefaultSubtitles()
     {
         _subtitleManager.RegisterDefaultSubtitle("doorClose", "interaction.doorClose");
+        _subtitleManager.RegisterDefaultSubtitle("eat", "player.eating");
+        _subtitleManager.RegisterDefaultSubtitle("gulp", "player.drinking");
+        _subtitleManager.RegisterDefaultSubtitle("ow", "player.hurts");
     }
 }

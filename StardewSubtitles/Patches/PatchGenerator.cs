@@ -29,6 +29,15 @@ public class PatchGenerator
             monitor.Log($"Error: {e}", LogLevel.Warn);
         }
     }
+
+    public static void GeneratePatchPairs(Harmony harmony, IMonitor monitor, MethodInfo original,
+        List<(string cueId, string subtitleId)> pairs)
+    {
+        foreach (var (cueId, subtitleId) in pairs)
+        {
+            GeneratePatchPair(harmony, monitor, original, cueId, subtitleId);
+        }
+    }
     
     private static void Prefix(MethodBase __originalMethod)
     {

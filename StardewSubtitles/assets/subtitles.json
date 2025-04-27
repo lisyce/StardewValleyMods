@@ -2,5 +2,8 @@
   "interaction.doorClose",
   "interaction.fenceGate",
   "interaction.trashCan",
-  "interaction.chest"
+  
+  "player.eating",
+  "player.drinking",
+  "player.hurts"
 ]

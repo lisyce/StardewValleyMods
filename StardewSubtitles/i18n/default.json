@@ -14,10 +14,14 @@
   
   // subtitle categories
   "interaction.category": "Interactions",
+  "player.category": "Player",
   
   // subtitle definitions
   "interaction.doorClose.subtitle": "Door Closes",
   "interaction.fenceGate.subtitle": "Fence Gate Toggles",
   "interaction.trashCan.subtitle": "Trash Rustles",
-  "interaction.chest.subtitle": "Chest Creaks"
+  
+  "player.eating.subtitle": "Eating",
+  "player.drinking.subtitle": "Drinking",
+  "player.hurts.subtitle": "Player Hurts"
 }
