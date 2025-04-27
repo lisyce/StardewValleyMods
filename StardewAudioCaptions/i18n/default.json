@@ -1,5 +1,4 @@
 {
-  // config
   "config.generalSectionTitle": "General Settings",
   "config.captionsEnabled": "Captions Enabled",
   "config.captionsEnabled.tooltip": "Disabling this setting will turn off all caption functionality from this mod.",
@@ -12,13 +11,11 @@
   "config.categories.paragraph": "The following links go link to other pages where you can turn individual captions on and off.",
   "config.toggleIndividualSectionTitle": "Toggle Individual Captions",
   
-  // caption categories
   "interaction.category": "Interactions",
   "player.category": "Player",
   "environment.category": "Environment",
   "events.category": "Events",
   
-  // caption definitions
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
   "interaction.chest.caption": "Chest opens",
