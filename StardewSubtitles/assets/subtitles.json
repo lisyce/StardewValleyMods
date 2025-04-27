@@ -14,7 +14,9 @@
   "environment.itemThrown",
   "environment.thunder",
   "environment.elevator",
-  "environment.train",
+  "environment.trainWhistle",
+  "environment.trainLoop",
+  "environment.distantTrain",
   
   "events.earthquake",
   "events.racoon0",

@@ -7,7 +7,7 @@ namespace StardewSubtitles.Patches;
 
 public class PatchGenerator
 {
-    private static readonly Dictionary<MethodBase, List<(string cueId, Subtitle subtitle)>> SubtitleLookup = new();
+    private static readonly Dictionary<MethodBase, List<Subtitle>> SubtitleLookup = new();
     
     public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodInfo original, Subtitle subtitle)
     {
@@ -15,7 +15,7 @@ public class PatchGenerator
         {
             if (!SubtitleLookup.ContainsKey(original))
             {
-                SubtitleLookup.Add(original, new List<(string, Subtitle)>());
+                SubtitleLookup.Add(original, new List<Subtitle>());
                 
                 // we only want to patch once!
                 harmony.Patch(
@@ -26,7 +26,7 @@ public class PatchGenerator
             }
 
             var list = SubtitleLookup[original];
-            list.Add((subtitle.CueId, subtitle));
+            list.Add(subtitle);
             monitor.Log($"Registered prefix/finalizer pair for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}. cueId: {subtitle.CueId}, subtitleId: {subtitle.SubtitleId}");
         }
         catch (Exception e)
@@ -47,21 +47,21 @@ public class PatchGenerator
     
     private static void Prefix(MethodBase __originalMethod)
     {
-        if (!SubtitleLookup.TryGetValue(__originalMethod, out var pairs)) return;  // should never happen
+        if (!SubtitleLookup.TryGetValue(__originalMethod, out var subtitles)) return;  // should never happen
 
-        foreach (var (cueId, subtitle) in pairs)
+        foreach (var subtitle in subtitles)
         {
-            ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitle);
+            ModEntry._subtitleManager.RegisterSubtitleForNextCue(subtitle);
         }
     }
 
     private static void Finalizer(MethodBase __originalMethod)
     {
-        if (!SubtitleLookup.TryGetValue(__originalMethod, out var pairs)) return;  // should never happen
+        if (!SubtitleLookup.TryGetValue(__originalMethod, out var subtitles)) return;  // should never happen
 
-        foreach (var (cueId, subtitle) in pairs)
+        foreach (var subtitle in subtitles)
         {
-            ModEntry._subtitleManager.UnRegisterSubtitleForNextCue(cueId, subtitle.SubtitleId);
+            ModEntry._subtitleManager.UnRegisterSubtitleForNextCue(subtitle.CueId, subtitle.SubtitleId);
         }
     }
     

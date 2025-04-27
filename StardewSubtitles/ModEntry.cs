@@ -104,13 +104,13 @@ public class ModEntry : Mod
         
         configMenu.AddNumberOption(
             mod: ModManifest,
-            name: () => Helper.Translation.Get("config.defaultDurationTicks"),
-            tooltip: () => Helper.Translation.Get("config.defaultDurationTicks.tooltip"),
-            getValue: () => _config.DefaultDurationTicks,
+            name: () => Helper.Translation.Get("config.minDurationTicks"),
+            tooltip: () => Helper.Translation.Get("config.minDurationTicks.tooltip"),
+            getValue: () => _config.MinDurationTicks,
             setValue: value =>
             {
-                _config.DefaultDurationTicks = value;
-                SubtitleManager.DefaultDurationTicks = value;
+                _config.MinDurationTicks = value;
+                SubtitleManager.MinDurationTicks = value;
             });
 
         configMenu.AddSectionTitle(
@@ -151,15 +151,17 @@ public class ModEntry : Mod
 
     private void RegisterDefaultSubtitles()
     {
-        _subtitleManager.RegisterDefaultSubtitle("doorClose", "interaction.doorClose");
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("doorClose", "interaction.doorClose"));
         
-        _subtitleManager.RegisterDefaultSubtitle("eat", "player.eating");
-        _subtitleManager.RegisterDefaultSubtitle("gulp", "player.drinking");
-        _subtitleManager.RegisterDefaultSubtitle("ow", "player.hurts");
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("eat", "player.eating"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("gulp", "player.drinking"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("ow", "player.hurts"));
         
-        _subtitleManager.RegisterDefaultSubtitle("throwDownITem", "environment.itemThrown");
-        _subtitleManager.RegisterDefaultSubtitle("thunder", "environment.thunder");
-        _subtitleManager.RegisterDefaultSubtitle("thunder_small", "environment.thunder");
-        _subtitleManager.RegisterDefaultSubtitle("trainWhistle", "environment.train");
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("throwDownITem", "environment.itemThrown"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("thunder", "environment.thunder"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("thunder_small", "environment.thunder"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("trainWhistle", "environment.trainWhistle"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("distantTrain", "environment.distantTrain"));
+        _subtitleManager.RegisterDefaultSubtitle(new Subtitle("trainLoop", "environment.trainLoop", 80 * 60));
     }
 }

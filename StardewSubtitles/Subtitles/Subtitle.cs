@@ -5,7 +5,7 @@ public class Subtitle
     public readonly string CueId;
     public readonly string SubtitleId;
     private readonly int? _duration;
-    public int Duration => _duration ?? SubtitleManager.DefaultDurationTicks;
+    public int MaxDuration => _duration ?? SubtitleManager.InfiniteDuration;
 
     public Subtitle(string cueId, string subtitleId, int? duration = null)
     {

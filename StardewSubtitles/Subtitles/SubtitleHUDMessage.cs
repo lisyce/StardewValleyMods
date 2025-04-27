@@ -24,7 +24,7 @@ public class SubtitleHUDMessage
         SubtitlesOn = config.SubtitlesOn;
     }
 
-    public void AddSubtitle(string message, int durationTicks)
+    public void AddSubtitle(Cue cue, string message, int maxDurationTicks)
     {
         // is this subtitle already displayed?
         foreach (var subtitle in _subtitles)
@@ -36,7 +36,7 @@ public class SubtitleHUDMessage
             }
         }
         
-        var el = new SubtitleHUDMessageElement(message, durationTicks);
+        var el = new SubtitleHUDMessageElement(cue, message, maxDurationTicks);
         _subtitles.Add(el);
     }
     

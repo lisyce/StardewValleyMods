@@ -4,24 +4,26 @@ namespace StardewSubtitles.Subtitles;
 
 public class SubtitleHUDMessageElement
 {
-    private int _ticksLeft;
-    private readonly int _originalDuration;
+    private int _ticksElapsed;
+    private readonly Cue _cue;
+    private readonly int _maxDurationTicks;
     
     public string Message { get; }
     public float Transparency { get; private set; }
 
-    public SubtitleHUDMessageElement(string message, int ticksLeft)
+    public SubtitleHUDMessageElement(Cue cue, string message, int maxDurationTicks)
     {
         Message = message;
-        _ticksLeft = ticksLeft;
-        _originalDuration = ticksLeft;
+        _cue = cue;
         Transparency = 1f;
+        _ticksElapsed = 0;
+        _maxDurationTicks = maxDurationTicks;
     }
 
     public bool Update()
     {
-        _ticksLeft--;
-        if (_ticksLeft < 0)
+        _ticksElapsed = Math.Min(_ticksElapsed + 1, SubtitleManager.InfiniteDuration);
+        if (VisibleLongEnough() && (!_cue.IsPlaying || _ticksElapsed >= _maxDurationTicks))
         {
             Transparency -= 0.02f;
             if (Transparency < 0f)
@@ -38,7 +40,12 @@ public class SubtitleHUDMessageElement
 
     public void Reset()
     {
-        _ticksLeft = _originalDuration;
         Transparency = 1f;
+        _ticksElapsed = 0;
+    }
+
+    private bool VisibleLongEnough()
+    {
+        return _ticksElapsed >= SubtitleManager.MinDurationTicks;
     }
 }

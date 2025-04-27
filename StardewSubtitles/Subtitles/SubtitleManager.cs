@@ -6,7 +6,8 @@ namespace StardewSubtitles.Subtitles;
 
 public class SubtitleManager
 {
-    public static int DefaultDurationTicks { get; set; }
+    public static int MinDurationTicks { get; set; }
+    public static readonly int InfiniteDuration = int.MaxValue;
     
     private readonly HashSet<string> _subtitleIds;
     private readonly SubtitleHUDMessage _hudMessage;
@@ -26,6 +27,7 @@ public class SubtitleManager
         Config = config;
         _subtitlesOnNextCue = new Dictionary<string, List<Subtitle>>();
         _defaultCueSubtitles = new Dictionary<string, Subtitle>();
+        MinDurationTicks = config.MinDurationTicks;
     }
 
     /// <summary>
@@ -42,7 +44,7 @@ public class SubtitleManager
         {
             foreach (var subtitle in subtitles)
             {
-                AddSubtitle(subtitle.SubtitleId, subtitle.Duration);
+                AddSubtitle(cue, subtitle);
             }
 
             _subtitlesOnNextCue.Remove(cueId);
@@ -50,22 +52,21 @@ public class SubtitleManager
         else if (_defaultCueSubtitles.TryGetValue(cueId, out var subtitle))
         {
             // default subtitle
-            AddSubtitle(subtitle.SubtitleId, subtitle.Duration);
+            AddSubtitle(cue, subtitle);
         }
     }
     
     /// <summary>
-    /// The next time the sound cue with Id cueId plays, adds the subtitle with Id subtitleId to the HUD.
+    /// The next time the appropriate cue plays, adds the subtitle to the HUD.
     /// Does not persist beyond the very next time the cue is played. This subtitle will override any default
     /// subtitles for the sound cue.
     /// </summary>
-    /// <param name="cueId">The sound cue from the game's sound bank</param>
     /// <param name="subtitle">The subtitle to show</param>
-    public void RegisterSubtitleForNextCue(string cueId, Subtitle subtitle)
+    public void RegisterSubtitleForNextCue(Subtitle subtitle)
     {
-        if (!_subtitlesOnNextCue.ContainsKey(cueId)) _subtitlesOnNextCue.Add(cueId, new List<Subtitle>());
+        if (!_subtitlesOnNextCue.ContainsKey(subtitle.CueId)) _subtitlesOnNextCue.Add(subtitle.CueId, new List<Subtitle>());
 
-        _subtitlesOnNextCue[cueId].Add(subtitle);
+        _subtitlesOnNextCue[subtitle.CueId].Add(subtitle);
         // _monitor.Log($"Registered subtitle {subtitleId} for next cue {cueId}", LogLevel.Debug);
     }
     
@@ -88,14 +89,12 @@ public class SubtitleManager
     /// <summary>
     /// Registers a persistent default subtitle for a sound cue.
     /// </summary>
-    /// <param name="cueId">The sound cue from the game's sound bank</param>
-    /// <param name="subtitleId">The Id of the subtitle to show</param>
-    /// <param name="duration">The number of ticks to show this subtitle for, or null for the default.</param>
-    public void RegisterDefaultSubtitle(string cueId, string subtitleId, int? duration = null)
+    /// <param name="subtitle">The subtitle to show</param>
+    public void RegisterDefaultSubtitle(Subtitle subtitle)
     {
-        if (!_defaultCueSubtitles.TryAdd(cueId, new Subtitle(cueId, subtitleId, duration)))
+        if (!_defaultCueSubtitles.TryAdd(subtitle.CueId, subtitle))
         {
-            _monitor.Log($"Failed to register default subtitle {subtitleId} for sound cue {cueId} because a default subtitle {_defaultCueSubtitles[cueId]} already exists.", LogLevel.Warn);
+            _monitor.Log($"Failed to register default subtitle {subtitle.SubtitleId} for sound cue {subtitle.CueId} because a default subtitle {_defaultCueSubtitles[subtitle.CueId]} already exists.", LogLevel.Warn);
         }
     }
 
@@ -112,8 +111,9 @@ public class SubtitleManager
         return result;
     }
 
-    private void AddSubtitle(string subtitleId, int duration)
+    private void AddSubtitle(Cue cue, Subtitle subtitle)
     {
+        var subtitleId = subtitle.SubtitleId;
         if (!Config.SubtitleToggles.GetValueOrDefault(subtitleId, true)) return;
         
         if (!_subtitleIds.Contains(subtitleId))
@@ -130,6 +130,6 @@ public class SubtitleManager
         }
         
         var translatedSubtitle = _helper.Translation.Get(subtitleTranslationKey);
-        _hudMessage.AddSubtitle(translatedSubtitle, duration);
+        _hudMessage.AddSubtitle(cue, translatedSubtitle, subtitle.MaxDuration);
     }
 }

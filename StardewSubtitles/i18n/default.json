@@ -7,8 +7,8 @@
   "config.fontScaling.tooltip": "A multiplier for the subtitle font size. Default 1.",
   "config.maxVisibleSubtitles": "Maximum Visible Subtitles",
   "config.maxVisibleSubtitles.tooltip": "The max number of subtitles to be shown at once (to prevent UI clutter).",
-  "config.defaultDurationTicks": "Default Duration (Ticks)",
-  "config.defaultDurationTicks.tooltip": "The default length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks.",
+  "config.minDurationTicks": "Minimum Duration (Ticks)",
+  "config.minDurationTicks.tooltip": "The minimum length a subtitle is shown for before fading out. 1 sec is approximately 60 game ticks.",
   "config.categories.paragraph": "The following links go link to other pages where you can turn individual subtitles on and off.",
   "config.toggleIndividualSectionTitle": "Toggle Individual Subtitles",
   
@@ -34,7 +34,9 @@
   "environment.itemThrown.subtitle": "Item thrown down",
   "environment.thunder.subtitle": "Thunder rumbles",
   "environment.elevator.subtitle": "Elevator dings",
-  "environment.train.subtitle": "Train whistles",
+  "environment.trainWhistle.subtitle": "Train whistles",
+  "environment.trainLoop.subtitle": "Train clacks",
+  "environment.distantTrain.subtitle": "Train whistles faintly",
   
   "events.earthquake.subtitle": "Rumbling",
   "events.racoon0.subtitle": "Wind blowing",

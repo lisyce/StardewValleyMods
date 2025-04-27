@@ -42,8 +42,8 @@ public class SoundCueCodeMatcher
         return _matcher.InstructionEnumeration();
     }
 
-    private static void RegisterSubtitleForNextCueHelper(string cueId, Subtitle subtitle)
+    private static void RegisterSubtitleForNextCueHelper(Subtitle subtitle)
     {
-        ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitle);
+        ModEntry._subtitleManager.RegisterSubtitleForNextCue(subtitle);
     }
 }
