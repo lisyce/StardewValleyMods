@@ -15,6 +15,6 @@ public class AudioPatches
 
     private static void PlayPostfix(Cue __instance)
     {
-        ModEntry._subtitleManager.OnSoundPlayed(__instance.Name);
+        ModEntry._subtitleManager.OnSoundPlayed(__instance);
     }
 }

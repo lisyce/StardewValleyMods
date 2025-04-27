@@ -110,7 +110,7 @@ public class ModEntry : Mod
             setValue: value =>
             {
                 _config.DefaultDurationTicks = value;
-                _subtitleHudMessage.DefaultDurationTicks = value;
+                SubtitleManager.DefaultDurationTicks = value;
             });
 
         configMenu.AddSectionTitle(

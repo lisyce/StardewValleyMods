@@ -1,5 +1,6 @@
 using HarmonyLib;
 using StardewModdingAPI;
+using StardewSubtitles.Subtitles;
 using StardewValley.Locations;
 
 namespace StardewSubtitles.Patches;
@@ -12,7 +13,6 @@ public class EnvironmentPatches : ISubtitlePatch
             harmony,
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.UpdateWhenCurrentLocation)),
-            "crystal",
-            "environment.elevator");
+            new Subtitle("crystal", "environment.elevator"));
     }
 }

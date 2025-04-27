@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework.Audio;
+
 namespace StardewSubtitles.Subtitles;
 
 public class SubtitleHUDMessageElement

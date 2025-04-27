@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -12,7 +13,6 @@ public class SubtitleHUDMessage
     private readonly List<SubtitleHUDMessageElement> _subtitles;
     public float FontScaling { get; set; }
     public int MaxVisible { get; set; }
-    public int DefaultDurationTicks { get; set; }
     
     public bool SubtitlesOn { get; set; }
 
@@ -21,7 +21,6 @@ public class SubtitleHUDMessage
         _subtitles = new List<SubtitleHUDMessageElement>();
         FontScaling = config.FontScaling;
         MaxVisible = config.MaxVisibleSubtitles;
-        DefaultDurationTicks = config.DefaultDurationTicks;
         SubtitlesOn = config.SubtitlesOn;
     }
 

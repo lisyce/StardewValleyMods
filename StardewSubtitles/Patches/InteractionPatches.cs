@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using StardewModdingAPI;
+using StardewSubtitles.Subtitles;
 using StardewValley;
 using StardewValley.Objects;
 
@@ -15,23 +16,20 @@ public class InteractionPatches : ISubtitlePatch
             monitor,
             AccessTools.Method(typeof(Fence), nameof(Fence.toggleGate),
                 new[] { typeof(bool), typeof(bool), typeof(Farmer) }),
-            "doorClose",
-            "interaction.fenceGate"
-            );
+            new Subtitle("doorClose", "interaction.fenceGate"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.CheckGarbage)),
-            "trashcan",
-            "interaction.trashCan"
-            );
+            new Subtitle("trashcan", "interaction.trashCan"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
             monitor,
             AccessTools.Method(typeof(Chest), nameof(Chest.checkForAction)),
-            ("openChest", "interaction.chest"), ("Ship", "interaction.giftbox"));
+            new Subtitle("openChest", "interaction.chest"),
+            new Subtitle("Ship", "interaction.giftbox"));
 
         if (TryGetChestDelegate(out var chestDelegate))
         {
@@ -39,7 +37,8 @@ public class InteractionPatches : ISubtitlePatch
                 harmony,
                 monitor,
                 chestDelegate!,
-                ("openChest", "interaction.chest"), ("doorCreak", "interaction.fridge"));
+                new Subtitle("openChest", "interaction.chest"),
+                new Subtitle("doorCreak", "interaction.fridge"));
         }
         else
         {

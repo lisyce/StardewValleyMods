@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
+using StardewSubtitles.Subtitles;
 using StardewValley;
 
 namespace StardewSubtitles.Patches;
@@ -41,8 +42,8 @@ public class SoundCueCodeMatcher
         return _matcher.InstructionEnumeration();
     }
 
-    private static void RegisterSubtitleForNextCueHelper(string cueId, string subtitleId)
+    private static void RegisterSubtitleForNextCueHelper(string cueId, Subtitle subtitle)
     {
-        ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitleId);
+        ModEntry._subtitleManager.RegisterSubtitleForNextCue(cueId, subtitle);
     }
 }
