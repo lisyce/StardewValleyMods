@@ -61,7 +61,7 @@ public class SubtitleManager
         if (!_subtitlesOnNextCue.ContainsKey(cueId)) _subtitlesOnNextCue.Add(cueId, new List<string>());
         
         _subtitlesOnNextCue[cueId].Add(subtitleId);
-       //  _monitor.Log($"Registered subtitle {subtitleId} for next cue {cueId}", LogLevel.Debug);
+        // _monitor.Log($"Registered subtitle {subtitleId} for next cue {cueId}", LogLevel.Debug);
     }
     
     /// <summary>

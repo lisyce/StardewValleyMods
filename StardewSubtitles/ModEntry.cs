@@ -152,8 +152,14 @@ public class ModEntry : Mod
     private void RegisterDefaultSubtitles()
     {
         _subtitleManager.RegisterDefaultSubtitle("doorClose", "interaction.doorClose");
+        
         _subtitleManager.RegisterDefaultSubtitle("eat", "player.eating");
         _subtitleManager.RegisterDefaultSubtitle("gulp", "player.drinking");
         _subtitleManager.RegisterDefaultSubtitle("ow", "player.hurts");
+        
+        _subtitleManager.RegisterDefaultSubtitle("throwDownITem", "environment.itemThrown");
+        _subtitleManager.RegisterDefaultSubtitle("thunder", "environment.thunder");
+        _subtitleManager.RegisterDefaultSubtitle("thunder_small", "environment.thunder");
+        _subtitleManager.RegisterDefaultSubtitle("trainWhistle", "environment.train");
     }
 }

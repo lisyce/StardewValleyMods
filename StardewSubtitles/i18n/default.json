@@ -15,6 +15,8 @@
   // subtitle categories
   "interaction.category": "Interactions",
   "player.category": "Player",
+  "environment.category": "Environment",
+  "events.category": "Events",
   
   // subtitle definitions
   "interaction.doorClose.subtitle": "Door closes",
@@ -22,8 +24,23 @@
   "interaction.chest.subtitle": "Chest opens",
   "interaction.trashCan.subtitle": "Trash rustles",
   "interaction.fridge.subtitle": "Fridge opens",
+  "interaction.giftbox.subtitle": "Gift box opens",
   
   "player.eating.subtitle": "Eating",
   "player.drinking.subtitle": "Drinking",
-  "player.hurts.subtitle": "Player hurts"
+  "player.hurts.subtitle": "Player hurts",
+  
+  "environment.itemCollect.subtitle": "Item collected",
+  "environment.itemThrown.subtitle": "Item thrown down",
+  "environment.thunder.subtitle": "Thunder rumbles",
+  "environment.elevator.subtitle": "Elevator dings",
+  "environment.train.subtitle": "Train whistles",
+  
+  "events.earthquake.subtitle": "Rumbling",
+  "events.racoon0.subtitle": "Wind blowing",
+  "events.racoon1.subtitle": "Tree falls",
+  "events.ufo.subtitle": "Sci-fi humming",
+  "events.meteorite.subtitle": "Whooshing",
+  "events.dogs.subtitle": "Howling and barking",
+  "events.owl.subtitle": "Owl hoots"
 }

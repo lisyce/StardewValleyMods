@@ -27,27 +27,19 @@ public class InteractionPatches : ISubtitlePatch
             "interaction.trashCan"
             );
         
-        PatchGenerator.GeneratePatchPair(
+        PatchGenerator.GeneratePatchPairs(
             harmony,
             monitor,
             AccessTools.Method(typeof(Chest), nameof(Chest.checkForAction)),
-            "openChest",
-            "interaction.chest");
+            ("openChest", "interaction.chest"), ("Ship", "interaction.giftbox"));
 
         if (TryGetChestDelegate(out var chestDelegate))
         {
-            PatchGenerator.GeneratePatchPair(
+            PatchGenerator.GeneratePatchPairs(
                 harmony,
                 monitor,
                 chestDelegate!,
-                "openChest",
-                "interaction.chest");
-            PatchGenerator.GeneratePatchPair(
-                harmony,
-                monitor,
-                chestDelegate!,
-                "doorCreak",
-                "interaction.fridge");
+                ("openChest", "interaction.chest"), ("doorCreak", "interaction.fridge"));
         }
         else
         {

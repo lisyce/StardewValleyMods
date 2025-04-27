@@ -4,8 +4,23 @@
   "interaction.chest",
   "interaction.trashCan",
   "interaction.fridge",
+  "interaction.giftbox",
   
   "player.eating",
   "player.drinking",
-  "player.hurts"
+  "player.hurts",
+  
+  "environment.itemCollect",
+  "environment.itemThrown",
+  "environment.thunder",
+  "environment.elevator",
+  "environment.train",
+  
+  "events.earthquake",
+  "events.racoon0",
+  "events.racoon1",
+  "events.ufo",
+  "events.meteorite",
+  "events.dogs",
+  "events.owl"
 ]

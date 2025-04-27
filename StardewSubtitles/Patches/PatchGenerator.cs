@@ -26,6 +26,7 @@ public class PatchGenerator
 
             var list = SubtitleLookup[original];
             list.Add((cueId, subtitleId));
+            monitor.Log($"Registered prefix/finalizer pair for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}. cueId: {cueId}, subtitleId: {subtitleId}");
         }
         catch (Exception e)
         {
@@ -35,7 +36,7 @@ public class PatchGenerator
     }
 
     public static void GeneratePatchPairs(Harmony harmony, IMonitor monitor, MethodInfo original,
-        List<(string cueId, string subtitleId)> pairs)
+        params (string cueId, string subtitleId)[] pairs)
     {
         foreach (var (cueId, subtitleId) in pairs)
         {
