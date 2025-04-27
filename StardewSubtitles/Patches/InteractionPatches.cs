@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Objects;
@@ -25,5 +26,48 @@ public class InteractionPatches : ISubtitlePatch
             "trashcan",
             "interaction.trashCan"
             );
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Chest), nameof(Chest.checkForAction)),
+            "openChest",
+            "interaction.chest");
+
+        if (TryGetChestDelegate(out var chestDelegate))
+        {
+            PatchGenerator.GeneratePatchPair(
+                harmony,
+                monitor,
+                chestDelegate!,
+                "openChest",
+                "interaction.chest");
+            PatchGenerator.GeneratePatchPair(
+                harmony,
+                monitor,
+                chestDelegate!,
+                "doorCreak",
+                "interaction.fridge");
+        }
+        else
+        {
+            monitor.Log("Failed to apply harmony patch on the Chest::checkForAction delegate; skipping these subtitles.", LogLevel.Warn);
+        }
+    }
+
+    private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
+    {
+        foreach (var method in typeof(Chest).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+        {
+            if (method.GetParameters().Length == 0 &&
+                method.Name.Contains("<checkForAction", StringComparison.Ordinal))
+            {
+                chestDelegate = method;
+                return true;
+            }
+        }
+
+        chestDelegate = null;
+        return false;
     }
 }

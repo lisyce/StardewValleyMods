@@ -30,6 +30,8 @@ public class SubtitleManager
     /// <param name="cueId">The sound cue from the game's sound bank</param>
     public void OnSoundPlayed(string cueId)
     {
+        _monitor.Log(cueId, LogLevel.Debug);
+        
         // do we have any overrides?
         if (_subtitlesOnNextCue.TryGetValue(cueId, out var subtitles))
         {
@@ -59,6 +61,7 @@ public class SubtitleManager
         if (!_subtitlesOnNextCue.ContainsKey(cueId)) _subtitlesOnNextCue.Add(cueId, new List<string>());
         
         _subtitlesOnNextCue[cueId].Add(subtitleId);
+       //  _monitor.Log($"Registered subtitle {subtitleId} for next cue {cueId}", LogLevel.Debug);
     }
     
     /// <summary>
@@ -73,6 +76,7 @@ public class SubtitleManager
         {
             subtitles.Remove(subtitleId);
             if (subtitles.Count == 0) _subtitlesOnNextCue.Remove(cueId);
+            // _monitor.Log($"Unregistered subtitle {subtitleId} for cue {cueId}", LogLevel.Debug);
         }
     }
 

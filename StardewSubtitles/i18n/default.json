@@ -17,11 +17,13 @@
   "player.category": "Player",
   
   // subtitle definitions
-  "interaction.doorClose.subtitle": "Door Closes",
-  "interaction.fenceGate.subtitle": "Fence Gate Toggles",
-  "interaction.trashCan.subtitle": "Trash Rustles",
+  "interaction.doorClose.subtitle": "Door closes",
+  "interaction.fenceGate.subtitle": "Fence gate toggles",
+  "interaction.chest.subtitle": "Chest opens",
+  "interaction.trashCan.subtitle": "Trash rustles",
+  "interaction.fridge.subtitle": "Fridge opens",
   
   "player.eating.subtitle": "Eating",
   "player.drinking.subtitle": "Drinking",
-  "player.hurts.subtitle": "Player Hurts"
+  "player.hurts.subtitle": "Player hurts"
 }

@@ -1,7 +1,9 @@
 [
   "interaction.doorClose",
   "interaction.fenceGate",
+  "interaction.chest",
   "interaction.trashCan",
+  "interaction.fridge",
   
   "player.eating",
   "player.drinking",

@@ -12,16 +12,20 @@ public class PatchGenerator
     {
         try
         {
-            if (!SubtitleLookup.ContainsKey(original)) SubtitleLookup.Add(original, new List<(string, string)>());
+            if (!SubtitleLookup.ContainsKey(original))
+            {
+                SubtitleLookup.Add(original, new List<(string, string)>());
+                
+                // we only want to patch once!
+                harmony.Patch(
+                    original: original,
+                    prefix: new HarmonyMethod(typeof(PatchGenerator), nameof(Prefix)),
+                    finalizer: new HarmonyMethod(typeof(PatchGenerator), nameof(Finalizer))
+                );
+            }
 
             var list = SubtitleLookup[original];
             list.Add((cueId, subtitleId));
-        
-            harmony.Patch(
-                original: original,
-                prefix: new HarmonyMethod(typeof(PatchGenerator), nameof(Prefix)),
-                finalizer: new HarmonyMethod(typeof(PatchGenerator), nameof(Finalizer))
-            ); 
         }
         catch (Exception e)
         {
