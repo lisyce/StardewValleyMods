@@ -9,6 +9,9 @@
   "interaction.shippingBinOpen",
   "interaction.shippingBinClose",
   "interaction.fireplace",
+  "interaction.ladderDescend",
+  "interaction.shaftFalling",
+  "interaction.shaftLanding",
   
   "player.eating",
   "player.drinking",
@@ -29,6 +32,7 @@
   "environment.birdChirp",
   "environment.rooster",
   "environment.leafRustle",
+  "environment.ladderAppear",
   
   "events.earthquake",
   "events.raccoon0",

@@ -5,6 +5,7 @@ using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
 using StardewValley;
 using StardewValley.Buildings;
+using StardewValley.Locations;
 using StardewValley.Objects;
 
 namespace StardewAudioCaptions.Patches;
@@ -77,6 +78,19 @@ public class InteractionPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Furniture), nameof(Furniture.setFireplace)),
             new Caption("fireball", "interaction.fireplace"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
+            new Caption("stairsdown", "interaction.ladderDescend"));
+        
+        PatchGenerator.GeneratePrefixes(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(MineShaft), nameof(MineShaft.enterMineShaft)),
+            new Caption("fallDown", "interaction.shaftFalling"),
+            new Caption("clubSmash", "interaction.shaftLanding"));
         
     }
 

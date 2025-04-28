@@ -15,7 +15,7 @@ public class EnvironmentPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.UpdateWhenCurrentLocation)),
-            new Caption("crystal", "environment.elevator"));
+            new Caption("crystal", "environment.elevator", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -28,5 +28,13 @@ public class EnvironmentPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.UpdateWhenCurrentLocation)),
             new Caption("dropItemInWater", "environment.fishSplash", shouldLog: false));
+    
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(MineShaft), nameof(MineShaft.createLadderAt)),
+            new Caption("sandyStep", "environment.ladderAppear"),
+            new Caption("hoeHit", "environment.ladderAppear"),
+            new Caption("newArtifact", "environment.ladderAppear"));
     }
 }

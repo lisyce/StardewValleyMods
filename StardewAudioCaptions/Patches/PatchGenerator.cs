@@ -68,6 +68,15 @@ public class PatchGenerator
             monitor.Log($"Error: {e}", LogLevel.Warn);
         }
     }
+
+    public static void GeneratePrefixes(Harmony harmony, IMonitor monitor, MethodInfo original,
+        params Caption[] captions)
+    {
+        foreach (var caption in captions)
+        {
+            GeneratePrefix(harmony, monitor, original, caption);
+        }
+    }
     
     private static void Prefix(MethodBase __originalMethod)
     {

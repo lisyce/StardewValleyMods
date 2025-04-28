@@ -28,6 +28,9 @@
   "interaction.shippingBinOpen.caption": "Shipping bin opens",
   "interaction.shippingBinClose.caption": "Shipping bin closes",
   "interaction.fireplace.caption": "Fire roars",
+  "interaction.ladderDescend.caption": "Footsteps on ladder",
+  "interaction.shaftFalling.caption": "Player falling",
+  "interaction.shaftLanding.caption": "Player hits ground",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -48,6 +51,7 @@
   "environment.birdChirp.caption": "Birds chirp",
   "environment.rooster.caption": "Rooster crows",
   "environment.leafRustle.caption": "Leaves rustle",
+  "environment.ladderAppear.caption": "Ladder appears",
   
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
