@@ -44,6 +44,30 @@ public class PatchGenerator
             GeneratePatchPair(harmony, monitor, original, caption);
         }
     }
+
+    public static void GeneratePrefix(Harmony harmony, IMonitor monitor, MethodInfo original, Caption caption)
+    {
+        try
+        {
+            if (!CaptionLookup.ContainsKey(original))
+            {
+                CaptionLookup.Add(original, new List<Caption>());
+                harmony.Patch(
+                    original: original,
+                    prefix: new HarmonyMethod(typeof(PatchGenerator), nameof(Prefix))
+                );
+            }
+
+            var list = CaptionLookup[original];
+            list.Add(caption);
+            monitor.Log($"Registered prefix for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}. cueId: {caption.CueId}, captionId: {caption.CaptionId}");
+        }
+        catch (Exception e)
+        {
+            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Warn);
+        }
+    }
     
     private static void Prefix(MethodBase __originalMethod)
     {
@@ -61,7 +85,7 @@ public class PatchGenerator
 
         foreach (var caption in captions)
         {
-            ModEntry.CaptionManager.UnRegisterCaptionForNextCue(caption.CueId, caption.CaptionId);
+            ModEntry.CaptionManager.UnregisterCaptionForNextCue(caption);
         }
     }
     

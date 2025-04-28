@@ -1,6 +1,8 @@
 using HarmonyLib;
 using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
+using StardewValley;
+using StardewValley.Buildings;
 using StardewValley.Locations;
 
 namespace StardewAudioCaptions.Patches;
@@ -14,5 +16,17 @@ public class EnvironmentPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.UpdateWhenCurrentLocation)),
             new Caption("crystal", "environment.elevator"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(JumpingFish), nameof(JumpingFish.Splash)),
+            new Caption("dropItemInWater", "environment.fishSplash"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.UpdateWhenCurrentLocation)),
+            new Caption("dropItemInWater", "environment.fishSplash", shouldLog: false));
     }
 }

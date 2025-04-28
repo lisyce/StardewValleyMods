@@ -15,17 +15,25 @@
   "player.category": "Player",
   "environment.category": "Environment",
   "events.category": "Events",
+  "tools.category": "Tools",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
   "interaction.chest.caption": "Chest opens",
+  "interaction.chestClose.caption": "Chest closes",
   "interaction.trashCan.caption": "Trash rustles",
   "interaction.fridge.caption": "Fridge opens",
-  "interaction.giftbox.caption": "Gift box opens",
   
+  "interaction.giftbox.caption": "Gift box opens",
+  "interaction.shippingBinOpen.caption": "Shipping bin opens",
+  "interaction.shippingBinClose.caption": "Shipping bin closes",
+  "interaction.fireplace.caption": "Fire roars",
+
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
   "player.hurts.caption": "Player hurts",
+  "player.footsteps.caption": "Footsteps",
+  "player.footstepsJingle.caption": "Bell jingles",
   
   "environment.itemCollect.caption": "Item collected",
   "environment.itemThrown.caption": "Item thrown down",
@@ -34,6 +42,12 @@
   "environment.trainWhistle.caption": "Train whistles",
   "environment.trainLoop.caption": "Train clacks",
   "environment.distantTrain.caption": "Train whistles faintly",
+  "environment.waterSlosh.caption": "Water sloshes",
+  "environment.fishSplash.caption": "Fish splashes",
+  "environment.seagull.caption": "Seagull squawks",
+  "environment.birdChirp.caption": "Birds chirp",
+  "environment.rooster.caption": "Rooster crows",
+  "environment.leafRustle.caption": "Leaves rustle",
   
   "events.earthquake.caption": "Rumbling",
   "events.racoon0.caption": "Wind blowing",
@@ -41,5 +55,9 @@
   "events.ufo.caption": "Sci-fi humming",
   "events.meteorite.caption": "Whooshing",
   "events.dogs.caption": "Howling and barking",
-  "events.owl.caption": "Owl hoots"
+  "events.owl.caption": "Owl hoots",
+  
+  "tools.shears.caption": "Shears click",
+  "tools.pail.caption": "Milking",
+  "tools.axe.caption": "Axe chops"
 }

@@ -2,13 +2,19 @@
   "interaction.doorClose",
   "interaction.fenceGate",
   "interaction.chest",
+  "interaction.chestClose",
   "interaction.trashCan",
   "interaction.fridge",
   "interaction.giftbox",
+  "interaction.shippingBinOpen",
+  "interaction.shippingBinClose",
+  "interaction.fireplace",
   
   "player.eating",
   "player.drinking",
   "player.hurts",
+  "player.footsteps",
+  "player.footstepsJingle",
   
   "environment.itemCollect",
   "environment.itemThrown",
@@ -17,6 +23,12 @@
   "environment.trainWhistle",
   "environment.trainLoop",
   "environment.distantTrain",
+  "environment.waterSlosh",
+  "environment.fishSplash",
+  "environment.seagull",
+  "environment.birdChirp",
+  "environment.rooster",
+  "environment.leafRustle",
   
   "events.earthquake",
   "events.racoon0",
@@ -24,5 +36,9 @@
   "events.ufo",
   "events.meteorite",
   "events.dogs",
-  "events.owl"
+  "events.owl",
+  
+  "tools.shears",
+  "tools.pail",
+  "tools.axe"
 ]

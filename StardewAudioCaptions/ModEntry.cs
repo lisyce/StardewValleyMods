@@ -156,6 +156,7 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
         CaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
         CaptionManager.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
+        CaptionManager.RegisterDefaultCaption(new Caption("jingleBell", "player.footstepsJingle"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "environment.itemThrown"));
         CaptionManager.RegisterDefaultCaption(new Caption("thunder", "environment.thunder"));
@@ -163,5 +164,12 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "environment.trainWhistle"));
         CaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "environment.distantTrain"));
         CaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "environment.trainLoop", 80 * 60));
+        CaptionManager.RegisterDefaultCaption(new Caption("slosh", "environment.waterSlosh"));
+        CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "environment.seagull"));
+        CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "environment.birdChirp"));
+        CaptionManager.RegisterDefaultCaption(new Caption("rooster", "environment.rooster"));
+        CaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "environment.leafRustle"));
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
     }
 }

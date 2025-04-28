@@ -47,12 +47,18 @@ public class CaptionManager
                 AddCaption(cue, caption);
             }
 
-            _captionsOnNextCue.Remove(cueId);
+            var captionsCopy = new List<Caption>(captions);
+            foreach (var caption in captionsCopy)
+            {
+                UnregisterCaptionForNextCue(caption);
+            }
+
         }
         else if (_defaultCueCaptions.TryGetValue(cueId, out var caption))
         {
             // default caption
             AddCaption(cue, caption);
+            UnregisterCaptionForNextCue(caption);
         }
     }
     
@@ -64,10 +70,15 @@ public class CaptionManager
     /// <param name="caption">The caption to show</param>
     public void RegisterCaptionForNextCue(Caption caption)
     {
+        if (!ValidateCaption(caption.CaptionId)) return;
         if (!_captionsOnNextCue.ContainsKey(caption.CueId)) _captionsOnNextCue.Add(caption.CueId, new List<Caption>());
 
         _captionsOnNextCue[caption.CueId].Add(caption);
-        // _monitor.Log($"Registered caption {captionId} for next cue {cueId}", LogLevel.Debug);
+
+        if (caption.ShouldLog)
+        {
+            _monitor.Log($"Registered caption {caption.CaptionId} for next cue {caption.CueId}", LogLevel.Debug);
+        }
     }
     
     /// <summary>
@@ -76,13 +87,16 @@ public class CaptionManager
     /// </summary>
     /// <param name="cueId"></param>
     /// <param name="captionId"></param>
-    public void UnRegisterCaptionForNextCue(string cueId, string captionId)
+    public void UnregisterCaptionForNextCue(Caption caption)
     {
-        if (_captionsOnNextCue.TryGetValue(cueId, out var captions))
+        if (_captionsOnNextCue.TryGetValue(caption.CueId, out var captions))
         {
-            captions.RemoveWhere(x => x.CaptionId == captionId);
-            if (captions.Count == 0) _captionsOnNextCue.Remove(cueId);
-            // _monitor.Log($"Unregistered caption {captionId} for cue {cueId}", LogLevel.Debug);
+            captions.RemoveWhere(x => x.CaptionId == caption.CaptionId);
+            if (captions.Count == 0) _captionsOnNextCue.Remove(caption.CueId);
+            if (caption.ShouldLog)
+            {
+                _monitor.Log($"Unregistered caption {caption.CaptionId} for cue {caption.CueId}", LogLevel.Debug);
+            }
         }
     }
 
@@ -92,6 +106,7 @@ public class CaptionManager
     /// <param name="caption">The caption to show</param>
     public void RegisterDefaultCaption(Caption caption)
     {
+        if (!ValidateCaption(caption.CaptionId)) return;
         if (!_defaultCueCaptions.TryAdd(caption.CueId, caption))
         {
             _monitor.Log($"Failed to register default caption {caption.CaptionId} for sound cue {caption.CueId} because a default caption {_defaultCueCaptions[caption.CueId]} already exists.", LogLevel.Warn);
@@ -116,20 +131,26 @@ public class CaptionManager
         var captionId = caption.CaptionId;
         if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;
         
+        var captionTranslationKey = captionId + ".caption";
+        var translatedCaption = _helper.Translation.Get(captionTranslationKey);
+        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration);
+    }
+
+    private bool ValidateCaption(string captionId)
+    {
         if (!_captionIds.Contains(captionId))
         {
             _monitor.Log($"Invalid caption id: {captionId}", LogLevel.Warn);
-            return;
+            return false;
         }
 
         var captionTranslationKey = captionId + ".caption";
         if (!_helper.Translation.ContainsKey(captionTranslationKey))
         {
             _monitor.Log($"No translation found for caption id: {captionId}. Translation key: {captionTranslationKey}");
-            return;
+            return false;
         }
-        
-        var translatedCaption = _helper.Translation.Get(captionTranslationKey);
-        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration);
+
+        return true;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using HarmonyLib;
+using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
 using StardewValley;
+using StardewValley.Buildings;
 using StardewValley.Objects;
 
 namespace StardewAudioCaptions.Patches;
@@ -44,6 +46,38 @@ public class InteractionPatches : ICaptionPatch
         {
             monitor.Log("Failed to apply harmony patch on the Chest::checkForAction delegate; skipping these captions.", LogLevel.Warn);
         }
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Chest), nameof(Chest.updateWhenCurrentLocation)),
+            new Caption("doorCreakReverse", "interaction.chestClose", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Chest), nameof(Chest.UpdateFarmerNearby)),
+            new Caption("doorCreak", "interaction.chest", shouldLog: false),
+            new Caption("doorCreakReverse", "interaction.chestClose", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(ShippingBin), "openShippingBinLid"),
+            new Caption("doorCreak", "interaction.shippingBinOpen", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(ShippingBin), "closeShippingBinLid"),
+            new Caption("doorCreakReverse", "interaction.shippingBinClose", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Furniture), nameof(Furniture.setFireplace)),
+            new Caption("fireball", "interaction.fireplace"));
+        
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
