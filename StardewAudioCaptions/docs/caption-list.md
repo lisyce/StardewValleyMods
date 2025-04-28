@@ -36,8 +36,8 @@
 | Internal Id | English Caption |
 |-|-|
 | `events.earthquake` | Rumbling |
-| `events.racoon0` | Wind blowing |
-| `events.racoon1` | Tree falls |
+| `events.raccoon0` | Wind blowing |
+| `events.raccoon1` | Tree falls |
 | `events.ufo` | Sci-fi humming |
 | `events.meteorite` | Whooshing |
 | `events.dogs` | Howling and barking |
