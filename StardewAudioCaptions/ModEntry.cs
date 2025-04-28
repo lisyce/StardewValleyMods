@@ -5,6 +5,7 @@ using StardewAudioCaptions.APIs;
 using StardewAudioCaptions.Patches;
 using StardewAudioCaptions.Captions;
 using StardewValley;
+using StardewValley.Mods;
 
 namespace StardewAudioCaptions;
 
@@ -17,7 +18,7 @@ public class ModEntry : Mod
     
     public override void Entry(IModHelper helper)
     {
-        Helper.Events.Display.RenderedHud += OnRenderedHud;
+        Helper.Events.Display.RenderedStep += OnRenderedStep;
         Helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         
@@ -31,9 +32,9 @@ public class ModEntry : Mod
         patchManager.Patch();
     }
 
-    private void OnRenderedHud(object? sender, RenderedHudEventArgs e)
+    private void OnRenderedStep(object? sender, RenderedStepEventArgs e)
     {
-        if (Game1.game1.takingMapScreenshot || Game1.HostPaused) return;
+        if (Game1.game1.takingMapScreenshot || Game1.HostPaused || e.Step != RenderSteps.Overlays) return;
         _captionHudMessage.Draw(e.SpriteBatch);
     }
 
