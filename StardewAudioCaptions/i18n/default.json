@@ -43,7 +43,7 @@
   "environment.thunder.caption": "Thunder rumbles",
   "environment.elevator.caption": "Elevator dings",
   "environment.trainWhistle.caption": "Train whistles",
-  "environment.trainLoop.caption": "Train clacks",
+  "environment.trainLoop.caption": "Train clacking",
   "environment.distantTrain.caption": "Train whistles faintly",
   "environment.waterSlosh.caption": "Water sloshes",
   "environment.fishSplash.caption": "Fish splashes",
@@ -52,6 +52,8 @@
   "environment.rooster.caption": "Rooster crows",
   "environment.leafRustle.caption": "Leaves rustle",
   "environment.ladderAppear.caption": "Ladder appears",
+  "environment.fuseHiss.caption": "Fuse hissing",
+  "environment.bombExplode.caption": "Bomb explodes",
   
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
@@ -63,5 +65,6 @@
   
   "tools.shears.caption": "Shears click",
   "tools.pail.caption": "Milking",
-  "tools.axe.caption": "Axe chops"
+  "tools.axe.caption": "Axe thuds",
+  "tools.pickaxe.caption": "Pickaxe thuds"
 }

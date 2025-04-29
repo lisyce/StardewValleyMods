@@ -77,6 +77,24 @@ public class PatchGenerator
             GeneratePrefix(harmony, monitor, original, caption);
         }
     }
+
+    public static void TranspilerPatch(Harmony harmony, IMonitor monitor, MethodInfo original,
+        Func<IEnumerable<CodeInstruction>, IEnumerable<CodeInstruction>> transpiler)
+    {
+        try
+        {
+            harmony.Patch(
+                original: original,
+                transpiler: new HarmonyMethod(transpiler.GetMethodInfo())
+            );
+            monitor.Log($"Registered transpiler for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}.");
+        }
+        catch (Exception e)
+        {
+            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Warn);
+        }
+    }
     
     private static void Prefix(MethodBase __originalMethod)
     {

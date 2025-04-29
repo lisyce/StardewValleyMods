@@ -45,5 +45,11 @@ public class ToolsPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Tree), nameof(Tree.performToolAction)),
             new Caption("axchop", "tools.axe"));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Pickaxe), nameof(Pickaxe.DoFunction)),
+            new Caption("hammer", "tools.pickaxe"));
     }
 }

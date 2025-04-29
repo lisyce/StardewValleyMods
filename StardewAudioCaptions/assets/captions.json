@@ -33,6 +33,8 @@
   "environment.rooster",
   "environment.leafRustle",
   "environment.ladderAppear",
+  "environment.fuseHiss",
+  "environment.bombExplode",
   
   "events.earthquake",
   "events.raccoon0",
@@ -44,5 +46,6 @@
   
   "tools.shears",
   "tools.pail",
-  "tools.axe"
+  "tools.axe",
+  "tools.pickaxe"
 ]

@@ -27,6 +27,7 @@ public class ModEntry : Mod
         _captionHudMessage = new CaptionHudMessage(_config);
         CaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
 
+        Harmony.DEBUG = true;
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
