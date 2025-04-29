@@ -160,18 +160,22 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
         CaptionManager.RegisterDefaultCaption(new Caption("jingleBell", "player.footstepsJingle"));
         
-        CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "environment.itemThrown"));
-        CaptionManager.RegisterDefaultCaption(new Caption("thunder", "environment.thunder"));
-        CaptionManager.RegisterDefaultCaption(new Caption("thunder_small", "environment.thunder"));
-        CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "environment.trainWhistle"));
-        CaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "environment.distantTrain"));
-        CaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "environment.trainLoop", 80 * 60));
+        CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "player.itemThrown"));
+        CaptionManager.RegisterDefaultCaption(new Caption("thunder", "ambient.thunder"));
+        CaptionManager.RegisterDefaultCaption(new Caption("thunder_small", "ambient.thunder"));
+        CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "ambient.trainWhistle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "ambient.distantTrain"));
+        CaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "ambient.trainLoop", 80 * 60));
         CaptionManager.RegisterDefaultCaption(new Caption("slosh", "environment.waterSlosh"));
-        CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "environment.seagull"));
-        CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "environment.birdChirp"));
+        CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "ambient.seagull"));
+        CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "ambient.birdChirp"));
         CaptionManager.RegisterDefaultCaption(new Caption("rooster", "environment.rooster"));
-        CaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "environment.leafRustle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "ambient.leafRustle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("cavedrip", "ambient.caveDrip"));
+        CaptionManager.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("batScreech", "monsters.batScreech"));
     }
 }

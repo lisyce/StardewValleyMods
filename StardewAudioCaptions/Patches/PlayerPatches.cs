@@ -13,7 +13,7 @@ public class PlayerPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Debris), nameof(Debris.updateChunks)),
-            new Caption("coin", "environment.itemCollect", shouldLog: false));
+            new Caption("coin", "player.itemCollect", shouldLog: false));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,

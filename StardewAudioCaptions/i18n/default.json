@@ -16,6 +16,8 @@
   "environment.category": "Environment",
   "events.category": "Events",
   "tools.category": "Tools",
+  "monsters.category": "Monsters",
+  "ambient.category": "Ambient Sounds",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
@@ -38,22 +40,24 @@
   "player.footsteps.caption": "Footsteps",
   "player.footstepsJingle.caption": "Bell jingles",
   
-  "environment.itemCollect.caption": "Item collected",
-  "environment.itemThrown.caption": "Item thrown down",
-  "environment.thunder.caption": "Thunder rumbles",
+  "player.itemCollect.caption": "Item collected",
+  "player.itemThrown.caption": "Item thrown down",
+  "ambient.thunder.caption": "Thunder rumbles",
   "environment.elevator.caption": "Elevator dings",
-  "environment.trainWhistle.caption": "Train whistles",
-  "environment.trainLoop.caption": "Train clacking",
-  "environment.distantTrain.caption": "Train whistles faintly",
+  "ambient.trainWhistle.caption": "Train whistles",
+  "ambient.trainLoop.caption": "Train clacking",
+  "ambient.distantTrain.caption": "Train whistles faintly",
   "environment.waterSlosh.caption": "Water sloshes",
   "environment.fishSplash.caption": "Fish splashes",
-  "environment.seagull.caption": "Seagull squawks",
-  "environment.birdChirp.caption": "Birds chirp",
+  "ambient.seagull.caption": "Seagull squawks",
+  "ambient.birdChirp.caption": "Birds chirp",
   "environment.rooster.caption": "Rooster crows",
-  "environment.leafRustle.caption": "Leaves rustle",
+  "ambient.leafRustle.caption": "Leaves rustle",
   "environment.ladderAppear.caption": "Ladder appears",
   "environment.fuseHiss.caption": "Fuse hissing",
   "environment.bombExplode.caption": "Bomb explodes",
+  "ambient.caveDrip.caption": "Water drips",
+  "ambient.bugLoop.caption": "Bug wings buzzing",
   
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
@@ -66,5 +70,9 @@
   "tools.shears.caption": "Shears click",
   "tools.pail.caption": "Milking",
   "tools.axe.caption": "Axe thuds",
-  "tools.pickaxe.caption": "Pickaxe thuds"
+  "tools.pickaxe.caption": "Pickaxe thuds",
+  
+  "monsters.batScreech.caption": "Bat screeches",
+  "monsters.serpentSpawn.caption": "Serpent spawns",
+  "monsters.hauntedSkull.caption": "Skull screeches"
 }
