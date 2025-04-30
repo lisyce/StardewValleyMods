@@ -1,6 +1,10 @@
 # List of Captions
 
+Stardew Audio Captions currently features 115 captions.
+
 ## Interactions
+
+13 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -20,6 +24,8 @@
 
 ## Player
 
+7 captions in this category
+
 | Internal Id | English Caption |
 |-|-|
 | `player.footstepsJingle` | Bell jingles |
@@ -31,6 +37,8 @@
 | `player.hurts` | Player hurts |
 
 ## Ambient Sounds
+
+9 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -46,6 +54,8 @@
 
 ## Environment
 
+8 captions in this category
+
 | Internal Id | English Caption |
 |-|-|
 | `environment.bombExplode` | Bomb explodes |
@@ -59,6 +69,8 @@
 
 ## Events
 
+7 captions in this category
+
 | Internal Id | English Caption |
 |-|-|
 | `events.dogs` | Howling and barking |
@@ -71,6 +83,8 @@
 
 ## Tools
 
+4 captions in this category
+
 | Internal Id | English Caption |
 |-|-|
 | `tools.axe` | Axe thuds |
@@ -79,6 +93,8 @@
 | `tools.shears` | Shears click |
 
 ## Monsters
+
+66 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -150,6 +166,8 @@
 | `monsters.squidkidHurt` | Squid Kid hurts |
 
 ## Weapons
+
+1 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
