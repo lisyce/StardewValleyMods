@@ -4,150 +4,150 @@
 
 | Internal Id | English Caption |
 |-|-|
+| `interaction.chestClose` | Chest closes |
+| `interaction.chest` | Chest opens |
 | `interaction.doorClose` | Door closes |
 | `interaction.fenceGate` | Fence gate toggles |
-| `interaction.chest` | Chest opens |
-| `interaction.chestClose` | Chest closes |
-| `interaction.trashCan` | Trash rustles |
-| `interaction.fridge` | Fridge opens |
-| `interaction.giftbox` | Gift box opens |
-| `interaction.shippingBinOpen` | Shipping bin opens |
-| `interaction.shippingBinClose` | Shipping bin closes |
 | `interaction.fireplace` | Fire roars |
 | `interaction.footstepsDescend` | Footsteps descending |
+| `interaction.fridge` | Fridge opens |
+| `interaction.giftbox` | Gift box opens |
 | `interaction.shaftFalling` | Player falling |
 | `interaction.shaftLanding` | Player hits ground |
+| `interaction.shippingBinClose` | Shipping bin closes |
+| `interaction.shippingBinOpen` | Shipping bin opens |
+| `interaction.trashCan` | Trash rustles |
 
 ## Player
 
 | Internal Id | English Caption |
 |-|-|
-| `player.eating` | Eating |
-| `player.drinking` | Drinking |
-| `player.hurts` | Player hurts |
-| `player.footsteps` | Footsteps |
 | `player.footstepsJingle` | Bell jingles |
+| `player.drinking` | Drinking |
+| `player.eating` | Eating |
+| `player.footsteps` | Footsteps |
 | `player.itemCollect` | Item collected |
 | `player.itemThrown` | Item thrown down |
+| `player.hurts` | Player hurts |
 
 ## Ambient Sounds
 
 | Internal Id | English Caption |
 |-|-|
-| `ambient.thunder` | Thunder rumbles |
-| `ambient.trainWhistle` | Train whistles |
-| `ambient.trainLoop` | Train clacking |
-| `ambient.distantTrain` | Train whistles faintly |
-| `ambient.seagull` | Seagull squawks |
 | `ambient.birdChirp` | Birds chirp |
-| `ambient.leafRustle` | Leaves rustle |
-| `ambient.caveDrip` | Water drips |
 | `ambient.bugLoop` | Bug wings buzzing |
+| `ambient.leafRustle` | Leaves rustle |
+| `ambient.seagull` | Seagull squawks |
+| `ambient.thunder` | Thunder rumbles |
+| `ambient.trainLoop` | Train clacking |
+| `ambient.trainWhistle` | Train whistles |
+| `ambient.distantTrain` | Train whistles faintly |
+| `ambient.caveDrip` | Water drips |
 
 ## Environment
 
 | Internal Id | English Caption |
 |-|-|
-| `environment.elevator` | Elevator dings |
-| `environment.waterSlosh` | Water sloshes |
-| `environment.lavaSlosh` | Lava sloshes |
-| `environment.fishSplash` | Fish splashes |
-| `environment.rooster` | Rooster crows |
-| `environment.ladderAppear` | Ladder appears |
-| `environment.fuseHiss` | Fuse hissing |
 | `environment.bombExplode` | Bomb explodes |
+| `environment.elevator` | Elevator dings |
+| `environment.fishSplash` | Fish splashes |
+| `environment.fuseHiss` | Fuse hissing |
+| `environment.ladderAppear` | Ladder appears |
+| `environment.lavaSlosh` | Lava sloshes |
+| `environment.rooster` | Rooster crows |
+| `environment.waterSlosh` | Water sloshes |
 
 ## Events
 
 | Internal Id | English Caption |
 |-|-|
-| `events.earthquake` | Rumbling |
-| `events.raccoon0` | Wind blowing |
-| `events.raccoon1` | Tree falls |
-| `events.ufo` | Sci-fi humming |
-| `events.meteorite` | Whooshing |
 | `events.dogs` | Howling and barking |
 | `events.owl` | Owl hoots |
+| `events.earthquake` | Rumbling |
+| `events.ufo` | Sci-fi humming |
+| `events.raccoon1` | Tree falls |
+| `events.meteorite` | Whooshing |
+| `events.raccoon0` | Wind blowing |
 
 ## Tools
 
 | Internal Id | English Caption |
 |-|-|
-| `tools.shears` | Shears click |
-| `tools.pail` | Milking |
 | `tools.axe` | Axe thuds |
+| `tools.pail` | Milking |
 | `tools.pickaxe` | Pickaxe thuds |
+| `tools.shears` | Shears click |
 
 ## Monsters
 
 | Internal Id | English Caption |
 |-|-|
 | `monsters.batScreech` | Bat screeches |
-| `monsters.serpentSpawn` | Serpent spawns |
-| `monsters.serpentDie` | Serpent dies |
-| `monsters.serpentHurt` | Serpent hurts |
-| `monsters.hauntedSkull` | Skull screeches |
-| `monsters.bigSlimeHurt` | Big Slime hurts |
 | `monsters.bigSlimeDie` | Big Slime dies |
-| `monsters.blueSquidHurt` | Blue Squid hurts |
-| `monsters.blueSquidDie` | Blue Squid dies |
+| `monsters.bigSlimeHurt` | Big Slime hurts |
 | `monsters.blueSquidMove` | Blue Squid bloops |
-| `monsters.debuffFire` | Debuff orb fired |
+| `monsters.blueSquidDie` | Blue Squid dies |
+| `monsters.blueSquidHurt` | Blue Squid hurts |
 | `monsters.squidBubble` | Bubbling |
-| `monsters.magmaSpriteHurt` | Magma Sprite hurts |
-| `monsters.magmaSpriteDie` | Magma Sprite dies |
-| `monsters.genericHurt` | Monster hurts |
-| `monsters.genericDie` | Monster dies |
-| `monsters.genericSpot` | Monster spots player |
-| `monsters.bugHurt` | Bug hurts |
 | `monsters.bugDie` | Bug dies |
-| `monsters.dinoDie` | Pepper rex dies |
+| `monsters.bugHurt` | Bug hurts |
+| `monsters.debuffFire` | Debuff orb fired |
 | `monsters.dinoFire` | Dino breathes fire |
-| `monsters.duggyHurt` | Duggy hurts |
 | `monsters.duggyDie` | Duggy dies |
 | `monsters.duggyDig` | Duggy digs |
+| `monsters.duggyHurt` | Duggy hurts |
 | `monsters.dustSpriteDie` | Dust Sprite dies |
 | `monsters.dustSpriteMeep` | Dust Sprite meeps |
-| `monsters.sentryHurt` | Sentry clanks |
-| `monsters.sentryDie` | Sentry dies |
 | `monsters.flyBuzz` | Fly buzzing |
-| `monsters.flyHurt` | Fly hurts |
 | `monsters.flyDie` | Fly dies |
+| `monsters.flyHurt` | Fly hurts |
 | `monsters.ghostDie` | Ghost dies |
-| `monsters.slimeHurt` | Slime hurts |
-| `monsters.slimeDie` | Slime dies |
-| `monsters.slime` | Slime boings |
-| `monsters.grubHurt` | Grub hurts |
+| `monsters.golemDie` | Golem dies |
+| `monsters.golemHurt` | Golem hurts |
+| `monsters.golemSpawn` | Golem spawns |
 | `monsters.grubDie` | Grub dies |
+| `monsters.grubHurt` | Grub hurts |
 | `monsters.hotheadFuse` | Hot Head hissing |
 | `monsters.hotheadHurt` | Hot Head hurts |
-| `monsters.lavalurkDie` | Lava Lurk dies |
 | `monsters.lavalurkFire` | Lava Lurk breathes fire |
-| `monsters.spiderDie` | Spider dies |
-| `monsters.spiderJump` | Spider jumps |
+| `monsters.lavalurkDie` | Lava Lurk dies |
+| `monsters.magmaSpriteDie` | Magma Sprite dies |
+| `monsters.magmaSpriteHurt` | Magma Sprite hurts |
 | `monsters.metalheadHurt` | Metal Head hurts |
+| `monsters.genericDie` | Monster dies |
+| `monsters.genericHurt` | Monster hurts |
+| `monsters.genericSpot` | Monster spots player |
+| `monsters.monsterHeal` | Monsters heal |
+| `monsters.mummyCrumble` | Mummy crumbles |
 | `monsters.mummyDie` | Mummy dies |
 | `monsters.mummyHurt` | Mummy hurts |
-| `monsters.mummyCrumble` | Mummy crumbles |
 | `monsters.mummyRevive` | Mummy stands up |
-| `monsters.rockCrabCrack` | Shell cracks |
-| `monsters.golemHurt` | Golem hurts |
-| `monsters.golemDie` | Golem dies |
-| `monsters.golemSpawn` | Golem spawns |
-| `monsters.shadowBruteHurt` | Shadow Brute hurts |
+| `monsters.dinoDie` | Pepper rex dies |
+| `monsters.sentryHurt` | Sentry clanks |
+| `monsters.sentryDie` | Sentry dies |
+| `monsters.serpentDie` | Serpent dies |
+| `monsters.serpentHurt` | Serpent hurts |
+| `monsters.serpentSpawn` | Serpent spawns |
 | `monsters.shadowBruteDie` | Shadow Brute dies |
-| `monsters.shamanHurt` | Shaman hurts |
+| `monsters.shadowBruteHurt` | Shadow Brute hurts |
 | `monsters.shamanDie` | Shaman dies |
+| `monsters.shamanHurt` | Shaman hurts |
 | `monsters.shamanPeep` | Shaman whistles |
-| `monsters.monsterHeal` | Monsters heal |
+| `monsters.rockCrabCrack` | Shell cracks |
+| `monsters.skeletonDie` | Skeleton dies |
+| `monsters.skeletonHurt` | Skeleton hurts |
+| `monsters.hauntedSkull` | Skull screeches |
+| `monsters.slime` | Slime boings |
+| `monsters.slimeDie` | Slime dies |
+| `monsters.slimeHurt` | Slime hurts |
+| `monsters.shooterDie` | Sniper dies |
 | `monsters.shooterFire` | Sniper fires |
 | `monsters.shooterHurt` | Sniper hurts |
-| `monsters.shooterDie` | Sniper dies |
-| `monsters.skeletonHurt` | Skeleton hurts |
-| `monsters.skeletonDie` | Skeleton dies |
-| `monsters.squidkidHurt` | Squid Kid hurts |
-| `monsters.squidkidDie` | Squid Kid dies |
+| `monsters.spiderDie` | Spider dies |
+| `monsters.spiderJump` | Spider jumps |
 | `monsters.squidkidFire` | Squid Kid breathes fire |
+| `monsters.squidkidDie` | Squid Kid dies |
+| `monsters.squidkidHurt` | Squid Kid hurts |
 
 ## Weapons
 

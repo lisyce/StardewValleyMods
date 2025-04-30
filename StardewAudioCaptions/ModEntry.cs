@@ -125,28 +125,43 @@ public class ModEntry : Mod
         
         var categories = CaptionManager.CaptionsByCategory();
 
-        foreach (var category in categories)
+        var translatedCategories = categories.Select(x => new
+            {
+                Id = x.Key,
+                Translation = Helper.Translation.Get(x.Key + ".category"),
+                Captions = x.Value
+            })
+            .OrderBy(x => x.Translation.ToString());
+        
+        foreach (var category in translatedCategories)
         {
             configMenu.AddPageLink(
                 mod: ModManifest,
-                pageId: category.Key,
-                text: () => Helper.Translation.Get(category.Key + ".category"));
+                pageId: category.Id,
+                text: () => category.Translation);
         }
         
-        foreach (var category in categories)
+        foreach (var category in translatedCategories)
         {
             configMenu.AddPage(
                 mod: ModManifest,
-                pageId: category.Key,
-                pageTitle: () => Helper.Translation.Get(category.Key + ".category"));
+                pageId: category.Id,
+                pageTitle: () => category.Translation);
 
-            foreach (var captionId in category.Value)
+            var translatedCaptions = category.Captions.Select(x => new
+            {
+                Id = x,
+                Translation = Helper.Translation.Get(x + ".caption")
+            })
+            .OrderBy(x => x.Translation.ToString());
+            
+            foreach (var caption in translatedCaptions)
             {
                 configMenu.AddBoolOption(
                     mod: ModManifest,
-                    name: () => Helper.Translation.Get(captionId + ".caption"),
-                    getValue: () => _config.CaptionToggles.GetValueOrDefault(captionId, true),
-                    setValue: value => _config.CaptionToggles[captionId] = value);
+                    name: () => caption.Translation,
+                    getValue: () => _config.CaptionToggles.GetValueOrDefault(caption.Id, true),
+                    setValue: value => _config.CaptionToggles[caption.Id] = value);
             }
         }
     }

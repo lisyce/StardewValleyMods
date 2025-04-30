@@ -18,8 +18,8 @@ with open("i18n/default.json", 'r') as i18n:
 markdown = "# List of Captions"
 for k, v in result.items():
   markdown += f"\n\n## {k}\n\n| Internal Id | English Caption |\n|-|-|"
-  for id, eng in v:
-    markdown += f"\n| `{id}` | {eng} |"
+  for _id, eng in sorted(v, key=lambda x: x[1]):
+    markdown += f"\n| `{_id}` | {eng} |"
     
 with open("docs/caption-list.md", "w") as out:
   out.write(markdown)
