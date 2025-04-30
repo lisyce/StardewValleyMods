@@ -154,6 +154,7 @@ public class ModEntry : Mod
     private void RegisterDefaultCaptions()
     {
         CaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
+        CaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
         CaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
@@ -177,5 +178,10 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("batScreech", "monsters.batScreech"));
+        CaptionManager.RegisterDefaultCaption(new Caption("squid_move", "monsters.blueSquidMove"));
+        CaptionManager.RegisterDefaultCaption(new Caption("Duggy", "monsters.duggyDig"));
+        CaptionManager.RegisterDefaultCaption(new Caption("flybuzzing", "monsters.flyBuzz"));
+        CaptionManager.RegisterDefaultCaption(new Caption("slime", "monsters.slime"));
+
     }
 }

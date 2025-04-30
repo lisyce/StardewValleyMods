@@ -14,5 +14,7 @@ public class Caption
         CaptionId = captionId;
         ShouldLog = shouldLog;
         _duration = duration;
+
+        ModEntry.CaptionManager.ValidateCaption(this);
     }
 }

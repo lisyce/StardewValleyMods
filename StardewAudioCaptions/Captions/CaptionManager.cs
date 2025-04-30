@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework.Audio;
 using StardewModdingAPI;
+using StardewValley;
 using StardewValley.Extensions;
 
 namespace StardewAudioCaptions.Captions;
@@ -70,7 +71,7 @@ public class CaptionManager
     /// <param name="caption">The caption to show</param>
     public void RegisterCaptionForNextCue(Caption caption)
     {
-        if (!ValidateCaption(caption.CaptionId)) return;
+        if (!ValidateCaption(caption)) return;
         if (!_captionsOnNextCue.ContainsKey(caption.CueId)) _captionsOnNextCue.Add(caption.CueId, new List<Caption>());
 
         _captionsOnNextCue[caption.CueId].Add(caption);
@@ -106,7 +107,7 @@ public class CaptionManager
     /// <param name="caption">The caption to show</param>
     public void RegisterDefaultCaption(Caption caption)
     {
-        if (!ValidateCaption(caption.CaptionId)) return;
+        if (!ValidateCaption(caption)) return;
         if (!_defaultCueCaptions.TryAdd(caption.CueId, caption))
         {
             _monitor.Log($"Failed to register default caption {caption.CaptionId} for sound cue {caption.CueId} because a default caption {_defaultCueCaptions[caption.CueId]} already exists.", LogLevel.Warn);
@@ -136,8 +137,9 @@ public class CaptionManager
         _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration);
     }
 
-    private bool ValidateCaption(string captionId)
+    public bool ValidateCaption(Caption caption)
     {
+        var captionId = caption.CaptionId;
         if (!_captionIds.Contains(captionId))
         {
             _monitor.Log($"Invalid caption id: {captionId}", LogLevel.Warn);
@@ -147,7 +149,13 @@ public class CaptionManager
         var captionTranslationKey = captionId + ".caption";
         if (!_helper.Translation.ContainsKey(captionTranslationKey))
         {
-            _monitor.Log($"No translation found for caption id: {captionId}. Translation key: {captionTranslationKey}");
+            _monitor.Log($"No translation found for caption id: {captionId}. Translation key: {captionTranslationKey}", LogLevel.Warn);
+            return false;
+        }
+
+        if (!Game1.soundBank.Exists(caption.CueId))
+        {
+            _monitor.Log($"Invalid sound cue id: {caption.CueId} for caption {captionId}", LogLevel.Warn);
             return false;
         }
 

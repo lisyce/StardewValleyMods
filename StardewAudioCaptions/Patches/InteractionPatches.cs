@@ -79,12 +79,6 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(Furniture), nameof(Furniture.setFireplace)),
             new Caption("fireball", "interaction.fireplace"));
         
-        PatchGenerator.GeneratePatchPair(
-            harmony,
-            monitor,
-            AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
-            new Caption("stairsdown", "interaction.ladderDescend"));
-        
         PatchGenerator.GeneratePrefixes(
             harmony,
             monitor,
