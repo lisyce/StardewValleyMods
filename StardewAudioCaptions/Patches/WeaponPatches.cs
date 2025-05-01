@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Microsoft.Xna.Framework;
 using StardewAudioCaptions.Captions;
 using StardewModdingAPI;
 using StardewValley;
@@ -12,6 +13,21 @@ public class WeaponPatches : ICaptionPatch
 {
     public void Patch(Harmony harmony, IMonitor monitor)
     {
+        var debuffProjCtorArgs = new[]
+        {
+            typeof(string), typeof(int), typeof(int), typeof(int), typeof(float),
+            typeof(float), typeof(float), typeof(Vector2), typeof(GameLocation),
+            typeof(Character), typeof(bool), typeof(bool)
+        };
+
+        var basicProjCtorArgs = new[]
+        {
+            typeof(int), typeof(int), typeof(int), typeof(int), typeof(float),
+            typeof(float), typeof(float), typeof(Vector2), typeof(string), typeof(string),
+            typeof(string), typeof(bool), typeof(bool), typeof(GameLocation), typeof(Character),
+            typeof(BasicProjectile.onCollisionBehavior), typeof(string)
+        };
+        
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
@@ -59,7 +75,7 @@ public class WeaponPatches : ICaptionPatch
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
-            AccessTools.Constructor(typeof(BasicProjectile)),
+            AccessTools.Constructor(typeof(BasicProjectile), basicProjCtorArgs),
             new Caption(CaptionManager.AnyCue, "weapons.projectileFire"));
         
         PatchGenerator.GeneratePatchPair(
@@ -77,7 +93,7 @@ public class WeaponPatches : ICaptionPatch
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
-            AccessTools.Constructor(typeof(DebuffingProjectile)),
+            AccessTools.Constructor(typeof(DebuffingProjectile), debuffProjCtorArgs),
             new Caption("debuffSpell", "weapons.debuffFire"));
         
         PatchGenerator.GeneratePatchPairs(
