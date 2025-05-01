@@ -1,6 +1,6 @@
 # List of Captions
 
-Stardew Audio Captions currently features 137 captions.
+Stardew Audio Captions currently features 150 captions.
 
 ## Interactions
 
@@ -136,7 +136,6 @@ Stardew Audio Captions currently features 137 captions.
 | `monsters.squidBubble` | Bubbling |
 | `monsters.bugDie` | Bug dies |
 | `monsters.bugHurt` | Bug hurts |
-| `monsters.debuffFire` | Debuff orb fired |
 | `monsters.dinoFire` | Dino breathes fire |
 | `monsters.duggyDie` | Duggy dies |
 | `monsters.duggyDig` | Duggy digs |
@@ -193,11 +192,25 @@ Stardew Audio Captions currently features 137 captions.
 | `monsters.squidkidFire` | Squid Kid breathes fire |
 | `monsters.squidkidDie` | Squid Kid dies |
 | `monsters.squidkidHurt` | Squid Kid hurts |
+| `monsters.wingsFlap` | Wings flapping |
 
 ## Weapons
 
-1 captions in this category
+14 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
+| `weapons.parry` | Attack parried |
+| `weapons.clubSmash` | Club smashes |
+| `weapons.daggerStab` | Dagger stabs |
+| `weapons.debuffFire` | Debuff projectile fired |
+| `weapons.monsterFreeze` | Monster freezes |
+| `weapons.playerDebuff` | Player debuffed |
+| `weapons.playerFreeze` | Player freezes |
+| `weapons.projectileHitsWall` | Projectile collides |
+| `weapons.projectileFire` | Projectile fired |
+| `weapons.slingshot` | Slingshot drawn |
+| `weapons.recharge` | Weapon alt recharges |
+| `weapons.block` | Weapon blocks |
 | `weapons.weaponClank` | Weapon clanks |
+| `weapons.swipe` | Weapon swipes |

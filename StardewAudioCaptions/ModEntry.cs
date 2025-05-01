@@ -27,7 +27,6 @@ public class ModEntry : Mod
         _captionHudMessage = new CaptionHudMessage(_config);
         CaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
 
-        Harmony.DEBUG = true;
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
@@ -209,6 +208,8 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("Duggy", "monsters.duggyDig"));
         CaptionManager.RegisterDefaultCaption(new Caption("flybuzzing", "monsters.flyBuzz"));
         CaptionManager.RegisterDefaultCaption(new Caption("slime", "monsters.slime"));
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("slingshot", "weapons.slingshot"));
 
     }
 }

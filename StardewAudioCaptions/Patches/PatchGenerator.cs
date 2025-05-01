@@ -9,7 +9,7 @@ public class PatchGenerator
 {
     private static readonly Dictionary<MethodBase, List<Caption>> CaptionLookup = new();
     
-    public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodInfo original, Caption caption)
+    public static void GeneratePatchPair(Harmony harmony, IMonitor monitor, MethodBase original, Caption caption)
     {
         try
         {

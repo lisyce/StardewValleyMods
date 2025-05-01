@@ -108,14 +108,12 @@
   "monsters.blueSquidHurt.caption": "Blue Squid hurts",
   "monsters.blueSquidDie.caption": "Blue Squid dies",
   "monsters.blueSquidMove.caption": "Blue Squid bloops",
-  "monsters.debuffFire.caption": "Debuff orb fired",
   "monsters.squidBubble.caption": "Bubbling",
   "monsters.magmaSpriteHurt.caption": "Magma Sprite hurts",
   "monsters.magmaSpriteDie.caption": "Magma Sprite dies",
   "monsters.genericHurt.caption": "Monster hurts",
   "monsters.genericDie.caption": "Monster dies",
   "monsters.genericSpot.caption": "Monster spots player",
-  "weapons.weaponClank.caption": "Weapon clanks",
   "monsters.bugHurt.caption": "Bug hurts",
   "monsters.bugDie.caption": "Bug dies",
   "monsters.dinoDie.caption": "Pepper rex dies",
@@ -164,5 +162,22 @@
   "monsters.skeletonDie.caption": "Skeleton dies",
   "monsters.squidkidHurt.caption": "Squid Kid hurts",
   "monsters.squidkidDie.caption": "Squid Kid dies",
-  "monsters.squidkidFire.caption": "Squid Kid breathes fire"
+  "monsters.squidkidFire.caption": "Squid Kid breathes fire",
+  "monsters.wingsFlap.caption": "Wings flapping",
+
+  "weapons.weaponClank.caption": "Weapon clanks",
+  "weapons.recharge.caption": "Weapon alt recharges",
+  "weapons.clubSmash.caption": "Club smashes",
+  "weapons.daggerStab.caption": "Dagger stabs",
+  "weapons.swipe.caption": "Weapon swipes",
+  "weapons.block.caption": "Weapon blocks",
+  "weapons.parry.caption": "Attack parried",
+  "weapons.slingshot.caption": "Slingshot drawn",
+  "weapons.projectileHitsWall.caption": "Projectile collides",
+  "weapons.projectileFire.caption": "Projectile fired",
+  "weapons.playerDebuff.caption": "Player debuffed",
+  "weapons.debuffFire.caption": "Debuff projectile fired",
+  "weapons.playerFreeze.caption": "Player freezes",
+  "weapons.monsterFreeze.caption": "Monster freezes"
+
 }

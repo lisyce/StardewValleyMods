@@ -56,12 +56,6 @@ public class MonsterPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(BlueSquid), "sharedDeathAnimation"),
             new Caption("slimedead", "monsters.blueSquidDie"));
-
-        PatchGenerator.GeneratePatchPair(
-            harmony,
-            monitor,
-            AccessTools.Method(typeof(BlueSquid), nameof(BlueSquid.behaviorAtGameTick)),
-            new Caption("debuffSpell", "monsters.debuffFire"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
@@ -76,7 +70,13 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Bat), nameof(Bat.behaviorAtGameTick)),
-            new Caption("magma_sprite_spot", "monsters.genericSpot"));
+            new Caption("magma_sprite_spot", "monsters.genericSpot", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Bat), "updateAnimation"),
+            new Caption("batFlap", "monsters.wingsFlap", shouldLog: false));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
@@ -101,7 +101,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(DinoMonster), nameof(DinoMonster.behaviorAtGameTick)),
-            new Caption("furnace", "monsters.dinoFire"));
+            new Caption("furnace", "monsters.dinoFire", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -156,7 +156,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Ghost), nameof(Ghost.behaviorAtGameTick)),
-            new Caption("fishSlap", "monsters.debuffFire"));
+            new Caption("fishSlap", "weapons.debuffFire", shouldLog: false));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
@@ -194,7 +194,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(LavaLurk), nameof(LavaLurk.behaviorAtGameTick)),
-            new Caption("fireball", "monsters.lavalurkFire"));
+            new Caption("fireball", "monsters.lavalurkFire", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -206,7 +206,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Leaper), nameof(Leaper.behaviorAtGameTick)),
-            new Caption("batFlap", "monsters.spiderJump"));
+            new Caption("batFlap", "monsters.spiderJump", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -264,7 +264,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(RockGolem), nameof(RockGolem.behaviorAtGameTick)),
-            new Caption("rockGolemSpawn", "monsters.golemSpawn"));
+            new Caption("rockGolemSpawn", "monsters.golemSpawn", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -289,14 +289,14 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(ShadowShaman), nameof(ShadowShaman.behaviorAtGameTick)),
-            new Caption("shadowpeep", "monsters.shamanPeep"),
-            new Caption("healSound", "monsters.monsterHeal"));
+            new Caption("shadowpeep", "monsters.shamanPeep", shouldLog: false),
+            new Caption("healSound", "monsters.monsterHeal", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(Shooter), nameof(Shooter.behaviorAtGameTick)),
-            new Caption("Cowboy_gunshot", "monsters.shooterFire"));
+            new Caption("Cowboy_gunshot", "monsters.shooterFire", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -338,7 +338,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Shooter), nameof(Shooter.behaviorAtGameTick)),
-            new Caption("fireball", "monsters.squidkidFire"));
+            new Caption("fireball", "monsters.squidkidFire", shouldLog: false));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,

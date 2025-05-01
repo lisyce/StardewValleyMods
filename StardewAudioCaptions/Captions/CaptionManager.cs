@@ -9,6 +9,7 @@ public class CaptionManager
 {
     public static int MinDurationTicks { get; set; }
     public static readonly int InfiniteDuration = int.MaxValue;
+    public static readonly string AnyCue = "";
     
     private readonly HashSet<string> _captionIds;
     private readonly CaptionHudMessage _hudMessage;
@@ -60,6 +61,21 @@ public class CaptionManager
             // default caption
             AddCaption(cue, caption);
             UnregisterCaptionForNextCue(caption);
+        }
+        
+        // captions raised for the next time ANY sound plays
+        if (_captionsOnNextCue.TryGetValue(AnyCue, out captions))
+        {
+            foreach (var caption2 in captions)
+            {
+                AddCaption(cue, caption2);
+            }
+
+            var captionsCopy = new List<Caption>(captions);
+            foreach (var caption2 in captionsCopy)
+            {
+                UnregisterCaptionForNextCue(caption2);
+            }
         }
     }
     
@@ -153,7 +169,7 @@ public class CaptionManager
             return false;
         }
 
-        if (!Game1.soundBank.Exists(caption.CueId))
+        if (caption.CueId != AnyCue && !Game1.soundBank.Exists(caption.CueId))
         {
             _monitor.Log($"Invalid sound cue id: {caption.CueId} for caption {captionId}", LogLevel.Warn);
             return false;
