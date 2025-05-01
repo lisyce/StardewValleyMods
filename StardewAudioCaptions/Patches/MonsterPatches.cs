@@ -125,7 +125,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(DustSpirit), "updateAnimation"),
-            new Caption("dustMeep", "monsters.dustSpriteMeep"));
+            new Caption("dustMeep", "monsters.dustSpriteMeep", shouldLog: false));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -188,7 +188,7 @@ public class MonsterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(LavaLurk), "updateAnimation"),
-            new Caption("waterSlosh", "environment.lavaSlosh"));
+            new Caption("waterSlosh", "world.lavaSlosh"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

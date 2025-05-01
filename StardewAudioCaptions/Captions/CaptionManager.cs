@@ -134,7 +134,7 @@ public class CaptionManager
         
         var captionTranslationKey = captionId + ".caption";
         var translatedCaption = _helper.Translation.Get(captionTranslationKey);
-        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration);
+        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption);
     }
 
     public bool ValidateCaption(Caption caption)

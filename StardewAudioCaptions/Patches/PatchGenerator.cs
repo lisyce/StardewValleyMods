@@ -32,7 +32,7 @@ public class PatchGenerator
         catch (Exception e)
         {
             monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
-            monitor.Log($"Error: {e}", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }
 
@@ -65,7 +65,7 @@ public class PatchGenerator
         catch (Exception e)
         {
             monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
-            monitor.Log($"Error: {e}", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }
 
@@ -92,7 +92,7 @@ public class PatchGenerator
         catch (Exception e)
         {
             monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
-            monitor.Log($"Error: {e}", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }
     

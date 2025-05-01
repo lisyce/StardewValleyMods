@@ -63,6 +63,7 @@ public class ModEntry : Mod
             {
                 Helper.WriteConfig(_config);
                 CaptionManager.Config = _config;
+                _captionHudMessage.ClearDisabledCaptions(_config);
             }
             );
         
@@ -168,6 +169,17 @@ public class ModEntry : Mod
 
     private void RegisterDefaultCaptions()
     {
+        CaptionManager.RegisterDefaultCaption(new Caption("babblingBrook", "ambient.brook"));
+        CaptionManager.RegisterDefaultCaption(new Caption("cracklingFire", "ambient.fireCrackle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("heavyEngine", "ambient.engine"));
+        CaptionManager.RegisterDefaultCaption(new Caption("cricketsAmbient", "ambient.cricket"));
+        CaptionManager.RegisterDefaultCaption(new Caption("waterfall", "ambient.waterfall"));
+        CaptionManager.RegisterDefaultCaption(new Caption("waterfall_big", "ambient.waterfall"));
+        CaptionManager.RegisterDefaultCaption(new Caption("moneyDial", "ambient.coinsClinking"));
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("monkey1", "critters.monkey"));
+        CaptionManager.RegisterDefaultCaption(new Caption("parrot_squawk", "critters.parrot"));
+        
         CaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
         CaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
         
@@ -182,11 +194,11 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "ambient.trainWhistle"));
         CaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "ambient.distantTrain"));
         CaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "ambient.trainLoop", 80 * 60));
-        CaptionManager.RegisterDefaultCaption(new Caption("slosh", "environment.waterSlosh"));
-        CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "ambient.seagull"));
-        CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "ambient.birdChirp"));
-        CaptionManager.RegisterDefaultCaption(new Caption("rooster", "environment.rooster"));
-        CaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "ambient.leafRustle"));
+        CaptionManager.RegisterDefaultCaption(new Caption("slosh", "world.waterSlosh"));
+        CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
+        CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));
+        CaptionManager.RegisterDefaultCaption(new Caption("rooster", "world.rooster"));
+        CaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "world.leafRustle"));
         CaptionManager.RegisterDefaultCaption(new Caption("cavedrip", "ambient.caveDrip"));
         CaptionManager.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
         

@@ -10,20 +10,23 @@ public class CaptionHudMessageElement
     
     public string Message { get; }
     public float Transparency { get; private set; }
+    public readonly Caption Caption;
 
-    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks)
+    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks, Caption caption)
     {
         Message = message;
         _cue = cue;
         Transparency = 1f;
         _ticksElapsed = 0;
         _maxDurationTicks = maxDurationTicks;
+        Caption = caption;
     }
 
     public bool Update()
     {
         _ticksElapsed = Math.Min(_ticksElapsed + 1, CaptionManager.InfiniteDuration);
-        if (VisibleLongEnough() && (!_cue.IsPlaying || _ticksElapsed >= _maxDurationTicks))
+        var cuePlaying = _cue.IsPaused && !_cue.IsPaused && _cue.Volume >= 0.01;
+        if (VisibleLongEnough() && (!cuePlaying || _ticksElapsed >= _maxDurationTicks))
         {
             Transparency -= 0.02f;
             if (Transparency < 0f)

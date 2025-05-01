@@ -16,6 +16,9 @@ public class SoundCueCodeMatcher
 
     public static readonly MethodInfo NetAudioStartPlaying =
         AccessTools.Method(typeof(NetAudio), nameof(NetAudio.StartPlaying));
+
+    public static readonly MethodInfo DelayedActionPlaySound =
+        AccessTools.Method(typeof(DelayedAction), nameof(DelayedAction.playSoundAfterDelay));
     
     public SoundCueCodeMatcher(IEnumerable<CodeInstruction> instructions)
     {

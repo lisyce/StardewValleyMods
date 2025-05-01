@@ -24,7 +24,7 @@ public class CaptionHudMessage
         CaptionsOn = config.CaptionsOn;
     }
 
-    public void AddCaption(Cue cue, string message, int maxDurationTicks)
+    public void AddCaption(Cue cue, string message, int maxDurationTicks, Caption backingCaption)
     {
         // is this caption already displayed?
         foreach (var caption in _captions)
@@ -36,7 +36,7 @@ public class CaptionHudMessage
             }
         }
         
-        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks);
+        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks, backingCaption);
         _captions.Add(el);
     }
     
@@ -78,5 +78,10 @@ public class CaptionHudMessage
             b.DrawString(Game1.smallFont, sub.Message, pos, Color.White * sub.Transparency, 0, Vector2.Zero, FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;
         }
+    }
+
+    public void ClearDisabledCaptions(ModConfig config)
+    {
+        _captions.RemoveWhere(c => !config.CaptionToggles.GetValueOrDefault(c.Caption.CaptionId, true));
     }
 }

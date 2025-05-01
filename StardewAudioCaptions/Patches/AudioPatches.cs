@@ -11,6 +11,11 @@ public class AudioPatches
             original: AccessTools.Method(typeof(Cue), nameof(Cue.Play)),
             postfix: new HarmonyMethod(typeof(AudioPatches), nameof(PlayPostfix))
             );
+        
+        harmony.Patch(
+            original: AccessTools.Method(typeof(Cue), nameof(Cue.Resume)),
+            postfix: new HarmonyMethod(typeof(AudioPatches), nameof(PlayPostfix))
+        );
     }
 
     private static void PlayPostfix(Cue __instance)

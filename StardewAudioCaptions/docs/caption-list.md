@@ -1,6 +1,6 @@
 # List of Captions
 
-Stardew Audio Captions currently features 115 captions.
+Stardew Audio Captions currently features 137 captions.
 
 ## Interactions
 
@@ -38,34 +38,63 @@ Stardew Audio Captions currently features 115 captions.
 
 ## Ambient Sounds
 
-9 captions in this category
+12 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
-| `ambient.birdChirp` | Birds chirp |
 | `ambient.bugLoop` | Bug wings buzzing |
-| `ambient.leafRustle` | Leaves rustle |
-| `ambient.seagull` | Seagull squawks |
+| `ambient.coinsClinking` | Coins clinking |
+| `ambient.cricket` | Crickets chirping |
+| `ambient.engine` | Engine rumbling |
+| `ambient.fireCrackle` | Fire crackling |
+| `ambient.brook` | River babbling |
 | `ambient.thunder` | Thunder rumbles |
 | `ambient.trainLoop` | Train clacking |
 | `ambient.trainWhistle` | Train whistles |
 | `ambient.distantTrain` | Train whistles faintly |
 | `ambient.caveDrip` | Water drips |
+| `ambient.waterfall` | Waterfall roaring |
 
-## Environment
+## Critters
 
-8 captions in this category
+13 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
-| `environment.bombExplode` | Bomb explodes |
-| `environment.elevator` | Elevator dings |
-| `environment.fishSplash` | Fish splashes |
-| `environment.fuseHiss` | Fuse hissing |
-| `environment.ladderAppear` | Ladder appears |
-| `environment.lavaSlosh` | Lava sloshes |
-| `environment.rooster` | Rooster crows |
-| `environment.waterSlosh` | Water sloshes |
+| `critters.birdFlap` | Bird flapping |
+| `critters.birdPeck` | Bird pecks ground |
+| `critters.birdChirp` | Birds chirp |
+| `critters.crabSplash` | Crab splashes |
+| `critters.crow` | Crow caws |
+| `critters.frogCroak` | Frog croaks |
+| `critters.frogSplash` | Frog splashes |
+| `critters.monkey` | Monkey chatters |
+| `critters.parrot` | Parrot squawks |
+| `critters.sandDuggyHide` | Sand Duggy hides |
+| `critters.sandDuggyWhack` | Sand Duggy hurts |
+| `critters.seagull` | Seagull squawks |
+| `critters.butterflySparkle` | Sparkling |
+
+## World
+
+14 captions in this category
+
+| Internal Id | English Caption |
+|-|-|
+| `world.bombExplode` | Bomb explodes |
+| `world.crystalShatter` | Crystal shatters |
+| `world.elevator` | Elevator dings |
+| `world.fishSplash` | Fish splashes |
+| `world.fuseHiss` | Fuse hissing |
+| `world.grassRustle` | Grass rustles |
+| `world.ladderAppear` | Ladder appears |
+| `world.lavaSlosh` | Lava sloshes |
+| `world.leafRustle` | Leaves rustle |
+| `world.parrotExpressLand` | Parrot Express lands |
+| `world.rooster` | Rooster crows |
+| `world.treeCrack` | Tree cracks |
+| `world.waterSlosh` | Water sloshes |
+| `world.weedRustle` | Weeds rustle |
 
 ## Events
 
