@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using StardewModdingAPI;
 using StardewValley;
@@ -7,9 +8,18 @@ namespace StardewAudioCaptions.Captions;
 
 public class CaptionManager
 {
-    public static int MinDurationTicks { get; set; }
     public static readonly int InfiniteDuration = int.MaxValue;
     public static readonly string AnyCue = "";
+
+    public static readonly Dictionary<string, Color> AllowedColors = new()
+    {
+        { "White", Color.White },
+        { "Gray", Color.DarkGray },
+        { "Yellow", Color.Yellow },
+        { "Cyan", Color.DarkTurquoise },
+        { "Pink", Color.HotPink },
+        { "Green", Color.LimeGreen }
+    };
     
     private readonly HashSet<string> _captionIds;
     private readonly CaptionHudMessage _hudMessage;
@@ -29,7 +39,6 @@ public class CaptionManager
         Config = config;
         _captionsOnNextCue = new Dictionary<string, List<Caption>>();
         _defaultCueCaptions = new Dictionary<string, Caption>();
-        MinDurationTicks = config.MinDurationTicks;
     }
 
     /// <summary>
@@ -150,7 +159,7 @@ public class CaptionManager
         
         var captionTranslationKey = captionId + ".caption";
         var translatedCaption = _helper.Translation.Get(captionTranslationKey);
-        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption);
+        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption, CaptionColor(caption));
     }
 
     public bool ValidateCaption(Caption caption)
@@ -176,5 +185,11 @@ public class CaptionManager
         }
 
         return true;
+    }
+
+    public Color CaptionColor(Caption caption)
+    {
+        var colorStr = Config.CategoryColors.GetValueOrDefault(caption.CategoryId, "White");
+        return AllowedColors[colorStr];
     }
 }

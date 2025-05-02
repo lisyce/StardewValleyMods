@@ -7,4 +7,5 @@ public sealed class ModConfig
     public int MaxVisibleCaptions { get; set; } = 6;
     public int MinDurationTicks { get; set; } = 80;
     public Dictionary<string, bool> CaptionToggles { get; set; } = new();
+    public Dictionary<string, string> CategoryColors { get; set; } = new();
 }

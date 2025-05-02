@@ -24,7 +24,7 @@ public class ModEntry : Mod
         
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
-        _captionHudMessage = new CaptionHudMessage(_config);
+        _captionHudMessage = new CaptionHudMessage();
         CaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
 
         AudioPatches.Patch(_harmony);
@@ -35,7 +35,7 @@ public class ModEntry : Mod
     private void OnRenderedStep(object? sender, RenderedStepEventArgs e)
     {
         if (Game1.game1.takingMapScreenshot || Game1.HostPaused || e.Step != RenderSteps.Overlays) return;
-        _captionHudMessage.Draw(e.SpriteBatch);
+        _captionHudMessage.Draw(e.SpriteBatch, CaptionManager.Config);
     }
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
@@ -76,44 +76,28 @@ public class ModEntry : Mod
             name: () => Helper.Translation.Get("config.captionsEnabled"),
             tooltip: () => Helper.Translation.Get("config.captionsEnabled.tooltip"),
             getValue: () => _config.CaptionsOn,
-            setValue: value =>
-            {
-                _config.CaptionsOn = value;
-                _captionHudMessage.CaptionsOn = value;
-            });
+            setValue: value => _config.CaptionsOn = value);
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.fontScaling"),
             tooltip: () => Helper.Translation.Get("config.fontScaling.tooltip"),
             getValue: () => _config.FontScaling,
-            setValue: value =>
-            {
-                _config.FontScaling = value;
-                _captionHudMessage.FontScaling = value;
-            });
+            setValue: value => _config.FontScaling = value);
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.maxVisibleCaptions"),
             tooltip: () => Helper.Translation.Get("config.maxVisibleCaptions.tooltip"),
             getValue: () => _config.MaxVisibleCaptions,
-            setValue: value =>
-            {
-                _config.MaxVisibleCaptions = value;
-                _captionHudMessage.MaxVisible = value;
-            });
+            setValue: value =>  _config.MaxVisibleCaptions = value);
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.minDurationTicks"),
             tooltip: () => Helper.Translation.Get("config.minDurationTicks.tooltip"),
             getValue: () => _config.MinDurationTicks,
-            setValue: value =>
-            {
-                _config.MinDurationTicks = value;
-                CaptionManager.MinDurationTicks = value;
-            });
+            setValue: value => _config.MinDurationTicks = value);
 
         configMenu.AddSectionTitle(
             mod: ModManifest,
@@ -139,6 +123,14 @@ public class ModEntry : Mod
                 mod: ModManifest,
                 pageId: category.Id,
                 text: () => category.Translation);
+            
+            configMenu.AddTextOption(
+                mod: ModManifest,
+                name: () => category.Translation + Helper.Translation.Get("config.categoryColor"),
+                getValue: () => _config.CategoryColors.GetValueOrDefault(category.Id, "White"),
+                setValue: value => _config.CategoryColors[category.Id] = value,
+                allowedValues: CaptionManager.AllowedColors.Keys
+                    .Select(x => Helper.Translation.Get("config.color" + x).ToString()).ToArray());
         }
         
         foreach (var category in translatedCategories)

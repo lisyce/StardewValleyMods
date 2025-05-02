@@ -7,6 +7,7 @@ public class Caption
     public readonly bool ShouldLog;
     private readonly int? _duration;
     public int MaxDuration => _duration ?? CaptionManager.InfiniteDuration;
+    public string CategoryId => CaptionId.Split(".")[0];
 
     public Caption(string cueId, string captionId, int? duration = null, bool shouldLog = true)
     {

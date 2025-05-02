@@ -11,20 +11,14 @@ namespace StardewAudioCaptions.Captions;
 public class CaptionHudMessage
 {
     private readonly List<CaptionHudMessageElement> _captions;
-    public float FontScaling { get; set; }
-    public int MaxVisible { get; set; }
     
-    public bool CaptionsOn { get; set; }
 
-    public CaptionHudMessage(ModConfig config)
+    public CaptionHudMessage()
     {
         _captions = new List<CaptionHudMessageElement>();
-        FontScaling = config.FontScaling;
-        MaxVisible = config.MaxVisibleCaptions;
-        CaptionsOn = config.CaptionsOn;
     }
 
-    public void AddCaption(Cue cue, string message, int maxDurationTicks, Caption backingCaption)
+    public void AddCaption(Cue cue, string message, int maxDurationTicks, Caption backingCaption, Color color)
     {
         // is this caption already displayed?
         foreach (var caption in _captions)
@@ -36,7 +30,7 @@ public class CaptionHudMessage
             }
         }
         
-        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks, backingCaption);
+        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks, backingCaption, color);
         _captions.Add(el);
     }
     
@@ -45,19 +39,19 @@ public class CaptionHudMessage
         _captions.RemoveWhere(s => s.Update());
     }
 
-    public void Draw(SpriteBatch b)
+    public void Draw(SpriteBatch b, ModConfig config)
     {
-        if (_captions.Count == 0 || !CaptionsOn) return;
+        if (_captions.Count == 0 || !config.CaptionsOn) return;
         
-        var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * FontScaling);
-        var elPadding = (int) (8 * FontScaling);
+        var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * config.FontScaling);
+        var elPadding = (int) (8 * config.FontScaling);
         var mainPadding = 16;
 
         var height = 2f * mainPadding - elPadding;  // we trim off the padding from the last element
-        for (var i=0; i < MaxVisible && i < _captions.Count; i++)
+        for (var i=0; i < config.MaxVisibleCaptions && i < _captions.Count; i++)
         {
             var sub = _captions[i];
-            height += (Game1.smallFont.MeasureString(sub.Message).Y * FontScaling) + elPadding;
+            height += (Game1.smallFont.MeasureString(sub.Message).Y * config.FontScaling) + elPadding;
         }
         
 
@@ -71,11 +65,11 @@ public class CaptionHudMessage
         
         // draw the actual captions
         y += mainPadding;
-        for (var i=0; i < MaxVisible && i < _captions.Count; i++)
+        for (var i=0; i < config.MaxVisibleCaptions && i < _captions.Count; i++)
         {
-            var sub = _captions[i];
+            var el = _captions[i];
             var pos = new Vector2(x + mainPadding, y);
-            b.DrawString(Game1.smallFont, sub.Message, pos, Color.White * sub.Transparency, 0, Vector2.Zero, FontScaling, SpriteEffects.None, 1f);
+            b.DrawString(Game1.smallFont, el.Message, pos, el.Color * el.Transparency, 0, Vector2.Zero, config.FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;
         }
     }

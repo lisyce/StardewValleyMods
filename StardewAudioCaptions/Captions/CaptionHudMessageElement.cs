@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
 namespace StardewAudioCaptions.Captions;
@@ -10,9 +11,11 @@ public class CaptionHudMessageElement
     
     public string Message { get; }
     public float Transparency { get; private set; }
+    public Color Color { get; }
+    
     public readonly Caption Caption;
 
-    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks, Caption caption)
+    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks, Caption caption, Color color)
     {
         Message = message;
         _cue = cue;
@@ -20,6 +23,7 @@ public class CaptionHudMessageElement
         _ticksElapsed = 0;
         _maxDurationTicks = maxDurationTicks;
         Caption = caption;
+        Color = color;
     }
 
     public bool Update()
@@ -49,6 +53,6 @@ public class CaptionHudMessageElement
 
     private bool VisibleLongEnough()
     {
-        return _ticksElapsed >= CaptionManager.MinDurationTicks;
+        return _ticksElapsed >= ModEntry.CaptionManager.Config.MinDurationTicks;
     }
 }
