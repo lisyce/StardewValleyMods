@@ -25,6 +25,7 @@
   "ambient.category": "Ambient Sounds",
   "weapons.category": "Weapons",
   "critters.category": "Critters",
+  "animals.category": "Farm Animals",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
@@ -188,6 +189,17 @@
   "weapons.playerDebuff.caption": "Player debuffed",
   "weapons.debuffFire.caption": "Debuff projectile fired",
   "weapons.playerFreeze.caption": "Player freezes",
-  "weapons.monsterFreeze.caption": "Monster freezes"
-
+  "weapons.monsterFreeze.caption": "Monster freezes",
+  
+  "animals.chicken.caption": "Chicken clucks",
+  "animals.duck.caption": "Duck quacks",
+  "animals.rabbit.caption": "Rabbit rustles",
+  "animals.cow.caption": "Cow moos",
+  "animals.goat.caption": "Goat bleats",
+  "animals.sheep.caption": "Sheep bleats",
+  "animals.pig.caption": "Pig oinks",
+  "animals.ostrich.caption": "Ostrich coos",
+  "animals.digging.caption": "Animal digging",
+  "animals.enterHouse.caption": "Animal goes inside",
+  "animals.splash.caption": "Animal splashes"
 }

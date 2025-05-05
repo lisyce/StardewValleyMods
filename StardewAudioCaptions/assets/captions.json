@@ -160,5 +160,17 @@
   "weapons.projectileFire",
   "weapons.playerDebuff",
   "weapons.playerFreeze",
-  "weapons.monsterFreeze"
+  "weapons.monsterFreeze",
+  
+  "animals.chicken",
+  "animals.duck",
+  "animals.rabbit",
+  "animals.cow",
+  "animals.goat",
+  "animals.sheep",
+  "animals.pig",
+  "animals.ostrich",
+  "animals.digging",
+  "animals.enterHouse",
+  "animals.splash"
 ]

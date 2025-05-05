@@ -226,5 +226,14 @@ public class ModEntry : Mod
         
         CaptionManager.RegisterDefaultCaption(new Caption("parachute", "events.parachute"));
         CaptionManager.RegisterDefaultCaption(new Caption("planeflyby", "events.planefly"));
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("cluck", "animals.chicken"));
+        CaptionManager.RegisterDefaultCaption(new Caption("Duck", "animals.duck"));
+        CaptionManager.RegisterDefaultCaption(new Caption("rabbit", "animals.rabbit"));
+        CaptionManager.RegisterDefaultCaption(new Caption("cow", "animals.cow"));
+        CaptionManager.RegisterDefaultCaption(new Caption("goat", "animals.goat"));
+        CaptionManager.RegisterDefaultCaption(new Caption("sheep", "animals.sheep"));
+        CaptionManager.RegisterDefaultCaption(new Caption("pig", "animals.pig"));
+        CaptionManager.RegisterDefaultCaption(new Caption("Ostrich", "animals.ostrich"));
     }
 }

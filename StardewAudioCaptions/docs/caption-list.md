@@ -1,10 +1,10 @@
 # List of Captions
 
-Stardew Audio Captions currently features 154 captions.
+Stardew Audio Captions currently features 166 captions.
 
 ## Interactions
 
-15 captions in this category
+16 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -22,6 +22,7 @@ Stardew Audio Captions currently features 154 captions.
 | `interaction.shaftLanding` | Player hits ground |
 | `interaction.shippingBinClose` | Shipping bin closes |
 | `interaction.shippingBinOpen` | Shipping bin opens |
+| `interaction.singingStone` | Stone chimes |
 | `interaction.trashCan` | Trash rustles |
 
 ## Player
@@ -218,3 +219,21 @@ Stardew Audio Captions currently features 154 captions.
 | `weapons.block` | Weapon blocks |
 | `weapons.weaponClank` | Weapon clanks |
 | `weapons.swipe` | Weapon swipes |
+
+## Farm Animals
+
+11 captions in this category
+
+| Internal Id | English Caption |
+|-|-|
+| `animals.digging` | Animal digging |
+| `animals.enterHouse` | Animal goes inside |
+| `animals.splash` | Animal splashes |
+| `animals.chicken` | Chicken clucks |
+| `animals.cow` | Cow moos |
+| `animals.duck` | Duck quacks |
+| `animals.goat` | Goat bleats |
+| `animals.ostrich` | Ostrich coos |
+| `animals.pig` | Pig oinks |
+| `animals.rabbit` | Rabbit rustles |
+| `animals.sheep` | Sheep bleats |
