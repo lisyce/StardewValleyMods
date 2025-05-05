@@ -1,6 +1,6 @@
 # List of Captions
 
-Stardew Audio Captions currently features 166 captions.
+Stardew Audio Captions currently features 171 captions.
 
 ## Interactions
 
@@ -237,3 +237,15 @@ Stardew Audio Captions currently features 166 captions.
 | `animals.pig` | Pig oinks |
 | `animals.rabbit` | Rabbit rustles |
 | `animals.sheep` | Sheep bleats |
+
+## Pets
+
+5 captions in this category
+
+| Internal Id | English Caption |
+|-|-|
+| `pets.cat` | Cat meows |
+| `pets.dogBark` | Dog barks |
+| `pets.dogPant` | Dog pants |
+| `pets.jump` | Pet jumps |
+| `pets.butterflyPowder` | Whooshing |

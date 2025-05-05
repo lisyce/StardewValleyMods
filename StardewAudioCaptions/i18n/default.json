@@ -206,5 +206,7 @@
   
   "pets.cat.caption": "Cat meows",
   "pets.dogBark.caption": "Dog barks",
-  "pets.dogPant.caption": "Dog pants"
+  "pets.dogPant.caption": "Dog pants",
+  "pets.butterflyPowder.caption": "Whooshing",
+  "pets.jump.caption": "Pet jumps"
 }
