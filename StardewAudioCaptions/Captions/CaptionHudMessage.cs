@@ -57,8 +57,8 @@ public class CaptionHudMessage
         
 
         var loc = GetSubtitleLocation(config, height);
-        var x = (int) loc.X + config.SubtitleOffsetX;
-        var y = (int) loc.Y + config.SubtitleOffsetY;
+        var x = (int) loc.X + config.CaptionOffsetX;
+        var y = (int) loc.Y + config.CaptionOffsetY;
 
         var boxSourceRect = new Rectangle(301, 288, 15, 15);
         IClickableMenu.drawTextureBox(b, Game1.mouseCursors, boxSourceRect, x, y, 300, (int) height, Color.White, drawShadow: false, scale: 4f);
@@ -78,7 +78,7 @@ public class CaptionHudMessage
     private Vector2 GetSubtitleLocation(ModConfig config, float boxheight)
     {
         var safeArea = Utility.getSafeArea();
-        return config.SubtitlePosition switch
+        return config.CaptionPosition switch
         {
             "Center Left" => new Vector2(safeArea.Left + 8, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
             "Bottom Left" => new Vector2(safeArea.Left + 8, safeArea.Bottom - boxheight - 8),

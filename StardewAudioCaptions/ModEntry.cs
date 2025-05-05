@@ -101,24 +101,24 @@ public class ModEntry : Mod
         
         configMenu.AddTextOption(
             mod: ModManifest,
-            name: () => Helper.Translation.Get("config.subtitlePosition"),
-            getValue: () => _config.SubtitlePosition,
-            setValue: value => _config.SubtitlePosition = value,
+            name: () => Helper.Translation.Get("config.captionPosition"),
+            getValue: () => _config.CaptionPosition,
+            setValue: value => _config.CaptionPosition = value,
             allowedValues: new []{ "Top Left", "Center Left", "Bottom Left", "Bottom Center", "Bottom Right", "Center Right" });
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.offsetX"),
             tooltip: () => Helper.Translation.Get("config.offset.tooltip"),
-            getValue: () => _config.SubtitleOffsetX,
-            setValue: value => _config.SubtitleOffsetX = value);
+            getValue: () => _config.CaptionOffsetX,
+            setValue: value => _config.CaptionOffsetX = value);
         
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.offsetY"),
             tooltip: () => Helper.Translation.Get("config.offset.tooltip"),
-            getValue: () => _config.SubtitleOffsetY,
-            setValue: value => _config.SubtitleOffsetY = value);
+            getValue: () => _config.CaptionOffsetY,
+            setValue: value => _config.CaptionOffsetY = value);
         
         // auto-generated config for categories
         configMenu.AddSectionTitle(

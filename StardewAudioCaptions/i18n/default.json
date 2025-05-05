@@ -11,10 +11,10 @@
   "config.categories.paragraph": "The following links go link to other pages where you can turn individual captions on and off.",
   "config.toggleIndividualSectionTitle": "Toggle Individual Captions",
   "config.categoryColor": " caption color",
-  "config.subtitlePosition": "Subtitle Location",
+  "config.captionPosition": "Caption Location",
   "config.offsetX": "Location X-Offset (Pixels)",
   "config.offsetY": "Location X-Offset (Pixels)",
-  "config.offset.tooltip": "Additionally offsets the subtitle UI from the specified location for finer customizability. Default 0.",
+  "config.offset.tooltip": "Additionally offsets the caption UI from the specified location for finer customizability. Default 0.",
 
   "interaction.category": "Interactions",
   "player.category": "Player",
