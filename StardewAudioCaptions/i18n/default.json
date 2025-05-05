@@ -41,6 +41,7 @@
   "interaction.shaftLanding.caption": "Player hits ground",
   "interaction.itemShipped.caption": "Item shipped",
   "interaction.doorOpen.caption": "Door opens",
+  "interaction.singingStone.caption": "Stone chimes",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",

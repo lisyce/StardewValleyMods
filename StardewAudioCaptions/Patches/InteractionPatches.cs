@@ -99,6 +99,12 @@ public class InteractionPatches : ICaptionPatch
             new Caption("doorOpen", "interaction.doorOpen"),
             new Caption("doorCreak", "interaction.doorOpen"));
         
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnSingingStone"),
+            new Caption("crystal", "interaction.singingStone"));
+        
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
