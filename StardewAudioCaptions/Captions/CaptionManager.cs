@@ -48,7 +48,7 @@ public class CaptionManager
     public void OnSoundPlayed(Cue cue)
     {
         var cueId = cue.Name;
-        _monitor.Log(cueId, LogLevel.Debug);
+        //_monitor.Log(cueId, LogLevel.Debug);
         
         // do we have any overrides?
         if (_captionsOnNextCue.TryGetValue(cueId, out var captions))
@@ -103,7 +103,7 @@ public class CaptionManager
 
         if (caption.ShouldLog)
         {
-            _monitor.Log($"Registered caption {caption.CaptionId} for next cue {caption.CueId}", LogLevel.Debug);
+            //_monitor.Log($"Registered caption {caption.CaptionId} for next cue {caption.CueId}", LogLevel.Debug);
         }
     }
     
@@ -121,7 +121,7 @@ public class CaptionManager
             if (captions.Count == 0) _captionsOnNextCue.Remove(caption.CueId);
             if (caption.ShouldLog)
             {
-                _monitor.Log($"Unregistered caption {caption.CaptionId} for cue {caption.CueId}", LogLevel.Debug);
+                //_monitor.Log($"Unregistered caption {caption.CaptionId} for cue {caption.CueId}", LogLevel.Debug);
             }
         }
     }

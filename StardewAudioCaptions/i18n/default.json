@@ -11,13 +11,11 @@
   "config.categories.paragraph": "The following links go link to other pages where you can turn individual captions on and off.",
   "config.toggleIndividualSectionTitle": "Toggle Individual Captions",
   "config.categoryColor": " caption color",
-  "config.colorWhite": "White",
-  "config.colorGray": "Gray",
-  "config.colorYellow": "Yellow",
-  "config.colorCyan": "Cyan",
-  "config.colorPink": "Pink",
-  "config.colorGreen": "Green",
-  
+  "config.subtitlePosition": "Subtitle Location",
+  "config.offsetX": "Location X-Offset (Pixels)",
+  "config.offsetY": "Location X-Offset (Pixels)",
+  "config.offset.tooltip": "Additionally offsets the subtitle UI from the specified location for finer customizability. Default 0.",
+
   "interaction.category": "Interactions",
   "player.category": "Player",
   "world.category": "World",
@@ -41,6 +39,8 @@
   "interaction.footstepsDescend.caption": "Footsteps descending",
   "interaction.shaftFalling.caption": "Player falling",
   "interaction.shaftLanding.caption": "Player hits ground",
+  "interaction.itemShipped.caption": "Item shipped",
+  "interaction.doorOpen.caption": "Door opens",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -66,7 +66,7 @@
   "ambient.coinsClinking.caption": "Coins clinking",
   
   "critters.birdFlap.caption": "Bird flapping",
-  "critters.birdPeck.caption": "Bird pecks ground",
+  "critters.birdPeck.caption": "Bird pecking",
   "critters.butterflySparkle.caption": "Sparkling",
   "critters.monkey.caption": "Monkey chatters",
   "critters.crabSplash.caption": "Crab splashes",
@@ -99,6 +99,8 @@
   "events.meteorite.caption": "Whooshing",
   "events.dogs.caption": "Howling and barking",
   "events.owl.caption": "Owl hoots",
+  "events.parachute.caption": "Parachutes rustling",
+  "events.planefly.caption": "Plane engine whirring",
   
   "tools.shears.caption": "Shears click",
   "tools.pail.caption": "Milking",

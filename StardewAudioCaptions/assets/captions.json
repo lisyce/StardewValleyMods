@@ -12,6 +12,8 @@
   "interaction.footstepsDescend",
   "interaction.shaftFalling",
   "interaction.shaftLanding",
+  "interaction.itemShipped",
+  "interaction.doorOpen",
   
   "player.eating",
   "player.drinking",
@@ -69,6 +71,8 @@
   "events.meteorite",
   "events.dogs",
   "events.owl",
+  "events.parachute",
+  "events.planefly",
   
   "tools.shears",
   "tools.pail",

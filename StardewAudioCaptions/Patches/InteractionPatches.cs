@@ -73,6 +73,12 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(ShippingBin), "closeShippingBinLid"),
             new Caption("doorCreakReverse", "interaction.shippingBinClose", shouldLog: false));
         
+        PatchGenerator.GeneratePrefix(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(ShippingBin), "showShipment"),
+            new Caption("Ship", "interaction.itemShipped"));
+        
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
@@ -85,6 +91,13 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.enterMineShaft)),
             new Caption("fallDown", "interaction.shaftFalling"),
             new Caption("clubSmash", "interaction.shaftLanding"));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.openDoor)),
+            new Caption("doorOpen", "interaction.doorOpen"),
+            new Caption("doorCreak", "interaction.doorOpen"));
         
     }
 

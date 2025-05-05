@@ -17,7 +17,7 @@ public class EventsPatches : ICaptionPatch
             new Caption("windstorm", "events.raccoon0", 9 * 60),
             new Caption("windstorm", "events.raccoon1", 9 * 60),
             new Caption("UFO", "events.ufo", 3 * 60),
-            new Caption("Meteorite", "events.meteorite", 3 * 60),
+            new Caption("Meteorite", "events.meteorite", 5 * 60),
             new Caption("dogs", "events.dogs", 4 * 60),
             new Caption("owl", "events.owl"));
     }

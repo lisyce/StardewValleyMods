@@ -1,21 +1,23 @@
 # List of Captions
 
-Stardew Audio Captions currently features 150 captions.
+Stardew Audio Captions currently features 154 captions.
 
 ## Interactions
 
-13 captions in this category
+15 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `interaction.chestClose` | Chest closes |
 | `interaction.chest` | Chest opens |
 | `interaction.doorClose` | Door closes |
+| `interaction.doorOpen` | Door opens |
 | `interaction.fenceGate` | Fence gate toggles |
 | `interaction.fireplace` | Fire roars |
 | `interaction.footstepsDescend` | Footsteps descending |
 | `interaction.fridge` | Fridge opens |
 | `interaction.giftbox` | Gift box opens |
+| `interaction.itemShipped` | Item shipped |
 | `interaction.shaftFalling` | Player falling |
 | `interaction.shaftLanding` | Player hits ground |
 | `interaction.shippingBinClose` | Shipping bin closes |
@@ -62,7 +64,7 @@ Stardew Audio Captions currently features 150 captions.
 | Internal Id | English Caption |
 |-|-|
 | `critters.birdFlap` | Bird flapping |
-| `critters.birdPeck` | Bird pecks ground |
+| `critters.birdPeck` | Bird pecking |
 | `critters.birdChirp` | Birds chirp |
 | `critters.crabSplash` | Crab splashes |
 | `critters.crow` | Crow caws |
@@ -98,12 +100,14 @@ Stardew Audio Captions currently features 150 captions.
 
 ## Events
 
-7 captions in this category
+9 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `events.dogs` | Howling and barking |
 | `events.owl` | Owl hoots |
+| `events.parachute` | Parachutes rustling |
+| `events.planefly` | Plane engine whirring |
 | `events.earthquake` | Rumbling |
 | `events.ufo` | Sci-fi humming |
 | `events.raccoon1` | Tree falls |

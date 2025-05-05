@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Extensions;
+using StardewValley.Locations;
 using StardewValley.Menus;
 
 namespace StardewAudioCaptions.Captions;
@@ -55,9 +56,9 @@ public class CaptionHudMessage
         }
         
 
-        var safeArea = Utility.getSafeArea();
-        var x = safeArea.Left + 16;
-        var y = safeArea.Top + 16;
+        var loc = GetSubtitleLocation(config, height);
+        var x = (int) loc.X + config.SubtitleOffsetX;
+        var y = (int) loc.Y + config.SubtitleOffsetY;
 
         var boxSourceRect = new Rectangle(301, 288, 15, 15);
         IClickableMenu.drawTextureBox(b, Game1.mouseCursors, boxSourceRect, x, y, 300, (int) height, Color.White, drawShadow: false, scale: 4f);
@@ -72,6 +73,39 @@ public class CaptionHudMessage
             b.DrawString(Game1.smallFont, el.Message, pos, el.Color * el.Transparency, 0, Vector2.Zero, config.FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;
         }
+    }
+
+    private Vector2 GetSubtitleLocation(ModConfig config, float boxheight)
+    {
+        var safeArea = Utility.getSafeArea();
+        return config.SubtitlePosition switch
+        {
+            "Center Left" => new Vector2(safeArea.Left + 8, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
+            "Bottom Left" => new Vector2(safeArea.Left + 8, safeArea.Bottom - boxheight - 8),
+            "Bottom Center" => IsToolbarBottom() ? new Vector2(safeArea.Left + safeArea.Width / 2f - 110, Game1.uiViewport.Height - 110 - boxheight) : new Vector2(safeArea.Left + safeArea.Width / 2f - 150, Game1.uiViewport.Height - 8 - boxheight),
+            "Bottom Right" => ShouldDrawBottomRightFlush() ? new Vector2(safeArea.Right - 308, safeArea.Bottom - boxheight - 8) : new Vector2(Game1.showingHealthBar ? safeArea.Right - 415 : safeArea.Right - 360, safeArea.Bottom - boxheight - 8),
+            "Center Right" => new Vector2(safeArea.Right - 308, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
+            // default is top left
+            _ => PlayerInMines() ? new Vector2(safeArea.Left + 8, safeArea.Top + 64) : new Vector2(safeArea.Left + 8, safeArea.Top + 8)
+        };
+    }
+
+    private bool IsToolbarBottom()
+    {
+        var menu = Game1.onScreenMenus.First(m => m is Toolbar);
+        if (menu is not Toolbar tb) return false;
+
+        return tb.yPositionOnScreen > Game1.uiViewport.Height / 2;
+    }
+
+    private bool ShouldDrawBottomRightFlush()
+    {
+        return Utility.getSafeArea().Width < 1650;
+    }
+
+    private bool PlayerInMines()
+    {
+        return Game1.player.currentLocation is MineShaft;
     }
 
     public void ClearDisabledCaptions(ModConfig config)

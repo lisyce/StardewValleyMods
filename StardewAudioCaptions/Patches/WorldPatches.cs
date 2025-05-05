@@ -5,6 +5,7 @@ using StardewValley;
 using StardewValley.BellsAndWhistles;
 using StardewValley.Buildings;
 using StardewValley.Locations;
+using StardewValley.Menus;
 using StardewValley.TerrainFeatures;
 
 namespace StardewAudioCaptions.Patches;
@@ -22,14 +23,15 @@ public class WorldPatches : ICaptionPatch
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
-            AccessTools.Method(typeof(JumpingFish), nameof(JumpingFish.Splash)),
-            new Caption("dropItemInWater", "world.fishSplash"));
+            AccessTools.Constructor(typeof(MineElevatorMenu)),
+            new Caption("crystal", "world.elevator"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
-            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.UpdateWhenCurrentLocation)),
-            new Caption("dropItemInWater", "world.fishSplash", shouldLog: false));
+            AccessTools.Method(typeof(JumpingFish), nameof(JumpingFish.Splash)),
+            new Caption("dropItemInWater", "world.fishSplash"));
+        
     
         PatchGenerator.GeneratePatchPairs(
             harmony,

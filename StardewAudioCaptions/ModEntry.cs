@@ -98,7 +98,29 @@ public class ModEntry : Mod
             tooltip: () => Helper.Translation.Get("config.minDurationTicks.tooltip"),
             getValue: () => _config.MinDurationTicks,
             setValue: value => _config.MinDurationTicks = value);
-
+        
+        configMenu.AddTextOption(
+            mod: ModManifest,
+            name: () => Helper.Translation.Get("config.subtitlePosition"),
+            getValue: () => _config.SubtitlePosition,
+            setValue: value => _config.SubtitlePosition = value,
+            allowedValues: new []{ "Top Left", "Center Left", "Bottom Left", "Bottom Center", "Bottom Right", "Center Right" });
+        
+        configMenu.AddNumberOption(
+            mod: ModManifest,
+            name: () => Helper.Translation.Get("config.offsetX"),
+            tooltip: () => Helper.Translation.Get("config.offset.tooltip"),
+            getValue: () => _config.SubtitleOffsetX,
+            setValue: value => _config.SubtitleOffsetX = value);
+        
+        configMenu.AddNumberOption(
+            mod: ModManifest,
+            name: () => Helper.Translation.Get("config.offsetY"),
+            tooltip: () => Helper.Translation.Get("config.offset.tooltip"),
+            getValue: () => _config.SubtitleOffsetY,
+            setValue: value => _config.SubtitleOffsetY = value);
+        
+        // auto-generated config for categories
         configMenu.AddSectionTitle(
             mod: ModManifest,
             text: () => Helper.Translation.Get("config.toggleIndividualSectionTitle"));
@@ -129,8 +151,7 @@ public class ModEntry : Mod
                 name: () => category.Translation + Helper.Translation.Get("config.categoryColor"),
                 getValue: () => _config.CategoryColors.GetValueOrDefault(category.Id, "White"),
                 setValue: value => _config.CategoryColors[category.Id] = value,
-                allowedValues: CaptionManager.AllowedColors.Keys
-                    .Select(x => Helper.Translation.Get("config.color" + x).ToString()).ToArray());
+                allowedValues: CaptionManager.AllowedColors.Keys.ToArray());
         }
         
         foreach (var category in translatedCategories)
@@ -202,6 +223,8 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("slime", "monsters.slime"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("slingshot", "weapons.slingshot"));
-
+        
+        CaptionManager.RegisterDefaultCaption(new Caption("parachute", "events.parachute"));
+        CaptionManager.RegisterDefaultCaption(new Caption("planeflyby", "events.planefly"));
     }
 }
