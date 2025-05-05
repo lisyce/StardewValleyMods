@@ -26,6 +26,7 @@
   "weapons.category": "Weapons",
   "critters.category": "Critters",
   "animals.category": "Farm Animals",
+  "pets.category": "Pets",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
@@ -201,5 +202,9 @@
   "animals.ostrich.caption": "Ostrich coos",
   "animals.digging.caption": "Animal digging",
   "animals.enterHouse.caption": "Animal goes inside",
-  "animals.splash.caption": "Animal splashes"
+  "animals.splash.caption": "Animal splashes",
+  
+  "pets.cat.caption": "Cat meows",
+  "pets.dogBark.caption": "Dog barks",
+  "pets.dogPant.caption": "Dog pants"
 }
