@@ -2,6 +2,7 @@
 using StardewAudioCaptions.Captions;
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.Characters;
 
 namespace StardewAudioCaptions.Patches;
 
@@ -26,6 +27,12 @@ public class AnimalPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(FarmAnimal), nameof(FarmAnimal.Splash)),
             new Caption("dropItemInWater", "animals.splash"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Horse), nameof(Horse.OnMountFootstep)),
+            new Caption(CaptionManager.AnyCue, "animals.horseGallop", shouldLog: false));
     }
 
     private static IEnumerable<CodeInstruction> FarmAnimalBehaviorsTranspiler(IEnumerable<CodeInstruction> instructions)

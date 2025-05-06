@@ -7,6 +7,7 @@ using StardewValley.Buildings;
 using StardewValley.Locations;
 using StardewValley.Menus;
 using StardewValley.TerrainFeatures;
+using StardewValley.Tools;
 
 namespace StardewAudioCaptions.Patches;
 
@@ -78,6 +79,24 @@ public class WorldPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(ParrotPlatform), nameof(ParrotPlatform.Update)),
             new Caption("treethud", "world.parrotExpressLand"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Tree), nameof(Tree.performToolAction)),
+            new Caption("moss_cut", "world.moss"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.performOrePanTenMinuteUpdate)),
+            new Caption("slosh", "world.panSpot", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(FishingRod), nameof(FishingRod.draw)),
+            new Caption("waterSlosh", "world.waterSlosh"));
 
     }
     

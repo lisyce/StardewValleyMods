@@ -26,5 +26,11 @@ public class PlayerPatches : ICaptionPatch
             new Caption("snowyStep", "player.footsteps", shouldLog: false),
             new Caption("grassyStep", "player.footsteps", shouldLog: false),
             new Caption("woodyStep", "player.footsteps", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.checkAction)),
+            new Caption("pickUpItem", "player.itemCollect", shouldLog: false));
     }
 }

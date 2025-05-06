@@ -27,6 +27,7 @@
   "critters.category": "Critters",
   "animals.category": "Farm Animals",
   "pets.category": "Pets",
+  "fishing.category": "Fishing",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
@@ -44,6 +45,11 @@
   "interaction.itemShipped.caption": "Item shipped",
   "interaction.doorOpen.caption": "Door opens",
   "interaction.singingStone.caption": "Stone chimes",
+  "interaction.cropHarvest.caption": "Crop harvested",
+  "interaction.hayHopper.caption": "Hay rustles",
+  "interaction.containerBreak.caption": "Crate breaks",
+  "interaction.containerCrack.caption": "Crate cracks",
+  "interaction.minecart.caption": "Coal thuds",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -52,6 +58,7 @@
   "player.footstepsJingle.caption": "Bell jingles",
   "player.itemCollect.caption": "Item collected",
   "player.itemThrown.caption": "Item thrown down",
+  "player.questComplete.caption": "Quest completes",
   
   "ambient.thunder.caption": "Thunder rumbles",
   "ambient.trainWhistle.caption": "Train whistles",
@@ -67,6 +74,7 @@
   "ambient.cricket.caption": "Crickets chirping",
   "ambient.waterfall.caption": "Waterfall roaring",
   "ambient.coinsClinking.caption": "Coins clinking",
+  "ambient.wind.caption": "Wind blowing",
   
   "critters.birdFlap.caption": "Bird flapping",
   "critters.birdPeck.caption": "Bird pecking",
@@ -79,12 +87,14 @@
   "critters.frogSplash.caption": "Frog splashes",
   "critters.sandDuggyWhack.caption": "Sand Duggy hurts",
   "critters.sandDuggyHide.caption": "Sand Duggy hides",
+  "critters.junimo.caption": "Junimo meeps",
+  "critters.junimoBundle.caption": "Junimo deposits bundle",
 
   "world.leafRustle.caption": "Leaves rustle",
   "world.elevator.caption": "Elevator dings",
   "world.waterSlosh.caption": "Water sloshes",
   "world.lavaSlosh.caption": "Lava sloshes",
-  "world.fishSplash.caption": "Fish splashes",
+  "world.fishSplash.caption": "Fish splasdes",
   "world.rooster.caption": "Rooster crows",
   "world.ladderAppear.caption": "Ladder appears",
   "world.fuseHiss.caption": "Fuse hissing",
@@ -94,6 +104,8 @@
   "world.weedRustle.caption": "Weeds rustle",
   "world.crystalShatter.caption": "Crystal shatters",
   "world.parrotExpressLand.caption": "Parrot Express lands",
+  "world.moss.caption": "Moss rustles",
+  "world.panSpot.caption": "Panning spot appears",
   
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
@@ -109,6 +121,8 @@
   "tools.pail.caption": "Milking",
   "tools.axe.caption": "Axe thuds",
   "tools.pickaxe.caption": "Pickaxe thuds",
+  "tools.pan.caption": "Pan sloshes",
+  "tools.wateringCan.caption": "Water pours",
   
   "monsters.batScreech.caption": "Bat screeches",
   "monsters.serpentSpawn.caption": "Serpent spawns",
@@ -191,6 +205,7 @@
   "weapons.debuffFire.caption": "Debuff projectile fired",
   "weapons.playerFreeze.caption": "Player freezes",
   "weapons.monsterFreeze.caption": "Monster freezes",
+  "weapons.crit.caption": "Weapon crits",
   
   "animals.chicken.caption": "Chicken clucks",
   "animals.duck.caption": "Duck quacks",
@@ -203,11 +218,20 @@
   "animals.digging.caption": "Animal digging",
   "animals.enterHouse.caption": "Animal goes inside",
   "animals.splash.caption": "Animal splashes",
+  "animals.horseGallop.caption": "Horse galloping",
   
   "pets.cat.caption": "Cat meows",
   "pets.dogBark.caption": "Dog barks",
   "pets.dogPant.caption": "Dog pants",
   "pets.butterflyPowder.caption": "Whooshing",
   "pets.jump.caption": "Pet jumps",
-  "pets.turtle.caption": "Turtle chirps"
+  "pets.turtle.caption": "Turtle chirps",
+  
+  "fishing.cast.caption": "Fishing rod casting",
+  "fishing.splash.caption": "Fishing rod splashes",
+  "fishing.bite.caption": "Fish bites",
+  "fishing.hit.caption": "Fish hooked",
+  "fishing.reeling.caption": "Fishing rod reeling",
+  "fishing.escape.caption": "Fish escapes",
+  "fishing.caught.caption": "Fish caught"
 }

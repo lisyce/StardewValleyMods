@@ -25,6 +25,11 @@ public class SoundCueCodeMatcher
         _matcher = new CodeMatcher(instructions);
     }
 
+    public SoundCueCodeMatcher(CodeMatcher matcher)
+    {
+        _matcher = matcher;
+    }
+
     public SoundCueCodeMatcher FindCue(string cueId, MethodInfo playSoundMethod)
     {
         _matcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, cueId))
@@ -49,7 +54,7 @@ public class SoundCueCodeMatcher
             new CodeInstruction(OpCodes.Ldc_I4, shouldLog ? 1 : 0),
             new CodeInstruction(OpCodes.Newobj, captionCtor),
             new CodeInstruction(OpCodes.Call, helper))
-            .Advance(1);
+            .Advance(8);
         return this;
     }
 

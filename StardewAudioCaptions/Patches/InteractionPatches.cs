@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Reflection.Emit;
 using HarmonyLib;
 using Microsoft.Xna.Framework;
 using StardewModdingAPI;
@@ -105,6 +106,31 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnSingingStone"),
             new Caption("crystal", "interaction.singingStone"));
         
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Building), nameof(Building.ToggleAnimalDoor)),
+            new Caption("doorCreak", "interaction.doorClose"),
+            new Caption("doorCreakReverse", "interaction.doorOpen"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnFeedHopper"),
+            new Caption("shwip", "interaction.hayHopper"));
+        
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(BreakableContainer), nameof(BreakableContainer.performToolAction)),
+            BreakableContainerPerformToolActionTranspiler);
+        
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
+            MineshaftCheckActionTranspiler);
+        
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
@@ -121,5 +147,40 @@ public class InteractionPatches : ICaptionPatch
 
         chestDelegate = null;
         return false;
+    }
+
+    private static IEnumerable<CodeInstruction> BreakableContainerPerformToolActionTranspiler(
+        IEnumerable<CodeInstruction> instructions)
+    {
+        var playSound =
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.playNearbySoundAll));
+        
+        // break sound
+        var matcher = new CodeMatcher(instructions);
+        matcher.MatchStartForward(
+                new CodeMatch(OpCodes.Call, playSound))
+            .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
+
+        var soundCueMatcher = new SoundCueCodeMatcher(matcher);
+        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerBreak",
+            CaptionManager.InfiniteDuration);
+        
+        // hit sound
+        matcher.MatchStartForward(
+                new CodeMatch(OpCodes.Call, playSound))
+            .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
+        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerCrack",
+            CaptionManager.InfiniteDuration);
+
+        return soundCueMatcher.InstructionEnumeration();
+    }
+
+    private static IEnumerable<CodeInstruction> MineshaftCheckActionTranspiler(
+        IEnumerable<CodeInstruction> instructions)
+    {
+        var matcher = new SoundCueCodeMatcher(instructions);
+        matcher.FindCue("openBox", SoundCueCodeMatcher.GameLocationPlaySound)
+            .RegisterCaptionForNextCue("openBox", "interaction.minecart", CaptionManager.InfiniteDuration);
+        return matcher.InstructionEnumeration();
     }
 }

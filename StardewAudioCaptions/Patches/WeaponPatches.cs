@@ -108,5 +108,11 @@ public class WeaponPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(DebuffingProjectile), nameof(DebuffingProjectile.behaviorOnCollisionWithMonster)),
             new Caption("frozen", "weapons.monsterFreeze"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), nameof(GameLocation.damageMonster), new []{ typeof(Rectangle), typeof(int), typeof(int), typeof(bool), typeof(float), typeof(int), typeof(float), typeof(float), typeof(bool), typeof(Farmer), typeof(bool) }),
+            new Caption("crit", "weapons.crit"));
     }
 }

@@ -1,15 +1,19 @@
 # List of Captions
 
-Stardew Audio Captions currently features 172 captions.
+Stardew Audio Captions currently features 194 captions.
 
 ## Interactions
 
-16 captions in this category
+21 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `interaction.chestClose` | Chest closes |
 | `interaction.chest` | Chest opens |
+| `interaction.minecart` | Coal thuds |
+| `interaction.containerBreak` | Crate breaks |
+| `interaction.containerCrack` | Crate cracks |
+| `interaction.cropHarvest` | Crop harvested |
 | `interaction.doorClose` | Door closes |
 | `interaction.doorOpen` | Door opens |
 | `interaction.fenceGate` | Fence gate toggles |
@@ -17,6 +21,7 @@ Stardew Audio Captions currently features 172 captions.
 | `interaction.footstepsDescend` | Footsteps descending |
 | `interaction.fridge` | Fridge opens |
 | `interaction.giftbox` | Gift box opens |
+| `interaction.hayHopper` | Hay rustles |
 | `interaction.itemShipped` | Item shipped |
 | `interaction.shaftFalling` | Player falling |
 | `interaction.shaftLanding` | Player hits ground |
@@ -27,7 +32,7 @@ Stardew Audio Captions currently features 172 captions.
 
 ## Player
 
-7 captions in this category
+8 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -38,10 +43,11 @@ Stardew Audio Captions currently features 172 captions.
 | `player.itemCollect` | Item collected |
 | `player.itemThrown` | Item thrown down |
 | `player.hurts` | Player hurts |
+| `player.questComplete` | Quest completes |
 
 ## Ambient Sounds
 
-12 captions in this category
+13 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -57,10 +63,11 @@ Stardew Audio Captions currently features 172 captions.
 | `ambient.distantTrain` | Train whistles faintly |
 | `ambient.caveDrip` | Water drips |
 | `ambient.waterfall` | Waterfall roaring |
+| `ambient.wind` | Wind blowing |
 
 ## Critters
 
-13 captions in this category
+15 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -71,6 +78,8 @@ Stardew Audio Captions currently features 172 captions.
 | `critters.crow` | Crow caws |
 | `critters.frogCroak` | Frog croaks |
 | `critters.frogSplash` | Frog splashes |
+| `critters.junimoBundle` | Junimo deposits bundle |
+| `critters.junimo` | Junimo meeps |
 | `critters.monkey` | Monkey chatters |
 | `critters.parrot` | Parrot squawks |
 | `critters.sandDuggyHide` | Sand Duggy hides |
@@ -80,19 +89,21 @@ Stardew Audio Captions currently features 172 captions.
 
 ## World
 
-14 captions in this category
+16 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `world.bombExplode` | Bomb explodes |
 | `world.crystalShatter` | Crystal shatters |
 | `world.elevator` | Elevator dings |
-| `world.fishSplash` | Fish splashes |
+| `world.fishSplash` | Fish splasdes |
 | `world.fuseHiss` | Fuse hissing |
 | `world.grassRustle` | Grass rustles |
 | `world.ladderAppear` | Ladder appears |
 | `world.lavaSlosh` | Lava sloshes |
 | `world.leafRustle` | Leaves rustle |
+| `world.moss` | Moss rustles |
+| `world.panSpot` | Panning spot appears |
 | `world.parrotExpressLand` | Parrot Express lands |
 | `world.rooster` | Rooster crows |
 | `world.treeCrack` | Tree cracks |
@@ -117,14 +128,16 @@ Stardew Audio Captions currently features 172 captions.
 
 ## Tools
 
-4 captions in this category
+6 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `tools.axe` | Axe thuds |
 | `tools.pail` | Milking |
+| `tools.pan` | Pan sloshes |
 | `tools.pickaxe` | Pickaxe thuds |
 | `tools.shears` | Shears click |
+| `tools.wateringCan` | Water pours |
 
 ## Monsters
 
@@ -201,7 +214,7 @@ Stardew Audio Captions currently features 172 captions.
 
 ## Weapons
 
-14 captions in this category
+15 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -218,11 +231,12 @@ Stardew Audio Captions currently features 172 captions.
 | `weapons.recharge` | Weapon alt recharges |
 | `weapons.block` | Weapon blocks |
 | `weapons.weaponClank` | Weapon clanks |
+| `weapons.crit` | Weapon crits |
 | `weapons.swipe` | Weapon swipes |
 
 ## Farm Animals
 
-11 captions in this category
+12 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -233,6 +247,7 @@ Stardew Audio Captions currently features 172 captions.
 | `animals.cow` | Cow moos |
 | `animals.duck` | Duck quacks |
 | `animals.goat` | Goat bleats |
+| `animals.horseGallop` | Horse galloping |
 | `animals.ostrich` | Ostrich coos |
 | `animals.pig` | Pig oinks |
 | `animals.rabbit` | Rabbit rustles |
@@ -250,3 +265,17 @@ Stardew Audio Captions currently features 172 captions.
 | `pets.jump` | Pet jumps |
 | `pets.turtle` | Turtle chirps |
 | `pets.butterflyPowder` | Whooshing |
+
+## Fishing
+
+7 captions in this category
+
+| Internal Id | English Caption |
+|-|-|
+| `fishing.bite` | Fish bites |
+| `fishing.caught` | Fish caught |
+| `fishing.escape` | Fish escapes |
+| `fishing.hit` | Fish hooked |
+| `fishing.cast` | Fishing rod casting |
+| `fishing.reeling` | Fishing rod reeling |
+| `fishing.splash` | Fishing rod splashes |

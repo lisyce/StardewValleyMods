@@ -3,6 +3,8 @@ using HarmonyLib;
 using StardewAudioCaptions.Captions;
 using StardewModdingAPI;
 using StardewValley.BellsAndWhistles;
+using StardewValley.Characters;
+using StardewValley.Locations;
 using StardewValley.TerrainFeatures;
 
 namespace StardewAudioCaptions.Patches;
@@ -119,6 +121,18 @@ public class CritterPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Woodpecker), "playPeck"),
             new Caption("Cowboy_gunshot", "critters.birdPeck"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(CommunityCenter), nameof(CommunityCenter.UpdateWhenCurrentLocation)),
+            new Caption("dustMeep", "critters.junimo", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Junimo), "junimoReachedHutToReturnBundle"),
+            new Caption("Ship", "critters.junimoBundle"));
     }
 
     private static IEnumerable<CodeInstruction> SandDuggyUpdateTranspiler(IEnumerable<CodeInstruction> instructions)

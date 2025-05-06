@@ -15,6 +15,11 @@
   "interaction.itemShipped",
   "interaction.doorOpen",
   "interaction.singingStone",
+  "interaction.cropHarvest",
+  "interaction.hayHopper",
+  "interaction.containerBreak",
+  "interaction.containerCrack",
+  "interaction.minecart",
   
   "player.eating",
   "player.drinking",
@@ -23,8 +28,10 @@
   "player.footstepsJingle",
   "player.itemCollect",
   "player.itemThrown",
+  "player.questComplete",
   
   "ambient.coinsClinking",
+  "ambient.wind",
   "ambient.thunder",
   "world.elevator",
   "ambient.trainLoop",
@@ -52,6 +59,8 @@
   "world.weedRustle",
   "world.crystalShatter",
   "world.parrotExpressLand",
+  "world.moss",
+  "world.panSpot",
 
   "critters.birdFlap",
   "critters.birdPeck",
@@ -64,6 +73,8 @@
   "critters.frogSplash",
   "critters.sandDuggyWhack",
   "critters.sandDuggyHide",
+  "critters.junimo",
+  "critters.junimoBundle",
   
   "events.earthquake",
   "events.raccoon0",
@@ -79,6 +90,8 @@
   "tools.pail",
   "tools.axe",
   "tools.pickaxe",
+  "tools.pan",
+  "tools.wateringCan",
   
   "monsters.batScreech",
   "monsters.serpentSpawn",
@@ -161,6 +174,7 @@
   "weapons.playerDebuff",
   "weapons.playerFreeze",
   "weapons.monsterFreeze",
+  "weapons.crit",
   
   "animals.chicken",
   "animals.duck",
@@ -173,11 +187,20 @@
   "animals.digging",
   "animals.enterHouse",
   "animals.splash",
+  "animals.horseGallop",
   
   "pets.cat",
   "pets.dogBark",
   "pets.dogPant",
   "pets.butterflyPowder",
   "pets.jump",
-  "pets.turtle"
+  "pets.turtle",
+  
+  "fishing.cast",
+  "fishing.splash",
+  "fishing.bite",
+  "fishing.hit",
+  "fishing.reeling",
+  "fishing.escape",
+  "fishing.caught"
 ]
