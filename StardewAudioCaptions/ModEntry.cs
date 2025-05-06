@@ -239,6 +239,6 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("cat", "pets.cat"));
         CaptionManager.RegisterDefaultCaption(new Caption("dog_bark", "pets.dogBark"));
         CaptionManager.RegisterDefaultCaption(new Caption("dog_pant", "pets.dogPant"));
-        // TODO turtle pet
+        CaptionManager.RegisterDefaultCaption(new Caption("turtle_pet", "pets.turtle"));
     }
 }

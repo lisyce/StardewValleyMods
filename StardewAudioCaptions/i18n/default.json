@@ -208,5 +208,6 @@
   "pets.dogBark.caption": "Dog barks",
   "pets.dogPant.caption": "Dog pants",
   "pets.butterflyPowder.caption": "Whooshing",
-  "pets.jump.caption": "Pet jumps"
+  "pets.jump.caption": "Pet jumps",
+  "pets.turtle.caption": "Turtle chirps"
 }
