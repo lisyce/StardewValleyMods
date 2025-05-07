@@ -1,6 +1,6 @@
 # List of Captions
 
-Stardew Audio Captions currently features 194 captions.
+Stardew Audio Captions currently features 195 captions.
 
 ## Interactions
 
@@ -32,7 +32,7 @@ Stardew Audio Captions currently features 194 captions.
 
 ## Player
 
-8 captions in this category
+9 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -44,6 +44,7 @@ Stardew Audio Captions currently features 194 captions.
 | `player.itemThrown` | Item thrown down |
 | `player.hurts` | Player hurts |
 | `player.questComplete` | Quest completes |
+| `player.stardrop` | Stardrop shimmering |
 
 ## Ambient Sounds
 
@@ -96,7 +97,7 @@ Stardew Audio Captions currently features 194 captions.
 | `world.bombExplode` | Bomb explodes |
 | `world.crystalShatter` | Crystal shatters |
 | `world.elevator` | Elevator dings |
-| `world.fishSplash` | Fish splasdes |
+| `world.fishSplash` | Fish splashes |
 | `world.fuseHiss` | Fuse hissing |
 | `world.grassRustle` | Grass rustles |
 | `world.ladderAppear` | Ladder appears |

@@ -50,6 +50,7 @@
   "interaction.containerBreak.caption": "Crate breaks",
   "interaction.containerCrack.caption": "Crate cracks",
   "interaction.minecart.caption": "Coal thuds",
+  "interaction.flute.caption": "Flute plays",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -124,6 +125,7 @@
   "tools.pickaxe.caption": "Pickaxe thuds",
   "tools.pan.caption": "Pan sloshes",
   "tools.wateringCan.caption": "Water pours",
+  "tools.horseFlute.caption": "Flute playing",
   
   "monsters.batScreech.caption": "Bat screeches",
   "monsters.serpentSpawn.caption": "Serpent spawns",
@@ -220,6 +222,7 @@
   "animals.enterHouse.caption": "Animal goes inside",
   "animals.splash.caption": "Animal splashes",
   "animals.horseGallop.caption": "Horse galloping",
+  "animals.horseWarp.caption": "Horse teleports",
   
   "pets.cat.caption": "Cat meows",
   "pets.dogBark.caption": "Dog barks",

@@ -20,6 +20,7 @@
   "interaction.containerBreak",
   "interaction.containerCrack",
   "interaction.minecart",
+  "interaction.flute",
   
   "player.eating",
   "player.drinking",
@@ -93,6 +94,7 @@
   "tools.pickaxe",
   "tools.pan",
   "tools.wateringCan",
+  "tools.horseFlute",
   
   "monsters.batScreech",
   "monsters.serpentSpawn",
@@ -189,6 +191,7 @@
   "animals.enterHouse",
   "animals.splash",
   "animals.horseGallop",
+  "animals.horseWarp",
   
   "pets.cat",
   "pets.dogBark",

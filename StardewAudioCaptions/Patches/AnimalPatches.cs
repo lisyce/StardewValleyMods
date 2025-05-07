@@ -33,6 +33,12 @@ public class AnimalPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Horse), nameof(Horse.OnMountFootstep)),
             new Caption(CaptionManager.AnyCue, "animals.horseGallop", shouldLog: false));
+        
+        PatchGenerator.GeneratePrefix(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(FarmerTeam), nameof(FarmerTeam.OnRequestHorseWarp)),
+            new Caption("wand", "animals.horseWarp"));
     }
 
     private static IEnumerable<CodeInstruction> FarmAnimalBehaviorsTranspiler(IEnumerable<CodeInstruction> instructions)

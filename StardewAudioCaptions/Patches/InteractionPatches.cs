@@ -130,7 +130,6 @@ public class InteractionPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
             MineshaftCheckActionTranspiler);
-        
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
