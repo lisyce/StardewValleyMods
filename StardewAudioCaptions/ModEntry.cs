@@ -202,7 +202,8 @@ public class ModEntry : Mod
         
         CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "player.itemThrown"));
         CaptionManager.RegisterDefaultCaption(new Caption("questcomplete", "player.questComplete"));
-
+        CaptionManager.RegisterDefaultCaption(new Caption("stardrop", "player.stardrop"));
+        
         CaptionManager.RegisterDefaultCaption(new Caption("thunder", "ambient.thunder"));
         CaptionManager.RegisterDefaultCaption(new Caption("thunder_small", "ambient.thunder"));
         CaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "ambient.trainWhistle"));

@@ -59,6 +59,7 @@
   "player.itemCollect.caption": "Item collected",
   "player.itemThrown.caption": "Item thrown down",
   "player.questComplete.caption": "Quest completes",
+  "player.stardrop.caption": "Stardrop shimmering",
   
   "ambient.thunder.caption": "Thunder rumbles",
   "ambient.trainWhistle.caption": "Train whistles",
@@ -94,7 +95,7 @@
   "world.elevator.caption": "Elevator dings",
   "world.waterSlosh.caption": "Water sloshes",
   "world.lavaSlosh.caption": "Lava sloshes",
-  "world.fishSplash.caption": "Fish splasdes",
+  "world.fishSplash.caption": "Fish splashes",
   "world.rooster.caption": "Rooster crows",
   "world.ladderAppear.caption": "Ladder appears",
   "world.fuseHiss.caption": "Fuse hissing",

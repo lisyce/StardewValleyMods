@@ -35,6 +35,8 @@ public class FishingPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(BobberBar), nameof(BobberBar.update)),
             new Caption("fastReel", "fishing.reeling", shouldLog: false),
+            new Caption("slowReel", "fishing.reeling", shouldLog: false),
+            new Caption("fishingRodBend", "fishing.reeling", shouldLog: false),
             new Caption("fishEscape", "fishing.escape", shouldLog: false),
             new Caption("jingle1", "fishing.caught", shouldLog: false));
     }

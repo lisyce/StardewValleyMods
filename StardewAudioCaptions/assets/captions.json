@@ -29,6 +29,7 @@
   "player.itemCollect",
   "player.itemThrown",
   "player.questComplete",
+  "player.stardrop",
   
   "ambient.coinsClinking",
   "ambient.wind",
