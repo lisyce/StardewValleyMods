@@ -105,11 +105,11 @@ public class WorldPatches : ICaptionPatch
         // there are 3 bomb types to match
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("fuse", SoundCueCodeMatcher.NetAudioStartPlaying)
-            .RegisterCaptionForNextCue("fuse", "world.fuseHiss", CaptionManager.InfiniteDuration)
+            .RegisterCaptionForNextCue("fuse", "world.fuseHiss")
             .FindCue("fuse", SoundCueCodeMatcher.NetAudioStartPlaying)
-            .RegisterCaptionForNextCue("fuse", "world.fuseHiss", CaptionManager.InfiniteDuration)
+            .RegisterCaptionForNextCue("fuse", "world.fuseHiss")
             .FindCue("fuse", SoundCueCodeMatcher.NetAudioStartPlaying)
-            .RegisterCaptionForNextCue("fuse", "world.fuseHiss", CaptionManager.InfiniteDuration);
+            .RegisterCaptionForNextCue("fuse", "world.fuseHiss");
 
         return matcher.InstructionEnumeration();
     }
@@ -118,7 +118,7 @@ public class WorldPatches : ICaptionPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("explosion", SoundCueCodeMatcher.GameLocationPlaySound)
-            .RegisterCaptionForNextCue("explosion", "world.bombExplode", CaptionManager.InfiniteDuration);
+            .RegisterCaptionForNextCue("explosion", "world.bombExplode");
         return matcher.InstructionEnumeration();
     }
     
@@ -127,9 +127,9 @@ public class WorldPatches : ICaptionPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("daggerswipe", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("daggerswipe", "world.grassRustle", CaptionManager.InfiniteDuration)
+            .RegisterCaptionForNextCue("daggerswipe", "world.grassRustle")
             .FindCue("swordswipe", SoundCueCodeMatcher.GameLocationPlaySound)
-            .RegisterCaptionForNextCue("swordswipe", "world.grassRustle", CaptionManager.InfiniteDuration);
+            .RegisterCaptionForNextCue("swordswipe", "world.grassRustle");
         return matcher.InstructionEnumeration();
     }
 }

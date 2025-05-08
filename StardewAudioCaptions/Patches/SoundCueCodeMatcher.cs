@@ -40,18 +40,20 @@ public class SoundCueCodeMatcher
         return this;
     }
 
-    public SoundCueCodeMatcher RegisterCaptionForNextCue(string cueId, string captionId, int duration, bool shouldLog = true)
+    public SoundCueCodeMatcher RegisterCaptionForNextCue(string cueId, string captionId, int? maxDuration = null, bool shouldLog = true)
     {
+        maxDuration ??= CaptionManager.InfiniteDuration;
         var helper = AccessTools.Method(typeof(SoundCueCodeMatcher), nameof(RegisterCaptionForNextCueHelper));
-        var captionCtor = AccessTools.Constructor(typeof(Caption), new []{ typeof(string), typeof(string), typeof(int?), typeof(bool) });
-        var nullableCtor = AccessTools.Constructor(typeof(Nullable<int>), new[] { typeof(int) });
+        var captionCtor = AccessTools.Constructor(typeof(Caption), new []{ typeof(string), typeof(string), typeof(int?), typeof(bool), typeof(object) });
+        var nullableCtor = AccessTools.Constructor(typeof(int?), new[] { typeof(int) });
         
         _matcher.Insert(
             new CodeInstruction(OpCodes.Ldstr, cueId),
             new CodeInstruction(OpCodes.Ldstr, captionId),
-            new CodeInstruction(OpCodes.Ldc_I4, duration),
+            new CodeInstruction(OpCodes.Ldc_I4, maxDuration),
             new CodeInstruction(OpCodes.Newobj, nullableCtor),
             new CodeInstruction(OpCodes.Ldc_I4, shouldLog ? 1 : 0),
+            new CodeInstruction(OpCodes.Ldnull),  // we choose not to support tokens in the transpiler patches
             new CodeInstruction(OpCodes.Newobj, captionCtor),
             new CodeInstruction(OpCodes.Call, helper))
             .Advance(8);

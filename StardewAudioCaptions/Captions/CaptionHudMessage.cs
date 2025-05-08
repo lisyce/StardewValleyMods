@@ -12,7 +12,7 @@ namespace StardewAudioCaptions.Captions;
 public class CaptionHudMessage
 {
     private readonly List<CaptionHudMessageElement> _captions;
-    
+    private int _width;
 
     public CaptionHudMessage()
     {
@@ -43,6 +43,8 @@ public class CaptionHudMessage
     public void Draw(SpriteBatch b, ModConfig config)
     {
         if (_captions.Count == 0 || !config.CaptionsOn) return;
+
+        _width = (int)(300 * config.FontScaling);  // set the width field
         
         var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * config.FontScaling);
         var elPadding = (int) (8 * config.FontScaling);
@@ -56,12 +58,12 @@ public class CaptionHudMessage
         }
         
 
-        var loc = GetSubtitleLocation(config, height);
+        var loc = GetCaptionLocation(config, height);
         var x = (int) loc.X + config.CaptionOffsetX;
         var y = (int) loc.Y + config.CaptionOffsetY;
 
         var boxSourceRect = new Rectangle(301, 288, 15, 15);
-        IClickableMenu.drawTextureBox(b, Game1.mouseCursors, boxSourceRect, x, y, 300, (int) height, Color.White, drawShadow: false, scale: 4f);
+        IClickableMenu.drawTextureBox(b, Game1.mouseCursors, boxSourceRect, x, y, _width, (int) height, Color.White, drawShadow: false, scale: 4f);
         
         
         // draw the actual captions
@@ -75,32 +77,47 @@ public class CaptionHudMessage
         }
     }
 
-    private Vector2 GetSubtitleLocation(ModConfig config, float boxheight)
+    private Vector2 GetCaptionLocation(ModConfig config, float boxheight)
     {
         var safeArea = Utility.getSafeArea();
         return config.CaptionPosition switch
         {
             "Center Left" => new Vector2(safeArea.Left + 8, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
             "Bottom Left" => new Vector2(safeArea.Left + 8, safeArea.Bottom - boxheight - 8),
-            "Bottom Center" => IsToolbarBottom() ? new Vector2(safeArea.Left + safeArea.Width / 2f - 110, Game1.uiViewport.Height - 110 - boxheight) : new Vector2(safeArea.Left + safeArea.Width / 2f - 150, Game1.uiViewport.Height - 8 - boxheight),
-            "Bottom Right" => ShouldDrawBottomRightFlush() ? new Vector2(safeArea.Right - 308, safeArea.Bottom - boxheight - 8) : new Vector2(Game1.showingHealthBar ? safeArea.Right - 415 : safeArea.Right - 360, safeArea.Bottom - boxheight - 8),
-            "Center Right" => new Vector2(safeArea.Right - 308, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
+            "Bottom Center" => IsToolbarBottom(out var toolbarYpos) ? new Vector2(safeArea.Left + safeArea.Width / 2f - _width / 2f, toolbarYpos - 8 - boxheight) : new Vector2(safeArea.Left + safeArea.Width / 2f - _width / 2f, Game1.uiViewport.Height - 8 - boxheight),
+            "Bottom Right" => ShouldDrawBottomRightFlush(safeArea, out var nonFlushXpos) ? new Vector2(safeArea.Right - _width - 8, safeArea.Bottom - boxheight - 8) : new Vector2(nonFlushXpos, safeArea.Bottom - boxheight - 8),
+            "Center Right" => new Vector2(safeArea.Right - _width - 8, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
             // default is top left
             _ => PlayerInMines() ? new Vector2(safeArea.Left + 8, safeArea.Top + 64) : new Vector2(safeArea.Left + 8, safeArea.Top + 8)
         };
     }
 
-    private bool IsToolbarBottom()
+    private bool IsToolbarBottom(out int toolbarYpos)
     {
+        toolbarYpos = -1;
         var menu = Game1.onScreenMenus.First(m => m is Toolbar);
         if (menu is not Toolbar tb) return false;
-
+        toolbarYpos = tb.yPositionOnScreen - tb.height / 2;
+        
         return tb.yPositionOnScreen > Game1.uiViewport.Height / 2;
     }
 
-    private bool ShouldDrawBottomRightFlush()
+    private bool ShouldDrawBottomRightFlush(Rectangle safeArea, out int nonFlushXpos)
     {
-        return Utility.getSafeArea().Width < 1650;
+        nonFlushXpos = -1;
+        var menu = Game1.onScreenMenus.First(m => m is Toolbar);
+        if (menu is not Toolbar tb || Game1.CurrentEvent != null) return true;
+        
+        if (Game1.showingHealthBar)
+        {
+            nonFlushXpos = safeArea.Width - 8 - 48 - 56 - 8 - _width;
+            return tb.buttons[11].bounds.Right + 40 + _width + 8 + 48 + 56 >= Game1.uiViewport.Width;
+        }
+        else
+        {
+            nonFlushXpos = safeArea.Width - 8 - 48 - 8 - _width;
+            return tb.buttons[11].bounds.Right + 40 + _width + 8 + 48 >= Game1.uiViewport.Width;
+        }
     }
 
     private bool PlayerInMines()

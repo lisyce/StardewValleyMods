@@ -139,8 +139,8 @@ public class CritterPatches : ICaptionPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("cowboy_gopher", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("cowboy_gopher", "critters.sandDuggyHide", ModEntry.CaptionManager.Config.MinDurationTicks)
-            .RegisterCaptionForNextCue("tinyWhip", "critters.sandDuggyHide", ModEntry.CaptionManager.Config.MinDurationTicks);
+            .RegisterCaptionForNextCue("cowboy_gopher", "critters.sandDuggyHide")
+            .RegisterCaptionForNextCue("tinyWhip", "critters.sandDuggyHide");
         return matcher.InstructionEnumeration();
     }
 }

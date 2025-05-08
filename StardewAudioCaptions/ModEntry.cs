@@ -194,7 +194,6 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
         CaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
         CaptionManager.RegisterDefaultCaption(new Caption("harvest", "interaction.cropHarvest"));
-        CaptionManager.RegisterDefaultCaption(new Caption("flute", "interaction.flute"));
 
         CaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
         CaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));

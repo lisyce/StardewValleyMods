@@ -45,11 +45,11 @@ public class AnimalPatches : ICaptionPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", CaptionManager.InfiniteDuration, false)
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false)
             .FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", CaptionManager.InfiniteDuration, false)
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false)
             .FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", CaptionManager.InfiniteDuration, false);
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false);
         return matcher.InstructionEnumeration();
     }
 }

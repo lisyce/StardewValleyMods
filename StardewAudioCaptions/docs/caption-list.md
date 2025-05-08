@@ -1,10 +1,10 @@
 # List of Captions
 
-Stardew Audio Captions currently features 195 captions.
+Stardew Audio Captions currently features 206 captions.
 
 ## Interactions
 
-21 captions in this category
+30 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -16,13 +16,22 @@ Stardew Audio Captions currently features 195 captions.
 | `interaction.cropHarvest` | Crop harvested |
 | `interaction.doorClose` | Door closes |
 | `interaction.doorOpen` | Door opens |
+| `interaction.fluteBlockDuck` | Duck quacks ({{pitch}}) |
 | `interaction.fenceGate` | Fence gate toggles |
 | `interaction.fireplace` | Fire roars |
+| `interaction.fluteBlock` | Flute plays ({{pitch}}) |
 | `interaction.footstepsDescend` | Footsteps descending |
 | `interaction.fridge` | Fridge opens |
 | `interaction.giftbox` | Gift box opens |
+| `interaction.fluteBlockCrystal` | Glockenspiel plays ({{pitch}}) |
+| `interaction.fluteBlockHarp` | Harpsichord plays ({{pitch}}) |
 | `interaction.hayHopper` | Hay rustles |
 | `interaction.itemShipped` | Item shipped |
+| `interaction.fluteBlockMeep` | Junimo meeps ({{pitch}}) |
+| `interaction.fluteBlockClam` | Kalimba plays ({{pitch}}) |
+| `interaction.fluteBlockTelephone` | Phone dials ({{pitch}}) |
+| `interaction.fluteBlockPiano` | Piano plays ({{pitch}}) |
+| `interaction.fluteBlockPig` | Pig oinks ({{pitch}}) |
 | `interaction.shaftFalling` | Player falling |
 | `interaction.shaftLanding` | Player hits ground |
 | `interaction.shippingBinClose` | Shipping bin closes |
@@ -129,11 +138,12 @@ Stardew Audio Captions currently features 195 captions.
 
 ## Tools
 
-6 captions in this category
+7 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `tools.axe` | Axe thuds |
+| `tools.horseFlute` | Flute playing |
 | `tools.pail` | Milking |
 | `tools.pan` | Pan sloshes |
 | `tools.pickaxe` | Pickaxe thuds |
@@ -237,7 +247,7 @@ Stardew Audio Captions currently features 195 captions.
 
 ## Farm Animals
 
-12 captions in this category
+13 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -249,6 +259,7 @@ Stardew Audio Captions currently features 195 captions.
 | `animals.duck` | Duck quacks |
 | `animals.goat` | Goat bleats |
 | `animals.horseGallop` | Horse galloping |
+| `animals.horseWarp` | Horse teleports |
 | `animals.ostrich` | Ostrich coos |
 | `animals.pig` | Pig oinks |
 | `animals.rabbit` | Rabbit rustles |

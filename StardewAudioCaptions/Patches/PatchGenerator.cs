@@ -31,7 +31,7 @@ public class PatchGenerator
         }
         catch (Exception e)
         {
-            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Failed to apply harmony patch on {original.DeclaringType?.Name + "::" ?? ""}{original.Name}; skipping these captions.", LogLevel.Warn);
             monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }
@@ -64,7 +64,7 @@ public class PatchGenerator
         }
         catch (Exception e)
         {
-            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Failed to apply harmony patch on {original.DeclaringType?.Name + "::" ?? ""}{original.Name}; skipping these captions.", LogLevel.Warn);
             monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }
@@ -91,7 +91,24 @@ public class PatchGenerator
         }
         catch (Exception e)
         {
-            monitor.Log($"Failed to apply harmony patch on {original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Failed to apply harmony patch on {original.DeclaringType?.Name + "::" ?? ""}{original.Name}; skipping these captions.", LogLevel.Warn);
+            monitor.Log($"Error: {e}", LogLevel.Debug);
+        }
+    }
+
+    public static void FinalizerPatch(Harmony harmony, IMonitor monitor, MethodInfo original, Action finalizer)
+    {
+        try
+        {
+            harmony.Patch(
+                original: original,
+                finalizer: new HarmonyMethod(finalizer.GetMethodInfo())
+            );
+            monitor.Log($"Registered finalizer for {original.DeclaringType?.Name + "::" ?? ""}{original.Name}.");
+        }
+        catch (Exception e)
+        {
+            monitor.Log($"Failed to apply harmony patch on {original.DeclaringType?.Name + "::" ?? ""}{original.Name}; skipping these captions.", LogLevel.Warn);
             monitor.Log($"Error: {e}", LogLevel.Debug);
         }
     }

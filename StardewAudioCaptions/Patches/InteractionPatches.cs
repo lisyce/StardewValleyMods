@@ -130,6 +130,31 @@ public class InteractionPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
             MineshaftCheckActionTranspiler);
+        
+        // flute block stuff
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.farmerAdjacentAction)),
+            FluteBlockTranspiler);
+        
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnFluteBlock"),
+            FluteBlockTranspiler);
+        
+        PatchGenerator.FinalizerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.farmerAdjacentAction)),
+            FluteBlockFinalizer);
+        
+        PatchGenerator.FinalizerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnFluteBlock"),
+            FluteBlockFinalizer);
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
@@ -161,15 +186,13 @@ public class InteractionPatches : ICaptionPatch
             .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
 
         var soundCueMatcher = new SoundCueCodeMatcher(matcher);
-        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerBreak",
-            CaptionManager.InfiniteDuration);
+        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerBreak");
         
         // hit sound
         matcher.MatchStartForward(
                 new CodeMatch(OpCodes.Call, playSound))
             .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
-        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerCrack",
-            CaptionManager.InfiniteDuration);
+        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerCrack");
 
         return soundCueMatcher.InstructionEnumeration();
     }
@@ -181,5 +204,68 @@ public class InteractionPatches : ICaptionPatch
         matcher.FindCue("openBox", SoundCueCodeMatcher.GameLocationPlaySound)
             .RegisterCaptionForNextCue("openBox", "interaction.minecart", CaptionManager.InfiniteDuration);
         return matcher.InstructionEnumeration();
+    }
+
+    private static IEnumerable<CodeInstruction> FluteBlockTranspiler(IEnumerable<CodeInstruction> instructions)
+    {
+        var matcher = new CodeMatcher(instructions);
+        matcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, "flute"))
+            .ThrowIfNotMatch("Could not find where flute sound is loaded")
+            .Insert(
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call,
+                    AccessTools.Method(typeof(InteractionPatches), nameof(FluteBlockHelper)))
+            );
+        return matcher.InstructionEnumeration();
+    }
+
+    private static void FluteBlockFinalizer()
+    {
+        var pairs = new[]
+        {
+            ("flute", "interaction.fluteBlock"),
+            ("clam_tone", "interaction.fluteBlockClam"),
+            ("telephone_buttonPush", "interaction.fluteBlockTelephone"),
+            ("miniharp_note", "interaction.fluteBlockHarp"),
+            ("pig", "interaction.fluteBlockPig"),
+            ("crystal", "interaction.fluteBlockCrystal"),
+            ("Duck", "interaction.fluteBlockDuck"),
+            ("toyPiano", "interaction.fluteBlockPiano"),
+            ("dustMeep", "interaction.fluteBlockMeep")
+        };
+        
+        foreach (var p in pairs)
+        {
+            ModEntry.CaptionManager.UnregisterCaptionForNextCue(new Caption(p.Item1, p.Item2));
+        }
+
+    }
+
+    private static void FluteBlockHelper(StardewValley.Object obj)
+    {
+        if (!int.TryParse(obj.preservedParentSheetIndex.Value, out var preservedParentSheetInt))
+            preservedParentSheetInt = 0;
+
+        preservedParentSheetInt /= 100;
+
+        var tokens = new { pitch = preservedParentSheetInt.ToString() };
+
+        var pairs = new[]
+        {
+            ("flute", "interaction.fluteBlock"),
+            ("clam_tone", "interaction.fluteBlockClam"),
+            ("telephone_buttonPush", "interaction.fluteBlockTelephone"),
+            ("miniharp_note", "interaction.fluteBlockHarp"),
+            ("pig", "interaction.fluteBlockPig"),
+            ("crystal", "interaction.fluteBlockCrystal"),
+            ("Duck", "interaction.fluteBlockDuck"),
+            ("toyPiano", "interaction.fluteBlockPiano"),
+            ("dustMeep", "interaction.fluteBlockMeep")
+        };
+        
+        foreach (var p in pairs)
+        {
+            ModEntry.CaptionManager.RegisterCaptionForNextCue(new Caption(p.Item1, p.Item2, tokens: tokens));
+        }
     }
 }

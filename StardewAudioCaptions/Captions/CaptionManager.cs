@@ -111,8 +111,7 @@ public class CaptionManager
     /// Removes a caption for the next sound cue that was added by <see cref="RegisterCaptionForNextCue"/>.
     /// Usually used with a prefix/postfix pair to avoid a transpiler.
     /// </summary>
-    /// <param name="cueId"></param>
-    /// <param name="captionId"></param>
+    /// <param name="caption">The caption to unregister</param>
     public void UnregisterCaptionForNextCue(Caption caption)
     {
         if (_captionsOnNextCue.TryGetValue(caption.CueId, out var captions))
@@ -158,7 +157,7 @@ public class CaptionManager
         if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;
         
         var captionTranslationKey = captionId + ".caption";
-        var translatedCaption = _helper.Translation.Get(captionTranslationKey);
+        var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);
         _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption, CaptionColor(caption));
     }
 
