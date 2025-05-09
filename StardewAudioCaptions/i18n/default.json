@@ -64,6 +64,7 @@
   "interaction.itemPlaced.caption": "Item placed",
   "interaction.planted.caption": "Planting",
   "interaction.fairyDust.caption": "Machine sparkling",
+  "interaction.itemBreak.caption": "Item broken",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -123,7 +124,8 @@
   "world.moss.caption": "Moss rustles",
   "world.panSpot.caption": "Panning spot appears",
   "world.machineProcessing.caption": "Machine working",
-  
+  "world.robinHammer.caption": "Robin's hammer thuds",
+
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
   "events.raccoon1.caption": "Tree falls",

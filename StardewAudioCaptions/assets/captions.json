@@ -33,6 +33,7 @@
   "interaction.itemPlaced",
   "interaction.planted",
   "interaction.fairyDust",
+  "interaction.itemBreak",
   
   "player.eating",
   "player.drinking",
@@ -76,6 +77,7 @@
   "world.moss",
   "world.panSpot",
   "world.machineProcessing",
+  "world.robinHammer",
 
   "critters.birdFlap",
   "critters.birdPeck",

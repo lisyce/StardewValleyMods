@@ -6,8 +6,10 @@ using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
 using StardewValley;
 using StardewValley.Buildings;
+using StardewValley.GameData.FloorsAndPaths;
 using StardewValley.Locations;
 using StardewValley.Objects;
+using StardewValley.TerrainFeatures;
 
 namespace StardewAudioCaptions.Patches;
 
@@ -156,6 +158,18 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.TryApplyFairyDust)),
             new Caption("yoba", "interaction.fairyDust"));
         
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Flooring), nameof(Flooring.performToolAction)),
+            new Caption(CaptionManager.AnyCue, "interaction.itemBreak"));
+        
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.placementAction)),
+            ObjectPlacementActionTranspiler);
+        
         // flute block stuff
         PatchGenerator.TranspilerPatch(
             harmony,
@@ -232,6 +246,26 @@ public class InteractionPatches : ICaptionPatch
             .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
         soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerCrack");
 
+        return soundCueMatcher.InstructionEnumeration();
+    }
+
+    private static IEnumerable<CodeInstruction> ObjectPlacementActionTranspiler(
+        IEnumerable<CodeInstruction> instructions)
+    {
+        var matcher = new CodeMatcher(instructions);
+        var placementSoundFld = AccessTools.Field(typeof(FloorPathData), nameof(FloorPathData.PlacementSound));
+        var isFloorPath =
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.IsFloorPathItem));
+
+        matcher.MatchStartForward(new CodeMatch(OpCodes.Callvirt, isFloorPath))
+            .MatchStartForward(
+                new CodeMatch(OpCodes.Ldfld, placementSoundFld),
+                new CodeMatch(OpCodes.Brfalse_S),
+                new CodeMatch(OpCodes.Callvirt, SoundCueCodeMatcher.GameLocationPlaySound))
+            .ThrowIfNotMatch("Could not find flooring placement sound");
+        
+        var soundCueMatcher = new SoundCueCodeMatcher(matcher);
+        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.itemPlaced");
         return soundCueMatcher.InstructionEnumeration();
     }
 

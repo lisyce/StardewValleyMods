@@ -1,10 +1,10 @@
 # List of Captions
 
-Stardew Audio Captions currently features 213 captions.
+Stardew Audio Captions currently features 215 captions.
 
 ## Interactions
 
-34 captions in this category
+35 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -27,6 +27,7 @@ Stardew Audio Captions currently features 213 captions.
 | `interaction.fluteBlockCrystal` | Glockenspiel plays ({{pitch}}) |
 | `interaction.fluteBlockHarp` | Harpsichord plays ({{pitch}}) |
 | `interaction.hayHopper` | Hay rustles |
+| `interaction.itemBreak` | Item broken |
 | `interaction.itemPlaced` | Item placed |
 | `interaction.itemShipped` | Item shipped |
 | `interaction.fluteBlockMeep` | Junimo meeps ({{pitch}}) |
@@ -104,7 +105,7 @@ Stardew Audio Captions currently features 213 captions.
 
 ## World
 
-17 captions in this category
+18 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -121,6 +122,7 @@ Stardew Audio Captions currently features 213 captions.
 | `world.moss` | Moss rustles |
 | `world.panSpot` | Panning spot appears |
 | `world.parrotExpressLand` | Parrot Express lands |
+| `world.robinHammer` | Robin's hammer thuds |
 | `world.rooster` | Rooster crows |
 | `world.treeCrack` | Tree cracks |
 | `world.waterSlosh` | Water sloshes |

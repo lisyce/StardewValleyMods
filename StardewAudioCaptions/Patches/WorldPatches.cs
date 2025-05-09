@@ -97,7 +97,12 @@ public class WorldPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(FishingRod), nameof(FishingRod.draw)),
             new Caption("waterSlosh", "world.waterSlosh"));
-
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(NPC), "robinHammerSound"),
+            new Caption(CaptionManager.AnyCue, "world.robinHammer"));
     }
     
     private static IEnumerable<CodeInstruction> ObjectPlacementActionTranspiler(IEnumerable<CodeInstruction> instructions)
