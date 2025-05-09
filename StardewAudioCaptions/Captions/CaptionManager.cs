@@ -21,7 +21,7 @@ public class CaptionManager
         { "Green", Color.LimeGreen }
     };
     
-    private readonly HashSet<string> _captionIds;
+    private readonly Dictionary<string, int> _captionIds;
     private readonly CaptionHudMessage _hudMessage;
     private readonly IMonitor _monitor;
     private readonly IModHelper _helper;
@@ -32,7 +32,7 @@ public class CaptionManager
     
     public CaptionManager(IModHelper helper, CaptionHudMessage hudMessage, IMonitor monitor, ModConfig config)
     {
-        _captionIds = helper.ModContent.Load<List<string>>("assets/captions.json").ToHashSet();
+        _captionIds = helper.ModContent.Load<Dictionary<string, int>>("assets/captions.json");
         _hudMessage = hudMessage;
         _monitor = monitor;
         _helper = helper;
@@ -142,7 +142,7 @@ public class CaptionManager
     public Dictionary<string, HashSet<string>> CaptionsByCategory()
     {
         var result = new Dictionary<string, HashSet<string>>();
-        foreach (var caption in _captionIds)
+        foreach (var caption in _captionIds.Keys)
         {
             var category = caption.Split(".")[0];
             if (!result.ContainsKey(category)) result.Add(category, new HashSet<string>());
@@ -155,7 +155,7 @@ public class CaptionManager
     public bool ValidateCaption(Caption caption)
     {
         var captionId = caption.CaptionId;
-        if (!_captionIds.Contains(captionId))
+        if (!_captionIds.ContainsKey(captionId))
         {
             _monitor.Log($"Invalid caption id: {captionId}", LogLevel.Warn);
             return false;
