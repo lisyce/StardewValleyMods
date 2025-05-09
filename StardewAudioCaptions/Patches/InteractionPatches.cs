@@ -84,7 +84,7 @@ public class InteractionPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Furniture), nameof(Furniture.setFireplace)),
-            new Caption("fireball", "interaction.fireplace"));
+            new Caption("fireball", "interaction.fire"));
         
         PatchGenerator.GeneratePrefixes(
             harmony,
@@ -131,6 +131,31 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.checkAction)),
             MineshaftCheckActionTranspiler);
         
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.placementAction)),
+            new Caption("woodyStep", "interaction.itemPlaced"),
+            new Caption("dirtyHit", "interaction.planted"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Furniture), nameof(Furniture.performObjectDropInAction)),
+            new Caption("woodyStep", "interaction.itemPlaced"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Torch), nameof(Torch.checkForAction)),
+            new Caption("fireball", "interaction.fire"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.TryApplyFairyDust)),
+            new Caption("yoba", "interaction.fairyDust"));
+        
         // flute block stuff
         PatchGenerator.TranspilerPatch(
             harmony,
@@ -155,6 +180,19 @@ public class InteractionPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnFluteBlock"),
             FluteBlockFinalizer);
+        
+        // drum block stuff
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.farmerAdjacentAction)),
+            DrumBlockTranspiler);
+        
+        PatchGenerator.TranspilerPatch(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnDrumBlock"),
+            DrumBlockTranspiler);
     }
 
     private bool TryGetChestDelegate(out MethodInfo? chestDelegate)
@@ -210,7 +248,7 @@ public class InteractionPatches : ICaptionPatch
     {
         var matcher = new CodeMatcher(instructions);
         matcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, "flute"))
-            .ThrowIfNotMatch("Could not find where flute sound is loaded")
+            .ThrowIfNotMatch("could not find where flute sound is loaded")
             .Insert(
                 new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Call,
@@ -267,5 +305,27 @@ public class InteractionPatches : ICaptionPatch
         {
             ModEntry.CaptionManager.RegisterCaptionForNextCue(new Caption(p.Item1, p.Item2, tokens: tokens));
         }
+    }
+
+    private static IEnumerable<CodeInstruction> DrumBlockTranspiler(IEnumerable<CodeInstruction> instructions)
+    {
+        var matcher = new CodeMatcher(instructions);
+        matcher.MatchStartForward(new CodeMatch(OpCodes.Ldstr, "drumkit"))
+            .ThrowIfNotMatch("could not find where drumkit sound is loaded")
+            .Insert(
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call,
+                    AccessTools.Method(typeof(InteractionPatches), nameof(DrumBlockHelper)))
+            );
+        return matcher.InstructionEnumeration();
+    }
+    
+    private static void DrumBlockHelper(StardewValley.Object obj)
+    {
+        if (!int.TryParse(obj.preservedParentSheetIndex.Value, out var preservedParentSheetInt))
+            preservedParentSheetInt = 0;
+        
+        var tokens = new { pitch = preservedParentSheetInt.ToString() };
+        ModEntry.CaptionManager.RegisterCaptionForNextCue(new Caption(CaptionManager.AnyCue, "interaction.drumBlock", tokens: tokens));
     }
 }

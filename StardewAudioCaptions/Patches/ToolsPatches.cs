@@ -65,5 +65,11 @@ public class ToolsPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Tool), nameof(Tool.endUsing)),
             new Caption("wateringCan", "tools.wateringCan", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Hoe), nameof(Hoe.DoFunction)),
+            new Caption("hoeHit", "tools.hoe"));
     }
 }

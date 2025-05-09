@@ -126,7 +126,7 @@ public class CaptionManager
     }
 
     /// <summary>
-    /// Registers a persistent default caption for a sound cue.
+    /// Registers a persistent default caption for a sound cue. Will only be used if a more specific caption is not found.
     /// </summary>
     /// <param name="caption">The caption to show</param>
     public void RegisterDefaultCaption(Caption caption)
@@ -137,7 +137,8 @@ public class CaptionManager
             _monitor.Log($"Failed to register default caption {caption.CaptionId} for sound cue {caption.CueId} because a default caption {_defaultCueCaptions[caption.CueId]} already exists.", LogLevel.Warn);
         }
     }
-
+    
+    /// <returns>A mapping of category Ids to captions Ids in each category.</returns>
     public Dictionary<string, HashSet<string>> CaptionsByCategory()
     {
         var result = new Dictionary<string, HashSet<string>>();
@@ -149,16 +150,6 @@ public class CaptionManager
         }
         
         return result;
-    }
-
-    private void AddCaption(Cue cue, Caption caption)
-    {
-        var captionId = caption.CaptionId;
-        if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;
-        
-        var captionTranslationKey = captionId + ".caption";
-        var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);
-        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption, CaptionColor(caption));
     }
 
     public bool ValidateCaption(Caption caption)
@@ -185,8 +176,18 @@ public class CaptionManager
 
         return true;
     }
+    
+    private void AddCaption(Cue cue, Caption caption)
+    {
+        var captionId = caption.CaptionId;
+        if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;
+        
+        var captionTranslationKey = captionId + ".caption";
+        var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);
+        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption, CaptionColor(caption));
+    }
 
-    public Color CaptionColor(Caption caption)
+    private Color CaptionColor(Caption caption)
     {
         var colorStr = Config.CategoryColors.GetValueOrDefault(caption.CategoryId, "White");
         return AllowedColors[colorStr];

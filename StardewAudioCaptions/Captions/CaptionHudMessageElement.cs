@@ -29,8 +29,8 @@ public class CaptionHudMessageElement
     public bool Update()
     {
         _ticksElapsed = Math.Min(_ticksElapsed + 1, CaptionManager.InfiniteDuration);
-        var cuePlaying = _cue.IsPaused && !_cue.IsPaused && _cue.Volume >= 0.01;
-        if (VisibleLongEnough() && (!cuePlaying || _ticksElapsed >= _maxDurationTicks))
+        var cuePlaying = _cue.IsPlaying && !_cue.IsPaused && _cue.Volume >= 10;
+        if (VisibleLongEnough() && (!cuePlaying || ExceededMaxDuration()))
         {
             Transparency -= 0.02f;
             if (Transparency < 0f)
@@ -54,5 +54,11 @@ public class CaptionHudMessageElement
     private bool VisibleLongEnough()
     {
         return _ticksElapsed >= ModEntry.CaptionManager.Config.MinDurationTicks;
+    }
+
+    private bool ExceededMaxDuration()
+    {
+        if (_maxDurationTicks == CaptionManager.InfiniteDuration) return false;
+        return _ticksElapsed >= _maxDurationTicks;
     }
 }

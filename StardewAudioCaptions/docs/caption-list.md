@@ -1,10 +1,10 @@
 # List of Captions
 
-Stardew Audio Captions currently features 206 captions.
+Stardew Audio Captions currently features 213 captions.
 
 ## Interactions
 
-30 captions in this category
+34 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -16,22 +16,26 @@ Stardew Audio Captions currently features 206 captions.
 | `interaction.cropHarvest` | Crop harvested |
 | `interaction.doorClose` | Door closes |
 | `interaction.doorOpen` | Door opens |
+| `interaction.drumBlock` | Drum block plays ({{pitch}}) |
 | `interaction.fluteBlockDuck` | Duck quacks ({{pitch}}) |
 | `interaction.fenceGate` | Fence gate toggles |
-| `interaction.fireplace` | Fire roars |
-| `interaction.fluteBlock` | Flute plays ({{pitch}}) |
+| `interaction.fire` | Fire roars |
+| `interaction.fluteBlock` | Flute block plays ({{pitch}}) |
 | `interaction.footstepsDescend` | Footsteps descending |
 | `interaction.fridge` | Fridge opens |
 | `interaction.giftbox` | Gift box opens |
 | `interaction.fluteBlockCrystal` | Glockenspiel plays ({{pitch}}) |
 | `interaction.fluteBlockHarp` | Harpsichord plays ({{pitch}}) |
 | `interaction.hayHopper` | Hay rustles |
+| `interaction.itemPlaced` | Item placed |
 | `interaction.itemShipped` | Item shipped |
 | `interaction.fluteBlockMeep` | Junimo meeps ({{pitch}}) |
 | `interaction.fluteBlockClam` | Kalimba plays ({{pitch}}) |
+| `interaction.fairyDust` | Machine sparkling |
 | `interaction.fluteBlockTelephone` | Phone dials ({{pitch}}) |
 | `interaction.fluteBlockPiano` | Piano plays ({{pitch}}) |
 | `interaction.fluteBlockPig` | Pig oinks ({{pitch}}) |
+| `interaction.planted` | Planting |
 | `interaction.shaftFalling` | Player falling |
 | `interaction.shaftLanding` | Player hits ground |
 | `interaction.shippingBinClose` | Shipping bin closes |
@@ -77,13 +81,14 @@ Stardew Audio Captions currently features 206 captions.
 
 ## Critters
 
-15 captions in this category
+16 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `critters.birdFlap` | Bird flapping |
 | `critters.birdPeck` | Bird pecking |
 | `critters.birdChirp` | Birds chirp |
+| `critters.camel` | Camel bleats |
 | `critters.crabSplash` | Crab splashes |
 | `critters.crow` | Crow caws |
 | `critters.frogCroak` | Frog croaks |
@@ -99,7 +104,7 @@ Stardew Audio Captions currently features 206 captions.
 
 ## World
 
-16 captions in this category
+17 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -112,6 +117,7 @@ Stardew Audio Captions currently features 206 captions.
 | `world.ladderAppear` | Ladder appears |
 | `world.lavaSlosh` | Lava sloshes |
 | `world.leafRustle` | Leaves rustle |
+| `world.machineProcessing` | Machine working |
 | `world.moss` | Moss rustles |
 | `world.panSpot` | Panning spot appears |
 | `world.parrotExpressLand` | Parrot Express lands |
@@ -138,12 +144,13 @@ Stardew Audio Captions currently features 206 captions.
 
 ## Tools
 
-7 captions in this category
+8 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `tools.axe` | Axe thuds |
 | `tools.horseFlute` | Flute playing |
+| `tools.hoe` | Hoe tills |
 | `tools.pail` | Milking |
 | `tools.pan` | Pan sloshes |
 | `tools.pickaxe` | Pickaxe thuds |

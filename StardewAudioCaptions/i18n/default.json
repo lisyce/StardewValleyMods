@@ -38,7 +38,7 @@
   "interaction.giftbox.caption": "Gift box opens",
   "interaction.shippingBinOpen.caption": "Shipping bin opens",
   "interaction.shippingBinClose.caption": "Shipping bin closes",
-  "interaction.fireplace.caption": "Fire roars",
+  "interaction.fire.caption": "Fire roars",
   "interaction.footstepsDescend.caption": "Footsteps descending",
   "interaction.shaftFalling.caption": "Player falling",
   "interaction.shaftLanding.caption": "Player hits ground",
@@ -50,7 +50,7 @@
   "interaction.containerBreak.caption": "Crate breaks",
   "interaction.containerCrack.caption": "Crate cracks",
   "interaction.minecart.caption": "Coal thuds",
-  "interaction.fluteBlock.caption": "Flute plays ({{pitch}})",
+  "interaction.fluteBlock.caption": "Flute block plays ({{pitch}})",
   "interaction.fluteBlockClam.caption": "Kalimba plays ({{pitch}})",
   "interaction.fluteBlockTelephone.caption": "Phone dials ({{pitch}})",
   "interaction.fluteBlockHarp.caption": "Harpsichord plays ({{pitch}})",
@@ -59,6 +59,10 @@
   "interaction.fluteBlockDuck.caption": "Duck quacks ({{pitch}})",
   "interaction.fluteBlockPiano.caption": "Piano plays ({{pitch}})",
   "interaction.fluteBlockMeep.caption": "Junimo meeps ({{pitch}})",
+  "interaction.drumBlock.caption": "Drum block plays ({{pitch}})",
+  "interaction.itemPlaced.caption": "Item placed",
+  "interaction.planted.caption": "Planting",
+  "interaction.fairyDust.caption": "Machine sparkling",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -99,6 +103,7 @@
   "critters.sandDuggyHide.caption": "Sand Duggy hides",
   "critters.junimo.caption": "Junimo meeps",
   "critters.junimoBundle.caption": "Junimo deposits bundle",
+  "critters.camel.caption": "Camel bleats",
 
   "world.leafRustle.caption": "Leaves rustle",
   "world.elevator.caption": "Elevator dings",
@@ -116,6 +121,7 @@
   "world.parrotExpressLand.caption": "Parrot Express lands",
   "world.moss.caption": "Moss rustles",
   "world.panSpot.caption": "Panning spot appears",
+  "world.machineProcessing.caption": "Machine working",
   
   "events.earthquake.caption": "Rumbling",
   "events.raccoon0.caption": "Wind blowing",
@@ -134,6 +140,7 @@
   "tools.pan.caption": "Pan sloshes",
   "tools.wateringCan.caption": "Water pours",
   "tools.horseFlute.caption": "Flute playing",
+  "tools.hoe.caption": "Hoe tills",
   
   "monsters.batScreech.caption": "Bat screeches",
   "monsters.serpentSpawn.caption": "Serpent spawns",

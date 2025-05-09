@@ -8,7 +8,7 @@
   "interaction.giftbox",
   "interaction.shippingBinOpen",
   "interaction.shippingBinClose",
-  "interaction.fireplace",
+  "interaction.fire",
   "interaction.footstepsDescend",
   "interaction.shaftFalling",
   "interaction.shaftLanding",
@@ -29,6 +29,10 @@
   "interaction.fluteBlockDuck",
   "interaction.fluteBlockPiano",
   "interaction.fluteBlockMeep",
+  "interaction.drumBlock",
+  "interaction.itemPlaced",
+  "interaction.planted",
+  "interaction.fairyDust",
   
   "player.eating",
   "player.drinking",
@@ -71,6 +75,7 @@
   "world.parrotExpressLand",
   "world.moss",
   "world.panSpot",
+  "world.machineProcessing",
 
   "critters.birdFlap",
   "critters.birdPeck",
@@ -85,6 +90,7 @@
   "critters.sandDuggyHide",
   "critters.junimo",
   "critters.junimoBundle",
+  "critters.camel",
   
   "events.earthquake",
   "events.raccoon0",
@@ -103,6 +109,7 @@
   "tools.pan",
   "tools.wateringCan",
   "tools.horseFlute",
+  "tools.hoe",
   
   "monsters.batScreech",
   "monsters.serpentSpawn",

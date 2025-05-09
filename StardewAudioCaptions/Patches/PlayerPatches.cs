@@ -2,6 +2,7 @@
 using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
 using StardewValley;
+using StardewValley.Objects;
 
 namespace StardewAudioCaptions.Patches;
 
@@ -32,5 +33,23 @@ public class PlayerPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.checkAction)),
             new Caption("pickUpItem", "player.itemCollect", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(Furniture), nameof(Furniture.clicked)),
+            new Caption("coin", "player.itemCollect"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(GameLocation), "removeQueuedFurniture"),
+            new Caption("coin", "player.itemCollect"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), "CheckForActionOnMachine"),
+            new Caption("coin", "player.itemCollect"));
     }
 }

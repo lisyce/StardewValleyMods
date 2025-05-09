@@ -44,7 +44,7 @@ public class CaptionHudMessage
     {
         if (_captions.Count == 0 || !config.CaptionsOn) return;
 
-        _width = (int)(300 * config.FontScaling);  // set the width field
+        _width = (int)(350 * config.FontScaling);  // set the width field
         
         var elHeight = (int) (Game1.smallFont.MeasureString("Ing!").Y * config.FontScaling);
         var elPadding = (int) (8 * config.FontScaling);

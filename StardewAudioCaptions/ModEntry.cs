@@ -219,7 +219,8 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
         CaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
         CaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));
-        
+        CaptionManager.RegisterDefaultCaption(new Caption("camel", "critters.camel"));
+
         CaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
         CaptionManager.RegisterDefaultCaption(new Caption("horse_flute", "tools.horseFlute"));
 
