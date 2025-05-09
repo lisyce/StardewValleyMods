@@ -15,13 +15,13 @@ public class CaptionHudMessageElement
     
     public readonly Caption Caption;
 
-    public CaptionHudMessageElement(Cue cue, string message, int maxDurationTicks, Caption caption, Color color)
+    public CaptionHudMessageElement(Cue cue, string message, Caption caption, Color color)
     {
         Message = message;
         _cue = cue;
         Transparency = 1f;
         _ticksElapsed = 0;
-        _maxDurationTicks = maxDurationTicks;
+        _maxDurationTicks = caption.MaxDuration;
         Caption = caption;
         Color = color;
     }
@@ -32,7 +32,7 @@ public class CaptionHudMessageElement
         var cuePlaying = _cue.IsPlaying && !_cue.IsPaused && _cue.Volume >= 10;
         if (VisibleLongEnough() && (!cuePlaying || ExceededMaxDuration()))
         {
-            Transparency -= 0.02f;
+            Transparency -= 0.05f;
             if (Transparency < 0f)
             {
                 return true;

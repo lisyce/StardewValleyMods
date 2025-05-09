@@ -5,6 +5,7 @@ public class Caption
     public readonly string CueId;
     public readonly string CaptionId;
     public readonly bool ShouldLog;
+    public readonly CaptionPriority Priority;
     private readonly int? _maxDuration;
     public int MaxDuration => _maxDuration ?? CaptionManager.InfiniteDuration;
     public string CategoryId => CaptionId.Split(".")[0];
@@ -17,6 +18,7 @@ public class Caption
         ShouldLog = shouldLog;
         _maxDuration = maxDuration;
         Tokens = tokens;
+        Priority = ModEntry.CaptionManager.GetPriority(captionId);
 
         ModEntry.CaptionManager.ValidateCaption(this);
     }

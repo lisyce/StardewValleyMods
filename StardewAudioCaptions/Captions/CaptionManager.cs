@@ -21,7 +21,7 @@ public class CaptionManager
         { "Green", Color.LimeGreen }
     };
     
-    private readonly Dictionary<string, int> _captionIds;
+    private readonly Dictionary<string, CaptionPriority> _captionIds;
     private readonly CaptionHudMessage _hudMessage;
     private readonly IMonitor _monitor;
     private readonly IModHelper _helper;
@@ -32,7 +32,7 @@ public class CaptionManager
     
     public CaptionManager(IModHelper helper, CaptionHudMessage hudMessage, IMonitor monitor, ModConfig config)
     {
-        _captionIds = helper.ModContent.Load<Dictionary<string, int>>("assets/captions.json");
+        _captionIds = helper.ModContent.Load<Dictionary<string, CaptionPriority>>("assets/captions.json");
         _hudMessage = hudMessage;
         _monitor = monitor;
         _helper = helper;
@@ -152,6 +152,11 @@ public class CaptionManager
         return result;
     }
 
+    public CaptionPriority GetPriority(string captionId)
+    {
+        return _captionIds.GetValueOrDefault(captionId, CaptionPriority.Default);
+    }
+
     public bool ValidateCaption(Caption caption)
     {
         var captionId = caption.CaptionId;
@@ -184,7 +189,7 @@ public class CaptionManager
         
         var captionTranslationKey = captionId + ".caption";
         var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);
-        _hudMessage.AddCaption(cue, translatedCaption, caption.MaxDuration, caption, CaptionColor(caption));
+        _hudMessage.AddCaption(cue, translatedCaption, caption, CaptionColor(caption));
     }
 
     private Color CaptionColor(Caption caption)

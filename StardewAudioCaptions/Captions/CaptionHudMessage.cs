@@ -19,7 +19,7 @@ public class CaptionHudMessage
         _captions = new List<CaptionHudMessageElement>();
     }
 
-    public void AddCaption(Cue cue, string message, int maxDurationTicks, Caption backingCaption, Color color)
+    public void AddCaption(Cue cue, string message, Caption backingCaption, Color color)
     {
         // is this caption already displayed?
         foreach (var caption in _captions)
@@ -31,8 +31,9 @@ public class CaptionHudMessage
             }
         }
         
-        var el = new CaptionHudMessageElement(cue, message, maxDurationTicks, backingCaption, color);
+        var el = new CaptionHudMessageElement(cue, message, backingCaption, color);
         _captions.Add(el);
+        _captions.Sort((x, y) => y.Caption.Priority.CompareTo(x.Caption.Priority));
     }
     
     public void Update()

@@ -256,13 +256,14 @@ public class InteractionPatches : ICaptionPatch
         var placementSoundFld = AccessTools.Field(typeof(FloorPathData), nameof(FloorPathData.PlacementSound));
         var isFloorPath =
             AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.IsFloorPathItem));
-
+        
         matcher.MatchStartForward(new CodeMatch(OpCodes.Callvirt, isFloorPath))
-            .MatchStartForward(
+            .ThrowIfNotMatch("Couldn't find IsFloorPathItem call")
+            .MatchEndForward(
                 new CodeMatch(OpCodes.Ldfld, placementSoundFld),
-                new CodeMatch(OpCodes.Brfalse_S),
-                new CodeMatch(OpCodes.Callvirt, SoundCueCodeMatcher.GameLocationPlaySound))
-            .ThrowIfNotMatch("Could not find flooring placement sound");
+                new CodeMatch(OpCodes.Brfalse_S))
+            .ThrowIfNotMatch("Could not find flooring placement sound")
+            .Advance(2);
         
         var soundCueMatcher = new SoundCueCodeMatcher(matcher);
         soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.itemPlaced");
