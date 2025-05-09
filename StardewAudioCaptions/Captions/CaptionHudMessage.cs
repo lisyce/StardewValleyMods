@@ -42,7 +42,7 @@ public class CaptionHudMessage
 
     public void Draw(SpriteBatch b, ModConfig config)
     {
-        if (_captions.Count == 0 || !config.CaptionsOn) return;
+        if (_captions.Count == 0 || !config.CaptionsOn || (config.HideInMenu && Game1.activeClickableMenu != null)) return;
 
         _width = (int)(350 * config.FontScaling);  // set the width field
         

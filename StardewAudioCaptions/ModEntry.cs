@@ -105,6 +105,12 @@ public class ModEntry : Mod
             setValue: value => _config.CaptionPosition = value,
             allowedValues: new []{ "Top Left", "Center Left", "Bottom Left", "Bottom Center", "Bottom Right", "Center Right" });
         
+        configMenu.AddBoolOption(
+            mod: ModManifest,
+            name: () => Helper.Translation.Get("config.hideInMenu"),
+            getValue: () => _config.HideInMenu,
+            setValue: value => _config.HideInMenu = value);
+        
         configMenu.AddNumberOption(
             mod: ModManifest,
             name: () => Helper.Translation.Get("config.offsetX"),

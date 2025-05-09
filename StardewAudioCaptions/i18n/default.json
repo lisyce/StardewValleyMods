@@ -15,7 +15,8 @@
   "config.offsetX": "Location X-Offset (Pixels)",
   "config.offsetY": "Location Y-Offset (Pixels)",
   "config.offset.tooltip": "Additionally offsets the caption UI from the specified location for finer customizability. Default 0.",
-
+  "config.hideInMenu": "Hide Captions in Menus",
+  
   "interaction.category": "Interactions",
   "player.category": "Player",
   "world.category": "World",
