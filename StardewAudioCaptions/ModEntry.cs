@@ -200,12 +200,12 @@ public class ModEntry : Mod
         CaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
         CaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
         CaptionManager.RegisterDefaultCaption(new Caption("harvest", "interaction.cropHarvest"));
+        CaptionManager.RegisterDefaultCaption(new Caption("book_read", "interaction.bookRead"));
 
         CaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
         CaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
         CaptionManager.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
         CaptionManager.RegisterDefaultCaption(new Caption("jingleBell", "player.footstepsJingle"));
-        
         CaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "player.itemThrown"));
         CaptionManager.RegisterDefaultCaption(new Caption("questcomplete", "player.questComplete"));
         CaptionManager.RegisterDefaultCaption(new Caption("stardrop", "player.stardrop"));

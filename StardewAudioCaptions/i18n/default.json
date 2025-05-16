@@ -65,6 +65,7 @@
   "interaction.planted.caption": "Planting",
   "interaction.fairyDust.caption": "Machine sparkling",
   "interaction.itemBreak.caption": "Item broken",
+  "interaction.bookRead.caption": "Book pages flipping",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -75,6 +76,7 @@
   "player.itemThrown.caption": "Item thrown down",
   "player.questComplete.caption": "Quest completes",
   "player.stardrop.caption": "Stardrop shimmering",
+  "player.teleport.caption": "Player teleports",
   
   "ambient.thunder.caption": "Thunder rumbles",
   "ambient.trainWhistle.caption": "Train whistles",

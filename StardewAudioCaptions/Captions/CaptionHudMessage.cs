@@ -1,11 +1,14 @@
+using HarmonyLib;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.Locations;
 using StardewValley.Menus;
+using StardewValley.Minigames;
 
 namespace StardewAudioCaptions.Captions;
 
@@ -89,7 +92,7 @@ public class CaptionHudMessage
             "Bottom Right" => ShouldDrawBottomRightFlush(safeArea, out var nonFlushXpos) ? new Vector2(safeArea.Right - _width - 8, safeArea.Bottom - boxheight - 8) : new Vector2(nonFlushXpos, safeArea.Bottom - boxheight - 8),
             "Center Right" => new Vector2(safeArea.Right - _width - 8, safeArea.Top + safeArea.Height / 2f - boxheight / 2),
             // default is top left
-            _ => PlayerInMines() ? new Vector2(safeArea.Left + 8, safeArea.Top + 64) : new Vector2(safeArea.Left + 8, safeArea.Top + 8)
+            _ => ShouldOffsetTopLeftY(out var yOffset) ? new Vector2(safeArea.Left + 8, safeArea.Top + yOffset) : new Vector2(safeArea.Left + 8, safeArea.Top + 8)
         };
     }
 
@@ -121,9 +124,46 @@ public class CaptionHudMessage
         }
     }
 
-    private bool PlayerInMines()
+    private bool ShouldOffsetTopLeftY(out int yOffset)
     {
-        return Game1.player.currentLocation is MineShaft;
+        yOffset = 0;
+        if (Game1.player.currentLocation is MineShaft)
+        {
+            yOffset = 64;
+            return true;
+        }
+        else if (Game1.currentMinigame is TargetGame or FishingGame)
+        {
+            yOffset = 100;
+            return true;
+        }
+        else if (FestivalCurrencyDisplay())
+        {
+            yOffset = 120;
+            return true;
+        }
+        else if (ShowingCurrency())
+        {
+            yOffset = 125;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool ShowingCurrency()
+    {
+        if (Game1.specialCurrencyDisplay == null) return false;
+        
+        return Game1.specialCurrencyDisplay.displayedCurrencies.Count > 0;
+    }
+
+    private bool FestivalCurrencyDisplay()
+    {
+        if (Game1.CurrentEvent == null) return false;
+
+        return Game1.CurrentEvent.isSpecificFestival("fall16") || Game1.CurrentEvent.isSpecificFestival("spring13") ||
+               Game1.CurrentEvent.isSpecificFestival("winter8");
     }
 
     public void ClearDisabledCaptions(ModConfig config)

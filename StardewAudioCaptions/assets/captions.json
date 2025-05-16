@@ -34,6 +34,7 @@
     "interaction.planted": 0,
     "interaction.fairyDust": 5,
     "interaction.itemBreak": 0,
+    "interaction.bookRead": 5,
     
     "player.eating": 0,
     "player.drinking": 0,
@@ -44,10 +45,11 @@
     "player.itemThrown": 0,
     "player.questComplete": 0,
     "player.stardrop": 10,
+    "player.teleport": 10,
     
     "ambient.coinsClinking": -10,
     "ambient.wind": -10,
-    "ambient.thunder": 0,
+    "ambient.thunder": 5,
     "ambient.trainLoop": -10,
     "ambient.trainWhistle": 0,
     "ambient.distantTrain": 0,

@@ -71,5 +71,12 @@ public class ToolsPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(Hoe), nameof(Hoe.DoFunction)),
             new Caption("hoeHit", "tools.hoe"));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(ResourceClump), nameof(ResourceClump.performToolAction)),
+            new Caption("axchop", "tools.axe"),
+            new Caption("hammer", "tools.pickaxe"));
     }
 }

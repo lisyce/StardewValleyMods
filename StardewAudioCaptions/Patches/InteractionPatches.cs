@@ -164,6 +164,12 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(Flooring), nameof(Flooring.performToolAction)),
             new Caption(CaptionManager.AnyCue, "interaction.itemBreak"));
         
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(AnimalHouse), nameof(AnimalHouse.checkAction)),
+            new Caption("coin", "interaction.itemPlaced"));
+        
         PatchGenerator.TranspilerPatch(
             harmony,
             monitor,
