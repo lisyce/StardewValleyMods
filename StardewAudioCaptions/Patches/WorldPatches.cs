@@ -103,6 +103,12 @@ public class WorldPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(NPC), "robinHammerSound"),
             new Caption(CaptionManager.AnyCue, "world.robinHammer"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.minutesElapsed)),
+            new Caption("dwop", "world.machineFinish"));
     }
     
     private static IEnumerable<CodeInstruction> ObjectPlacementActionTranspiler(IEnumerable<CodeInstruction> instructions)

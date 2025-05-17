@@ -13,6 +13,7 @@ public class ModEntry : Mod
 {
     private ModConfig _config;
     public static CaptionManager CaptionManager;  // has to be public static so that harmony patches can use it
+    public static EventCaptionManager EventCaptionManager;
     private CaptionHudMessage _captionHudMessage;
     private Harmony _harmony;
     
@@ -26,6 +27,8 @@ public class ModEntry : Mod
         _harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         CaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
+        EventCaptionManager = new EventCaptionManager(helper, Monitor, CaptionManager);
+        
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
@@ -40,6 +43,7 @@ public class ModEntry : Mod
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
     {
         _captionHudMessage.Update();
+        EventCaptionManager.Update();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
@@ -238,8 +242,8 @@ public class ModEntry : Mod
         
         CaptionManager.RegisterDefaultCaption(new Caption("slingshot", "weapons.slingshot"));
         
-        CaptionManager.RegisterDefaultCaption(new Caption("parachute", "events.parachute"));
-        CaptionManager.RegisterDefaultCaption(new Caption("planeflyby", "events.planefly"));
+        CaptionManager.RegisterDefaultCaption(new Caption("parachute", "nightEvents.parachute"));
+        CaptionManager.RegisterDefaultCaption(new Caption("planeflyby", "nightEvents.planefly"));
         
         CaptionManager.RegisterDefaultCaption(new Caption("cluck", "animals.chicken"));
         CaptionManager.RegisterDefaultCaption(new Caption("Duck", "animals.duck"));

@@ -20,7 +20,7 @@
   "interaction.category": "Interactions",
   "player.category": "Player",
   "world.category": "World",
-  "events.category": "Events",
+  "nightEvents.category": "Night Events",
   "tools.category": "Tools",
   "monsters.category": "Monsters",
   "ambient.category": "Ambient Sounds",
@@ -29,6 +29,7 @@
   "animals.category": "Farm Animals",
   "pets.category": "Pets",
   "fishing.category": "Fishing",
+  "events.category": "Events",
   
   "interaction.doorClose.caption": "Door closes",
   "interaction.fenceGate.caption": "Fence gate toggles",
@@ -127,16 +128,17 @@
   "world.panSpot.caption": "Panning spot appears",
   "world.machineProcessing.caption": "Machine working",
   "world.robinHammer.caption": "Robin's hammer thuds",
+  "world.machineFinish.caption": "Machine finishes",
 
-  "events.earthquake.caption": "Rumbling",
-  "events.raccoon0.caption": "Wind blowing",
-  "events.raccoon1.caption": "Tree falls",
-  "events.ufo.caption": "Sci-fi humming",
-  "events.meteorite.caption": "Whooshing",
-  "events.dogs.caption": "Howling and barking",
-  "events.owl.caption": "Owl hoots",
-  "events.parachute.caption": "Parachutes rustling",
-  "events.planefly.caption": "Plane engine whirring",
+  "nightEvents.earthquake.caption": "Rumbling",
+  "nightEvents.raccoon0.caption": "Wind blowing",
+  "nightEvents.raccoon1.caption": "Tree falls",
+  "nightEvents.ufo.caption": "Sci-fi humming",
+  "nightEvents.meteorite.caption": "Whooshing",
+  "nightEvents.dogs.caption": "Howling and barking",
+  "nightEvents.owl.caption": "Owl hoots",
+  "nightEvents.parachute.caption": "Parachutes rustling",
+  "nightEvents.planefly.caption": "Plane engine whirring",
   
   "tools.shears.caption": "Shears click",
   "tools.pail.caption": "Milking",
@@ -257,5 +259,7 @@
   "fishing.hit.caption": "Fish hooked",
   "fishing.reeling.caption": "Fishing rod reeling",
   "fishing.escape.caption": "Fish escapes",
-  "fishing.caught.caption": "Fish caught"
+  "fishing.caught.caption": "Fish caught",
+  
+  "events.missingBundleComplete_wand.caption": "Junimo teleports"
 }

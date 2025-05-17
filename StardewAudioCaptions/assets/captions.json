@@ -79,6 +79,7 @@
     "world.panSpot": 5,
     "world.machineProcessing": 0,
     "world.robinHammer": 0,
+    "world.machineFinish": 0,
     
     "critters.birdFlap": -5,
     "critters.birdPeck": -5,
@@ -97,15 +98,15 @@
     "critters.seagull": -5,
     "critters.birdChirp": -5,
     
-    "events.earthquake": 10,
-    "events.raccoon0": 10,
-    "events.raccoon1": 10,
-    "events.ufo": 10,
-    "events.meteorite": 10,
-    "events.dogs": 10,
-    "events.owl": 10,
-    "events.parachute": 10,
-    "events.planefly": 10,
+    "nightEvents.earthquake": 10,
+    "nightEvents.raccoon0": 10,
+    "nightEvents.raccoon1": 10,
+    "nightEvents.ufo": 10,
+    "nightEvents.meteorite": 10,
+    "nightEvents.dogs": 10,
+    "nightEvents.owl": 10,
+    "nightEvents.parachute": 10,
+    "nightEvents.planefly": 10,
     
     "tools.shears": -5,
     "tools.pail": -5,
@@ -226,5 +227,7 @@
     "fishing.hit": 0,
     "fishing.reeling": 0,
     "fishing.escape": 5,
-    "fishing.caught": 5
+    "fishing.caught": 5,
+    
+    "events.missingBundleComplete_wand": 0
 }

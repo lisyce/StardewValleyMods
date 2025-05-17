@@ -134,15 +134,15 @@ Stardew Audio Captions currently features 215 captions.
 
 | Internal Id | English Caption |
 |-|-|
-| `events.dogs` | Howling and barking |
-| `events.owl` | Owl hoots |
-| `events.parachute` | Parachutes rustling |
-| `events.planefly` | Plane engine whirring |
-| `events.earthquake` | Rumbling |
-| `events.ufo` | Sci-fi humming |
-| `events.raccoon1` | Tree falls |
-| `events.meteorite` | Whooshing |
-| `events.raccoon0` | Wind blowing |
+| `nightEvents.dogs` | Howling and barking |
+| `nightEvents.owl` | Owl hoots |
+| `nightEvents.parachute` | Parachutes rustling |
+| `nightEvents.planefly` | Plane engine whirring |
+| `nightEvents.earthquake` | Rumbling |
+| `nightEvents.ufo` | Sci-fi humming |
+| `nightEvents.raccoon1` | Tree falls |
+| `nightEvents.meteorite` | Whooshing |
+| `nightEvents.raccoon0` | Wind blowing |
 
 ## Tools
 

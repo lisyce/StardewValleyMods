@@ -13,12 +13,12 @@ public class EventsPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(SoundInTheNightEvent), nameof(SoundInTheNightEvent.tickUpdate)),
-            new Caption("thunder_small", "events.earthquake"),
-            new Caption("windstorm", "events.raccoon0"),
-            new Caption("windstorm", "events.raccoon1"),
-            new Caption("UFO", "events.ufo"),
-            new Caption("Meteorite", "events.meteorite"),
-            new Caption("dogs", "events.dogs"),
-            new Caption("owl", "events.owl"));
+            new Caption("thunder_small", "nightEvents.earthquake"),
+            new Caption("windstorm", "nightEvents.raccoon0"),
+            new Caption("windstorm", "nightEvents.raccoon1"),
+            new Caption("UFO", "nightEvents.ufo"),
+            new Caption("Meteorite", "nightEvents.meteorite"),
+            new Caption("dogs", "nightEvents.dogs"),
+            new Caption("owl", "nightEvents.owl"));
     }
 }
