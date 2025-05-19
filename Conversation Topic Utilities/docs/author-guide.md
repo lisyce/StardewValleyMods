@@ -60,6 +60,7 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 | `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names.   | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: ANY"` |
 | `GSQ`           | A [Game State Query](https://stardewvalleywiki.com/Modding:Game_state_queries) | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
 | `TopicContains` | A string to match. This is an exact match.                                     | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
+| `CurrentNpcManner` | The [manner](https://stardewvalleywiki.com/Modding:NPC_data#Basic_info) to match. | Allows a default dialogue to apply only when the NPC the player is speaking to has a specific manner field. | `"CurrentNpcManner: Rude"` |
 
 ### The %CurrentNPC% Token
 
