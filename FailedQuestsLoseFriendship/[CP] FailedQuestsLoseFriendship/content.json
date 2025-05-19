@@ -1,6 +1,7 @@
 {
   "Format": "2.6.0",
   "Changes": [
+    // CTU rules
     {
       "Action": "EditData",
       "Target": "BarleyZP.CTU/TopicRules",
@@ -10,9 +11,28 @@
           "IdIsPrefix": true,
           "RepeatableOnExpire": true,
           "DefaultDialogueRules": [
+            // special rules for specific NPCs
             {
-              "Id": "So, you don't keep your promises, huh? You took that quest from me and didn't complete it!",
-              "Rules": [ "TopicContains: _%CurrentNPC%" ]
+              "Id": "{{ModId}}_MisterGinger",
+              "Dialogue": "{{i18n:Default.MisterGinger}}",
+              "Rules": [ "TopicContains: _%CurrentNPC%", "ForNPC: MisterGinger" ]
+            },
+            
+            // defaults for all NPCs
+            {
+              "Id": "{{ModId}}_Neutral",
+              "Dialogue": "{{i18n:Default.Neutral{{Random:0,1}}}}",
+              "Rules": [ "TopicContains: _%CurrentNPC%", "CurrentNpcManner: Neutral" ]
+            },
+            {
+              "Id": "{{ModId}}_Rude",
+              "Dialogue": "{{i18n:Default.Rude{{Random:0}}}}",
+              "Rules": [ "TopicContains: _%CurrentNPC%", "CurrentNpcManner: Rude" ]
+            },
+            {
+              "Id": "{{ModId}}_Polite",
+              "Dialogue": "{{i18n:Default.Polite{{Random:0}}}}",
+              "Rules": [ "TopicContains: _%CurrentNPC%", "CurrentNpcManner: Polite" ]
             }
           ]
         }
@@ -27,7 +47,8 @@
         "BarleyZP.FailedQuestsLoseFriendship20": "{{i18n:BarleyZP.FailedQuestsLoseFriendship20.text}}%item money -500%%[#]{{i18n:BarleyZP.FailedQuestsLoseFriendship20.title}}",
         "BarleyZP.FailedQuestsLoseFriendship50": "{{i18n:BarleyZP.FailedQuestsLoseFriendship50.text}}%item money -5000%%[#]{{i18n:BarleyZP.FailedQuestsLoseFriendship50.title}}"
       }
-    },
+    },    
+    // Vanilla NPCs
     {
       "Action": "EditData",
       "Target": "Characters/Dialogue/Emily",

@@ -47,10 +47,11 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 
 #### Fields
 
-| Field   | Description                                                                                                                        | Default Value                     |
-|---------|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `Id`    | The default dialogue line itself. Unique identifier among all default dialogue rules for a topic rule.                             | Required field; no default value. |
-| `Rules` | A list of string rules in the form `"RuleType: Arguments"`. All rules must apply for a default dialogue line to be said by an NPC. | `[]`                              |
+| Field      | Description                                                                                                                                                                          | Default Value                     |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `Id`       | Unique identifier among all default dialogue rules for a topic rule.                                                                                                                 | Required field; no default value. |
+| `Dialogue` | The default dialogue line itself.                                                                                                                                                    | Required field; no default value. |
+| `Rules`    | A list of string rules in the form `"RuleType: Arguments"` that specify when a default dialogue line applies. All rules must apply for a default dialogue line to be said by an NPC. | `[]`                              |
 
 #### Available Rules
 
@@ -67,11 +68,12 @@ As of now, it can only be used in default dialogue rules: `"GSQ: PLAYER_HEARTS C
 
 ```json
 {
-  "Id": "{{ModId}}_myConversationTopic_",
+  "Id": "myConversationTopic_",
   "IdIsPrefix": true,
   "DefaultDialogueRules": [
     {
-      "Id": "I only say this line if my name is in the CT key!",
+      "Id": "SomeUniqueId",
+      "Dialogue": "I only say this line if my name is in the CT key!",
       "Rules": [ "TopicContains: _%CurrentNPC%" ]      
     }      
   ]
@@ -153,15 +155,18 @@ Notice that the order of the default dialogue rules from specific to general all
           "Id": "cc_Complete",
           "DefaultDialogueRules": [
             {
-              "Id": "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h",
+              "Id": "{{ModId}}_SamRaining",
+              "Dialogue": "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h",
               "Rules": [ "ForNPC: Sam", "GSQ: WEATHER Here Rain" ]
             },
             {
-              "Id": "Hey, it's raining and you completed the CC!",
+              "Id": "{{ModId}}_raining",
+              "Dialogue": "Hey, it's raining and you completed the CC!",
               "Rules": [ "GSQ: WEATHER Here Rain" ]
             },
             {
-              "Id": "Hey, it's cool you completed the CC!"
+              "Id": "{{ModId}}_fallback",
+              "Dialogue": "Hey, it's cool you completed the CC!"
             }
           ]
         }

@@ -7,7 +7,9 @@ public class TopicRule
 {
     public class DefaultDialogueRule {
         [JsonRequired]
-        public string Id { get; set; }  // required field
+        public string Id { get; set; }
+        [JsonRequired]
+        public string Dialogue { get; set; }
         public List<string> Rules = new();
     }
 
