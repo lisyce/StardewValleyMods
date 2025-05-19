@@ -119,7 +119,7 @@ public class PatchGenerator
 
         foreach (var caption in captions)
         {
-            ModEntry.CaptionManager.RegisterCaptionForNextCue(caption);
+            ModEntry.ModCaptionManager.Value.RegisterCaptionForNextCue(caption);
         }
     }
 
@@ -129,7 +129,7 @@ public class PatchGenerator
 
         foreach (var caption in captions)
         {
-            ModEntry.CaptionManager.UnregisterCaptionForNextCue(caption);
+            ModEntry.ModCaptionManager.Value.UnregisterCaptionForNextCue(caption);
         }
     }
     
