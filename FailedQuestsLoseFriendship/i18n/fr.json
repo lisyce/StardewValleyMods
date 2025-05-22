@@ -1,0 +1,12 @@
+{
+  "Config.GeneralSettings": "Paramètres généraux",
+  "Config.Penalty": "Pénalité d'amitié",
+  "Config.Collection": "Activer les quêtes de collection",
+  "Config.Slay": "Activer les quêtes d’élimination de monstres",
+  "Config.Fish": "Activer les quêtes de pêche",
+  "Config.Delivery": "Activer les quêtes de livraison d'articles",
+  "Config.Socialize": "Activer les quêtes de sociabilisation",
+  "Config.SO": "Activer les commandes spéciales",
+  "Config.SOToggle": "Basculer les commandes spéciales individuelles",
+  "Config.LoadSave": "Chargez une sauvegarde pour accéder à ces options."
+}
