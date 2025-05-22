@@ -1,0 +1,72 @@
+{
+  "BarleyZP.FailedQuestsLoseFriendship3.title": "3 demandes manquées",
+  "BarleyZP.FailedQuestsLoseFriendship3.text": "Hé, @.^J'ai entendu dire que tu avais promis aux concitoyens de réaliser leurs demandes, mais que tu as choisis de revenir sur cette promesse.^Sois plus responsable à l'avenir!^^- Maire Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship10.title": "10 demandes manquées",
+  "BarleyZP.FailedQuestsLoseFriendship10.text": "Salut, @.^Plusieurs personnes se sont manifestées pour me dire que vous manquez toujours les délais sur ls demandes publiées en ville.^Si cela se poursuit, nous devrons discuter du système d'honneur mis en place dans notre ville.^^-Maire Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship20.title": "20 demandes manquées",
+  "BarleyZP.FailedQuestsLoseFriendship20.text": "@,^Cela devient ridicule. Tu as maintenant rompu 20 promesses de répondre aux demandes des citadins (enfin, au moins celles dont j’ai eu connaissance).^Tu seras condamné à une amende pour ces infractions.^^-Maire Lewis",
+  "BarleyZP.FailedQuestsLoseFriendship50.title": "50 demandes manquées",
+  "BarleyZP.FailedQuestsLoseFriendship50.text": "@,^C'est absurde! Tu dois ramasser des papiers en masse, tout ça pour ne pas y répondre ensuite. Je te condamne à une amende plus lourde cette fois.^^-Maire Lewis",
+
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus": "À mon quart de travail l'autre soir, j'ai entendu dire que tu avais rompu une promesse faite à Gus. C'est vraiment de mauvaises vibrations.$a",
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize": "Tu m'avais promis que tu dirais bonjour à tout le monde et tu ne l'as pas fait ! Pourquoi ?$a",
+  "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily": "Quoi, tu penses que l'énergie dans les cristaux est une blague ? Tu n’avais pas besoin de prétendre m'aider à les récupérer dans ce cas.$a",
+
+  "Maru.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Harvey": "Harvey m'a dit que tu t’étais engagé sur une faveur pour lui mais vous ne l'avez pas fait. Tu devrais peut-être faire attention à être un peu plus responsable.$a",
+
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Clint": "Hé, comment se fait-il que tu n’as jamais fini de rassembler ces minerais l'autre jour?$3",
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Clint": "Hé, comment se fait-il que tu n’as jamais fini de tuer ces monstres l'autre jour?$3",
+  "Clint.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Clint": "Hé, comment se fait-il que tu n’as jamais fini de tuer ces monstres l'autre jour?$3#$e#Tu avais promis de garder les mines en sécurité pour les autres mineurs.$3",
+
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "Hé, si tu promets encore à ma femme de rassembler du matériel, tu ferais mieux de tenir cette promesse la prochaine fois.$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Demetrius": "Pourquoi ne finirais-tu pas de cette mission de tuer ces monstres que tu avais promis d’anéantir ? Mes recherches prennent du recul.$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Demetrius": "J'ai entendu dire que tu n’avais pas fini la pêche comme promis. Tu sais que la surpopulation est une menace sérieuse pour l'écosystème !$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius": "Tu n’as pas fini la pêche comme promis. Tu sais que la surpopulation est une menace sérieuse pour l'écosystème !$4",
+  "Demetrius.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Demetrius2": "Tu n’as pas fini la pêche comme promis. Tu sais que la surpopulation est une menace sérieuse pour l'écosystème !$4",
+
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_sm_Lewis": "Je suis déçu que tu aies promis de tuer des monstres dans les mines, puis de manquer à ta promesse. La sécurité de Pélican Ville est très importante pour moi.$3",
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Lewis": "Est-ce que ce panneau d’annonce devant chez Pierre est utile ? Tu as dit que vous allez répondre à mon offre et que tu ne l’as pas fait.$3",
+  "Lewis.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Lewis": "Je suppose que je vais devoir mettre cette récompense du Fonds agricole à une autre occasion car tu n’as pas autant produit que promis.$3",
+
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_f_Willy": "Je dois dire que je pensais que tu serais mieux pour tenir tes promesses ...$2",
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy": "Mes crabes s’ront certainement déçus sans cette viande d'insectes que tu avais promise de m'apporter ...$2",
+  "Willy.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Willy2": "Un vrai pêcheur garderait sa promesse de tenir l'art de la pêche tropicale en vie ...$2",
+
+  "Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Penny": "La prochaine fois, si tu n’veux pas vraiment le faire, j’préférerais si t’accepte pas ma d’mande ...$s",
+  "Penny.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pam": "Ma mère est déçue mais je suis content que tu n’ai pas amené toutes ces boissons pour elle comme tu lui avais dit.",
+
+  "Alex.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Alex": "Mec, tu as oublié de m'apporter quelque chose !$a#$b#Tu sais, l’annonce que je mets devant chez Pierre!",
+
+  "Shane.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Shane": "Je suppose que mes publications \"Besoin d’aide\" sont aussi oubliables que moi ...$s",
+
+  "Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Haley": "Ouah ... je pensais vraiment que je pouvais te faire confiance pour me faire une faveur mais je suppose que j'avais tort.$3",
+  "Haley.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Emily": "Je connais ma sœur et je ne m'entend parfois mal avec tu ne peux pas casser tes promesses comme ça !$3",
+
+  "Elliott.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Elliott": "Ah, je vois que tu as oublié ce que tu avais promis de m'apporter. Comme si ma demande n'était qu'une brise qui passe ...$2",
+
+  "Leah.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Leah": "Oh ... salut.$s#$b#As-tu oublié que tu étais censé m'apporter quelque chose l'autre jour?$s",
+
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_rc_Robin": "Bon eh bien... Je suppose que je n'avais pas vraiment besoin de ces documents pour lesquels j'avais publié une annonce.$2",
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin": "Je suppose que je ne pourrai pas faire ce nouveau style de lit après tout ...$2",
+  "Robin.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Robin2": "Si tu n’étais pas intéressé par ma promotion de collection de ressources, tu n’avais pas besoin de prétendre vouloir participer.$2",
+
+  "Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "Oh, ${mon petit^ma petite^@}$. Bien sûr, je te pardonne d'avoir oublié ta promesse de m'apporter quelque chose l'autre jour.",
+  "Evelyn.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Evelyn": "Comment vais-je surprendre George sans ces poireaux que tu avais promis de m'apporter?$2",
+
+  "George.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Evelyn": "HMPH ... Ma femme peut te pardonner ton oubli, mais moi non.",
+
+  "Jodi.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Jodi": "Je suis tellement occupé, tu sais. C'est pourquoi j'ai posté cet avis à l'extérieur de Pierre l'autre jour.#$e#Si je savais que tu ne t’en en sortirais pas, j'aurais trouvé quelqu'un d'autre pour le faire.$2",
+
+  "Marnie.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Marnie": "Non, ça va ... Je n'avais pas vraiment besoin de toi pour cette annonce de toute façon ...$2",
+
+  "Pam.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pam": "Hé, ${gamin^gamine^@}$. Fais attention avec tes promesses.$4",
+
+  "Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Pierre": "Pourquoi ai-je même ce tableau d'affichage si des gens comme toi promettent de réaliser des offres et décident ensuite de ne pas le faire ?$3",
+  "Pierre.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Pierre": "Maintenant, comment suis-je censé gérer cette promotion ? Tu as oublié de m'apporter les produits!$3",
+
+  "Gus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Gus": "Si tu ne voulais pas essayer mon omelette géante, tu aurais pu le dire.$3#$b#Pas besoin de faire des promesses en l’air.$3",
+
+  "Linus.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Linus": "Est-ce une farce pour toi lorsque tu promets de m’aider à nettoyer la vallée et te décides de ne pas le faire?$2",
+
+  "Caroline.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Caroline": "Je suppose que je trouverai quelqu'un d'autre pour expédier des produits tropicaux afin que je puisse les expérimenter une autre fois ...$2"
+}
