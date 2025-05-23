@@ -7,7 +7,7 @@ using StardewValley.Extensions;
 
 // ReSharper disable InconsistentNaming
 
-namespace ModListPageGen;
+namespace ModListPageGen.NexusApiClient;
 
 public class NexusApiClient
 {
@@ -36,7 +36,7 @@ public class NexusApiClient
     {
         var result = new GetNexusInfoResponse();
         
-        var legacyModIds = modIds.Select(x => new GraphqlSchemas.LegacyModId { gameId = 1303, modId = x})
+        var legacyModIds = modIds.Select(x => new LegacyModId { gameId = 1303, modId = x})
             .Where(x => !result.invalidNexusIds.Contains(x.modId)).ToList();
 
         for (var batchSize = legacyModIds.Count / 2; batchSize >= 1 && legacyModIds.Count > 0; batchSize /= 2)
@@ -61,8 +61,8 @@ public class NexusApiClient
         return result;
     }
     
-    private async Task<(GetNexusInfoResponse sureOf, List<GraphqlSchemas.LegacyModId> unsureOf)> GetNexusInfoHelper(List<GraphqlSchemas.LegacyModId> legacyModIds, int batchSize) {
-        var unsureOf = new List<GraphqlSchemas.LegacyModId>();
+    private async Task<(GetNexusInfoResponse sureOf, List<LegacyModId> unsureOf)> GetNexusInfoHelper(List<LegacyModId> legacyModIds, int batchSize) {
+        var unsureOf = new List<LegacyModId>();
 
         var sureOf = new GetNexusInfoResponse();
 
@@ -79,10 +79,10 @@ public class NexusApiClient
                 var request = GetGraphQlRequest(checkingNow, count);
                 await Task.Delay(200);  // politely rate-limit ourself
 
-                var graphQLResponse = await _graphQl.SendQueryAsync<GraphqlSchemas.LegacyModsType>(request);
+                var graphQLResponse = await _graphQl.SendQueryAsync<LegacyMods>(request);
                 if (graphQLResponse.Errors?.Length > 0)
                 {
-                    _monitor.Log(graphQLResponse.Errors[0].Message, LogLevel.Trace);
+                    _monitor.Log(graphQLResponse.Errors[0].Message);
                     if (batchSize == 1)
                     {
                         sureOf.invalidNexusIds.AddRange(checkingNow.Select(x => x.modId));
@@ -106,7 +106,7 @@ public class NexusApiClient
         return (sureOf, unsureOf);
     }
 
-    private GraphQLRequest GetGraphQlRequest(List<GraphqlSchemas.LegacyModId> modIds, int offset)
+    private GraphQLRequest GetGraphQlRequest(List<LegacyModId> modIds, int offset)
     {
         return new GraphQLRequest {
             Query = @"

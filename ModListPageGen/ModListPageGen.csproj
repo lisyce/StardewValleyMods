@@ -7,7 +7,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <Version>1.1.1</Version>
+        <Version>2.0.0</Version>
         <MinimumApiVersion>4.2.1</MinimumApiVersion>
         <MinimumGameVersion>1.6.15</MinimumGameVersion>
         <Name>Shareable Mod List Generator</Name>
@@ -20,7 +20,6 @@
     <ItemGroup>
       <PackageReference Include="GraphQL.Client" Version="6.1.0" />
       <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0" />
-      <PackageReference Include="Handlebars.Net" Version="2.1.6" />
       <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
       <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
     </ItemGroup>
@@ -28,11 +27,5 @@
     <PropertyGroup>
         <BundleExtraAssemblies>ThirdParty, System</BundleExtraAssemblies>
     </PropertyGroup>
-
-    <ItemGroup>
-        <None Update="template.html">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
 
 </Project>

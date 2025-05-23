@@ -1,3 +1,4 @@
+using ModListPageGen.ShareableLinkClient;
 using StardewModdingAPI;
 
 namespace ModListPageGen;
@@ -21,24 +22,7 @@ public class ModInfo
         _nexusId = nexusId;
     }
 
-    public class TemplatedModInfo
-    {
-        public bool HasNexus;
-        public string Name;
-        public string Author;
-        public string? NexusId;
-        public string Summary;
-        public string Downloads;
-        public string Endorsements;
-        public bool? AdultContent;
-        public string? PictureUrl;
-        public string? ContentPackFor;
-        public string CategoryName;
-        public string CategoryClass;
-        public string DepsClasses;
-    }
-
-    public TemplatedModInfo ToTemplate(IModHelper helper)
+    public ModListMod ToModListMod(IModHelper helper)
     {
         // find everything this mod depends on
         HashSet<string> dependsOn = new();
@@ -57,23 +41,37 @@ public class ModInfo
             if (depManifest == null || !dep.IsRequired) continue;
             dependsOn.Add(depManifest.Name);
         }
-        
-        return new TemplatedModInfo
-        {
-            HasNexus = _nexusInfo != null,
-            
-            Name = _manifest.Name,
-            Author = _manifest.Author,
-            NexusId = _nexusId,
-            Summary = _nexusInfo?.Summary ?? _manifest.Description,
-            Downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-",
-            Endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-",
-            AdultContent = _nexusInfo?.AdultContent,
-            PictureUrl = _nexusInfo?.PictureUrl,
-            ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
-            CategoryName = _nexusInfo?.categoryName ?? "No Category",
-            CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
-            DepsClasses = dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps",
-        };
+
+
+        var summary = _nexusInfo?.Summary ?? _manifest.Description;
+        var categoryName = _nexusInfo?.categoryName ?? "No Category";
+        var categoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category";
+        var depsClasses =
+            dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps";
+        var contentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name;
+        var hasNexusInfo = _nexusInfo != null;
+        var downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-";
+        var endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-";
+
+        return new ModListMod(_manifest.Name, _manifest.Author, summary, categoryName, categoryClass, depsClasses,
+            contentPackFor, _nexusId, hasNexusInfo, downloads, endorsements);
+
+        // return new ModListMod()
+        // {
+        //     HasNexusInfo = _nexusInfo != null,
+        //     
+        //     Name = _manifest.Name,
+        //     Author = _manifest.Author,
+        //     NexusId = _nexusId,
+        //     Summary = _nexusInfo?.Summary ?? _manifest.Description,
+        //     Downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-",
+        //     Endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-",
+        //     AdultContent = _nexusInfo?.AdultContent,
+        //     PictureUrl = _nexusInfo?.PictureUrl,
+        //     ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
+        //     CategoryName = _nexusInfo?.categoryName ?? "No Category",
+        //     CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
+        //     DepsClasses = dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps",
+        // };
     }
 };
