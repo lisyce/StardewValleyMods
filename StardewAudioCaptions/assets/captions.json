@@ -97,6 +97,7 @@
     "critters.camel": -5,
     "critters.seagull": -5,
     "critters.birdChirp": -5,
+    "critters.raccoon": 5,
     
     "nightEvents.earthquake": 10,
     "nightEvents.raccoon0": 10,
@@ -107,6 +108,11 @@
     "nightEvents.owl": 10,
     "nightEvents.parachute": 10,
     "nightEvents.planefly": 10,
+    "nightEvents.fairyFlap": 10,
+    "nightEvents.fairySparkle": 10,
+    "nightEvents.witchCackle": 10,
+    "nightEvents.witchSparkle": 10,
+    "nightEvents.witchSpell": 10,
     
     "tools.shears": -5,
     "tools.pail": -5,
@@ -222,12 +228,13 @@
     "pets.turtle": 0,
     
     "fishing.cast": 0,
-    "fishing.splash": 0,
+    "fishing.splash": -5,
     "fishing.bite": 10,
-    "fishing.hit": 0,
+    "fishing.hit": -5,
     "fishing.reeling": 0,
     "fishing.escape": 5,
     "fishing.caught": 5,
+    "fishing.troutTag": 5,
     
     "events.missingBundleComplete_wand": 0
 }

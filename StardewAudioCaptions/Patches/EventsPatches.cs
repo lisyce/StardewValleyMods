@@ -20,5 +20,26 @@ public class EventsPatches : ICaptionPatch
             new Caption("Meteorite", "nightEvents.meteorite"),
             new Caption("dogs", "nightEvents.dogs"),
             new Caption("owl", "nightEvents.owl"));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(FairyEvent), nameof(FairyEvent.tickUpdate)),
+            new Caption("batFlap", "nightEvents.fairyFlap", shouldLog: false),
+            new Caption("yoba", "nightEvents.fairySparkle", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(WitchEvent), nameof(WitchEvent.setUp)),
+            new Caption("cacklingWitch", "nightEvents.witchCackle"),
+            new Caption("yoba", "nightEvents.witchSparkle"));
+        
+        PatchGenerator.GeneratePatchPairs(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(WitchEvent), nameof(WitchEvent.tickUpdate)),
+            new Caption("discoverMineral", "nightEvents.witchSpell", shouldLog: false),
+            new Caption("debuffSpell", "nightEvents.witchSpell", shouldLog: false));
     }
 }

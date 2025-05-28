@@ -109,6 +109,7 @@
   "critters.junimo.caption": "Junimo meeps",
   "critters.junimoBundle.caption": "Junimo deposits bundle",
   "critters.camel.caption": "Camel bleats",
+  "critters.raccoon.caption": "Raccoon chitters",
 
   "world.leafRustle.caption": "Leaves rustle",
   "world.elevator.caption": "Elevator dings",
@@ -139,6 +140,11 @@
   "nightEvents.owl.caption": "Owl hoots",
   "nightEvents.parachute.caption": "Parachutes rustling",
   "nightEvents.planefly.caption": "Plane engine whirring",
+  "nightEvents.fairyFlap.caption": "Fairy fluttering",
+  "nightEvents.fairySparkle.caption": "Wand sparkling",
+  "nightEvents.witchSparkle.caption": "Sparkling",
+  "nightEvents.witchCackle.caption": "Witch cackling",
+  "nightEvents.witchSpell.caption": "Spell casted",
   
   "tools.shears.caption": "Shears click",
   "tools.pail.caption": "Milking",
@@ -260,6 +266,7 @@
   "fishing.reeling.caption": "Fishing rod reeling",
   "fishing.escape.caption": "Fish escapes",
   "fishing.caught.caption": "Fish caught",
+  "fishing.troutTag.caption": "Golden tag sparkling",
   
   "events.missingBundleComplete_wand.caption": "Junimo teleports"
 }

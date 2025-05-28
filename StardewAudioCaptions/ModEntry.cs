@@ -230,6 +230,7 @@ public class ModEntry : Mod
         ModCaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("camel", "critters.camel"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("Raccoon", "critters.raccoon"));
 
         ModCaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("horse_flute", "tools.horseFlute"));

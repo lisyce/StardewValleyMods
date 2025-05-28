@@ -1,13 +1,14 @@
 # List of Captions
 
-Stardew Audio Captions currently features 215 captions.
+Stardew Audio Captions currently features 226 captions.
 
 ## Interactions
 
-35 captions in this category
+36 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
+| `interaction.bookRead` | Book pages flipping |
 | `interaction.chestClose` | Chest closes |
 | `interaction.chest` | Chest opens |
 | `interaction.minecart` | Coal thuds |
@@ -46,7 +47,7 @@ Stardew Audio Captions currently features 215 captions.
 
 ## Player
 
-9 captions in this category
+10 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -57,6 +58,7 @@ Stardew Audio Captions currently features 215 captions.
 | `player.itemCollect` | Item collected |
 | `player.itemThrown` | Item thrown down |
 | `player.hurts` | Player hurts |
+| `player.teleport` | Player teleports |
 | `player.questComplete` | Quest completes |
 | `player.stardrop` | Stardrop shimmering |
 
@@ -82,7 +84,7 @@ Stardew Audio Captions currently features 215 captions.
 
 ## Critters
 
-16 captions in this category
+17 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -98,6 +100,7 @@ Stardew Audio Captions currently features 215 captions.
 | `critters.junimo` | Junimo meeps |
 | `critters.monkey` | Monkey chatters |
 | `critters.parrot` | Parrot squawks |
+| `critters.raccoon` | Raccoon chitters |
 | `critters.sandDuggyHide` | Sand Duggy hides |
 | `critters.sandDuggyWhack` | Sand Duggy hurts |
 | `critters.seagull` | Seagull squawks |
@@ -105,7 +108,7 @@ Stardew Audio Captions currently features 215 captions.
 
 ## World
 
-18 captions in this category
+19 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -118,6 +121,7 @@ Stardew Audio Captions currently features 215 captions.
 | `world.ladderAppear` | Ladder appears |
 | `world.lavaSlosh` | Lava sloshes |
 | `world.leafRustle` | Leaves rustle |
+| `world.machineFinish` | Machine finishes |
 | `world.machineProcessing` | Machine working |
 | `world.moss` | Moss rustles |
 | `world.panSpot` | Panning spot appears |
@@ -128,21 +132,26 @@ Stardew Audio Captions currently features 215 captions.
 | `world.waterSlosh` | Water sloshes |
 | `world.weedRustle` | Weeds rustle |
 
-## Events
+## Night Events
 
-9 captions in this category
+14 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
+| `nightEvents.fairyFlap` | Fairy fluttering |
 | `nightEvents.dogs` | Howling and barking |
 | `nightEvents.owl` | Owl hoots |
 | `nightEvents.parachute` | Parachutes rustling |
 | `nightEvents.planefly` | Plane engine whirring |
 | `nightEvents.earthquake` | Rumbling |
 | `nightEvents.ufo` | Sci-fi humming |
+| `nightEvents.witchSparkle` | Sparkling |
+| `nightEvents.witchSpell` | Spell casted |
 | `nightEvents.raccoon1` | Tree falls |
+| `nightEvents.fairySparkle` | Wand sparkling |
 | `nightEvents.meteorite` | Whooshing |
 | `nightEvents.raccoon0` | Wind blowing |
+| `nightEvents.witchCackle` | Witch cackling |
 
 ## Tools
 
@@ -289,7 +298,7 @@ Stardew Audio Captions currently features 215 captions.
 
 ## Fishing
 
-7 captions in this category
+8 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
@@ -300,3 +309,12 @@ Stardew Audio Captions currently features 215 captions.
 | `fishing.cast` | Fishing rod casting |
 | `fishing.reeling` | Fishing rod reeling |
 | `fishing.splash` | Fishing rod splashes |
+| `fishing.troutTag` | Golden tag sparkling |
+
+## Events
+
+1 captions in this category
+
+| Internal Id | English Caption |
+|-|-|
+| `events.missingBundleComplete_wand` | Junimo teleports |

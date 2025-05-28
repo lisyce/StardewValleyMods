@@ -39,5 +39,11 @@ public class FishingPatches : ICaptionPatch
             new Caption("fishingRodBend", "fishing.reeling", shouldLog: false),
             new Caption("fishEscape", "fishing.escape", shouldLog: false),
             new Caption("jingle1", "fishing.caught", shouldLog: false));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(FishingRod), nameof(FishingRod.openChestEndFunction)),
+            new Caption("discoverMineral", "fishing.troutTag"));
     }
 }
