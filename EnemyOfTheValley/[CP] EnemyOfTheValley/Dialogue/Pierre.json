@@ -1,0 +1,35 @@
+{
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "Characters/Dialogue/Pierre",
+      "Entries": {
+        "AcceptEnemyCake": "{{i18n:Pierre.AcceptEnemyCake}}",
+        "RejectEnemyCake_Archenemies": "{{i18n:Pierre.RejectEnemyCake_Archenemies}}",
+        "RejectEnemyCake_ExArchenemies": "{{i18n:Pierre.RejectEnemyCake_ExArchenemies}}",
+        "RejectEnemyCake_LowNegativeHearts": "{{i18n:Pierre.RejectEnemyCake_LowNegativeHearts}}",
+        "AcceptShatteredAmulet": "{{i18n:Pierre.AcceptShatteredAmulet}}",
+        "RejectShatteredAmulet_ExArchenemies": "{{i18n:Pierre.RejectShatteredAmulet_ExArchenemies}}",
+        "RejectShatteredAmulet_LowNegativeHearts": "{{i18n:Pierre.RejectShatteredAmulet_LowNegativeHearts}}",
+        "RejectMermaidPendant_NegativeHearts": "{{i18n:Pierre.RejectMermaidPendant_NegativeHearts}}",
+        "RejectBouquet_NegativeHearts": "{{i18n:Pierre.RejectBouquet_NegativeHearts}}",
+        "{{MainModId}}.apologized_Pierre": "{{i18n:Pierre.{{MainModId}}.apologized_Pierre}}",
+        "ReconciliationDustUsed": "{{i18n:Pierre.ReconciliationDustUsed}}"
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Pierre",
+      "Entries": {
+        "Mon-2": "{{i18n:Pierre.Mon-2}}",
+        "Mon-6": "{{i18n:Pierre.Mon-6}}",
+        "Tue-2": "{{i18n:Pierre.Tue-2}}",
+        "Wed-2": "{{i18n:Pierre.Wed-2}}",
+        "Thu-2": "{{i18n:Pierre.Thu-2}}",
+        "Fri-2": "{{i18n:Pierre.Fri-2}}",
+        "Sat-2": "{{i18n:Pierre.Sat-2}}",
+        "Sun-2": "{{i18n:Pierre.Sun-2}}"
+      }
+    }
+  ]
+}

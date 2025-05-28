@@ -27,6 +27,10 @@
     {
       "Action": "Include",
       "FromFile": "Dialogue/Lewis.json"
+    },
+    {
+      "Action": "Include",
+      "FromFile": "Dialogue/Pierre.json"
     }
   ]
 }

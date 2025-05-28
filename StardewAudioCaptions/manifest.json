@@ -1,0 +1,21 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.StardewAudioCaptions",
+  "Name": "Stardew Audio Captions",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "A highly-configurable and open-source mod for audio captions in Stardew Valley. Intended for anyone who may benefit from captioned audio, including deaf and hard-of-hearing individuals and people who play with the game muted.",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "StardewAudioCaptions.dll",
+  "UpdateKeys": [
+    "Nexus:33544"
+  ]
+}

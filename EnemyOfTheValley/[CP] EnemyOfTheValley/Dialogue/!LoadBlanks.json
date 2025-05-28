@@ -39,6 +39,11 @@
       "Action": "Load",
       "Target": "{{MainModId}}/NegativeHeartDialogue/Lewis",
       "FromFile": "blank.json"
+    },
+    {
+      "Action": "Load",
+      "Target": "{{MainModId}}/NegativeHeartDialogue/Pierre",
+      "FromFile": "blank.json"
     }
   ]
 }

@@ -22,7 +22,7 @@ namespace EnemyOfTheValley
         public static Texture2D? MiscSprites;  // do not reference directly in transpilers
         public static Texture2D? StandardSprites;
 
-        private static readonly HashSet<string> OptedInNpcs = new() { "Abigail", "Alex", "Clint", "Demetrius", "Elliott", "Haley", "Lewis" };
+        private static readonly HashSet<string> OptedInNpcs = new() { "Abigail", "Alex", "Clint", "Demetrius", "Elliott", "Haley", "Lewis", "Pierre" };
         public override void Entry(IModHelper helper)
         {
             StaticMonitor = Monitor;

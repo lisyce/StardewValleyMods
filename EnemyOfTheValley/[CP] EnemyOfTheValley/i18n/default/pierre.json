@@ -1,0 +1,22 @@
+{
+  "Pierre.AcceptEnemyCake": "Ugh... fine! Let's officially be enemies, @.$3#$b#If I didn't need your business at my store, I'd have made you a cake like this myself!$3",
+  "Pierre.RejectEnemyCake_Archenemies": "We've already sworn something deeper. No need for this again.$3",
+  "Pierre.RejectEnemyCake_ExArchenemies": "And to think I thought we could make amends someday...$2#$b#I didn't expect to be best friends, but can't we amicable business partners at least?$2",
+  "Pierre.RejectEnemyCake_LowNegativeHearts": "What's this? No, I won't buy it off of you. Nobody would purchase this at my store.$1",
+  "Pierre.AcceptShatteredAmulet": "Oh, bring it on, @! Let's be archenemies!$3#$b#I was here in Pelican Town before you and I'll be darned if I let you push me around!$3",
+  "Pierre.RejectShatteredAmulet_ExArchenemies": "And to think I thought we could make amends someday...$2#$b#I didn't expect to be best friends, but can't we amicable business partners at least?$2",
+  "Pierre.RejectShatteredAmulet_LowNegativeHearts": "Are you threatening to break up my marriage? Don't even think about it, @.$3",
+  "Pierre.RejectMermaidPendant_NegativeHearts": "This isn't even a funny joke, it's just creepy. You know I'm already married!$3",
+  "Pierre.RejectBouquet_NegativeHearts": "Why would you buy this from me just to give it to me as a joke?#$b#At least I've already got your money for it.$1",
+  "Pierre.BarleyZP.EnemyOfTheValley.apologized_Pierre": "I got your letter, but you know what would *really* show me that you're sorry? A nice big purchase of seeds.",
+  "Pierre.ReconciliationDustUsed": "Wha- what just happened? I don't know why, but I feel like I want to forgive you!$4#$b#@, why don't you stop by the shop later? Maybe we can negotiate some nice business deals for the both of us.$1",
+
+  "Pierre.Mon-2": "What, looking for seeds? I suppose I'll sell them to you...",
+  "Pierre.Mon-6": "I wish more people would buy my seeds. I hate having to bend to your will to keep your business.$3",
+  "Pierre.Tue-2": "Have I ever told you that I used to be a pretty good boxer back in the day, @? Just something to think about.",
+  "Pierre.Wed-2": "If you're unhappy about my business hours, I don't want to hear it.$3",
+  "Pierre.Thu-2": "I'll buy produce off of you, but it better be high-quality! I don't want you ruining the good reputation of 'Pierre's'!$3",
+  "Pierre.Fri-2": "Ugh... you remind me of the people at Joja...$2",
+  "Pierre.Sat-2": "If you find any wild produce, I'll take it off your hands.#$b#But you'd better not be putting any pests in the things you sell me!$3",
+  "Pierre.Sun-2": "It's rude to harass me when I'm working and can't leave, you know.$3"
+}
