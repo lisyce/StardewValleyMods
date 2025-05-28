@@ -1,0 +1,22 @@
+{
+  "Format": "2.7.0",
+  "Changes": [
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.MushroomLogFramework/ProduceRules",
+      "TargetField": [ "(BC)MushroomLog", "SpecificTreeProbabilities", "1"],  // oak tree
+      "Entries": {
+        "(O)Cornucopia_ChickenoftheWoods": 1,
+        "(O)Cornucopia_Shiitake": 1
+      }
+    },
+    {
+      "Action": "EditData",
+      "Target": "BarleyZP.MushroomLogFramework/ProduceRules",
+      "TargetField": [ "(BC)MushroomLog", "SpecificTreeProbabilities", "2"],  // maple tree
+      "Entries": {
+        "(O)Cornucopia_Shiitake": 5
+      }
+    }
+  ]
+}

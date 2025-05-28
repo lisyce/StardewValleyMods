@@ -1,0 +1,18 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.MushroomLogFramework",
+  "Name": "Mushroom Log Framework",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "Dehardcodes the vanilla mushroom logs to allow other mods to add outputs",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "MushroomLogFramework.dll"
+}
