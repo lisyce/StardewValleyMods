@@ -8,6 +8,13 @@
   "BarleyZP.FailedQuestsLoseFriendship50.title": "50 Missed Requests",
   "BarleyZP.FailedQuestsLoseFriendship50.text": "@,^This is absurd! You must be picking up quests and leaving them unfulfilled on purpose. You have been fined a heftier sum than last time.^^-Mayor Lewis",
 
+  "Default.Rude0": "So, you don't keep your promises, huh? You took that \"help wanted\" posting for me and didn't complete it!",
+  "Default.Neutral0": "Hey, I noticed that you didn't make good on your promise to complete my \"help wanted\" posting.#$b#Please leave them up in the future if you're not going to complete them.",
+  "Default.Neutral1": "I really needed that delivery done that you said you'd do...#$b#You should be more careful in the future so you don't forget your promises.",
+  "Default.Polite0": "Would you mind not taking the \"help wanted\" requests if you're not going to complete them?#$b#I'd prefer to be able to trust that the system works.",
+
+  "Default.MisterGinger": "%Mr. Ginger seems upset that you've forgotten to do something for him.",
+  
   "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_id_Gus": "At my shift the other night, I heard you broke a promise with Gus. That's seriously bad vibes.$a",
   "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_socialize": "You promised me you'd say hi to everyone and you didn't! What's up with that?$a",
   "Emily.BarleyZP.FailedQuestsLoseFriendship_questFailed_so_Emily": "What, do you think the energy in crystals is a joke or something? You didn't need to pretend like you were going to help me collect them.$a",

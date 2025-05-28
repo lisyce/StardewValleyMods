@@ -47,10 +47,11 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 
 #### Fields
 
-| Field   | Description                                                                                                                        | Default Value                     |
-|---------|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `Id`    | The default dialogue line itself. Unique identifier among all default dialogue rules for a topic rule.                             | Required field; no default value. |
-| `Rules` | A list of string rules in the form `"RuleType: Arguments"`. All rules must apply for a default dialogue line to be said by an NPC. | `[]`                              |
+| Field      | Description                                                                                                                                                                          | Default Value                     |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `Id`       | Unique identifier among all default dialogue rules for a topic rule.                                                                                                                 | Required field; no default value. |
+| `Dialogue` | The default dialogue line itself.                                                                                                                                                    | Required field; no default value. |
+| `Rules`    | A list of string rules in the form `"RuleType: Arguments"` that specify when a default dialogue line applies. All rules must apply for a default dialogue line to be said by an NPC. | `[]`                              |
 
 #### Available Rules
 
@@ -59,6 +60,7 @@ Note that *all* rules must evaluate to true for an NPC to say a default dialogue
 | `ForNPC`        | The NPCs this dialogue is for. Either `ANY` or a list of internal NPC names.   | Allows a default dialogue line to only be applied when speaking to specific NPCs.                                                               | `"ForNPC: Abigail, Emily"`, `"ForNPC: ANY"` |
 | `GSQ`           | A [Game State Query](https://stardewvalleywiki.com/Modding:Game_state_queries) | Allows a default dialogue to only be applied when a given GSQ is true.                                                                          | `"GSQ: WEATHER Here Rain"`                  |
 | `TopicContains` | A string to match. This is an exact match.                                     | Allows a default dialogue to only be applied when the CT contains the argument string. Useful in conjunction with the `IdIsPrefix` field above. | `"TopicContains: someText"`                 |
+| `CurrentNpcManner` | The [manner](https://stardewvalleywiki.com/Modding:NPC_data#Basic_info) to match. | Allows a default dialogue to apply only when the NPC the player is speaking to has a specific manner field. | `"CurrentNpcManner: Rude"` |
 
 ### The %CurrentNPC% Token
 
@@ -67,11 +69,12 @@ As of now, it can only be used in default dialogue rules: `"GSQ: PLAYER_HEARTS C
 
 ```json
 {
-  "Id": "{{ModId}}_myConversationTopic_",
+  "Id": "myConversationTopic_",
   "IdIsPrefix": true,
   "DefaultDialogueRules": [
     {
-      "Id": "I only say this line if my name is in the CT key!",
+      "Id": "SomeUniqueId",
+      "Dialogue": "I only say this line if my name is in the CT key!",
       "Rules": [ "TopicContains: _%CurrentNPC%" ]      
     }      
   ]
@@ -153,15 +156,18 @@ Notice that the order of the default dialogue rules from specific to general all
           "Id": "cc_Complete",
           "DefaultDialogueRules": [
             {
-              "Id": "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h",
+              "Id": "{{ModId}}_SamRaining",
+              "Dialogue": "Hey! I'm Sam, it's raining, and I think it's cool you completed the CC!$h",
               "Rules": [ "ForNPC: Sam", "GSQ: WEATHER Here Rain" ]
             },
             {
-              "Id": "Hey, it's raining and you completed the CC!",
+              "Id": "{{ModId}}_raining",
+              "Dialogue": "Hey, it's raining and you completed the CC!",
               "Rules": [ "GSQ: WEATHER Here Rain" ]
             },
             {
-              "Id": "Hey, it's cool you completed the CC!"
+              "Id": "{{ModId}}_fallback",
+              "Dialogue": "Hey, it's cool you completed the CC!"
             }
           ]
         }

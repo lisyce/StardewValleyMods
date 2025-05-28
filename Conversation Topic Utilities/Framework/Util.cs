@@ -1,5 +1,6 @@
 using StardewModdingAPI;
 using StardewValley;
+using StardewValley.GameData.Characters;
 using DefaultDialogueRule = Conversation_Topic_Utilities.TopicRule.DefaultDialogueRule;
 
 namespace Conversation_Topic_Utilities;
@@ -70,7 +71,7 @@ public class Util
             ModEntry.StaticMonitor.Log($"Testing if default dialogue line \"{defaultDialogueRule.Id}\" applies...");
             if (DefaultDialogueRuleApplies(defaultDialogueRule, npc, conversationTopic))
             {
-                dialogue = defaultDialogueRule.Id;
+                dialogue = defaultDialogueRule.Dialogue;
                 return true;
             }
         }
@@ -104,15 +105,13 @@ public class Util
         if (!rule.Contains(':')) return false;
         var query = rule.Split(":")[1].Trim().Replace("%CurrentNPC%", npc.Name);
         var type = rule.Split(":")[0].Trim();
-
-        var validTypes = new HashSet<string>{ "GSQ", "TopicContains", "ForNPC" };
-        if (!validTypes.Contains(type)) return false;
         
         result = type switch
         {
             "GSQ" => GameStateQuery.CheckConditions(query),
             "TopicContains" => conversationTopic.Contains(query),
             "ForNPC" => query == "ANY" || query.Split(",").ToList().Select(x => x.Trim()).Contains(npc.Name),
+            "CurrentNpcManner" => Utility.TryParseEnum<NpcManner>(query, out var manners) && npc.Manners == (int) manners,
             _ => false
         };
 
