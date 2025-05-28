@@ -53,7 +53,7 @@ public class CaptionHudMessageElement
 
     private bool VisibleLongEnough()
     {
-        return _ticksElapsed >= ModEntry.CaptionManager.Config.MinDurationTicks;
+        return _ticksElapsed >= ModEntry.ModCaptionManager.Value.Config.MinDurationTicks;
     }
 
     private bool ExceededMaxDuration()

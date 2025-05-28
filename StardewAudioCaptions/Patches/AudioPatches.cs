@@ -26,11 +26,11 @@ public class AudioPatches
 
     private static void PlayPostfix(Cue __instance)
     {
-        ModEntry.CaptionManager.OnSoundPlayed(__instance);
+        ModEntry.ModCaptionManager.Value.OnSoundPlayed(__instance);
     }
 
     private static void EventPlaySoundPrefix()
     {
-        ModEntry.EventCaptionManager.BeforePlaySound();
+        ModEntry.EventCaptionManager.Value.BeforePlaySound();
     }
 }
