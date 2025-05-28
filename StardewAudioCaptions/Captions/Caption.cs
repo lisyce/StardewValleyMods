@@ -18,8 +18,8 @@ public class Caption
         ShouldLog = shouldLog;
         _maxDuration = maxDuration;
         Tokens = tokens;
-        Priority = ModEntry.ModCaptionManager.Value.GetPriority(captionId);
+        Priority = ModEntry.ModCaptionManager.GetPriority(captionId);
 
-        ModEntry.ModCaptionManager.Value.ValidateCaption(this);
+        ModEntry.ModCaptionManager.ValidateCaption(this);
     }
 }

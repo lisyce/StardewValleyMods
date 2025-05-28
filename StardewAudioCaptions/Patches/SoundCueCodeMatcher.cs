@@ -67,6 +67,6 @@ public class SoundCueCodeMatcher
 
     private static void RegisterCaptionForNextCueHelper(Caption caption)
     {
-        ModEntry.ModCaptionManager.Value.RegisterCaptionForNextCue(caption);
+        ModEntry.ModCaptionManager.RegisterCaptionForNextCue(caption);
     }
 }

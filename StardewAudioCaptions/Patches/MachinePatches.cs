@@ -34,7 +34,7 @@ public class MachinePatches : ICaptionPatch
 
     private static void PlayEffectsHelper()
     {
-        ModEntry.ModCaptionManager.Value.RegisterCaptionForNextCue(
+        ModEntry.ModCaptionManager.RegisterCaptionForNextCue(
             new Caption(CaptionManager.AnyCue, 
                 "world.machineProcessing"));
     }

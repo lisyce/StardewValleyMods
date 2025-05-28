@@ -315,7 +315,7 @@ public class InteractionPatches : ICaptionPatch
         
         foreach (var p in pairs)
         {
-            ModEntry.ModCaptionManager.Value.UnregisterCaptionForNextCue(new Caption(p.Item1, p.Item2));
+            ModEntry.ModCaptionManager.UnregisterCaptionForNextCue(new Caption(p.Item1, p.Item2));
         }
 
     }
@@ -344,7 +344,7 @@ public class InteractionPatches : ICaptionPatch
         
         foreach (var p in pairs)
         {
-            ModEntry.ModCaptionManager.Value.RegisterCaptionForNextCue(new Caption(p.Item1, p.Item2, tokens: tokens));
+            ModEntry.ModCaptionManager.RegisterCaptionForNextCue(new Caption(p.Item1, p.Item2, tokens: tokens));
         }
     }
 
@@ -367,6 +367,6 @@ public class InteractionPatches : ICaptionPatch
             preservedParentSheetInt = 0;
         
         var tokens = new { pitch = preservedParentSheetInt.ToString() };
-        ModEntry.ModCaptionManager.Value.RegisterCaptionForNextCue(new Caption(CaptionManager.AnyCue, "interaction.drumBlock", tokens: tokens));
+        ModEntry.ModCaptionManager.RegisterCaptionForNextCue(new Caption(CaptionManager.AnyCue, "interaction.drumBlock", tokens: tokens));
     }
 }

@@ -13,9 +13,9 @@ namespace StardewAudioCaptions;
 public class ModEntry : Mod
 {
     private ModConfig _config;
-    public static PerScreen<CaptionManager> ModCaptionManager;  // has to be public static so that harmony patches can use it
-    public static PerScreen<EventCaptionManager> EventCaptionManager;
-    private PerScreen<CaptionHudMessage> _captionHudMessage;
+    public static CaptionManager ModCaptionManager;  // has to be public static so that harmony patches can use it
+    public static EventCaptionManager EventCaptionManager;
+    private CaptionHudMessage _captionHudMessage;
     private Harmony _harmony;
     
     public override void Entry(IModHelper helper)
@@ -26,10 +26,9 @@ public class ModEntry : Mod
         
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
-        _captionHudMessage = new PerScreen<CaptionHudMessage>(createNewState: () => new CaptionHudMessage());
-        ModCaptionManager = new PerScreen<CaptionManager>(createNewState: () => new CaptionManager(Helper, _captionHudMessage.Value, Monitor, _config));
-        EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () =>
-            new EventCaptionManager(helper, Monitor, ModCaptionManager.Value));
+        _captionHudMessage = new CaptionHudMessage();
+        ModCaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
+        EventCaptionManager = new EventCaptionManager(helper, Monitor, ModCaptionManager);
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
@@ -38,13 +37,13 @@ public class ModEntry : Mod
     private void OnRenderedStep(object? sender, RenderedStepEventArgs e)
     {
         if (Game1.game1.takingMapScreenshot || Game1.HostPaused || e.Step != RenderSteps.Overlays) return;
-        _captionHudMessage.Value.Draw(e.SpriteBatch, _config);
+        _captionHudMessage.Draw(e.SpriteBatch, _config);
     }
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
     {
-        _captionHudMessage.Value.Update();
-        EventCaptionManager.Value.Update();
+        _captionHudMessage.Update();
+        EventCaptionManager.Update();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
@@ -65,8 +64,8 @@ public class ModEntry : Mod
             save: () =>
             {
                 Helper.WriteConfig(_config);
-                ModCaptionManager.Value.Config = _config;
-                _captionHudMessage.Value.ClearDisabledCaptions(_config);
+                ModCaptionManager.Config = _config;
+                _captionHudMessage.ClearDisabledCaptions(_config);
             }
             );
         
@@ -139,7 +138,7 @@ public class ModEntry : Mod
             mod: ModManifest,
             text: () => Helper.Translation.Get("config.categories.paragraph"));
         
-        var categories = ModCaptionManager.Value.CaptionsByCategory();
+        var categories = ModCaptionManager.CaptionsByCategory();
 
         var translatedCategories = categories.Select(x => new
             {
@@ -191,73 +190,73 @@ public class ModEntry : Mod
 
     private void RegisterDefaultCaptions()
     {
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("babblingBrook", "ambient.brook"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cracklingFire", "ambient.fireCrackle"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("heavyEngine", "ambient.engine"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cricketsAmbient", "ambient.cricket"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("waterfall", "ambient.waterfall"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("waterfall_big", "ambient.waterfall"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("moneyDial", "ambient.coinsClinking"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("babblingBrook", "ambient.brook"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cracklingFire", "ambient.fireCrackle"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("heavyEngine", "ambient.engine"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cricketsAmbient", "ambient.cricket"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("waterfall", "ambient.waterfall"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("waterfall_big", "ambient.waterfall"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("moneyDial", "ambient.coinsClinking"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("monkey1", "critters.monkey"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("parrot_squawk", "critters.parrot"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("monkey1", "critters.monkey"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("parrot_squawk", "critters.parrot"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("harvest", "interaction.cropHarvest"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("book_read", "interaction.bookRead"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("harvest", "interaction.cropHarvest"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("book_read", "interaction.bookRead"));
 
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("eat", "player.eating"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("jingleBell", "player.footstepsJingle"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("throwDownITem", "player.itemThrown"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("questcomplete", "player.questComplete"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("stardrop", "player.stardrop"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("eat", "player.eating"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("gulp", "player.drinking"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("ow", "player.hurts"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("jingleBell", "player.footstepsJingle"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("throwDownITem", "player.itemThrown"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("questcomplete", "player.questComplete"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("stardrop", "player.stardrop"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("thunder", "ambient.thunder"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("thunder_small", "ambient.thunder"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("trainWhistle", "ambient.trainWhistle"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("distantTrain", "ambient.distantTrain"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("trainLoop", "ambient.trainLoop", 80 * 60));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("slosh", "world.waterSlosh"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("rooster", "world.rooster"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("leafrustle", "world.leafRustle"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cavedrip", "ambient.caveDrip"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("wind", "ambient.wind"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("thunder", "ambient.thunder"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("thunder_small", "ambient.thunder"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("trainWhistle", "ambient.trainWhistle"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("distantTrain", "ambient.distantTrain"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("trainLoop", "ambient.trainLoop", 80 * 60));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("slosh", "world.waterSlosh"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("rooster", "world.rooster"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("leafrustle", "world.leafRustle"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cavedrip", "ambient.caveDrip"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("wind", "ambient.wind"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("camel", "critters.camel"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("camel", "critters.camel"));
 
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("horse_flute", "tools.horseFlute"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("scissors", "tools.shears"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("horse_flute", "tools.horseFlute"));
 
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("batScreech", "monsters.batScreech"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("squid_move", "monsters.blueSquidMove"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("Duggy", "monsters.duggyDig"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("flybuzzing", "monsters.flyBuzz"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("slime", "monsters.slime"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("batScreech", "monsters.batScreech"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("squid_move", "monsters.blueSquidMove"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("Duggy", "monsters.duggyDig"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("flybuzzing", "monsters.flyBuzz"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("slime", "monsters.slime"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("slingshot", "weapons.slingshot"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("slingshot", "weapons.slingshot"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("parachute", "nightEvents.parachute"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("planeflyby", "nightEvents.planefly"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("parachute", "nightEvents.parachute"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("planeflyby", "nightEvents.planefly"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cluck", "animals.chicken"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("Duck", "animals.duck"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("rabbit", "animals.rabbit"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cow", "animals.cow"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("goat", "animals.goat"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("sheep", "animals.sheep"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("pig", "animals.pig"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("Ostrich", "animals.ostrich"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cluck", "animals.chicken"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("Duck", "animals.duck"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("rabbit", "animals.rabbit"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cow", "animals.cow"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("goat", "animals.goat"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("sheep", "animals.sheep"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("pig", "animals.pig"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("Ostrich", "animals.ostrich"));
         
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("cat", "pets.cat"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("dog_bark", "pets.dogBark"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("dog_pant", "pets.dogPant"));
-        ModCaptionManager.Value.RegisterDefaultCaption(new Caption("turtle_pet", "pets.turtle"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cat", "pets.cat"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("dog_bark", "pets.dogBark"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("dog_pant", "pets.dogPant"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("turtle_pet", "pets.turtle"));
     }
 }
