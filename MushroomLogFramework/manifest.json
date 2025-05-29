@@ -14,5 +14,8 @@
   "Description": "Dehardcodes the vanilla mushroom logs to allow other mods to add outputs",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "MushroomLogFramework.dll"
+  "EntryDll": "MushroomLogFramework.dll",
+  "UpdateKeys": [
+    "Nexus:34328"
+  ]
 }

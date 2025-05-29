@@ -18,7 +18,7 @@
         <Authors>BarleyZP</Authors>
         <Description>Dehardcodes the vanilla mushroom logs to allow other mods to add outputs</Description>
         <UniqueId>BarleyZP.MushroomLogFramework</UniqueId>
-        <UpdateKeys></UpdateKeys>
+        <UpdateKeys>Nexus:34328</UpdateKeys>
 
         <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
         <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
