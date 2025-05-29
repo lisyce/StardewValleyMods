@@ -25,7 +25,11 @@ public class HarmonyPatches
         var hasMoss = AccessTools.Field(typeof(Tree), nameof(Tree.hasMoss));
         var hasData = AccessTools.Method(typeof(HarmonyPatches), nameof(ObjectHasData));
         var rollTree = AccessTools.Method(typeof(HarmonyPatches), nameof(RollTreeProduce));
-        var rollDefault = AccessTools.Method(typeof(HarmonyPatches), nameof(RollDefaultProduce));    
+        var rollDefault = AccessTools.Method(typeof(HarmonyPatches), nameof(RollDefaultProduce));
+        var create = AccessTools.GetDeclaredMethods(typeof(ItemRegistry))
+            .FirstOrDefault(m =>
+                m.Name == nameof(ItemRegistry.Create) && !m.IsGenericMethod);
+        var changeQuality = AccessTools.Method(typeof(HarmonyPatches), nameof(ChangeOutputQualityIfNeeded));
         
         // step one: replace the per-tree mushroom
         matcher.MatchStartForward(
@@ -50,7 +54,7 @@ public class HarmonyPatches
             .MatchEndForward(
                 new CodeMatch(OpCodes.Ldstr, "(O)422"),
                 new CodeMatch(OpCodes.Callvirt))
-            .ThrowIfNotMatch("Could not find second entry point for Object::OutputMushroomLog transpielr")
+            .ThrowIfNotMatch("Could not find second entry point for Object::OutputMushroomLog transpiler")
             .CreateLabel(out Label lbl2)
             .Insert(
                 new CodeInstruction(OpCodes.Ldarg_0),
@@ -60,7 +64,15 @@ public class HarmonyPatches
                 // the object had data
                 new CodeInstruction(OpCodes.Pop), // pop "(O)422" off the stack since we will replace it
                 new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, rollDefault));
+                new CodeInstruction(OpCodes.Call, rollDefault))
+            .MatchStartForward(
+                new CodeMatch(OpCodes.Call, create))
+            .ThrowIfNotMatch("Could not find third entry point for Object::OutputMushroomLog transpiler")
+            .Advance(1)
+            .Insert(
+                new CodeInstruction(OpCodes.Dup),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Call, changeQuality));
 
         return matcher.InstructionEnumeration();
     }
@@ -92,5 +104,14 @@ public class HarmonyPatches
         // common mushroom fallback
         if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return FallbackProduce;
         return Util.DrawFromDistribution(data.DefaultTreeWeights, FallbackProduce);
+    }
+
+    private static void ChangeOutputQualityIfNeeded(Item output, StardewValley.Object machine)
+    {
+        if (ModEntry.ProduceRules.TryGetValue(machine.QualifiedItemId, out var data) &&
+            data.DisableQualityModifiersOn.Contains(output.QualifiedItemId))
+        {
+            output.Quality = 0;
+        }
     }
 }

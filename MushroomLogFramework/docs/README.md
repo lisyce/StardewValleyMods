@@ -19,10 +19,11 @@ lookup.
 - The string key is the qualified Id of the mushroom log machine. For example, Vanilla's `(BC)MushroomLog`.
 - The value is a model with the following fields:
 
-| field                 | description                                                                                                                                                                                                           |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DefaultTreeWeights`  | A string to float dictionary of qualified output item Ids to the weight of that output item. These are used as the basic distribution of outputs, including when there is no specific distribution for a nearby tree. |
-| `SpecificTreeWeights` | A string to model dictionary of wild tree Ids to a mapping of outputs in the same format as `DefaultTreeWeights`.                                                                                                     |
+| field                       | description                                                                                                                                                                                                           |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DefaultTreeWeights`        | A string to float dictionary of qualified output item Ids to the weight of that output item. These are used as the basic distribution of outputs, including when there is no specific distribution for a nearby tree. |
+| `SpecificTreeWeights`       | A string to model dictionary of wild tree Ids to a mapping of outputs in the same format as `DefaultTreeWeights`.                                                                                                     |
+| `DisableQualityModifiersOn` | A list of qualified item Ids that quality modifiers should not be applied to. Optional.                                                                                                                               |
 
 Because this mod normalizes the probability of each output item being produced, the weights do not need to sum to 1.
 
@@ -33,7 +34,8 @@ Because this mod normalizes the probability of each output item being produced, 
 This example Content Patcher pack edits the Vanilla Mushroom Log's oak tree distribution.
 In addition to the Morel, it adds Moss and Mystery Boxes as potential output items. Moss and Morels will both
 be drawn from the distribution with a probability of 0.4 and Mystery Boxes will be drawn with a probability
-of 0.2.
+of 0.2. This example also disables changing the quality of the Moss and Mystery Box outputs since we always
+want them to be normal quality.
 
 ```json
 {
@@ -47,6 +49,15 @@ of 0.2.
         "(O)Moss": 1,
         "(O)MysteryBox": 0.5
       }
+    },
+    {
+        "Action": "EditData",
+        "Target": "BarleyZP.MushroomLogFramework/ProduceRules",
+        "TargetField": [ "(BC)MushroomLog", "DisableQualityModifiersOn" ],
+        "Entries": {
+          "#-1": "(O)Moss",
+          "#-2": "(O)MysteryBox"
+        }
     }
   ]
 }
