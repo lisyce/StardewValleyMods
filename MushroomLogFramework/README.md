@@ -4,7 +4,7 @@ Mushroom Log Framework allows content pack authors to edit some of the hardcoded
 
 ## Background
 
-Please familiarize yourself with the [mushrrom log wiki page](https://stardewvalleywiki.com/Mushroom_Log) so
+Please familiarize yourself with the [mushroom log wiki page](https://stardewvalleywiki.com/Mushroom_Log) so
 that you better understand how Vanilla handles mushroom log outputs. This mod does not change the general
 algorithm used to decide the output. Rather, it simply allows for adding to the list of potential outputs
 based on the nearby trees. See `VanillaProduceRules.json` in the `assets` folder for the Vanilla distributions
