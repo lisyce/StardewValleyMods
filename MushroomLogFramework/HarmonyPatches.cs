@@ -64,39 +64,26 @@ public class HarmonyPatches
 
         return matcher.InstructionEnumeration();
     }
-
-    private static void NormalizeDistribution(Dictionary<string, int> distribution)
-    {
-        var total = distribution.Values.Sum();
-        foreach (var key in distribution.Keys)
-        {
-            var res = ((float)distribution[key] / total) * 100;
-            distribution[key] = (int) res;  // we want int from 0-100, not float from 0 to 1
-        }
-    }
-
+    
     private static bool ObjectHasData(StardewValley.Object obj)
     {
-        ModEntry.ModMonitor.Log(ModEntry.ProduceRules.ContainsKey(obj.QualifiedItemId).ToString(), LogLevel.Debug);
         return ModEntry.ProduceRules.ContainsKey(obj.QualifiedItemId);
     }
     
     private static string RollTreeProduce(StardewValley.Object obj, Tree t)
     {
-        ModEntry.ModMonitor.Log("rolltree", LogLevel.Debug);
         // common mushroom fallback
         if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return FallbackProduce;
 
         // get the tree data
-        if (data.SpecificTreeProbabilities.TryGetValue(t.treeType.Value, out var produceRule))
+        if (data.SpecificTreeWeights.TryGetValue(t.treeType.Value, out var produceRule))
         {
-            return DrawFromDistribution(produceRule);
+            return Util.DrawFromDistribution(produceRule, FallbackProduce);
         }
         else
         {
             // use defaults
-            ModEntry.ModMonitor.Log("defaults", LogLevel.Debug);
-            return DrawFromDistribution(data.DefaultTreeProbabilities);
+            return Util.DrawFromDistribution(data.DefaultTreeWeights, FallbackProduce);
         }
     }
 
@@ -104,23 +91,6 @@ public class HarmonyPatches
     {
         // common mushroom fallback
         if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return FallbackProduce;
-        return DrawFromDistribution(data.DefaultTreeProbabilities);
-    }
-
-    private static string DrawFromDistribution(Dictionary<string, int> distribution)
-    {
-        if (!distribution.Any()) return FallbackProduce;
-        
-        NormalizeDistribution(distribution);
-
-        var choices = new List<string>();
-        foreach (var pair in distribution)
-        {
-            choices.AddRange(Enumerable.Repeat(pair.Key, pair.Value));   
-        }
-
-        var res = Game1.random.ChooseFrom(choices);
-        ModEntry.ModMonitor.Log(res, LogLevel.Debug);
-        return res;
+        return Util.DrawFromDistribution(data.DefaultTreeWeights, FallbackProduce);
     }
 }

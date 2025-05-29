@@ -4,6 +4,6 @@ namespace MushroomLogFramework;
 
 public class MushroomLogData
 {
-    public Dictionary<string, int> DefaultTreeProbabilities { get; set; }
-    public Dictionary<string, Dictionary<string, int>> SpecificTreeProbabilities { get; set; }
+    public Dictionary<string, float> DefaultTreeWeights { get; set; }
+    public Dictionary<string, Dictionary<string, float>> SpecificTreeWeights { get; set; }
 }

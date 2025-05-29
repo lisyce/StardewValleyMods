@@ -10,9 +10,7 @@ public class ModEntry : Mod
 {
     private static readonly string ProduceRulesAssetName = "BarleyZP.MushroomLogFramework/ProduceRules";
     private static Dictionary<string, MushroomLogData>? _produceRules;
-
-    internal static IMonitor ModMonitor;
-
+    
     internal static Dictionary<string, MushroomLogData> ProduceRules
     {
         get
@@ -24,8 +22,6 @@ public class ModEntry : Mod
     
     public override void Entry(IModHelper helper)
     {
-        ModMonitor = Monitor;
-        
         helper.Events.Content.AssetRequested += OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
 
@@ -42,8 +38,8 @@ public class ModEntry : Mod
         foreach (var pair in ProduceRules)
         {
             builder.Append("\n\n").Append(pair.Key).Append("\n--------------------");
-            builder.Append($"\nDefaults: [ {DistributionToString(pair.Value.DefaultTreeProbabilities)} ]");
-            foreach (var specific in pair.Value.SpecificTreeProbabilities)
+            builder.Append($"\nDefaults: [ {DistributionToString(pair.Value.DefaultTreeWeights)} ]");
+            foreach (var specific in pair.Value.SpecificTreeWeights)
             {
                 builder.Append($"\n{specific.Key}: [ {DistributionToString(specific.Value)} ]");
             }
@@ -52,21 +48,14 @@ public class ModEntry : Mod
         Monitor.Log(builder.ToString(), LogLevel.Info);
     }
 
-    private string DistributionToString(Dictionary<string, int> distribution)
+    private string DistributionToString(Dictionary<string, float> distribution)
     {
-        var normed = new Dictionary<string, float>();
-        var total = distribution.Values.Sum();
-        foreach (var key in distribution.Keys)
-        {
-            var res = (float)distribution[key] / total;
-            normed[key] = (float) Math.Round(res, 2); 
-        }
-        
+        Util.NormalizeDistribution(distribution);
         
         var sb = new StringBuilder();
-        foreach (var pair in normed)
+        foreach (var pair in distribution)
         {
-            sb.Append(pair.Key).Append(": ").Append(pair.Value).Append(", ");
+            sb.Append(pair.Key).Append(": ").Append(Math.Round(pair.Value, 2)).Append(", ");
         }
         
         return sb.ToString().TrimEnd(',', ' ');
