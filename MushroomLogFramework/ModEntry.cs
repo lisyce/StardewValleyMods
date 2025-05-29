@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Text;
+using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -28,9 +29,47 @@ public class ModEntry : Mod
         helper.Events.Content.AssetRequested += OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
 
+        helper.ConsoleCommands.Add("mushroom_log_summary", "Print a summary of the mushroom log data",
+            PrintDistributions);
+
         var harmony = new Harmony(ModManifest.UniqueID);
-        Harmony.DEBUG = true;
         HarmonyPatches.Patch(harmony);
+    }
+
+    private void PrintDistributions(string command, string[] args)
+    {
+        var builder = new StringBuilder();
+        foreach (var pair in ProduceRules)
+        {
+            builder.Append("\n\n").Append(pair.Key).Append("\n--------------------");
+            builder.Append($"\nDefaults: [ {DistributionToString(pair.Value.DefaultTreeProbabilities)} ]");
+            foreach (var specific in pair.Value.SpecificTreeProbabilities)
+            {
+                builder.Append($"\n{specific.Key}: [ {DistributionToString(specific.Value)} ]");
+            }
+        }
+        
+        Monitor.Log(builder.ToString(), LogLevel.Info);
+    }
+
+    private string DistributionToString(Dictionary<string, int> distribution)
+    {
+        var normed = new Dictionary<string, float>();
+        var total = distribution.Values.Sum();
+        foreach (var key in distribution.Keys)
+        {
+            var res = (float)distribution[key] / total;
+            normed[key] = (float) Math.Round(res, 2); 
+        }
+        
+        
+        var sb = new StringBuilder();
+        foreach (var pair in normed)
+        {
+            sb.Append(pair.Key).Append(": ").Append(pair.Value).Append(", ");
+        }
+        
+        return sb.ToString().TrimEnd(',', ' ');
     }
 
     private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
