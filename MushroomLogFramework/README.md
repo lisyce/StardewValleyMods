@@ -30,7 +30,10 @@ Because this mod normalizes the probability of each output item being produced, 
 
 ### Example
 
-This example Content Patcher pack adds two new possible outputs to the oak tree's distribution:
+This example Content Patcher pack edits the Vanilla Mushroom Log's oak tree distribution.
+In addition to the Morel, it adds Moss and Mystery Boxes as potential output items. Moss and Morels will both
+be drawn from the distribution with a probability of 0.4 and Mystery Boxes will be drawn with a probability
+of 0.2.
 
 ```json
 {
