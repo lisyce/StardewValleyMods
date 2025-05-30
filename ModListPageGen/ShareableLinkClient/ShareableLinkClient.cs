@@ -25,12 +25,12 @@ public class ShareableLinkClient
         _monitor = monitor;
     }
 
-    public bool TryCreateLink(ModList list, out string link, out string html)
+    public bool TryCreateLink(ModList list, string theme, out string link, out string html)
     {
         link = "";  // default value
         html = "";
         
-        var task = _httpClient.PostAsJsonAsync("mod-lists", list);
+        var task = _httpClient.PostAsJsonAsync("mod-lists", new {ModList = list, ColorTheme=theme});
         task.Wait();
         
         if (!task.IsCompletedSuccessfully || !task.Result.IsSuccessStatusCode)

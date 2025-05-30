@@ -55,23 +55,5 @@ public class ModInfo
 
         return new ModListMod(_manifest.Name, _manifest.Author, summary, categoryName, categoryClass, depsClasses,
             contentPackFor, _nexusId, hasNexusInfo, downloads, endorsements);
-
-        // return new ModListMod()
-        // {
-        //     HasNexusInfo = _nexusInfo != null,
-        //     
-        //     Name = _manifest.Name,
-        //     Author = _manifest.Author,
-        //     NexusId = _nexusId,
-        //     Summary = _nexusInfo?.Summary ?? _manifest.Description,
-        //     Downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-",
-        //     Endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-",
-        //     AdultContent = _nexusInfo?.AdultContent,
-        //     PictureUrl = _nexusInfo?.PictureUrl,
-        //     ContentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name,
-        //     CategoryName = _nexusInfo?.categoryName ?? "No Category",
-        //     CategoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category",
-        //     DepsClasses = dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps",
-        // };
     }
 };

@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using ModListPageGen.ShareableLinkClient;
 using StardewModdingAPI;
+using StardewValley;
 
 namespace ModListPageGen;
 
@@ -13,21 +14,17 @@ public class ModEntry : Mod
     {
         _helper = helper;
 
-        _helper.ConsoleCommands.Add("bzp_mod_list",
-            "Generates an HTML-formatted mod list. Usage: bzp_mod_list \"<title>\" \"<author>\" <(optional bool) skip Nexus API>",
-            GenerateList);
-        _helper.ConsoleCommands.Add("bzp_share_mod_list", "Creates a shareable link for an existing mod list. Usage: bzp_share_mod_list \"<title>\"",
-            ShareList);
+        _helper.ConsoleCommands.Add("mod_list_json", ConsoleCommandsHelper.GenerateJsonUsage, GenerateJson);
+        _helper.ConsoleCommands.Add("mod_list_share", ConsoleCommandsHelper.ShareHtmlUsage, ShareList);
     }
 
     private void ShareList(string command, string[] args)
     {
-        if (args.Length < 1)
+        if (!ConsoleCommandsHelper.TryParseShareHtmlArgs(args, out var title, out var theme, out var error))
         {
-            Monitor.Log("Not enough arguments provided to bzp_share_mod_list. Usage: bzp_share_mod_list \"<title>\"", LogLevel.Error);
+            Monitor.Log(error, LogLevel.Warn);
             return;
         }
-        var title = args[0];
         
         // does the list exist?
         var outputPath = Path.Combine("GeneratedModListsJson", $"{MakeValidFileName(title)}.json");
@@ -43,7 +40,7 @@ public class ModEntry : Mod
         
         // post
         var client = new ShareableLinkClient.ShareableLinkClient(Monitor);
-        if (!client.TryCreateLink(modListJson, out string link, out string _))
+        if (!client.TryCreateLink(modListJson, theme, out string link, out string _))
         {
             Monitor.Log("Could not create shareable link. Please try again in a few minutes.", LogLevel.Error);
             return;
@@ -53,21 +50,12 @@ public class ModEntry : Mod
         Monitor.Log("Links are valid for four weeks.", LogLevel.Debug);
     }
 
-    private void GenerateList(string command, string[] args)
+    private void GenerateJson(string command, string[] args)
     {
-        
-        if (args.Length < 2)
+        if (!ConsoleCommandsHelper.TryParseGenerateJsonArgs(args, out var title, out var author, out var skipNexus, out var error))
         {
-            Monitor.Log("Not enough arguments provided to bzp_mod_list. Usage: bzp_mod_list \"<title>\" \"<author>\" <(optional bool) skip Nexus API>", LogLevel.Error);
+            Monitor.Log(error, LogLevel.Warn);
             return;
-        }
-        var title = args[0];
-        var author = args[1];
-        var skipNexus = false;
-
-        if (args.Length >= 3 && bool.TryParse(args[2].ToLower(), out var b))
-        {
-            skipNexus = b;
         }
         
         var len = _helper.ModRegistry.GetAll().Count();
@@ -81,7 +69,7 @@ public class ModEntry : Mod
         }
         else
         {
-            Monitor.Log("Skipping Nexus API calls because that argument was provided to this command. Category information may be unavailable.", LogLevel.Info);
+            Monitor.Log("Skipping Nexus API calls. Category information may be unavailable.", LogLevel.Info);
         }
         
         var client = new NexusApiClient.NexusApiClient(Monitor);
@@ -128,9 +116,10 @@ public class ModEntry : Mod
             {
                 var depMod = Helper.ModRegistry.Get(uniqueId);
                 if (depMod == null) continue;
-                
-                if (!tree.ContainsKey(uniqueId)) tree.Add(uniqueId, new DependencyListEntry { Name = depMod.Manifest.Name, CssClass = depMod.Manifest.Name.Replace(" ", "_"), DepsCount = 0 });
-                tree[uniqueId].DepsCount += 1;
+
+                var lowered = uniqueId.ToLower();
+                if (!tree.ContainsKey(lowered)) tree.Add(lowered, new DependencyListEntry { Name = depMod.Manifest.Name, CssClass = depMod.Manifest.Name.Replace(" ", "_"), DepsCount = 0 });
+                tree[lowered].DepsCount += 1;
             }
 
             if (dependsOn.Count == 0)
