@@ -1,12 +1,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using StardewValley;
 
 namespace StardewAudioCaptions.Captions;
 
 public class CaptionHudMessageElement
 {
     private int _ticksElapsed;
-    private readonly Cue _cue;
+    private readonly ICue _cue;
     private readonly int _maxDurationTicks;
     
     public string Message { get; }
@@ -15,7 +16,7 @@ public class CaptionHudMessageElement
     
     public readonly Caption Caption;
 
-    public CaptionHudMessageElement(Cue cue, string message, Caption caption, Color color)
+    public CaptionHudMessageElement(ICue cue, string message, Caption caption, Color color)
     {
         Message = message;
         _cue = cue;
@@ -29,7 +30,7 @@ public class CaptionHudMessageElement
     public bool Update()
     {
         _ticksElapsed = Math.Min(_ticksElapsed + 1, CaptionManager.InfiniteDuration);
-        var cuePlaying = _cue.IsPlaying && !_cue.IsPaused && _cue.Volume >= 10;
+        var cuePlaying = _cue.IsPlaying && !_cue.IsPaused;
         if (VisibleLongEnough() && (!cuePlaying || ExceededMaxDuration()))
         {
             Transparency -= 0.03f;

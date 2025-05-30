@@ -45,7 +45,7 @@ public class CaptionManager
     /// Adds captions to the HUD for the sound cue if any are registered.
     /// </summary>
     /// <param name="cue">The sound cue</param>
-    public void OnSoundPlayed(Cue cue)
+    public void OnSoundPlayed(ICue cue)
     {
         var cueId = cue.Name;
         //_monitor.Log(cueId, LogLevel.Debug);
@@ -182,7 +182,7 @@ public class CaptionManager
         return true;
     }
     
-    private void AddCaption(Cue cue, Caption caption)
+    private void AddCaption(ICue cue, Caption caption)
     {
         var captionId = caption.CaptionId;
         if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;

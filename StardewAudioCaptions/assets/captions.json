@@ -236,5 +236,10 @@
     "fishing.caught": 5,
     "fishing.troutTag": 5,
     
-    "events.missingBundleComplete_wand": 0
+    "events.missingBundleComplete_wand": 0,
+    "events.3910974_woodWhack": 0,
+    "events.6963327_dirtyHit": 0,
+    "events.20_throw": 0,
+    "events.288847_latch": 0,
+    "events.288847_musicBox": 0
 }

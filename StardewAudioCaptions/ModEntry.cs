@@ -139,6 +139,7 @@ public class ModEntry : Mod
             text: () => Helper.Translation.Get("config.categories.paragraph"));
         
         var categories = ModCaptionManager.CaptionsByCategory();
+        categories.Remove("events");
 
         var translatedCategories = categories.Select(x => new
             {

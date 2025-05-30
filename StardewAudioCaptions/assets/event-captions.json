@@ -4,5 +4,61 @@
       "CueId": "wand",
       "CaptionId": "events.missingBundleComplete_wand"
     }
+  ],
+  "3910674": [
+    {
+      "CueId": "wateringCan",
+      "CaptionId": "tools.wateringCan"
+    }
+  ],
+  "3910974": [
+    {
+      "CueId": "woodWhack",
+      "CaptionId": "events.3910974_woodWhack"
+    }
+  ],
+  "6963327": [
+    {
+      "CueId": "rockGolemSpawn",
+      "CaptionId": "monsters.golemSpawn"
+    },
+    {
+      "CueId": "swordswipe",
+      "CaptionId": "weapons.swipe"
+    },
+    {
+      "CueId": "hitEnemy",
+      "CaptionId": "player.hurts"
+    },
+    {
+      "CueId": "rockGolemHit",
+      "CaptionId": "monsters.golemHurt",
+      "When": "AfterN",
+      "WhenCount": 1
+    },
+    {
+      "CueId": "dirtyHit",
+      "CaptionId": "events.6963327_dirtyHit"
+    },
+    {
+      "CueId": "rockGolemDie",
+      "CaptionId": "monsters.golemDie"
+    }
+  ],
+  "20": [
+    {
+      "CueId": "throw",
+      "CaptionId": "events.20_throw"
+    }
+  ],
+  "288847": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.288847_latch"
+    },
+    {
+      "CueId": "tinymusicbox",
+      "CaptionId": "events.288847_musicBox"
+    }
   ]
 }

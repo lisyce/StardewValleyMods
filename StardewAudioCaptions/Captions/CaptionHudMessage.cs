@@ -22,7 +22,7 @@ public class CaptionHudMessage
         _captions = new List<CaptionHudMessageElement>();
     }
 
-    public void AddCaption(Cue cue, string message, Caption backingCaption, Color color)
+    public void AddCaption(ICue cue, string message, Caption backingCaption, Color color)
     {
         // is this caption already displayed?
         foreach (var caption in _captions)
@@ -46,7 +46,7 @@ public class CaptionHudMessage
 
     public void Draw(SpriteBatch b, ModConfig config)
     {
-        if (_captions.Count == 0 || !config.CaptionsOn || (config.HideInMenu && Game1.activeClickableMenu != null)) return;
+        if (_captions.Count == 0 || !config.CaptionsOn || !ShouldDrawDespiteMenu(config)) return;
 
         _width = (int)(350 * config.FontScaling);  // set the width field
         
@@ -81,6 +81,11 @@ public class CaptionHudMessage
         }
     }
 
+    private bool ShouldDrawDespiteMenu(ModConfig config)
+    {
+        if (!config.HideInMenu) return true;
+        return Game1.activeClickableMenu is null or DialogueBox or BobberBar;
+    }
     private Vector2 GetCaptionLocation(ModConfig config, float boxheight)
     {
         var safeArea = Utility.getSafeArea();

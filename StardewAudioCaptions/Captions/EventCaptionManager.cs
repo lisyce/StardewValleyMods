@@ -9,6 +9,8 @@ public class EventCaptionManager
 {
     private static readonly MethodInfo PlaySoundHandler =
         AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlaySound));
+    private static readonly MethodInfo PlayMusicHandler =
+        AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlayMusic));
     
     private readonly Dictionary<string, List<EventCaption>> _eventCaptions;
     private readonly IMonitor _monitor;
@@ -64,10 +66,15 @@ public class EventCaptionManager
             var cmdName = ArgUtility.Get(args, 0);
             
             if (!Event.TryGetEventCommandHandler(cmdName, out var handler)) continue;
-            if (!handler.Method.Equals(PlaySoundHandler)) continue;
-     
-            var cueId = ArgUtility.Get(args, 1);
 
+            string cueId;
+            if (handler.Method.Equals(PlaySoundHandler)) cueId = ArgUtility.Get(args, 1);
+            else if (handler.Method.Equals(PlayMusicHandler))
+            {
+                ArgUtility.TryGetRemainder(args, 1, out cueId, out var _, ' ', "string musicId");
+            }
+            else continue;
+            
             // count times this sound has played
             timesPlayed.TryAdd(cueId, 0);
             timesPlayed[cueId]++;
@@ -76,8 +83,10 @@ public class EventCaptionManager
             var total = 0;
             foreach (var ec in captionsForThisEvent.Where(x => x.CueId == cueId))
             {
-                if (ec.When == EventCaptionCondition.FirstN) total += ec.AppliesFor;
-                if (ec.When == EventCaptionCondition.Always || timesPlayed[cueId] <= total)
+                total += ec.WhenCount;
+                var firstNApplies = ec.When == EventCaptionCondition.FirstN && timesPlayed[cueId] <= total;
+                var afterNApplies = ec.When == EventCaptionCondition.AfterN && timesPlayed[cueId] > total;
+                if (ec.When == EventCaptionCondition.Always || firstNApplies || afterNApplies)
                 {
                     _currentCaptions.Add(new Caption(cueId, ec.CaptionId));
                     break;

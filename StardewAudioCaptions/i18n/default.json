@@ -268,5 +268,10 @@
   "fishing.caught.caption": "Fish caught",
   "fishing.troutTag.caption": "Golden tag sparkling",
   
-  "events.missingBundleComplete_wand.caption": "Junimo teleports"
+  "events.missingBundleComplete_wand.caption": "Junimo teleports",
+  "events.3910974_woodWhack.caption": "Present opened",
+  "events.6963327_dirtyHit.caption": "Digging",
+  "events.20_throw.caption": "Ball thrown",
+  "events.288847_latch.caption": "Latch clicks",
+  "events.288847_musicBox.caption": "Music box playing"
 }
