@@ -67,6 +67,7 @@
   "interaction.fairyDust.caption": "Machine sparkling",
   "interaction.itemBreak.caption": "Item broken",
   "interaction.bookRead.caption": "Book pages flipping",
+  "interaction.busDoorOpen.caption": "Bus door opens",
 
   "player.eating.caption": "Eating",
   "player.drinking.caption": "Drinking",
@@ -130,6 +131,7 @@
   "world.machineProcessing.caption": "Machine working",
   "world.robinHammer.caption": "Robin's hammer thuds",
   "world.machineFinish.caption": "Machine finishes",
+  "world.busDriveOff.caption": "Bus engine rumbling",
 
   "nightEvents.earthquake.caption": "Rumbling",
   "nightEvents.raccoon0.caption": "Wind blowing",
@@ -273,5 +275,15 @@
   "events.6963327_dirtyHit.caption": "Digging",
   "events.20_throw.caption": "Ball thrown",
   "events.288847_latch.caption": "Latch clicks",
-  "events.288847_musicBox.caption": "Music box playing"
+  "events.288847_musicBox.caption": "Music box playing",
+  "events.29_cast.caption": "Umbrella opens",
+  "events.7771191_pullItem.caption": "Sea monster splashes",
+  "events.3131209_slimeHit.caption": "Bug meat squelches",
+  "events.samBand_poppy.caption": "Pop music playing",
+  "events.samBand_heavy.caption": "Rock music playing",
+  "events.samBand_honkytonky.caption": "Energetic dance music playing",
+  "events.samBand_shimmeringbastion.caption": "Bluegrass music playing",
+  "events.9581348_stadium.caption": "Crowd chanting",
+  "events.9581348_wild.caption": "Crowd cheering wildly",
+  "events.520702_peep.caption": "Shadow guy whistles"
 }

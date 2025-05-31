@@ -51,8 +51,9 @@ public class EventCaptionManager
         _currentIdx++;
     }
 
-    private void PrepareForEvent(Event @event)
+    public void PrepareForEvent(Event @event)
     {
+        _monitor.Log("preparing for " + @event.id, LogLevel.Debug);
         _currentEvent = @event;
         _currentCaptions = new List<Caption>();
         _currentIdx = 0;
@@ -74,10 +75,14 @@ public class EventCaptionManager
                 ArgUtility.TryGetRemainder(args, 1, out cueId, out var _, ' ', "string musicId");
             }
             else continue;
+
+            if (cueId == "samBand") cueId = ConvertSamBand();
             
             // count times this sound has played
             timesPlayed.TryAdd(cueId, 0);
             timesPlayed[cueId]++;
+            
+            _monitor.Log(cueId, LogLevel.Debug);
 
             // find the appropriate caption
             var total = 0;
@@ -96,8 +101,34 @@ public class EventCaptionManager
         
     }
 
-    private void CleanupAfterEvent()
+    public void CleanupAfterEvent()
     {
+        _monitor.Log("cleanup", LogLevel.Debug);
         _currentEvent = null;
+    }
+
+    public bool EventInProgress()
+    {
+        return _currentEvent != null;
+    }
+
+    private string ConvertSamBand()
+    {
+        if (Game1.player.DialogueQuestionsAnswered.Contains("78"))
+        {
+            return "shimmeringbastion";
+        }
+        else if (Game1.player.DialogueQuestionsAnswered.Contains("79"))
+        {
+            return "honkytonky";
+        }
+        else if (Game1.player.DialogueQuestionsAnswered.Contains("77"))
+        {
+            return "heavy";
+        }
+        else
+        {
+            return "poppy";
+        }
     }
 }

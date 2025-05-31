@@ -14,7 +14,7 @@ public class ModEntry : Mod
 {
     private ModConfig _config;
     public static CaptionManager ModCaptionManager;  // has to be public static so that harmony patches can use it
-    public static EventCaptionManager EventCaptionManager;
+    public static PerScreen<EventCaptionManager> EventCaptionManager;
     private CaptionHudMessage _captionHudMessage;
     private Harmony _harmony;
     
@@ -28,7 +28,7 @@ public class ModEntry : Mod
         _harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         ModCaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
-        EventCaptionManager = new EventCaptionManager(helper, Monitor, ModCaptionManager);
+        EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(helper, Monitor, ModCaptionManager));
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
@@ -43,7 +43,7 @@ public class ModEntry : Mod
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e)
     {
         _captionHudMessage.Update();
-        EventCaptionManager.Update();
+        EventCaptionManager.Value.Update();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
@@ -226,6 +226,7 @@ public class ModEntry : Mod
         ModCaptionManager.RegisterDefaultCaption(new Caption("cavedrip", "ambient.caveDrip"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("wind", "ambient.wind"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("busDriveOff", "world.busDriveOff"));
         
         ModCaptionManager.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));

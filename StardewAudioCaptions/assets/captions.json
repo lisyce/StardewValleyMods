@@ -35,6 +35,7 @@
     "interaction.fairyDust": 5,
     "interaction.itemBreak": 0,
     "interaction.bookRead": 5,
+    "interaction.busDoorOpen": 0,
     
     "player.eating": 0,
     "player.drinking": 0,
@@ -80,6 +81,7 @@
     "world.machineProcessing": 0,
     "world.robinHammer": 0,
     "world.machineFinish": 0,
+    "world.busDriveOff": 0,
     
     "critters.birdFlap": -5,
     "critters.birdPeck": -5,
@@ -241,5 +243,15 @@
     "events.6963327_dirtyHit": 0,
     "events.20_throw": 0,
     "events.288847_latch": 0,
-    "events.288847_musicBox": 0
+    "events.288847_musicBox": 0,
+    "events.29_cast": 0,
+    "events.7771191_pullItem": 0,
+    "events.3131209_slimeHit": 0,
+    "events.samBand_poppy": 0,
+    "events.samBand_heavy": 0,
+    "events.samBand_honkytonky": 0,
+    "events.samBand_shimmeringbastion": 0,
+    "events.9581348_stadium": 0,
+    "events.9581348_wild": 0,
+    "events.520702_peep": 0
 }

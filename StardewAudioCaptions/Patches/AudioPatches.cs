@@ -33,6 +33,11 @@ public class AudioPatches
             original: AccessTools.Method(typeof(Game1), nameof(Game1.updateMusic)),
             postfix: new HarmonyMethod(typeof(AudioPatches), nameof(UpdateMusicPostfix))
         );
+        
+        harmony.Patch(
+            original: AccessTools.Method(typeof(Event), nameof(Event.ReplaceAllCommands)),
+            postfix: new HarmonyMethod(typeof(AudioPatches), nameof(EventReplaceAllCommandsPostfix))
+        );
     }
 
     private static void PlayPostfix(Cue __instance)
@@ -42,7 +47,7 @@ public class AudioPatches
 
     private static void EventPlaySoundPrefix()
     {
-        ModEntry.EventCaptionManager.BeforePlaySound();
+        ModEntry.EventCaptionManager.Value.BeforePlaySound();
     }
 
     private static void UpdateMusicPostfix()
@@ -51,5 +56,11 @@ public class AudioPatches
         {
             ModEntry.ModCaptionManager.OnSoundPlayed(Game1.currentSong);
         }
+    }
+
+    private static void EventReplaceAllCommandsPostfix(Event __instance)
+    {
+        ModEntry.EventCaptionManager.Value.CleanupAfterEvent();
+        ModEntry.EventCaptionManager.Value.PrepareForEvent(__instance);
     }
 }

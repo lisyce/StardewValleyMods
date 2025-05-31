@@ -185,7 +185,7 @@ public class CaptionManager
     private void AddCaption(ICue cue, Caption caption)
     {
         var captionId = caption.CaptionId;
-        if (!Config.CaptionToggles.GetValueOrDefault(captionId, true)) return;
+        if (!Config.CaptionToggles.GetValueOrDefault(captionId, true) && !ModEntry.EventCaptionManager.Value.EventInProgress()) return;
         
         var captionTranslationKey = captionId + ".caption";
         var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);

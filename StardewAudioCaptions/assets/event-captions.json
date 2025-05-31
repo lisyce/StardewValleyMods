@@ -60,5 +60,75 @@
       "CueId": "tinymusicbox",
       "CaptionId": "events.288847_musicBox"
     }
+  ],
+  "29": [
+    {
+      "CueId": "cast",
+      "CaptionId": "events.29_cast"
+    }
+  ],
+  "7771191": [
+    {
+      "CueId": "waterSlosh",
+      "CaptionId": "world.waterSlosh"
+    },
+    {
+      "CueId": "pullItemFromWater",
+      "CaptionId": "events.7771191_pullItem"
+    }
+  ],
+  "3131209": [
+    {
+      "CueId": "slimeHit",
+      "CaptionId": "events.3131209_slimeHit"
+    },
+    {
+      "CueId": "fishBite",
+      "CaptionId": "fishing.bite"
+    }
+  ],
+  "60367": [
+    {
+      "CueId": "busDoorOpen",
+      "CaptionId": "interaction.busDoorOpen"
+    }
+  ],
+  "4081148": [
+    {
+      "CueId": "busDoorOpen",
+      "CaptionId": "interaction.busDoorOpen"
+    },
+    {
+      "CueId": "poppy",
+      "CaptionId": "events.samBand_poppy"
+    },
+    {
+      "CueId": "heavy",
+      "CaptionId": "events.samBand_heavy"
+    },
+    {
+      "CueId": "honkytonky",
+      "CaptionId": "events.samBand_honkytonky"
+    },
+    {
+      "CueId": "shimmeringbastion",
+      "CaptionId": "events.samBand_shimmeringbastion"
+    }
+  ],
+  "9581348": [
+    {
+      "CueId": "Stadium_ambient",
+      "CaptionId": "events.9581348_stadium"
+    },
+    {
+      "CueId": "Stadium_cheer",
+      "CaptionId": "events.9581348_wild"
+    }
+  ],
+  "520702": [
+    {
+      "CueId": "shadowpeep",
+      "CaptionId": "events.520702_peep"
+    }
   ]
 }
