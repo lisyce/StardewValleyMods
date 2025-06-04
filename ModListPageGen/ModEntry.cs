@@ -88,8 +88,10 @@ public class ModEntry : Mod
             .Select(x => new Category(x.First().CategoryName, x.First().CategoryClass, x.Count())).ToList();
 
         var dependencyList = GetDependencyList(_helper.ModRegistry.GetAll());
-        
-        var data = new ModList(title, author, result.Count, result, categories, dependencyList,  Game1.version, Constants.ApiVersion.ToString());
+
+        var timeCreated = DateTime.Now;
+        var timeCreatedString = $"{timeCreated:O}";
+        var data = new ModList(title, author, result.Count, result, categories, dependencyList, timeCreatedString, Game1.version, Constants.ApiVersion.ToString());
 
         // create dir if necessary
         Directory.CreateDirectory(Path.Combine(_helper.DirectoryPath, "GeneratedModListsJson"));

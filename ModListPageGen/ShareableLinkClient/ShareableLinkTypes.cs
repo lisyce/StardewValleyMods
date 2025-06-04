@@ -31,6 +31,7 @@ public record ModList(
     List<ModListMod> Mods,
     List<Category> Categories,
     List<DependencyListEntry> DependencyList,
+    string DateCreated,
     string GameVersion,
     string SmapiVersion,
     string GeneratorVersion = "2.0.0");
