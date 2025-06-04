@@ -27,8 +27,8 @@ public class ModEntry : Mod
         }
         
         // does the list exist?
-        var outputPath = Path.Combine("GeneratedModListsJson", $"{MakeValidFileName(title)}.json");
-        var modListJson = Helper.Data.ReadJsonFile<ModList>(outputPath);
+        var jsonOutputPath = Path.Combine("GeneratedModListsJson", $"{MakeValidFileName(title)}.json");
+        var modListJson = Helper.Data.ReadJsonFile<ModList>(jsonOutputPath);
         if (modListJson == null)
         {
             Monitor.Log("Mod list with that name could not be found. Is there a file with that name in the <this mod's folder>/GeneratedModLists folder?", LogLevel.Error);
@@ -40,7 +40,7 @@ public class ModEntry : Mod
         
         // post
         var client = new ShareableLinkClient.ShareableLinkClient(Monitor);
-        if (!client.TryCreateLink(modListJson, theme, out string link, out string _))
+        if (!client.TryCreateLink(modListJson, theme, out string link, out string html))
         {
             Monitor.Log("Could not create shareable link. Please try again in a few minutes.", LogLevel.Error);
             return;
@@ -48,6 +48,14 @@ public class ModEntry : Mod
         
         Monitor.Log($"Shareable link generated: {link}", LogLevel.Info);
         Monitor.Log("Links are valid for four weeks.", LogLevel.Debug);
+        
+        // create dir if necessary
+        Directory.CreateDirectory(Path.Combine(_helper.DirectoryPath, "GeneratedModListsHtml"));
+        
+        // write html
+        var htmlOutputPath = Path.Combine(_helper.DirectoryPath, "GeneratedModListsHtml", $"{MakeValidFileName(title)}.html");
+        File.WriteAllText(htmlOutputPath, html);
+        Monitor.Log($"Saved your HTML mod list to GeneratedModListsHtml/{MakeValidFileName(title)}.", LogLevel.Info);
     }
 
     private void GenerateJson(string command, string[] args)
@@ -88,7 +96,7 @@ public class ModEntry : Mod
         
         // write json
         var outputPath = Path.Combine("GeneratedModListsJson", $"{MakeValidFileName(title)}.json");
-        Helper.Data.WriteJsonFile<ModList>(outputPath, data);
+        Helper.Data.WriteJsonFile(outputPath, data);
         
         Monitor.Log($"Saved mod list to {outputPath}.", LogLevel.Info);
     }
