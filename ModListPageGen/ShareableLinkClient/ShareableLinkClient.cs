@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using StardewModdingAPI;
+using StardewValley;
 
 namespace ModListPageGen.ShareableLinkClient;
 
@@ -29,8 +30,9 @@ public class ShareableLinkClient
     {
         link = "";  // default value
         html = "";
-        
-        var task = _httpClient.PostAsJsonAsync("mod-lists", new {ModList = list, ColorTheme=theme});
+
+        var req = new ModPageData(list, theme);
+        var task = _httpClient.PostAsJsonAsync("mod-lists", req);
         task.Wait();
         
         if (!task.IsCompletedSuccessfully || !task.Result.IsSuccessStatusCode)

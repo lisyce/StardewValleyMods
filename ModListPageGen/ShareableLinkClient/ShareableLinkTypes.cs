@@ -31,4 +31,10 @@ public record ModList(
     List<ModListMod> Mods,
     List<Category> Categories,
     List<DependencyListEntry> DependencyList,
-    string Version = "2.0.0");
+    string GameVersion,
+    string SmapiVersion,
+    string GeneratorVersion = "2.0.0");
+    
+public record ModPageData(
+    ModList ModList,
+    string ColorTheme);
