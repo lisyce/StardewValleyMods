@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Extensions;

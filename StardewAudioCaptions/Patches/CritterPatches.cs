@@ -1,11 +1,9 @@
-using System.Collections;
 using HarmonyLib;
 using StardewAudioCaptions.Captions;
 using StardewModdingAPI;
 using StardewValley.BellsAndWhistles;
 using StardewValley.Characters;
 using StardewValley.Locations;
-using StardewValley.TerrainFeatures;
 
 namespace StardewAudioCaptions.Patches;
 

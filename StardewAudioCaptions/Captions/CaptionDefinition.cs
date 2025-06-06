@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace StardewAudioCaptions.Captions;
 
 /// <summary>

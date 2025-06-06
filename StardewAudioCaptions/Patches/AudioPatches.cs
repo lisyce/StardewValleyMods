@@ -1,5 +1,4 @@
 using HarmonyLib;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using StardewValley;
 

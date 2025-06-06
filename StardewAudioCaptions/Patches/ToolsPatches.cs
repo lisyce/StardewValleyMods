@@ -1,4 +1,3 @@
-using System.Collections;
 using HarmonyLib;
 using StardewAudioCaptions.Captions;
 using StardewModdingAPI;

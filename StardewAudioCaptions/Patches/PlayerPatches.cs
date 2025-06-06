@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using HarmonyLib;
+﻿using HarmonyLib;
 using StardewModdingAPI;
 using StardewAudioCaptions.Captions;
 using StardewValley;
