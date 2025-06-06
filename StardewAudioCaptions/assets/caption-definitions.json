@@ -1,0 +1,460 @@
+{
+    "interaction.doorClose": {},
+    "interaction.fenceGate": {},
+    "interaction.chest": {},
+    "interaction.chestClose": {},
+    "interaction.trashCan": {},
+    "interaction.fridge": {},
+    "interaction.giftbox": {},
+    "interaction.shippingBinOpen": {},
+    "interaction.shippingBinClose": {},
+    "interaction.fire": {},
+    "interaction.footstepsDescend": {},
+    "interaction.shaftFalling": {},
+    "interaction.shaftLanding": {},
+    "interaction.itemShipped": {},
+    "interaction.doorOpen": {},
+    "interaction.singingStone": {},
+    "interaction.cropHarvest": {},
+    "interaction.hayHopper": {},
+    "interaction.containerCrack": {},
+    "interaction.minecart": {
+        "Priority": 5
+    },
+    "interaction.fluteBlock": {},
+    "interaction.fluteBlockClam": {},
+    "interaction.fluteBlockTelephone": {},
+    "interaction.fluteBlockHarp": {},
+    "interaction.fluteBlockPig": {},
+    "interaction.fluteBlockCrystal": {},
+    "interaction.fluteBlockDuck": {},
+    "interaction.fluteBlockPiano": {},
+    "interaction.fluteBlockMeep": {},
+    "interaction.drumBlock": {},
+    "interaction.itemPlaced": {},
+    "interaction.planted": {},
+    "interaction.fairyDust": {
+        "Priority": 5
+    },
+    "interaction.itemBreak": {},
+    "interaction.bookRead": {
+        "Priority": 5
+    },
+    "interaction.busDoorOpen": {},
+    "interaction.volcanoBtn": {},
+    "player.eating": {},
+    "player.drinking": {},
+    "player.hurts": {},
+    "player.footsteps": {
+        "Priority": -10
+    },
+    "player.footstepsJingle": {
+        "Priority": -10
+    },
+    "player.itemCollect": {},
+    "player.itemThrown": {},
+    "player.questComplete": {},
+    "player.stardrop": {
+        "Priority": 10
+    },
+    "player.teleport": {
+        "Priority": 10
+    },
+    "ambient.coinsClinking": {
+        "Priority": -10
+    },
+    "ambient.wind": {
+        "Priority": -10
+    },
+    "ambient.thunder": {
+        "Priority": 5
+    },
+    "ambient.trainLoop": {
+        "Priority": -10
+    },
+    "ambient.trainWhistle": {},
+    "ambient.distantTrain": {},
+    "ambient.brook": {
+        "Priority": -10
+    },
+    "ambient.fireCrackle": {
+        "Priority": -10
+    },
+    "ambient.engine": {
+        "Priority": -10
+    },
+    "ambient.cricket": {
+        "Priority": -10
+    },
+    "ambient.waterfall": {
+        "Priority": -10
+    },
+    "ambient.caveDrip": {
+        "Priority": -10
+    },
+    "ambient.bugLoop": {},
+    "world.elevator": {
+        "Priority": 10
+    },
+    "world.waterSlosh": {},
+    "world.lavaSlosh": {},
+    "world.fishSplash": {
+        "Priority": 5
+    },
+    "world.rooster": {},
+    "world.leafRustle": {},
+    "world.ladderAppear": {
+        "Priority": 10
+    },
+    "world.fuseHiss": {},
+    "world.bombExplode": {
+        "Priority": 5
+    },
+    "world.grassRustle": {},
+    "world.treeCrack": {},
+    "world.weedRustle": {},
+    "world.crystalShatter": {},
+    "world.parrotExpressLand": {},
+    "world.moss": {},
+    "world.panSpot": {
+        "Priority": 5
+    },
+    "world.machineProcessing": {},
+    "world.robinHammer": {},
+    "world.machineFinish": {},
+    "world.busDriveOff": {},
+    "world.trappedProf": {
+        "Priority": 5
+    },
+    "critters.birdFlap": {
+        "Priority": -5
+    },
+    "critters.birdPeck": {
+        "Priority": -5
+    },
+    "critters.butterflySparkle": {
+        "Priority": -5
+    },
+    "critters.monkey": {
+        "Priority": -5
+    },
+    "critters.crabSplash": {
+        "Priority": -5
+    },
+    "critters.crow": {
+        "Priority": -5
+    },
+    "critters.parrot": {
+        "Priority": -5
+    },
+    "critters.frogCroak": {
+        "Priority": -5
+    },
+    "critters.frogSplash": {
+        "Priority": -5
+    },
+    "critters.sandDuggyWhack": {
+        "Priority": -5
+    },
+    "critters.sandDuggyHide": {
+        "Priority": -5
+    },
+    "critters.junimo": {
+        "Priority": -5
+    },
+    "critters.junimoBundle": {
+        "Priority": -5
+    },
+    "critters.camel": {
+        "Priority": -5
+    },
+    "critters.seagull": {
+        "Priority": -5
+    },
+    "critters.birdChirp": {
+        "Priority": -5
+    },
+    "critters.raccoon": {
+        "Priority": 5
+    },
+    "nightEvents.earthquake": {
+        "Priority": 10
+    },
+    "nightEvents.raccoon0": {
+        "Priority": 10
+    },
+    "nightEvents.raccoon1": {
+        "Priority": 10
+    },
+    "nightEvents.ufo": {
+        "Priority": 10
+    },
+    "nightEvents.meteorite": {
+        "Priority": 10
+    },
+    "nightEvents.dogs": {
+        "Priority": 10
+    },
+    "nightEvents.owl": {
+        "Priority": 10
+    },
+    "nightEvents.parachute": {
+        "Priority": 10
+    },
+    "nightEvents.planefly": {
+        "Priority": 10
+    },
+    "nightEvents.fairyFlap": {
+        "Priority": 10
+    },
+    "nightEvents.fairySparkle": {
+        "Priority": 10
+    },
+    "nightEvents.witchCackle": {
+        "Priority": 10
+    },
+    "nightEvents.witchSparkle": {
+        "Priority": 10
+    },
+    "nightEvents.witchSpell": {
+        "Priority": 10
+    },
+    "tools.shears": {
+        "Priority": -5
+    },
+    "tools.pail": {
+        "Priority": -5
+    },
+    "tools.axe": {
+        "Priority": -5
+    },
+    "tools.pickaxe": {
+        "Priority": -5
+    },
+    "tools.pan": {
+        "Priority": -5
+    },
+    "tools.wateringCan": {
+        "Priority": -5
+    },
+    "tools.horseFlute": {
+        "Priority": 5
+    },
+    "tools.hoe": {
+        "Priority": -5
+    },
+    "monsters.batScreech": {
+        "Priority": 10
+    },
+    "monsters.serpentSpawn": {
+        "Priority": 10
+    },
+    "monsters.serpentDie": {},
+    "monsters.serpentHurt": {},
+    "monsters.hauntedSkull": {},
+    "monsters.bigSlimeHurt": {},
+    "monsters.bigSlimeDie": {},
+    "monsters.blueSquidHurt": {},
+    "monsters.blueSquidDie": {},
+    "monsters.blueSquidMove": {},
+    "weapons.debuffFire": {
+        "Priority": 5
+    },
+    "monsters.squidBubble": {
+        "Priority": 5
+    },
+    "monsters.magmaSpriteHurt": {},
+    "monsters.magmaSpriteDie": {},
+    "monsters.genericHurt": {},
+    "monsters.genericDie": {},
+    "monsters.genericSpot": {
+        "Priority": 10
+    },
+    "monsters.bugHurt": {},
+    "monsters.bugDie": {},
+    "monsters.dinoDie": {},
+    "monsters.dinoFire": {
+        "Priority": 5
+    },
+    "monsters.duggyHurt": {},
+    "monsters.duggyDie": {},
+    "monsters.duggyDig": {
+        "Priority": 5
+    },
+    "monsters.dustSpriteDie": {},
+    "monsters.dustSpriteMeep": {},
+    "monsters.sentryHurt": {},
+    "monsters.sentryDie": {},
+    "monsters.flyBuzz": {},
+    "monsters.flyHurt": {},
+    "monsters.flyDie": {},
+    "monsters.ghostDie": {},
+    "monsters.slimeHurt": {},
+    "monsters.slimeDie": {},
+    "monsters.slime": {},
+    "monsters.grubHurt": {},
+    "monsters.grubDie": {},
+    "monsters.hotheadFuse": {
+        "Priority": 5
+    },
+    "monsters.hotheadHurt": {},
+    "monsters.lavalurkDie": {},
+    "monsters.lavalurkFire": {
+        "Priority": 5
+    },
+    "monsters.spiderDie": {},
+    "monsters.spiderJump": {
+        "Priority": 5
+    },
+    "monsters.metalheadHurt": {},
+    "monsters.mummyDie": {},
+    "monsters.mummyHurt": {},
+    "monsters.mummyCrumble": {},
+    "monsters.mummyRevive": {
+        "Priority": 10
+    },
+    "monsters.rockCrabCrack": {},
+    "monsters.golemHurt": {},
+    "monsters.golemDie": {},
+    "monsters.golemSpawn": {
+        "Priority": 10
+    },
+    "monsters.shadowBruteHurt": {},
+    "monsters.shadowBruteDie": {},
+    "monsters.shamanHurt": {},
+    "monsters.shamanDie": {},
+    "monsters.shamanPeep": {},
+    "monsters.monsterHeal": {
+        "Priority": 5
+    },
+    "monsters.shooterFire": {
+        "Priority": 5
+    },
+    "monsters.shooterHurt": {},
+    "monsters.shooterDie": {},
+    "monsters.skeletonHurt": {},
+    "monsters.skeletonDie": {},
+    "monsters.squidkidHurt": {},
+    "monsters.squidkidDie": {},
+    "monsters.squidkidFire": {
+        "Priority": 5
+    },
+    "monsters.wingsFlap": {
+        "Priority": 5
+    },
+    "weapons.weaponClank": {},
+    "weapons.recharge": {
+        "Priority": 10
+    },
+    "weapons.clubSmash": {},
+    "weapons.daggerStab": {},
+    "weapons.swipe": {
+        "Priority": -5
+    },
+    "weapons.block": {
+        "Priority": -5
+    },
+    "weapons.parry": {
+        "Priority": -5
+    },
+    "weapons.slingshot": {},
+    "weapons.projectileHitsWall": {
+        "Priority": -10
+    },
+    "weapons.projectileFire": {
+        "Priority": 10
+    },
+    "weapons.playerDebuff": {
+        "Priority": 5
+    },
+    "weapons.playerFreeze": {
+        "Priority": 5
+    },
+    "weapons.monsterFreeze": {
+        "Priority": 5
+    },
+    "weapons.crit": {
+        "Priority": 10
+    },
+    "animals.chicken": {
+        "Priority": -5
+    },
+    "animals.duck": {
+        "Priority": -5
+    },
+    "animals.rabbit": {
+        "Priority": -5
+    },
+    "animals.cow": {
+        "Priority": -5
+    },
+    "animals.goat": {
+        "Priority": -5
+    },
+    "animals.sheep": {
+        "Priority": -5
+    },
+    "animals.pig": {
+        "Priority": -5
+    },
+    "animals.ostrich": {
+        "Priority": -5
+    },
+    "animals.digging": {},
+    "animals.enterHouse": {
+        "Priority": -5
+    },
+    "animals.splash": {
+        "Priority": -5
+    },
+    "animals.horseGallop": {
+        "Priority": -5
+    },
+    "animals.horseWarp": {
+        "Priority": 5
+    },
+    "pets.cat": {},
+    "pets.dogBark": {},
+    "pets.dogPant": {},
+    "pets.butterflyPowder": {
+        "Priority": 10
+    },
+    "pets.jump": {},
+    "pets.turtle": {},
+    "fishing.cast": {},
+    "fishing.splash": {
+        "Priority": -5
+    },
+    "fishing.bite": {
+        "Priority": 10
+    },
+    "fishing.hit": {
+        "Priority": -5
+    },
+    "fishing.reeling": {},
+    "fishing.escape": {
+        "Priority": 5
+    },
+    "fishing.caught": {
+        "Priority": 5
+    },
+    "fishing.troutTag": {
+        "Priority": 5
+    },
+    "events.missingBundleComplete_wand": {},
+    "events.3910974_woodWhack": {},
+    "events.6963327_dirtyHit": {},
+    "events.20_throw": {},
+    "events.288847_latch": {},
+    "events.288847_musicBox": {},
+    "events.29_cast": {},
+    "events.7771191_pullItem": {},
+    "events.3131209_slimeHit": {},
+    "events.samBand_poppy": {},
+    "events.samBand_heavy": {},
+    "events.samBand_honkytonky": {},
+    "events.samBand_shimmeringbastion": {},
+    "events.9581348_stadium": {},
+    "events.9581348_wild": {},
+    "events.520702_peep": {}
+}

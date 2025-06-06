@@ -17,18 +17,51 @@ public class ModEntry : Mod
     public static PerScreen<EventCaptionManager> EventCaptionManager;
     private CaptionHudMessage _captionHudMessage;
     private Harmony _harmony;
+    private Dictionary<string, CaptionDefinition> rawCaptionDefinitions;
+
+    private const string DefinitionsAssetName = "BarleyZP.Captions/Definitions";
+    private static Dictionary<string, CaptionDefinition>? _definitions;
+    internal static Dictionary<string, CaptionDefinition> Definitions
+    {
+        get
+        {
+            _definitions ??= Game1.content.Load<Dictionary<string, CaptionDefinition>>(DefinitionsAssetName);
+            return _definitions;
+        }
+    }
+
+    private const string EventsAssetName = "BarleyZP.Captions/Events";
+    private static Dictionary<string, List<EventCaption>>? _eventCaptions;
+    internal static Dictionary<string, List<EventCaption>> EventCaptions
+    {
+        get
+        {
+            _eventCaptions ??= Game1.content.Load<Dictionary<string, List<EventCaption>>>(DefinitionsAssetName);
+            return _eventCaptions;
+        }
+    }
     
     public override void Entry(IModHelper helper)
     {
         Helper.Events.Display.RenderedStep += OnRenderedStep;
         Helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+        Helper.Events.Content.AssetRequested += OnAssetRequested;
+        Helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
+        
+        rawCaptionDefinitions =
+            Helper.ModContent.Load<Dictionary<string, CaptionDefinition>>("assets/caption-definitions.json");
+        foreach (var def in rawCaptionDefinitions)
+        {
+            def.Value.Text = Helper.Translation.Get($"{def.Key}.caption");
+        }
         
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         ModCaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
         EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(helper, Monitor, ModCaptionManager));
+        
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
@@ -44,6 +77,30 @@ public class ModEntry : Mod
     {
         _captionHudMessage.Update();
         EventCaptionManager.Value.Update();
+    }
+
+    private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
+    {
+        if (e.NameWithoutLocale.IsEquivalentTo(DefinitionsAssetName))
+        {
+           e.LoadFrom(() => rawCaptionDefinitions, AssetLoadPriority.Exclusive);
+        }
+        else if (e.NameWithoutLocale.IsEquivalentTo(EventsAssetName))
+        {
+            e.LoadFromModFile<Dictionary<string, List<EventCaption>>>("assets/event-captions.json", AssetLoadPriority.Exclusive);
+        }
+    }
+    
+    private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
+    {
+        if (e.NamesWithoutLocale.Any(x => x.IsEquivalentTo(DefinitionsAssetName)))
+        {
+            _definitions = null;
+        }
+        else if (e.NamesWithoutLocale.Any(x => x.IsEquivalentTo(EventsAssetName)))
+        {
+            _eventCaptions = null;
+        }
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)

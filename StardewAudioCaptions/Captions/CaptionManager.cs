@@ -21,7 +21,6 @@ public class CaptionManager
         { "Green", Color.LimeGreen }
     };
     
-    private readonly Dictionary<string, CaptionPriority> _captionIds;
     private readonly CaptionHudMessage _hudMessage;
     private readonly IMonitor _monitor;
     private readonly IModHelper _helper;
@@ -32,7 +31,6 @@ public class CaptionManager
     
     public CaptionManager(IModHelper helper, CaptionHudMessage hudMessage, IMonitor monitor, ModConfig config)
     {
-        _captionIds = helper.ModContent.Load<Dictionary<string, CaptionPriority>>("assets/captions.json");
         _hudMessage = hudMessage;
         _monitor = monitor;
         _helper = helper;
@@ -142,7 +140,7 @@ public class CaptionManager
     public Dictionary<string, HashSet<string>> CaptionsByCategory()
     {
         var result = new Dictionary<string, HashSet<string>>();
-        foreach (var caption in _captionIds.Keys)
+        foreach (var caption in ModEntry.Definitions.Keys)
         {
             var category = caption.Split(".")[0];
             if (!result.ContainsKey(category)) result.Add(category, new HashSet<string>());
@@ -154,13 +152,14 @@ public class CaptionManager
 
     public CaptionPriority GetPriority(string captionId)
     {
-        return _captionIds.GetValueOrDefault(captionId, CaptionPriority.Default);
+        if (!ModEntry.Definitions.ContainsKey(captionId)) return CaptionPriority.Default;
+        return ModEntry.Definitions[captionId].Priority;
     }
 
     public bool ValidateCaption(Caption caption)
     {
         var captionId = caption.CaptionId;
-        if (!_captionIds.ContainsKey(captionId))
+        if (!ModEntry.Definitions.ContainsKey(captionId))
         {
             _monitor.Log($"Invalid caption id: {captionId}", LogLevel.Warn);
             return false;
