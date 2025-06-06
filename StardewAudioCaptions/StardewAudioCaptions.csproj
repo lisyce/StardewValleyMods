@@ -24,4 +24,10 @@
         <UpdateKeys>Nexus:33544</UpdateKeys>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="LICENSE.md">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>
