@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace StardewAudioCaptions.Captions;
 
 /// <summary>
@@ -6,5 +8,8 @@ namespace StardewAudioCaptions.Captions;
 public class CaptionDefinition
 {
     public CaptionPriority Priority { get; set; } = CaptionPriority.Default;
-    public string Text { get; set; }
+    
+    // only instantiated via JSON deserialization
+    // not marked [JsonRequired] because this mod does not provide the Text field in the JSON but rather programmatically
+    public string Text { get; set; } = null!;
 }

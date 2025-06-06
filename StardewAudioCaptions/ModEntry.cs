@@ -12,12 +12,11 @@ namespace StardewAudioCaptions;
 
 public class ModEntry : Mod
 {
-    private ModConfig _config;
-    public static CaptionManager ModCaptionManager;  // has to be public static so that harmony patches can use it
-    public static PerScreen<EventCaptionManager> EventCaptionManager;
-    private CaptionHudMessage _captionHudMessage;
-    private Harmony _harmony;
-    private Dictionary<string, CaptionDefinition> rawCaptionDefinitions;
+    private ModConfig _config = null!;  // set in Entry
+    public static CaptionManager ModCaptionManager = null!;  // set in Entry; has to be public static so that harmony patches can use it
+    public static PerScreen<EventCaptionManager> EventCaptionManager = null!;  // set in Entry
+    private CaptionHudMessage _captionHudMessage = null!;  // set in Entry
+    private Dictionary<string, CaptionDefinition> _rawCaptionDefinitions = null!;  // set in Entry
 
     private const string DefinitionsAssetName = "BarleyZP.Captions/Definitions";
     private static Dictionary<string, CaptionDefinition>? _definitions;
@@ -49,21 +48,21 @@ public class ModEntry : Mod
         Helper.Events.Content.AssetRequested += OnAssetRequested;
         Helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
         
-        rawCaptionDefinitions =
+        _rawCaptionDefinitions =
             Helper.ModContent.Load<Dictionary<string, CaptionDefinition>>("assets/caption-definitions.json");
-        foreach (var def in rawCaptionDefinitions)
+        foreach (var def in _rawCaptionDefinitions)
         {
             def.Value.Text = Helper.Translation.Get($"{def.Key}.caption");
         }
         
         _config = Helper.ReadConfig<ModConfig>();
-        _harmony = new Harmony(ModManifest.UniqueID);
+        var harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         ModCaptionManager = new CaptionManager(_captionHudMessage, Monitor, _config);
         EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(Monitor, ModCaptionManager));
         
-        AudioPatches.Patch(_harmony);
-        var patchManager = new PatchManager(Monitor, _harmony);
+        AudioPatches.Patch(harmony);
+        var patchManager = new PatchManager(Monitor, harmony);
         patchManager.Patch();
     }
     
@@ -88,7 +87,7 @@ public class ModEntry : Mod
     {
         if (e.NameWithoutLocale.IsEquivalentTo(DefinitionsAssetName))
         {
-           e.LoadFrom(() => rawCaptionDefinitions, AssetLoadPriority.Exclusive);
+           e.LoadFrom(() => _rawCaptionDefinitions, AssetLoadPriority.Exclusive);
         }
         else if (e.NameWithoutLocale.IsEquivalentTo(EventsAssetName))
         {

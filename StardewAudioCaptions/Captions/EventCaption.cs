@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace StardewAudioCaptions.Captions;
 
 /// <summary>
@@ -5,8 +7,10 @@ namespace StardewAudioCaptions.Captions;
 /// </summary>
 public class EventCaption
 {
-    public string CueId { get; set; }
-    public string CaptionId { get; set; }
+    [JsonRequired]
+    public string CueId { get; set; } = null!;  // only instantiated via JSON deserialization
+    [JsonRequired]
+    public string CaptionId { get; set; } = null!;  // only instantiated via JSON deserialization
     public EventCaptionCondition When { get; set; } = EventCaptionCondition.Always;
     public int WhenCount { get; set; } = -1;
 }

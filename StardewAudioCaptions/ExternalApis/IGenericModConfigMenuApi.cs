@@ -1,11 +1,8 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
-using StardewModdingAPI.Utilities;
-using StardewValley;
 
 namespace StardewAudioCaptions.APIs;
 
+#pragma warning disable 8625
 public interface IGenericModConfigMenuApi
 {
     /*********

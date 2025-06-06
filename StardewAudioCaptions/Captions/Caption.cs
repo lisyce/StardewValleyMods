@@ -13,7 +13,14 @@ public class Caption
     public string CategoryId => CaptionId.Split(".")[0];
     public object? Tokens { get; private set; }
 
-    public string Text => ModEntry.Definitions.GetValueOrDefault(CaptionId, null)?.Text ?? $"{CaptionId} is undefined";
+    public string Text
+    {
+        get
+        {
+            if (!ModEntry.Definitions.TryGetValue(CaptionId, out var capt)) return $"{CaptionId} has no Text";
+            return capt.Text;
+        }
+    }
     
     /// <param name="cueId">The ID of the sound cue</param>
     /// <param name="captionId">The ID of the caption to display</param>
