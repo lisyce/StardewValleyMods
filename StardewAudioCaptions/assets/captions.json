@@ -17,7 +17,6 @@
     "interaction.singingStone": 0,
     "interaction.cropHarvest": 0,
     "interaction.hayHopper": 0,
-    "interaction.containerBreak": 0,
     "interaction.containerCrack": 0,
     "interaction.minecart": 5,
     "interaction.fluteBlock": 0,
@@ -36,6 +35,7 @@
     "interaction.itemBreak": 0,
     "interaction.bookRead": 5,
     "interaction.busDoorOpen": 0,
+    "interaction.volcanoBtn": 0,
     
     "player.eating": 0,
     "player.drinking": 0,
@@ -82,6 +82,7 @@
     "world.robinHammer": 0,
     "world.machineFinish": 0,
     "world.busDriveOff": 0,
+    "world.trappedProf": 5,
     
     "critters.birdFlap": -5,
     "critters.birdPeck": -5,

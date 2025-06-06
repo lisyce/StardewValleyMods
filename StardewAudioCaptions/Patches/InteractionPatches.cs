@@ -170,6 +170,12 @@ public class InteractionPatches : ICaptionPatch
             AccessTools.Method(typeof(AnimalHouse), nameof(AnimalHouse.checkAction)),
             new Caption("coin", "interaction.itemPlaced"));
         
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(DwarfGate), nameof(DwarfGate.OnPress)),
+            new Caption("openBox", "interaction.volcanoBtn"));
+        
         PatchGenerator.TranspilerPatch(
             harmony,
             monitor,
@@ -236,20 +242,16 @@ public class InteractionPatches : ICaptionPatch
     {
         var playSound =
             AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.playNearbySoundAll));
-        
-        // break sound
         var matcher = new CodeMatcher(instructions);
-        matcher.MatchStartForward(
-                new CodeMatch(OpCodes.Call, playSound))
-            .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
-
         var soundCueMatcher = new SoundCueCodeMatcher(matcher);
-        soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerBreak");
         
-        // hit sound
         matcher.MatchStartForward(
                 new CodeMatch(OpCodes.Call, playSound))
-            .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll");
+            .ThrowIfNotMatch("Couldn't find call to method playNearbySoundAll")
+            .Advance(1)
+            .MatchStartForward(
+                new CodeMatch(OpCodes.Call, playSound))
+            .ThrowIfNotMatch("Couldn't find second call to method playNearbySoundAll");
         soundCueMatcher.RegisterCaptionForNextCue(CaptionManager.AnyCue, "interaction.containerCrack");
 
         return soundCueMatcher.InstructionEnumeration();

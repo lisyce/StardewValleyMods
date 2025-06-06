@@ -109,6 +109,12 @@ public class WorldPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(StardewValley.Object), nameof(StardewValley.Object.minutesElapsed)),
             new Caption("dwop", "world.machineFinish"));
+        
+        PatchGenerator.GeneratePatchPair(
+            harmony,
+            monitor,
+            AccessTools.Method(typeof(IslandNorth), nameof(IslandNorth.UpdateWhenCurrentLocation)),
+            new Caption("hammer", "world.trappedProf"));
     }
     
     private static IEnumerable<CodeInstruction> ObjectPlacementActionTranspiler(IEnumerable<CodeInstruction> instructions)

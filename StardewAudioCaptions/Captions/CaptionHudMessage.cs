@@ -132,9 +132,14 @@ public class CaptionHudMessage
     private bool ShouldOffsetTopLeftY(out int yOffset)
     {
         yOffset = 0;
-        if (Game1.player.currentLocation is MineShaft)
+        if (ShowingCurrency())
         {
-            yOffset = 64;
+            yOffset = 125;
+            return true;
+        }
+        else if (Game1.player.currentLocation is MineShaft or VolcanoDungeon)
+        {
+            yOffset = 75;
             return true;
         }
         else if (Game1.currentMinigame is TargetGame or FishingGame)
@@ -145,11 +150,6 @@ public class CaptionHudMessage
         else if (FestivalCurrencyDisplay())
         {
             yOffset = 120;
-            return true;
-        }
-        else if (ShowingCurrency())
-        {
-            yOffset = 125;
             return true;
         }
 
