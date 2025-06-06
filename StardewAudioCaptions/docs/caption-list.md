@@ -1,18 +1,18 @@
 # List of Captions
 
-Stardew Audio Captions currently features 226 captions.
+Stardew Audio Captions currently features 244 captions.
 
 ## Interactions
 
-36 captions in this category
+37 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `interaction.bookRead` | Book pages flipping |
+| `interaction.busDoorOpen` | Bus door opens |
 | `interaction.chestClose` | Chest closes |
 | `interaction.chest` | Chest opens |
 | `interaction.minecart` | Coal thuds |
-| `interaction.containerBreak` | Crate breaks |
 | `interaction.containerCrack` | Crate cracks |
 | `interaction.cropHarvest` | Crop harvested |
 | `interaction.doorClose` | Door closes |
@@ -43,6 +43,7 @@ Stardew Audio Captions currently features 226 captions.
 | `interaction.shippingBinClose` | Shipping bin closes |
 | `interaction.shippingBinOpen` | Shipping bin opens |
 | `interaction.singingStone` | Stone chimes |
+| `interaction.volcanoBtn` | Switch clicks |
 | `interaction.trashCan` | Trash rustles |
 
 ## Player
@@ -102,22 +103,24 @@ Stardew Audio Captions currently features 226 captions.
 | `critters.parrot` | Parrot squawks |
 | `critters.raccoon` | Raccoon chitters |
 | `critters.sandDuggyHide` | Sand Duggy hides |
-| `critters.sandDuggyWhack` | Sand Duggy hurts |
+| `critters.sandDuggyWhack` | Sand Duggy screeches |
 | `critters.seagull` | Seagull squawks |
 | `critters.butterflySparkle` | Sparkling |
 
 ## World
 
-19 captions in this category
+21 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `world.bombExplode` | Bomb explodes |
+| `world.busDriveOff` | Bus engine rumbling |
 | `world.crystalShatter` | Crystal shatters |
 | `world.elevator` | Elevator dings |
 | `world.fishSplash` | Fish splashes |
 | `world.fuseHiss` | Fuse hissing |
 | `world.grassRustle` | Grass rustles |
+| `world.trappedProf` | Knocking |
 | `world.ladderAppear` | Ladder appears |
 | `world.lavaSlosh` | Lava sloshes |
 | `world.leafRustle` | Leaves rustle |
@@ -313,8 +316,23 @@ Stardew Audio Captions currently features 226 captions.
 
 ## Events
 
-1 captions in this category
+16 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
+| `events.20_throw` | Ball thrown |
+| `events.samBand_shimmeringbastion` | Bluegrass music playing |
+| `events.3131209_slimeHit` | Bug meat squelches |
+| `events.9581348_stadium` | Crowd chanting |
+| `events.9581348_wild` | Crowd cheering wildly |
+| `events.6963327_dirtyHit` | Digging |
+| `events.samBand_honkytonky` | Energetic dance music playing |
 | `events.missingBundleComplete_wand` | Junimo teleports |
+| `events.288847_latch` | Latch clicks |
+| `events.288847_musicBox` | Music box playing |
+| `events.samBand_poppy` | Pop music playing |
+| `events.3910974_woodWhack` | Present opened |
+| `events.samBand_heavy` | Rock music playing |
+| `events.7771191_pullItem` | Sea monster splashes |
+| `events.520702_peep` | Shadow guy whistles |
+| `events.29_cast` | Umbrella opens |

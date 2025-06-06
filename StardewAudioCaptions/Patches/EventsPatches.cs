@@ -25,8 +25,8 @@ public class EventsPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(FairyEvent), nameof(FairyEvent.tickUpdate)),
-            new Caption("batFlap", "nightEvents.fairyFlap", shouldLog: false),
-            new Caption("yoba", "nightEvents.fairySparkle", shouldLog: false));
+            new Caption("batFlap", "nightEvents.fairyFlap"),
+            new Caption("yoba", "nightEvents.fairySparkle"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
@@ -39,7 +39,7 @@ public class EventsPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(WitchEvent), nameof(WitchEvent.tickUpdate)),
-            new Caption("discoverMineral", "nightEvents.witchSpell", shouldLog: false),
-            new Caption("debuffSpell", "nightEvents.witchSpell", shouldLog: false));
+            new Caption("discoverMineral", "nightEvents.witchSpell"),
+            new Caption("debuffSpell", "nightEvents.witchSpell"));
     }
 }

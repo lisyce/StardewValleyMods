@@ -1,5 +1,8 @@
 namespace StardewAudioCaptions.Captions;
 
+/// <summary>
+/// An <c>EventCaption</c> is a list entry in the value of a key/value pair in the <c>BarleyZP.Captions/Events</c> asset.
+/// </summary>
 public class EventCaption
 {
     public string CueId { get; set; }

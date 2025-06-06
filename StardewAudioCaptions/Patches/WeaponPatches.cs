@@ -32,7 +32,7 @@ public class WeaponPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(MeleeWeapon), nameof(MeleeWeapon.weaponsTypeUpdate)),
-            new Caption("objectiveComplete", "weapons.recharge", shouldLog: false));
+            new Caption("objectiveComplete", "weapons.recharge"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -70,7 +70,7 @@ public class WeaponPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Projectile), nameof(Projectile.update)),
-            new Caption(CaptionManager.AnyCue, "weapons.projectileHitsWall", shouldLog: false));
+            new Caption(CaptionManager.AnyCue, "weapons.projectileHitsWall"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -88,7 +88,7 @@ public class WeaponPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(BlueSquid), nameof(BlueSquid.behaviorAtGameTick)),
-            new Caption("debuffSpell", "weapons.debuffFire", shouldLog: false));
+            new Caption("debuffSpell", "weapons.debuffFire"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

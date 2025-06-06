@@ -5,6 +5,9 @@ using StardewValley;
 
 namespace StardewAudioCaptions.Captions;
 
+/// <summary>
+/// The <c>EventCaptionManager</c> is responsible for registering captions to be displayed in the HUD when sounds and music play during cutscenes.
+/// </summary>
 public class EventCaptionManager
 {
     private static readonly MethodInfo PlaySoundHandler =
@@ -12,7 +15,6 @@ public class EventCaptionManager
     private static readonly MethodInfo PlayMusicHandler =
         AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlayMusic));
     
-    private readonly Dictionary<string, List<EventCaption>> _eventCaptions;
     private readonly IMonitor _monitor;
     private readonly IModHelper _helper;
     private readonly CaptionManager _captionManager;
@@ -24,7 +26,6 @@ public class EventCaptionManager
     
     public EventCaptionManager(IModHelper helper, IMonitor monitor, CaptionManager captionManager)
     {
-        _eventCaptions = helper.ModContent.Load<Dictionary<string, List<EventCaption>>>("assets/event-captions.json");
         _monitor = monitor;
         _helper = helper;
         _captionManager = captionManager;
@@ -53,13 +54,13 @@ public class EventCaptionManager
 
     public void PrepareForEvent(Event @event)
     {
-        _monitor.Log("preparing for " + @event.id, LogLevel.Debug);
+        _monitor.Log("preparing for event " + @event.id);
         _currentEvent = @event;
         _currentCaptions = new List<Caption>();
         _currentIdx = 0;
 
         var timesPlayed = new Dictionary<string, int>();
-        if (!_eventCaptions.TryGetValue(@event.id, out var captionsForThisEvent)) return;
+        if (!ModEntry.EventCaptions.TryGetValue(@event.id, out var captionsForThisEvent)) return;
         
         foreach (var cmd in @event.eventCommands)
         {
@@ -103,7 +104,7 @@ public class EventCaptionManager
 
     public void CleanupAfterEvent()
     {
-        _monitor.Log("cleanup", LogLevel.Debug);
+        _monitor.Log("cleanup after event");
         _currentEvent = null;
     }
 

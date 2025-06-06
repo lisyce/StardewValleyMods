@@ -15,7 +15,7 @@ public class FishingPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(FishingRod), nameof(FishingRod.tickUpdate)),
-            new Caption("cast", "fishing.cast", shouldLog: false));
+            new Caption("cast", "fishing.cast"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
@@ -34,11 +34,11 @@ public class FishingPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(BobberBar), nameof(BobberBar.update)),
-            new Caption("fastReel", "fishing.reeling", shouldLog: false),
-            new Caption("slowReel", "fishing.reeling", shouldLog: false),
-            new Caption("fishingRodBend", "fishing.reeling", shouldLog: false),
-            new Caption("fishEscape", "fishing.escape", shouldLog: false),
-            new Caption("jingle1", "fishing.caught", shouldLog: false));
+            new Caption("fastReel", "fishing.reeling"),
+            new Caption("slowReel", "fishing.reeling"),
+            new Caption("fishingRodBend", "fishing.reeling"),
+            new Caption("fishEscape", "fishing.escape"),
+            new Caption("jingle1", "fishing.caught"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

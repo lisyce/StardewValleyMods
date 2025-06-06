@@ -6,10 +6,13 @@ using StardewValley.Extensions;
 
 namespace StardewAudioCaptions.Captions;
 
+/// <summary>
+/// The <c>CaptionManager</c> is responsible for registering captions to be displayed in the HUD when sounds play.
+/// </summary>
 public class CaptionManager
 {
-    public static readonly int InfiniteDuration = int.MaxValue;
-    public static readonly string AnyCue = "";
+    public const int InfiniteDuration = int.MaxValue;
+    public const string AnyCue = "";
 
     public static readonly Dictionary<string, Color> AllowedColors = new()
     {
@@ -23,17 +26,15 @@ public class CaptionManager
     
     private readonly CaptionHudMessage _hudMessage;
     private readonly IMonitor _monitor;
-    private readonly IModHelper _helper;
     private readonly Dictionary<string, List<Caption>> _captionsOnNextCue;
     private readonly Dictionary<string, Caption> _defaultCueCaptions;
     
     public ModConfig Config { get; set; }
     
-    public CaptionManager(IModHelper helper, CaptionHudMessage hudMessage, IMonitor monitor, ModConfig config)
+    public CaptionManager(CaptionHudMessage hudMessage, IMonitor monitor, ModConfig config)
     {
         _hudMessage = hudMessage;
         _monitor = monitor;
-        _helper = helper;
         Config = config;
         _captionsOnNextCue = new Dictionary<string, List<Caption>>();
         _defaultCueCaptions = new Dictionary<string, Caption>();
@@ -98,11 +99,6 @@ public class CaptionManager
         if (!_captionsOnNextCue.ContainsKey(caption.CueId)) _captionsOnNextCue.Add(caption.CueId, new List<Caption>());
 
         _captionsOnNextCue[caption.CueId].Add(caption);
-
-        if (caption.ShouldLog)
-        {
-            //_monitor.Log($"Registered caption {caption.CaptionId} for next cue {caption.CueId}", LogLevel.Debug);
-        }
     }
     
     /// <summary>
@@ -116,10 +112,6 @@ public class CaptionManager
         {
             captions.RemoveWhere(x => x.CaptionId == caption.CaptionId);
             if (captions.Count == 0) _captionsOnNextCue.Remove(caption.CueId);
-            if (caption.ShouldLog)
-            {
-                //_monitor.Log($"Unregistered caption {caption.CaptionId} for cue {caption.CueId}", LogLevel.Debug);
-            }
         }
     }
 
@@ -164,14 +156,7 @@ public class CaptionManager
             _monitor.Log($"Invalid caption id: {captionId}", LogLevel.Warn);
             return false;
         }
-
-        var captionTranslationKey = captionId + ".caption";
-        if (!_helper.Translation.ContainsKey(captionTranslationKey))
-        {
-            _monitor.Log($"No translation found for caption id: {captionId}. Translation key: {captionTranslationKey}", LogLevel.Warn);
-            return false;
-        }
-
+        
         if (caption.CueId != AnyCue && !Game1.soundBank.Exists(caption.CueId))
         {
             _monitor.Log($"Invalid sound cue id: {caption.CueId} for caption {captionId}", LogLevel.Warn);
@@ -186,9 +171,7 @@ public class CaptionManager
         var captionId = caption.CaptionId;
         if (!Config.CaptionToggles.GetValueOrDefault(captionId, true) && !ModEntry.EventCaptionManager.Value.EventInProgress()) return;
         
-        var captionTranslationKey = captionId + ".caption";
-        var translatedCaption = _helper.Translation.Get(captionTranslationKey, caption.Tokens);
-        _hudMessage.AddCaption(cue, translatedCaption, caption, CaptionColor(caption));
+        _hudMessage.AddCaption(cue, caption, CaptionColor(caption));
     }
 
     private Color CaptionColor(Caption caption)

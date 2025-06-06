@@ -29,7 +29,7 @@ public class CritterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Butterfly), nameof(Butterfly.update)),
-            new Caption("yoba", "critters.butterflySparkle", shouldLog: false));
+            new Caption("yoba", "critters.butterflySparkle"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -126,7 +126,7 @@ public class CritterPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(CommunityCenter), nameof(CommunityCenter.UpdateWhenCurrentLocation)),
-            new Caption("dustMeep", "critters.junimo", shouldLog: false));
+            new Caption("dustMeep", "critters.junimo"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

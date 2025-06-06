@@ -19,7 +19,7 @@ public class WorldPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(MineShaft), nameof(MineShaft.UpdateWhenCurrentLocation)),
-            new Caption("crystal", "world.elevator", shouldLog: false));
+            new Caption("crystal", "world.elevator"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -90,7 +90,7 @@ public class WorldPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.performOrePanTenMinuteUpdate)),
-            new Caption("slosh", "world.panSpot", shouldLog: false));
+            new Caption("slosh", "world.panSpot"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

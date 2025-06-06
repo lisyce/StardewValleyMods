@@ -20,7 +20,7 @@ public class AnimalPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(FarmAnimal), nameof(FarmAnimal.updateWhenCurrentLocation)),
-            new Caption("dwoop", "animals.enterHouse", shouldLog: false));
+            new Caption("dwoop", "animals.enterHouse"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
@@ -32,7 +32,7 @@ public class AnimalPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Horse), nameof(Horse.OnMountFootstep)),
-            new Caption(CaptionManager.AnyCue, "animals.horseGallop", shouldLog: false));
+            new Caption(CaptionManager.AnyCue, "animals.horseGallop"));
         
         PatchGenerator.GeneratePrefix(
             harmony,
@@ -45,11 +45,11 @@ public class AnimalPatches : ICaptionPatch
     {
         var matcher = new SoundCueCodeMatcher(instructions);
         matcher.FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false)
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging")
             .FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false)
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging")
             .FindCue("dirtyHit", SoundCueCodeMatcher.DelayedActionPlaySound)
-            .RegisterCaptionForNextCue("dirtyHit", "animals.digging", shouldLog: false);
+            .RegisterCaptionForNextCue("dirtyHit", "animals.digging");
         return matcher.InstructionEnumeration();
     }
 }

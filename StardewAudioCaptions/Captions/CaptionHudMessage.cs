@@ -1,9 +1,5 @@
-using HarmonyLib;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using StardewModdingAPI;
-using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.Locations;
@@ -12,29 +8,34 @@ using StardewValley.Minigames;
 
 namespace StardewAudioCaptions.Captions;
 
+/// <summary>
+/// A <c>CaptionHudMessage</c> manages the UI that displays captions on the player's screen.
+/// </summary>
 public class CaptionHudMessage
 {
-    private readonly List<CaptionHudMessageElement> _captions;
+    private readonly List<CaptionHudMessageElement> _captions = new();
     private int _width;
 
-    public CaptionHudMessage()
-    {
-        _captions = new List<CaptionHudMessageElement>();
-    }
-
-    public void AddCaption(ICue cue, string message, Caption backingCaption, Color color)
+    /// <summary>
+    /// Adds a new caption to the HUD. If a caption with this message already exists on the HUD, then that caption's
+    /// visibility timer is reset.
+    /// </summary>
+    /// <param name="cue">The cue that caused this caption to be displayed</param>
+    /// <param name="backingCaption">The caption to display</param>
+    /// <param name="color">The text color to display</param>
+    public void AddCaption(ICue cue, Caption backingCaption, Color color)
     {
         // is this caption already displayed?
         foreach (var caption in _captions)
         {
-            if (caption.Message == message)
+            if (caption.Text == backingCaption.Text)
             {
                 caption.Reset();
                 return;
             }
         }
         
-        var el = new CaptionHudMessageElement(cue, message, backingCaption, color);
+        var el = new CaptionHudMessageElement(cue, backingCaption, color);
         _captions.Add(el);
         _captions.Sort((x, y) => y.Caption.Priority.CompareTo(x.Caption.Priority));
     }
@@ -58,7 +59,7 @@ public class CaptionHudMessage
         for (var i=0; i < config.MaxVisibleCaptions && i < _captions.Count; i++)
         {
             var sub = _captions[i];
-            height += (Game1.smallFont.MeasureString(sub.Message).Y * config.FontScaling) + elPadding;
+            height += (Game1.smallFont.MeasureString(sub.Text).Y * config.FontScaling) + elPadding;
         }
         
 
@@ -76,7 +77,7 @@ public class CaptionHudMessage
         {
             var el = _captions[i];
             var pos = new Vector2(x + mainPadding, y);
-            b.DrawString(Game1.smallFont, el.Message, pos, el.Color * el.Transparency, 0, Vector2.Zero, config.FontScaling, SpriteEffects.None, 1f);
+            b.DrawString(Game1.smallFont, el.Text, pos, el.Color * el.Transparency, 0, Vector2.Zero, config.FontScaling, SpriteEffects.None, 1f);
             y += elHeight + elPadding;
         }
     }

@@ -20,25 +20,25 @@ public class PlayerPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Debris), nameof(Debris.updateChunks)),
-            new Caption("coin", "player.itemCollect", shouldLog: false));
+            new Caption("coin", "player.itemCollect"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
             monitor,
             AccessTools.Method(typeof(FarmerSprite), "checkForFootstep"),
-            new Caption("thudStep", "player.footsteps", shouldLog: false),
-            new Caption("thudStep", "player.footsteps", shouldLog: false),
-            new Caption("sandyStep", "player.footsteps", shouldLog: false),
-            new Caption("stoneStep", "player.footsteps", shouldLog: false),
-            new Caption("snowyStep", "player.footsteps", shouldLog: false),
-            new Caption("grassyStep", "player.footsteps", shouldLog: false),
-            new Caption("woodyStep", "player.footsteps", shouldLog: false));
+            new Caption("thudStep", "player.footsteps"),
+            new Caption("thudStep", "player.footsteps"),
+            new Caption("sandyStep", "player.footsteps"),
+            new Caption("stoneStep", "player.footsteps"),
+            new Caption("snowyStep", "player.footsteps"),
+            new Caption("grassyStep", "player.footsteps"),
+            new Caption("woodyStep", "player.footsteps"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(GameLocation), nameof(GameLocation.checkAction)),
-            new Caption("pickUpItem", "player.itemCollect", shouldLog: false));
+            new Caption("pickUpItem", "player.itemCollect"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

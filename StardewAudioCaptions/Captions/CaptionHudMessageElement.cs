@@ -4,21 +4,24 @@ using StardewValley;
 
 namespace StardewAudioCaptions.Captions;
 
+/// <summary>
+/// A <c>CaptionHudMessageElement</c> is an entry in a <see cref="CaptionHudMessage"/>.
+/// </summary>
 public class CaptionHudMessageElement
 {
     private int _ticksElapsed;
     private readonly ICue _cue;
     private readonly int _maxDurationTicks;
     
-    public string Message { get; }
     public float Transparency { get; private set; }
     public Color Color { get; }
     
     public readonly Caption Caption;
 
-    public CaptionHudMessageElement(ICue cue, string message, Caption caption, Color color)
+    public string Text => Caption.Text;
+
+    public CaptionHudMessageElement(ICue cue, Caption caption, Color color)
     {
-        Message = message;
         _cue = cue;
         Transparency = 1f;
         _ticksElapsed = 0;

@@ -64,7 +64,7 @@ public class ToolsPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Tool), nameof(Tool.endUsing)),
-            new Caption("wateringCan", "tools.wateringCan", shouldLog: false));
+            new Caption("wateringCan", "tools.wateringCan"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,

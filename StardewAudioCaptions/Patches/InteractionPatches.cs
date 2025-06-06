@@ -55,26 +55,26 @@ public class InteractionPatches : ICaptionPatch
             harmony,
             monitor,
             AccessTools.Method(typeof(Chest), nameof(Chest.updateWhenCurrentLocation)),
-            new Caption("doorCreakReverse", "interaction.chestClose", shouldLog: false));
+            new Caption("doorCreakReverse", "interaction.chestClose"));
         
         PatchGenerator.GeneratePatchPairs(
             harmony,
             monitor,
             AccessTools.Method(typeof(Chest), nameof(Chest.UpdateFarmerNearby)),
-            new Caption("doorCreak", "interaction.chest", shouldLog: false),
-            new Caption("doorCreakReverse", "interaction.chestClose", shouldLog: false));
+            new Caption("doorCreak", "interaction.chest"),
+            new Caption("doorCreakReverse", "interaction.chestClose"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(ShippingBin), "openShippingBinLid"),
-            new Caption("doorCreak", "interaction.shippingBinOpen", shouldLog: false));
+            new Caption("doorCreak", "interaction.shippingBinOpen"));
         
         PatchGenerator.GeneratePatchPair(
             harmony,
             monitor,
             AccessTools.Method(typeof(ShippingBin), "closeShippingBinLid"),
-            new Caption("doorCreakReverse", "interaction.shippingBinClose", shouldLog: false));
+            new Caption("doorCreakReverse", "interaction.shippingBinClose"));
         
         PatchGenerator.GeneratePrefix(
             harmony,

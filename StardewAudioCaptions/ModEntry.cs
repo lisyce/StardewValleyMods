@@ -59,12 +59,17 @@ public class ModEntry : Mod
         _config = Helper.ReadConfig<ModConfig>();
         _harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
-        ModCaptionManager = new CaptionManager(Helper, _captionHudMessage, Monitor, _config);
+        ModCaptionManager = new CaptionManager(_captionHudMessage, Monitor, _config);
         EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(helper, Monitor, ModCaptionManager));
         
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
         patchManager.Patch();
+    }
+    
+    public override object? GetApi()
+    {
+        return new StardewAudioCaptionsApiProvider(ModCaptionManager);
     }
 
     private void OnRenderedStep(object? sender, RenderedStepEventArgs e)
