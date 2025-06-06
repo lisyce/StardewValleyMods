@@ -16,7 +16,6 @@ public class EventCaptionManager
         AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlayMusic));
     
     private readonly IMonitor _monitor;
-    private readonly IModHelper _helper;
     private readonly CaptionManager _captionManager;
 
     private Event? _currentEvent;
@@ -24,10 +23,9 @@ public class EventCaptionManager
     private List<Caption> _currentCaptions = new();
     private int _currentIdx = 0;
     
-    public EventCaptionManager(IModHelper helper, IMonitor monitor, CaptionManager captionManager)
+    public EventCaptionManager(IMonitor monitor, CaptionManager captionManager)
     {
         _monitor = monitor;
-        _helper = helper;
         _captionManager = captionManager;
     }
 

@@ -60,7 +60,7 @@ public class ModEntry : Mod
         _harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         ModCaptionManager = new CaptionManager(_captionHudMessage, Monitor, _config);
-        EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(helper, Monitor, ModCaptionManager));
+        EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(Monitor, ModCaptionManager));
         
         AudioPatches.Patch(_harmony);
         var patchManager = new PatchManager(Monitor, _harmony);
