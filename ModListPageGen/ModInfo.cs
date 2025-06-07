@@ -39,21 +39,18 @@ public class ModInfo
         {
             var depManifest = helper.ModRegistry.Get(dep.UniqueID)?.Manifest;
             if (depManifest == null || !dep.IsRequired) continue;
-            dependsOn.Add(depManifest.Name);
+            dependsOn.Add(depManifest.UniqueID);
         }
 
 
         var summary = _nexusInfo?.Summary ?? _manifest.Description;
         var categoryName = _nexusInfo?.categoryName ?? "No Category";
-        var categoryClass = _nexusInfo?.categoryName.Replace(" ", "_") ?? "No_Category";
-        var depsClasses =
-            dependsOn.Count > 0 ? string.Join(" ", dependsOn.Select(d => d.Replace(" ", "_"))) : "No_Deps";
         var contentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name;
         var hasNexusInfo = _nexusInfo != null;
         var downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-";
         var endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-";
 
-        return new ModListMod(_manifest.Name, _manifest.Author, summary, categoryName, categoryClass, depsClasses,
-            contentPackFor, _nexusId, hasNexusInfo, downloads, endorsements);
+        return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author, summary, categoryName, 
+            contentPackFor, dependsOn.ToList(), _nexusId, hasNexusInfo, downloads, endorsements);
     }
 };

@@ -85,7 +85,7 @@ public class ModEntry : Mod
             .Select(x => x.ToModListMod(_helper)).ToList();
 
         var categories = result.GroupBy(x => x.CategoryName)
-            .Select(x => new Category(x.First().CategoryName, x.First().CategoryClass, x.Count())).ToList();
+            .Select(x => new Category(x.First().CategoryName, x.Count())).ToList();
 
         var dependencyList = GetDependencyList(_helper.ModRegistry.GetAll());
 

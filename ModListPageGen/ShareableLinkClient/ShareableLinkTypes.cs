@@ -1,23 +1,23 @@
 namespace ModListPageGen.ShareableLinkClient;
 
-public record Category(string Name, string CssClass, int Count);
+public record Category(string Name, int Count);
 
 public class DependencyListEntry
 {
-    public string Name { get; init; }
+    public string Name { get; set; }
     public int DepsCount { get; set; }
-    public string CssClass { get; init; }
+    public string UniqueId { get; set; }
 }
 
 public record ModListMod(
+    string UniqueId,
     string Name,
     string Author,
     string Summary,
 
     string CategoryName,
-    string CategoryClass,
-    string DepsClasses,
     string? ContentPackFor,
+    List<string> DependsOn,
 
     string NexusId,
     bool HasNexusInfo,
