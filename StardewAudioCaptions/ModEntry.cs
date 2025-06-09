@@ -35,7 +35,7 @@ public class ModEntry : Mod
     {
         get
         {
-            _eventCaptions ??= Game1.content.Load<Dictionary<string, List<EventCaption>>>(DefinitionsAssetName);
+            _eventCaptions ??= Game1.content.Load<Dictionary<string, List<EventCaption>>>(EventsAssetName);
             return _eventCaptions;
         }
     }
