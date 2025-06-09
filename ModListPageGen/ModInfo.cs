@@ -73,7 +73,7 @@ public class ModInfo
             contentPackFor, dependsOn.ToList(), urlInfo, shareableNexusInfo);
     }
 
-    public bool TryGetGithubUpdateKey(out string key)
+    private bool TryGetGithubUpdateKey(out string key)
     {
         key = "";  // default
         
