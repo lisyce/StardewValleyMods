@@ -63,9 +63,29 @@ public class ModInfo
         {
             urlInfo = new UrlInfo("Nexus", $"https://www.nexusmods.com/stardewvalley/mods/{_nexusId}");
         }
+        else if (TryGetGithubUpdateKey(out var githubKey))
+        {
+            urlInfo = new UrlInfo("GitHub", $"https://github.com/{githubKey}");
+        }
         
 
         return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author, summary, categoryName, 
             contentPackFor, dependsOn.ToList(), urlInfo, shareableNexusInfo);
+    }
+
+    public bool TryGetGithubUpdateKey(out string key)
+    {
+        key = "";  // default
+        
+        foreach (var k in _manifest.UpdateKeys)
+        {
+            if (k.ToLower().StartsWith("github:"))
+            {
+                key = k[7..];
+                return true;
+            }
+        }
+
+        return false;
     }
 };
