@@ -28,24 +28,26 @@ public class ModInfo
         HashSet<string> dependsOn = new();
         if (_manifest.ContentPackFor != null)
         {
-            var depManifest = helper.ModRegistry.Get(_manifest.ContentPackFor.UniqueID)?.Manifest;
-            if (depManifest != null)
-            {
-                dependsOn.Add(depManifest.Name);
-            }
+            dependsOn.Add(_manifest.ContentPackFor.UniqueID);
         }
 
         foreach (var dep in _manifest.Dependencies)
         {
-            var depManifest = helper.ModRegistry.Get(dep.UniqueID)?.Manifest;
-            if (depManifest == null || !dep.IsRequired) continue;
-            dependsOn.Add(depManifest.UniqueID);
+            if (dep.IsRequired) dependsOn.Add(dep.UniqueID);
         }
 
 
         var summary = _nexusInfo?.Summary ?? _manifest.Description;
         var categoryName = _nexusInfo?.categoryName ?? "No Category";
-        var contentPackFor = helper.ModRegistry.Get(_manifest.ContentPackFor?.UniqueID ?? "")?.Manifest.Name;
+
+        ContentPackFor? contentPackFor = null;
+        if (_manifest.ContentPackFor != null)
+        {
+            var packForInfo = helper.ModRegistry.Get(_manifest.ContentPackFor.UniqueID);
+            if (packForInfo != null)
+                contentPackFor = new ContentPackFor(packForInfo.Manifest.Name, packForInfo.Manifest.UniqueID);
+        }
+        
         var hasNexusInfo = _nexusInfo != null;
         var downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-";
         var endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-";
