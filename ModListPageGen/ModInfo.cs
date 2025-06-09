@@ -52,7 +52,20 @@ public class ModInfo
         var downloads = _nexusInfo != null ? _nexusInfo.Downloads.ToString("N0") : "-";
         var endorsements = _nexusInfo != null ? _nexusInfo.Endorsements.ToString("N0") : "-";
 
+        ShareableLinkClient.NexusInfo? shareableNexusInfo = null;
+        if (hasNexusInfo)
+        {
+            shareableNexusInfo = new ShareableLinkClient.NexusInfo(downloads, endorsements);
+        }
+
+        UrlInfo? urlInfo = null;
+        if (_nexusId != null)
+        {
+            urlInfo = new UrlInfo("Nexus", $"https://www.nexusmods.com/stardewvalley/mods/{_nexusId}");
+        }
+        
+
         return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author, summary, categoryName, 
-            contentPackFor, dependsOn.ToList(), _nexusId, hasNexusInfo, downloads, endorsements);
+            contentPackFor, dependsOn.ToList(), urlInfo, shareableNexusInfo);
     }
 };

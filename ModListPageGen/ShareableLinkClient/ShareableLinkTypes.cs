@@ -2,7 +2,11 @@ namespace ModListPageGen.ShareableLinkClient;
 
 public record ContentPackFor(string Name, string UniqueId);
 
+public record UrlInfo(string SiteName, string Url);
+
 public record Category(string Name, int Count);
+
+public record NexusInfo(string Downloads, string Endorsements);
 
 public class DependencyListEntry
 {
@@ -21,10 +25,8 @@ public record ModListMod(
     ContentPackFor? ContentPackFor,
     List<string> DependsOn,
 
-    string NexusId,
-    bool HasNexusInfo,
-    string Downloads,
-    string Endorsements);
+    UrlInfo? UrlInfo,
+    NexusInfo? NexusInfo);
 
 public record ModList(
     string Title,
