@@ -128,13 +128,13 @@ public class ModEntry : Mod
                 if (depMod == null) continue;
 
                 var lowered = uniqueId.ToLower();
-                if (!tree.ContainsKey(lowered)) tree.Add(lowered, new DependencyListEntry { Name = depMod.Manifest.Name, CssClass = depMod.Manifest.Name.Replace(" ", "_"), DepsCount = 0 });
+                if (!tree.ContainsKey(lowered)) tree.Add(lowered, new DependencyListEntry { Name = depMod.Manifest.Name, DepsCount = 0, UniqueId = depMod.Manifest.UniqueID });
                 tree[lowered].DepsCount += 1;
             }
 
             if (dependsOn.Count == 0)
             {
-                if (!tree.ContainsKey("No Dependencies")) tree.Add("No Dependencies", new DependencyListEntry { Name = "No Dependencies", CssClass = "No_Deps", DepsCount = 0 });
+                if (!tree.ContainsKey("No Dependencies")) tree.Add("No Dependencies", new DependencyListEntry { Name = "No Dependencies", DepsCount = 0, UniqueId = "No.Dependencies"});
                 tree["No Dependencies"].DepsCount += 1;
             }
         }
