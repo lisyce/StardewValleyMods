@@ -31,18 +31,18 @@ public class ShareableLinkClient
         link = "";  // default value
         html = "";
 
-        var req = new ModPageData(list, theme);
-        var task = _httpClient.PostAsJsonAsync("mod-lists", req);
-        task.Wait();
-        
-        if (!task.IsCompletedSuccessfully || !task.Result.IsSuccessStatusCode)
-        {
-            _monitor.Log(task.Result?.ReasonPhrase);
-            return false;
-        }
-
         try
         {
+            var req = new ModPageData(list, theme);
+            var task = _httpClient.PostAsJsonAsync("mod-lists", req);
+            task.Wait();
+            
+            if (!task.IsCompletedSuccessfully || !task.Result.IsSuccessStatusCode)
+            {
+                _monitor.Log(task.Result?.ReasonPhrase);
+                return false;
+            }
+            
             var result = task.Result.Content.ReadFromJsonAsync<LinkResponse>();
             result.Wait();
             if (!result.IsCompletedSuccessfully || result.Result == null) return false;

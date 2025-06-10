@@ -36,7 +36,6 @@ public class ModInfo
             if (dep.IsRequired) dependsOn.Add(dep.UniqueID);
         }
 
-
         var summary = _nexusInfo?.Summary ?? _manifest.Description;
         var categoryName = _nexusInfo?.categoryName ?? "No Category";
 

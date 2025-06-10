@@ -10,6 +10,8 @@ public class ConsoleCommandsHelper
 
     public static readonly string ShareHtmlUsage =
         "Creates a shareable link for an existing json mod list and saves the resulting HTML to this mod's folder. Usage: mod_list_share \"<title>\", [theme]";
+
+    private static HashSet<string> ValidThemes = new(){ "default", "sakura", "stardrop", "coffee", "sage" };
     
     public static bool TryParseGenerateJsonArgs(string[] args, out string title, out string author, out bool skipNexus, out string error)
     {
@@ -33,9 +35,9 @@ public class ConsoleCommandsHelper
         
         if (!ArgUtility.TryGet(args, 0, out title, out error, allowBlank: false)) return false;
         if (!ArgUtility.TryGetOptional(args, 1, out theme, out error, "default", allowBlank: false)) return false;
-        if (!ThemeManager.IsValidTheme(theme))
+        if (!ValidThemes.Contains(theme))
         {
-            error = "Invalid color scheme name: " + theme;
+            error = "Invalid color scheme name: " + theme + ". Valid schemes are: " + string.Join(", ", ValidThemes);
             return false;
         }
 
