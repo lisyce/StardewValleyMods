@@ -91,7 +91,7 @@ public class ModEntry : Mod
 
         var timeCreated = DateTime.Now;
         var timeCreatedString = $"{timeCreated:O}";
-        var data = new ModList(title, author, result.Count, result, categories, dependencyList, timeCreatedString, Game1.version, Constants.ApiVersion.ToString());
+        var data = new ModList(title, author, result, categories, dependencyList, timeCreatedString, Game1.version, Constants.ApiVersion.ToString());
 
         // create dir if necessary
         Directory.CreateDirectory(Path.Combine(_helper.DirectoryPath, "GeneratedModListsJson"));

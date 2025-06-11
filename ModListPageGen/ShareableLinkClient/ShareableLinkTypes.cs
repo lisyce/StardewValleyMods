@@ -31,7 +31,6 @@ public record ModListMod(
 public record ModList(
     string Title,
     string Author,
-    int ModCount,
     List<ModListMod> Mods,
     List<Category> Categories,
     List<DependencyListEntry> DependencyList,
