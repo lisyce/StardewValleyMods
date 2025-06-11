@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace ModListPageGen.ShareableLinkClient;
 
 public record ContentPackFor(string Name, string UniqueId);
@@ -28,16 +30,43 @@ public record ModListMod(
     UrlInfo? UrlInfo,
     NexusInfo? NexusInfo);
 
-public record ModList(
-    string Title,
-    string Author,
-    List<ModListMod> Mods,
-    List<Category> Categories,
-    List<DependencyListEntry> DependencyList,
-    string DateCreated,
-    string GameVersion,
-    string SmapiVersion,
-    string GeneratorVersion = "2.0.0");
+public class ModList
+{
+    [JsonProperty("$schema")]
+    public string Schema => "https://modlists.barleyzp.com/schemas/modlist-v2.json";
+
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public List<ModListMod> Mods { get; set; }
+    public List<Category> Categories { get; set; }
+    public List<DependencyListEntry> DependencyList { get; set; }
+    public string DateCreated { get; set; }
+    public string GameVersion { get; set; }
+    public string SmapiVersion { get; set; }
+    public string GeneratorVersion { get; set; }
+    
+    public ModList(
+        string title,
+        string author,
+        List<ModListMod> mods,
+        List<Category> categories,
+        List<DependencyListEntry> dependencyList,
+        string dateCreated,
+        string gameVersion,
+        string smapiVersion,
+        string generatorVersion = "2.0.0")
+    {
+        Title = title;
+        Author = author;
+        Mods = mods;
+        Categories = categories;
+        DependencyList = dependencyList;
+        DateCreated = dateCreated;
+        GameVersion = gameVersion;
+        SmapiVersion = smapiVersion;
+        GeneratorVersion = generatorVersion;
+    }
+}
     
 public record ModPageData(
     ModList ModList,

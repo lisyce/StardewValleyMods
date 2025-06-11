@@ -21,7 +21,7 @@ public class ShareableLinkClient
     {
         _httpClient = new HttpClient()
         {
-            BaseAddress = new Uri("http://localhost:8080/"),
+            BaseAddress = new Uri("https://modlists.barleyzp.com/"),
         };
         _monitor = monitor;
     }
