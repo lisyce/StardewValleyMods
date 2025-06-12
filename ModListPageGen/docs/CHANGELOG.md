@@ -2,7 +2,7 @@
 
 ## v2.0.0
 
-Released 11 June 2025 for SMAPI 4.2.1 or later.
+Released 12 June 2025 for SMAPI 4.2.1 or later.
 
 > Previous versions of this mod are now *deprecated*. The web server may go out of support and the hosted CSS/JS files for existing
 > mod lists may be removed in favor of this new version, which is more stable and provides new features. This means your existing mod lists
