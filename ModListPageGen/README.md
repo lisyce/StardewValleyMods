@@ -13,7 +13,7 @@ You can generate a shareable HTML version through another console command or you
 
 1. Install this mod.
 2. Launch the game with SMAPI.
-3. Run the command `mod_list_json "title", "author"`.
+3. Run the command `mod_list_json "title" "author"`.
    - You can optionally append `true` to the end to skip calling the Nexus Mods API. If you do this, category information and other stats may be unavailable. For example: `mod_list_json "title" "author" true`
 4. The JSON mod list will be saved to the `GeneratedModListsJson` folder inside this mod's folder.
 
@@ -27,7 +27,7 @@ Shareable links will be valid for 4 weeks. Anyone with this link will be able to
 
 #### Option 1 (Console Command)
 
-Run the command `mod_list_share "title", "theme"`.
+Run the command `mod_list_share "title" "theme"`.
 
 - The list will be saved in the `GeneratedModListsHtml` folder inside this mod's folder.
 - A shareable link will be printed to the SMAPI console.
