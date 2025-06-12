@@ -30,7 +30,7 @@ public class PatchManager
             }
 
             iPatch.Patch(_harmony, _monitor);
-            _monitor.Log($"Applied harmony patches from {patcher.GetType()}", LogLevel.Debug);
+            _monitor.Log($"Applied harmony patches from {patcher.GetType()}");
         }
     }
 }

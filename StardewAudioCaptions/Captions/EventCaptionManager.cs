@@ -12,17 +12,18 @@ public class EventCaptionManager
 {
     private static readonly MethodInfo PlaySoundHandler =
         AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlaySound));
+
     private static readonly MethodInfo PlayMusicHandler =
         AccessTools.Method(typeof(Event.DefaultCommands), nameof(Event.DefaultCommands.PlayMusic));
-    
+
     private readonly IMonitor _monitor;
     private readonly CaptionManager _captionManager;
 
     private Event? _currentEvent;
-    
+
     private List<Caption> _currentCaptions = new();
     private int _currentIdx = 0;
-    
+
     public EventCaptionManager(IMonitor monitor, CaptionManager captionManager)
     {
         _monitor = monitor;
@@ -59,12 +60,17 @@ public class EventCaptionManager
 
         var timesPlayed = new Dictionary<string, int>();
         if (!ModEntry.EventCaptions.TryGetValue(@event.id, out var captionsForThisEvent)) return;
+
+        if (TryGetStartingMusic(out var startingMusicId))
+        {
+            TryAddCaptionForCue(startingMusicId, timesPlayed, captionsForThisEvent);
+        }
         
         foreach (var cmd in @event.eventCommands)
         {
             var args = ArgUtility.SplitBySpaceQuoteAware(cmd);
             var cmdName = ArgUtility.Get(args, 0);
-            
+
             if (!Event.TryGetEventCommandHandler(cmdName, out var handler)) continue;
 
             string cueId;
@@ -75,29 +81,8 @@ public class EventCaptionManager
             }
             else continue;
 
-            if (cueId == "samBand") cueId = ConvertSamBand();
-            
-            // count times this sound has played
-            timesPlayed.TryAdd(cueId, 0);
-            timesPlayed[cueId]++;
-            
-            _monitor.Log(cueId, LogLevel.Debug);
-
-            // find the appropriate caption
-            var total = 0;
-            foreach (var ec in captionsForThisEvent.Where(x => x.CueId == cueId))
-            {
-                total += ec.WhenCount;
-                var firstNApplies = ec.When == EventCaptionCondition.FirstN && timesPlayed[cueId] <= total;
-                var afterNApplies = ec.When == EventCaptionCondition.AfterN && timesPlayed[cueId] > total;
-                if (ec.When == EventCaptionCondition.Always || firstNApplies || afterNApplies)
-                {
-                    _currentCaptions.Add(new Caption(cueId, ec.CaptionId));
-                    break;
-                }
-            }
+            TryAddCaptionForCue(cueId, timesPlayed, captionsForThisEvent);
         }
-        
     }
 
     public void CleanupAfterEvent()
@@ -128,6 +113,41 @@ public class EventCaptionManager
         else
         {
             return "poppy";
+        }
+    }
+
+    private bool TryGetStartingMusic(out string music)
+    {
+        music = "";
+        if (_currentEvent == null) return false;
+
+        return ArgUtility.TryGet(_currentEvent.eventCommands, 0, out music, out var error, allowBlank: true,
+            "string musicId");
+    }
+
+    private void TryAddCaptionForCue(string cueId, Dictionary<string, int> timesPlayed, List<EventCaption> captionsForThisEvent)
+    {
+        if (cueId == "samBand") cueId = ConvertSamBand();
+
+        // count times this sound has played
+        timesPlayed.TryAdd(cueId, 0);
+        timesPlayed[cueId]++;
+
+        _monitor.Log(cueId, LogLevel.Debug);
+
+        // find the appropriate caption
+        var total = 0;
+        foreach (var ec in captionsForThisEvent.Where(x => x.CueId == cueId))
+        {
+            _monitor.Log($"Adding caption with id {ec.CaptionId} for cue {cueId}", LogLevel.Debug);
+            total += ec.WhenCount;
+            var firstNApplies = ec.When == EventCaptionCondition.FirstN && timesPlayed[cueId] <= total;
+            var afterNApplies = ec.When == EventCaptionCondition.AfterN && timesPlayed[cueId] > total;
+            if (ec.When == EventCaptionCondition.Always || firstNApplies || afterNApplies)
+            {
+                _currentCaptions.Add(new Caption(cueId, ec.CaptionId));
+                break;
+            }
         }
     }
 }

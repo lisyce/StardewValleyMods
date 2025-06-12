@@ -126,6 +126,7 @@
     "world.trappedProf": {
         "Priority": 5
     },
+    "world.camera": {},
     "critters.birdFlap": {
         "Priority": -5
     },
@@ -456,5 +457,25 @@
     "events.samBand_shimmeringbastion": {},
     "events.9581348_stadium": {},
     "events.9581348_wild": {},
-    "events.520702_peep": {}
+    "events.520702_peep": {},
+    "events.423502_piano": {},
+    "events.980558_slime": {},
+    "events.3918602_acoustic": {},
+    "events.3918603_click": {},
+    "events.3918603_song": {},
+    "events.4325434_ding": {},
+    "events.4325434_open": {},
+    "events.9333220_slime": {},
+    "events.16253595_slosh": {},
+    "events.54_punch": {},
+    "events.318560_clank": {},
+    "events.318560_slime": {},
+    "events.318560_peep": {},
+    "events.12_jar": {},
+    "events.12_lid": {},
+    "events.15_knock": {},
+    "events.15_ambient": {},
+    "events.15_switch": {},
+    "events.917409_music": {},
+    "events.boatEngine": {}
 }

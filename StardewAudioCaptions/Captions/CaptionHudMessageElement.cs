@@ -35,7 +35,7 @@ public class CaptionHudMessageElement
         var cuePlaying = _cue.IsPlaying && !_cue.IsPaused;
         if (VisibleLongEnough() && (!cuePlaying || ExceededMaxDuration()))
         {
-            Transparency -= 0.03f;
+            Transparency -= 0.1f;
             if (Transparency < 0f)
             {
                 return true;

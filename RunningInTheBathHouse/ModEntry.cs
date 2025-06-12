@@ -1,9 +1,8 @@
 ﻿using StardewModdingAPI;
-using StardewModdingAPI.Events;
 using StardewValley;
 using HarmonyLib;
 
-namespace YourProjectName
+namespace RunningInTheBathHouse
 {
     internal sealed class ModEntry : Mod
     {

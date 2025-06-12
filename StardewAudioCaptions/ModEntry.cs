@@ -262,6 +262,7 @@ public class ModEntry : Mod
         
         ModCaptionManager.RegisterDefaultCaption(new Caption("monkey1", "critters.monkey"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("parrot_squawk", "critters.parrot"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("parrot", "critters.parrot"));
         
         ModCaptionManager.RegisterDefaultCaption(new Caption("doorClose", "interaction.doorClose"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("stairsdown", "interaction.footstepsDescend"));
@@ -288,6 +289,7 @@ public class ModEntry : Mod
         ModCaptionManager.RegisterDefaultCaption(new Caption("bugLevelLoop", "ambient.bugLoop"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("wind", "ambient.wind"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("busDriveOff", "world.busDriveOff"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("cameraNoise", "world.camera"));
         
         ModCaptionManager.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));

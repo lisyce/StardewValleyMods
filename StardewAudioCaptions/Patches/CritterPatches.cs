@@ -77,12 +77,6 @@ public class CritterPatches : ICaptionPatch
             monitor,
             AccessTools.Method(typeof(ParrotPlatform.Parrot), nameof(ParrotPlatform.Parrot.Update)),
             new Caption("batFlap", "critters.birdFlap"));
-        
-        PatchGenerator.GeneratePatchPair(
-            harmony,
-            monitor,
-            AccessTools.Method(typeof(ParrotPlatform), nameof(ParrotPlatform.StartDeparture)),
-            new Caption("parrot", "critters.parrot"));
                 
         PatchGenerator.GeneratePatchPair(
             harmony,

@@ -130,5 +130,128 @@
       "CueId": "shadowpeep",
       "CaptionId": "events.520702_peep"
     }
+  ],
+  "423502": [
+    {
+      "CueId": "elliottPiano",
+      "CaptionId": "events.423502_piano"
+    }
+  ],
+  "980558": [
+    {
+      "CueId": "slimeHit",
+      "CaptionId": "events.980558_slime"
+    },
+    {
+      "CueId": "fireball",
+      "CaptionId": "interaction.fire"
+    }
+  ],
+  "3918602": [
+    {
+      "CueId": "sam_acoustic2",
+      "CaptionId": "events.3918602_acoustic"
+    }
+  ],
+  "3918603": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.3918603_click"
+    },
+    {
+      "CueId": "sam_acoustic1",
+      "CaptionId": "events.3918603_song"
+    }
+  ],
+  "4325434": [
+    {
+      "CueId": "crystal",
+      "CaptionId": "events.4325434_ding"
+    },
+    {
+      "CueId": "openChest",
+      "CaptionId": "events.4325434_open"
+    }
+  ],
+  "9333220": [
+    {
+      "CueId": "slimeHit",
+      "CaptionId": "events.9333220_slime"
+    }
+  ],
+  "16253595": [
+    {
+      "CueId": "quickSlosh",
+      "CaptionId": "events.16253595_slosh"
+    }
+  ],
+  "14": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.3918603_click"
+    }
+  ],
+  "54": [
+    {
+      "CueId": "clubSmash",
+      "CaptionId": "events.54_punch"
+    }
+  ],
+  "318560": [
+    {
+      "CueId": "clank",
+      "CaptionId": "events.318560_clank"
+    },
+    {
+      "CueId": "slimeHit",
+      "CaptionId": "events.318560_slime"
+    },
+    {
+      "CueId": "shadowpeep",
+      "CaptionId": "events.318560_peep"
+    }
+  ],
+  "12": [
+    {
+      "CueId": "fishingRodBend",
+      "CaptionId": "events.12_jar"
+    },
+    {
+      "CueId": "coin",
+      "CaptionId": "events.12_lid"
+    }
+  ],
+  "15": [
+    {
+      "CueId": "Hospital_Ambient",
+      "CaptionId": "events.15_ambient"
+    },
+    {
+      "CueId": "woodyStep",
+      "CaptionId": "events.15_knock"
+    },
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.15_switch"
+    }
+  ],
+  "917409": [
+    {
+      "CueId": "EmilyDance",
+      "CaptionId": "events.917409_music"
+    }
+  ],
+  "IslandDepart": [
+    {
+      "CueId": "furnace",
+      "CaptionId": "events.boatEngine"
+    }
+  ],
+  "6497423": [
+    {
+      "CueId": "pullItemFromWater",
+      "CaptionId": "world.fishSplash"
+    }
   ]
+  // left off on LeahHouse
 }

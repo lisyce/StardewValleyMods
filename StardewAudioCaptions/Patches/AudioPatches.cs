@@ -1,6 +1,7 @@
 using HarmonyLib;
 using Microsoft.Xna.Framework.Audio;
 using StardewValley;
+using StardewValley.GameData;
 
 namespace StardewAudioCaptions.Patches;
 
@@ -37,6 +38,11 @@ public class AudioPatches
             original: AccessTools.Method(typeof(Event), nameof(Event.ReplaceAllCommands)),
             postfix: new HarmonyMethod(typeof(AudioPatches), nameof(EventReplaceAllCommandsPostfix))
         );
+        
+        harmony.Patch(
+            original: AccessTools.Method(typeof(Game1), nameof(Game1.changeMusicTrack)),
+            postfix: new HarmonyMethod(typeof(AudioPatches), nameof(ChangeMusicPrefix))
+        );
     }
 
     private static void PlayPostfix(Cue __instance)
@@ -46,6 +52,12 @@ public class AudioPatches
 
     private static void EventPlaySoundPrefix()
     {
+        ModEntry.EventCaptionManager.Value.BeforePlaySound();
+    }
+
+    private static void ChangeMusicPrefix(MusicContext music_context)
+    {
+        if (music_context != MusicContext.Event) return;
         ModEntry.EventCaptionManager.Value.BeforePlaySound();
     }
 
