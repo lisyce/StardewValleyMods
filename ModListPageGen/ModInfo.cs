@@ -70,12 +70,12 @@ public class ModInfo
         // validate manifest fields
         if (_manifest.Author == null)
         {
-            monitor.Log($"{_manifest.UniqueID} has no \"Author\" field specified in their manifest.json", LogLevel.Debug);
+            monitor.Log($"{_manifest.Name} ({_manifest.UniqueID}) has no \"Author\" field specified in their manifest.json", LogLevel.Debug);
         }
         
         if (summary == null)
         {
-            monitor.Log($"{_manifest.UniqueID} has no \"Description\" field specified in their manifest.json", LogLevel.Debug);
+            monitor.Log($"{_manifest.Name} ({_manifest.UniqueID}) has no \"Description\" field specified in their manifest.json", LogLevel.Debug);
         }
 
         return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author ?? "(No Author Provided)", summary ?? "(No Summary Provided)", categoryName, 
