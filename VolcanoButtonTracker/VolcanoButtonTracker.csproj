@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableHarmony>true</EnableHarmony>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
+      <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Version>1.0.0</Version>
+        <Name>Volcano Button Tracker</Name>
+        <Authors>BarleyZP</Authors>
+        <Description>Shows a popup message to let you know how many more buttons you need to press to advance to the next level in the Volcano Dungeon.</Description>
+        <UniqueId>BarleyZP.VolcanoButtonTracker</UniqueId>
+
+        <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
+        <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
+        <UpdateKeys></UpdateKeys>
+    </PropertyGroup>
+
+</Project>

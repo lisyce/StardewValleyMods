@@ -1,0 +1,18 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.VolcanoButtonTracker",
+  "Name": "Volcano Button Tracker",
+  "Author": "BarleyZP",
+  "Version": "1.0.0-Debug",
+  "Description": "Shows a popup message to let you know how many more buttons you need to press to advance to the next level in the Volcano Dungeon.",
+  "MinimumApiVersion": "4.2",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "VolcanoButtonTracker.dll"
+}

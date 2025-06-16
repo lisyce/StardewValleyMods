@@ -1,0 +1,6 @@
+{
+  "NoButtons": "This level has no buttons.",
+  "NButtons": "This level has {{num}} buttons remaining...",
+  "OneButton": "This level has 1 button remaining...",
+  "GateOpen": "The gate has opened!"
+}
