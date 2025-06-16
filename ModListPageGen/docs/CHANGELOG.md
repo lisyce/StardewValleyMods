@@ -1,5 +1,11 @@
 ﻿# Changelog
 
+## v2.0.1
+
+Released 16 June 2025 for SMAPI 4.2.1 or later.
+
+- Added fallbacks for mods with no "Author" or "Description" in their manifest so the JSON would still be valid.
+
 ## v2.0.0
 
 Released 12 June 2025 for SMAPI 4.2.1 or later.
