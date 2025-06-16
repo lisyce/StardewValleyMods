@@ -22,7 +22,7 @@ public class ModInfo
         _nexusId = nexusId;
     }
 
-    public ModListMod ToModListMod(IModHelper helper)
+    public ModListMod ToModListMod(IModHelper helper, IMonitor monitor)
     {
         // find everything this mod depends on
         HashSet<string> dependsOn = new();
@@ -67,8 +67,18 @@ public class ModInfo
             urlInfo = new UrlInfo("GitHub", $"https://github.com/{githubKey}");
         }
         
+        // validate manifest fields
+        if (_manifest.Author == null)
+        {
+            monitor.Log($"{_manifest.UniqueID} has no \"Author\" field specified in their manifest.json", LogLevel.Debug);
+        }
+        
+        if (summary == null)
+        {
+            monitor.Log($"{_manifest.UniqueID} has no \"Description\" field specified in their manifest.json", LogLevel.Debug);
+        }
 
-        return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author, summary, categoryName, 
+        return new ModListMod(_manifest.UniqueID, _manifest.Name, _manifest.Author ?? "(No Author Provided)", summary ?? "(No Summary Provided)", categoryName, 
             contentPackFor, dependsOn.ToList(), urlInfo, shareableNexusInfo);
     }
 

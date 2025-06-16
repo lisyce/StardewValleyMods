@@ -10,7 +10,7 @@
   "UniqueID": "BarleyZP.ShareableModLists",
   "Name": "Shareable Mod List Generator",
   "Author": "BarleyZP",
-  "Version": "2.0.0",
+  "Version": "2.0.1",
   "Description": "Provides console commands to generate an HTML-formmated mod list and shareable links based on the mods SMAPI has currently loaded.",
   "MinimumApiVersion": "4.2.1",
   "MinimumGameVersion": "1.6.15",

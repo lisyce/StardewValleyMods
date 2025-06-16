@@ -7,7 +7,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <Version>2.0.0</Version>
+        <Version>2.0.1</Version>
         <MinimumApiVersion>4.2.1</MinimumApiVersion>
         <MinimumGameVersion>1.6.15</MinimumGameVersion>
         <Name>Shareable Mod List Generator</Name>

@@ -82,7 +82,7 @@ public class ModEntry : Mod
         
         var client = new NexusApiClient.NexusApiClient(Monitor);
         result = GetMods(_helper.ModRegistry.GetAll(), client, skipNexus).OrderBy(x => x.Name)
-            .Select(x => x.ToModListMod(_helper)).ToList();
+            .Select(x => x.ToModListMod(_helper, Monitor)).ToList();
 
         var categories = result.GroupBy(x => x.CategoryName)
             .Select(x => new Category(x.First().CategoryName, x.Count())).ToList();
@@ -208,7 +208,7 @@ public class ModEntry : Mod
 
         if (modsWithInvalidIds.Any())
         {
-            Monitor.Log($"{modsWithInvalidIds.Count} mods have invalid Nexus update keys. Your list will still be generated!", LogLevel.Info);
+            Monitor.Log($"{modsWithInvalidIds.Count} mods have invalid Nexus update keys. Your list will still be generated!", LogLevel.Warn);
             foreach (var (name, uniqueId, nexusId) in modsWithInvalidIds)
             {
                 Monitor.Log($"{name} ({uniqueId}): \"{nexusId}\".", LogLevel.Debug);    
