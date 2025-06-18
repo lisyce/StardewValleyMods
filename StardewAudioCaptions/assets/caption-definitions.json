@@ -127,6 +127,8 @@
         "Priority": 5
     },
     "world.camera": {},
+    "world.keyboard": {},
+    "world.mouse": {},
     "critters.birdFlap": {
         "Priority": -5
     },
@@ -582,6 +584,33 @@
         "Priority": 5
     },
     "events.100_pop": {
+        "Priority": 5
+    },
+    "events.9_zap": {
+        "Priority": 5
+    },
+    "events.10_hinge": {
+        "Priority": 5
+    },
+    "events.10_robot": {
+        "Priority": 5
+    },
+    "events.3_clatter": {
+        "Priority": 5
+    },
+    "events.58_aerobics": {
+        "Priority": 5
+    },
+    "events.6184644_whistle": {
+        "Priority": 5
+    },
+    "events.2123343_grunt": {
+        "Priority": 5
+    },
+    "events.2123343_sniff": {
+        "Priority": 5
+    },
+    "events.2123343_rustle": {
         "Priority": 5
     }
 }

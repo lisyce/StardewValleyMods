@@ -134,6 +134,8 @@
   "world.busDriveOff.caption": "Bus engine rumbling",
   "world.trappedProf.caption": "Knocking",
   "world.camera.caption": "Camera shutter clicks",
+  "world.keyboard.caption": "Keyboard typing",
+  "world.mouse.caption": "Mouse clicks",
 
   "nightEvents.earthquake.caption": "Rumbling",
   "nightEvents.raccoon0.caption": "Wind blowing",
@@ -318,5 +320,16 @@
   "events.911526_dog.caption": "Dog whining",
   "events.44_rock.caption": "Rock music playing",
   "events.46_crack.caption": "Egg cracks",
-  "events.100_pop.caption": "Popping"
+  "events.100_pop.caption": "Popping",
+  "events.9_zap.caption": "Electricity zaps",
+  "events.10_hinge.caption": "Hinges creak",
+  "events.10_robot.caption": "Robot booting up",
+  "events.2794460_keyboard.caption": "Keyboard typing",
+  "events.2794460_mouse.caption": "Mouse clicks",
+  "events.3_clatter.caption": "Pieces clatter",
+  "events.58_aerobics.caption": "Dance music playing",
+  "events.6184644_whistle.caption": "Whistle blows",
+  "events.2123343_grunt.caption": "Grunting",
+  "events.2123343_sniff.caption": "Bear sniffing",
+  "events.2123343_rustle.caption": "Fabric rustling"
 }

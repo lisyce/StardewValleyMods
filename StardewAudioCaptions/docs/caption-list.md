@@ -1,6 +1,6 @@
 # List of Captions
 
-Stardew Audio Captions currently features 244 captions.
+Stardew Audio Captions currently features 289 captions.
 
 ## Interactions
 
@@ -109,17 +109,20 @@ Stardew Audio Captions currently features 244 captions.
 
 ## World
 
-21 captions in this category
+24 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
 | `world.bombExplode` | Bomb explodes |
 | `world.busDriveOff` | Bus engine rumbling |
+| `world.camera` | Camera shutter clicks |
 | `world.crystalShatter` | Crystal shatters |
 | `world.elevator` | Elevator dings |
 | `world.fishSplash` | Fish splashes |
 | `world.fuseHiss` | Fuse hissing |
 | `world.grassRustle` | Grass rustles |
+| `world.robinHammer` | Hammer thuds |
+| `world.keyboard` | Keyboard typing |
 | `world.trappedProf` | Knocking |
 | `world.ladderAppear` | Ladder appears |
 | `world.lavaSlosh` | Lava sloshes |
@@ -127,9 +130,9 @@ Stardew Audio Captions currently features 244 captions.
 | `world.machineFinish` | Machine finishes |
 | `world.machineProcessing` | Machine working |
 | `world.moss` | Moss rustles |
+| `world.mouse` | Mouse clicks |
 | `world.panSpot` | Panning spot appears |
 | `world.parrotExpressLand` | Parrot Express lands |
-| `world.robinHammer` | Robin's hammer thuds |
 | `world.rooster` | Rooster crows |
 | `world.treeCrack` | Tree cracks |
 | `world.waterSlosh` | Water sloshes |
@@ -316,23 +319,65 @@ Stardew Audio Captions currently features 244 captions.
 
 ## Events
 
-16 captions in this category
+58 captions in this category
 
 | Internal Id | English Caption |
 |-|-|
+| `events.40_ale` | Ale pouring |
+| `events.16253595_slosh` | Bait sloshes |
 | `events.20_throw` | Ball thrown |
+| `events.2123343_sniff` | Bear sniffing |
 | `events.samBand_shimmeringbastion` | Bluegrass music playing |
 | `events.3131209_slimeHit` | Bug meat squelches |
+| `events.3918603_click` | Button clicks |
+| `events.584059_beep` | Computer beeps |
 | `events.9581348_stadium` | Crowd chanting |
 | `events.9581348_wild` | Crowd cheering wildly |
+| `events.917409_music` | Dance music playing |
+| `events.58_aerobics` | Dance music playing |
 | `events.6963327_dirtyHit` | Digging |
+| `events.911526_dog` | Dog whining |
+| `events.46_crack` | Egg cracks |
+| `events.9_zap` | Electricity zaps |
 | `events.samBand_honkytonky` | Energetic dance music playing |
+| `events.boatEngine` | Engine roars |
+| `events.2123343_rustle` | Fabric rustling |
+| `events.2_duet` | Flute and harp playing |
+| `events.9333220_slime` | Frog splats |
+| `events.2123343_grunt` | Grunting |
+| `events.3918602_acoustic` | Guitar playing |
+| `events.10_hinge` | Hinges creak |
+| `events.12_jar` | Jar squeaks |
 | `events.missingBundleComplete_wand` | Junimo teleports |
+| `events.2794460_keyboard` | Keyboard typing |
+| `events.15_knock` | Knocking |
 | `events.288847_latch` | Latch clicks |
+| `events.12_lid` | Lid pops |
+| `events.15_switch` | Light switch clicks |
+| `events.15_ambient` | Machine whirring |
+| `events.384883_clank` | Metal clanking |
+| `events.318560_clank` | Metal clanks |
+| `events.2794460_mouse` | Mouse clicks |
 | `events.288847_musicBox` | Music box playing |
+| `events.318560_peep` | Mysterious whistling |
+| `events.384883_oil` | Oil sloshing |
+| `events.4325434_open` | Oven door creaks |
+| `events.51_phone` | Phone clicks |
+| `events.423502_piano` | Piano playing |
+| `events.3_clatter` | Pieces clatter |
 | `events.samBand_poppy` | Pop music playing |
+| `events.100_pop` | Popping |
 | `events.3910974_woodWhack` | Present opened |
+| `events.54_punch` | Punch smacks |
+| `events.10_robot` | Robot booting up |
 | `events.samBand_heavy` | Rock music playing |
+| `events.44_rock` | Rock music playing |
+| `events.980558_slime` | Sauce sloshes |
 | `events.7771191_pullItem` | Sea monster splashes |
 | `events.520702_peep` | Shadow guy whistles |
+| `events.318560_slime` | Squelching |
+| `events.4325434_ding` | Timer dings |
 | `events.29_cast` | Umbrella opens |
+| `events.3918603_song` | Upbeat music playing |
+| `events.911526_violin` | Violin playing |
+| `events.6184644_whistle` | Whistle blows |

@@ -290,7 +290,9 @@ public class ModEntry : Mod
         ModCaptionManager.RegisterDefaultCaption(new Caption("wind", "ambient.wind"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("busDriveOff", "world.busDriveOff"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("cameraNoise", "world.camera"));
-        
+        ModCaptionManager.RegisterDefaultCaption(new Caption("keyboardTyping", "world.keyboard"));
+        ModCaptionManager.RegisterDefaultCaption(new Caption("mouseClick", "world.mouse"));
+
         ModCaptionManager.RegisterDefaultCaption(new Caption("junimoMeep1", "critters.junimo"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("seagulls", "critters.seagull"));
         ModCaptionManager.RegisterDefaultCaption(new Caption("SpringBirds", "critters.birdChirp"));

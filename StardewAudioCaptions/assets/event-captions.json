@@ -377,5 +377,140 @@
       "CaptionId": "interaction.volcanoBtn"
     }
   ],
-  // left off on ScienceHouse
+  "9": [
+    {
+      "CueId": "woodyStep",
+      "CaptionId": "events.15_knock"
+    },
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.3918603_click"
+    },
+    {
+      "CueId": "debuffHit",
+      "CaptionId": "events.9_zap"
+    }
+  ],
+  "10": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.10_hinge"
+    },
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.3918603_click"
+    },
+    {
+      "CueId": "robotSoundEffects",
+      "CaptionId": "events.10_robot"
+    },
+    {
+      "CueId": "robotBLASTOFF",
+      "CaptionId": "events.boatEngine"
+    }
+  ],
+  "2794460": [
+    {
+      "CueId": "Pickup_Coin15",
+      "CaptionId": "events.584059_beep"
+    }
+  ],
+  "27": [
+    {
+      "CueId": "openChest",
+      "CaptionId": "interaction.doorOpen"
+    },
+    {
+      "CueId": "woodyStep",
+      "CaptionId": "interaction.footstepsDescend"
+    },
+    {
+      "CueId": "flameSpell",
+      "CaptionId": "nightEvents.witchSpell"
+    },
+    {
+      "CueId": "debuffSpell",
+      "CaptionId": "nightEvents.witchSpell"
+    }
+  ],
+  "3": [
+    {
+      "CueId": "seeds",
+      "CaptionId": "events.3_clatter"
+    }
+  ],
+  "58": [
+    {
+      "CueId": "aerobics",
+      "CaptionId": "events.58_aerobics"
+    }
+  ],
+  "691039": [
+    {
+      "CueId": "flameSpellHit",
+      "CaptionId": "interaction.fire"
+    }
+  ],
+  "719926": [
+    {
+      "CueId": "sipTea",
+      "CaptionId": "player.drinking"
+    }
+  ],
+  "2481135": [
+    {
+      "CueId": "dogWhining",
+      "CaptionId": "events.911526_dog"
+    }
+  ],
+  "502969": [
+    {
+      "CueId": "dirtyHit",
+      "CaptionId": "interaction.trashCan"
+    }
+  ],
+  "6184644": [
+    {
+      "CueId": "whistle",
+      "CaptionId": "events.6184644_whistle"
+    }
+  ],
+  "15389722": [
+    {
+      "CueId": "crafting",
+      "CaptionId": "world.robinHammer"
+    }
+  ],
+  "963313": [
+    {
+      "CueId": "glug",
+      "CaptionId": "player.drinking"
+    }
+  ],
+  "418172": [
+    {
+      "CueId": "fireball",
+      "CaptionId": "interaction.fire"
+    }
+  ],
+  "2123343": [
+    {
+      "CueId": "grunt",
+      "CaptionId": "events.2123343_grunt"
+    },
+    {
+      "CueId": "rabbit",
+      "CaptionId": "events.2123343_sniff"
+    },
+    {
+      "CueId": "grassyStep",
+      "CaptionId": "events.2123343_rustle"
+    }
+  ],
+  "2120303": [
+    {
+      "CueId": "rabbit",
+      "CaptionId": "events.2123343_sniff"
+    }
+  ]
 }

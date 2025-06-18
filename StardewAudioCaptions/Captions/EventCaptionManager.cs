@@ -21,7 +21,7 @@ public class EventCaptionManager
 
     private Event? _currentEvent;
 
-    private List<Caption> _currentCaptions = new();
+    private List<Caption?> _currentCaptions = new();
     private int _currentIdx = 0;
 
     public EventCaptionManager(IMonitor monitor, CaptionManager captionManager)
@@ -47,7 +47,14 @@ public class EventCaptionManager
         if (_currentEvent == null || _currentIdx >= _currentCaptions.Count) return;
 
         var caption = _currentCaptions[_currentIdx];
-        _captionManager.RegisterCaptionForNextCue(caption);
+        if (caption != null)
+        {
+#if DEBUG
+            _monitor.Log($"Registered {caption.CaptionId} for cue {caption.CueId}", LogLevel.Debug);
+#endif
+            _captionManager.RegisterCaptionForNextCue(caption);
+        }
+        
         _currentIdx++;
     }
 
@@ -57,7 +64,7 @@ public class EventCaptionManager
         _monitor.Log("preparing for event " + @event.id, LogLevel.Debug);
 #endif
         _currentEvent = @event;
-        _currentCaptions = new List<Caption>();
+        _currentCaptions = new List<Caption?>();
         _currentIdx = 0;
 
         var timesPlayed = new Dictionary<string, int>();
@@ -136,9 +143,9 @@ public class EventCaptionManager
         // count times this sound has played
         timesPlayed.TryAdd(cueId, 0);
         timesPlayed[cueId]++;
-
+#if DEBUG
         _monitor.Log(cueId, LogLevel.Debug);
-
+#endif
         // find the appropriate caption
         var total = 0;
         foreach (var ec in captionsForThisEvent.Where(x => x.CueId == cueId))
@@ -152,8 +159,10 @@ public class EventCaptionManager
             if (ec.When == EventCaptionCondition.Always || firstNApplies || afterNApplies)
             {
                 _currentCaptions.Add(new Caption(cueId, ec.CaptionId));
-                break;
+                return;
             }
         }
+        
+        _currentCaptions.Add(null);
     }
 }

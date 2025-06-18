@@ -61,7 +61,6 @@ public class CaptionManager
             {
                 UnregisterCaptionForNextCue(caption);
             }
-
         }
         else if (_defaultCueCaptions.TryGetValue(cueId, out var caption))
         {
