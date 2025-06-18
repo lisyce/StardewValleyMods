@@ -312,5 +312,11 @@
   "events.584059_beep.caption": "Computer beeps",
   "events.2_duet.caption": "Flute and harp playing",
   "events.384883_clank.caption": "Metal clanking",
-  "events.384883_oil.caption": "Oil sloshing"
+  "events.384883_oil.caption": "Oil sloshing",
+  "events.40_ale.caption": "Ale pouring",
+  "events.911526_violin.caption": "Violin playing",
+  "events.911526_dog.caption": "Dog whining",
+  "events.44_rock.caption": "Rock music playing",
+  "events.46_crack.caption": "Egg cracks",
+  "events.100_pop.caption": "Popping"
 }

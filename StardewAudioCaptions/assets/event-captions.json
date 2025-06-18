@@ -328,5 +328,54 @@
       "CueId": "furnace",
       "CaptionId": "interaction.fire"
     }
-  ]
+  ],
+  "40": [
+    {
+      "CueId": "Milking",
+      "CaptionId": "events.40_ale"
+    }
+  ],
+  "97": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.3918603_click"
+    }
+  ],
+  "911526": [
+    {
+      "CueId": "gusviolin",
+      "CaptionId": "events.911526_violin"
+    },
+    {
+      "CueId": "dogWhining",
+      "CaptionId": "events.911526_dog"
+    }
+  ],
+  "44": [
+    {
+      "CueId": "sampractice",
+      "CaptionId": "events.44_rock"
+    }
+  ],
+  "46": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.288847_latch"
+    },
+    {
+      "CueId": "slimedead",
+      "CaptionId": "events.46_crack"
+    }
+  ],
+  "100": [
+    {
+      "CueId": "cowboy_monsterhit",
+      "CaptionId": "events.100_pop"
+    },
+    {
+      "CueId": "openBox",
+      "CaptionId": "interaction.volcanoBtn"
+    }
+  ],
+  // left off on ScienceHouse
 }

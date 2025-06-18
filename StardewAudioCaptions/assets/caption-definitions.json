@@ -565,5 +565,23 @@
     },
     "events.384883_oil": {
         "Priority": 5
+    },
+    "events.40_ale": {
+        "Priority": 5
+    },
+    "events.911526_violin": {
+        "Priority": 5
+    },
+    "events.911526_dog": {
+        "Priority": 5
+    },
+    "events.44_rock": {
+        "Priority": 5
+    },
+    "events.46_crack": {
+        "Priority": 5
+    },
+    "events.100_pop": {
+        "Priority": 5
     }
 }

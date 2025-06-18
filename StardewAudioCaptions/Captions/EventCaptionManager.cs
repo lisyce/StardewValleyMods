@@ -53,7 +53,9 @@ public class EventCaptionManager
 
     public void PrepareForEvent(Event @event)
     {
-        _monitor.Log("preparing for event " + @event.id);
+#if DEBUG
+        _monitor.Log("preparing for event " + @event.id, LogLevel.Debug);
+#endif
         _currentEvent = @event;
         _currentCaptions = new List<Caption>();
         _currentIdx = 0;
@@ -87,7 +89,9 @@ public class EventCaptionManager
 
     public void CleanupAfterEvent()
     {
-        _monitor.Log("cleanup after event");
+#if DEBUG
+        _monitor.Log("cleanup after event", LogLevel.Debug);
+#endif
         _currentEvent = null;
     }
 
@@ -139,7 +143,9 @@ public class EventCaptionManager
         var total = 0;
         foreach (var ec in captionsForThisEvent.Where(x => x.CueId == cueId))
         {
+#if DEBUG
             _monitor.Log($"Adding caption with id {ec.CaptionId} for cue {cueId}", LogLevel.Debug);
+#endif
             total += ec.WhenCount;
             var firstNApplies = ec.When == EventCaptionCondition.FirstN && timesPlayed[cueId] <= total;
             var afterNApplies = ec.When == EventCaptionCondition.AfterN && timesPlayed[cueId] > total;
