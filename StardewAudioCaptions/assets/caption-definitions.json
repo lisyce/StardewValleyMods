@@ -442,40 +442,128 @@
     "fishing.troutTag": {
         "Priority": 5
     },
-    "events.missingBundleComplete_wand": {},
-    "events.3910974_woodWhack": {},
-    "events.6963327_dirtyHit": {},
-    "events.20_throw": {},
-    "events.288847_latch": {},
-    "events.288847_musicBox": {},
-    "events.29_cast": {},
-    "events.7771191_pullItem": {},
-    "events.3131209_slimeHit": {},
-    "events.samBand_poppy": {},
-    "events.samBand_heavy": {},
-    "events.samBand_honkytonky": {},
-    "events.samBand_shimmeringbastion": {},
-    "events.9581348_stadium": {},
-    "events.9581348_wild": {},
-    "events.520702_peep": {},
-    "events.423502_piano": {},
-    "events.980558_slime": {},
-    "events.3918602_acoustic": {},
-    "events.3918603_click": {},
-    "events.3918603_song": {},
-    "events.4325434_ding": {},
-    "events.4325434_open": {},
-    "events.9333220_slime": {},
-    "events.16253595_slosh": {},
-    "events.54_punch": {},
-    "events.318560_clank": {},
-    "events.318560_slime": {},
-    "events.318560_peep": {},
-    "events.12_jar": {},
-    "events.12_lid": {},
-    "events.15_knock": {},
-    "events.15_ambient": {},
-    "events.15_switch": {},
-    "events.917409_music": {},
-    "events.boatEngine": {}
+    
+    "events.missingBundleComplete_wand": {
+        "Priority": 5
+    },
+    "events.3910974_woodWhack": {
+        "Priority": 5
+    },
+    "events.6963327_dirtyHit": {
+        "Priority": 5
+    },
+    "events.20_throw": {
+        "Priority": 5
+    },
+    "events.288847_latch": {
+        "Priority": 5
+    },
+    "events.288847_musicBox": {
+        "Priority": 5
+    },
+    "events.29_cast": {
+        "Priority": 5
+    },
+    "events.7771191_pullItem": {
+        "Priority": 5
+    },
+    "events.3131209_slimeHit": {
+        "Priority": 5
+    },
+    "events.samBand_poppy": {
+        "Priority": 5
+    },
+    "events.samBand_heavy": {
+        "Priority": 5
+    },
+    "events.samBand_honkytonky": {
+        "Priority": 5
+    },
+    "events.samBand_shimmeringbastion": {
+        "Priority": 5
+    },
+    "events.9581348_stadium": {
+        "Priority": 5
+    },
+    "events.9581348_wild": {
+        "Priority": 5
+    },
+    "events.520702_peep": {
+        "Priority": 5
+    },
+    "events.423502_piano": {
+        "Priority": 5
+    },
+    "events.980558_slime": {
+        "Priority": 5
+    },
+    "events.3918602_acoustic": {
+        "Priority": 5
+    },
+    "events.3918603_click": {
+        "Priority": 5
+    },
+    "events.3918603_song": {
+        "Priority": 5
+    },
+    "events.4325434_ding": {
+        "Priority": 5
+    },
+    "events.4325434_open": {
+        "Priority": 5
+    },
+    "events.9333220_slime": {
+        "Priority": 5
+    },
+    "events.16253595_slosh": {
+        "Priority": 5
+    },
+    "events.54_punch": {
+        "Priority": 5
+    },
+    "events.318560_clank": {
+        "Priority": 5
+    },
+    "events.318560_slime": {
+        "Priority": 5
+    },
+    "events.318560_peep": {
+        "Priority": 5
+    },
+    "events.12_jar": {
+        "Priority": 5
+    },
+    "events.12_lid": {
+        "Priority": 5
+    },
+    "events.15_knock": {
+        "Priority": 5
+    },
+    "events.15_ambient": {
+        "Priority": 5
+    },
+    "events.15_switch": {
+        "Priority": 5
+    },
+    "events.917409_music": {
+        "Priority": 5
+    },
+    "events.boatEngine": {
+        "Priority": 5
+    },
+    "events.51_phone": {
+        "Priority": 5
+    },
+    "events.584059_beep": {
+        "Priority": 5
+    },
+    "events.2_duet": {
+        "Priority": 5
+    },
+    "events.384883_clank": {
+        "Priority": 5
+    },
+    "events.384883_oil": {
+        "Priority": 5
+    }
 }

@@ -252,6 +252,81 @@
       "CueId": "pullItemFromWater",
       "CaptionId": "world.fishSplash"
     }
+  ],
+  "50": [
+    {
+      "CueId": "woodyStep",
+      "CaptionId": "world.robinHammer"
+    }
+  ],
+  "51": [
+    {
+      "CueId": "openBox",
+      "CaptionId": "events.51_phone"
+    }
+  ],
+  "584059": [
+    {
+      "CueId": "Pickup_Coin15",
+      "CaptionId": "events.584059_beep"
+    }
+  ],
+  "901756": [
+    {
+      "CueId": "batFlap",
+      "CaptionId": "monsters.wingsFlap"
+    }
+  ],
+  "2": [
+    {
+      "CueId": "AbigailFlute",
+      "CaptionId": "tools.horseFlute"
+    },
+    {
+      "CueId": "AbigailFluteDuet",
+      "CaptionId": "events.2_duet"
+    }
+  ],
+  "26": [
+    {
+      "CueId": "fishSlap",
+      "CaptionId": "events.318560_slime"
+    },
+    {
+      "CueId": "slimeHit",
+      "CaptionId": "events.318560_slime"
+    },
+    {
+      "CueId": "slimedead",
+      "CaptionId": "events.318560_slime"
+    }
+  ],
+  "384883": [
+    {
+      "CueId": "clank",
+      "CaptionId": "events.384883_clank"
+    },
+    {
+      "CueId": "Milking",
+      "CaptionId": "events.384883_oil"
+    }
+  ],
+  "9333219": [
+    {
+      "CueId": "croak",
+      "CaptionId": "critters.frogCroak"
+    }
+  ],
+  "8959199": [
+    {
+      "CueId": "waterSlosh",
+      "CaptionId": "world.waterSlosh"
+    }
+  ],
+  "528052": [
+    {
+      "CueId": "furnace",
+      "CaptionId": "interaction.fire"
+    }
   ]
-  // left off on LeahHouse
 }

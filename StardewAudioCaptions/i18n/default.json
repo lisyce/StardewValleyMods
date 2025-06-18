@@ -129,7 +129,7 @@
   "world.moss.caption": "Moss rustles",
   "world.panSpot.caption": "Panning spot appears",
   "world.machineProcessing.caption": "Machine working",
-  "world.robinHammer.caption": "Robin's hammer thuds",
+  "world.robinHammer.caption": "Hammer thuds",
   "world.machineFinish.caption": "Machine finishes",
   "world.busDriveOff.caption": "Bus engine rumbling",
   "world.trappedProf.caption": "Knocking",
@@ -307,5 +307,10 @@
   "events.15_knock.caption": "Knocking",
   "events.15_switch.caption": "Light switch clicks",
   "events.917409_music.caption": "Dance music playing",
-  "events.boatEngine.caption": "Engine roars"
+  "events.boatEngine.caption": "Engine roars",
+  "events.51_phone.caption": "Phone clicks",
+  "events.584059_beep.caption": "Computer beeps",
+  "events.2_duet.caption": "Flute and harp playing",
+  "events.384883_clank.caption": "Metal clanking",
+  "events.384883_oil.caption": "Oil sloshing"
 }
