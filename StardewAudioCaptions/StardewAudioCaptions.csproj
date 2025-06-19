@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <Name>Stardew Audio Captions</Name>
         <Authors>BarleyZP</Authors>
         <Description>A highly-configurable and open-source mod for audio captions in Stardew Valley. Intended for anyone who may benefit from captioned audio, including deaf and hard-of-hearing individuals and people who play with the game muted.</Description>

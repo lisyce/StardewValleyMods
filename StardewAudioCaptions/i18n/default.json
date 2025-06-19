@@ -10,7 +10,7 @@
   "config.minDurationTicks.tooltip": "The minimum length a caption is shown for before fading out. 1 sec is approximately 60 game ticks.",
   "config.categories.paragraph": "The following links go to other pages where you can turn individual captions on and off.",
   "config.toggleIndividualSectionTitle": "Toggle Individual Captions",
-  "config.categoryColor": " Caption Color",
+  "config.categoryColor": "Caption Color",
   "config.captionPosition": "Caption Location",
   "config.offsetX": "Location X-Offset (Pixels)",
   "config.offsetY": "Location Y-Offset (Pixels)",

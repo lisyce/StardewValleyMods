@@ -16,7 +16,6 @@ public class ModEntry : Mod
     public static CaptionManager ModCaptionManager = null!;  // set in Entry; has to be public static so that harmony patches can use it
     public static PerScreen<EventCaptionManager> EventCaptionManager = null!;  // set in Entry
     private CaptionHudMessage _captionHudMessage = null!;  // set in Entry
-    private Dictionary<string, CaptionDefinition> _rawCaptionDefinitions = null!;  // set in Entry
 
     private const string DefinitionsAssetName = "BarleyZP.Captions/Definitions";
     private static Dictionary<string, CaptionDefinition>? _definitions;
@@ -47,13 +46,6 @@ public class ModEntry : Mod
         Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         Helper.Events.Content.AssetRequested += OnAssetRequested;
         Helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
-        
-        _rawCaptionDefinitions =
-            Helper.ModContent.Load<Dictionary<string, CaptionDefinition>>("assets/caption-definitions.json");
-        foreach (var def in _rawCaptionDefinitions)
-        {
-            def.Value.Text = Helper.Translation.Get($"{def.Key}.caption");
-        }
         
         _config = Helper.ReadConfig<ModConfig>();
         var harmony = new Harmony(ModManifest.UniqueID);
@@ -87,7 +79,12 @@ public class ModEntry : Mod
     {
         if (e.NameWithoutLocale.IsEquivalentTo(DefinitionsAssetName))
         {
-           e.LoadFrom(() => _rawCaptionDefinitions, AssetLoadPriority.Exclusive);
+            var rawDefinitions = Helper.ModContent.Load<Dictionary<string, CaptionDefinition>>("assets/caption-definitions.json");
+            foreach (var def in rawDefinitions)
+            {
+                def.Value.Text = Helper.Translation.Get($"{def.Key}.caption");
+            }
+            e.LoadFrom(() => rawDefinitions, AssetLoadPriority.Exclusive);
         }
         else if (e.NameWithoutLocale.IsEquivalentTo(EventsAssetName))
         {
@@ -219,7 +216,7 @@ public class ModEntry : Mod
             
             configMenu.AddTextOption(
                 mod: ModManifest,
-                name: () => category.Translation + Helper.Translation.Get("config.categoryColor"),
+                name: () => Helper.Translation.Get("config.categoryColor"),
                 getValue: () => _config.CategoryColors.GetValueOrDefault(category.Id, "White"),
                 setValue: value => _config.CategoryColors[category.Id] = value,
                 allowedValues: CaptionManager.AllowedColors.Keys.ToArray());
