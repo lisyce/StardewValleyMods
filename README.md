@@ -18,6 +18,7 @@ If you wish to find the code for a specific release version of a mod, that infor
 - **Run in the Bath House (Spa)** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/31470))<br>*Lets you bypass the running restriction in the spa/bath house so you can get into and out of the pool faster.*
 - **Seasonal Fiber Sprites** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/32271))<br>*Makes the fiber item sprites seasonal to match the weeds they drop from. Recolor-compatible!*
 - **Shareable Mod List Generator** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/32609))<br>*Provides console commands to generate a shareable mod list based on the mods SMAPI currently has loaded. Easily share your favorite loadouts with your friends!*
+- **Stardew Audio Captions** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/33544))<br>*A highly-configurable and open-source mod for audio captions in Stardew Valley. Intended for anyone who may benefit from captioned audio.*
 
 ## Maintained, No Longer Updated
 
