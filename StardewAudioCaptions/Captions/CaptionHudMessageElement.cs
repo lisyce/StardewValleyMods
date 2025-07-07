@@ -32,7 +32,17 @@ public class CaptionHudMessageElement
     public bool Update()
     {
         _ticksElapsed = Math.Min(_ticksElapsed + 1, CaptionManager.InfiniteDuration);
-        var cuePlaying = _cue.IsPlaying && !_cue.IsPaused;
+        var cuePlaying = false;
+        try
+        {
+            // the CueWrapper implementation can result in an NRE that we can't handle
+            cuePlaying = _cue.IsPlaying && !_cue.IsPaused;
+        }
+        catch (Exception e)
+        {
+            // ignored
+        }
+
         if (VisibleLongEnough() && (!cuePlaying || ExceededMaxDuration()))
         {
             Transparency -= 0.1f;

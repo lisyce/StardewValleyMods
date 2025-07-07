@@ -47,6 +47,7 @@ public class AudioPatches
 
     private static void PlayPostfix(Cue __instance)
     {
+        if (__instance == null) return;
         ModEntry.ModCaptionManager.OnSoundPlayed(new CueWrapper(__instance));
     }
 

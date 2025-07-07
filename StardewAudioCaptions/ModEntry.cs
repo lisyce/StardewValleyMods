@@ -16,6 +16,7 @@ public class ModEntry : Mod
     public static CaptionManager ModCaptionManager = null!;  // set in Entry; has to be public static so that harmony patches can use it
     public static PerScreen<EventCaptionManager> EventCaptionManager = null!;  // set in Entry
     private CaptionHudMessage _captionHudMessage = null!;  // set in Entry
+    public static IModHelper ModHelper = null!;  // set in Entry
 
     private const string DefinitionsAssetName = "BarleyZP.Captions/Definitions";
     private static Dictionary<string, CaptionDefinition>? _definitions;
@@ -46,12 +47,14 @@ public class ModEntry : Mod
         Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         Helper.Events.Content.AssetRequested += OnAssetRequested;
         Helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
+        Helper.Events.Content.LocaleChanged += OnLocaleChanged;
         
         _config = Helper.ReadConfig<ModConfig>();
         var harmony = new Harmony(ModManifest.UniqueID);
         _captionHudMessage = new CaptionHudMessage();
         ModCaptionManager = new CaptionManager(_captionHudMessage, Monitor, _config);
         EventCaptionManager = new PerScreen<EventCaptionManager>(createNewState: () => new EventCaptionManager(Monitor, ModCaptionManager));
+        ModHelper = Helper;
         
         AudioPatches.Patch(harmony);
         var patchManager = new PatchManager(Monitor, harmony);
@@ -82,7 +85,7 @@ public class ModEntry : Mod
             var rawDefinitions = Helper.ModContent.Load<Dictionary<string, CaptionDefinition>>("assets/caption-definitions.json");
             foreach (var def in rawDefinitions)
             {
-                def.Value.Text = Helper.Translation.Get($"{def.Key}.caption");
+                def.Value.TranslationKey = $"{def.Key}.caption";
             }
             e.LoadFrom(() => rawDefinitions, AssetLoadPriority.Exclusive);
         }
@@ -102,6 +105,12 @@ public class ModEntry : Mod
         {
             _eventCaptions = null;
         }
+    }
+
+    private void OnLocaleChanged(object? sender, LocaleChangedEventArgs e)
+    {
+        _definitions = null;
+        _eventCaptions = null;
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)

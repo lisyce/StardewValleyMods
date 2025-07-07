@@ -1,3 +1,6 @@
+using System.Text.RegularExpressions;
+using StardewModdingAPI;
+
 namespace StardewAudioCaptions.Captions;
 
 /// <summary>
@@ -11,14 +14,16 @@ public class Caption
     private readonly int? _maxDuration;
     public int MaxDuration => _maxDuration ?? CaptionManager.InfiniteDuration;
     public string CategoryId => CaptionId.Split(".")[0];
-    public object? Tokens { get; private set; }
+    private object? Tokens;
 
     public string Text
     {
         get
         {
             if (!ModEntry.Definitions.TryGetValue(CaptionId, out var capt)) return $"{CaptionId} has no Text";
-            return capt.Text;
+            return capt.TranslationKey != null
+                ? ModEntry.ModHelper.Translation.Get(capt.TranslationKey, tokens: Tokens)
+                : capt.Text;
         }
     }
     

@@ -45,6 +45,7 @@ public class CaptionManager
     /// <param name="cue">The sound cue</param>
     public void OnSoundPlayed(ICue cue)
     {
+        if (cue == null) return;
         var cueId = cue.Name;
         //_monitor.Log(cueId, LogLevel.Debug);
         

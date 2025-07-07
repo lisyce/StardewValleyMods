@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace StardewAudioCaptions.Captions;
 
 /// <summary>
@@ -10,4 +12,8 @@ public class CaptionDefinition
     // only instantiated via JSON deserialization
     // not marked [JsonRequired] because this mod does not provide the Text field in the JSON but rather programmatically
     public string Text { get; set; } = null!;
+    
+    // Used internally by this mod for tokenization purposes
+    [JsonIgnore]
+    internal string? TranslationKey = null;
 }
