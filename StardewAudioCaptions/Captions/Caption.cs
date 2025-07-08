@@ -20,7 +20,7 @@ public class Caption
     {
         get
         {
-            if (!ModEntry.Definitions.TryGetValue(CaptionId, out var capt)) return $"{CaptionId} has no Text";
+            if (!ModEntry.Definitions.TryGetValue(CaptionId, out var capt)) return $"Caption {CaptionId} does not exist";
             return capt.TranslationKey != null
                 ? ModEntry.ModHelper.Translation.Get(capt.TranslationKey, tokens: Tokens)
                 : capt.Text;

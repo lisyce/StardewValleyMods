@@ -38,7 +38,7 @@ public class CaptionHudMessageElement
             // the CueWrapper implementation can result in an NRE that we can't handle
             cuePlaying = _cue.IsPlaying && !_cue.IsPaused;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // ignored
         }

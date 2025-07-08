@@ -96,4 +96,11 @@ public interface IGenericModConfigMenuApi
         /// <param name="text">The link text shown in the form.</param>
         /// <param name="tooltip">The tooltip text shown when the cursor hovers on the link, or <c>null</c> to disable the tooltip.</param>
         void AddPageLink(IManifest mod, string pageId, Func<string> text, Func<string> tooltip = null);
+        
+        /****
+         ** Advanced
+         ****/
+        /// <summary>Remove a mod from the config UI and delete all its options and pages.</summary>
+        /// <param name="mod">The mod's manifest.</param>
+        void Unregister(IManifest mod);
 }

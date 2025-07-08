@@ -111,6 +111,7 @@ public class ModEntry : Mod
     {
         _definitions = null;
         _eventCaptions = null;
+        SetupGmcmIntegration();
     }
 
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
@@ -124,6 +125,8 @@ public class ModEntry : Mod
         var configMenu = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
         if (configMenu is null)
             return;
+        
+        configMenu.Unregister(ModManifest);
         
         configMenu.Register(
             mod: ModManifest,
