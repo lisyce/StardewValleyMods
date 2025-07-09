@@ -33,8 +33,9 @@ public class ModEntry : Mod
 
     private static void OnWarped(object? sender, WarpedEventArgs e)
     {
-        if (!e.IsLocalPlayer || e.NewLocation is not VolcanoDungeon dungeon ||
-            dungeon.level.Value is 0 or 5) return;
+        if (!e.IsLocalPlayer || e.OldLocation.Name == e.NewLocation.Name || e.NewLocation is not VolcanoDungeon dungeon ||
+            !VolcanoDungeon.IsGeneratedLevel(dungeon.Name, out var level) ||
+            level is 0 or 5) return;
 
         var leftToPress = GetRemainingSwitches(dungeon);
         if (leftToPress <= 0)
@@ -53,10 +54,10 @@ public class ModEntry : Mod
 
     private static void OnPressPostfix(DwarfGate __instance)
     {
-        if (!Game1.player.currentLocation.Equals(__instance.locationRef.Value)) return;
-        if (Game1.player.currentLocation is not VolcanoDungeon dungeon) return;
+        if (!Game1.IsMasterGame || !Game1.player.currentLocation.Equals(__instance.locationRef.Value)) return;
+        if (Game1.player.currentLocation is not VolcanoDungeon) return;
         
-        var leftToPress = GetRemainingSwitches(dungeon);
+        var leftToPress = GetRemainingSwitches(__instance);
         if (leftToPress == 1)
         {
             Game1.showGlobalMessage(_staticHelper.Translation.Get("OneButton"));
@@ -74,11 +75,24 @@ public class ModEntry : Mod
         Game1.showGlobalMessage(_staticHelper.Translation.Get("GateOpen"));
     }
 
+    private static int GetRemainingSwitches(DwarfGate gate)
+    {
+        var totalSwitches = 0;
+        var pressedSwitches = 0;
+        foreach (var pressed in gate.switches.Values)
+        {
+            totalSwitches++;
+            if (pressed) pressedSwitches++;
+        }
+
+        var leftToPress = totalSwitches - pressedSwitches;
+        return leftToPress;
+    }
+    
     private static int GetRemainingSwitches(VolcanoDungeon dungeon)
     {
         var totalSwitches = 0;
         var pressedSwitches = 0;
-        _staticMonitor.Log(dungeon.dwarfGates.Count.ToString(), LogLevel.Debug);
         foreach (var gate in dungeon.dwarfGates)
         {
             foreach (var pressed in gate.switches.Values)
@@ -88,7 +102,6 @@ public class ModEntry : Mod
             }
         }
 
-        _staticMonitor.Log(totalSwitches.ToString(), LogLevel.Debug);
         var leftToPress = totalSwitches - pressedSwitches;
         return leftToPress;
     }
