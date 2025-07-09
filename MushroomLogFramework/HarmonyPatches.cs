@@ -4,6 +4,7 @@ using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Extensions;
 using StardewValley.TerrainFeatures;
+using static MushroomLogFramework.MushroomLogData;
 
 namespace MushroomLogFramework;
 
@@ -29,7 +30,6 @@ public class HarmonyPatches
         var create = AccessTools.GetDeclaredMethods(typeof(ItemRegistry))
             .FirstOrDefault(m =>
                 m.Name == nameof(ItemRegistry.Create) && !m.IsGenericMethod);
-        var changeQuality = AccessTools.Method(typeof(HarmonyPatches), nameof(ChangeOutputQualityIfNeeded));
         
         // step one: replace the per-tree mushroom
         matcher.MatchStartForward(
@@ -64,15 +64,7 @@ public class HarmonyPatches
                 // the object had data
                 new CodeInstruction(OpCodes.Pop), // pop "(O)422" off the stack since we will replace it
                 new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, rollDefault))
-            .MatchStartForward(
-                new CodeMatch(OpCodes.Call, create))
-            .ThrowIfNotMatch("Could not find third entry point for Object::OutputMushroomLog transpiler")
-            .Advance(1)
-            .Insert(
-                new CodeInstruction(OpCodes.Dup),
-                new CodeInstruction(OpCodes.Ldarg_0),
-                new CodeInstruction(OpCodes.Call, changeQuality));
+                new CodeInstruction(OpCodes.Call, rollDefault));
 
         return matcher.InstructionEnumeration();
     }
@@ -82,36 +74,38 @@ public class HarmonyPatches
         return ModEntry.ProduceRules.ContainsKey(obj.QualifiedItemId);
     }
     
-    private static string RollTreeProduce(StardewValley.Object obj, Tree t)
+    // TODO: make this return an Item and pick from the list of items rather than item ids
+    // TODO: need to deal with disabling vanilla affecting quality and quantity
+    private static string RollTreeProduce(StardewValley.Object obj, TerrainFeature t)
     {
         // common mushroom fallback
         if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return FallbackProduce;
+        
+        // get all possible outputs for this tree from all the entries
+        List<TreeOutputItem> possibleOutputs = new();
+        foreach (var produce in data.SpecificTreeOutputs)
+        {
+            if (produce.Type == TreeType.Wild && t is Tree wildTree && wildTree.treeType.Value == produce.TreeId &&
+                GameStateQuery.CheckConditions(produce.Condition, wildTree.Location))
+            {
+                possibleOutputs.AddRange(produce.Outputs);
+            }
+            else if (produce.Type == TreeType.Fruit && t is FruitTree fruitTree && fruitTree.treeId.Value == produce.TreeId &&
+                     GameStateQuery.CheckConditions(produce.Condition, fruitTree.Location))
+            {
+                possibleOutputs.AddRange(produce.Outputs);
+            }
+        }
 
-        // get the tree data
-        if (data.SpecificTreeWeights.TryGetValue(t.treeType.Value, out var produceRule))
-        {
-            return Util.DrawFromDistribution(produceRule, FallbackProduce);
-        }
-        else
-        {
-            // use defaults
-            return Util.DrawFromDistribution(data.DefaultTreeWeights, FallbackProduce);
-        }
+        var (item, outputRule) = Util.SelectTreeContribution(possibleOutputs, FallbackProduce);
+        return item.QualifiedItemId;
     }
 
     private static string RollDefaultProduce(StardewValley.Object obj)
     {
         // common mushroom fallback
         if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return FallbackProduce;
-        return Util.DrawFromDistribution(data.DefaultTreeWeights, FallbackProduce);
-    }
-
-    private static void ChangeOutputQualityIfNeeded(Item output, StardewValley.Object machine)
-    {
-        if (ModEntry.ProduceRules.TryGetValue(machine.QualifiedItemId, out var data) &&
-            data.DisableQualityModifiersOn.Contains(output.QualifiedItemId))
-        {
-            output.Quality = 0;
-        }
+        var (item, outputRule) = Util.SelectTreeContribution(data.DefaultTreeOutputs, FallbackProduce);
+        return item.QualifiedItemId;
     }
 }

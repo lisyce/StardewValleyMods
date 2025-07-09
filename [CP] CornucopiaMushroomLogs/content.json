@@ -4,18 +4,30 @@
     {
       "Action": "EditData",
       "Target": "BarleyZP.MushroomLogFramework/ProduceRules",
-      "TargetField": [ "(BC)MushroomLog", "SpecificTreeWeights", "1"],  // oak tree
+      "TargetField": [ "(BC)MushroomLog", "SpecificTreeOutputs", "Oak", "Outputs"],
       "Entries": {
-        "(O)Cornucopia_ChickenoftheWoods": 1,
-        "(O)Cornucopia_Shiitake": 1
+        "(O)Cornucopia_ChickenoftheWoods": {
+          "ItemId": "(O)Cornucopia_ChickenoftheWoods",
+          "Precedence": -1,
+          "Chance": 0.4
+        },
+        "(O)Cornucopia_Shiitake": {
+          "ItemId": "(O)Cornucopia_Shiitake",
+          "Precedence": -1,
+          "Chance": 0.4
+        }
       }
     },
     {
       "Action": "EditData",
       "Target": "BarleyZP.MushroomLogFramework/ProduceRules",
-      "TargetField": [ "(BC)MushroomLog", "SpecificTreeWeights", "2"],  // maple tree
+      "TargetField": [ "(BC)MushroomLog", "SpecificTreeOutputs", "Maple", "Outputs"],
       "Entries": {
-        "(O)Cornucopia_Shiitake": 0.5
+        "(O)Cornucopia_Shiitake": {
+          "ItemId": "(O)Cornucopia_Shiitake",
+          "Precedence": -1,
+          "Chance": 0.4
+        }
       }
     }
   ]

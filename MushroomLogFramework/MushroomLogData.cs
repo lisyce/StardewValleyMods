@@ -1,10 +1,31 @@
-﻿using StardewModdingAPI;
+﻿using StardewValley.GameData;
 
 namespace MushroomLogFramework;
 
 public class MushroomLogData
 {
-    public Dictionary<string, float> DefaultTreeWeights { get; set; }
-    public Dictionary<string, Dictionary<string, float>> SpecificTreeWeights { get; set; }
-    public List<string> DisableQualityModifiersOn { get; set; } = new();
+    public enum TreeType
+    {
+        Wild,
+        Fruit
+    }
+
+    public class TreeOutputItem : GenericSpawnItemDataWithCondition
+    {
+        public int Precedence { get; set; } = 0;
+        public float Chance { get; set; } = 1;
+        public List<QuantityModifier> ChanceModifiers { get; set; } = new();
+    }
+    
+    public class TreeProduce
+    {
+        public string Id { get; set; }
+        public TreeType Type { get; set; } = TreeType.Wild;
+        public string TreeId { get; set; }
+        public List<TreeOutputItem> Outputs { get; set; }
+        public string Condition { get; set; }
+    }
+    
+    public List<TreeOutputItem> DefaultTreeOutputs { get; set; }
+    public List<TreeProduce> SpecificTreeOutputs { get; set; }
 }

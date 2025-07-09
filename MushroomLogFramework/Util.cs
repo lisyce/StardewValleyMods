@@ -1,5 +1,7 @@
 using StardewValley;
-
+using StardewValley.Extensions;
+using StardewValley.Internal;
+using static MushroomLogFramework.MushroomLogData;
 namespace MushroomLogFramework;
 
 public class Util
@@ -13,20 +15,28 @@ public class Util
         }
     }
     
-    public static string DrawFromDistribution(Dictionary<string, float> distribution, string fallback)
+    public static (Item, TreeOutputItem?) SelectTreeContribution(List<TreeOutputItem> outputs, string fallback)
     {
-        if (!distribution.Any()) return fallback;
-        
-        NormalizeDistribution(distribution);
-        
-        var rand = Game1.random.NextDouble();
-        var ptr = 0d;
-        foreach (var pair in distribution)
+        IEnumerable<TreeOutputItem> possibleOutputs = outputs;
+        possibleOutputs = possibleOutputs.OrderBy(t => t.Precedence)
+            .ThenBy(t => Game1.random.Next());
+
+        ItemQueryContext ctx = new();
+        for (var i = 0; i < 2; i++)
         {
-            ptr += pair.Value;
-            if (ptr >= rand) return pair.Key;
+            foreach (var output in possibleOutputs)
+            {
+                if (!GameStateQuery.CheckConditions(output.Condition)) continue;
+                
+                // TODO debug logging
+                var item = ItemQueryResolver.TryResolveRandomItem(output, ctx, logError: (query, message) => { });
+                if (item == null) continue;
+
+                var chance = Utility.ApplyQuantityModifiers(output.Chance, output.ChanceModifiers);
+                if (Game1.random.NextBool(chance)) return (item, output);
+            }
         }
 
-        return fallback;  // should never get here
+        return (ItemRegistry.Create(fallback), null);
     }
 }

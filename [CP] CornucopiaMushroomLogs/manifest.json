@@ -1,7 +1,7 @@
 {
   "Name": "[CP] Cornucopia Mushroom Logs",
   "Author": "BarleyZP",
-  "Version": "1.0.0",
+  "Version": "2.0.0",
   "Description": "Adds Cornucopia mushrooms to the vanilla mushroom logs.",
   "UniqueID": "BarleyZP.CornucopiaMushroomLogs",
   "MinimumApiVersion": "4.2.0",
@@ -12,7 +12,8 @@
   "Dependencies": [
     {
       "UniqueID": "BarleyZP.MushroomLogFramework",
-      "IsRequired": true
+      "IsRequired": true,
+      "MinimumVersion": "2.0.0-Debug"
     },
     {
       "UniqueID": "Cornucopia.MoreCrops",
