@@ -10,7 +10,7 @@
   "UniqueID": "BarleyZP.VolcanoButtonTracker",
   "Name": "Volcano Button Tracker",
   "Author": "BarleyZP",
-  "Version": "1.0.0-Debug",
+  "Version": "1.0.0",
   "Description": "Shows a popup message to let you know how many more buttons you need to press to advance to the next level in the Volcano Dungeon.",
   "MinimumApiVersion": "4.2",
   "MinimumGameVersion": "1.6",

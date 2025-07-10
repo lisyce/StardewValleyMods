@@ -10,6 +10,7 @@ public class ModEntry : Mod
 {
     private static readonly string ProduceRulesAssetName = "BarleyZP.MushroomLogFramework/ProduceRules";
     private static Dictionary<string, MushroomLogData>? _produceRules;
+    internal static IMonitor StaticMonitor;
     
     internal static Dictionary<string, MushroomLogData> ProduceRules
     {
@@ -24,6 +25,7 @@ public class ModEntry : Mod
     {
         helper.Events.Content.AssetRequested += OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
+        StaticMonitor = Monitor;
 
         var harmony = new Harmony(ModManifest.UniqueID);
         HarmonyPatches.Patch(harmony);

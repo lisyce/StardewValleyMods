@@ -15,7 +15,7 @@ public class Util
         }
     }
     
-    public static (Item, TreeOutputItem?) SelectTreeContribution(List<TreeOutputItem> outputs, string fallback)
+    public static (Item, TreeOutputItem?) SelectTreeContribution(List<TreeOutputItem> outputs, Item fallback)
     {
         IEnumerable<TreeOutputItem> possibleOutputs = outputs;
         possibleOutputs = possibleOutputs.OrderBy(t => t.Precedence)
@@ -37,6 +37,6 @@ public class Util
             }
         }
 
-        return (ItemRegistry.Create(fallback), null);
+        return (fallback, null);
     }
 }
