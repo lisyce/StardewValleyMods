@@ -164,14 +164,14 @@ public class HarmonyPatches
         
         foreach (var feature in nearbyTrees)
         {
-            if (feature is Tree wildTree && wildTree.growthStage.Value >= 5)
+            if (feature is Tree wildTree)
             {
-                outputs.Add(RollTreeProduce(machine, feature));
+                if (wildTree.growthStage.Value >= 5) outputs.Add(RollTreeProduce(machine, feature));
                 if (wildTree.hasMoss.Value) mossyCount++;
             }
-            else if (feature is FruitTree fruitTree && fruitTree.growthStage.Value >= 4 && !fruitTree.stump.Value)
+            else if (feature is FruitTree fruitTree)
             {
-                outputs.Add(RollTreeProduce(machine, feature));
+                if (fruitTree.growthStage.Value >= 4 && !fruitTree.stump.Value) outputs.Add(RollTreeProduce(machine, feature));
                 if (fruitTree.fruit.Any()) mossyCount++;
             }
         }
