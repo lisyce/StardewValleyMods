@@ -6,9 +6,9 @@ namespace MushroomLogFramework;
 
 public class Util
 {
-    public static (Item, TreeOutputItem?) SelectTreeContribution(List<TreeOutputItem> outputs, Item fallback)
+    public static (Item, TreeOutput?) SelectTreeContribution(List<TreeOutput> outputs, Item fallback)
     {
-        IEnumerable<TreeOutputItem> possibleOutputs = outputs;
+        IEnumerable<TreeOutput> possibleOutputs = outputs;
         possibleOutputs = possibleOutputs.OrderBy(t => t.Precedence)
             .ThenBy(t => Game1.random.Next());
 
@@ -23,7 +23,7 @@ public class Util
                 var item = ItemQueryResolver.TryResolveRandomItem(output, ctx, logError: (query, message) => { });
                 if (item == null) continue;
 
-                var chance = Utility.ApplyQuantityModifiers(output.Chance, output.ChanceModifiers);
+                var chance = Utility.ApplyQuantityModifiers(output.Chance, output.ChanceModifiers, output.ChanceModifierMode);
                 if (Game1.random.NextBool(chance)) return (item, output);
             }
         }
