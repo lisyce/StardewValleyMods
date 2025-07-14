@@ -102,8 +102,11 @@ This Content Patcher example adds mystery boxes as a potential output from the o
 
 ### Adding possible outputs based on fruit trees
 
-This Content Patcher example adds a random fruit as an output when a cherry tree is nearby. If only cherry trees are nearby
-and no other rules interfere, then this will guarantee that a cherry or apple is outputted from the mushroom log.
+This Content Patcher example adds a random fruit as an output when a cherry tree is nearby.
+
+If only cherry trees are nearby and no other rules interfere, then this will guarantee that a cherry or apple is outputted from the mushroom log.
+
+If there is at least one cherry tree nearby, then this will guarantee that none of the "default" possible outputs are selected for this mushroom log, even if a cherry or apple is not selected.
 
 ```json
 {
