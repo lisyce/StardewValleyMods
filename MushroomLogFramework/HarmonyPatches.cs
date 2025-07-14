@@ -37,8 +37,8 @@ public class HarmonyPatches
             new CodeInstruction(OpCodes.Stloc, treeListLocal.LocalIndex));
         
         // init the list of Items that could be potential outputs
-        var outputListLocal = gen.DeclareLocal(typeof(List<Item>));
-        var itemListCtor = AccessTools.Constructor(typeof(List<Item>), Array.Empty<Type>());
+        var outputListLocal = gen.DeclareLocal(typeof(List<(Item, TreeOutputItem?)>));
+        var itemListCtor = AccessTools.Constructor(typeof(List<(Item, TreeOutputItem?)>), Array.Empty<Type>());
         matcher.Insert(
             new CodeInstruction(OpCodes.Newobj, itemListCtor),
             new CodeInstruction(OpCodes.Stloc, outputListLocal.LocalIndex));
@@ -94,7 +94,7 @@ public class HarmonyPatches
         
         // roll the default outputs and add those Items to the list
         var rollDefault = AccessTools.Method(typeof(HarmonyPatches), nameof(RollDefaultProduce));
-        var outputListAdd = AccessTools.Method(typeof(List<Item>), nameof(List<Item>.Add));
+        var outputListAdd = AccessTools.Method(typeof(List<(Item, TreeOutputItem?)>), nameof(List<(Item, TreeOutputItem?)>.Add));
         matcher.MatchEndForward(
                 new CodeMatch(OpCodes.Ldstr, "(O)404"),
                 new CodeMatch(OpCodes.Br_S),
@@ -134,17 +134,23 @@ public class HarmonyPatches
         return matcher.InstructionEnumeration();
     }
 
-    private static Item ChooseFrom(List<Item> items, int amount, int quality)
+    private static Item ChooseFrom(List<(Item, TreeOutputItem?)> items, int amount, int quality)
     {
-        ModEntry.StaticMonitor.Log($"Choosing from {items.Count} items.", LogLevel.Debug);
-        var result = Game1.random.ChooseFrom(items);
-        result.Stack = amount;
-        result.Quality = quality;
-        return result;
+        var (item, treeOutputItem) = Game1.random.ChooseFrom(items);
+        if (treeOutputItem?.AllowQualityModifications ?? true)
+        {
+            item.Quality = quality;
+        }
+
+        if (treeOutputItem?.AllowQuantityModifications ?? true)
+        {
+            item.Stack = amount;
+        }
+        return item;
     }
 
     // returns "mossyCount", aka number of trees with moss or fruit
-    private static int PopulatePotentialOutputs(StardewValley.Object machine, List<Item> outputs,
+    private static int PopulatePotentialOutputs(StardewValley.Object machine, List<(Item, TreeOutputItem?)> outputs,
         List<TerrainFeature> nearbyTrees)
     {
         var mossyCount = 0;
@@ -170,13 +176,12 @@ public class HarmonyPatches
     {
         if (feature is Tree or FruitTree) list.Add(feature);
     }
-    
-    // TODO: need to deal with disabling vanilla affecting quality and quantity
-    private static Item RollTreeProduce(StardewValley.Object machine, TerrainFeature t)
+
+    private static (Item, TreeOutputItem?) RollTreeProduce(StardewValley.Object machine, TerrainFeature t)
     {
         // if the machine has no data in the asset, default to (BC)MushroomLog for the data
         if (!ModEntry.ProduceRules.TryGetValue(machine.QualifiedItemId, out var data) ||
-            !ModEntry.ProduceRules.TryGetValue("(BC)MushroomLog", out data)) return ItemRegistry.Create(FallbackProduce);
+            !ModEntry.ProduceRules.TryGetValue("(BC)MushroomLog", out data)) return (ItemRegistry.Create(FallbackProduce), null);
         
         // get all possible outputs for this tree from all the entries
         List<TreeOutputItem> possibleOutputs = new();
@@ -194,16 +199,13 @@ public class HarmonyPatches
             }
         }
 
-        var (item, outputRule) = Util.SelectTreeContribution(possibleOutputs, RollDefaultProduce(machine));
-        ModEntry.StaticMonitor.Log($"Rolled {item.QualifiedItemId} ({item.DisplayName})", LogLevel.Debug);
-        return item;
+        return Util.SelectTreeContribution(possibleOutputs, RollDefaultProduce(machine).Item1);
     }
 
-    private static Item RollDefaultProduce(StardewValley.Object obj)
+    private static (Item, TreeOutputItem?) RollDefaultProduce(StardewValley.Object obj)
     {
         // common mushroom fallback
-        if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return ItemRegistry.Create(FallbackProduce);
-        var (item, outputRule) = Util.SelectTreeContribution(data.DefaultTreeOutputs, ItemRegistry.Create(FallbackProduce));
-        return item;
+        if (!ModEntry.ProduceRules.TryGetValue(obj.QualifiedItemId, out var data)) return (ItemRegistry.Create(FallbackProduce), null);
+        return Util.SelectTreeContribution(data.DefaultTreeOutputs, ItemRegistry.Create(FallbackProduce));
     }
 }

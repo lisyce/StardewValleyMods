@@ -6,15 +6,6 @@ namespace MushroomLogFramework;
 
 public class Util
 {
-    public static void NormalizeDistribution(Dictionary<string, float> distribution)
-    {
-        var total = distribution.Values.Sum();
-        foreach (var key in distribution.Keys)
-        {
-            distribution[key] /= total;
-        }
-    }
-    
     public static (Item, TreeOutputItem?) SelectTreeContribution(List<TreeOutputItem> outputs, Item fallback)
     {
         IEnumerable<TreeOutputItem> possibleOutputs = outputs;

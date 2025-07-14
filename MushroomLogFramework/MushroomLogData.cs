@@ -15,6 +15,8 @@ public class MushroomLogData
         public int Precedence { get; set; } = 0;
         public float Chance { get; set; } = 1;
         public List<QuantityModifier> ChanceModifiers { get; set; } = new();
+        public bool AllowQualityModifications { get; set; } = true;
+        public bool AllowQuantityModifications { get; set; } = true;
     }
     
     public class TreeProduce
