@@ -26,6 +26,7 @@ public class ModEntry : Mod
         helper.Events.Content.AssetsInvalidated += OnAssetsInvalidated;
 
         var harmony = new Harmony(ModManifest.UniqueID);
+        Harmony.DEBUG = true;
         HarmonyPatches.Patch(harmony);
     }
     

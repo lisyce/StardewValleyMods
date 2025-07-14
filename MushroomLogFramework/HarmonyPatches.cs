@@ -94,6 +94,7 @@ public class HarmonyPatches
         
         // roll the default outputs and add those Items to the list
         var rollDefault = AccessTools.Method(typeof(HarmonyPatches), nameof(RollDefaultProduce));
+        var shouldRollDefault = AccessTools.Method(typeof(HarmonyPatches), nameof(ShouldRollDefaultProduce));
         var outputListAdd = AccessTools.Method(typeof(List<(Item, TreeOutputItem?)>), nameof(List<(Item, TreeOutputItem?)>.Add));
         matcher.MatchEndForward(
                 new CodeMatch(OpCodes.Ldstr, "(O)404"),
@@ -107,8 +108,14 @@ public class HarmonyPatches
                 new CodeInstruction(OpCodes.Ldloc, outputListLocal.LocalIndex),
                 new CodeInstruction(OpCodes.Ldarg_0),
                 new CodeInstruction(OpCodes.Call, rollDefault),
-                new CodeInstruction(OpCodes.Callvirt, outputListAdd));
-        
+                new CodeInstruction(OpCodes.Callvirt, outputListAdd))
+            .Advance(4)
+            .CreateLabel(out Label rollDefaultLabel)
+            .Advance(-4)
+            .Insert(
+                new CodeInstruction(OpCodes.Ldloc, outputListLocal.LocalIndex),
+                new CodeInstruction(OpCodes.Call, shouldRollDefault),
+                new CodeInstruction(OpCodes.Brfalse, rollDefaultLabel));
         
         // at method end, instead of the original ItemRegistry::Create call, choose at random from the list and
         // set the stack and quality to the amounts calculated by the method already
@@ -200,6 +207,11 @@ public class HarmonyPatches
         }
 
         return Util.SelectTreeContribution(possibleOutputs, RollDefaultProduce(machine).Item1);
+    }
+
+    private static bool ShouldRollDefaultProduce(List<(Item, TreeOutputItem?)> outputs)
+    {
+        return !outputs.Any(pair => pair.Item2?.DisableDefaultOutputPossibilities ?? false);
     }
 
     private static (Item, TreeOutputItem?) RollDefaultProduce(StardewValley.Object obj)

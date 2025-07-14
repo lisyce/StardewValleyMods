@@ -17,6 +17,7 @@ public class MushroomLogData
         public List<QuantityModifier> ChanceModifiers { get; set; } = new();
         public bool AllowQualityModifications { get; set; } = true;
         public bool AllowQuantityModifications { get; set; } = true;
+        public bool DisableDefaultOutputPossibilities { get; set; } = false;
     }
     
     public class TreeProduce
