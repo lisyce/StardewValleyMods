@@ -12,7 +12,7 @@
   "Author": "BarleyZP",
   "Version": "2.0.0-Debug",
   "Description": "Dehardcodes the vanilla mushroom logs to allow other mods to add outputs",
-  "MinimumApiVersion": "4.2",
+  "MinimumApiVersion": "4.3",
   "MinimumGameVersion": "1.6",
   "EntryDll": "MushroomLogFramework.dll",
   "UpdateKeys": [
