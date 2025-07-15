@@ -42,22 +42,35 @@ public class ModEntry : Mod
         {
             Game1.showGlobalMessage(_staticHelper.Translation.Get("NoButtons"));
         }
-        else if (leftToPress == 1)
-        {
-            Game1.showGlobalMessage(_staticHelper.Translation.Get("OneButton"));
-        }
         else
         {
-            Game1.showGlobalMessage(_staticHelper.Translation.Get("NButtons", new { num = leftToPress }));
+            DisplayButtonsLeft(leftToPress);
         }
     }
 
     private static void OnPressPostfix(DwarfGate __instance)
     {
         if (!Game1.IsMasterGame || !Game1.player.currentLocation.Equals(__instance.locationRef.Value)) return;
-        if (Game1.player.currentLocation is not VolcanoDungeon) return;
+        if (Game1.player.currentLocation is not VolcanoDungeon dungeon) return;
         
-        var leftToPress = GetRemainingSwitches(__instance);
+        var leftToPress = GetRemainingSwitches(dungeon);
+        DisplayButtonsLeft(leftToPress);
+    }
+
+    private static void OnOpenPostfix(DwarfGate __instance)
+    {
+        if (!Game1.player.currentLocation.Equals(__instance.locationRef.Value)) return;
+        if (Game1.player.currentLocation is not VolcanoDungeon dungeon) return;
+        
+        var leftToPress = GetRemainingSwitches(dungeon);
+        if (leftToPress == 0)
+        {
+            Game1.showGlobalMessage(_staticHelper.Translation.Get("GateOpen"));
+        }
+    }
+
+    private static void DisplayButtonsLeft(int leftToPress)
+    {
         if (leftToPress == 1)
         {
             Game1.showGlobalMessage(_staticHelper.Translation.Get("OneButton"));
@@ -66,27 +79,6 @@ public class ModEntry : Mod
         {
             Game1.showGlobalMessage(_staticHelper.Translation.Get("NButtons", new { num = leftToPress }));
         }
-    }
-
-    private static void OnOpenPostfix(DwarfGate __instance)
-    {
-        if (!Game1.player.currentLocation.Equals(__instance.locationRef.Value)) return;
-        if (Game1.player.currentLocation is not VolcanoDungeon) return;
-        Game1.showGlobalMessage(_staticHelper.Translation.Get("GateOpen"));
-    }
-
-    private static int GetRemainingSwitches(DwarfGate gate)
-    {
-        var totalSwitches = 0;
-        var pressedSwitches = 0;
-        foreach (var pressed in gate.switches.Values)
-        {
-            totalSwitches++;
-            if (pressed) pressedSwitches++;
-        }
-
-        var leftToPress = totalSwitches - pressedSwitches;
-        return leftToPress;
     }
     
     private static int GetRemainingSwitches(VolcanoDungeon dungeon)

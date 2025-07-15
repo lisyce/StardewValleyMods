@@ -21,7 +21,7 @@
 
         <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
         <MinimumGameVersion_Behavior>Update</MinimumGameVersion_Behavior>
-        <UpdateKeys></UpdateKeys>
+        <UpdateKeys>Nexus:35739</UpdateKeys>
     </PropertyGroup>
 
 </Project>

@@ -12,7 +12,10 @@
   "Author": "BarleyZP",
   "Version": "1.0.0",
   "Description": "Shows a popup message to let you know how many more buttons you need to press to advance to the next level in the Volcano Dungeon.",
-  "MinimumApiVersion": "4.2",
+  "MinimumApiVersion": "4.3",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "VolcanoButtonTracker.dll"
+  "EntryDll": "VolcanoButtonTracker.dll",
+  "UpdateKeys": [
+    "Nexus:35739"
+  ]
 }
