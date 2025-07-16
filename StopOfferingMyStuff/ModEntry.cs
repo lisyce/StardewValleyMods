@@ -1,3 +1,5 @@
+using System.Reflection.Emit;
+using HarmonyLib;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -7,13 +9,19 @@ namespace StopOfferingMyStuff;
 
 public class ModEntry : Mod
 {
-    private ModConfig Config;
+    private static ModConfig Config = null!;  // set in Entry
     
     public override void Entry(IModHelper helper)
     {
         helper.Events.GameLoop.GameLaunched += OnGameLaunched;
         helper.Events.Input.ButtonPressed += OnButtonPressed;
         Config = Helper.ReadConfig<ModConfig>();
+
+        var harmony = new Harmony(ModManifest.UniqueID);
+        harmony.Patch(
+            original: AccessTools.Method(typeof(Farmer), nameof(Farmer.checkAction)),
+            transpiler: new HarmonyMethod(typeof(ModEntry), nameof(FarmerCheckActionTranspiler))
+            );
     }
 
     private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
@@ -55,5 +63,25 @@ public class ModEntry : Mod
             tooltip: () => Helper.Translation.Get("config.toggle.tooltip"),
             getValue: () => Config.ToggleKeybind,
             setValue: value => Config.ToggleKeybind = value);
+    }
+
+    private static IEnumerable<CodeInstruction> FarmerCheckActionTranspiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
+    {
+        var codeMatcher = new CodeMatcher(instructions, generator);
+        var createDialogue = AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue),
+            new[] { typeof(string), typeof(Response[]), typeof(GameLocation.afterQuestionBehavior), typeof(NPC) });
+
+        codeMatcher.MatchStartForward(
+                new CodeMatch(OpCodes.Ldstr, "Strings\\UI:GiftPlayerItem_"))
+            .MatchStartForward(
+                new CodeMatch(OpCodes.Callvirt, createDialogue))
+            .SetOpcodeAndAdvance(OpCodes.Nop)
+            .Insert(
+                new CodeInstruction(OpCodes.Pop),
+                new CodeInstruction(OpCodes.Pop),
+                new CodeInstruction(OpCodes.Pop),
+                new CodeInstruction(OpCodes.Pop));
+
+        return codeMatcher.InstructionEnumeration();
     }
 }
