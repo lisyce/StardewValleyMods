@@ -19,6 +19,7 @@ If you wish to find the code for a specific release version of a mod, that infor
 - **Seasonal Fiber Sprites** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/32271))<br>*Makes the fiber item sprites seasonal to match the weeds they drop from. Recolor-compatible!*
 - **Shareable Mod List Generator** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/32609))<br>*Provides console commands to generate a shareable mod list based on the mods SMAPI currently has loaded. Easily share your favorite loadouts with your friends!*
 - **Stardew Audio Captions** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/33544))<br>*A highly-configurable and open-source mod for audio captions in Stardew Valley. Intended for anyone who may benefit from captioned audio.*
+- **Stop Offering My Stuff** ([Nexus](https://www.nexusmods.com/stardewvalley/mods/35765))<br>*Allows you to temporarily (or permanently) disable the "Offer your \[item] to \[player]?" popups that can sometimes get in the way in multiplayer.*
 - **Volcano Button Tracker** ([Nexus](https://www.neexusmods.com/stardewvalley/mods/35739))<br>*Shows a popup message to let you know how many more buttons you need to press to advance to the next level in the Volcano Dungeon.*
 
 ## Maintained, No Longer Updated
