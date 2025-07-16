@@ -14,5 +14,8 @@
   "Description": "Allows you to temporarily (or permanently) disable the \"Offer your [item] to [player]?\" popups that can sometimes get in the way in multiplayer.",
   "MinimumApiVersion": "4.3",
   "MinimumGameVersion": "1.6",
-  "EntryDll": "StopOfferingMyStuff.dll"
+  "EntryDll": "StopOfferingMyStuff.dll",
+  "UpdateKeys": [
+    "Nexus:35765"
+  ]
 }
