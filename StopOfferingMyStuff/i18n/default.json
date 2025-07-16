@@ -1,0 +1,7 @@
+{
+  "config.enabled": "Mod Enabled",
+  "config.toggle": "Toggle Keybind",
+  "config.toggle.tooltip": "Quickly enable or disable this mod using a keybind.",
+  "offering-on": "Offering items is turned ON.",
+  "offering-off": "Offering items is turned OFF."
+}
