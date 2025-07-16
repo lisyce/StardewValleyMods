@@ -1,3 +1,4 @@
+#pragma warning disable CS8625
 using StardewModdingAPI;
 
 namespace StopOfferingMyStuff.ExternalApis

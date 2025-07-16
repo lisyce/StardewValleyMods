@@ -26,18 +26,18 @@ public class ModEntry : Mod
 
     private void OnButtonPressed(object? sender, ButtonPressedEventArgs e)
     {
-        if (!e.Button.Equals(Config.ToggleKeybind)) return;
+        if (e.Button != Config.ToggleKeybind) return;
 
         Config.ModEnabled = !Config.ModEnabled;
         Helper.WriteConfig(Config);
         
         if (Config.ModEnabled)
         {
-            Game1.showGlobalMessage(Helper.Translation.Get("offering-on"));
+            Game1.showGlobalMessage(Helper.Translation.Get("offering-off"));
         }
         else
         {
-            Game1.showGlobalMessage(Helper.Translation.Get("offering-off"));
+            Game1.showGlobalMessage(Helper.Translation.Get("offering-on"));
         }
     }
 
@@ -68,19 +68,23 @@ public class ModEntry : Mod
     private static IEnumerable<CodeInstruction> FarmerCheckActionTranspiler(IEnumerable<CodeInstruction> instructions, ILGenerator generator)
     {
         var codeMatcher = new CodeMatcher(instructions, generator);
-        var createDialogue = AccessTools.Method(typeof(GameLocation), nameof(GameLocation.createQuestionDialogue),
-            new[] { typeof(string), typeof(Response[]), typeof(GameLocation.afterQuestionBehavior), typeof(NPC) });
+        var halt = AccessTools.Method(typeof(Character), nameof(Character.Halt));
+        var enabledFld = AccessTools.Field(typeof(ModConfig), nameof(ModConfig.ModEnabled));
+        var config = AccessTools.Field(typeof(ModEntry), nameof(Config));
 
         codeMatcher.MatchStartForward(
                 new CodeMatch(OpCodes.Ldstr, "Strings\\UI:GiftPlayerItem_"))
-            .MatchStartForward(
-                new CodeMatch(OpCodes.Callvirt, createDialogue))
-            .SetOpcodeAndAdvance(OpCodes.Nop)
+            .MatchStartBackwards(
+                new CodeMatch(OpCodes.Ldloc_0),
+                new CodeMatch(OpCodes.Ldfld),
+                new CodeMatch(OpCodes.Callvirt, halt))
+            .CreateLabel(out var lbl)
             .Insert(
-                new CodeInstruction(OpCodes.Pop),
-                new CodeInstruction(OpCodes.Pop),
-                new CodeInstruction(OpCodes.Pop),
-                new CodeInstruction(OpCodes.Pop));
+                new CodeInstruction(OpCodes.Ldsfld, config),
+                new CodeInstruction(OpCodes.Ldfld, enabledFld),
+                new CodeMatch(OpCodes.Brfalse, lbl),
+                new CodeMatch(OpCodes.Ldc_I4_0),
+                new CodeMatch(OpCodes.Ret));
 
         return codeMatcher.InstructionEnumeration();
     }
