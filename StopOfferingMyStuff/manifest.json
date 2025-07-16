@@ -1,0 +1,18 @@
+{
+  /*
+   | This file is automatically updated by ModManifestBuilder
+   | when the project is compiled.
+   | 
+   | Changes made to this file may be overwritten.
+   | 
+   */
+  "$schema": "https://smapi.io/schemas/manifest.json",
+  "UniqueID": "BarleyZP.StopOfferingMyStuff",
+  "Name": "Stop Offering My Stuff",
+  "Author": "BarleyZP",
+  "Version": "1.0.0",
+  "Description": "Allows you to temporarily (or permanently) disable the \"Offer your [item] to [player]?\" popups that can sometimes get in the way in multiplayer.",
+  "MinimumApiVersion": "4.3",
+  "MinimumGameVersion": "1.6",
+  "EntryDll": "StopOfferingMyStuff.dll"
+}
