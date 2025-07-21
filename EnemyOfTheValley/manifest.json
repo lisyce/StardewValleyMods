@@ -12,7 +12,7 @@
   "Author": "BarleyZP",
   "Version": "1.0.0-Debug",
   "Description": "You either die a hero or live long enough to see yourself become the villain.",
-  "MinimumApiVersion": "4.2",
+  "MinimumApiVersion": "4.3",
   "MinimumGameVersion": "1.6",
   "EntryDll": "EnemyOfTheValley.dll",
   "UpdateKeys": [

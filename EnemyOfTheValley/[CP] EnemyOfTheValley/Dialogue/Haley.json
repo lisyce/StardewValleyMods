@@ -18,7 +18,8 @@
         "RejectBouquet_NegativeHearts": "{{i18n:Haley.RejectBouquet_NegativeHearts}}",
         "{{MainModId}}.apologized_Haley": "{{i18n:Haley.{{MainModId}}.apologized_Haley}}",
         "{{MainModId}}.apologized_Alex": "{{i18n:Haley.{{MainModId}}.apologized_Alex}}",
-        "ReconciliationDustUsed": "{{i18n:Haley.ReconciliationDustUsed}}"
+        "ReconciliationDustUsed": "{{i18n:Haley.ReconciliationDustUsed}}",
+        "eventSeen_{{MainModId}}_HaleyNegative8": "{{i18n:Haley.AfterNegative8Event}}"
       }
     },
     {
