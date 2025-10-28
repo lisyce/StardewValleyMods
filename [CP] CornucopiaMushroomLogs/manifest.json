@@ -13,7 +13,7 @@
     {
       "UniqueID": "BarleyZP.MushroomLogFramework",
       "IsRequired": true,
-      "MinimumVersion": "2.0.0-Debug"
+      "MinimumVersion": "2.0.0"
     },
     {
       "UniqueID": "Cornucopia.MoreCrops",
